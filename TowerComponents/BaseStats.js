@@ -1,3 +1,5 @@
+import Locator from './Locator.js';
+
 class BaseStats {
     #baseAttributes = [
         'Damage',
@@ -29,45 +31,84 @@ class BaseStats {
      * 		Lead: Boolean,
      * 		Flying: Boolean,
      * }}} data
+     * @param {Locator} locator
      */
-    constructor(data) {
+    constructor(data, locator) {
         this.data = data;
+        this.locator = locator;
+
         this.special = {};
         this.attributes = {};
 
-        this.attributes.Damage = data.Damage;
-        this.attributes.Cooldown = data.Cooldown;
-        this.attributes.Range = data.Range;
-        this.attributes.Hidden = data.Detections.Hidden;
-        this.attributes.Flying = data.Detections.Flying;
-        this.attributes.Lead = data.Detections.Lead;
+        this.addAttribute('Damage');
+        this.addAttribute('Cooldown');
+        this.addAttribute('Range');
+
+        this.addDetection('Hidden');
+        this.addAttribute('Flying', ['Detections']);
+        this.addAttribute('Lead', ['Detections']);
+
         this.attributes.Cost = data.Cost | data.Price;
 
         for (let [key, value] of Object.entries(data)) {
             if (this.#baseAttributes.includes(key)) continue;
 
-            this.addAttribute(key, value);
+            this.addAttribute(key);
         }
 
         for (let [key, value] of Object.entries(data.Attributes ?? {})) {
             if (this.#baseAttributes.includes(key)) continue;
 
-            this.addAttribute(key, value);
+            this.addAttribute(key, ['Attributes']);
         }
     }
 
-    addAttribute(name, value) {
+    addAttribute(name, location) {
+        const value = this.locator.locate(this.data, name, location);
+        if (value === undefined) return;
+
+        this.locator.addLocation(name, location);
+        this.addAttributeValue(name, value);
+    }
+
+    addAttributeValue(name, value) {
         this.attributeNames.push(name);
         this.attributes[name] = value;
     }
 
+    addDetection(name) {
+        if (this.locator.hasDetection(name)) return;
+
+        const value = this.locator.locate(this.data, name, ['Detections']);
+        if (value === undefined) return;
+
+        if (value) this.locator.addDetection(name);
+
+        this.addAttributeValue(name, value);
+    }
+
     set(attribute, value) {
-        if (this.data[attribute] != undefined) {
-            this.data[attribute] = value;
-        } else if (this.data.Detections?.[attribute] != undefined) {
-            this.data.Detections[attribute] = value;
-        } else if (this.data.Attributes?.[attribute] != undefined) {
-            this.data.Attributes[attribute] = value;
+        if (['Hidden', 'Flying', 'Lead'].includes(attribute)) {
+            if (this.data.Detections == undefined) {
+                this.data.Detections = {};
+            }
+
+            if (value) {
+                this.data.Detections[attribute] = value;
+            } else {
+                delete this.data.Detections[attribute];
+            }
+
+            if (Object.keys(this.data.Detections).length == 0) {
+                delete this.data.Detections;
+            }
+        } else if (this.locator.hasLocation(attribute)) {
+            const targetData = this.locator.getTargetData(
+                this.data,
+                this.locator.getLocation(attribute)
+            );
+
+            targetData[attribute] = value;
         } else if (attribute === 'Cost' && this.data.Price !== undefined) {
             this.data.Price = value;
         }

@@ -9,11 +9,11 @@ class Upgrade extends BaseStats {
      * 	Image: {},
      * }} data
      */
-    constructor(data) {
-        super(data.Stats);
+    constructor(data, locator) {
+        super(data.Stats, locator);
         this.upgradeData = data;
 
-        this.addAttribute('Cost', data.Cost);
+        this.addAttributeValue('Cost', data.Cost);
     }
 
     set(attribute, value) {

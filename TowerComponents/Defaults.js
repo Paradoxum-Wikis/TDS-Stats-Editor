@@ -16,8 +16,12 @@ class Defaults extends BaseStats {
      * 		Flying: Boolean,
      * }}} data
      */
-    constructor(data) {
-        super(data);
+    constructor(data, locator) {
+        super(data, locator);
+
+        this.attributes['Hidden'] = this.attributes['Hidden'] ?? false;
+        this.attributes['Lead'] = this.attributes['Lead'] ?? false;
+        this.attributes['Flying'] = this.attributes['Flying'] ?? false;
     }
 }
 

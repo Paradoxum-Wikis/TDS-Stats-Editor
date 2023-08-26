@@ -4,6 +4,7 @@ import Upgrade from './Upgrade.js';
 import Levels from './Levels.js';
 import CalculatedManager from './CalculatedManager.js';
 import BaseStats from './BaseStats.js';
+import Locator from './Locator.js';
 
 class SkinData {
     /**
@@ -22,9 +23,10 @@ class SkinData {
     }
 
     createData() {
-        this.defaults = new Defaults(this.data.Defaults);
+        this.locator = new Locator();
+        this.defaults = new Defaults(this.data.Defaults, this.locator);
         this.upgrades = this.data.Upgrades.map(
-            (upgrade) => new Upgrade(upgrade)
+            (upgrade) => new Upgrade(upgrade, this.locator)
         );
         this.levels = new Levels(this);
 
@@ -43,22 +45,19 @@ class SkinData {
     }
 
     getUpgradeChanges(level) {
-        const baseStatA = this.getBaseStatForUpgrade(level);
         const baseStatB = this.getBaseStatForUpgrade(level + 1);
 
-        return Object.entries(baseStatB.attributes)
-            .filter(([key, valueB]) => {
-                const valueA = baseStatA.attributes[key];
-                return valueA != valueB;
-            })
-            .map(([key, valueB]) => {
-                const valueA = baseStatA.attributes[key];
+        return Object.keys(baseStatB.attributes)
+            .map((key) => {
+                const valueA = this.levels.getCell(level, key);
+                const valueB = this.levels.getCell(level + 1, key);
                 return {
                     key: key,
                     original: valueA,
                     new: valueB,
                 };
-            });
+            })
+            .filter((value) => value.original != value.new);
     }
 
     getUpgradeChangeOutput(level, filter) {
@@ -69,6 +68,7 @@ class SkinData {
             'Hidden',
             'Flying',
             'Lead',
+            'Income',
         ];
 
         const changes = this.getUpgradeChanges(level)
@@ -81,12 +81,8 @@ class SkinData {
                 }
             });
 
-        return [
-            ...changes,
-            ...this.data.Upgrades[level].Stats.Extras.map(
-                (extra) => `● ${extra}`
-            ),
-        ];
+        const extras = this.data.Upgrades[level].Stats.Extras ?? [];
+        return [...changes, ...extras.map((extra) => `● ${extra}`)];
     }
 
     set(level, attribute, newValue) {
