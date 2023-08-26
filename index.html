@@ -41,24 +41,14 @@
 			<hr>
 
 			<!-- Selection -->
-			<div id="side-selection-radio" class="btn-group btn-group-toggle ms-2 me-2 mb-2">
-				<label id="side-selection-views" class="btn btn-sm btn-outline-primary active">
-					<input id="side-selection-views-radio" class="d-none" type="radio" name="options" id="option1"
-						autocomplete="off" checked>
-					Views
-				</label>
-				<label id="side-selection-upgrades" class="btn btn-sm btn-outline-primary">
-					<input id="side-selection-upgrades-radio" class="d-none" type="radio" name="options" id="option2"
-						autocomplete="off"> Upgrades
-				</label>
-				<label id="side-selection-boosts" class="btn btn-sm btn-outline-primary">
-					<input id="side-selection-boosts-radio" class="d-none" type="radio" name="options" id="option3"
-						autocomplete="off"> Boosts
-				</label>
+			<div id="side-selection-radio" class="btn-group btn-group-toggle ms-2 me-2 mb-2 w-100">
+				<div class="spinner-border text-secondary m-auto" role="status">
+					<span class="sr-only"></span>
+				</div>
 			</div>
 
 			<!-- Property Viewer -->
-			<div id="property-viewer-section">
+			<div id="property-viewer-section" class="d-none">
 				<div class="btn-group w-100 p-2 pt-0">
 					<button id="property-all" class="btn btn-sm btn-dark">All</button>
 					<button id="property-base" class="btn btn-sm btn-dark">Base</button>
@@ -66,36 +56,9 @@
 					<button id="property-calc" class="btn btn-sm btn-dark">Calcs</button>
 				</div>
 				<ul id="property-viewer" class="nav nav-pills flex-column mb-auto me-2 ms-2">
-					<li class="nav-item position-relative mb-1">
-						<a href="#" class="btn w-100 btn-outline-primary text-white" aria-current="page">
-							Property
-						</a>
-					</li>
-					<li class="nav-item position-relative mb-1">
-						<a href="#" class="btn w-100 btn-outline-primary text-white" aria-current="page">
-							Property
-						</a>
-					</li>
-					<li class="nav-item position-relative mb-1">
-						<a href="#" class="btn w-100 btn-outline-primary text-white" aria-current="page">
-							Property
-						</a>
-					</li>
-					<li class="nav-item position-relative mb-1">
-						<a href="#" class="btn w-100 btn-outline-primary text-white" aria-current="page">
-							Property
-						</a>
-					</li>
-					<li class="nav-item position-relative mb-1">
-						<a href="#" class="btn w-100 btn-outline-primary text-white" aria-current="page">
-							Property
-						</a>
-					</li>
-					<li class="nav-item position-relative mb-1">
-						<a href="#" class="btn w-100 btn-outline-primary text-white" aria-current="page">
-							Property
-						</a>
-					</li>
+					<div class="spinner-border text-secondary m-auto" role="status">
+						<span class="sr-only"></span>
+					</div>
 				</ul>
 			</div>
 
@@ -139,26 +102,8 @@
 
 						<label for="formGroupExampleInput2">Extras</label>
 						<div id="side-upgrade-extras">
-							<div class="input-group mb-2">
-								<input type="text" class="form-control form-control-sm" id="inlineFormInputGroup"
-									placeholder="Username">
-								<div class="input-group-postpend">
-									<div class="btn btn-sm btn-outline-danger">Remove</div>
-								</div>
-							</div>
-							<div class="input-group mb-2">
-								<input type="text" class="form-control form-control-sm" id="inlineFormInputGroup"
-									placeholder="Username">
-								<div class="input-group-postpend">
-									<div class="btn btn-sm btn-outline-danger">Remove</div>
-								</div>
-							</div>
-							<div class="input-group mb-2">
-								<input type="text" class="form-control form-control-sm" id="inlineFormInputGroup"
-									placeholder="Username">
-								<div class="input-group-postpend">
-									<div class="btn btn-sm btn-outline-danger">Remove</div>
-								</div>
+							<div class="spinner-border text-secondary m-auto" role="status">
+								<span class="sr-only"></span>
 							</div>
 						</div>
 						<div id="side-upgrade-extras-add" class="btn btn-sm btn-outline-primary mb-2">Add Extra</div>
@@ -168,18 +113,17 @@
 			</div>
 		</div>
 
-
-
-
-
 		<!-- Body -->
 		<main role="main" class="d-flex flex-column">
 			<!-- Body Header -->
-			<header class="pt-4 ps-2 pe-2">
-				<div
-					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 ps-3 mb-3  ">
+			<header class="p-3">
+				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
 					<!-- Title -->
-					<h1 id="tower-name" class="h2 text-white">Tower</h1>
+					<h1 id="tower-name" class="h4 text-white">
+						<div class="spinner-border text-secondary m-auto" role="status">
+							<span class="sr-only"></span>
+						</div>
+					</h1>
 
 					<div class="btn-toolbar mb-2 mb-md-0 ">
 						<!-- Search -->
@@ -196,14 +140,14 @@
 
 						<!-- Variants -->
 						<div id="tower-variants" class="btn-group me-2">
-							<button class="btn btn-sm btn-secondary">Default</button>
-							<button class="btn btn-sm btn-outline-secondary">Golden</button>
+							<div class="spinner-border text-secondary m-auto" role="status">
+								<span class="sr-only"></span>
+							</div>
 						</div>
 
 						<!-- JSON/Table Toggle -->
 						<div id="table-view" class="btn-group me-2">
-							<button class="btn btn-sm btn-secondary">Table</button>
-							<button class="btn btn-sm btn-outline-secondary">JSON</button>
+
 						</div>
 
 						<!-- Delta Toggle -->
@@ -216,9 +160,11 @@
 
 
 			<!-- Body Table -->
-			<div class="table-responsive p-2">
+			<div class="d-none table-responsive p-2">
 				<table id="tower-table" class="table table-striped table-md table-dark mb-2">
+
 					<thead>
+
 						<tr>
 							<th>Level</th>
 							<th>Damage</th>
@@ -369,7 +315,7 @@
 			</div>
 
 			<!-- Body JSON -->
-			<div id="json-panel" class="d-flex flex-column p-3 pb-0">
+			<div id="json-panel" class="d-none d-flex flex-column p-3 pb-0">
 				<!-- JSON Header -->
 				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  ">
 					<div class="btn-toolbar mb-2 mb-md-0 ">
