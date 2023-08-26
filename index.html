@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<link href="./Styles/bootstrap.css" rel="stylesheet">
+	<link href="./Styles/Dashboard.css" rel="stylesheet">
+	<link href="./Styles/Sidebars.css" rel="stylesheet">
+	<link href="./Styles/json-viewer.css" rel="stylesheet">
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+
+	<script src="./json-viewer.js"></script>
+	<script defer type="module" src="./Main.js"></script>
+
+	</style>
+	<title>Stat Editor</title>
+</head>
+
+
+<body class="bg-dark">
+	<!-- Document -->
+	<div class="container-main">
+		<!-- Side Panel -->
+		<div class="aside d-flex flex-column flex-shrink-0  text-white" style="width: 240px;">
+			<!-- Title -->
+			<a href="/" class="d-flex align-items-center mb-0 mt-3 ms-3 text-white text-decoration-none">
+				<span class="fs-4">Stat Editor</span>
+			</a>
+			<hr>
+
+			<!-- Selection -->
+			<div id="side-selection-radio" class="btn-group btn-group-toggle ms-2 me-2 mb-2">
+				<label id="side-selection-views" class="btn btn-sm btn-outline-primary active">
+					<input id="side-selection-views-radio" class="d-none" type="radio" name="options" id="option1"
+						autocomplete="off" checked>
+					Views
+				</label>
+				<label id="side-selection-upgrades" class="btn btn-sm btn-outline-primary">
+					<input id="side-selection-upgrades-radio" class="d-none" type="radio" name="options" id="option2"
+						autocomplete="off"> Upgrades
+				</label>
+				<label id="side-selection-boosts" class="btn btn-sm btn-outline-primary">
+					<input id="side-selection-boosts-radio" class="d-none" type="radio" name="options" id="option3"
+						autocomplete="off"> Boosts
+				</label>
+			</div>
+
+			<!-- Property Viewer -->
+			<div id="property-viewer-section">
+				<div class="btn-group w-100 p-2 pt-0">
+					<button id="property-all" class="btn btn-sm btn-dark">All</button>
+					<button id="property-base" class="btn btn-sm btn-dark">Base</button>
+					<button id="property-extra" class="btn btn-sm btn-dark">Extra</button>
+					<button id="property-calc" class="btn btn-sm btn-dark">Calcs</button>
+				</div>
+				<ul id="property-viewer" class="nav nav-pills flex-column mb-auto me-2 ms-2">
+					<li class="nav-item position-relative mb-1">
+						<a href="#" class="btn w-100 btn-outline-primary text-white" aria-current="page">
+							Property
+						</a>
+					</li>
+					<li class="nav-item position-relative mb-1">
+						<a href="#" class="btn w-100 btn-outline-primary text-white" aria-current="page">
+							Property
+						</a>
+					</li>
+					<li class="nav-item position-relative mb-1">
+						<a href="#" class="btn w-100 btn-outline-primary text-white" aria-current="page">
+							Property
+						</a>
+					</li>
+					<li class="nav-item position-relative mb-1">
+						<a href="#" class="btn w-100 btn-outline-primary text-white" aria-current="page">
+							Property
+						</a>
+					</li>
+					<li class="nav-item position-relative mb-1">
+						<a href="#" class="btn w-100 btn-outline-primary text-white" aria-current="page">
+							Property
+						</a>
+					</li>
+					<li class="nav-item position-relative mb-1">
+						<a href="#" class="btn w-100 btn-outline-primary text-white" aria-current="page">
+							Property
+						</a>
+					</li>
+				</ul>
+			</div>
+
+
+			<!-- Level Viewer -->
+			<div id="level-view" class="d-none overflow-auto">
+				<div class="d-flex flex-column">
+					<!-- Levels -->
+					<div id="side-upgrade-levels" class="flex-grow-1 btn-group btn-group-toggle m-2">
+						<label class="btn btn-sm btn-outline-dark active">
+							<input class="d-none" type="radio" name="options" autocomplete="off" checked>
+							1
+						</label>
+						<label class="btn btn-sm btn-outline-dark">
+							<input class="d-none" type="radio" name="options" autocomplete="off"> 2
+						</label>
+						<label class="btn btn-sm btn-outline-dark">
+							<input class="d-none" type="radio" name="options" autocomplete="off"> 3
+						</label>
+						<label class="btn btn-sm btn-outline-dark">
+							<input class="d-none" type="radio" name="options" autocomplete="off"> 4
+						</label>
+						<label class="btn btn-sm btn-outline-dark">
+							<input class="d-none" type="radio" name="options" autocomplete="off"> 5
+						</label>
+					</div>
+
+					<form class="m-2 overflow-y-auto">
+						<textarea type="text" class="form-control resize-none form-control-sm bg-dark text-white mb-2"
+							id="side-upgrade-extras-output" readonly>Example Text</textarea>
+						<div class="form-group m-2">
+							<label for="formGroupExampleInput">Image</label>
+							<input id="side-upgrade-image" type="text" class="form-control form-control-sm text-white"
+								id="formGroupExampleInput" placeholder="ImageId">
+						</div>
+						<div class="form-group mb-2">
+							<label for="formGroupExampleInput">Title</label>
+							<input id="side-upgrade-title" type="text" class="form-control form-control-sm text-white"
+								id="formGroupExampleInput" placeholder="Title">
+						</div>
+
+						<label for="formGroupExampleInput2">Extras</label>
+						<div id="side-upgrade-extras">
+							<div class="input-group mb-2">
+								<input type="text" class="form-control form-control-sm" id="inlineFormInputGroup"
+									placeholder="Username">
+								<div class="input-group-postpend">
+									<div class="btn btn-sm btn-outline-danger">Remove</div>
+								</div>
+							</div>
+							<div class="input-group mb-2">
+								<input type="text" class="form-control form-control-sm" id="inlineFormInputGroup"
+									placeholder="Username">
+								<div class="input-group-postpend">
+									<div class="btn btn-sm btn-outline-danger">Remove</div>
+								</div>
+							</div>
+							<div class="input-group mb-2">
+								<input type="text" class="form-control form-control-sm" id="inlineFormInputGroup"
+									placeholder="Username">
+								<div class="input-group-postpend">
+									<div class="btn btn-sm btn-outline-danger">Remove</div>
+								</div>
+							</div>
+						</div>
+						<div id="side-upgrade-extras-add" class="btn btn-sm btn-outline-primary mb-2">Add Extra</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+		<!-- Body -->
+		<main role="main" class="d-flex flex-column">
+			<!-- Body Header -->
+			<header class="pt-4 ps-2 pe-2">
+				<div
+					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 ps-3 mb-3  ">
+					<!-- Title -->
+					<h1 id="tower-name" class="h2 text-white">Tower</h1>
+
+					<div class="btn-toolbar mb-2 mb-md-0 ">
+						<!-- Search -->
+						<form id="Tower-Selector" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+							<input type="search" class="form-control form-control-dark text-bg-dark text-white"
+								placeholder="Search..." aria-label="Search">
+							<div class="dropdown-menu bg-dark text-white">
+								<a class="dropdown-item" href="#">Action</a>
+								<a class="dropdown-item" href="#">Action</a>
+								<a class="dropdown-item" href="#">Action</a>
+								<a class="dropdown-item" href="#">Action</a>
+							</div>
+						</form>
+
+						<!-- Variants -->
+						<div id="tower-variants" class="btn-group me-2">
+							<button class="btn btn-sm btn-secondary">Default</button>
+							<button class="btn btn-sm btn-outline-secondary">Golden</button>
+						</div>
+
+						<!-- JSON/Table Toggle -->
+						<div id="table-view" class="btn-group me-2">
+							<button class="btn btn-sm btn-secondary">Table</button>
+							<button class="btn btn-sm btn-outline-secondary">JSON</button>
+						</div>
+
+						<!-- Delta Toggle -->
+						<div id="button-delta" class="btn-group me-2">
+							<button class="btn btn-sm">Show Deltas</button>
+						</div>
+					</div>
+				</div>
+			</header>
+
+
+			<!-- Body Table -->
+			<div class="table-responsive p-2">
+				<table id="tower-table" class="table table-striped table-md table-dark mb-2">
+					<thead>
+						<tr>
+							<th>Level</th>
+							<th>Damage</th>
+							<th>Cooldown</th>
+							<th>Range</th>
+							<th>Cost</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1,001</td>
+							<td>Lorem</td>
+							<td>ipsum</td>
+							<td>dolor</td>
+							<td>sit</td>
+						</tr>
+						<tr>
+							<td>1,002</td>
+							<td>amet</td>
+							<td>consectetur</td>
+							<td>adipiscing</td>
+							<td>elit</td>
+						</tr>
+						<tr>
+							<td>1,003</td>
+							<td>Integer</td>
+							<td>nec</td>
+							<td>odio</td>
+							<td>Praesent</td>
+						</tr>
+						<tr>
+							<td>1,003</td>
+							<td>libero</td>
+							<td>Sed</td>
+							<td>cursus</td>
+							<td>ante</td>
+						</tr>
+						<tr>
+							<td>1,004</td>
+							<td>dapibus</td>
+							<td>diam</td>
+							<td>Sed</td>
+							<td>nisi</td>
+						</tr>
+						<tr>
+							<td>1,005</td>
+							<td>Nulla</td>
+							<td>quis</td>
+							<td>sem</td>
+							<td>at</td>
+						</tr>
+						<tr>
+							<td>1,006</td>
+							<td>nibh</td>
+							<td>elementum</td>
+							<td>imperdiet</td>
+							<td>Duis</td>
+						</tr>
+						<tr>
+							<td>1,007</td>
+							<td>sagittis</td>
+							<td>ipsum</td>
+							<td>Praesent</td>
+							<td>mauris</td>
+						</tr>
+						<tr>
+							<td>1,008</td>
+							<td>Fusce</td>
+							<td>nec</td>
+							<td>tellus</td>
+							<td>sed</td>
+						</tr>
+						<tr>
+							<td>1,009</td>
+							<td>augue</td>
+							<td>semper</td>
+							<td>porta</td>
+							<td>Mauris</td>
+						</tr>
+						<tr>
+							<td>1,010</td>
+							<td>massa</td>
+							<td>Vestibulum</td>
+							<td>lacinia</td>
+							<td>arcu</td>
+						</tr>
+						<tr>
+							<td>1,011</td>
+							<td>eget</td>
+							<td>nulla</td>
+							<td>Class</td>
+							<td>aptent</td>
+						</tr>
+						<tr>
+							<td>1,012</td>
+							<td>taciti</td>
+							<td>sociosqu</td>
+							<td>ad</td>
+							<td>litora</td>
+						</tr>
+						<tr>
+							<td>1,013</td>
+							<td>torquent</td>
+							<td>per</td>
+							<td>conubia</td>
+							<td>nostra</td>
+						</tr>
+						<tr>
+							<td>1,014</td>
+							<td>per</td>
+							<td>inceptos</td>
+							<td>himenaeos</td>
+							<td>Curabitur</td>
+						</tr>
+						<tr>
+							<td>1,015</td>
+							<td>sodales</td>
+							<td>ligula</td>
+							<td>in</td>
+							<td>libero</td>
+						</tr>
+					</tbody>
+				</table>
+				<!-- Table Header -->
+				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  ">
+					<div class="btn-toolbar mb-2 mb-md-0 mt-0">
+						<!-- Data management buttons-->
+						<div class="btn-group me-2">
+							<button id="table-clear" class="btn btn-sm btn-outline-secondary">Clear
+								Changes</button>
+							<button id="table-apply" class="btn btn-sm btn-outline-secondary">Apply
+								Changes</button>
+							<button id="table-reset" class="btn btn-sm btn-outline-secondary">Reset to
+								Default</button>
+						</div>
+
+						<!-- Level buttons-->
+						<div class="btn-group me-2">
+
+							<button id="table-add-level" class="btn btn-sm btn-outline-secondary">Add
+								Level</button>
+
+							<button id="table-remove-level" class="btn btn-sm btn-outline-secondary">Remove
+								Level</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Body JSON -->
+			<div id="json-panel" class="d-flex flex-column p-3 pb-0">
+				<!-- JSON Header -->
+				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  ">
+					<div class="btn-toolbar mb-2 mb-md-0 ">
+						<!-- Copy Button -->
+						<div class="btn-group me-2">
+							<button id="json-copy" class="btn btn-sm btn-outline-secondary">Copy to
+								Clipboard</button>
+						</div>
+						<div class="btn-group me-2">
+							<!-- Import Button -->
+							<button id="json-import" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
+								data-target="#json-import-modal">Import</button>
+
+							<!-- Export Button -->
+							<button id="json-export" class="btn btn-sm btn-outline-secondary">Export</button>
+						</div>
+					</div>
+				</div>
+
+				<!-- JSON Body -->
+				<div id="json" class="overflow-auto"></div>
+			</div>
+		</main>
+	</div>
+
+	<!-- Modals -->
+	<div class="modal fade" id="json-import-modal" tabindex="-1" role="dialog" aria-labelledby="json-import-label"
+		aria-hidden="true">
+		<div class="modal-dialog modal-xl " role="document">
+			<div class="modal-content bg-dark text-white">
+				<div class="modal-header">
+					<h5 class="modal-title" id="json-import-label">Import Stats</h5>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group bg-dark text-white">
+							<label for="message-text" class="col-form-label">JSON:</label>
+							<textarea class="form-control form-control-sm text-white" rows="32"
+								id="json-import-text"></textarea>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button id="json-import-submit" type="button" class="btn btn-primary"
+						data-dismiss="modal">Import</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

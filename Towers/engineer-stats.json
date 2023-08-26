@@ -1,0 +1,189 @@
+{
+  "Engineer": {
+    "Default": {
+      "Upgrades": [
+        {
+          "Image": 4517035597,
+          "Stats": {
+            "Extras": [],
+            "Attributes": {
+              "BuildTime": 2,
+              "MaxUnits": 2,
+              "UnitToSend": "Sentry1",
+              "SpawnTime": 1,
+              "SentryShield": false,
+              "Buildzone": 6,
+              "Deadzone": 2
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": true
+            },
+            "Cooldown": 1.5,
+            "Range": 15,
+            "Damage": 5
+          },
+          "Title": "Precise Calculations",
+          "Cost": 250
+        },
+        {
+          "Image": 149177741,
+          "Stats": {
+            "Extras": [],
+            "Attributes": {
+              "BuildTime": 2,
+              "MaxUnits": 2,
+              "UnitToSend": "Sentry1",
+              "SpawnTime": 1,
+              "SentryShield": false,
+              "Buildzone": 6,
+              "Deadzone": 2
+            },
+            "Detections": {
+              "Flying": true,
+              "Hidden": true,
+              "Lead": true
+            },
+            "Cooldown": 1.5,
+            "Range": 18,
+            "Damage": 5
+          },
+          "Title": "Makeshift Radar",
+          "Cost": 400
+        },
+        {
+          "Image": 8998290803,
+          "Stats": {
+            "Extras": [
+              "Rifle Sentry"
+            ],
+            "Attributes": {
+              "BuildTime": 2,
+              "MaxUnits": 2,
+              "UnitToSend": "Sentry2",
+              "SpawnTime": 1,
+              "SentryShield": false,
+              "Buildzone": 6,
+              "Deadzone": 2
+            },
+            "Detections": {
+              "Flying": true,
+              "Hidden": true,
+              "Lead": true
+            },
+            "Cooldown": 1.25,
+            "Range": 18,
+            "Damage": 8
+          },
+          "Title": "Auto Converter",
+          "Cost": 1600
+        },
+        {
+          "Image": 31857714,
+          "Stats": {
+            "Extras": [
+              "3 Max Units",
+              "Sentry Shield"
+            ],
+            "Attributes": {
+              "BuildTime": 2,
+              "MaxUnits": 3,
+              "UnitToSend": "Sentry2",
+              "SpawnTime": 1,
+              "SentryShield": true,
+              "Buildzone": 6,
+              "Deadzone": 2
+            },
+            "Detections": {
+              "Flying": true,
+              "Hidden": true,
+              "Lead": true
+            },
+            "Cooldown": 1,
+            "Range": 18,
+            "Damage": 15
+          },
+          "Title": "Pressure Tank",
+          "Cost": 3500
+        },
+        {
+          "Image": 155526941,
+          "Stats": {
+            "Extras": [
+              "Minigun Sentry"
+            ],
+            "Attributes": {
+              "BuildTime": 2,
+              "MaxUnits": 3,
+              "UnitToSend": "Sentry3",
+              "SpawnTime": 1,
+              "SentryShield": true,
+              "Buildzone": 6,
+              "Deadzone": 2
+            },
+            "Detections": {
+              "Flying": true,
+              "Hidden": true,
+              "Lead": true
+            },
+            "Cooldown": 1,
+            "Range": 18,
+            "Damage": 25
+          },
+          "Title": "Heavy Construction",
+          "Cost": 12500
+        },
+        {
+          "Image": 7852911857,
+          "Stats": {
+            "Extras": [
+              "War Machine Sentry",
+              "4 Max Units"
+            ],
+            "Attributes": {
+              "BuildTime": 2,
+              "MaxUnits": 4,
+              "UnitToSend": "Sentry4",
+              "SpawnTime": 1,
+              "SentryShield": true,
+              "Buildzone": 6,
+              "Deadzone": 2
+            },
+            "Detections": {
+              "Flying": true,
+              "Hidden": true,
+              "Lead": true
+            },
+            "Cooldown": 0.8,
+            "Range": 20,
+            "Damage": 40
+          },
+          "Title": "Illegal Gun Parts",
+          "Cost": 35000
+        }
+      ],
+      "Defaults": {
+        "Limit": 6,
+        "Detections": {
+          "Flying": false,
+          "Hidden": false,
+          "Lead": false
+        },
+        "Range": 14,
+        "Price": 750,
+        "Attributes": {
+          "BuildTime": 2,
+          "MaxUnits": 2,
+          "UnitToSend": "Sentry1",
+          "SpawnTime": 1,
+          "SentryShield": false,
+          "Buildzone": 6,
+          "Deadzone": 2
+        },
+        "Cooldown": 1.5,
+        "Damage": 3
+      }
+    }
+  }
+}

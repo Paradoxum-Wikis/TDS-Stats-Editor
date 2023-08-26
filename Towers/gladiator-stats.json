@@ -1,0 +1,131 @@
+{
+  "Gladiator": {
+    "Default": {
+      "Upgrades": [
+        {
+          "Image": 3356186535,
+          "Stats": {
+            "Extras": [],
+            "Attributes": {
+              "ParryCooldown": 5,
+              "MaxHits": 3,
+              "ParryLength": 1.25
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": false
+            },
+            "Cooldown": 1,
+            "Range": 5,
+            "Damage": 3
+          },
+          "Title": "Warrior Armor",
+          "Cost": 250
+        },
+        {
+          "Image": 141745478,
+          "Stats": {
+            "Extras": [],
+            "Attributes": {
+              "ParryCooldown": 5,
+              "MaxHits": 3,
+              "ParryLength": 1.25
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": true,
+              "Lead": false
+            },
+            "Cooldown": 1,
+            "Range": 5,
+            "Damage": 5
+          },
+          "Title": "Dangersense",
+          "Cost": 500
+        },
+        {
+          "Image": 4118882122,
+          "Stats": {
+            "Extras": [
+              "Warrior's Call"
+            ],
+            "Attributes": {
+              "ParryCooldown": 5,
+              "MaxHits": 3,
+              "ParryLength": 1.25
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": true,
+              "Lead": false
+            },
+            "Cooldown": 1,
+            "Range": 5,
+            "Damage": 10
+          },
+          "Title": "Extra Protection",
+          "Cost": 1500
+        },
+        {
+          "Image": 16620737,
+          "Stats": {
+            "Extras": [],
+            "Attributes": {
+              "ParryCooldown": 5,
+              "MaxHits": 3,
+              "ParryLength": 1.25
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": true,
+              "Lead": false
+            },
+            "Cooldown": 0.75,
+            "Range": 5,
+            "Damage": 25
+          },
+          "Title": "Illumina",
+          "Cost": 2500
+        },
+        {
+          "Image": 16868189,
+          "Stats": {
+            "Extras": [],
+            "Attributes": {
+              "ParryCooldown": 5,
+              "MaxHits": 3,
+              "ParryLength": 1.25
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": true,
+              "Lead": false
+            },
+            "Cooldown": 0.5,
+            "Range": 6,
+            "Damage": 40
+          },
+          "Title": "Darkheart Swordsman",
+          "Cost": 6000
+        }
+      ],
+      "Defaults": {
+        "Detections": {
+          "Flying": false,
+          "Hidden": false,
+          "Lead": false
+        },
+        "Attributes": {
+          "ParryCooldown": 5,
+          "MaxHits": 3,
+          "ParryLength": 1.25
+        },
+        "Price": 300,
+        "Range": 5,
+        "Cooldown": 1,
+        "Damage": 2
+      }
+    }
+  }
+}

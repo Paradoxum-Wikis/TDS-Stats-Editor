@@ -1,0 +1,254 @@
+{
+    "Cowboy": {
+        "Default": {
+            "Upgrades": [
+                {
+                    "Image": 4999425200,
+                    "Stats": {
+                        "Attributes": {
+                            "MaxAmmo": 6,
+                            "SpinDuration": 1.7
+                        },
+                        "Extras": [],
+                        "Income": 25,
+                        "Detections": {
+                            "Flying": false,
+                            "Hidden": false,
+                            "Lead": false
+                        },
+                        "Cooldown": 0.8,
+                        "Range": 14,
+                        "Damage": 3
+                    },
+                    "Title": "Steady Aim",
+                    "Cost": 250
+                },
+                {
+                    "Image": 5523233366,
+                    "Stats": {
+                        "Attributes": {
+                            "MaxAmmo": 6,
+                            "SpinDuration": 1.7
+                        },
+                        "Extras": [],
+                        "Income": 35,
+                        "Detections": {
+                            "Flying": false,
+                            "Hidden": false,
+                            "Lead": false
+                        },
+                        "Cooldown": 0.8,
+                        "Range": 16,
+                        "Damage": 4
+                    },
+                    "Title": "Lucky Shot",
+                    "Cost": 300
+                },
+                {
+                    "Image": 5523231844,
+                    "Stats": {
+                        "Attributes": {
+                            "MaxAmmo": 6,
+                            "SpinDuration": 1.3
+                        },
+                        "Extras": ["Spin: 1.7 > 1.3 secs"],
+                        "Income": 35,
+                        "Detections": {
+                            "Flying": false,
+                            "Hidden": true,
+                            "Lead": false
+                        },
+                        "Cooldown": 0.8,
+                        "Range": 18,
+                        "Damage": 8
+                    },
+                    "Title": "Faster Instincts",
+                    "Cost": 1650
+                },
+                {
+                    "Image": 5523234030,
+                    "Stats": {
+                        "Attributes": {
+                            "MaxAmmo": 6,
+                            "SpinDuration": 1.3
+                        },
+                        "Extras": [],
+                        "Income": 50,
+                        "Detections": {
+                            "Flying": false,
+                            "Hidden": true,
+                            "Lead": false
+                        },
+                        "Cooldown": 0.35,
+                        "Range": 18,
+                        "Damage": 10
+                    },
+                    "Title": "Double Tap",
+                    "Cost": 4000
+                },
+                {
+                    "Image": 5523234990,
+                    "Stats": {
+                        "Attributes": {
+                            "MaxAmmo": 6,
+                            "SpinDuration": 1
+                        },
+                        "Extras": ["Spin: 1.3 → 1 secs"],
+                        "Income": 80,
+                        "Detections": {
+                            "Flying": false,
+                            "Hidden": true,
+                            "Lead": false
+                        },
+                        "Cooldown": 0.35,
+                        "Range": 18,
+                        "Damage": 20
+                    },
+                    "Title": "Outlawed",
+                    "Cost": 7500
+                }
+            ],
+            "Defaults": {
+                "Income": 25,
+                "Detections": {
+                    "Flying": false,
+                    "Hidden": false,
+                    "Lead": false
+                },
+                "Range": 11,
+                "Price": 450,
+                "Attributes": {
+                    "MaxAmmo": 6,
+                    "SpinDuration": 1.7
+                },
+                "Cooldown": 0.8,
+                "Damage": 2
+            }
+        },
+        "Golden": {
+            "Upgrades": [
+                {
+                    "Image": 5523231844,
+                    "Stats": {
+                        "Attributes": {
+                            "MaxAmmo": 6,
+                            "SpinDuration": 1.5
+                        },
+                        "Extras": [],
+                        "Income": 25,
+                        "Detections": {
+                            "Flying": false,
+                            "Hidden": false,
+                            "Lead": false
+                        },
+                        "Cooldown": 0.65,
+                        "Range": 14,
+                        "Damage": 3
+                    },
+                    "Title": "Headshot Practice",
+                    "Cost": 250
+                },
+                {
+                    "Image": 4999425200,
+                    "Stats": {
+                        "Attributes": {
+                            "MaxAmmo": 6,
+                            "SpinDuration": 1.5
+                        },
+                        "Extras": [],
+                        "Income": 45,
+                        "Detections": {
+                            "Flying": false,
+                            "Hidden": false,
+                            "Lead": false
+                        },
+                        "Cooldown": 0.55,
+                        "Range": 16,
+                        "Damage": 4
+                    },
+                    "Title": "Gold Shot",
+                    "Cost": 500
+                },
+                {
+                    "Image": 5523233366,
+                    "Stats": {
+                        "Attributes": {
+                            "MaxAmmo": 6,
+                            "SpinDuration": 1.3
+                        },
+                        "Extras": ["Spin: 1.5 → 1.3 secs"],
+                        "Income": 45,
+                        "Detections": {
+                            "Flying": false,
+                            "Hidden": true,
+                            "Lead": false
+                        },
+                        "Cooldown": 0.5,
+                        "Range": 18,
+                        "Damage": 10
+                    },
+                    "Title": "Faster Instincts",
+                    "Cost": 2250
+                },
+                {
+                    "Image": 5523234030,
+                    "Stats": {
+                        "Attributes": {
+                            "MaxAmmo": 12,
+                            "SpinDuration": 1.3
+                        },
+                        "Extras": ["Longer Burst (12)"],
+                        "Income": 115,
+                        "Detections": {
+                            "Flying": false,
+                            "Hidden": true,
+                            "Lead": false
+                        },
+                        "Cooldown": 0.25,
+                        "Range": 18,
+                        "Damage": 12
+                    },
+                    "Title": "Double Tap",
+                    "Cost": 6650
+                },
+                {
+                    "Image": 5523234990,
+                    "Stats": {
+                        "Attributes": {
+                            "MaxAmmo": 12,
+                            "SpinDuration": 1
+                        },
+                        "Extras": ["Spin: 1.3 → 1 secs"],
+                        "Income": 160,
+                        "Detections": {
+                            "Flying": false,
+                            "Hidden": true,
+                            "Lead": false
+                        },
+                        "Cooldown": 0.25,
+                        "Range": 18,
+                        "Damage": 20
+                    },
+                    "Title": "Wildest Of The West",
+                    "Cost": 12000
+                }
+            ],
+            "Defaults": {
+                "Income": 25,
+                "Detections": {
+                    "Flying": false,
+                    "Hidden": false,
+                    "Lead": false
+                },
+                "Range": 12,
+                "Price": 700,
+                "Attributes": {
+                    "MaxAmmo": 6,
+                    "SpinDuration": 1.5
+                },
+                "Cooldown": 0.65,
+                "Damage": 2
+            }
+        }
+    }
+}

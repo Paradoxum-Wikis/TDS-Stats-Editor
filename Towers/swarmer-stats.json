@@ -1,0 +1,144 @@
+{
+  "Swarmer": {
+    "Default": {
+      "Upgrades": [
+        {
+          "Image": 4865025162,
+          "Stats": {
+            "Extras": [],
+            "Attributes": {
+              "StingTime": 4,
+              "ExplosionRadius": 8,
+              "BeeDamage": 1,
+              "TickRate": 0.75
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": false
+            },
+            "Cooldown": 2,
+            "Range": 12,
+            "Damage": 1
+          },
+          "Title": "Aggressive Bees",
+          "Cost": 250
+        },
+        {
+          "Image": 4865025274,
+          "Stats": {
+            "Extras": [],
+            "Attributes": {
+              "StingTime": 4,
+              "ExplosionRadius": 8,
+              "BeeDamage": 1,
+              "TickRate": 0.75
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": false
+            },
+            "Cooldown": 2,
+            "Range": 16,
+            "Damage": 1
+          },
+          "Title": "Improve Handling",
+          "Cost": 300
+        },
+        {
+          "Image": 4865025421,
+          "Stats": {
+            "Extras": [],
+            "Attributes": {
+              "StingTime": 4,
+              "ExplosionRadius": 8,
+              "BeeDamage": 1,
+              "TickRate": 0.75
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": false
+            },
+            "Cooldown": 1,
+            "Range": 18,
+            "Damage": 1
+          },
+          "Title": "Bee Gun",
+          "Cost": 500
+        },
+        {
+          "Image": 4865025564,
+          "Stats": {
+            "Extras": [
+              "More bee damage",
+              "Even faster tick",
+              "Longer stings",
+              "Beehive grenade"
+            ],
+            "Attributes": {
+              "StingTime": 6,
+              "ExplosionRadius": 8,
+              "BeeDamage": 2,
+              "TickRate": 0.5
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": false
+            },
+            "Cooldown": 1,
+            "Range": 18,
+            "Damage": 1
+          },
+          "Title": "Beehive of Madness",
+          "Cost": 1200
+        },
+        {
+          "Image": 4865025676,
+          "Stats": {
+            "Extras": [
+              "More bee damage",
+              "Faster tick",
+              "Longer strings"
+            ],
+            "Attributes": {
+              "StingTime": 8,
+              "ExplosionRadius": 8,
+              "BeeDamage": 4,
+              "TickRate": 0.25
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": false
+            },
+            "Cooldown": 0.5,
+            "Range": 20,
+            "Damage": 1
+          },
+          "Title": "Beekeeper of Death",
+          "Cost": 4000
+        }
+      ],
+      "Defaults": {
+        "Detections": {
+          "Flying": false,
+          "Hidden": false,
+          "Lead": false
+        },
+        "Attributes": {
+          "StingTime": 3,
+          "ExplosionRadius": 8,
+          "BeeDamage": 1,
+          "TickRate": 1
+        },
+        "Price": 300,
+        "Range": 12,
+        "Cooldown": 2,
+        "Damage": 1
+      }
+    }
+  }
+}

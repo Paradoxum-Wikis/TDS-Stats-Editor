@@ -1,0 +1,155 @@
+{
+  "War Machine": {
+    "Default": {
+      "Upgrades": [
+        {
+          "Image": 4989372339,
+          "Stats": {
+            "Extras": [],
+            "Attributes": {
+              "MissileTime": 5,
+              "DamageBuff": 0,
+              "ExplosionRadius": 5,
+              "Spread": 10,
+              "ExplosionDamage": 20
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": false
+            },
+            "Cooldown": 0.1,
+            "Range": 18,
+            "Damage": 1
+          },
+          "Title": "IMPROVED HANDLING",
+          "Cost": 250
+        },
+        {
+          "Image": 4989372568,
+          "Stats": {
+            "Extras": [
+              "Missile",
+              "20 damage",
+              "5 sec reload"
+            ],
+            "Attributes": {
+              "MissileTime": 5,
+              "DamageBuff": 0,
+              "ExplosionRadius": 5,
+              "Spread": 10,
+              "ExplosionDamage": 20
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": false
+            },
+            "Cooldown": 0.1,
+            "Range": 22,
+            "Damage": 2
+          },
+          "Title": "STARK MISSILE",
+          "Cost": 650
+        },
+        {
+          "Image": 3584258139,
+          "Stats": {
+            "Extras": [
+              "Nearby troops get 10% DMG buff"
+            ],
+            "Attributes": {
+              "MissileTime": 5,
+              "DamageBuff": 10,
+              "ExplosionRadius": 5,
+              "Spread": 10,
+              "ExplosionDamage": 20
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": false
+            },
+            "Cooldown": 0.1,
+            "Range": 22,
+            "Damage": 4
+          },
+          "Title": "EPIC ARMOR PLATING",
+          "Cost": 5000
+        },
+        {
+          "Image": 4989373124,
+          "Stats": {
+            "Extras": [
+              "Quad Missile Launcher",
+              "25 damage",
+              "Bigger boom"
+            ],
+            "Attributes": {
+              "MissileTime": 5,
+              "DamageBuff": 10,
+              "ExplosionRadius": 6,
+              "Spread": 10,
+              "ExplosionDamage": 25
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": false
+            },
+            "Cooldown": 0.1,
+            "Range": 24,
+            "Damage": 10
+          },
+          "Title": "ULTRA CHARGED BODY ARMOR",
+          "Cost": 12500
+        },
+        {
+          "Image": 4989373460,
+          "Stats": {
+            "Extras": [
+              "Faster missile reloading",
+              "Nearby troops get 20% DMG buff"
+            ],
+            "Attributes": {
+              "MissileTime": 4,
+              "DamageBuff": 20,
+              "ExplosionRadius": 6,
+              "Spread": 10,
+              "ExplosionDamage": 25
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": false
+            },
+            "Cooldown": 0.1,
+            "Range": 26,
+            "Damage": 18
+          },
+          "Title": "To The Void and Back",
+          "Cost": 75000
+        }
+      ],
+      "Defaults": {
+        "Attributes": {
+          "MissileTime": 5,
+          "DamageBuff": 0,
+          "ExplosionRadius": 5,
+          "Spread": 10,
+          "ExplosionDamage": 20
+        },
+        "Detections": {
+          "Flying": false,
+          "Hidden": false,
+          "Lead": false
+        },
+        "Range": 12,
+        "Price": 2000,
+        "Limit": 10,
+        "Cooldown": 0.1,
+        "Damage": 1
+      }
+    }
+  }
+}

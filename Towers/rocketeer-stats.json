@@ -1,0 +1,103 @@
+{
+  "Rocketeer": {
+    "Default": {
+      "Upgrades": [
+        {
+          "Image": 5523197925,
+          "Stats": {
+            "Extras": [],
+            "Attributes": {
+              "ExplosionRadius": 4
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": true
+            },
+            "Cooldown": 5,
+            "Range": 16,
+            "Damage": 8
+          },
+          "Title": "Faster Reloading",
+          "Cost": 350
+        },
+        {
+          "Image": 5523199083,
+          "Stats": {
+            "Extras": [],
+            "Attributes": {
+              "ExplosionRadius": 4
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": true
+            },
+            "Cooldown": 5,
+            "Range": 20,
+            "Damage": 8
+          },
+          "Title": "Aiming Practice",
+          "Cost": 600
+        },
+        {
+          "Image": 5523200004,
+          "Stats": {
+            "Extras": [
+              "Larger explosion"
+            ],
+            "Attributes": {
+              "ExplosionRadius": 5
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": true
+            },
+            "Cooldown": 4.5,
+            "Range": 20,
+            "Damage": 20
+          },
+          "Title": "Explosive Risks",
+          "Cost": 2800
+        },
+        {
+          "Image": 5523202707,
+          "Stats": {
+            "Extras": [
+              "Larger explosion"
+            ],
+            "Attributes": {
+              "ExplosionRadius": 6
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": true
+            },
+            "Cooldown": 4.5,
+            "Range": 28,
+            "Damage": 40
+          },
+          "Title": "Artillery Cannon",
+          "Cost": 7500
+        }
+      ],
+      "Defaults": {
+        "Attributes": {
+          "ExplosionRadius": 4
+        },
+        "Detections": {
+          "Flying": false,
+          "Hidden": false,
+          "Lead": false
+        },
+        "Range": 16,
+        "Price": 850,
+        "Limit": 8,
+        "Cooldown": 6,
+        "Damage": 8
+      }
+    }
+  }
+}

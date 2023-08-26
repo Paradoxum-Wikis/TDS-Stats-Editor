@@ -1,0 +1,137 @@
+{
+  "Toxic Gunner": {
+    "Default": {
+      "Upgrades": [
+        {
+          "Image": 5523192002,
+          "Stats": {
+            "Extras": [
+              "x2 Reload Speed"
+            ],
+            "Attributes": {
+              "PoisonTick": 0.5,
+              "Burst": 3,
+              "DefenseMelt": 0,
+              "ReloadSpeed": 5,
+              "Slowness": 10,
+              "PoisonLength": 2,
+              "PoisonDamage": 0
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": true
+            },
+            "Cooldown": 0.15,
+            "Range": 10,
+            "Damage": 1
+          },
+          "Title": "Faster Reloading",
+          "Cost": 150
+        },
+        {
+          "Image": 5523193619,
+          "Stats": {
+            "Extras": [
+              "Bullets damage over time"
+            ],
+            "Attributes": {
+              "PoisonTick": 0.5,
+              "Burst": 3,
+              "DefenseMelt": 0,
+              "ReloadSpeed": 5,
+              "Slowness": 10,
+              "PoisonLength": 2,
+              "PoisonDamage": 1
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": true
+            },
+            "Cooldown": 0.15,
+            "Range": 12,
+            "Damage": 1
+          },
+          "Title": "Poisonous Bullets",
+          "Cost": 400
+        },
+        {
+          "Image": 5523195646,
+          "Stats": {
+            "Extras": [
+              "Increased burst"
+            ],
+            "Attributes": {
+              "PoisonTick": 0.5,
+              "Burst": 6,
+              "DefenseMelt": 0,
+              "ReloadSpeed": 5,
+              "Slowness": 10,
+              "PoisonLength": 2,
+              "PoisonDamage": 1
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": true
+            },
+            "Cooldown": 0.1,
+            "Range": 14,
+            "Damage": 2
+          },
+          "Title": "Hazardous Gear",
+          "Cost": 1600
+        },
+        {
+          "Image": 5523196519,
+          "Stats": {
+            "Extras": [
+              "Increased burst",
+              "Longer effects"
+            ],
+            "Attributes": {
+              "PoisonTick": 0.5,
+              "Burst": 10,
+              "DefenseMelt": 0,
+              "ReloadSpeed": 5,
+              "Slowness": 10,
+              "PoisonLength": 4,
+              "PoisonDamage": 1
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": true
+            },
+            "Cooldown": 0.1,
+            "Range": 18,
+            "Damage": 4
+          },
+          "Title": "Nuclear Overload",
+          "Cost": 6000
+        }
+      ],
+      "Defaults": {
+        "Detections": {
+          "Flying": false,
+          "Hidden": false,
+          "Lead": false
+        },
+        "Attributes": {
+          "PoisonTick": 0.5,
+          "Burst": 3,
+          "DefenseMelt": 0,
+          "ReloadSpeed": 10,
+          "Slowness": 10,
+          "PoisonLength": 2,
+          "PoisonDamage": 0
+        },
+        "Price": 400,
+        "Range": 10,
+        "Cooldown": 0.15,
+        "Damage": 1
+      }
+    }
+  }
+}

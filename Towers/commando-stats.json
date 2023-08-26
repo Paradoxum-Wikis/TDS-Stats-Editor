@@ -1,0 +1,110 @@
+{
+  "Commando": {
+    "Default": {
+      "Upgrades": [
+        {
+          "Image": 3615110168,
+          "Stats": {
+            "Extras": [],
+            "Attributes": {},
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": false
+            },
+            "Cooldown": 0.5,
+            "Range": 14,
+            "Damage": 2
+          },
+          "Title": "Radar Pack",
+          "Cost": 350
+        },
+        {
+          "Image": 3615110536,
+          "Stats": {
+            "Extras": [
+              "Missile launcher"
+            ],
+            "Attributes": {},
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": false
+            },
+            "Cooldown": 0.5,
+            "Range": 16,
+            "Damage": 2
+          },
+          "Title": "Disposable Missile",
+          "Cost": 700
+        },
+        {
+          "Image": 3615110964,
+          "Stats": {
+            "Extras": [],
+            "Attributes": {},
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": false
+            },
+            "Cooldown": 0.5,
+            "Range": 17,
+            "Damage": 4
+          },
+          "Title": "Recon Armor",
+          "Cost": 2000
+        },
+        {
+          "Image": 3615111324,
+          "Stats": {
+            "Extras": [
+              "Quad missiles"
+            ],
+            "Attributes": {},
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": false
+            },
+            "Cooldown": 0.5,
+            "Range": 19,
+            "Damage": 10
+          },
+          "Title": "Quad Launcher",
+          "Cost": 7500
+        },
+        {
+          "Image": 3615112120,
+          "Stats": {
+            "Extras": [
+              "Really cool armor"
+            ],
+            "Attributes": {},
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": false
+            },
+            "Cooldown": 0.5,
+            "Range": 22,
+            "Damage": 22
+          },
+          "Title": "Flex Armor",
+          "Cost": 10000
+        }
+      ],
+      "Defaults": {
+        "Detections": {
+          "Flying": false,
+          "Hidden": false,
+          "Lead": false
+        },
+        "Price": 1600,
+        "Range": 12,
+        "Cooldown": 0.5,
+        "Damage": 2
+      }
+    }
+  }
+}

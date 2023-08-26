@@ -1,0 +1,100 @@
+{
+  "Demoman": {
+    "Default": {
+      "Upgrades": [
+        {
+          "Image": 0,
+          "Stats": {
+            "Extras": [],
+            "Attributes": {
+              "ExplosionRadius": 2.5
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": true
+            },
+            "Cooldown": 2,
+            "Range": 10,
+            "Damage": 3
+          },
+          "Title": "Further Throwing",
+          "Cost": 150
+        },
+        {
+          "Image": 5523227714,
+          "Stats": {
+            "Extras": [],
+            "Attributes": {
+              "ExplosionRadius": 3.5
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": true
+            },
+            "Cooldown": 2,
+            "Range": 10,
+            "Damage": 6
+          },
+          "Title": "Steil Grenade",
+          "Cost": 525
+        },
+        {
+          "Image": 5523228733,
+          "Stats": {
+            "Extras": [],
+            "Attributes": {
+              "ExplosionRadius": 3.5
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": true
+            },
+            "Cooldown": 1.5,
+            "Range": 10,
+            "Damage": 12
+          },
+          "Title": "Chinalake",
+          "Cost": 1500
+        },
+        {
+          "Image": 5523229364,
+          "Stats": {
+            "Extras": [
+              "Bigger explosion"
+            ],
+            "Attributes": {
+              "ExplosionRadius": 4
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": true
+            },
+            "Cooldown": 1.2,
+            "Range": 14,
+            "Damage": 28
+          },
+          "Title": "Collateral Damage",
+          "Cost": 6000
+        }
+      ],
+      "Defaults": {
+        "Detections": {
+          "Flying": false,
+          "Hidden": false,
+          "Lead": false
+        },
+        "Attributes": {
+          "ExplosionRadius": 2.5
+        },
+        "Price": 300,
+        "Range": 7,
+        "Cooldown": 2.5,
+        "Damage": 3
+      }
+    }
+  }
+}

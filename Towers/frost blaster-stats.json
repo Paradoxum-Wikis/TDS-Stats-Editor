@@ -1,0 +1,135 @@
+{
+  "Frost Blaster": {
+    "Default": {
+      "Upgrades": [
+        {
+          "Image": 3354968287,
+          "Stats": {
+            "Extras": [],
+            "Attributes": {
+              "MaxFreezeTime": 0.4,
+              "DefenseMelt": 0,
+              "MinFreezeTime": 0.2
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": false
+            },
+            "Cooldown": 3,
+            "Range": 13,
+            "Damage": 1
+          },
+          "Title": "Endurance",
+          "Cost": 350
+        },
+        {
+          "Image": 3354969462,
+          "Stats": {
+            "Extras": [],
+            "Attributes": {
+              "MaxFreezeTime": 0.4,
+              "DefenseMelt": 0,
+              "MinFreezeTime": 0.2
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": true,
+              "Lead": false
+            },
+            "Cooldown": 3,
+            "Range": 14,
+            "Damage": 5
+          },
+          "Title": "Subarctic Warmth",
+          "Cost": 600
+        },
+        {
+          "Image": 3354970959,
+          "Stats": {
+            "Extras": [
+              "Defense reducing"
+            ],
+            "Attributes": {
+              "MaxFreezeTime": 0.4,
+              "DefenseMelt": 5,
+              "MinFreezeTime": 0.2
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": true,
+              "Lead": false
+            },
+            "Cooldown": 1.5,
+            "Range": 14,
+            "Damage": 15
+          },
+          "Title": "Improved Armor",
+          "Cost": 1500
+        },
+        {
+          "Image": 3354972102,
+          "Stats": {
+            "Extras": [
+              "Longer freeze"
+            ],
+            "Attributes": {
+              "MaxFreezeTime": 0.8,
+              "DefenseMelt": 5,
+              "MinFreezeTime": 0.2
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": true,
+              "Lead": false
+            },
+            "Cooldown": 1.5,
+            "Range": 14,
+            "Damage": 18
+          },
+          "Title": "Hyper Icer Rifle",
+          "Cost": 3000
+        },
+        {
+          "Image": 3280084231,
+          "Stats": {
+            "Extras": [
+              "Longer freeze"
+            ],
+            "Attributes": {
+              "MaxFreezeTime": 1.2,
+              "DefenseMelt": 5,
+              "MinFreezeTime": 0.2
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": true,
+              "Lead": false
+            },
+            "Cooldown": 1.5,
+            "Range": 18,
+            "Damage": 35
+          },
+          "Title": "Subzero Hero",
+          "Cost": 6500
+        }
+      ],
+      "Defaults": {
+        "Detections": {
+          "Flying": false,
+          "Hidden": false,
+          "Lead": false
+        },
+        "Attributes": {
+          "MaxFreezeTime": 0.4,
+          "DefenseMelt": 0,
+          "MinFreezeTime": 0.2
+        },
+        "Price": 450,
+        "Range": 10,
+        "Cooldown": 3,
+        "Damage": 1
+      }
+    }
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "Commander": {
+    "Default": {
+      "Upgrades": [
+        {
+          "Image": 5525000768,
+          "Stats": {
+            "Extras": [
+              "15% firerate buff"
+            ],
+            "Attributes": {
+              "FirerateBuff": 15
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": false
+            },
+            "Cooldown": 0.5,
+            "Range": 14,
+            "Damage": 4
+          },
+          "Title": "Leadership",
+          "Cost": 850
+        },
+        {
+          "Image": 4594880289,
+          "Stats": {
+            "Extras": [
+              "Call to Arms"
+            ],
+            "Attributes": {
+              "FirerateBuff": 15
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": false
+            },
+            "Cooldown": 0.5,
+            "Range": 14,
+            "Damage": 4
+          },
+          "Title": "Call to Arms",
+          "Cost": 1800
+        },
+        {
+          "Image": 5525002879,
+          "Stats": {
+            "Extras": [
+              "20% firerate buff"
+            ],
+            "Attributes": {
+              "FirerateBuff": 20
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": false
+            },
+            "Cooldown": 0.5,
+            "Range": 16,
+            "Damage": 6
+          },
+          "Title": "Intense Training",
+          "Cost": 5500
+        },
+        {
+          "Image": 5525003528,
+          "Stats": {
+            "Extras": [
+              "25% firerate buff"
+            ],
+            "Attributes": {
+              "FirerateBuff": 25
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": false
+            },
+            "Cooldown": 0.5,
+            "Range": 20,
+            "Damage": 10
+          },
+          "Title": "World Leader",
+          "Cost": 9000
+        }
+      ],
+      "Defaults": {
+        "Detections": {
+          "Flying": false,
+          "Hidden": false,
+          "Lead": false
+        },
+        "Attributes": {
+          "FirerateBuff": 10
+        },
+        "Price": 650,
+        "Range": 12,
+        "Cooldown": 0.5,
+        "Damage": 4
+      }
+    }
+  }
+}

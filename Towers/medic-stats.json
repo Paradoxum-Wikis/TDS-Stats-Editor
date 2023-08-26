@@ -1,0 +1,121 @@
+{
+  "Medic": {
+    "Default": {
+      "Upgrades": [
+        {
+          "Image": 4119547116,
+          "Stats": {
+            "Extras": [],
+            "Attributes": {
+              "Healing": 5
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": false
+            },
+            "Cooldown": 1,
+            "Range": 11,
+            "Damage": 3
+          },
+          "Title": "Medical Precautions",
+          "Cost": 400
+        },
+        {
+          "Image": 4119547593,
+          "Stats": {
+            "Extras": [
+              "Increased healings"
+            ],
+            "Attributes": {
+              "Healing": 5
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": false,
+              "Lead": false
+            },
+            "Cooldown": 0.8,
+            "Range": 12,
+            "Damage": 6
+          },
+          "Title": "Prescribed Vitamins",
+          "Cost": 900
+        },
+        {
+          "Image": 4119548000,
+          "Stats": {
+            "Extras": [],
+            "Attributes": {
+              "Healing": 5
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": true,
+              "Lead": false
+            },
+            "Cooldown": 0.8,
+            "Range": 15,
+            "Damage": 6
+          },
+          "Title": "BIG BRAIN",
+          "Cost": 2400
+        },
+        {
+          "Image": 4119548431,
+          "Stats": {
+            "Extras": [
+              "Increased healing"
+            ],
+            "Attributes": {
+              "Healing": 5
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": true,
+              "Lead": false
+            },
+            "Cooldown": 0.65,
+            "Range": 16,
+            "Damage": 8
+          },
+          "Title": "Medical Pack",
+          "Cost": 4500
+        },
+        {
+          "Image": 4119548907,
+          "Stats": {
+            "Extras": [],
+            "Attributes": {
+              "Healing": 5
+            },
+            "Detections": {
+              "Flying": false,
+              "Hidden": true,
+              "Lead": false
+            },
+            "Cooldown": 0.3,
+            "Range": 18,
+            "Damage": 8
+          },
+          "Title": "Goddess of Healing",
+          "Cost": 6500
+        }
+      ],
+      "Defaults": {
+        "Detections": {
+          "Flying": false,
+          "Hidden": false,
+          "Lead": false
+        },
+        "Attributes": {
+          "Healing": 5
+        },
+        "Price": 900,
+        "Range": 10,
+        "Cooldown": 1,
+        "Damage": 2
+      }
+    }
+  }
+}
