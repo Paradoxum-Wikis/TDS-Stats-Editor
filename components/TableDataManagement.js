@@ -8,6 +8,9 @@ export default class TableDataManagement {
     constructor(viewer) {
         this.viewer = viewer;
 
+        this.activeClass = 'btn-outline-primary';
+        this.inactiveClass = 'btn-outline-secondary';
+
         this.clearButton = document.querySelector('#table-clear');
         this.applyButton = document.querySelector('#table-apply');
         this.resetButton = document.querySelector('#table-reset');
@@ -22,6 +25,32 @@ export default class TableDataManagement {
             'click',
             this.removeLevel.bind(this)
         );
+    }
+
+    renderButtonOutlines() {
+        const currentJSON = JSON.stringify(this.viewer.tower.json);
+        const referenceJSON = JSON.stringify(this.viewer.deltaTower.json);
+        const savedJSON = JSON.stringify(
+            this.viewer.defaultTowerManager.towers[this.viewer.tower.name].json
+        );
+
+        const activeChanges = currentJSON !== referenceJSON;
+        const deltaChanges = savedJSON !== referenceJSON;
+
+        this.#setEnabled(this.clearButton, activeChanges);
+        this.#setEnabled(this.applyButton, activeChanges);
+        this.#setEnabled(this.resetButton, deltaChanges, 'btn-outline-danger');
+    }
+
+    #setEnabled(button, state, active) {
+        active = active ?? this.activeClass;
+        if (state) {
+            button.classList.add(active);
+            button.classList.remove(this.inactiveClass);
+        } else {
+            button.classList.remove(active);
+            button.classList.add(this.inactiveClass);
+        }
     }
 
     clearTable() {

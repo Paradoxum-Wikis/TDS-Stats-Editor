@@ -150,6 +150,7 @@ export default class UpgradeViewer {
 
     #loadExtras(upgrade) {
         const extras = upgrade?.data?.Extras ?? [];
+
         this.extrasInput.innerHTML = [];
 
         extras.forEach((extra, index) => {

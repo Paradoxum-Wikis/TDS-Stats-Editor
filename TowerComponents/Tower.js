@@ -39,6 +39,50 @@ class Tower {
         }, {});
     }
 
+    get attributes() {
+        let allAttributes = [];
+
+        for (const skinData of Object.values(this.skins)) {
+            const attributes = Object.keys(skinData.locator.locations);
+
+            allAttributes = [...new Set([...allAttributes, ...attributes])];
+        }
+
+        return allAttributes;
+    }
+
+    getOccurrencesForAttribute(attributeName) {
+        let occurrences = [];
+
+        for (const skinData of Object.values(this.skins)) {
+            const attributes =
+                skinData.getOccurrencesForAttribute(attributeName);
+
+            occurrences = [...new Set([...occurrences, ...attributes])];
+        }
+
+        return occurrences;
+    }
+
+    getAttributeType(attributeName) {
+        for (const skinData of Object.values(this.skins)) {
+            if (
+                !Object.keys(skinData.locator.locations).includes(attributeName)
+            )
+                continue;
+
+            return skinData.getAttributeType(attributeName);
+        }
+    }
+
+    getAttributeLocation(attributeName) {
+        for (const skinData of Object.values(this.skins)) {
+            if (!skinData.locator.hasLocation(attributeName)) continue;
+
+            return skinData.locator.getLocation(attributeName);
+        }
+    }
+
     /**
      * @param {String} skinName
      * @returns {SkinData}

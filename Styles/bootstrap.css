@@ -2245,7 +2245,7 @@ progress {
 }
 .form-control:disabled,
 .form-control[readonly] {
-    background-color: #e9ecef;
+    color: rgba(255, 212, 248, 0.59) !important;
     opacity: 1;
 }
 .form-control::file-selector-button {
@@ -4939,6 +4939,7 @@ fieldset:disabled .btn {
     margin-bottom: 1rem;
     border: 1px solid transparent;
     border-radius: 0.25rem;
+    z-index: 1000;
 }
 
 .alert-heading {
@@ -4979,9 +4980,9 @@ fieldset:disabled .btn {
 }
 
 .alert-success {
-    color: #0f5132;
-    background-color: #d1e7dd;
-    border-color: #badbcc;
+    color: #ffffff;
+    background-color: #198754cc;
+    border-color: #198754;
 }
 .alert-success .alert-link {
     color: #0c4128;

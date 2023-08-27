@@ -1,4 +1,6 @@
 import Locator from './Locator.js';
+import TowerManager from './TowerManager.js';
+import Alert from '../components/Alert.js';
 
 class BaseStats {
     #baseAttributes = [
@@ -45,8 +47,8 @@ class BaseStats {
         this.addAttribute('Range');
 
         this.addDetection('Hidden');
-        this.addAttribute('Flying', ['Detections']);
-        this.addAttribute('Lead', ['Detections']);
+        this.addDetection('Flying');
+        this.addDetection('Lead');
 
         this.attributes.Cost = data.Cost | data.Price;
 
@@ -69,6 +71,43 @@ class BaseStats {
 
         this.locator.addLocation(name, location);
         this.addAttributeValue(name, value);
+    }
+
+    removeAttribute(attributeName) {
+        if (!this.locator.hasLocation(attributeName)) return true;
+
+        const target = this.locator.getTargetData(
+            this.data,
+            this.locator.getLocation(attributeName)
+        );
+        if (target !== undefined && target[attributeName] !== undefined) {
+            delete target[attributeName];
+        }
+        return true;
+    }
+
+    addNewAttribute(attributeName, defaultValue) {
+        if (this.locator.hasLocation(attributeName)) {
+            const alert = new Alert(`Attribute already exists`, {
+                alertStyle: 'alert-warning',
+            });
+
+            alert.fire();
+            return false;
+        }
+
+        const towerManager = new TowerManager();
+        const location = towerManager.getAttributeLocation(attributeName) ?? [
+            'Attributes',
+        ];
+        const targetData = this.locator.getOrCreateTargetData(
+            this.data,
+            location
+        );
+
+        targetData[attributeName] = defaultValue;
+
+        return true;
     }
 
     addAttributeValue(name, value) {
@@ -103,7 +142,7 @@ class BaseStats {
                 delete this.data.Detections;
             }
         } else if (this.locator.hasLocation(attribute)) {
-            const targetData = this.locator.getTargetData(
+            const targetData = this.locator.getOrCreateTargetData(
                 this.data,
                 this.locator.getLocation(attribute)
             );

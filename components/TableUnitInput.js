@@ -1,25 +1,12 @@
-import Levels from '../TowerComponents/Levels.js';
 import Viewer from './Viewer.js';
 
-export default class TableInput {
-    /**
-	 * ({
-		level: level,
-		attribute: attribute,
-		towerLevels: levels,
-		referenceLevels: deltaLevels,
-		useDelta: this.viewer.buttonDeltaButton.state,
-		viewer: this.viewer,
-	})
-	 */
+export default class TableUnitInput {
     /**
      *
      * @param {{
-	 * level: Number,
-	 * attribute: String,
-	 * towerLevels: Levels,
-	 * referenceLevels: Levels,
-	 * useDelta: Boolean,
+	 * unitName: string,
+	 * attribute: string,
+	 * unitData: {},
 	 * viewer: Viewer,
 	 * }} data
  
@@ -28,11 +15,9 @@ export default class TableInput {
     constructor(data) {
         this.base = this.#createBase();
 
-        this.level = data.level;
+        this.name = data.unitData;
         this.attribute = data.attribute;
-        this.towerLevels = data.towerLevels;
-        this.referenceLevels = data.referenceLevels;
-        this.useDelta = data.useDelta;
+        this.unitData = data.unitData;
         this.viewer = data.viewer;
 
         this.sizeFactor = 1.35;
@@ -41,13 +26,8 @@ export default class TableInput {
     }
 
     createInput() {
-        const cellData = this.towerLevels.getCell(this.level, this.attribute);
-        const deltaData = this.referenceLevels.getCell(
-            this.level,
-            this.attribute
-        );
-
-        const input = this.#getInput(cellData, deltaData);
+        const cellData = this.unitData[this.attribute];
+        const input = this.#getInput(cellData);
 
         this.input = input;
     }
@@ -59,16 +39,31 @@ export default class TableInput {
         return td;
     }
 
-    #getInput(value, deltaData) {
+    #getInput(value) {
+        if (value === undefined) return this.#createNullInput(value);
+
         if (['true', 'false'].includes(String(value))) {
-            return this.#createBooleanInput(value, deltaData);
+            return this.#createBooleanInput(value);
         }
 
         if (Number.isFinite(+value)) {
-            return this.#createNumberInput(value, deltaData);
+            return this.#createNumberInput(value);
         }
 
-        return this.#createTextInput(value, deltaData);
+        return this.#createTextInput(value);
+    }
+
+    #createNullInput(value) {
+        const input = document.createElement('input');
+
+        input.classList.add('table-cell-input');
+        input.readOnly = true;
+
+        input.size = 1;
+
+        this.base.appendChild(input);
+
+        return input;
     }
 
     #createBooleanInput(value, deltaData) {
@@ -114,10 +109,6 @@ export default class TableInput {
         });
 
         let outputValue = this.#formatNumber(value);
-        if (this.useDelta)
-            outputValue =
-                String(outputValue) +
-                String(this.#getDelta(value, deltaData, input));
 
         const computedSize =
             String(outputValue).length / this.sizeFactor + this.sizeModifier;
@@ -137,7 +128,7 @@ export default class TableInput {
                 this.viewer.unitManager.unitData[value];
         }
         const input = document.createElement('input');
-
+        input.size = 1;
         input.classList.add('table-cell-input');
 
         input.addEventListener('focusin', (() => {
@@ -151,7 +142,8 @@ export default class TableInput {
         if (this.useDelta && value != deltaData) {
             input.classList.add('table-cell-input-delta');
         }
-        const computedSize = String(value).length / this.sizeFactor;
+        const computedSize =
+            String(value).length / this.sizeFactor + this.sizeModifier;
 
         input.style.minWidth = `${computedSize}em`;
         input.value = value;
@@ -164,15 +156,20 @@ export default class TableInput {
     #onBooleanSubmit() {
         const newValue = this.input.checked;
 
-        this.towerLevels.set(this.level, this.attribute, newValue);
+        try {
+            this.unitData[this.attribute] = newValue;
+        } catch (error) {}
+
         this.viewer.reload();
     }
 
     #onNumberSubmit() {
         const newValue = this.input.value;
 
-        if (newValue !== '' && Number.isFinite(+newValue))
-            this.towerLevels.set(this.level, this.attribute, +newValue);
+        try {
+            if (newValue !== '' && Number.isFinite(+newValue))
+                this.unitData[this.attribute] = newValue;
+        } catch (error) {}
 
         this.viewer.reload();
     }
@@ -180,8 +177,10 @@ export default class TableInput {
     #onTextSubmit() {
         const newValue = this.input.value;
 
-        if (newValue != '')
-            this.towerLevels.set(this.level, this.attribute, newValue);
+        try {
+            if (newValue !== '' || this.attribute !== 'Name')
+                this.unitData[this.attribute] = newValue;
+        } catch (error) {}
 
         this.viewer.reload();
     }
@@ -194,18 +193,5 @@ export default class TableInput {
                 return `$${Intl.NumberFormat().format(number)}`;
         }
         return +(+number).toFixed(2);
-    }
-
-    #getDelta(cellData, deltaData, input) {
-        const difference = cellData - deltaData;
-        if (difference === 0) return '';
-
-        const sign = Math.sign(difference) > 0 ? '+' : '-';
-        const absDifference = Math.abs(difference);
-
-        input.classList.add('table-cell-input-delta');
-        this.sizeModifier = this.sizeDeltaModifier;
-
-        return ` (${sign}${this.#formatNumber(absDifference)})`;
     }
 }

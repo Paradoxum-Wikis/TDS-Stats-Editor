@@ -14,6 +14,14 @@ class Upgrade extends BaseStats {
         this.upgradeData = data;
 
         this.addAttributeValue('Cost', data.Cost);
+
+        //Fixes extras being wrongly typed as an object
+        if (
+            data.Stats.Extras !== undefined &&
+            !(data.Stats.Extras instanceof Array)
+        ) {
+            data.Stats.Extras = [];
+        }
     }
 
     set(attribute, value) {

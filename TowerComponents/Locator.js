@@ -28,6 +28,15 @@ export default class Locator {
         return location.reduce((target, next) => target?.[next], data);
     }
 
+    getOrCreateTargetData(data, location) {
+        return location.reduce((target, next) => {
+            if (target[next] === undefined) {
+                target[next] = {};
+            }
+            return target[next];
+        }, data);
+    }
+
     locate(data, attribute, location) {
         location = location ?? [];
 

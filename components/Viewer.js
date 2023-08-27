@@ -1,5 +1,6 @@
 import Tower from '../TowerComponents/Tower.js';
 import TowerTable from './TowerTable.js';
+import UnitTable from './UnitTable.js';
 import ButtonSelection from './ButtonSelection.js';
 import ToggleButton from './ToggleButton.js';
 import TowerManager from '../TowerComponents/TowerManager.js';
@@ -7,6 +8,11 @@ import TableDataManagement from './TableDataManagement.js';
 import PropertyViewer from './PropertyViewer.js';
 import SidePanel from './SidePanel.js';
 import UpgradeViewer from './UpgradeViewer.js';
+import Alert from './Alert.js';
+import Dropdown from './Dropdown.js';
+import AddAttributeForm from './AddAttributeForm.js';
+import RemoveAttributeForm from './RemoveAttributeForm.js';
+import UnitManager from '../TowerComponents/UnitManager.js';
 
 class Viewer {
     /**
@@ -15,7 +21,10 @@ class Viewer {
     constructor(app) {
         this.app = app;
 
+        this.unitManager = new UnitManager();
+        this.defaultTowerManager = new TowerManager();
         this.deltaTowerManager = new TowerManager('delta');
+
         this.propertyViewer = new PropertyViewer(
             this,
             document.getElementById('property-viewer')
@@ -51,6 +60,10 @@ class Viewer {
             document.querySelector('#tower-table'),
             this
         );
+        this.unitTable = new UnitTable(
+            document.querySelector('#unit-table'),
+            this
+        );
 
         this.jsonViewer = new JSONViewer();
 
@@ -69,7 +82,10 @@ class Viewer {
         this.importButtonSubmit.addEventListener(
             'click',
             (() => {
-                this.import(document.querySelector('#json-import-text').value);
+                this.import(
+                    document.querySelector('#json-import-text').value,
+                    true
+                );
             }).bind(this)
         );
 
@@ -80,7 +96,9 @@ class Viewer {
                 this.export(JSON.stringify(this.tower.json));
             }).bind(this)
         );
-        new TableDataManagement(this);
+        this.tableManagement = new TableDataManagement(this);
+        new AddAttributeForm(this);
+        this.removeAttributeForm = new RemoveAttributeForm(this);
     }
 
     /**
@@ -90,8 +108,6 @@ class Viewer {
         this.tower = tower;
         this.deltaTower = this.deltaTowerManager.towers[this.tower.name];
 
-        this.towerNameH1.innerText = tower.name;
-
         this.#setVariantButtons();
         this.#loadBody();
     }
@@ -100,15 +116,30 @@ class Viewer {
         this.#loadBody();
     }
 
-    import(json) {
+    import(json, enableAlert) {
+        enableAlert = enableAlert ?? false;
+
         const oldJSON = JSON.parse(JSON.stringify(this.tower.json));
         try {
             const towerData = JSON.parse(json);
             this.tower.importJSON(towerData);
+
+            if (enableAlert) {
+                const alert = new Alert('JSON Imported!', {
+                    alertStyle: 'alert-success',
+                });
+                alert.timeBeforeShow = 0.1;
+
+                alert.fire();
+            }
         } catch (e) {
             this.tower.importJSON(oldJSON);
-            console.log('Someone just tried to upload something silly');
-            console.log(e);
+            const alert = new Alert('Unable to load that 🦊', {
+                alertStyle: 'alert-danger',
+            });
+            alert.timeBeforeShow = 0.1;
+            alert.alertTimeInSeconds = 1;
+            alert.fire();
         }
 
         this.reload();
@@ -168,6 +199,8 @@ class Viewer {
         this.app.towerManager.saveTower(this.tower);
         this.deltaTowerManager.saveTower(this.deltaTower);
 
+        this.#loadName();
+
         this.#hideJSON();
         this.#hideTable();
 
@@ -177,6 +210,8 @@ class Viewer {
         switch (this.tableView.getSelectedName()) {
             case 'Table':
                 this.#loadTable();
+                this.tableManagement.renderButtonOutlines();
+                this.removeAttributeForm.load();
                 break;
             case 'JSON':
                 this.#showJSON();
@@ -186,7 +221,17 @@ class Viewer {
         }
     }
 
+    #loadName() {
+        const towerName = this.tower.name;
+        const activeVariant = this.towerVariants.getSelectedName();
+        const displayedVariant =
+            activeVariant === 'Default' ? '' : `${activeVariant} `;
+
+        this.towerNameH1.innerText = displayedVariant + towerName;
+    }
+
     #loadTable() {
+        this.activeUnits = {};
         this.towerTable.root.parentElement.classList.remove('d-none');
 
         const skinData = this.getActiveSkin();
@@ -195,6 +240,8 @@ class Viewer {
         this.towerTable.load(skinData, {
 			ignore: this.propertyViewer.disabled
 		}); // prettier-ignore
+
+        this.unitTable.load(this.activeUnits);
     }
 
     #hideTable() {
@@ -222,6 +269,10 @@ class Viewer {
 
     #onCopyJSON() {
         navigator.clipboard.writeText(JSON.stringify(this.tower.json));
+        const alert = new Alert('JSON Copied!', {
+            alertStyle: 'alert-success',
+        });
+        alert.fire();
     }
 }
 

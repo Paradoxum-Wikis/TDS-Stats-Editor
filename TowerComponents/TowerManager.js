@@ -17,6 +17,44 @@ class TowerManager {
             : JSON.parse(JSON.stringify(TowerData));
     }
 
+    #unique(arrayA, arrayB) {
+        return [...new Set([...arrayA, ...arrayB])];
+    }
+
+    getAllAttributes() {
+        const attributes = Object.values(this.towers).reduce(
+            (a, v) => this.#unique(a, v.attributes),
+            []
+        );
+
+        return [...new Set(attributes)];
+    }
+
+    getTypeForAttribute(attributeName) {
+        for (const tower of Object.values(this.towers)) {
+            if (!tower.attributes.includes(attributeName)) continue;
+
+            return tower.getAttributeType(attributeName);
+        }
+    }
+
+    getAttributeLocation(attributeName) {
+        for (const tower of Object.values(this.towers)) {
+            if (!tower.attributes.includes(attributeName)) continue;
+
+            return tower.getAttributeLocation(attributeName);
+        }
+    }
+
+    getOccurrencesForAttribute(attributeName) {
+        const attributes = Object.values(this.towers).reduce(
+            (a, v) =>
+                this.#unique(a, v.getOccurrencesForAttribute(attributeName)),
+            []
+        );
+
+        return [...new Set(attributes)];
+    }
     parseTowerNames(towerData) {
         return Object.keys(towerData).sort((a, b) => a > b);
     }

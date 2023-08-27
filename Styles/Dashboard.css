@@ -11,6 +11,9 @@ main {
 main > header {
     background-color: rgba(0, 0, 0, 0.15);
 }
+#alert-container {
+    pointer-events: none;
+}
 
 #propertyViewer {
     display: block;

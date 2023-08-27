@@ -4,11 +4,17 @@ class Dropdown {
      * @param {HTMLInputElement} textForm
      * @param {HTMLDivElement} dropdown
      * @param {Array<String>} options
+     * @param {{
+     * 		setTextMode: Boolean
+     * }} config
      */
-    constructor(textForm, dropdown, options) {
+    constructor(textForm, dropdown, options, config) {
+        config = config ?? {};
+
         this.textForm = textForm;
         this.dropdown = dropdown;
         this.options = options;
+        this.setTextMode = config.setTextMode ?? false;
 
         this.textForm.addEventListener('focusin', this.#onFocusIn.bind(this));
         this.textForm.addEventListener('focusout', this.#onFocusOut.bind(this));
@@ -83,13 +89,15 @@ class Dropdown {
     }
 
     #onFocusIn() {
-        this.#filterOptions();
         this.#show();
+
         this.#clearText();
+        this.#filterOptions();
     }
 
     #onFocusOut() {
         this.#hide();
+        if (this.setTextMode) return;
         this.#clearText();
     }
 
@@ -100,6 +108,10 @@ class Dropdown {
     #onOptionSelect(option) {
         const event = new CustomEvent('submit', { detail: option });
         this.textForm.dispatchEvent(event);
+
+        if (this.setTextMode) {
+            this.textForm.value = option;
+        }
     }
 }
 
