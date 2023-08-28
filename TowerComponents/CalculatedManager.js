@@ -108,7 +108,8 @@ class CalculatedManager {
                 Value: (level) => {
                     const totalDamage = level.MaxAmmo;
 
-                    const burstCooldown = level.ChargeTime + level.Cooldown;
+                    const burstCooldown =
+                        level.ChargeTime + level.LaserCooldown;
 
                     return totalDamage / (level.LaserTime + burstCooldown);
                 },
