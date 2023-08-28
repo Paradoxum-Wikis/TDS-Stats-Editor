@@ -30,6 +30,13 @@ export default class UnitManager {
 
         Object.keys(this.unitData).forEach((unitName) => {
             this.unitAttributes[unitName].push('DPS');
+            if (
+                Object.getOwnPropertyNames(this.unitData[unitName]).includes(
+                    'DPS'
+                )
+            )
+                return;
+
             Object.defineProperty(this.unitData[unitName], 'DPS', {
                 get() {
                     return dps(this);

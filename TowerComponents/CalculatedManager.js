@@ -1,7 +1,80 @@
 import SkinData from './SkinData.js';
+import UnitManager from './UnitManager.js';
 
 class CalculatedManager {
+    constructor() {
+        this.unitManager = new UnitManager();
+    }
+
     calculated = {
+        LaserDPS: {
+            Default: {
+                For: ['Accelerator'],
+                Requires: ['Damage', 'Cooldown'],
+                Value: (level) => level.Damage / level.Cooldown,
+            },
+        },
+        TowerDPS: {
+            Default: {
+                For: ['Engineer', 'Crook Boss'],
+                Requires: ['Damage', 'Cooldown'],
+                Value: (level) => level.Damage / level.Cooldown,
+            },
+        },
+        RamDPS: {
+            Default: {
+                Exclude: ['Engineer'],
+                Requires: ['UnitToSend', 'SpawnTime'],
+                Value: (level) => {
+                    if (!this.unitManager.hasUnit(level.UnitToSend)) return 0;
+                    const unit = this.unitManager.unitData[level.UnitToSend];
+
+                    return unit.Health / level.SpawnTime;
+                },
+            },
+        },
+        UnitDPS: {
+            Default: {
+                Requires: ['UnitToSend'],
+                Value: (level) => {
+                    if (!this.unitManager.hasUnit(level.UnitToSend)) return 0;
+
+                    return (
+                        this.unitManager.unitData[level.UnitToSend]?.DPS ?? 0
+                    );
+                },
+            },
+            Engineer: {
+                For: ['Engineer'],
+                Requires: ['UnitToSend', 'MaxUnits'],
+                Value: (level) => {
+                    if (!this.unitManager.hasUnit(level.UnitToSend)) return 0;
+
+                    const unit = this.unitManager.unitData[level.UnitToSend];
+
+                    return unit.DPS * level.MaxUnits;
+                },
+            },
+            Crook: {
+                For: ['Crook Boss'],
+                Requires: ['UnitToSend', 'MaxCrooks'],
+                Value: (level) => {
+                    if (!this.unitManager.hasUnit(level.UnitToSend)) return 0;
+
+                    const unit = this.unitManager.unitData[level.UnitToSend];
+
+                    return unit.DPS * level.MaxCrooks;
+                },
+            },
+        },
+        LaserTime: {
+            Default: {
+                For: ['Accelerator'],
+                Requires: ['MaxAmmo', 'LaserDPS'],
+                Value: (level) => level.MaxAmmo / level.LaserDPS,
+            },
+        },
+
         DPS: {
             Default: {
                 Requires: ['Damage', 'Cooldown'],
@@ -31,20 +104,13 @@ class CalculatedManager {
             },
             Accel: {
                 For: ['Accelerator'],
-                Requires: [
-                    'MaxAmmo',
-                    'Damage',
-                    'Cooldown',
-                    'ChargeTime',
-                    'Cooldown',
-                ],
+                Requires: ['MaxAmmo', 'ChargeTime', 'Cooldown', 'LaserTime'],
                 Value: (level) => {
                     const totalDamage = level.MaxAmmo;
-                    const burstDPS = level.Damage / level.Cooldown;
-                    const burstLength = level.MaxAmmo / burstDPS;
+
                     const burstCooldown = level.ChargeTime + level.Cooldown;
 
-                    return totalDamage / (burstLength + burstCooldown);
+                    return totalDamage / (level.LaserTime + burstCooldown);
                 },
             },
             BurnTower: {
@@ -119,13 +185,13 @@ class CalculatedManager {
                 },
             },
             WarMachine: {
-                For: ['Toxic Gunner'],
+                For: ['War Machine'],
                 Value: (level) => {
                     const dps = level.Damage / level.Cooldown;
                     const missileDPS =
                         level.ExplosionDamage / level.MissileTime;
 
-                    return dps / missileDPS;
+                    return dps + missileDPS;
                 },
             },
             Shotgun: {
@@ -133,6 +199,16 @@ class CalculatedManager {
                 Value: (level) => {
                     const dps = level.Damage / level.Cooldown;
                     return dps * level.ShotSize;
+                },
+            },
+            Spawner: {
+                For: ['Engineer', 'Crook Boss', 'Military Base', 'Mecha Base'],
+                Value: (level) => {
+                    const unitDPS = level.UnitDPS ?? 0;
+                    const towerDPS = level.TowerDPS ?? 0;
+                    const ramDPS = level.RamDPS ?? 0;
+
+                    return unitDPS + towerDPS + ramDPS;
                 },
             },
         },
@@ -239,6 +315,11 @@ class CalculatedManager {
     }
 
     addCalculate(skinData) {
+        this.#add('LaserDPS', skinData);
+        this.#add('TowerDPS', skinData);
+        this.#add('UnitDPS', skinData);
+        this.#add('RamDPS', skinData);
+        this.#add('LaserTime', skinData);
         this.#add('DPS', skinData);
         this.#add('NetCost', skinData);
         this.#add('CostEfficiency', skinData);
