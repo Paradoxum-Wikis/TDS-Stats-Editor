@@ -100,12 +100,25 @@ class Levels {
     }
 
     addCalculated(name, getter) {
+        if (this.attributes.includes(name))
+            return this.addOverride(name, getter);
         this.attributes.push(name);
 
         this.levels.forEach((level) => {
             Object.defineProperty(level, name, {
                 get() {
                     return getter(this);
+                },
+            });
+        });
+    }
+
+    addOverride(name, getter) {
+        this.levels.forEach((level) => {
+            const originalValue = level[name];
+            Object.defineProperty(level, name, {
+                get() {
+                    return getter(originalValue);
                 },
             });
         });

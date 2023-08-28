@@ -74,7 +74,6 @@ class CalculatedManager {
                 Value: (level) => level.MaxAmmo / level.LaserDPS,
             },
         },
-
         DPS: {
             Default: {
                 Requires: ['Damage', 'Cooldown'],
@@ -273,6 +272,14 @@ class CalculatedManager {
                 },
             },
         },
+        Cooldown: {
+            Type: 'Override',
+            Default: {
+                Value: (cooldown) => {
+                    return cooldown;
+                },
+            },
+        },
     };
 
     getValue(calculatedField, skinData) {
@@ -329,6 +336,7 @@ class CalculatedManager {
         this.#add('TotalIncomePerSecond', skinData);
         this.#add('WavesUntilNetProfit', skinData);
         this.#add('WavesUntilUpgradeProfit', skinData);
+        this.#add('Cooldown', skinData);
     }
 }
 

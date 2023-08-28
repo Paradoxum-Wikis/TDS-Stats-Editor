@@ -1,5 +1,7 @@
 import ButtonSelection from './ButtonSelection.js';
 
+const imageCache = {};
+
 export default class UpgradeViewer {
     constructor(viewer) {
         this.viewer = viewer;
@@ -41,8 +43,13 @@ export default class UpgradeViewer {
             const upgradeIndex = this.index;
             const skin = this.viewer.getActiveSkin();
 
-            const upgrade = skin.data.Upgrades[upgradeIndex];
-            upgrade.Stats.Extras.push('');
+            const upgradeStats = skin.data.Upgrades[upgradeIndex].Stats;
+
+            if (upgradeStats.Extras === undefined) {
+                upgradeStats.Extras = [];
+            }
+
+            upgradeStats.Extras.push('');
             this.viewer.reload();
         });
 
@@ -71,6 +78,7 @@ export default class UpgradeViewer {
     }
 
     loadUpgrade(index) {
+        console.log(index);
         this.index = index;
         this.upgrade = this.skinData.upgrades[index];
 
@@ -79,14 +87,17 @@ export default class UpgradeViewer {
 
         this.#loadExtras(this.upgrade);
         this.#loadUpgradeChanges();
+        this.#loadImage();
     }
 
     #loadUpgradeChanges() {
         const upgradeChanges = this.skinData.getUpgradeChangeOutput(this.index);
         const minRows = 5;
 
-        this.upgradeChanges.innerText = '';
-        this.upgradeChanges.textContent = upgradeChanges.join('\n');
+        this.upgradeChanges.textContent = '';
+        this.upgradeChanges.value = '';
+
+        this.upgradeChanges.value = upgradeChanges.join('\n');
         this.upgradeChanges.rows = Math.max(upgradeChanges.length, minRows);
     }
 
@@ -146,6 +157,44 @@ export default class UpgradeViewer {
         }
 
         this.viewer.reload();
+    }
+
+    async #fetchImage(imageId) {
+        const protocol = 'https://';
+        const baseUrl = 'assetdelivery.RoProxy.com';
+        const path = '/v2/assetId/';
+
+        var url = `${protocol}${baseUrl}${path}${imageId}`;
+
+        const response = await fetch(url, {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            redirect: 'follow',
+            referrerPolicy: 'no-referrer',
+        });
+
+        const data = await response.json();
+        const imageLocation = data?.locations?.[0]?.location;
+        imageCache[imageId] = imageLocation;
+        return imageLocation;
+    }
+
+    async #loadImage() {
+        const imageId = this.upgrade.upgradeData.Image;
+
+        const imageLocation =
+            imageCache[imageId] ?? (await this.#fetchImage(imageId));
+
+        if (imageLocation) {
+            document.getElementById('upgrade-image').src = imageLocation;
+        } else {
+            document.getElementById('upgrade-image').src = '';
+        }
     }
 
     #loadExtras(upgrade) {
