@@ -47,7 +47,9 @@ export default class PropertyViewer {
     }
 
     getCalculatedProperties() {
-        return Object.keys(CalculatedManager.calculated);
+        return Object.keys(CalculatedManager.calculated).filter(
+            (key) => CalculatedManager.calculated[key]?.Type !== 'Override'
+        );
     }
 
     toggleAll() {

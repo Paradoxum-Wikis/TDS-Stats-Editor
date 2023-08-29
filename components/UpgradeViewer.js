@@ -78,7 +78,6 @@ export default class UpgradeViewer {
     }
 
     loadUpgrade(index) {
-        console.log(index);
         this.index = index;
         this.upgrade = this.skinData.upgrades[index];
 

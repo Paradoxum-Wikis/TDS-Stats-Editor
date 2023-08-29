@@ -137,6 +137,7 @@ export default class TableInput {
                 this.viewer.unitManager.unitData[value];
         }
         const input = document.createElement('input');
+        input.size = 1;
 
         input.classList.add('table-cell-input');
 
@@ -186,14 +187,21 @@ export default class TableInput {
         this.viewer.reload();
     }
 
-    #formatNumber(number) {
+    #formatNumber(value) {
         switch (this.attribute) {
             case 'Cost':
             case 'NetCost':
             case 'Income':
-                return `$${Intl.NumberFormat().format(number)}`;
+                return `$${Intl.NumberFormat().format(value)}`;
         }
-        return +(+number).toFixed(2);
+
+        if (+value < 1) {
+            return +(+value).toFixed(3);
+        }
+        if (+value < 10) {
+            return +(+value).toFixed(2);
+        }
+        return +(+value).toFixed(1);
     }
 
     #getDelta(cellData, deltaData, input) {

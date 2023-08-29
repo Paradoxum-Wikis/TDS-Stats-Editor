@@ -5,6 +5,27 @@ import Viewer from './components/Viewer.js';
 class App {
     constructor() {
         this.towerManager = new TowerManager('New');
+
+        window.state = {
+            boosts: {
+                tower: {
+                    extraCooldown: 0,
+                    firerateBuff: 0,
+                    damageBuff: 0,
+                    rangeBuff: 0,
+                    discount: 0,
+                },
+                unit: {
+                    extraCooldown: 0,
+                    firerateBuff: 0,
+                    damageBuff: 0,
+                    rangeBuff: 0,
+                    healthBuff: 0,
+                    spawnrateBuff: 0,
+                },
+            },
+            cache: {},
+        };
     }
 
     start() {

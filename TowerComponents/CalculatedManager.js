@@ -3,7 +3,8 @@ import UnitManager from './UnitManager.js';
 
 class CalculatedManager {
     constructor() {
-        this.unitManager = new UnitManager();
+        this.unitManager = new UnitManager('units');
+        this.unitManager.load();
     }
 
     calculated = {
@@ -26,6 +27,8 @@ class CalculatedManager {
                 Exclude: ['Engineer'],
                 Requires: ['UnitToSend', 'SpawnTime'],
                 Value: (level) => {
+                    this.unitManager.load();
+
                     if (!this.unitManager.hasUnit(level.UnitToSend)) return 0;
                     const unit = this.unitManager.unitData[level.UnitToSend];
 
@@ -37,6 +40,7 @@ class CalculatedManager {
             Default: {
                 Requires: ['UnitToSend'],
                 Value: (level) => {
+                    this.unitManager.load();
                     if (!this.unitManager.hasUnit(level.UnitToSend)) return 0;
 
                     return (
@@ -48,6 +52,7 @@ class CalculatedManager {
                 For: ['Engineer'],
                 Requires: ['UnitToSend', 'MaxUnits'],
                 Value: (level) => {
+                    this.unitManager.load();
                     if (!this.unitManager.hasUnit(level.UnitToSend)) return 0;
 
                     const unit = this.unitManager.unitData[level.UnitToSend];
@@ -59,6 +64,7 @@ class CalculatedManager {
                 For: ['Crook Boss'],
                 Requires: ['UnitToSend', 'MaxCrooks'],
                 Value: (level) => {
+                    this.unitManager.load();
                     if (!this.unitManager.hasUnit(level.UnitToSend)) return 0;
 
                     const unit = this.unitManager.unitData[level.UnitToSend];
@@ -212,6 +218,13 @@ class CalculatedManager {
                 },
             },
         },
+        LimitDPS: {
+            Default: {
+                Requires: ['DPS', 'Limit'],
+
+                Value: (level) => level.DPS * level.Limit,
+            },
+        },
         NetCost: {
             Default: {
                 Value: (level) => (level.levels.levels.reduce(
@@ -274,9 +287,61 @@ class CalculatedManager {
         },
         Cooldown: {
             Type: 'Override',
+
             Default: {
+                Requires: ['Cooldown'],
                 Value: (cooldown) => {
-                    return cooldown;
+                    const { extraCooldown, firerateBuff } = window.state.boosts.tower; // prettier-ignore
+
+                    return cooldown / (firerateBuff + 1) + extraCooldown;
+                },
+            },
+        },
+        Damage: {
+            Type: 'Override',
+
+            Default: {
+                Requires: ['Damage'],
+                Value: (damage) => {
+                    const { damageBuff } = window.state.boosts.tower; // prettier-ignore
+
+                    return damage * (damageBuff + 1);
+                },
+            },
+        },
+        Range: {
+            Type: 'Override',
+
+            Default: {
+                Requires: ['Range'],
+                Value: (range) => {
+                    const { rangeBuff } = window.state.boosts.tower; // prettier-ignore
+
+                    return range * (rangeBuff + 1);
+                },
+            },
+        },
+        Cost: {
+            Type: 'Override',
+
+            Default: {
+                Requires: ['Cost'],
+                Value: (cost) => {
+                    const { discount } = window.state.boosts.tower; // prettier-ignore
+
+                    return cost * (-discount + 1);
+                },
+            },
+        },
+        SpawnTime: {
+            Type: 'Override',
+
+            Default: {
+                Requires: ['SpawnTime'],
+                Value: (spawnTime) => {
+                    const { spawnrateBuff } = window.state.boosts.unit; // prettier-ignore
+
+                    return spawnTime / (spawnrateBuff + 1);
                 },
             },
         },
@@ -323,12 +388,21 @@ class CalculatedManager {
     }
 
     addCalculate(skinData) {
+        this.unitManager.load();
+
+        this.#add('Cooldown', skinData);
+        this.#add('Damage', skinData);
+        this.#add('Range', skinData);
+        this.#add('Cost', skinData);
+        this.#add('SpawnTime', skinData);
+
         this.#add('LaserDPS', skinData);
         this.#add('TowerDPS', skinData);
         this.#add('UnitDPS', skinData);
         this.#add('RamDPS', skinData);
         this.#add('LaserTime', skinData);
         this.#add('DPS', skinData);
+        this.#add('LimitDPS', skinData);
         this.#add('NetCost', skinData);
         this.#add('CostEfficiency', skinData);
         this.#add('IncomeFactor', skinData);
@@ -336,7 +410,6 @@ class CalculatedManager {
         this.#add('TotalIncomePerSecond', skinData);
         this.#add('WavesUntilNetProfit', skinData);
         this.#add('WavesUntilUpgradeProfit', skinData);
-        this.#add('Cooldown', skinData);
     }
 }
 

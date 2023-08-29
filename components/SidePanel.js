@@ -4,11 +4,12 @@ export default class SidePanel {
     constructor() {
         this.sideViewPanel = document.getElementById('property-viewer-section');
         this.levelViewPanel = document.getElementById('level-view');
+        this.boostsViewPanel = document.getElementById('boost-view');
 
         this.buttonSelection = new ButtonSelection(
             document.getElementById('side-selection-radio')
         );
-        this.buttons = ['Upgrades', 'Views'];
+        this.buttons = ['Upgrades', 'Views', 'Boosts'];
         this.buttonSelection.setButtons(this.buttons);
         this.buttonSelection.root.addEventListener(
             'submit',
@@ -29,12 +30,16 @@ export default class SidePanel {
             case 'Upgrades':
                 this.levelViewPanel.classList.remove('d-none');
                 break;
+            case 'Boosts':
+                this.boostsViewPanel.classList.remove('d-none');
+                break;
         }
     }
 
     hideAll() {
         this.sideViewPanel.classList.add('d-none');
         this.levelViewPanel.classList.add('d-none');
+        this.boostsViewPanel.classList.add('d-none');
     }
 
     onUpdate() {

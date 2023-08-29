@@ -13,6 +13,7 @@ import Dropdown from './Dropdown.js';
 import AddAttributeForm from './AddAttributeForm.js';
 import RemoveAttributeForm from './RemoveAttributeForm.js';
 import UnitManager from '../TowerComponents/UnitManager.js';
+import BoostPanel from './BoostPanel.js';
 
 class Viewer {
     /**
@@ -21,7 +22,7 @@ class Viewer {
     constructor(app) {
         this.app = app;
 
-        this.unitManager = new UnitManager();
+        this.unitManager = new UnitManager('units');
         this.defaultTowerManager = new TowerManager();
         this.deltaTowerManager = new TowerManager('delta');
 
@@ -32,6 +33,7 @@ class Viewer {
         this.sidePanel = new SidePanel();
 
         this.upgradeViewer = new UpgradeViewer(this);
+        this.boostPanel = new BoostPanel(this);
 
         /** @type {HTMLHeadingElement} */
         this.towerNameH1 = document.querySelector('#tower-name');
@@ -109,10 +111,12 @@ class Viewer {
         this.deltaTower = this.deltaTowerManager.towers[this.tower.name];
 
         this.#setVariantButtons();
+        this.unitManager.load();
         this.#loadBody();
     }
 
     reload() {
+        this.unitManager.load();
         this.#loadBody();
     }
 
@@ -190,6 +194,11 @@ class Viewer {
         return this.tower.skins[this.towerVariants.getSelectedName()];
     }
 
+    clearUnitChanges() {
+        this.unitManager.clear();
+        this.reload();
+    }
+
     #setVariantButtons() {
         this.towerVariants.setButtons(this.tower.skinNames);
         this.towerVariants.root.addEventListener('submit', (() => this.#loadBody()).bind(this)); // prettier-ignore
@@ -198,6 +207,7 @@ class Viewer {
     #loadBody() {
         this.app.towerManager.saveTower(this.tower);
         this.deltaTowerManager.saveTower(this.deltaTower);
+        this.boostPanel.reload();
 
         this.#loadName();
 

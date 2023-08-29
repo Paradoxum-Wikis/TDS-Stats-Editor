@@ -53,28 +53,12 @@
 				</div>
 			</div>
 
-			<!-- Property Viewer -->
-			<div id="property-viewer-section" class="d-none">
-				<div class="btn-group w-100 p-2 pt-0">
-					<button id="property-all" class="btn btn-sm btn-dark">All</button>
-					<button id="property-base" class="btn btn-sm btn-dark">Base</button>
-					<button id="property-extra" class="btn btn-sm btn-dark">Extra</button>
-					<button id="property-calc" class="btn btn-sm btn-dark">Calcs</button>
-				</div>
-				<ul id="property-viewer" class="nav nav-pills flex-column mb-auto me-2 ms-2">
-					<div class="spinner-border text-secondary m-auto" role="status">
-						<span class="sr-only"></span>
-					</div>
-				</ul>
-			</div>
-
-
 			<!-- Level Viewer -->
 			<div id="level-view" class="d-none overflow-auto">
 				<div class="d-flex flex-column">
 					<!-- Levels -->
 
-					<div id="side-upgrade-levels" class="flex-grow-1 btn-group btn-group-toggle m-2">
+					<div id="side-upgrade-levels" class="flex-grow-1 btn-group btn-group-toggle m-2 mt-0">
 						<label class="btn btn-sm btn-outline-dark active">
 							<input class="d-none" type="radio" name="options" autocomplete="off" checked>
 							1
@@ -116,6 +100,74 @@
 						<div id="side-upgrade-extras-add" class="btn btn-sm btn-outline-primary mb-2">Add Extra</div>
 
 					</form>
+				</div>
+			</div>
+
+			<!-- Property Viewer -->
+			<div id="property-viewer-section" class="d-none">
+				<div class="btn-group w-100 p-2 pt-0">
+					<button id="property-all" class="btn btn-sm btn-dark">All</button>
+					<button id="property-base" class="btn btn-sm btn-dark">Base</button>
+					<button id="property-extra" class="btn btn-sm btn-dark">Extra</button>
+					<button id="property-calc" class="btn btn-sm btn-dark">Calcs</button>
+				</div>
+				<ul id="property-viewer" class="nav nav-pills flex-column mb-auto me-2 ms-2">
+					<div class="spinner-border text-secondary m-auto" role="status">
+						<span class="sr-only"></span>
+					</div>
+				</ul>
+			</div>
+
+			<!-- Boost View -->
+			<div id="boost-view" class="d-none">
+
+				<div class="d-flex flex-column p-2 pt-0">
+					<div id="side-boosts-target" class="btn-group w-100 pt-0">
+						<button class="btn btn-sm btn-dark">Tower</button>
+						<button class="btn btn-sm btn-dark">Unit</button>
+					</div>
+					<div id="side-boost-form" class="p-2">
+						<form class="d-flex mb-1">
+							<label for="add-attribute-value" class="col-sm-8 col-form-label fs-6">Firerate Buff
+							</label>
+
+							<div class="col-sm-4" id="">
+								<input type="text" class="form-control text-white">
+							</div>
+						</form>
+						<form class="d-flex mb-1">
+							<label for="add-attribute-value" class="col-sm-8 col-form-label fs-6">Damage Buff
+							</label>
+
+							<div class="col-sm-4" id="">
+								<input type="text" class="form-control text-white">
+							</div>
+						</form>
+						<form class="d-flex mb-1">
+							<label for="add-attribute-value" class="col-sm-8 col-form-label fs-6">Range Buff
+							</label>
+
+							<div class="col-sm-4" id="">
+								<input type="text" class="form-control text-white">
+							</div>
+						</form>
+						<form class="d-flex mb-1">
+							<label for="add-attribute-value" class="col-sm-8 col-form-label fs-6">Discount
+							</label>
+
+							<div class="col-sm-4" id="">
+								<input type="text" class="form-control text-white">
+							</div>
+						</form>
+						<form class="d-flex mb-1">
+							<label for="add-attribute-value" class="col-sm-8 col-form-label fs-6">Extra
+								Cooldown</label>
+
+							<div class="col-sm-4" id="">
+								<input type="text" class="form-control text-white">
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -341,6 +393,21 @@
 
 
 				</table>
+				<!-- Unit Table Footer -->
+				<div id="unit-table-buttons"
+					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  ">
+					<div class="btn-toolbar mb-2 mb-md-0 mt-0">
+						<!-- Data management buttons-->
+						<div class="btn-group me-2">
+
+							<button id="table-unit-reset" class="btn btn-sm btn-outline-danger"
+								title="Clears all unit changes">Clear
+								All Unit Changes</button>
+						</div>
+
+
+					</div>
+				</div>
 			</div>
 
 			<!-- Body JSON -->

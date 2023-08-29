@@ -157,10 +157,14 @@ export default class TableUnitInput {
         const newValue = this.input.checked;
 
         try {
-            this.unitData[this.attribute] = newValue;
+            this.viewer.unitManager.set(
+                this.unitData.Name,
+                this.attribute,
+                newValue
+            );
         } catch (error) {}
 
-        this.viewer.reload();
+        this.viewer.load(this.viewer.tower);
     }
 
     #onNumberSubmit() {
@@ -168,10 +172,14 @@ export default class TableUnitInput {
 
         try {
             if (newValue !== '' && Number.isFinite(+newValue))
-                this.unitData[this.attribute] = newValue;
+                this.viewer.unitManager.set(
+                    this.unitData.Name,
+                    this.attribute,
+                    newValue
+                );
         } catch (error) {}
 
-        this.viewer.reload();
+        this.viewer.load(this.viewer.tower);
     }
 
     #onTextSubmit() {
@@ -179,10 +187,14 @@ export default class TableUnitInput {
 
         try {
             if (newValue !== '' || this.attribute !== 'Name')
-                this.unitData[this.attribute] = newValue;
+                this.viewer.unitManager.set(
+                    this.unitData.Name,
+                    this.attribute,
+                    newValue
+                );
         } catch (error) {}
 
-        this.viewer.reload();
+        this.viewer.load(this.viewer.tower);
     }
 
     #formatNumber(number) {

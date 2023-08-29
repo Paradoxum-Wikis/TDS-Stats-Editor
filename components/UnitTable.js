@@ -9,6 +9,7 @@ export default class UnitTable extends Table {
     }
 
     removeTable() {
+        document.getElementById('unit-table-buttons').classList.add('d-none');
         super.removeTable();
     }
 
@@ -67,6 +68,10 @@ export default class UnitTable extends Table {
 
         this.removeTable();
         if (Object.keys(data).length === 0) return;
+
+        document
+            .getElementById('unit-table-buttons')
+            .classList.remove('d-none');
 
         this.attributes = this.#getAttributes(
             data,
