@@ -27,7 +27,7 @@ class Upgrade extends BaseStats {
     set(attribute, value) {
         super.set(attribute, value);
 
-        if (this.upgradeData[attribute]) {
+        if (this.upgradeData[attribute] !== undefined) {
             this.upgradeData[attribute] = value;
         }
     }
