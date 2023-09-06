@@ -152,6 +152,7 @@ export default class TableInput {
         if (this.useDelta && value != deltaData) {
             input.classList.add('table-cell-input-delta');
         }
+
         const computedSize = String(value).length / this.sizeFactor;
 
         input.style.minWidth = `${computedSize}em`;
@@ -204,6 +205,21 @@ export default class TableInput {
         return +(+value).toFixed(1);
     }
 
+    flipped = [
+        'Cooldown',
+        'Cost',
+        'CostEfficiency',
+        'NetCost',
+        'ChargeTime',
+        'LaserCooldown',
+        'LaserTime',
+        'BombTime',
+        'MissileCooldown',
+        'SpinDuration',
+        'BurstCool',
+        'ReloadSpeed',
+    ];
+
     #getDelta(cellData, deltaData, input) {
         const difference = cellData - deltaData;
         if (difference === 0) return '';
@@ -211,7 +227,13 @@ export default class TableInput {
         const sign = Math.sign(difference) > 0 ? '+' : '-';
         const absDifference = Math.abs(difference);
 
-        input.classList.add('table-cell-input-delta');
+        const flipFactor = this.flipped.includes(this.attribute) ? -1 : 1;
+
+        if (difference * flipFactor > 0) {
+            input.classList.add('table-cell-input-delta-positive');
+        } else {
+            input.classList.add('table-cell-input-delta-negative');
+        }
         this.sizeModifier = this.sizeDeltaModifier;
 
         return ` (${sign}${this.#formatNumber(absDifference)})`;

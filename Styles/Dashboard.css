@@ -54,6 +54,14 @@ main > header {
     color: #5c9dff !important;
 }
 
+.table-cell-input-delta-positive {
+    color: #5cff6f !important;
+}
+
+.table-cell-input-delta-negative {
+    color: #ff5c5c !important;
+}
+
 .btn-dark {
     background-color: hsl(210, 11%, 4%);
     border-color: hsl(210, 11%, 4%);
