@@ -51,15 +51,15 @@ main > header {
 }
 
 .table-cell-input-delta {
-    color: #5c9dff !important;
+    color: hsl(216, 60%, 75%) !important;
 }
 
 .table-cell-input-delta-positive {
-    color: #5cff6f !important;
+    color: hsl(0, 60%, 75%) !important;
 }
 
 .table-cell-input-delta-negative {
-    color: #ff5c5c !important;
+    color: hsl(137, 61%, 75%) !important;
 }
 
 .btn-dark {
