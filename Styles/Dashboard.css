@@ -55,11 +55,11 @@ main > header {
 }
 
 .table-cell-input-delta-positive {
-    color: hsl(0, 60%, 75%) !important;
+    color: hsl(137, 60%, 75%) !important;
 }
 
 .table-cell-input-delta-negative {
-    color: hsl(137, 61%, 75%) !important;
+    color: hsl(0, 61%, 75%) !important;
 }
 
 .btn-dark {
