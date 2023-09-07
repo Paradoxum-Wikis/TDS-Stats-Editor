@@ -212,7 +212,6 @@ export default class TableInput {
         'NetCost',
         'ChargeTime',
         'LaserCooldown',
-        'LaserTime',
         'BombTime',
         'MissileCooldown',
         'SpinDuration',
