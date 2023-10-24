@@ -118,7 +118,7 @@ class Levels {
             const originalValue = level[name];
             Object.defineProperty(level, name, {
                 get() {
-                    return getter(originalValue);
+                    return getter(originalValue, this);
                 },
             });
         });

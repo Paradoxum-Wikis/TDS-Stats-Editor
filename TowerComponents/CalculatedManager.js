@@ -326,10 +326,12 @@ class CalculatedManager {
 
             Default: {
                 Requires: ['Cost'],
-                Value: (cost) => {
+                Value: (cost, level) => {
                     const { discount } = window.state.boosts.tower; // prettier-ignore
 
-                    return cost * (-discount + 1);
+                    return level.Level == 0 && discount > 0
+                        ? cost
+                        : cost * (-discount + 1);
                 },
             },
         },
