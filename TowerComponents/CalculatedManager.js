@@ -92,6 +92,12 @@ class CalculatedManager {
                 ],
                 Value: (level) => level.Damage / level.Cooldown,
             },
+            Ranger: {
+                For: ['Ranger'],
+                Value: (level) =>
+                    (level.Damage + level.ExplosionDamage * level.MaxHits) /
+                    level.Cooldown,
+            },
             Cowboy: {
                 For: ['Cowboy'],
                 Value: (level) => ((level.Damage * level.MaxAmmo) / (level.Cooldown * level.MaxAmmo + level.SpinDuration)), // prettier-ignore
