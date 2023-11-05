@@ -243,6 +243,13 @@ class CalculatedManager {
                 Value: (level) => level.NetCost / level.DPS,
             },
         },
+        Value: {
+            Default: {
+                Requires: ['NetCost', 'DPS', 'Range'],
+                Value: (level) =>
+                    (1000 * level.DPS * level.Range ** 0.4) / level.NetCost,
+            },
+        },
         IncomeFactor: {
             Default: {
                 Requires: ['NetCost', 'DPS'],
@@ -413,6 +420,7 @@ class CalculatedManager {
         this.#add('LimitDPS', skinData);
         this.#add('NetCost', skinData);
         this.#add('CostEfficiency', skinData);
+        this.#add('Value', skinData);
         this.#add('IncomeFactor', skinData);
         this.#add('IncomePerSecond', skinData);
         this.#add('TotalIncomePerSecond', skinData);

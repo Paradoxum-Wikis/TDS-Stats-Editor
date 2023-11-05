@@ -9,7 +9,7 @@ export default class PropertyViewer {
         this.buttonClasses = ['btn', 'btn-sm', 'w-100', 'text-white'];
         this.activeButtonClass = 'btn-outline-secondary';
         this.inactiveButtonClass = 'btn-outline-dark';
-        this.disabled = [];
+        this.disabled = ['LimitDPS'];
         this.baseProperties = [
             'Damage',
             'Cooldown',
