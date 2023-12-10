@@ -160,5 +160,13 @@ class SkinData {
 
         this.createData();
     }
+
+    get(level, attribute) {
+        if (level === 0) {
+            return this.defaults.get(attribute);
+        } else {
+            return this.upgrades[level - 1].get(attribute);
+        }
+    }
 }
 export default SkinData;

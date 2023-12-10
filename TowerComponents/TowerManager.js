@@ -10,11 +10,27 @@ class TowerManager {
         this.towers = this.parseTowers(this.towerData);
     }
 
+    getDefault() {
+        return JSON.parse(JSON.stringify(TowerData));
+    }
+
+    loadLocalData(localData) {
+        const loadedLocal = JSON.parse(localData);
+        const loadedStatic = JSON.parse(JSON.stringify(TowerData));
+
+        for (let [key, value] of Object.entries(loadedStatic)) {
+            if (key in loadedLocal) continue;
+
+            loadedLocal[key] = value;
+        }
+
+        return loadedLocal;
+    }
+
     getTowerData() {
         const localData = localStorage.getItem(this.dataKey);
-        return localData
-            ? JSON.parse(localData)
-            : JSON.parse(JSON.stringify(TowerData));
+
+        return localData ? this.loadLocalData(localData) : this.getDefault();
     }
 
     #unique(arrayA, arrayB) {

@@ -2216,6 +2216,97 @@ export default {
             },
         },
     },
+    Jester: {
+        Default: {
+            Upgrades: [
+                {
+                    Stats: { Cooldown: 1, Range: 12 },
+                    Image: 0,
+                    Title: 'Trained Juggling',
+                    Cost: 100,
+                },
+                {
+                    Stats: {
+                        Attributes: {
+                            FireStats: { BurnTime: 5, BurnTick: 1 },
+                        },
+                        Damage: 5,
+                    },
+                    Image: 0,
+                    Title: 'Cold Humor',
+                    Cost: 650,
+                },
+                {
+                    Stats: {
+                        Attributes: {
+                            FireStats: { BurnTime: 6, BurnTick: 1 },
+                        },
+                        Damage: 10,
+                    },
+                    Image: 0,
+                    Title: 'Potent Bombs',
+                    Cost: 2100,
+                },
+                {
+                    Stats: {
+                        Attributes: {
+                            FireStats: { BurnTime: 8, BurnTick: 0.5 },
+                            BombCount: 2,
+                        },
+                        Cooldown: 0.75,
+                        Range: 14,
+                        Damage: 24,
+                    },
+                    Image: 0,
+                    Title: 'Harlequin of Doom',
+                    Cost: 6000,
+                },
+            ],
+            Defaults: {
+                Range: 10,
+                Detections: { Flying: false, Hidden: true, Lead: true },
+                Attributes: {
+                    PoisonStats: {
+                        DefenseMelt: 0.1,
+                        Radius: 3.5,
+                        Length: 10,
+                        TickRate: 0.5,
+                    },
+                    AnimTimes: {
+                        0: { Equip: 0.23, Fire: 0.57 },
+                        4: { Equip: 0.46, Right: 0.6, Left: 0.6 },
+                    },
+                    Velocity: 30,
+                    AimTime: 0.2,
+                    EquipTime: 0.4,
+                    MaxHits: 5,
+                    IceStats: {
+                        DefenseMelt: 0,
+                        Length: 2,
+                        SlowPercent: 40,
+                        TickRate: 0.25,
+                    },
+                    FireStats: { BurnTick: 1, BurnTime: 3 },
+                    ExplosionRadius: 3,
+                    BombCount: 1,
+                    ConfuseStats: { Debounce: 8, Length: 3 },
+                },
+                Abilities: [
+                    {
+                        Name: 'Equip Bombs',
+                        Debounce: 5,
+                        Price: 0,
+                        Level: 0,
+                        Icon: 4594880289,
+                    },
+                ],
+                Price: 500,
+                Limit: 8,
+                Cooldown: 1.5,
+                Damage: 2,
+            },
+        },
+    },
     'Mecha Base': {
         Default: {
             Upgrades: [

@@ -150,6 +150,43 @@ class BaseStats {
             targetData[attribute] = value;
         } else if (attribute === 'Cost' && this.data.Price !== undefined) {
             this.data.Price = value;
+        } else if (attribute.includes('.')) {
+            const propertyChain = attribute.split('.');
+
+            const targetData = this.locator.getOrCreateTargetData(
+                this.data,
+                this.locator.getLocation(propertyChain[0])
+            );
+
+            let currentValue = targetData;
+            for (let i = 0; i < propertyChain.length - 1; i++) {
+                let key = propertyChain[i];
+
+                if (currentValue?.[key] === undefined) {
+                    currentValue[key] = {};
+                }
+
+                currentValue = currentValue[key];
+            }
+
+            currentValue[propertyChain[propertyChain.length - 1]] = value;
+        }
+    }
+
+    get(attribute) {
+        if (['Hidden', 'Flying', 'Lead'].includes(attribute)) {
+            if (this.data.Detections == undefined) {
+                return null;
+            }
+        } else if (this.locator.hasLocation(attribute)) {
+            const targetData = this.locator.getTargetData(
+                this.data,
+                this.locator.getLocation(attribute)
+            );
+
+            return targetData[attribute];
+        } else if (attribute === 'Cost' && this.data.Price !== undefined) {
+            return this.data.Price;
         }
     }
 }

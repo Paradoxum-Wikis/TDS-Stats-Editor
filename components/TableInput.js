@@ -34,6 +34,7 @@ export default class TableInput {
         this.referenceLevels = data.referenceLevels;
         this.useDelta = data.useDelta;
         this.viewer = data.viewer;
+        this.isComplex = data.isComplex;
 
         this.sizeFactor = 1.35;
         this.sizeDeltaModifier = 0;

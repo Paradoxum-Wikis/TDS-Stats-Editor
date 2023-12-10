@@ -245,7 +245,10 @@ class Viewer {
         this.towerTable.root.parentElement.classList.remove('d-none');
 
         const skinData = this.getActiveSkin();
-        this.propertyViewer.createButtons(skinData.levels.attributes);
+        this.propertyViewer.createButtons([
+            ...skinData.levels.attributes,
+            ...skinData.levels.complexAttributes,
+        ]);
 
         this.towerTable.load(skinData, {
 			ignore: this.propertyViewer.disabled

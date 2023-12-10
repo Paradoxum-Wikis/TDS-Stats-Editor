@@ -31,6 +31,16 @@ class Upgrade extends BaseStats {
             this.upgradeData[attribute] = value;
         }
     }
+
+    get(attribute) {
+        const value = super.get(attribute);
+
+        if (value == null) {
+            return this.upgradeData[attribute];
+        }
+
+        return value;
+    }
 }
 
 export default Upgrade;

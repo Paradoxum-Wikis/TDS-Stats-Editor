@@ -8,6 +8,8 @@ class Levels {
      */
     constructor(skinData) {
         this.skinData = skinData;
+        this.complexValues = [];
+        this.complexAttributes = [];
         this.attributes = this.#getAttributes();
         this.levels = [];
 
@@ -20,16 +22,49 @@ class Levels {
 
     #getAttributes() {
         const attributes = ['Level'];
+        const complexValues = [];
+        const complexAttributes = [];
 
-        const processAttribute = (attributeName) => {
-            if (attributes.includes(attributeName)) return;
-            attributes.push(attributeName);
+        const addComplex = (attribute, fullName) => {
+            for (const [attributeName, attributeValue] of Object.entries(
+                attribute
+            )) {
+                const combinedName = fullName + attributeName;
+                if (attributeValue instanceof Object) {
+                    if (!complexAttributes.includes(combinedName))
+                        complexAttributes.push(combinedName);
+                    addComplex(attributeValue, combinedName + '.');
+                } else {
+                    if (!complexValues.includes(combinedName))
+                        complexValues.push(combinedName);
+                }
+            }
         };
 
-        this.skinData.defaults.attributeNames.forEach(processAttribute);
-        this.skinData.upgrades.forEach((level) =>
-            level.attributeNames.forEach(processAttribute)
+        const processAttribute = (attributeName, level) => {
+            const foundStat = this.skinData.get(level, attributeName);
+            if (foundStat instanceof Object) {
+                if (!complexAttributes.includes(attributeName))
+                    complexAttributes.push(attributeName);
+                addComplex(foundStat, attributeName + '.');
+            } else {
+                if (!attributes.includes(attributeName))
+                    attributes.push(attributeName);
+            }
+        };
+
+        this.skinData.defaults.attributeNames.forEach((name) =>
+            processAttribute(name, 0)
         );
+
+        this.skinData.upgrades.forEach((level, index) =>
+            level.attributeNames.forEach((name) =>
+                processAttribute(name, index + 1)
+            )
+        );
+
+        this.complexValues = complexValues;
+        this.complexAttributes = complexAttributes;
 
         return attributes;
     }
@@ -41,6 +76,22 @@ class Levels {
     getCell(level, property) {
         if (level < 0 || level > this.levels.length) return null;
 
+        if (property.includes('.')) {
+            const props = property.split('.');
+
+            try {
+                let currentValue = this.skinData.get(level, props[0]);
+                for (let i = 1; i < props.length; i++) {
+                    let key = props[i];
+
+                    currentValue = currentValue?.[key];
+                }
+
+                return currentValue ?? this.getCell(level - 1, property);
+            } catch (error) {
+                return this.getCell(level - 1, property);
+            }
+        }
         return this.levels[level][property];
     }
 

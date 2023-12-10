@@ -32,7 +32,8 @@ export default class PropertyViewer {
     }
 
     getProperties() {
-        return this.viewer.getActiveSkin().levels.attributes;
+        const levelData = this.viewer.getActiveSkin().levels;
+        return [...levelData.attributes, ...levelData.complexAttributes];
     }
 
     getExtraProperties() {

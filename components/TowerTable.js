@@ -49,6 +49,25 @@ export default class TowerTable extends Table {
                         referenceLevels: deltaLevels,
                         useDelta: this.viewer.buttonDeltaButton.state,
                         viewer: this.viewer,
+                        isComplex: false,
+                    });
+
+                    tableInput.createInput();
+
+                    tr.appendChild(tableInput.base);
+                });
+
+            levels.complexValues
+                .filter(this.#viewFilter.bind(this))
+                .forEach((attribute, column) => {
+                    const tableInput = new TableInput({
+                        level: level,
+                        attribute: attribute,
+                        towerLevels: levels,
+                        referenceLevels: deltaLevels,
+                        useDelta: this.viewer.buttonDeltaButton.state,
+                        viewer: this.viewer,
+                        isComplex: true,
                     });
 
                     tableInput.createInput();
@@ -58,6 +77,17 @@ export default class TowerTable extends Table {
 
             this.body.appendChild(tr);
         });
+    }
+
+    #viewFilter(attribute) {
+        let attributeName = attribute;
+        if (attributeName.includes('.')) {
+            return !this.ignore.some((ignoreValue) =>
+                attributeName.startsWith(ignoreValue)
+            );
+        }
+
+        return !this.ignore.includes(attributeName);
     }
 
     /**
@@ -71,10 +101,11 @@ export default class TowerTable extends Table {
         this.#createBaseTable();
 
         this.#addHeader(
-            data.levels.attributes.filter(
-                (attribute) => !this.ignore.includes(attribute)
+            [...data.levels.attributes, ...data.levels.complexValues].filter(
+                this.#viewFilter.bind(this)
             )
         );
+
         this.#addBody(data.levels);
     }
 }
