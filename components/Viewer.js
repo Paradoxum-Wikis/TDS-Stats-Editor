@@ -24,7 +24,7 @@ class Viewer {
         this.app = app;
 
         this.unitManager = new UnitManager('units');
-        this.defaultTowerManager = new TowerManager();
+        this.defaultTowerManager = new TowerManager('default');
         this.deltaTowerManager = new TowerManager('delta');
 
         this.propertyViewer = new PropertyViewer(
@@ -202,8 +202,10 @@ class Viewer {
     }
 
     addNewTower(name, json) {
-        this.defaultTowerManager.addTower(name, json);
+        this.app.towerManager.addTower(name, json);
         this.deltaTowerManager.addTower(name, json);
+        this.defaultTowerManager.addTower(name, json);
+
         this.app.addTowerOption(name);
 
         this.load(this.defaultTowerManager.towers[name]);

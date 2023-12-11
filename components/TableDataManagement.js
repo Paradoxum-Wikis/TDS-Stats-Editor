@@ -14,6 +14,8 @@ export default class TableDataManagement {
         this.clearButton = document.querySelector('#table-clear');
         this.applyButton = document.querySelector('#table-apply');
         this.resetButton = document.querySelector('#table-reset');
+        this.clearDataButton = document.querySelector('#table-clear-data');
+
         this.addLevelButton = document.querySelector('#table-add-level');
         this.removeLevelButton = document.querySelector('#table-remove-level');
 
@@ -23,6 +25,12 @@ export default class TableDataManagement {
         this.clearButton.addEventListener('click', this.clearTable.bind(this));
         this.applyButton.addEventListener('click', this.applyTable.bind(this));
         this.resetButton.addEventListener('click', this.resetTable.bind(this));
+
+        this.clearDataButton.addEventListener(
+            'click',
+            this.clearTableFull.bind(this)
+        );
+
         this.addLevelButton.addEventListener('click', this.addLevel.bind(this));
         this.removeLevelButton.addEventListener(
             'click',
@@ -66,6 +74,13 @@ export default class TableDataManagement {
     }
     clearTable() {
         this.viewer.import(JSON.stringify(this.viewer.deltaTower.json));
+    }
+
+    clearTableFull() {
+        localStorage.removeItem('New');
+        localStorage.removeItem('delta');
+        localStorage.removeItem('default');
+        location.reload();
     }
 
     applyTable() {

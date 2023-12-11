@@ -37,8 +37,9 @@ class TowerManager {
         this.towerData[name] = json;
 
         this.towerNames = this.parseTowerNames(this.towerData);
-        console.log(this);
-        this.towers[name] = new Tower(name, json);
+        const towerData = new Tower(name, json);
+        this.towers[name] = towerData;
+        this.saveTower(towerData);
     }
 
     #unique(arrayA, arrayB) {
