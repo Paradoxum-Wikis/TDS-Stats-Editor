@@ -14,6 +14,7 @@ import AddAttributeForm from './AddAttributeForm.js';
 import RemoveAttributeForm from './RemoveAttributeForm.js';
 import UnitManager from '../TowerComponents/UnitManager.js';
 import BoostPanel from './BoostPanel.js';
+import CloneTowerForm from './CloneTowerForm.js';
 
 class Viewer {
     /**
@@ -100,6 +101,7 @@ class Viewer {
         );
         this.tableManagement = new TableDataManagement(this);
         new AddAttributeForm(this);
+        new CloneTowerForm(this);
         this.removeAttributeForm = new RemoveAttributeForm(this);
     }
 
@@ -197,6 +199,14 @@ class Viewer {
     clearUnitChanges() {
         this.unitManager.clear();
         this.reload();
+    }
+
+    addNewTower(name, json) {
+        this.defaultTowerManager.addTower(name, json);
+        this.deltaTowerManager.addTower(name, json);
+        this.app.addTowerOption(name);
+
+        this.load(this.defaultTowerManager.towers[name]);
     }
 
     #setVariantButtons() {

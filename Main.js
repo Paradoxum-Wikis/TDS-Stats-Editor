@@ -28,14 +28,18 @@ class App {
         };
     }
 
+    addTowerOption(name) {
+        this.dropdown.options.push(name);
+    }
+
     start() {
-        const dropdown = new Dropdown(
+        this.dropdown = new Dropdown(
             document.querySelector('#Tower-Selector input'),
             document.querySelector('#Tower-Selector .dropdown-menu'),
             this.towerManager.towerNames
         );
 
-        dropdown.textForm.addEventListener('submit', (e) => {
+        this.dropdown.textForm.addEventListener('submit', (e) => {
             viewer.load(this.towerManager.towers[e.detail]);
         });
 

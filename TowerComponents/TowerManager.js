@@ -33,6 +33,14 @@ class TowerManager {
         return localData ? this.loadLocalData(localData) : this.getDefault();
     }
 
+    addTower(name, json) {
+        this.towerData[name] = json;
+
+        this.towerNames = this.parseTowerNames(this.towerData);
+        console.log(this);
+        this.towers[name] = new Tower(name, json);
+    }
+
     #unique(arrayA, arrayB) {
         return [...new Set([...arrayA, ...arrayB])];
     }

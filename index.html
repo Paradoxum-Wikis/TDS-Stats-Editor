@@ -214,6 +214,12 @@
                             <button class="btn btn-sm" title="Visualize your changes">Show
                                 Deltas</button>
                         </div>
+
+                        <!-- Clone Toggle -->
+                        <div id="button-clone" class="btn-group me-2">
+                            <button title="Breed your tower" class="btn btn-sm btn-outline-secondary"
+                                data-toggle="modal" data-target="#clone-tower">Clone</button>
+                        </div>
                     </div>
                 </div>
             </header>
@@ -590,6 +596,57 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button id="remove-attribute-submit" type="button" class="btn btn-danger"
                         data-dismiss="modal">Remove</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Clone Model-->
+    <div class="modal fade" id="clone-tower" tabindex="-1" role="dialog" aria-labelledby="json-import-label"
+        aria-hidden="true">
+        <div class="modal-dialog modal-sm " role="document">
+            <div class="modal-content bg-dark text-white">
+                <!-- Model Header-->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="json-import-label">Clone Tower</h5>
+                </div>
+
+                <!-- Model Body-->
+                <div class="modal-body">
+
+                    <!-- New Tower Name -->
+                    <form class="d-flex mb-2">
+                        <label for="clone-tower-name" class="col-sm-5 col-form-label text-center fw-bold fs-6">New
+                            Name</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control text-white" id="clone-tower-name"
+                                placeholder="Enter Name">
+                        </div>
+                    </form>
+
+                    <!-- New Tower Name -->
+                    <form class="d-flex mb-2">
+                        <label for="clone-tower-reference" class="col-sm-5 col-form-label text-center fw-bold fs-6">From
+                            Tower</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control text-white" id="clone-tower-reference"
+                                placeholder="Enter Tower">
+                            <div id="clone-tower-options" class="dropdown-menu bg-dark text-white">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Action</a>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+
+                <!-- Model Footer-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="clone-submit" type="button" class="btn btn-primary" data-dismiss="modal">Add</button>
                 </div>
             </div>
         </div>
