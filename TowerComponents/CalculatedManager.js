@@ -80,6 +80,21 @@ class CalculatedManager {
                 Value: (level) => level.MaxAmmo / level.LaserDPS,
             },
         },
+        BeeDps: {
+            Default: {
+                For: ["Swarmer"],
+                Requires: ["StingTime", "BeeDamage", "TickRate"],
+                Value: (level) => level.BeeDamage / level.TickRate,
+            },
+        },
+        TotalStingDamage: {
+            Default: {
+                For: ["Swarmer"],
+                Requires: ["StingTime", "BeeDamage", "TickRate"],
+                Value: (level) =>
+                    (level.StingTime * level.BeeDamage) / level.TickRate,
+            },
+        },
         DPS: {
             Default: {
                 Requires: ["Damage", "Cooldown"],
@@ -166,12 +181,8 @@ class CalculatedManager {
             },
             Swarmer: {
                 For: ["Swarmer"],
-                Value: (level) => {
-                    const dps = level.Damage / level.Cooldown;
-                    const beeDps = level.BeeDamage / level.TickRate;
-
-                    return dps + beeDps;
-                },
+                Requires: ["TotalStingDamage", "Cooldown"],
+                Value: (level) => level.TotalStingDamage / level.Cooldown,
             },
             Burst: {
                 For: ["Freezer"],
@@ -426,6 +437,8 @@ class CalculatedManager {
         this.#add("UnitDPS", skinData);
         this.#add("RamDPS", skinData);
         this.#add("LaserTime", skinData);
+        this.#add("BeeDps", skinData);
+        this.#add("TotalStingDamage", skinData);
         this.#add("DPS", skinData);
         this.#add("LimitDPS", skinData);
         this.#add("NetCost", skinData);
