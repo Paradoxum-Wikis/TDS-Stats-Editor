@@ -1,39 +1,71 @@
 export default {
-    Guard1: {
+    Skeleton: {
+        Health: 20,
+        Speed: 4,
+        Range: 2,
+    },
+    'Sword Skeleton': {
+        Health: 20,
+        Speed: 4,
+        Range: 6,
+        Cooldown: 0.8,
+        Damage: 15,
+    },
+    'Skeleton Knight': {
+        Health: 65,
+        Speed: 3.5,
+        Range: 6,
+        Cooldown: 0.65,
+        Damage: 25,
+    },
+    'Hallow Guard': {
+        Health: 750,
+        Speed: 1.8,
+        Range: 2,
+    },
+    'Executioner Skeleton': {
+        Health: 3000,
+        Speed: 1.8,
+        Cooldown: 4,
+        Range: 24,
+        Damage: 50,
+    },
+
+    Goon1: {
+        Range: 14,
         Health: 10,
-        Damage: 2,
         Cooldown: 1,
-        Range: 20,
-    },
-    Guard2: {
-        Health: 10,
         Damage: 2,
-        Cooldown: 0.5,
-        Range: 20,
     },
-    Guard3: {
-        Health: 50,
-        Damage: 2,
-        Cooldown: 0.2,
-        Range: 25,
-    },
-    GoldenGuard1: {
-        Health: 10,
-        Damage: 2,
-        Cooldown: 0.6,
-        Range: 20,
-    },
-    GoldenGuard2: {
-        Health: 10,
+    Goon2: {
+        Range: 16,
+        Health: 35,
+        Cooldown: 0.25,
         Damage: 3,
-        Cooldown: 0.3,
-        Range: 20,
     },
-    GoldenGuard3: {
+    Goon3: {
+        Range: 18,
         Health: 50,
+        Cooldown: 0.18,
         Damage: 4,
+    },
+    GoldenGoon1: {
+        Range: 14,
+        Health: 15,
+        Cooldown: 1,
+        Damage: 2,
+    },
+    GoldenGoon2: {
+        Range: 16,
+        Health: 40,
+        Cooldown: 0.22,
+        Damage: 4,
+    },
+    GoldenGoon3: {
+        Range: 18,
+        Health: 65,
         Cooldown: 0.15,
-        Range: 25,
+        Damage: 5,
     },
     Sentry1: {
         Health: 20,

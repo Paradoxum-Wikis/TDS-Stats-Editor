@@ -27,6 +27,21 @@ const calculated = {
     },
 };
 
+const register = {
+    Necromancer: {
+        Default: [
+            'Sword Skeleton',
+            'Skeleton Knight',
+            'Hallow Guard',
+            'Executioner Skeleton',
+        ],
+    },
+    'Crook Boss': {
+        Golden: ['GoldenGoon1', 'GoldenGoon2', 'GoldenGoon3'],
+        Default: ['Goon1', 'Goon2', 'Goon3'],
+    },
+};
+
 export default class UnitManager {
     constructor(dataKey) {
         this.dataKey = dataKey;
@@ -37,6 +52,7 @@ export default class UnitManager {
     load() {
         this.baseData = this.getData();
         this.unitData = JSON.parse(JSON.stringify(this.baseData));
+
         this.unitAttributes = {};
 
         Object.keys(this.unitData).forEach((unitName) => {
@@ -58,16 +74,41 @@ export default class UnitManager {
     }
 
     getData() {
-        if (!this.dataKey) return JSON.parse(JSON.stringify(UnitData));
+        const localData = this.getLocalData();
+
+        if (!localData) return this.getDefault();
+
+        return this.loadLocalData(localData);
+    }
+
+    getLocalData() {
+        if (!this.dataKey) return;
 
         if (window.state && window.state.cache.unitData !== undefined) {
             return window.state.cache.unitData;
         }
 
         const localData = localStorage.getItem(this.dataKey);
-        if (!localData) return JSON.parse(JSON.stringify(UnitData));
+        if (!localData) return;
 
         return JSON.parse(localData);
+    }
+
+    getDefault() {
+        return JSON.parse(JSON.stringify(UnitData));
+    }
+
+    loadLocalData(data) {
+        const loadedLocal = JSON.parse(JSON.stringify(data));
+        const loadedStatic = this.getDefault();
+
+        for (let [key, value] of Object.entries(loadedStatic)) {
+            if (key in loadedLocal) continue;
+
+            loadedLocal[key] = value;
+        }
+
+        return loadedLocal;
     }
 
     set(unitName, attribute, value) {
@@ -79,6 +120,8 @@ export default class UnitManager {
     }
 
     #override(unitName, propertyName) {
+        if (this.unitData[unitName][propertyName] == undefined) return;
+
         const propertyDescriptor = Object.getOwnPropertyDescriptor(
             this.unitData[unitName],
             propertyName
@@ -116,6 +159,17 @@ export default class UnitManager {
 
     hasUnit(unitName) {
         return this.unitData[unitName];
+    }
+
+    populate(towerName, towerSkin) {
+        const output = {};
+        const units = register?.[towerName]?.[towerSkin];
+        if (units == null) return output;
+
+        for (const unit of units) {
+            output[unit] = this.unitData[unit];
+        }
+        return output;
     }
 
     save() {

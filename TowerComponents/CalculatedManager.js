@@ -1,31 +1,31 @@
-import SkinData from "./SkinData.js";
-import UnitManager from "./UnitManager.js";
+import SkinData from './SkinData.js';
+import UnitManager from './UnitManager.js';
 
 class CalculatedManager {
     constructor() {
-        this.unitManager = new UnitManager("units");
+        this.unitManager = new UnitManager('units');
         this.unitManager.load();
     }
 
     calculated = {
         LaserDPS: {
             Default: {
-                For: ["Accelerator"],
-                Requires: ["Damage", "Cooldown"],
+                For: ['Accelerator'],
+                Requires: ['Damage', 'Cooldown'],
                 Value: (level) => level.Damage / level.Cooldown,
             },
         },
         TowerDPS: {
             Default: {
-                For: ["Engineer", "Crook Boss"],
-                Requires: ["Damage", "Cooldown"],
+                For: ['Engineer', 'Crook Boss'],
+                Requires: ['Damage', 'Cooldown'],
                 Value: (level) => level.Damage / level.Cooldown,
             },
         },
         RamDPS: {
             Default: {
-                Exclude: ["Engineer"],
-                Requires: ["UnitToSend", "SpawnTime"],
+                Exclude: ['Engineer'],
+                Requires: ['UnitToSend', 'SpawnTime'],
                 Value: (level) => {
                     this.unitManager.load();
 
@@ -38,7 +38,7 @@ class CalculatedManager {
         },
         UnitDPS: {
             Default: {
-                Requires: ["UnitToSend"],
+                Requires: ['UnitToSend'],
                 Value: (level) => {
                     this.unitManager.load();
                     if (!this.unitManager.hasUnit(level.UnitToSend)) return 0;
@@ -49,8 +49,8 @@ class CalculatedManager {
                 },
             },
             Engineer: {
-                For: ["Engineer"],
-                Requires: ["UnitToSend", "MaxUnits"],
+                For: ['Engineer'],
+                Requires: ['UnitToSend', 'MaxUnits'],
                 Value: (level) => {
                     this.unitManager.load();
                     if (!this.unitManager.hasUnit(level.UnitToSend)) return 0;
@@ -61,64 +61,78 @@ class CalculatedManager {
                 },
             },
             Crook: {
-                For: ["Crook Boss"],
-                Requires: ["UnitToSend", "MaxCrooks"],
+                For: ['Crook Boss'],
+                Requires: [
+                    'PistolCrookSpawnTime',
+                    'DoublePistolCrooks',
+                    'TommyCrookSpawnTime',
+                    'TommyDrum',
+                ],
                 Value: (level) => {
+                    const skin = level.levels.skinData.name;
                     this.unitManager.load();
-                    if (!this.unitManager.hasUnit(level.UnitToSend)) return 0;
 
-                    const unit = this.unitManager.unitData[level.UnitToSend];
+                    const goldText = skin == 'Golden' ? 'Golden' : '';
+                    const goon1 = this.unitManager.unitData[`${goldText}Goon1`];
+                    const goon2 = this.unitManager.unitData[`${goldText}Goon2`];
+                    const goon3 = this.unitManager.unitData[`${goldText}Goon3`];
 
-                    return unit.DPS * level.MaxCrooks;
+                    let goon1DPS = level.PistolCrookSpawnTime && goon1.DPS;
+                    if (level.DoublePistolCrooks) goon1DPS *= 2;
+
+                    let goon2DPS = level.TommyCrookSpawnTime && goon2.DPS;
+                    if (level.TommyDrum) goon2DPS = goon3.DPS;
+
+                    return goon1DPS + goon2DPS;
                 },
             },
         },
         LaserTime: {
             Default: {
-                For: ["Accelerator"],
-                Requires: ["MaxAmmo", "LaserDPS"],
+                For: ['Accelerator'],
+                Requires: ['MaxAmmo', 'LaserDPS'],
                 Value: (level) => level.MaxAmmo / level.LaserDPS,
             },
         },
         BeeDps: {
             Default: {
-                For: ["Swarmer"],
-                Requires: ["StingTime", "BeeDamage", "TickRate"],
+                For: ['Swarmer'],
+                Requires: ['StingTime', 'BeeDamage', 'TickRate'],
                 Value: (level) => level.BeeDamage / level.TickRate,
             },
         },
         TotalStingDamage: {
             Default: {
-                For: ["Swarmer"],
-                Requires: ["StingTime", "BeeDamage", "TickRate"],
+                For: ['Swarmer'],
+                Requires: ['StingTime', 'BeeDamage', 'TickRate'],
                 Value: (level) =>
                     (level.StingTime * level.BeeDamage) / level.TickRate,
             },
         },
         DPS: {
             Default: {
-                Requires: ["Damage", "Cooldown"],
+                Requires: ['Damage', 'Cooldown'],
                 Exclude: [
-                    "Farm",
-                    "DJ Booth",
-                    "Elf Camp",
-                    "Military Base",
-                    "Mecha Base",
+                    'Farm',
+                    'DJ Booth',
+                    'Elf Camp',
+                    'Military Base',
+                    'Mecha Base',
                 ],
                 Value: (level) => level.Damage / level.Cooldown,
             },
             Ranger: {
-                For: ["Ranger"],
+                For: ['Ranger'],
                 Value: (level) =>
                     (level.Damage + level.ExplosionDamage * level.MaxHits) /
                     level.Cooldown,
             },
             Cowboy: {
-                For: ["Cowboy"],
+                For: ['Cowboy'],
                 Value: (level) => ((level.Damage * level.MaxAmmo) / (level.Cooldown * level.MaxAmmo + level.SpinDuration)), // prettier-ignore
             },
             Ace: {
-                For: ["Ace Pilot"],
+                For: ['Ace Pilot'],
                 Value: (level) => {
                     const dps = level.Damage / level.Cooldown;
                     const bombDps = level.BombDropping
@@ -129,8 +143,8 @@ class CalculatedManager {
                 },
             },
             Accel: {
-                For: ["Accelerator"],
-                Requires: ["MaxAmmo", "ChargeTime", "Cooldown", "LaserTime"],
+                For: ['Accelerator'],
+                Requires: ['MaxAmmo', 'ChargeTime', 'Cooldown', 'LaserTime'],
                 Value: (level) => {
                     const totalDamage = level.MaxAmmo;
 
@@ -141,8 +155,8 @@ class CalculatedManager {
                 },
             },
             BurnTower: {
-                For: ["Archer, Pyromancer"],
-                Requires: ["Damage", "Cooldown", "BurnDamage", "BurnTick"],
+                For: ['Archer, Pyromancer'],
+                Requires: ['Damage', 'Cooldown', 'BurnDamage', 'BurnTick'],
                 Value: (level) => {
                     const dps = level.Damage / level.Cooldown;
                     const burnDPS = level.BurnDamage / level.BurnTick;
@@ -151,8 +165,8 @@ class CalculatedManager {
                 },
             },
             MultiHit: {
-                For: ["Electroshocker"],
-                Requires: ["Damage", "Cooldown", "MaxHits"],
+                For: ['Electroshocker'],
+                Requires: ['Damage', 'Cooldown', 'MaxHits'],
                 Value: (level) => {
                     const dps = level.Damage / level.Cooldown;
 
@@ -160,14 +174,14 @@ class CalculatedManager {
                 },
             },
             Missiles: {
-                For: ["Pursuit"],
+                For: ['Pursuit'],
                 Requires: [
-                    "Damage",
-                    "Cooldown",
-                    "MissilesEnabled",
-                    "ExplosionDamage",
-                    "MissileAmount",
-                    "MissileCooldown",
+                    'Damage',
+                    'Cooldown',
+                    'MissilesEnabled',
+                    'ExplosionDamage',
+                    'MissileAmount',
+                    'MissileCooldown',
                 ],
                 Value: (level) => {
                     const dps = level.Damage / level.Cooldown;
@@ -180,13 +194,13 @@ class CalculatedManager {
                 },
             },
             Swarmer: {
-                For: ["Swarmer"],
-                Requires: ["TotalStingDamage", "Cooldown"],
+                For: ['Swarmer'],
+                Requires: ['TotalStingDamage', 'Cooldown'],
                 Value: (level) => level.TotalStingDamage / level.Cooldown,
             },
             Burst: {
-                For: ["Freezer"],
-                Requires: ["Damage", "Cooldown", "Burst", "ReloadTime"],
+                For: ['Freezer'],
+                Requires: ['Damage', 'Cooldown', 'Burst', 'ReloadTime'],
                 Value: (level) => {
                     const totalDamage = level.Damage * level.Burst;
                     const totalTime =
@@ -195,8 +209,21 @@ class CalculatedManager {
                     return totalDamage / totalTime;
                 },
             },
+            Cryomancer: {
+                For: ['Cryomancer'],
+                Value: (level) => {
+                    const magDamage = level.Damage * level.MaxAmmo;
+                    const magTime =
+                        level.Cooldown * level.MaxAmmo + level.ReloadTime;
+
+                    const gunDPS = magDamage / magTime;
+                    const dotDPS = level.DebuffDamage / level.TickRate;
+
+                    return gunDPS + dotDPS;
+                },
+            },
             SoldierBurst: {
-                For: ["Soldier"],
+                For: ['Soldier'],
                 Value: (level) => {
                     const totalDamage = level.Damage * level.Burst;
                     const totalTime =
@@ -206,7 +233,7 @@ class CalculatedManager {
                 },
             },
             ToxicGunner: {
-                For: ["Toxic Gunner"],
+                For: ['Toxic Gunner'],
                 Value: (level) => {
                     const totalDamage = level.Damage * level.Burst;
                     const totalTime =
@@ -219,7 +246,7 @@ class CalculatedManager {
                 },
             },
             WarMachine: {
-                For: ["War Machine"],
+                For: ['War Machine'],
                 Value: (level) => {
                     const dps = level.Damage / level.Cooldown;
                     const missileDPS =
@@ -229,14 +256,14 @@ class CalculatedManager {
                 },
             },
             Shotgun: {
-                For: ["Shotgunner"],
+                For: ['Shotgunner'],
                 Value: (level) => {
                     const dps = level.Damage / level.Cooldown;
                     return dps * level.ShotSize;
                 },
             },
             Spawner: {
-                For: ["Engineer", "Crook Boss", "Military Base", "Mecha Base"],
+                For: ['Engineer', 'Crook Boss', 'Military Base', 'Mecha Base'],
                 Value: (level) => {
                     const unitDPS = level.UnitDPS ?? 0;
                     const towerDPS = level.TowerDPS ?? 0;
@@ -248,7 +275,7 @@ class CalculatedManager {
         },
         LimitDPS: {
             Default: {
-                Requires: ["DPS", "Limit"],
+                Requires: ['DPS', 'Limit'],
 
                 Value: (level) => level.DPS * level.Limit,
             },
@@ -261,21 +288,21 @@ class CalculatedManager {
         },
         CostEfficiency: {
             Default: {
-                Requires: ["NetCost", "DPS"],
+                Requires: ['NetCost', 'DPS'],
                 Value: (level) => level.NetCost / level.DPS,
             },
         },
         Value: {
             Default: {
-                Requires: ["NetCost", "DPS", "Range"],
+                Requires: ['NetCost', 'DPS', 'Range'],
                 Value: (level) =>
                     (1000 * level.DPS * level.Range ** 0.4) / level.NetCost,
             },
         },
         IncomeFactor: {
             Default: {
-                Requires: ["NetCost", "DPS"],
-                For: ["Cowboy"],
+                Requires: ['NetCost', 'DPS'],
+                For: ['Cowboy'],
                 Value: (level) => {
                     const damagePerCylinder = level.Damage * level.MaxAmmo;
                     return (
@@ -286,8 +313,8 @@ class CalculatedManager {
         },
         IncomePerSecond: {
             Default: {
-                Requires: ["Income", "MaxAmmo", "SpinDuration"],
-                For: ["Cowboy"],
+                Requires: ['Income', 'MaxAmmo', 'SpinDuration'],
+                For: ['Cowboy'],
                 Value: (level) =>
                     level.Income /
                     (level.Cooldown * level.MaxAmmo + level.SpinDuration),
@@ -295,22 +322,22 @@ class CalculatedManager {
         },
         TotalIncomePerSecond: {
             Default: {
-                Requires: ["IncomePerSecond", "DPS"],
-                For: ["Cowboy"],
+                Requires: ['IncomePerSecond', 'DPS'],
+                For: ['Cowboy'],
                 Value: (level) => level.IncomePerSecond + level.DPS,
             },
         },
         WavesUntilNetProfit: {
             Default: {
-                Requires: ["Income", "NetCost"],
-                For: ["Farm"],
+                Requires: ['Income', 'NetCost'],
+                For: ['Farm'],
                 Value: (level) => level.NetCost / level.Income,
             },
         },
         WavesUntilUpgradeProfit: {
             Default: {
-                Requires: ["Income", "NetCost"],
-                For: ["Farm"],
+                Requires: ['Income', 'NetCost'],
+                For: ['Farm'],
                 Value: (level) => {
                     const lastLevelIncome =
                         level.Level === 0
@@ -321,10 +348,10 @@ class CalculatedManager {
             },
         },
         Cooldown: {
-            Type: "Override",
+            Type: 'Override',
 
             Default: {
-                Requires: ["Cooldown"],
+                Requires: ['Cooldown'],
                 Value: (cooldown) => {
                     const { extraCooldown, firerateBuff } = window.state.boosts.tower; // prettier-ignore
 
@@ -333,10 +360,10 @@ class CalculatedManager {
             },
         },
         Damage: {
-            Type: "Override",
+            Type: 'Override',
 
             Default: {
-                Requires: ["Damage"],
+                Requires: ['Damage'],
                 Value: (damage) => {
                     const { damageBuff } = window.state.boosts.tower; // prettier-ignore
 
@@ -345,10 +372,10 @@ class CalculatedManager {
             },
         },
         Range: {
-            Type: "Override",
+            Type: 'Override',
 
             Default: {
-                Requires: ["Range"],
+                Requires: ['Range'],
                 Value: (range) => {
                     const { rangeBuff } = window.state.boosts.tower; // prettier-ignore
 
@@ -357,10 +384,10 @@ class CalculatedManager {
             },
         },
         Cost: {
-            Type: "Override",
+            Type: 'Override',
 
             Default: {
-                Requires: ["Cost"],
+                Requires: ['Cost'],
                 Value: (cost, level) => {
                     const { discount } = window.state.boosts.tower; // prettier-ignore
 
@@ -371,10 +398,10 @@ class CalculatedManager {
             },
         },
         SpawnTime: {
-            Type: "Override",
+            Type: 'Override',
 
             Default: {
-                Requires: ["SpawnTime"],
+                Requires: ['SpawnTime'],
                 Value: (spawnTime) => {
                     const { spawnrateBuff } = window.state.boosts.unit; // prettier-ignore
 
@@ -427,28 +454,28 @@ class CalculatedManager {
     addCalculate(skinData) {
         this.unitManager.load();
 
-        this.#add("Cooldown", skinData);
-        this.#add("Damage", skinData);
-        this.#add("Range", skinData);
-        this.#add("Cost", skinData);
-        this.#add("SpawnTime", skinData);
-        this.#add("LaserDPS", skinData);
-        this.#add("TowerDPS", skinData);
-        this.#add("UnitDPS", skinData);
-        this.#add("RamDPS", skinData);
-        this.#add("LaserTime", skinData);
-        this.#add("BeeDps", skinData);
-        this.#add("TotalStingDamage", skinData);
-        this.#add("DPS", skinData);
-        this.#add("LimitDPS", skinData);
-        this.#add("NetCost", skinData);
-        this.#add("CostEfficiency", skinData);
-        this.#add("Value", skinData);
-        this.#add("IncomeFactor", skinData);
-        this.#add("IncomePerSecond", skinData);
-        this.#add("TotalIncomePerSecond", skinData);
-        this.#add("WavesUntilNetProfit", skinData);
-        this.#add("WavesUntilUpgradeProfit", skinData);
+        this.#add('Cooldown', skinData);
+        this.#add('Damage', skinData);
+        this.#add('Range', skinData);
+        this.#add('Cost', skinData);
+        this.#add('SpawnTime', skinData);
+        this.#add('LaserDPS', skinData);
+        this.#add('TowerDPS', skinData);
+        this.#add('UnitDPS', skinData);
+        this.#add('RamDPS', skinData);
+        this.#add('LaserTime', skinData);
+        this.#add('BeeDps', skinData);
+        this.#add('TotalStingDamage', skinData);
+        this.#add('DPS', skinData);
+        this.#add('LimitDPS', skinData);
+        this.#add('NetCost', skinData);
+        this.#add('CostEfficiency', skinData);
+        this.#add('Value', skinData);
+        this.#add('IncomeFactor', skinData);
+        this.#add('IncomePerSecond', skinData);
+        this.#add('TotalIncomePerSecond', skinData);
+        this.#add('WavesUntilNetProfit', skinData);
+        this.#add('WavesUntilUpgradeProfit', skinData);
     }
 }
 

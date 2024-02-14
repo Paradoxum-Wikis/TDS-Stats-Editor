@@ -15,39 +15,39 @@ export default {
                 {
                     Stats: { Detections: { Hidden: true }, Damage: 15 },
                     Image: 11821094308,
-                    Title: "Extra Juice",
+                    Title: 'Extra Juice',
                     Cost: 800,
                 },
                 {
                     Stats: {
-                        Extras: ["Overcharge: 180 → 375"],
+                        Extras: ['Overcharge: 180 → 375'],
                         Range: 17.5,
                         MaxAmmo: 375,
                     },
                     Image: 11821094198,
-                    Title: "Second Energy Canister",
+                    Title: 'Second Energy Canister',
                     Cost: 1350,
                 },
                 {
                     Stats: {
                         MaxAmmo: 625,
-                        Extras: ["Overcharge: 375 → 625"],
+                        Extras: ['Overcharge: 375 → 625'],
                         Damage: 25,
                     },
                     Image: 11821093989,
-                    Title: "Powerhouse Armor",
+                    Title: 'Powerhouse Armor',
                     Cost: 3300,
                 },
                 {
                     Stats: {
                         MaxAmmo: 1350,
                         Cooldown: 0.2,
-                        Extras: ["Overcharge: 625 → 1350"],
+                        Extras: ['Overcharge: 625 → 1350'],
                         Damage: 45,
                         Range: 17.5,
                     },
                     Image: 11821093828,
-                    Title: "Supercharger",
+                    Title: 'Supercharger',
                     Cost: 10000,
                 },
                 {
@@ -56,17 +56,17 @@ export default {
                         Cooldown: 0.1,
                         Attributes: { ChargeTime: 2 },
                         Range: 20,
-                        Extras: ["Overcharge: 1200 → 3000", "Faster Charge"],
+                        Extras: ['Overcharge: 1200 → 3000', 'Faster Charge'],
                         Damage: 50,
                     },
                     Image: 11821093672,
-                    Title: "Vessel Of Infinite Destruction",
+                    Title: 'Vessel Of Infinite Destruction',
                     Cost: 34000,
                 },
             ],
         },
     },
-    "Ace Pilot": {
+    'Ace Pilot': {
         Default: {
             Upgrades: [
                 {
@@ -89,13 +89,13 @@ export default {
                         Range: 7.5,
                         Damage: 2,
                     },
-                    Title: "Stronger Bullets",
+                    Title: 'Stronger Bullets',
                     Cost: 300,
                 },
                 {
                     Image: 5525754186,
                     Stats: {
-                        Extras: ["Bomb dropping"],
+                        Extras: ['Bomb dropping'],
                         Attributes: {
                             BombTime: 4.5,
                             BombDropping: true,
@@ -112,13 +112,13 @@ export default {
                         Range: 7.5,
                         Damage: 2,
                     },
-                    Title: "Bombs Away!",
+                    Title: 'Bombs Away!',
                     Cost: 350,
                 },
                 {
                     Image: 5525748117,
                     Stats: {
-                        Extras: ["Stronger bombs"],
+                        Extras: ['Stronger bombs'],
                         Attributes: {
                             BombTime: 4.5,
                             BombDropping: true,
@@ -135,15 +135,15 @@ export default {
                         Range: 7.5,
                         Damage: 4,
                     },
-                    Title: "Aerial Ace",
+                    Title: 'Aerial Ace',
                     Cost: 2000,
                 },
                 {
                     Image: 5525748988,
                     Stats: {
                         Extras: [
-                            "Nearby towers get HD at the start of each wave",
-                            "Faster Bombs",
+                            'Nearby towers get HD at the start of each wave',
+                            'Faster Bombs',
                         ],
                         Attributes: {
                             BombTime: 3,
@@ -157,7 +157,7 @@ export default {
                         Range: 9,
                         Damage: 6,
                     },
-                    Title: "Spy Plane",
+                    Title: 'Spy Plane',
                     Cost: 3200,
                 },
                 {
@@ -176,7 +176,7 @@ export default {
                         Range: 10,
                         Damage: 10,
                     },
-                    Title: "The Surging Sky",
+                    Title: 'The Surging Sky',
                     Cost: 8750,
                 },
             ],
@@ -208,7 +208,7 @@ export default {
                             BurnDamage: 2,
                             MaxHits: 2,
                             EnemyBuff: 0,
-                            ArrowType: "Normal",
+                            ArrowType: 'Normal',
                             MaxStun: 1,
                             BurnTick: 1,
                             MinStun: 0.25,
@@ -223,7 +223,7 @@ export default {
                         Range: 22,
                         Damage: 4,
                     },
-                    Title: "Faster Reloading",
+                    Title: 'Faster Reloading',
                     Cost: 100,
                 },
                 {
@@ -234,7 +234,7 @@ export default {
                             BurnDamage: 2,
                             MaxHits: 2,
                             EnemyBuff: 0,
-                            ArrowType: "Normal",
+                            ArrowType: 'Normal',
                             MaxStun: 1,
                             BurnTick: 1,
                             MinStun: 0.25,
@@ -245,18 +245,18 @@ export default {
                         Range: 22,
                         Damage: 8,
                     },
-                    Title: "Deadshot",
+                    Title: 'Deadshot',
                     Cost: 700,
                 },
                 {
                     Image: 141745478,
                     Stats: {
-                        Extras: ["More penetration", "Flame Arrows"],
+                        Extras: ['More penetration', 'Flame Arrows'],
                         Attributes: {
                             BurnDamage: 2,
                             MaxHits: 5,
                             EnemyBuff: 0,
-                            ArrowType: "Flame",
+                            ArrowType: 'Flame',
                             MaxStun: 1,
                             BurnTick: 1,
                             MinStun: 0.25,
@@ -267,18 +267,18 @@ export default {
                         Range: 22,
                         Damage: 10,
                     },
-                    Title: "Ammo Mods",
+                    Title: 'Ammo Mods',
                     Cost: 1500,
                 },
                 {
                     Image: 456573844,
                     Stats: {
-                        Extras: ["Stronger Flame Arrows"],
+                        Extras: ['Stronger Flame Arrows'],
                         Attributes: {
                             BurnDamage: 4,
                             MaxHits: 5,
                             EnemyBuff: 0,
-                            ArrowType: "Flame",
+                            ArrowType: 'Flame',
                             MaxStun: 1,
                             BurnTick: 1,
                             MinStun: 0.25,
@@ -289,18 +289,18 @@ export default {
                         Range: 24,
                         Damage: 20,
                     },
-                    Title: "Mechanical Bow",
+                    Title: 'Mechanical Bow',
                     Cost: 3000,
                 },
                 {
                     Image: 106341823,
                     Stats: {
-                        Extras: ["More Penetration", "Stronger Flame Arrows"],
+                        Extras: ['More Penetration', 'Stronger Flame Arrows'],
                         Attributes: {
                             BurnDamage: 10,
                             MaxHits: 8,
                             EnemyBuff: 0,
-                            ArrowType: "Flame",
+                            ArrowType: 'Flame',
                             MaxStun: 1,
                             BurnTick: 1,
                             MinStun: 0.25,
@@ -311,7 +311,7 @@ export default {
                         Range: 26,
                         Damage: 30,
                     },
-                    Title: "Professional Archer",
+                    Title: 'Professional Archer',
                     Cost: 7500,
                 },
             ],
@@ -321,7 +321,7 @@ export default {
                     BurnDamage: 2,
                     MaxHits: 2,
                     EnemyBuff: 0,
-                    ArrowType: "Normal",
+                    ArrowType: 'Normal',
                     MaxStun: 1,
                     BurnTick: 1,
                     MinStun: 0.25,
@@ -340,7 +340,7 @@ export default {
                 {
                     Image: 5525000768,
                     Stats: {
-                        Extras: ["15% firerate buff"],
+                        Extras: ['15% firerate buff'],
                         Attributes: { FirerateBuff: 15 },
                         Detections: {
                             Flying: false,
@@ -351,13 +351,13 @@ export default {
                         Range: 14,
                         Damage: 4,
                     },
-                    Title: "Leadership",
+                    Title: 'Leadership',
                     Cost: 850,
                 },
                 {
                     Image: 4594880289,
                     Stats: {
-                        Extras: ["Call to Arms"],
+                        Extras: ['Call to Arms'],
                         Attributes: { FirerateBuff: 15 },
                         Detections: {
                             Flying: false,
@@ -368,13 +368,13 @@ export default {
                         Range: 14,
                         Damage: 4,
                     },
-                    Title: "Call to Arms",
+                    Title: 'Call to Arms',
                     Cost: 1800,
                 },
                 {
                     Image: 5525002879,
                     Stats: {
-                        Extras: ["20% firerate buff"],
+                        Extras: ['20% firerate buff'],
                         Attributes: { FirerateBuff: 20 },
                         Detections: {
                             Flying: false,
@@ -385,13 +385,13 @@ export default {
                         Range: 16,
                         Damage: 6,
                     },
-                    Title: "Intense Training",
+                    Title: 'Intense Training',
                     Cost: 5500,
                 },
                 {
                     Image: 5525003528,
                     Stats: {
-                        Extras: ["25% firerate buff"],
+                        Extras: ['25% firerate buff'],
                         Attributes: { FirerateBuff: 25 },
                         Detections: {
                             Flying: false,
@@ -402,7 +402,7 @@ export default {
                         Range: 20,
                         Damage: 10,
                     },
-                    Title: "World Leader",
+                    Title: 'World Leader',
                     Cost: 9000,
                 },
             ],
@@ -433,13 +433,13 @@ export default {
                         Range: 14,
                         Damage: 2,
                     },
-                    Title: "Radar Pack",
+                    Title: 'Radar Pack',
                     Cost: 350,
                 },
                 {
                     Image: 3615110536,
                     Stats: {
-                        Extras: ["Missile launcher"],
+                        Extras: ['Missile launcher'],
                         Attributes: {},
                         Detections: {
                             Flying: false,
@@ -450,7 +450,7 @@ export default {
                         Range: 16,
                         Damage: 2,
                     },
-                    Title: "Disposable Missile",
+                    Title: 'Disposable Missile',
                     Cost: 700,
                 },
                 {
@@ -467,13 +467,13 @@ export default {
                         Range: 17,
                         Damage: 4,
                     },
-                    Title: "Recon Armor",
+                    Title: 'Recon Armor',
                     Cost: 2000,
                 },
                 {
                     Image: 3615111324,
                     Stats: {
-                        Extras: ["Quad missiles"],
+                        Extras: ['Quad missiles'],
                         Attributes: {},
                         Detections: {
                             Flying: false,
@@ -484,13 +484,13 @@ export default {
                         Range: 19,
                         Damage: 10,
                     },
-                    Title: "Quad Launcher",
+                    Title: 'Quad Launcher',
                     Cost: 7500,
                 },
                 {
                     Image: 3615112120,
                     Stats: {
-                        Extras: ["Really cool armor"],
+                        Extras: ['Really cool armor'],
                         Attributes: {},
                         Detections: {
                             Flying: false,
@@ -501,7 +501,7 @@ export default {
                         Range: 22,
                         Damage: 22,
                     },
-                    Title: "Flex Armor",
+                    Title: 'Flex Armor',
                     Cost: 10000,
                 },
             ],
@@ -532,7 +532,7 @@ export default {
                         Range: 14,
                         Damage: 2,
                     },
-                    Title: "Steady Hand",
+                    Title: 'Steady Hand',
                     Cost: 250,
                 },
                 {
@@ -550,14 +550,14 @@ export default {
                         Range: 16,
                         Damage: 4,
                     },
-                    Title: "Lucky Shot",
+                    Title: 'Lucky Shot',
                     Cost: 300,
                 },
                 {
                     Image: 5523231844,
                     Stats: {
                         Attributes: { MaxAmmo: 6, SpinDuration: 1.3 },
-                        Extras: ["Spin: 1.7 > 1.3 secs"],
+                        Extras: ['Spin: 1.7 > 1.3 secs'],
                         Income: 35,
                         Detections: {
                             Flying: false,
@@ -568,7 +568,7 @@ export default {
                         Range: 18,
                         Damage: 8,
                     },
-                    Title: "Faster Instincts",
+                    Title: 'Faster Instincts',
                     Cost: 1650,
                 },
                 {
@@ -586,14 +586,14 @@ export default {
                         Range: 18,
                         Damage: 10,
                     },
-                    Title: "Double Tap",
+                    Title: 'Double Tap',
                     Cost: 4000,
                 },
                 {
                     Image: 5523234990,
                     Stats: {
                         Attributes: { MaxAmmo: 6, SpinDuration: 1 },
-                        Extras: ["Spin: 1.3 → 1 secs"],
+                        Extras: ['Spin: 1.3 → 1 secs'],
                         Income: 80,
                         Detections: {
                             Flying: false,
@@ -604,7 +604,7 @@ export default {
                         Range: 18,
                         Damage: 20,
                     },
-                    Title: "Outlawed",
+                    Title: 'Outlawed',
                     Cost: 7500,
                 },
             ],
@@ -635,7 +635,7 @@ export default {
                         Range: 14,
                         Damage: 3,
                     },
-                    Title: "Headshot Practice",
+                    Title: 'Headshot Practice',
                     Cost: 250,
                 },
                 {
@@ -653,14 +653,14 @@ export default {
                         Range: 16,
                         Damage: 4,
                     },
-                    Title: "Gold Shot",
+                    Title: 'Gold Shot',
                     Cost: 500,
                 },
                 {
                     Image: 5523233366,
                     Stats: {
                         Attributes: { MaxAmmo: 6, SpinDuration: 1.3 },
-                        Extras: ["Spin: 1.7 → 1.3 secs"],
+                        Extras: ['Spin: 1.7 → 1.3 secs'],
                         Income: 45,
                         Detections: {
                             Flying: false,
@@ -671,14 +671,14 @@ export default {
                         Range: 18,
                         Damage: 10,
                     },
-                    Title: "Faster Instincts",
+                    Title: 'Faster Instincts',
                     Cost: 2250,
                 },
                 {
                     Image: 5523234030,
                     Stats: {
                         Attributes: { MaxAmmo: 12, SpinDuration: 1.3 },
-                        Extras: ["Longer Burst (12)"],
+                        Extras: ['Longer Burst (12)'],
                         Income: 115,
                         Detections: {
                             Flying: false,
@@ -689,14 +689,14 @@ export default {
                         Range: 18,
                         Damage: 12,
                     },
-                    Title: "Double Tap",
+                    Title: 'Double Tap',
                     Cost: 6650,
                 },
                 {
                     Image: 5523234990,
                     Stats: {
                         Attributes: { MaxAmmo: 12, SpinDuration: 1 },
-                        Extras: ["Spin: 1.3 → 1 secs"],
+                        Extras: ['Spin: 1.3 → 1 secs'],
                         Income: 160,
                         Detections: {
                             Flying: false,
@@ -707,7 +707,7 @@ export default {
                         Range: 18,
                         Damage: 20,
                     },
-                    Title: "Wildest Of The West",
+                    Title: 'Wildest Of The West',
                     Cost: 12000,
                 },
             ],
@@ -722,187 +722,149 @@ export default {
             },
         },
     },
-    "Crook Boss": {
+    'Crook Boss': {
         Default: {
             Upgrades: [
                 {
-                    Image: 3032133716,
                     Stats: {
-                        Extras: ["Guards", "1 Spawn Limit"],
-                        Attributes: { UnitToSend: "Guard1", MaxCrooks: 1 },
-                        Detections: {
-                            Flying: false,
-                            Hidden: false,
-                            Lead: false,
-                        },
-                        SpawnTime: 60,
-                        Cooldown: 0.75,
+                        Attributes: { PistolCrookSpawnTime: 25 },
                         Range: 10,
-                        Damage: 3,
+                        Cooldown: 1.1,
+                        Extras: ['Pistol Crook Spawn Time: 35 > 25'],
+                        Damage: 4,
                     },
-                    Title: "Hired Help",
+                    Image: 3032133716,
+                    Title: 'Quick Getaway',
                     Cost: 250,
                 },
                 {
-                    Image: 3444643559,
                     Stats: {
-                        Extras: [],
-                        Attributes: { UnitToSend: "Guard1", MaxCrooks: 1 },
-                        Detections: {
-                            Flying: false,
-                            Hidden: true,
-                            Lead: false,
-                        },
-                        SpawnTime: 45,
-                        Cooldown: 0.55,
-                        Range: 11,
-                        Damage: 3,
-                    },
-                    Title: "Underground Eye",
-                    Cost: 800,
-                },
-                {
-                    Image: 3838914605,
-                    Stats: {
-                        Extras: ["Double Guards", "2 Spawn Limit"],
-                        Attributes: { UnitToSend: "Guard2", MaxCrooks: 2 },
-                        Detections: {
-                            Flying: false,
-                            Hidden: true,
-                            Lead: false,
-                        },
-                        SpawnTime: 45,
-                        Cooldown: 0.15,
+                        Attributes: { DoublePistolCrooks: true },
                         Range: 12,
-                        Damage: 3,
+                        Detections: { Hidden: true },
+                        Cooldown: 1,
+                        Extras: ['2 Pistol Crooks spawn at a time.'],
+                        Damage: 4,
                     },
-                    Title: "Tommy Gun",
-                    Cost: 2000,
+                    Image: 3444643559,
+                    Title: 'Double Trouble',
+                    Cost: 900,
                 },
                 {
-                    Image: 3444644903,
                     Stats: {
-                        Extras: ["Stronger Guards", "3 Spawn Limit"],
-                        Attributes: { UnitToSend: "Guard3", MaxCrooks: 3 },
-                        Detections: {
-                            Flying: false,
-                            Hidden: true,
-                            Lead: false,
-                        },
-                        SpawnTime: 40,
-                        Cooldown: 0.1,
-                        Range: 15,
-                        Damage: 5,
+                        Attributes: { TommyCrookSpawnTime: 30 },
+                        Range: 14,
+                        Extras: [
+                            'Tommy Crooks (30s Spawn Time)',
+                            '2 Damage, 0.25 Firerate',
+                        ],
+                        Cooldown: 0.15,
+                        Damage: 3,
                     },
-                    Title: "Criminal Mastermind",
-                    Cost: 8000,
+                    Image: 3838914605,
+                    Title: 'Tommy Goons',
+                    Cost: 2850,
+                },
+                {
+                    Stats: {
+                        Attributes: {
+                            TommyDrum: true,
+                            TommyCrookSpawnTime: 20,
+                        },
+                        Range: 15,
+                        Extras: [
+                            'Upgraded Tommy Crooks',
+                            '4 Damage, 0.2 Firerate',
+                            'Tommy Crook Spawn Time: 30 > 20',
+                        ],
+                        Cooldown: 0.1,
+                        Damage: 6,
+                    },
+                    Image: 3444644903,
+                    Title: 'The Godfather',
+                    Cost: 12000,
                 },
             ],
             Defaults: {
-                Attributes: {},
-                Detections: { Flying: false, Hidden: false, Lead: false },
                 Range: 10,
-                Limit: 5,
-                Price: 450,
-                Cooldown: 0.75,
-                Damage: 2,
+                Attributes: { PistolCrookSpawnTime: 35, BackupCallTime: 1.5 },
+                Limit: 6,
+                Price: 600,
+                Detections: { Flying: false, Hidden: false, Lead: false },
+                Cooldown: 1.25,
+                Damage: 4,
             },
         },
         Golden: {
             Upgrades: [
                 {
+                    Stats: {
+                        Attributes: { PistolCrookSpawnTime: 25 },
+                        Range: 11.5,
+                        Cooldown: 1.4,
+                        Extras: ['Pistol Crook Spawn Time: 35 > 25'],
+                        Damage: 8,
+                    },
                     Image: 3032133716,
-                    Stats: {
-                        Extras: ["Guards", "1 Spawn Limit"],
-                        Attributes: {
-                            UnitToSend: "GoldenGuard1",
-                            MaxCrooks: 1,
-                        },
-                        Detections: {
-                            Flying: false,
-                            Hidden: false,
-                            Lead: false,
-                        },
-                        SpawnTime: 50,
-                        Cooldown: 0.55,
-                        Range: 11,
-                        Damage: 3,
-                    },
-                    Title: "Henchmen Funds",
-                    Cost: 275,
+                    Title: 'Lvl 1. Broke',
+                    Cost: 325,
                 },
                 {
+                    Stats: {
+                        Attributes: { DoublePistolCrooks: true },
+                        Range: 13,
+                        Detections: { Hidden: true },
+                        Cooldown: 1.1,
+                        Extras: ['2 Pistol Crooks spawn at a time.'],
+                        Damage: 8,
+                    },
                     Image: 3444643559,
-                    Stats: {
-                        Extras: [],
-                        Attributes: {
-                            UnitToSend: "GoldenGuard1",
-                            MaxCrooks: 1,
-                        },
-                        Detections: {
-                            Flying: false,
-                            Hidden: true,
-                            Lead: false,
-                        },
-                        SpawnTime: 40,
-                        Cooldown: 0.4,
-                        Range: 13,
-                        Damage: 3,
-                    },
-                    Title: "Goldeneye",
-                    Cost: 1050,
+                    Title: 'Lvl. 2 Normie',
+                    Cost: 1100,
                 },
                 {
-                    Image: 3838914605,
                     Stats: {
-                        Extras: ["Double Guards", "2 Spawn Limit"],
-                        Attributes: {
-                            UnitToSend: "GoldenGuard2",
-                            MaxCrooks: 2,
-                        },
-                        Detections: {
-                            Flying: false,
-                            Hidden: true,
-                            Lead: false,
-                        },
-                        SpawnTime: 40,
-                        Cooldown: 0.1,
-                        Range: 13,
-                        Damage: 3,
-                    },
-                    Title: "M1927",
-                    Cost: 3250,
-                },
-                {
-                    Image: 3444644903,
-                    Stats: {
-                        Extras: ["Stronger Guards", "3 Spawn Limit"],
-                        Attributes: {
-                            UnitToSend: "GoldenGuard3",
-                            MaxCrooks: 3,
-                        },
-                        Detections: {
-                            Flying: false,
-                            Hidden: true,
-                            Lead: false,
-                        },
-                        SpawnTime: 35,
-                        Cooldown: 0.08,
+                        Attributes: { TommyCrookSpawnTime: 25 },
                         Range: 15,
-                        Damage: 6,
+                        Extras: [
+                            'Golden Tommy Crooks (25s Spawn Time)',
+                            '4 Damage, 0.25 Firerate',
+                        ],
+                        Cooldown: 0.12,
+                        Damage: 4,
                     },
-                    Title: "Level 100 BOSS",
-                    Cost: 8500,
+                    Image: 3838914605,
+                    Title: 'Lvl 3. Gamer',
+                    Cost: 3500,
+                },
+                {
+                    Stats: {
+                        Attributes: {
+                            TommyDrum: true,
+                            TommyCrookSpawnTime: 20,
+                        },
+                        Range: 17.5,
+                        Extras: [
+                            'Upgraded Gold Tommy Crooks',
+                            '4 Damage, 0.2 Firerate',
+                            'Gold Tommy Crook Spawn Time: 25 > 20',
+                        ],
+                        Cooldown: 0.1,
+                        Damage: 10,
+                    },
+                    Image: 3444644903,
+                    Title: 'Lvl. 4 GOD',
+                    Cost: 16000,
                 },
             ],
             Defaults: {
-                Attributes: {},
-                Range: 10,
+                Range: 11.5,
+                Attributes: { PistolCrookSpawnTime: 35, BackupCallTime: 1.5 },
+                Limit: 6,
+                Price: 900,
                 Detections: { Flying: false, Hidden: false, Lead: false },
-                Price: 600,
-                Limit: 4,
-                Cooldown: 0.7,
-                Damage: 3,
+                Cooldown: 1.6,
+                Damage: 8,
             },
         },
     },
@@ -915,24 +877,24 @@ export default {
                         MaxAmmo: 50,
                         Range: 12,
                         Extras: [
-                            "Ammo: 40 -> 50",
-                            "❄️ Max Slowness: 50% > 65%",
+                            'Ammo: 40 -> 50',
+                            '❄️ Max Slowness: 50% > 65%',
                         ],
                         Attributes: {
                             MaxSlow: 65,
                         },
                     },
                     Image: 3280081327,
-                    Title: "Frosty Gear",
+                    Title: 'Frosty Gear',
                     Cost: 250,
                 },
                 {
                     Stats: {
                         MaxAmmo: 80,
                         Extras: [
-                            "Ammo: 50 -> 80",
-                            "Chilled Enemies take tick-based damage",
-                            "❄️ Tick Damage: (1)",
+                            'Ammo: 50 -> 80',
+                            'Chilled Enemies take tick-based damage',
+                            '❄️ Tick Damage: (1)',
                         ],
                         Attributes: {
                             DebuffDamage: 1,
@@ -940,16 +902,16 @@ export default {
                         Range: 13.5,
                     },
                     Image: 3280081327,
-                    Title: "Freezing Tanks",
+                    Title: 'Freezing Tanks',
                     Cost: 935,
                 },
                 {
                     Stats: {
                         Extras: [
-                            "Chill Slowness: 5% -> 10%",
-                            "Larger Frost Beam",
-                            "Debuff Duration: 2 -> 4",
-                            "❄️ Max Slowness: 65% > 75%",
+                            'Chill Slowness: 5% -> 10%',
+                            'Larger Frost Beam',
+                            'Debuff Duration: 2 -> 4',
+                            '❄️ Max Slowness: 65% > 75%',
                         ],
                         Attributes: {
                             DebuffLength: 4,
@@ -960,16 +922,16 @@ export default {
                         Damage: 1,
                     },
                     Image: 3280081327,
-                    Title: "Ice Commando",
+                    Title: 'Ice Commando',
                     Cost: 4000,
                 },
                 {
                     Stats: {
                         Extras: [
                             "🧊 Enemies now freeze at max 'Chill'",
-                            "Even Larger Frost Beam",
-                            "❄️ Tick Damage: 1 -> 3",
-                            "Max Hits: 3 -> 6",
+                            'Even Larger Frost Beam',
+                            '❄️ Tick Damage: 1 -> 3',
+                            'Max Hits: 3 -> 6',
                         ],
                         Attributes: {
                             CanFreeze: true,
@@ -1029,44 +991,44 @@ export default {
                 {
                     Stats: { Range: 10, Cooldown: 2.5 },
                     Image: 0,
-                    Title: "Further Throwing",
+                    Title: 'Further Throwing',
                     Cost: 50,
                 },
                 {
                     Stats: { Attributes: { ExplosionRadius: 3.25 }, Damage: 8 },
                     Image: 5523227714,
-                    Title: "Steil Grenade",
+                    Title: 'Steil Grenade',
                     Cost: 450,
                 },
                 {
                     Stats: {
                         Cooldown: 1.5,
                         Attributes: { Velocity: 20, MustAim: false },
-                        Extras: ["Faster Projectile", "No Aim Time"],
+                        Extras: ['Faster Projectile', 'No Aim Time'],
                         Range: 12,
                         Damage: 12,
                     },
                     Image: 5523228733,
-                    Title: "Chinalake",
+                    Title: 'Chinalake',
                     Cost: 1500,
                 },
                 {
                     Stats: {
                         Detections: { Hidden: true },
                         Attributes: { ExplosionRadius: 4 },
-                        Extras: ["Bigger Explosion"],
+                        Extras: ['Bigger Explosion'],
                         Cooldown: 1.2,
                         Range: 14,
                         Damage: 28,
                     },
                     Image: 5523229364,
-                    Title: "Collateral Damage",
+                    Title: 'Collateral Damage',
                     Cost: 6000,
                 },
             ],
         },
     },
-    "DJ Booth": {
+    'DJ Booth': {
         Default: {
             Upgrades: [
                 {
@@ -1087,13 +1049,13 @@ export default {
                         Range: 17,
                         Damage: 0,
                     },
-                    Title: "Laptop Studio",
+                    Title: 'Laptop Studio',
                     Cost: 300,
                 },
                 {
                     Image: 5523222880,
                     Stats: {
-                        Extras: ["15% range buff"],
+                        Extras: ['15% range buff'],
                         Attributes: {
                             RangeBuff: 15,
                             Discount: 0,
@@ -1108,13 +1070,13 @@ export default {
                         Range: 17,
                         Damage: 0,
                     },
-                    Title: "Party Mode",
+                    Title: 'Party Mode',
                     Cost: 850,
                 },
                 {
                     Image: 5523224020,
                     Stats: {
-                        Extras: ["10% discount buff"],
+                        Extras: ['10% discount buff'],
                         Attributes: {
                             RangeBuff: 15,
                             Discount: 10,
@@ -1129,13 +1091,13 @@ export default {
                         Range: 18,
                         Damage: 0,
                     },
-                    Title: "Thrifty Music",
+                    Title: 'Thrifty Music',
                     Cost: 2500,
                 },
                 {
                     Image: 5523225033,
                     Stats: {
-                        Extras: ["25% range buff"],
+                        Extras: ['25% range buff'],
                         Attributes: {
                             RangeBuff: 25,
                             Discount: 10,
@@ -1150,13 +1112,13 @@ export default {
                         Range: 18,
                         Damage: 0,
                     },
-                    Title: "Audio Visualizer",
+                    Title: 'Audio Visualizer',
                     Cost: 4000,
                 },
                 {
                     Image: 5523225756,
                     Stats: {
-                        Extras: ["35% range buff", "20% discount buff"],
+                        Extras: ['35% range buff', '20% discount buff'],
                         Attributes: {
                             RangeBuff: 35,
                             Discount: 20,
@@ -1171,7 +1133,7 @@ export default {
                         Range: 20,
                         Damage: 0,
                     },
-                    Title: "Apocalypse Rave",
+                    Title: 'Apocalypse Rave',
                     Cost: 9000,
                 },
             ],
@@ -1209,13 +1171,13 @@ export default {
                         Range: 9,
                         Damage: 2,
                     },
-                    Title: "Improved Handling",
+                    Title: 'Improved Handling',
                     Cost: 325,
                 },
                 {
                     Image: 4675534331,
                     Stats: {
-                        Extras: ["3 Max Hits"],
+                        Extras: ['3 Max Hits'],
                         Attributes: {
                             MinStun: 0,
                             MaxStun: 0,
@@ -1228,7 +1190,7 @@ export default {
                         Range: 9,
                         Damage: 4,
                     },
-                    Title: "Outside Support",
+                    Title: 'Outside Support',
                     Cost: 900,
                 },
                 {
@@ -1254,9 +1216,9 @@ export default {
                     Image: 4675504505,
                     Stats: {
                         Extras: [
-                            "5 Max Hits",
-                            "Stuns enemies",
-                            "Increased chain range",
+                            '5 Max Hits',
+                            'Stuns enemies',
+                            'Increased chain range',
                         ],
                         Attributes: {
                             MinStun: 0.35,
@@ -1270,17 +1232,17 @@ export default {
                         Range: 14,
                         Damage: 45,
                     },
-                    Title: "Lightning Cannon",
+                    Title: 'Lightning Cannon',
                     Cost: 5000,
                 },
                 {
                     Image: 4675504640,
                     Stats: {
                         Extras: [
-                            "8 Max Hits",
-                            "Increased chain range",
-                            "Longer stuns",
-                            "Reduce defense",
+                            '8 Max Hits',
+                            'Increased chain range',
+                            'Longer stuns',
+                            'Reduce defense',
                         ],
                         Attributes: {
                             MinStun: 0.5,
@@ -1294,7 +1256,7 @@ export default {
                         Range: 14,
                         Damage: 90,
                     },
-                    Title: "Zeus Cannon",
+                    Title: 'Zeus Cannon',
                     Cost: 13500,
                 },
             ],
@@ -1315,13 +1277,13 @@ export default {
             },
         },
     },
-    "Elf Camp": {
+    'Elf Camp': {
         Default: {
             Upgrades: [
                 {
                     Image: 11756694085,
                     Stats: {
-                        Extras: ["Faster spawning"],
+                        Extras: ['Faster spawning'],
                         Attributes: {
                             GiftBomberElfLimit: 0,
                             RippedElfSpawnTime: 0,
@@ -1348,13 +1310,13 @@ export default {
                         Range: 0,
                         Damage: 0,
                     },
-                    Title: "Winter Training",
+                    Title: 'Winter Training',
                     Cost: 150,
                 },
                 {
                     Image: 11866247025,
                     Stats: {
-                        Extras: ["Snowball Elfs"],
+                        Extras: ['Snowball Elfs'],
                         Attributes: {
                             GiftBomberElfLimit: 0,
                             RippedElfSpawnTime: 0,
@@ -1381,13 +1343,13 @@ export default {
                         Range: 0,
                         Damage: 0,
                     },
-                    Title: "Snowball Fight",
+                    Title: 'Snowball Fight',
                     Cost: 325,
                 },
                 {
                     Image: 11866247585,
                     Stats: {
-                        Extras: ["Bomber Elfs"],
+                        Extras: ['Bomber Elfs'],
                         Attributes: {
                             GiftBomberElfLimit: 0,
                             RippedElfSpawnTime: 0,
@@ -1414,13 +1376,13 @@ export default {
                         Range: 0,
                         Damage: 0,
                     },
-                    Title: "Explosive Surprise",
+                    Title: 'Explosive Surprise',
                     Cost: 1500,
                 },
                 {
                     Image: 11866248209,
                     Stats: {
-                        Extras: ["Guardian Elfs", "Cannoneer Elfs"],
+                        Extras: ['Guardian Elfs', 'Cannoneer Elfs'],
                         Attributes: {
                             GiftBomberElfLimit: 0,
                             RippedElfSpawnTime: 0,
@@ -1447,13 +1409,13 @@ export default {
                         Range: 0,
                         Damage: 0,
                     },
-                    Title: "Winter Workshop",
+                    Title: 'Winter Workshop',
                     Cost: 3500,
                 },
                 {
                     Image: 11866248664,
                     Stats: {
-                        Extras: ["Ripped Elfs", "Gift Bombers", "Gunner Elfs"],
+                        Extras: ['Ripped Elfs', 'Gift Bombers', 'Gunner Elfs'],
                         Attributes: {
                             GiftBomberElfLimit: 2,
                             RippedElfSpawnTime: 80,
@@ -1480,7 +1442,7 @@ export default {
                         Range: 0,
                         Damage: 0,
                     },
-                    Title: "X-Mas Army",
+                    Title: 'X-Mas Army',
                     Cost: 9500,
                 },
             ],
@@ -1514,13 +1476,13 @@ export default {
         Default: {
             Upgrades: [
                 {
-                    Image: "4517035597",
+                    Image: '4517035597',
                     Stats: {
                         Extras: [],
                         Attributes: {
                             BuildTime: 2,
                             MaxUnits: 1,
-                            UnitToSend: "Sentry1",
+                            UnitToSend: 'Sentry1',
                             SpawnTime: 1,
                             SentryShield: false,
                             Buildzone: 6,
@@ -1535,7 +1497,7 @@ export default {
                         Range: 14,
                         Damage: 5,
                     },
-                    Title: "Precise Calculations",
+                    Title: 'Precise Calculations',
                     Cost: 250,
                 },
                 {
@@ -1545,7 +1507,7 @@ export default {
                         Attributes: {
                             BuildTime: 2,
                             MaxUnits: 1,
-                            UnitToSend: "Sentry1",
+                            UnitToSend: 'Sentry1',
                             SpawnTime: 1,
                             SentryShield: false,
                             Buildzone: 6,
@@ -1556,17 +1518,17 @@ export default {
                         Range: 15,
                         Damage: 5,
                     },
-                    Title: "Makeshift Radar",
+                    Title: 'Makeshift Radar',
                     Cost: 400,
                 },
                 {
                     Image: 8998290803,
                     Stats: {
-                        Extras: ["Rifle Sentry"],
+                        Extras: ['Rifle Sentry'],
                         Attributes: {
                             BuildTime: 2,
                             MaxUnits: 1,
-                            UnitToSend: "Sentry2",
+                            UnitToSend: 'Sentry2',
                             SpawnTime: 1,
                             SentryShield: false,
                             Buildzone: 6,
@@ -1577,17 +1539,17 @@ export default {
                         Range: 15,
                         Damage: 10,
                     },
-                    Title: "Auto Converter",
+                    Title: 'Auto Converter',
                     Cost: 1750,
                 },
                 {
                     Image: 31857714,
                     Stats: {
-                        Extras: ["3 Max Units", "Sentry Shield"],
+                        Extras: ['3 Max Units', 'Sentry Shield'],
                         Attributes: {
                             BuildTime: 2,
                             MaxUnits: 2,
-                            UnitToSend: "Sentry2",
+                            UnitToSend: 'Sentry2',
                             SpawnTime: 1,
                             SentryShield: true,
                             Buildzone: 6,
@@ -1598,17 +1560,17 @@ export default {
                         Range: 18,
                         Damage: 15,
                     },
-                    Title: "Pressure Tank",
+                    Title: 'Pressure Tank',
                     Cost: 3250,
                 },
                 {
                     Image: 155526941,
                     Stats: {
-                        Extras: ["Minigun Sentry"],
+                        Extras: ['Minigun Sentry'],
                         Attributes: {
                             BuildTime: 2,
                             MaxUnits: 3,
-                            UnitToSend: "Sentry3",
+                            UnitToSend: 'Sentry3',
                             SpawnTime: 1,
                             SentryShield: true,
                             Buildzone: 6,
@@ -1619,17 +1581,17 @@ export default {
                         Range: 18,
                         Damage: 30,
                     },
-                    Title: "Heavy Construction",
+                    Title: 'Heavy Construction',
                     Cost: 12500,
                 },
                 {
                     Image: 7852911857,
                     Stats: {
-                        Extras: ["War Machine Sentry", "4 Max Units"],
+                        Extras: ['War Machine Sentry', '4 Max Units'],
                         Attributes: {
                             BuildTime: 2,
                             MaxUnits: 3,
-                            UnitToSend: "Sentry4",
+                            UnitToSend: 'Sentry4',
                             SpawnTime: 1,
                             SentryShield: true,
                             Buildzone: 6,
@@ -1640,7 +1602,7 @@ export default {
                         Range: 20,
                         Damage: 45,
                     },
-                    Title: "Illegal Gun Parts",
+                    Title: 'Illegal Gun Parts',
                     Cost: 33500,
                 },
             ],
@@ -1652,7 +1614,7 @@ export default {
                 Attributes: {
                     BuildTime: 2,
                     MaxUnits: 1,
-                    UnitToSend: "Sentry1",
+                    UnitToSend: 'Sentry1',
                     SpawnTime: 1,
                     SentryShield: false,
                     Buildzone: 6,
@@ -1684,7 +1646,7 @@ export default {
                         Range: 14,
                         Damage: 4,
                     },
-                    Title: "Improved Throwing",
+                    Title: 'Improved Throwing',
                     Cost: 250,
                 },
                 {
@@ -1705,13 +1667,13 @@ export default {
                         Range: 14,
                         Damage: 8,
                     },
-                    Title: "Double Head Axe",
+                    Title: 'Double Head Axe',
                     Cost: 750,
                 },
                 {
                     Image: 6426220009,
                     Stats: {
-                        Extras: ["Bounces: 5"],
+                        Extras: ['Bounces: 5'],
                         Attributes: {
                             MaxHits: 3,
                             MaxBounce: 5,
@@ -1726,7 +1688,7 @@ export default {
                         Range: 18,
                         Damage: 15,
                     },
-                    Title: "Blood Seeking",
+                    Title: 'Blood Seeking',
                     Cost: 2500,
                 },
                 {
@@ -1743,13 +1705,13 @@ export default {
                         Range: 18,
                         Damage: 30,
                     },
-                    Title: "Tactical Ops",
+                    Title: 'Tactical Ops',
                     Cost: 6000,
                 },
                 {
                     Image: 143769378,
                     Stats: {
-                        Extras: ["Bounces: 7"],
+                        Extras: ['Bounces: 7'],
                         Attributes: {
                             MaxHits: 3,
                             MaxBounce: 7,
@@ -1760,7 +1722,7 @@ export default {
                         Range: 18,
                         Damage: 80,
                     },
-                    Title: "Head Chopping",
+                    Title: 'Head Chopping',
                     Cost: 12500,
                 },
             ],
@@ -1793,7 +1755,7 @@ export default {
                         Range: 3,
                         Damage: 0,
                     },
-                    Title: "Carrot Farm",
+                    Title: 'Carrot Farm',
                     Cost: 200,
                 },
                 {
@@ -1811,7 +1773,7 @@ export default {
                         Range: 3,
                         Damage: 0,
                     },
-                    Title: "Wheat Farm",
+                    Title: 'Wheat Farm',
                     Cost: 550,
                 },
                 {
@@ -1829,7 +1791,7 @@ export default {
                         Range: 3,
                         Damage: 0,
                     },
-                    Title: "Tree Farm",
+                    Title: 'Tree Farm',
                     Cost: 1000,
                 },
                 {
@@ -1847,7 +1809,7 @@ export default {
                         Range: 3,
                         Damage: 0,
                     },
-                    Title: "Apple Farm",
+                    Title: 'Apple Farm',
                     Cost: 2500,
                 },
                 {
@@ -1865,7 +1827,7 @@ export default {
                         Range: 3,
                         Damage: 0,
                     },
-                    Title: "Space Fruit Farm",
+                    Title: 'Space Fruit Farm',
                     Cost: 5000,
                 },
             ],
@@ -1886,7 +1848,7 @@ export default {
                 {
                     Image: 3354968287,
                     Stats: {
-                        Extras: ["Longer freeze"],
+                        Extras: ['Longer freeze'],
                         Attributes: {
                             MaxFreezeTime: 1.35,
                             ExplosionRadius: 3,
@@ -1902,7 +1864,7 @@ export default {
                         Range: 10,
                         Damage: 0,
                     },
-                    Title: "Frost Knuckles",
+                    Title: 'Frost Knuckles',
                     Cost: 350,
                 },
                 {
@@ -1924,13 +1886,13 @@ export default {
                         Range: 12,
                         Damage: 0,
                     },
-                    Title: "Frost Vision",
+                    Title: 'Frost Vision',
                     Cost: 400,
                 },
                 {
                     Image: 3354970959,
                     Stats: {
-                        Extras: ["Defense melting"],
+                        Extras: ['Defense melting'],
                         Attributes: {
                             MaxFreezeTime: 1.35,
                             ExplosionRadius: 3,
@@ -1946,7 +1908,7 @@ export default {
                         Range: 12,
                         Damage: 2,
                     },
-                    Title: "Cold Snap",
+                    Title: 'Cold Snap',
                     Cost: 1400,
                 },
                 {
@@ -1968,13 +1930,13 @@ export default {
                         Range: 12,
                         Damage: 2,
                     },
-                    Title: "Arctic Commando",
+                    Title: 'Arctic Commando',
                     Cost: 2500,
                 },
                 {
                     Image: 3280084231,
                     Stats: {
-                        Extras: ["Longer freeze", "More defense reducing"],
+                        Extras: ['Longer freeze', 'More defense reducing'],
                         Attributes: {
                             MaxFreezeTime: 1.5,
                             ExplosionRadius: 3,
@@ -1990,7 +1952,7 @@ export default {
                         Range: 14,
                         Damage: 2,
                     },
-                    Title: "Subzero Hero",
+                    Title: 'Subzero Hero',
                     Cost: 6000,
                 },
             ],
@@ -2009,7 +1971,7 @@ export default {
             },
         },
     },
-    "Frost Blaster": {
+    'Frost Blaster': {
         Default: {
             Upgrades: [
                 {
@@ -2030,7 +1992,7 @@ export default {
                         Range: 13,
                         Damage: 1,
                     },
-                    Title: "Endurance",
+                    Title: 'Endurance',
                     Cost: 350,
                 },
                 {
@@ -2051,13 +2013,13 @@ export default {
                         Range: 14,
                         Damage: 5,
                     },
-                    Title: "Subarctic Warmth",
+                    Title: 'Subarctic Warmth',
                     Cost: 600,
                 },
                 {
                     Image: 3354970959,
                     Stats: {
-                        Extras: ["Defense reducing"],
+                        Extras: ['Defense reducing'],
                         Attributes: {
                             MaxFreezeTime: 0.4,
                             DefenseMelt: 5,
@@ -2072,13 +2034,13 @@ export default {
                         Range: 14,
                         Damage: 15,
                     },
-                    Title: "Improved Armor",
+                    Title: 'Improved Armor',
                     Cost: 1500,
                 },
                 {
                     Image: 3354972102,
                     Stats: {
-                        Extras: ["Longer freeze"],
+                        Extras: ['Longer freeze'],
                         Attributes: {
                             MaxFreezeTime: 0.8,
                             DefenseMelt: 5,
@@ -2093,13 +2055,13 @@ export default {
                         Range: 14,
                         Damage: 18,
                     },
-                    Title: "Hyper Icer Rifle",
+                    Title: 'Hyper Icer Rifle',
                     Cost: 3000,
                 },
                 {
                     Image: 3280084231,
                     Stats: {
-                        Extras: ["Longer freeze"],
+                        Extras: ['Longer freeze'],
                         Attributes: {
                             MaxFreezeTime: 1.2,
                             DefenseMelt: 5,
@@ -2114,7 +2076,7 @@ export default {
                         Range: 18,
                         Damage: 35,
                     },
-                    Title: "Subzero Hero",
+                    Title: 'Subzero Hero',
                     Cost: 6500,
                 },
             ],
@@ -2153,7 +2115,7 @@ export default {
                         Range: 5,
                         Damage: 3,
                     },
-                    Title: "Warrior Armor",
+                    Title: 'Warrior Armor',
                     Cost: 250,
                 },
                 {
@@ -2174,7 +2136,7 @@ export default {
                         Range: 5,
                         Damage: 5,
                     },
-                    Title: "Dangersense",
+                    Title: 'Dangersense',
                     Cost: 500,
                 },
                 {
@@ -2195,7 +2157,7 @@ export default {
                         Range: 5,
                         Damage: 10,
                     },
-                    Title: "Extra Protection",
+                    Title: 'Extra Protection',
                     Cost: 1500,
                 },
                 {
@@ -2216,7 +2178,7 @@ export default {
                         Range: 5,
                         Damage: 25,
                     },
-                    Title: "Illumina",
+                    Title: 'Illumina',
                     Cost: 2500,
                 },
                 {
@@ -2237,7 +2199,7 @@ export default {
                         Range: 6,
                         Damage: 40,
                     },
-                    Title: "Darkheart Swordsman",
+                    Title: 'Darkheart Swordsman',
                     Cost: 6000,
                 },
             ],
@@ -2268,7 +2230,7 @@ export default {
                         Range: 18,
                         Damage: 4,
                     },
-                    Title: "Improved Handeling",
+                    Title: 'Improved Handeling',
                     Cost: 150,
                 },
                 {
@@ -2281,7 +2243,7 @@ export default {
                         Range: 20,
                         Damage: 6,
                     },
-                    Title: "Experienced",
+                    Title: 'Experienced',
                     Cost: 550,
                 },
                 {
@@ -2294,7 +2256,7 @@ export default {
                         Range: 25,
                         Damage: 16,
                     },
-                    Title: "Better Gear",
+                    Title: 'Better Gear',
                     Cost: 1850,
                 },
                 {
@@ -2307,7 +2269,7 @@ export default {
                         Range: 28,
                         Damage: 36,
                     },
-                    Title: "Zombie Hunter",
+                    Title: 'Zombie Hunter',
                     Cost: 5200,
                 },
             ],
@@ -2326,7 +2288,7 @@ export default {
                 {
                     Stats: { Cooldown: 1, Range: 12 },
                     Image: 0,
-                    Title: "Trained Juggling",
+                    Title: 'Trained Juggling',
                     Cost: 100,
                 },
                 {
@@ -2337,7 +2299,7 @@ export default {
                         Damage: 5,
                     },
                     Image: 0,
-                    Title: "Cold Humor",
+                    Title: 'Cold Humor',
                     Cost: 650,
                 },
                 {
@@ -2348,7 +2310,7 @@ export default {
                         Damage: 10,
                     },
                     Image: 0,
-                    Title: "Potent Bombs",
+                    Title: 'Potent Bombs',
                     Cost: 2100,
                 },
                 {
@@ -2362,7 +2324,7 @@ export default {
                         Damage: 24,
                     },
                     Image: 0,
-                    Title: "Harlequin of Doom",
+                    Title: 'Harlequin of Doom',
                     Cost: 6000,
                 },
             ],
@@ -2397,7 +2359,7 @@ export default {
                 },
                 Abilities: [
                     {
-                        Name: "Equip Bombs",
+                        Name: 'Equip Bombs',
                         Debounce: 5,
                         Price: 0,
                         Level: 0,
@@ -2411,7 +2373,7 @@ export default {
             },
         },
     },
-    "Mecha Base": {
+    'Mecha Base': {
         Default: {
             Upgrades: [
                 {
@@ -2420,7 +2382,7 @@ export default {
                         Extras: [],
                         Attributes: {
                             SpawnTime: 40,
-                            UnitToSend: "Mark1Rocket",
+                            UnitToSend: 'Mark1Rocket',
                         },
                         Detections: {
                             Flying: false,
@@ -2431,14 +2393,14 @@ export default {
                         Range: 3,
                         Damage: 0,
                     },
-                    Title: "Mechanics",
+                    Title: 'Mechanics',
                     Cost: 400,
                 },
                 {
                     Image: 4119547593,
                     Stats: {
                         Extras: [],
-                        Attributes: { SpawnTime: 40, UnitToSend: "Mark2" },
+                        Attributes: { SpawnTime: 40, UnitToSend: 'Mark2' },
                         Detections: {
                             Flying: false,
                             Hidden: false,
@@ -2448,14 +2410,14 @@ export default {
                         Range: 3,
                         Damage: 0,
                     },
-                    Title: "Missile Launcher",
+                    Title: 'Missile Launcher',
                     Cost: 900,
                 },
                 {
                     Image: 4119548000,
                     Stats: {
                         Extras: [],
-                        Attributes: { SpawnTime: 40, UnitToSend: "Mark3" },
+                        Attributes: { SpawnTime: 40, UnitToSend: 'Mark3' },
                         Detections: {
                             Flying: false,
                             Hidden: false,
@@ -2465,14 +2427,14 @@ export default {
                         Range: 3,
                         Damage: 0,
                     },
-                    Title: "Minigun Mech",
+                    Title: 'Minigun Mech',
                     Cost: 2400,
                 },
                 {
                     Image: 4119548431,
                     Stats: {
                         Extras: [],
-                        Attributes: { SpawnTime: 40, UnitToSend: "Mark4" },
+                        Attributes: { SpawnTime: 40, UnitToSend: 'Mark4' },
                         Detections: {
                             Flying: false,
                             Hidden: false,
@@ -2482,14 +2444,14 @@ export default {
                         Range: 3,
                         Damage: 0,
                     },
-                    Title: "Destroyer Mech",
+                    Title: 'Destroyer Mech',
                     Cost: 4500,
                 },
                 {
                     Image: 4119548907,
                     Stats: {
                         Extras: [],
-                        Attributes: { SpawnTime: 40, UnitToSend: "Mark5" },
+                        Attributes: { SpawnTime: 40, UnitToSend: 'Mark5' },
                         Detections: {
                             Flying: false,
                             Hidden: false,
@@ -2499,7 +2461,7 @@ export default {
                         Range: 3,
                         Damage: 0,
                     },
-                    Title: "Void Walker",
+                    Title: 'Void Walker',
                     Cost: 6500,
                 },
             ],
@@ -2508,7 +2470,7 @@ export default {
                 Detections: { Flying: false, Hidden: false, Lead: false },
                 Range: 3,
                 Price: 5000,
-                Attributes: { SpawnTime: 60, UnitToSend: "Mark1" },
+                Attributes: { SpawnTime: 60, UnitToSend: 'Mark1' },
                 Cooldown: 0.5,
                 Damage: 0,
             },
@@ -2531,13 +2493,13 @@ export default {
                         Range: 11,
                         Damage: 3,
                     },
-                    Title: "Medical Precautions",
+                    Title: 'Medical Precautions',
                     Cost: 400,
                 },
                 {
                     Image: 4119547593,
                     Stats: {
-                        Extras: ["Increased healings"],
+                        Extras: ['Increased healings'],
                         Attributes: { Healing: 5 },
                         Detections: {
                             Flying: false,
@@ -2548,7 +2510,7 @@ export default {
                         Range: 12,
                         Damage: 6,
                     },
-                    Title: "Prescribed Vitamins",
+                    Title: 'Prescribed Vitamins',
                     Cost: 900,
                 },
                 {
@@ -2565,13 +2527,13 @@ export default {
                         Range: 15,
                         Damage: 6,
                     },
-                    Title: "BIG BRAIN",
+                    Title: 'BIG BRAIN',
                     Cost: 2400,
                 },
                 {
                     Image: 4119548431,
                     Stats: {
-                        Extras: ["Increased healing"],
+                        Extras: ['Increased healing'],
                         Attributes: { Healing: 5 },
                         Detections: {
                             Flying: false,
@@ -2582,7 +2544,7 @@ export default {
                         Range: 16,
                         Damage: 8,
                     },
-                    Title: "Medical Pack",
+                    Title: 'Medical Pack',
                     Cost: 4500,
                 },
                 {
@@ -2599,7 +2561,7 @@ export default {
                         Range: 18,
                         Damage: 8,
                     },
-                    Title: "Goddess of Healing",
+                    Title: 'Goddess of Healing',
                     Cost: 6500,
                 },
             ],
@@ -2630,7 +2592,7 @@ export default {
                         Range: 17,
                         Damage: 1,
                     },
-                    Title: "Radio Comms",
+                    Title: 'Radio Comms',
                     Cost: 250,
                 },
                 {
@@ -2647,7 +2609,7 @@ export default {
                         Range: 17,
                         Damage: 2,
                     },
-                    Title: "Bigger Rifle",
+                    Title: 'Bigger Rifle',
                     Cost: 1500,
                 },
                 {
@@ -2664,7 +2626,7 @@ export default {
                         Range: 19,
                         Damage: 4,
                     },
-                    Title: "Upskill",
+                    Title: 'Upskill',
                     Cost: 3500,
                 },
                 {
@@ -2681,7 +2643,7 @@ export default {
                         Range: 21,
                         Damage: 7,
                     },
-                    Title: "Stealth Mercenary",
+                    Title: 'Stealth Mercenary',
                     Cost: 7500,
                 },
             ],
@@ -2694,14 +2656,14 @@ export default {
             },
         },
     },
-    "Military Base": {
+    'Military Base': {
         Default: {
             Upgrades: [
                 {
                     Image: 3877874591,
                     Stats: {
-                        Extras: ["Faster spawn time"],
-                        Attributes: { SpawnTime: 40, UnitToSend: "Humvee" },
+                        Extras: ['Faster spawn time'],
+                        Attributes: { SpawnTime: 40, UnitToSend: 'Humvee' },
                         Detections: {
                             Flying: false,
                             Hidden: false,
@@ -2711,14 +2673,14 @@ export default {
                         Range: 0,
                         Damage: 0,
                     },
-                    Title: "Mechanics",
+                    Title: 'Mechanics',
                     Cost: 200,
                 },
                 {
                     Image: 3877875003,
                     Stats: {
-                        Extras: ["More health"],
-                        Attributes: { SpawnTime: 40, UnitToSend: "Humvee 2" },
+                        Extras: ['More health'],
+                        Attributes: { SpawnTime: 40, UnitToSend: 'Humvee 2' },
                         Detections: {
                             Flying: false,
                             Hidden: false,
@@ -2728,14 +2690,14 @@ export default {
                         Range: 0,
                         Damage: 0,
                     },
-                    Title: "Barbed Wire",
+                    Title: 'Barbed Wire',
                     Cost: 400,
                 },
                 {
                     Image: 3877873543,
                     Stats: {
-                        Extras: ["Gunner"],
-                        Attributes: { SpawnTime: 40, UnitToSend: "Humvee 3" },
+                        Extras: ['Gunner'],
+                        Attributes: { SpawnTime: 40, UnitToSend: 'Humvee 3' },
                         Detections: {
                             Flying: false,
                             Hidden: false,
@@ -2745,18 +2707,18 @@ export default {
                         Range: 0,
                         Damage: 0,
                     },
-                    Title: "Mounted Gunner",
+                    Title: 'Mounted Gunner',
                     Cost: 1200,
                 },
                 {
                     Image: 3444568329,
                     Stats: {
                         Extras: [
-                            "More health",
-                            "More damage",
-                            "Explosive shells",
+                            'More health',
+                            'More damage',
+                            'Explosive shells',
                         ],
-                        Attributes: { SpawnTime: 40, UnitToSend: "Tank" },
+                        Attributes: { SpawnTime: 40, UnitToSend: 'Tank' },
                         Detections: {
                             Flying: false,
                             Hidden: false,
@@ -2766,20 +2728,20 @@ export default {
                         Range: 0,
                         Damage: 0,
                     },
-                    Title: "Tank",
+                    Title: 'Tank',
                     Cost: 6000,
                 },
                 {
                     Image: 3444568580,
                     Stats: {
                         Extras: [
-                            "More health",
-                            "More damage",
-                            "Stronger explosions",
+                            'More health',
+                            'More damage',
+                            'Stronger explosions',
                         ],
                         Attributes: {
                             SpawnTime: 40,
-                            UnitToSend: "Railgun Tank",
+                            UnitToSend: 'Railgun Tank',
                         },
                         Detections: {
                             Flying: false,
@@ -2790,12 +2752,12 @@ export default {
                         Range: 0,
                         Damage: 0,
                     },
-                    Title: "Railgun Tank",
+                    Title: 'Railgun Tank',
                     Cost: 26000,
                 },
             ],
             Defaults: {
-                Attributes: { SpawnTime: 60, UnitToSend: "Humvee" },
+                Attributes: { SpawnTime: 60, UnitToSend: 'Humvee' },
                 Detections: { Flying: false, Hidden: false, Lead: false },
                 Range: 0,
                 Price: 400,
@@ -2811,7 +2773,7 @@ export default {
                 {
                     Image: 5523183082,
                     Stats: {
-                        Extras: ["Faster Rev Time (1.4)"],
+                        Extras: ['Faster Rev Time (1.4)'],
                         Attributes: { RevTime: 1.4 },
                         Detections: {
                             Flying: false,
@@ -2822,13 +2784,13 @@ export default {
                         Range: 15,
                         Damage: 2,
                     },
-                    Title: "Improved Handling",
+                    Title: 'Improved Handling',
                     Cost: 400,
                 },
                 {
                     Image: 5523183560,
                     Stats: {
-                        Extras: ["Faster Rev Time (1.3)"],
+                        Extras: ['Faster Rev Time (1.3)'],
                         Attributes: { RevTime: 1.3 },
                         Detections: {
                             Flying: false,
@@ -2840,7 +2802,7 @@ export default {
                         Damage: 3,
                         Hidden: true,
                     },
-                    Title: "Specialized Tech",
+                    Title: 'Specialized Tech',
                     Cost: 2000,
                 },
                 {
@@ -2853,20 +2815,20 @@ export default {
                         Range: 16,
                         Damage: 5,
                     },
-                    Title: "Geared Up",
+                    Title: 'Geared Up',
                     Cost: 5000,
                 },
                 {
                     Image: 5523184267,
                     Stats: {
-                        Extras: ["Faster Rev Time (1.2)"],
+                        Extras: ['Faster Rev Time (1.2)'],
                         Attributes: { RevTime: 1.2 },
                         Detections: { Flying: false, Hidden: true, Lead: true },
                         Cooldown: 0.1,
                         Range: 18,
                         Damage: 10,
                     },
-                    Title: "Death Machine",
+                    Title: 'Death Machine',
                     Cost: 10000,
                 },
             ],
@@ -2884,7 +2846,7 @@ export default {
                 {
                     Image: 5523183082,
                     Stats: {
-                        Extras: ["Faster Rev Time (1.4)"],
+                        Extras: ['Faster Rev Time (1.4)'],
                         Attributes: { RevTime: 1.4 },
                         Detections: {
                             Flying: false,
@@ -2895,13 +2857,13 @@ export default {
                         Range: 15,
                         Damage: 3,
                     },
-                    Title: "Improved Handling",
+                    Title: 'Improved Handling',
                     Cost: 650,
                 },
                 {
                     Image: 5523183560,
                     Stats: {
-                        Extras: ["Faster Rev Time (1.3)"],
+                        Extras: ['Faster Rev Time (1.3)'],
                         Attributes: { RevTime: 1.3 },
                         Detections: {
                             Flying: false,
@@ -2912,7 +2874,7 @@ export default {
                         Range: 17,
                         Damage: 4,
                     },
-                    Title: "Thermal Vision",
+                    Title: 'Thermal Vision',
                     Cost: 2000,
                 },
                 {
@@ -2925,15 +2887,15 @@ export default {
                         Range: 17,
                         Damage: 8,
                     },
-                    Title: "High-Tech Armory",
+                    Title: 'High-Tech Armory',
                     Cost: 8750,
                 },
                 {
                     Image: 5523184267,
                     Stats: {
                         Extras: [
-                            "Faster Rev Time (1.2)",
-                            "Fires 24K cartridges at 10,000 RPM",
+                            'Faster Rev Time (1.2)',
+                            'Fires 24K cartridges at 10,000 RPM',
                         ],
                         Attributes: { RevTime: 1.2 },
                         Detections: {
@@ -2945,7 +2907,7 @@ export default {
                         Range: 19,
                         Damage: 14,
                     },
-                    Title: "24 Karat Gatling Gun",
+                    Title: '24 Karat Gatling Gun',
                     Cost: 12500,
                 },
             ],
@@ -2978,7 +2940,7 @@ export default {
                         Damage: 12,
                     },
                     Image: 4538447265,
-                    Title: "Improved Handling",
+                    Title: 'Improved Handling',
                     Cost: 600,
                 },
                 {
@@ -2991,13 +2953,13 @@ export default {
                             ExplosionRadius: 6.5,
                         },
                         Range: 24,
-                        Extras: ["Larger Explosion"],
+                        Extras: ['Larger Explosion'],
                         Detections: { Flying: true, Hidden: false, Lead: true },
                         Cooldown: 4,
                         Damage: 24,
                     },
                     Image: 4538447347,
-                    Title: "Upgraded Armaments",
+                    Title: 'Upgraded Armaments',
                     Cost: 1300,
                 },
                 {
@@ -3016,7 +2978,7 @@ export default {
                         Damage: 55,
                     },
                     Image: 4538447424,
-                    Title: "Bigger Cannon",
+                    Title: 'Bigger Cannon',
                     Cost: 3200,
                 },
                 {
@@ -3029,13 +2991,13 @@ export default {
                             ExplosionRadius: 6.5,
                         },
                         Range: 30,
-                        Extras: ["Cluster Bombs (30 Damage)"],
+                        Extras: ['Cluster Bombs (30 Damage)'],
                         Detections: { Flying: true, Hidden: false, Lead: true },
                         Cooldown: 3.5,
                         Damage: 125,
                     },
                     Image: 4538447493,
-                    Title: "Loaded Warhead",
+                    Title: 'Loaded Warhead',
                     Cost: 8500,
                 },
                 {
@@ -3049,16 +3011,16 @@ export default {
                         },
                         Range: 35,
                         Extras: [
-                            "Even Larger Explosion",
-                            "Stronger Cluster Bombs (50 Damage)",
-                            "Mushroom Cloud",
+                            'Even Larger Explosion',
+                            'Stronger Cluster Bombs (50 Damage)',
+                            'Mushroom Cloud',
                         ],
                         Detections: { Flying: true, Hidden: false, Lead: true },
                         Cooldown: 3.5,
                         Damage: 250,
                     },
                     Image: 4538447579,
-                    Title: "City Buster",
+                    Title: 'City Buster',
                     Cost: 20000,
                 },
             ],
@@ -3079,6 +3041,108 @@ export default {
             },
         },
     },
+    Necromancer: {
+        Default: {
+            Upgrades: [
+                {
+                    Stats: {
+                        Extras: ['Magic pierces (3)'],
+                        Attributes: { MaxHits: 3 },
+                        Damage: 10,
+                    },
+                    Image: 15332519996,
+                    Title: 'Dark Magic',
+                    Cost: 750,
+                },
+                {
+                    Stats: {
+                        Extras: [
+                            'Spawn Count: 2 -> 3',
+                            "Spawns 'Sword Skeletons'",
+                        ],
+                        Cooldown: 1,
+                        Attributes: { SpawnCount: 3 },
+                    },
+                    Image: 15332520691,
+                    Title: 'Armed Skeletons',
+                    Cost: 2000,
+                },
+                {
+                    Stats: {
+                        Extras: [
+                            'Unlocks lv. 2 gravestone',
+                            "Spawns 'Giant Skeletons'",
+                            "Spawns 'Skeleton Knights'",
+                        ],
+                        Attributes: { Max_Grave_Level: 2 },
+                        Range: 18,
+                        Damage: 25,
+                    },
+                    Image: 15332520335,
+                    Title: 'Corpse Manipulation',
+                    Cost: 10000,
+                },
+                {
+                    Stats: {
+                        Extras: [
+                            'Unlocks lv. 3 gravestone',
+                            "Spawns x1 'Executioner Skeleton'",
+                            "Spawns 'Hallow Guards'",
+                            'Steals Souls',
+                            'Gravestones Explode (75 DMG)',
+                        ],
+                        Cooldown: 0.3,
+                        Attributes: {
+                            MaxHits: 4,
+                            Max_Grave_Level: 3,
+                            SpawnCount: 3,
+                        },
+                        Damage: 15,
+                    },
+                    Image: 15332519505,
+                    Title: 'The Darkhold',
+                    Cost: 30000,
+                },
+            ],
+            Defaults: {
+                Range: 16,
+                Detections: { Flying: true, Hidden: true, Lead: false },
+                Abilities: [
+                    {
+                        Name: 'Raise The Dead',
+                        Debounce: 5,
+                        Price: 0,
+                        Level: 0,
+                        Icon: 15229477810,
+                    },
+                ],
+                Limit: 3,
+                Price: 2250,
+                Attributes: {
+                    Max_Graves: 6,
+                    SpawnCount: 2,
+                    MaxHits: 1,
+                    Summon_Delay: 1.33,
+                    BuildTime: 1.5,
+                    ExplosionRadius: 1.5,
+                    Buildzone: 8,
+                    BuildDelay: 0.85,
+                    BookAim: 0.8,
+                    Summon_Debounce: 3,
+                    SlowTime: 1,
+                    ProjectileSpeed: 50,
+                    MustAim: true,
+                    BookDebounce: 0.76,
+                    MaxAmmo: 30,
+                    Max_Grave_Level: 1,
+                    Grave_Cooldown: 2,
+                    ExplosionDamage: 75,
+                },
+                Cooldown: 1.5,
+                Damage: 8,
+            },
+        },
+    },
     Paintballer: {
         Default: {
             Upgrades: [
@@ -3096,13 +3160,13 @@ export default {
                         Range: 13,
                         Damage: 2,
                     },
-                    Title: "Paintball Gear",
+                    Title: 'Paintball Gear',
                     Cost: 100,
                 },
                 {
                     Image: 3319083300,
                     Stats: {
-                        Extras: ["Larger splash"],
+                        Extras: ['Larger splash'],
                         Attributes: { ExplosiveRange: 3 },
                         Detections: {
                             Flying: false,
@@ -3113,7 +3177,7 @@ export default {
                         Range: 13,
                         Damage: 3,
                     },
-                    Title: "Shoulder Pads",
+                    Title: 'Shoulder Pads',
                     Cost: 500,
                 },
                 {
@@ -3130,13 +3194,13 @@ export default {
                         Range: 15,
                         Damage: 3,
                     },
-                    Title: "Double Barrel Gun",
+                    Title: 'Double Barrel Gun',
                     Cost: 700,
                 },
                 {
                     Image: 3319084508,
                     Stats: {
-                        Extras: ["Larger splash"],
+                        Extras: ['Larger splash'],
                         Attributes: { ExplosiveRange: 4 },
                         Detections: {
                             Flying: false,
@@ -3147,13 +3211,13 @@ export default {
                         Range: 15,
                         Damage: 5,
                     },
-                    Title: "Competitive Gear",
+                    Title: 'Competitive Gear',
                     Cost: 2500,
                 },
                 {
                     Image: 3319085582,
                     Stats: {
-                        Extras: ["Larger splash"],
+                        Extras: ['Larger splash'],
                         Attributes: { ExplosiveRange: 5 },
                         Detections: {
                             Flying: false,
@@ -3164,7 +3228,7 @@ export default {
                         Range: 15,
                         Damage: 10,
                     },
-                    Title: "Paintball Champion",
+                    Title: 'Paintball Champion',
                     Cost: 3500,
                 },
             ],
@@ -3199,16 +3263,16 @@ export default {
                         Range: 8,
                         Damage: 3,
                     },
-                    Title: "Armor Penetration",
+                    Title: 'Armor Penetration',
                     Cost: 900,
                 },
                 {
                     Image: 5528331895,
                     Stats: {
                         Extras: [
-                            "Missile Launcher",
-                            "30 Damage (2 Burst)",
-                            "7 second reload",
+                            'Missile Launcher',
+                            '30 Damage (2 Burst)',
+                            '7 second reload',
                         ],
                         Attributes: {
                             MissileCooldown: 6,
@@ -3224,13 +3288,13 @@ export default {
                         Range: 9.5,
                         Damage: 3,
                     },
-                    Title: "Missiles",
+                    Title: 'Missiles',
                     Cost: 1650,
                 },
                 {
                     Image: 5528336509,
                     Stats: {
-                        Extras: ["Faster Missile reload"],
+                        Extras: ['Faster Missile reload'],
                         Attributes: {
                             MissileCooldown: 6,
                             MissileAmount: 2,
@@ -3245,13 +3309,13 @@ export default {
                         Range: 10.5,
                         Damage: 4,
                     },
-                    Title: "Tri-Barrel Minigun",
+                    Title: 'Tri-Barrel Minigun',
                     Cost: 4500,
                 },
                 {
                     Image: 5528337682,
                     Stats: {
-                        Extras: ["More missiles"],
+                        Extras: ['More missiles'],
                         Attributes: {
                             MissileCooldown: 6,
                             MissileAmount: 4,
@@ -3266,13 +3330,13 @@ export default {
                         Range: 10.5,
                         Damage: 7,
                     },
-                    Title: "Huey",
+                    Title: 'Huey',
                     Cost: 10000,
                 },
                 {
                     Image: 5528341233,
                     Stats: {
-                        Extras: ["More missiles"],
+                        Extras: ['More missiles'],
                         Attributes: {
                             MissileCooldown: 6,
                             MissileAmount: 6,
@@ -3287,7 +3351,7 @@ export default {
                         Range: 12,
                         Damage: 12,
                     },
-                    Title: "Space Defense",
+                    Title: 'Space Defense',
                     Cost: 25000,
                 },
             ],
@@ -3316,7 +3380,7 @@ export default {
                 {
                     Image: 3280081327,
                     Stats: {
-                        Extras: ["More range", "Bigger flames"],
+                        Extras: ['More range', 'Bigger flames'],
                         Attributes: {
                             BurnDamage: 1,
                             EnemyBuff: 0,
@@ -3335,7 +3399,7 @@ export default {
                         Range: 9,
                         Damage: 1,
                     },
-                    Title: "Improved Handling",
+                    Title: 'Improved Handling',
                     Cost: 400,
                 },
                 {
@@ -3356,16 +3420,16 @@ export default {
                         Range: 9,
                         Damage: 2,
                     },
-                    Title: "Fire Fighting",
+                    Title: 'Fire Fighting',
                     Cost: 950,
                 },
                 {
                     Image: 3304823988,
                     Stats: {
                         Extras: [
-                            "More burn damage",
-                            "Longer burn time",
-                            "Defense Melting",
+                            'More burn damage',
+                            'Longer burn time',
+                            'Defense Melting',
                         ],
                         Attributes: {
                             BurnDamage: 2,
@@ -3381,13 +3445,13 @@ export default {
                         Range: 10,
                         Damage: 2,
                     },
-                    Title: "Fire Hazard",
+                    Title: 'Fire Hazard',
                     Cost: 2200,
                 },
                 {
                     Image: 3304824958,
                     Stats: {
-                        Extras: ["More fire damage", "Longer burn time"],
+                        Extras: ['More fire damage', 'Longer burn time'],
                         Attributes: {
                             BurnDamage: 4,
                             EnemyBuff: 0,
@@ -3402,17 +3466,17 @@ export default {
                         Range: 10,
                         Damage: 2,
                     },
-                    Title: "Napalm Thrower",
+                    Title: 'Napalm Thrower',
                     Cost: 3800,
                 },
                 {
                     Image: 3304825822,
                     Stats: {
                         Extras: [
-                            "More burn damage",
-                            "Longer burn time",
-                            "More defense melting",
-                            "Bigger flames",
+                            'More burn damage',
+                            'Longer burn time',
+                            'More defense melting',
+                            'Bigger flames',
                         ],
                         Attributes: {
                             BurnDamage: 8,
@@ -3428,7 +3492,7 @@ export default {
                         Range: 12,
                         Damage: 3,
                     },
-                    Title: "Pyromaniac",
+                    Title: 'Pyromaniac',
                     Cost: 8000,
                 },
             ],
@@ -3454,7 +3518,7 @@ export default {
                 {
                     Image: 3280081327,
                     Stats: {
-                        Extras: ["More range", "Bigger flames"],
+                        Extras: ['More range', 'Bigger flames'],
                         Attributes: {
                             BurnDamage: 1,
                             EnemyBuff: 0,
@@ -3469,13 +3533,13 @@ export default {
                         Range: 9,
                         Damage: 1,
                     },
-                    Title: "Better Handling",
+                    Title: 'Better Handling',
                     Cost: 350,
                 },
                 {
                     Image: 3304823121,
                     Stats: {
-                        Extras: ["Stronger Flames"],
+                        Extras: ['Stronger Flames'],
                         Attributes: {
                             BurnDamage: 2,
                             EnemyBuff: 0,
@@ -3490,16 +3554,16 @@ export default {
                         Range: 10,
                         Damage: 2,
                     },
-                    Title: "Golden Flare",
+                    Title: 'Golden Flare',
                     Cost: 750,
                 },
                 {
                     Image: 3304823988,
                     Stats: {
                         Extras: [
-                            "More burn damage",
-                            "Longer burn time",
-                            "Defense Melting",
+                            'More burn damage',
+                            'Longer burn time',
+                            'Defense Melting',
                         ],
                         Attributes: {
                             BurnDamage: 3,
@@ -3515,17 +3579,17 @@ export default {
                         Range: 10,
                         Damage: 3,
                     },
-                    Title: "Ring Of Fire",
+                    Title: 'Ring Of Fire',
                     Cost: 1500,
                 },
                 {
                     Image: 3304824958,
                     Stats: {
                         Extras: [
-                            "More fire damage",
-                            "Longer burn time",
-                            "Better tick speed",
-                            "More Defense Melting",
+                            'More fire damage',
+                            'Longer burn time',
+                            'Better tick speed',
+                            'More Defense Melting',
                         ],
                         Attributes: {
                             BurnDamage: 6,
@@ -3541,16 +3605,16 @@ export default {
                         Range: 10,
                         Damage: 4,
                     },
-                    Title: "Gilded Arsonist",
+                    Title: 'Gilded Arsonist',
                     Cost: 6000,
                 },
                 {
                     Image: 3304825822,
                     Stats: {
                         Extras: [
-                            "More burn damage",
-                            "Longer burn time",
-                            "Bigger flames",
+                            'More burn damage',
+                            'Longer burn time',
+                            'Bigger flames',
                         ],
                         Attributes: {
                             BurnDamage: 8,
@@ -3606,14 +3670,14 @@ export default {
                         Range: 50,
                         Damage: 80,
                     },
-                    Title: "Quicker Reload",
+                    Title: 'Quicker Reload',
                     Cost: 1500,
                 },
                 {
                     Image: 3381734408,
                     Stats: {
                         Extras: [
-                            "Nearby Towers get a small range boost at the start of waves (20s)",
+                            'Nearby Towers get a small range boost at the start of waves (20s)',
                         ],
                         Attributes: {
                             ExplosionDamage: 0,
@@ -3626,7 +3690,7 @@ export default {
                         Range: 50,
                         Damage: 140,
                     },
-                    Title: "Intelligence Radio",
+                    Title: 'Intelligence Radio',
                     Cost: 4500,
                 },
                 {
@@ -3644,16 +3708,16 @@ export default {
                         Range: 50,
                         Damage: 300,
                     },
-                    Title: "Trained Outlaw",
+                    Title: 'Trained Outlaw',
                     Cost: 17000,
                 },
                 {
                     Image: 3381735846,
                     Stats: {
                         Extras: [
-                            "Impact Explosion",
-                            "125 Damage (Stacks w/ Base damage)",
-                            "3 Hit Limit",
+                            'Impact Explosion',
+                            '125 Damage (Stacks w/ Base damage)',
+                            '3 Hit Limit',
                         ],
                         Attributes: {
                             ExplosionDamage: 125,
@@ -3666,7 +3730,7 @@ export default {
                         Range: 50,
                         Damage: 1125,
                     },
-                    Title: "Experimental Weapon of Destruction",
+                    Title: 'Experimental Weapon of Destruction',
                     Cost: 35000,
                 },
             ],
@@ -3703,7 +3767,7 @@ export default {
                         Range: 22,
                         Damage: 25,
                     },
-                    Title: "Faster Reloading",
+                    Title: 'Faster Reloading',
                     Cost: 300,
                 },
                 {
@@ -3720,33 +3784,33 @@ export default {
                         Range: 25,
                         Damage: 55,
                     },
-                    Title: "Direct Hit",
+                    Title: 'Direct Hit',
                     Cost: 800,
                 },
                 {
                     Image: 5523200004,
                     Stats: {
-                        Extras: ["Larger explosion"],
+                        Extras: ['Larger explosion'],
                         Attributes: { Deadzone: 12, ExplosionRadius: 3.5 },
                         Detections: { Flying: false, Hidden: true, Lead: true },
                         Cooldown: 3.5,
                         Range: 25,
                         Damage: 100,
                     },
-                    Title: "Explosive Risks",
+                    Title: 'Explosive Risks',
                     Cost: 6500,
                 },
                 {
                     Image: 5523202707,
                     Stats: {
-                        Extras: ["Larger explosion"],
+                        Extras: ['Larger explosion'],
                         Attributes: { Deadzone: 12, ExplosionRadius: 4 },
                         Detections: { Flying: false, Hidden: true, Lead: true },
                         Cooldown: 3.5,
                         Range: 28,
                         Damage: 225,
                     },
-                    Title: "Artillery Cannon",
+                    Title: 'Artillery Cannon',
                     Cost: 18000,
                 },
             ],
@@ -3778,7 +3842,7 @@ export default {
                         Range: 12,
                         Damage: 1,
                     },
-                    Title: "Faster Reloading",
+                    Title: 'Faster Reloading',
                     Cost: 50,
                 },
                 {
@@ -3795,7 +3859,7 @@ export default {
                         Range: 14,
                         Damage: 2,
                     },
-                    Title: "Precise Aiming",
+                    Title: 'Precise Aiming',
                     Cost: 300,
                 },
                 {
@@ -3812,7 +3876,7 @@ export default {
                         Range: 14,
                         Damage: 4,
                     },
-                    Title: "Stronger Equipment",
+                    Title: 'Stronger Equipment',
                     Cost: 800,
                 },
                 {
@@ -3829,7 +3893,7 @@ export default {
                         Range: 16,
                         Damage: 4,
                     },
-                    Title: "Double Tap",
+                    Title: 'Double Tap',
                     Cost: 2000,
                 },
             ],
@@ -3857,7 +3921,7 @@ export default {
                         Range: 14,
                         Damage: 3,
                     },
-                    Title: "Higher Caliber",
+                    Title: 'Higher Caliber',
                     Cost: 125,
                 },
                 {
@@ -3874,7 +3938,7 @@ export default {
                         Range: 16,
                         Damage: 4,
                     },
-                    Title: "Precise Aiming",
+                    Title: 'Precise Aiming',
                     Cost: 500,
                 },
                 {
@@ -3891,7 +3955,7 @@ export default {
                         Range: 16,
                         Damage: 10,
                     },
-                    Title: "Double Tap",
+                    Title: 'Double Tap',
                     Cost: 1500,
                 },
                 {
@@ -3908,7 +3972,7 @@ export default {
                         Range: 18,
                         Damage: 15,
                     },
-                    Title: "Golden Deagle",
+                    Title: 'Golden Deagle',
                     Cost: 4000,
                 },
             ],
@@ -3938,13 +4002,13 @@ export default {
                         Range: 7,
                         Damage: 2,
                     },
-                    Title: "Faster Reloading",
+                    Title: 'Faster Reloading',
                     Cost: 200,
                 },
                 {
                     Image: 5587697884,
                     Stats: {
-                        Extras: ["8 Shots", "Tighter Spread"],
+                        Extras: ['8 Shots', 'Tighter Spread'],
                         Attributes: { Spread: 60, ShotSize: 8 },
                         Detections: {
                             Flying: false,
@@ -3955,7 +4019,7 @@ export default {
                         Range: 9,
                         Damage: 3,
                     },
-                    Title: "Better Handling",
+                    Title: 'Better Handling',
                     Cost: 1250,
                 },
                 {
@@ -3972,13 +4036,13 @@ export default {
                         Range: 9,
                         Damage: 5,
                     },
-                    Title: "Slug Madness",
+                    Title: 'Slug Madness',
                     Cost: 3500,
                 },
                 {
                     Image: 5587698246,
                     Stats: {
-                        Extras: ["12 Shots", "Tighter Spread"],
+                        Extras: ['12 Shots', 'Tighter Spread'],
                         Attributes: { Spread: 50, ShotSize: 12 },
                         Detections: {
                             Flying: false,
@@ -3989,7 +4053,7 @@ export default {
                         Range: 11,
                         Damage: 6,
                     },
-                    Title: "Tactical Blowback",
+                    Title: 'Tactical Blowback',
                     Cost: 10000,
                 },
             ],
@@ -4025,13 +4089,13 @@ export default {
                         Range: 5,
                         Damage: 4,
                     },
-                    Title: "Thinner Blade",
+                    Title: 'Thinner Blade',
                     Cost: 250,
                 },
                 {
                     Image: 4157647195,
                     Stats: {
-                        Extras: ["Knife throw"],
+                        Extras: ['Knife throw'],
                         Attributes: {
                             KnifeAngles: [0],
                             MaxHits: 3,
@@ -4047,7 +4111,7 @@ export default {
                         Range: 6,
                         Damage: 4,
                     },
-                    Title: "Blood Sense",
+                    Title: 'Blood Sense',
                     Cost: 300,
                 },
                 {
@@ -4069,13 +4133,13 @@ export default {
                         Range: 6,
                         Damage: 6,
                     },
-                    Title: "Dual Wield",
+                    Title: 'Dual Wield',
                     Cost: 1350,
                 },
                 {
                     Image: 4157648765,
                     Stats: {
-                        Extras: ["Triple knife throw"],
+                        Extras: ['Triple knife throw'],
                         Attributes: {
                             KnifeAngles: [0, 15, -15],
                             MaxHits: 3,
@@ -4091,7 +4155,7 @@ export default {
                         Range: 6,
                         Damage: 10,
                     },
-                    Title: "Deadly Assassin",
+                    Title: 'Deadly Assassin',
                     Cost: 3500,
                 },
             ],
@@ -4135,13 +4199,13 @@ export default {
                         Range: 6,
                         Damage: 6,
                     },
-                    Title: "Heavier Swings",
+                    Title: 'Heavier Swings',
                     Cost: 250,
                 },
                 {
                     Image: 141745478,
                     Stats: {
-                        Extras: ["2 max hits."],
+                        Extras: ['2 max hits.'],
                         Attributes: {
                             CanFreeze: false,
                             DefenseMelt: 0,
@@ -4160,13 +4224,13 @@ export default {
                         Range: 6,
                         Damage: 8,
                     },
-                    Title: "Better Sledge",
+                    Title: 'Better Sledge',
                     Cost: 500,
                 },
                 {
                     Image: 4118882122,
                     Stats: {
-                        Extras: ["Freeze enemies on hit."],
+                        Extras: ['Freeze enemies on hit.'],
                         Attributes: {
                             CanFreeze: true,
                             DefenseMelt: 0,
@@ -4185,13 +4249,13 @@ export default {
                         Range: 6,
                         Damage: 15,
                     },
-                    Title: "Freezing Strikes",
+                    Title: 'Freezing Strikes',
                     Cost: 1500,
                 },
                 {
                     Image: 16620737,
                     Stats: {
-                        Extras: ["Frozen enemies take x2 damage."],
+                        Extras: ['Frozen enemies take x2 damage.'],
                         Attributes: {
                             CanFreeze: true,
                             DefenseMelt: 0,
@@ -4210,13 +4274,13 @@ export default {
                         Range: 6,
                         Damage: 35,
                     },
-                    Title: "Ice Breaker",
+                    Title: 'Ice Breaker',
                     Cost: 2500,
                 },
                 {
                     Image: 16868189,
                     Stats: {
-                        Extras: ["4 max hits."],
+                        Extras: ['4 max hits.'],
                         Attributes: {
                             CanFreeze: true,
                             DefenseMelt: 0,
@@ -4235,7 +4299,7 @@ export default {
                         Range: 6,
                         Damage: 50,
                     },
-                    Title: "Arctic Commando",
+                    Title: 'Arctic Commando',
                     Cost: 8500,
                 },
             ],
@@ -4275,7 +4339,7 @@ export default {
                         Range: 26,
                         Damage: 6,
                     },
-                    Title: "Faster Reloading",
+                    Title: 'Faster Reloading',
                     Cost: 150,
                 },
                 {
@@ -4288,7 +4352,7 @@ export default {
                         Range: 26,
                         Damage: 12,
                     },
-                    Title: "Geared Up",
+                    Title: 'Geared Up',
                     Cost: 500,
                 },
                 {
@@ -4301,7 +4365,7 @@ export default {
                         Range: 28,
                         Damage: 20,
                     },
-                    Title: "Frontlines Sniping",
+                    Title: 'Frontlines Sniping',
                     Cost: 1500,
                 },
                 {
@@ -4314,7 +4378,7 @@ export default {
                         Range: 34,
                         Damage: 35,
                     },
-                    Title: "Spec Ops",
+                    Title: 'Spec Ops',
                     Cost: 4500,
                 },
             ],
@@ -4344,7 +4408,7 @@ export default {
                         Range: 15,
                         Damage: 1,
                     },
-                    Title: "Better Vision",
+                    Title: 'Better Vision',
                     Cost: 100,
                 },
                 {
@@ -4361,13 +4425,13 @@ export default {
                         Range: 16,
                         Damage: 2,
                     },
-                    Title: "Better Aiming",
+                    Title: 'Better Aiming',
                     Cost: 500,
                 },
                 {
                     Image: 5523195646,
                     Stats: {
-                        Extras: ["Increased burst (5)"],
+                        Extras: ['Increased burst (5)'],
                         Attributes: { Burst: 5, BurstCool: 1 },
                         Detections: {
                             Flying: false,
@@ -4378,13 +4442,13 @@ export default {
                         Range: 16,
                         Damage: 3,
                     },
-                    Title: "Equipment Upgrades",
+                    Title: 'Equipment Upgrades',
                     Cost: 1500,
                 },
                 {
                     Image: 5523196519,
                     Stats: {
-                        Extras: ["Increased burst (7)"],
+                        Extras: ['Increased burst (7)'],
                         Attributes: { Burst: 7, BurstCool: 1 },
                         Detections: {
                             Flying: false,
@@ -4395,7 +4459,7 @@ export default {
                         Range: 18,
                         Damage: 6,
                     },
-                    Title: "Deadliest Soldier",
+                    Title: 'Deadliest Soldier',
                     Cost: 3500,
                 },
             ],
@@ -4424,39 +4488,39 @@ export default {
                         Range: 16,
                         Damage: 2,
                     },
-                    Title: "Trigger Finger",
+                    Title: 'Trigger Finger',
                     Cost: 125,
                 },
                 {
                     Image: 5523193619,
                     Stats: {
-                        Extras: ["Increased burst (5)"],
+                        Extras: ['Increased burst (5)'],
                         Attributes: { Burst: 5, BurstCool: 1.2 },
                         Detections: { Flying: true, Hidden: true, Lead: false },
                         Cooldown: 0.15,
                         Range: 17,
                         Damage: 3,
                     },
-                    Title: "Better Aiming",
+                    Title: 'Better Aiming',
                     Cost: 750,
                 },
                 {
                     Image: 5523195646,
                     Stats: {
-                        Extras: ["Increased burst (8)"],
+                        Extras: ['Increased burst (8)'],
                         Attributes: { Burst: 8, BurstCool: 1.2 },
                         Detections: { Flying: true, Hidden: true, Lead: false },
                         Cooldown: 0.1,
                         Range: 17,
                         Damage: 5,
                     },
-                    Title: "Equipment Upgrades",
+                    Title: 'Equipment Upgrades',
                     Cost: 2500,
                 },
                 {
                     Image: 5523196519,
                     Stats: {
-                        Extras: ["Increased burst (12)"],
+                        Extras: ['Increased burst (12)'],
                         Attributes: { Burst: 12, BurstCool: 1.2 },
                         Detections: { Flying: true, Hidden: true, Lead: false },
                         Cooldown: 0.076,
@@ -4499,7 +4563,7 @@ export default {
                         Range: 12,
                         Damage: 1,
                     },
-                    Title: "Aggressive Bees",
+                    Title: 'Aggressive Bees',
                     Cost: 250,
                 },
                 {
@@ -4521,7 +4585,7 @@ export default {
                         Range: 16,
                         Damage: 1,
                     },
-                    Title: "Improve Handling",
+                    Title: 'Improve Handling',
                     Cost: 300,
                 },
                 {
@@ -4543,17 +4607,17 @@ export default {
                         Range: 18,
                         Damage: 1,
                     },
-                    Title: "Bee Gun",
+                    Title: 'Bee Gun',
                     Cost: 500,
                 },
                 {
                     Image: 4865025564,
                     Stats: {
                         Extras: [
-                            "More bee damage",
-                            "Even faster tick",
-                            "Longer stings",
-                            "Beehive grenade",
+                            'More bee damage',
+                            'Even faster tick',
+                            'Longer stings',
+                            'Beehive grenade',
                         ],
                         Attributes: {
                             StingTime: 6,
@@ -4570,16 +4634,16 @@ export default {
                         Range: 18,
                         Damage: 1,
                     },
-                    Title: "Beehive of Madness",
+                    Title: 'Beehive of Madness',
                     Cost: 1200,
                 },
                 {
                     Image: 4865025676,
                     Stats: {
                         Extras: [
-                            "More bee damage",
-                            "Faster tick",
-                            "Longer strings",
+                            'More bee damage',
+                            'Faster tick',
+                            'Longer strings',
                         ],
                         Attributes: {
                             StingTime: 8,
@@ -4596,7 +4660,7 @@ export default {
                         Range: 20,
                         Damage: 1,
                     },
-                    Title: "Beekeeper of Death",
+                    Title: 'Beekeeper of Death',
                     Cost: 4000,
                 },
             ],
@@ -4615,13 +4679,13 @@ export default {
             },
         },
     },
-    "Toxic Gunner": {
+    'Toxic Gunner': {
         Default: {
             Upgrades: [
                 {
                     Image: 5523192002,
                     Stats: {
-                        Extras: ["x2 Reload Speed"],
+                        Extras: ['x2 Reload Speed'],
                         Attributes: {
                             PoisonTick: 0.5,
                             Burst: 3,
@@ -4640,13 +4704,13 @@ export default {
                         Range: 10,
                         Damage: 1,
                     },
-                    Title: "Faster Reloading",
+                    Title: 'Faster Reloading',
                     Cost: 150,
                 },
                 {
                     Image: 5523193619,
                     Stats: {
-                        Extras: ["Bullets damage over time"],
+                        Extras: ['Bullets damage over time'],
                         Attributes: {
                             PoisonTick: 0.5,
                             Burst: 3,
@@ -4665,13 +4729,13 @@ export default {
                         Range: 12,
                         Damage: 1,
                     },
-                    Title: "Poisonous Bullets",
+                    Title: 'Poisonous Bullets',
                     Cost: 400,
                 },
                 {
                     Image: 5523195646,
                     Stats: {
-                        Extras: ["Increased burst"],
+                        Extras: ['Increased burst'],
                         Attributes: {
                             PoisonTick: 0.5,
                             Burst: 6,
@@ -4690,13 +4754,13 @@ export default {
                         Range: 14,
                         Damage: 2,
                     },
-                    Title: "Hazardous Gear",
+                    Title: 'Hazardous Gear',
                     Cost: 1600,
                 },
                 {
                     Image: 5523196519,
                     Stats: {
-                        Extras: ["Increased burst", "Longer effects"],
+                        Extras: ['Increased burst', 'Longer effects'],
                         Attributes: {
                             PoisonTick: 0.5,
                             Burst: 10,
@@ -4715,7 +4779,7 @@ export default {
                         Range: 18,
                         Damage: 4,
                     },
-                    Title: "Nuclear Overload",
+                    Title: 'Nuclear Overload',
                     Cost: 6000,
                 },
             ],
@@ -4754,7 +4818,7 @@ export default {
                         Range: 20,
                         Damage: 8,
                     },
-                    Title: "Radar",
+                    Title: 'Radar',
                     Cost: 500,
                 },
                 {
@@ -4767,7 +4831,7 @@ export default {
                         Range: 20,
                         Damage: 20,
                     },
-                    Title: "Stronger Ammunition",
+                    Title: 'Stronger Ammunition',
                     Cost: 2000,
                 },
                 {
@@ -4780,7 +4844,7 @@ export default {
                         Range: 22,
                         Damage: 20,
                     },
-                    Title: "Dual Turret",
+                    Title: 'Dual Turret',
                     Cost: 7250,
                 },
                 {
@@ -4793,7 +4857,7 @@ export default {
                         Range: 24,
                         Damage: 28,
                     },
-                    Title: "Even Heavier Ammo",
+                    Title: 'Even Heavier Ammo',
                     Cost: 12500,
                 },
                 {
@@ -4806,7 +4870,7 @@ export default {
                         Range: 26,
                         Damage: 35,
                     },
-                    Title: "XR-200 Turret",
+                    Title: 'XR-200 Turret',
                     Cost: 32000,
                 },
             ],
@@ -4820,7 +4884,7 @@ export default {
             },
         },
     },
-    "War Machine": {
+    'War Machine': {
         Default: {
             Upgrades: [
                 {
@@ -4843,13 +4907,13 @@ export default {
                         Range: 18,
                         Damage: 1,
                     },
-                    Title: "IMPROVED HANDLING",
+                    Title: 'IMPROVED HANDLING',
                     Cost: 250,
                 },
                 {
                     Image: 4989372568,
                     Stats: {
-                        Extras: ["Missile", "20 damage", "5 sec reload"],
+                        Extras: ['Missile', '20 damage', '5 sec reload'],
                         Attributes: {
                             MissileTime: 5,
                             DamageBuff: 0,
@@ -4866,13 +4930,13 @@ export default {
                         Range: 22,
                         Damage: 2,
                     },
-                    Title: "STARK MISSILE",
+                    Title: 'STARK MISSILE',
                     Cost: 650,
                 },
                 {
                     Image: 3584258139,
                     Stats: {
-                        Extras: ["Nearby troops get 10% DMG buff"],
+                        Extras: ['Nearby troops get 10% DMG buff'],
                         Attributes: {
                             MissileTime: 5,
                             DamageBuff: 10,
@@ -4889,16 +4953,16 @@ export default {
                         Range: 22,
                         Damage: 4,
                     },
-                    Title: "EPIC ARMOR PLATING",
+                    Title: 'EPIC ARMOR PLATING',
                     Cost: 5000,
                 },
                 {
                     Image: 4989373124,
                     Stats: {
                         Extras: [
-                            "Quad Missile Launcher",
-                            "25 damage",
-                            "Bigger boom",
+                            'Quad Missile Launcher',
+                            '25 damage',
+                            'Bigger boom',
                         ],
                         Attributes: {
                             MissileTime: 5,
@@ -4916,15 +4980,15 @@ export default {
                         Range: 24,
                         Damage: 10,
                     },
-                    Title: "ULTRA CHARGED BODY ARMOR",
+                    Title: 'ULTRA CHARGED BODY ARMOR',
                     Cost: 12500,
                 },
                 {
                     Image: 4989373460,
                     Stats: {
                         Extras: [
-                            "Faster missile reloading",
-                            "Nearby troops get 20% DMG buff",
+                            'Faster missile reloading',
+                            'Nearby troops get 20% DMG buff',
                         ],
                         Attributes: {
                             MissileTime: 4,
@@ -4942,7 +5006,7 @@ export default {
                         Range: 26,
                         Damage: 18,
                     },
-                    Title: "To The Void and Back",
+                    Title: 'To The Void and Back',
                     Cost: 75000,
                 },
             ],
@@ -4987,7 +5051,7 @@ export default {
                         Range: 5,
                         Damage: 8,
                     },
-                    Title: "Night Shift",
+                    Title: 'Night Shift',
                     Cost: 250,
                 },
                 {
@@ -5011,13 +5075,13 @@ export default {
                         Range: 6,
                         Damage: 12,
                     },
-                    Title: "Heavier Stick",
+                    Title: 'Heavier Stick',
                     Cost: 1250,
                 },
                 {
                     Image: 11415014676,
                     Stats: {
-                        Extras: ["Stuns Enemies Every Hit"],
+                        Extras: ['Stuns Enemies Every Hit'],
                         Attributes: {
                             CanBlock: false,
                             ParryLength: 1.25,
@@ -5031,13 +5095,13 @@ export default {
                         Range: 6,
                         Damage: 40,
                     },
-                    Title: "Stunning Blows",
+                    Title: 'Stunning Blows',
                     Cost: 5000,
                 },
                 {
                     Image: 11415015418,
                     Stats: {
-                        Extras: ["Riot Shield: Block Stuns", "Longer Stuns"],
+                        Extras: ['Riot Shield: Block Stuns', 'Longer Stuns'],
                         Attributes: {
                             CanBlock: true,
                             ParryLength: 1.25,
@@ -5051,7 +5115,7 @@ export default {
                         Range: 7,
                         Damage: 100,
                     },
-                    Title: "Class Foxtrot Defense Level",
+                    Title: 'Class Foxtrot Defense Level',
                     Cost: 14500,
                 },
             ],
