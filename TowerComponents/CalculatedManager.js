@@ -35,6 +35,37 @@ class CalculatedManager {
                     return unit.Health / level.SpawnTime;
                 },
             },
+            Crook: {
+                For: ['Crook Boss'],
+                Requires: [
+                    'PistolCrookSpawnTime',
+                    'DoublePistolCrooks',
+                    'TommyCrookSpawnTime',
+                    'TommyDrum',
+                ],
+                Value: (level) => {
+                    const skin = level.levels.skinData.name;
+                    this.unitManager.load();
+
+                    const goldText = skin == 'Golden' ? 'Golden' : '';
+                    const goon1 = this.unitManager.unitData[`${goldText}Goon1`];
+                    const goon2 = this.unitManager.unitData[`${goldText}Goon2`];
+                    const goon3 = this.unitManager.unitData[`${goldText}Goon3`];
+
+                    let goon1Ram =
+                        level.PistolCrookSpawnTime &&
+                        goon1.Health / level.PistolCrookSpawnTime;
+                    if (level.DoublePistolCrooks) goon1Ram *= 2;
+
+                    let goon2Ram =
+                        level.TommyCrookSpawnTime &&
+                        goon2.Health / level.TommyCrookSpawnTime;
+                    if (level.TommyDrum)
+                        goon2Ram = goon3.Health / level.TommyCrookSpawnTime;
+
+                    return goon1Ram + goon2Ram;
+                },
+            },
         },
         UnitDPS: {
             Default: {
