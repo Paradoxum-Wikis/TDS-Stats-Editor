@@ -118,6 +118,108 @@ class CalculatedManager {
                 },
             },
         },
+        SpikeDPS: {
+            Default: {
+                For: ['Trapper'],
+
+                Value: (level) => {
+                    const damage =
+                        level.levels.getCell(
+                            level.Level,
+                            'Traps.Spike.Damage'
+                        ) ?? 0;
+
+                    const cooldown = level.levels.getCell(
+                        level.Level,
+                        'Traps.Spike.Cooldown'
+                    );
+
+                    return damage / cooldown;
+                },
+            },
+        },
+        SpikeMaxPileDamage: {
+            Default: {
+                For: ['Trapper'],
+
+                Value: (level) => {
+                    const damage = level.levels.getCell(
+                        level.Level,
+                        'Traps.Spike.Damage'
+                    );
+
+                    return damage * level.MaxTraps;
+                },
+            },
+        },
+        LandmineDPS: {
+            Default: {
+                For: ['Trapper'],
+
+                Value: (level) => {
+                    const damage = level.levels.getCell(
+                        level.Level,
+                        'Traps.Landmine.Damage'
+                    );
+
+                    const cooldown = level.levels.getCell(
+                        level.Level,
+                        'Traps.Landmine.Cooldown'
+                    );
+
+                    const dps = damage / cooldown;
+                    return isFinite(dps) ? dps : 0;
+                },
+            },
+        },
+        LandmineMaxPileDamage: {
+            Default: {
+                For: ['Trapper'],
+
+                Value: (level) => {
+                    const damage = level.levels.getCell(
+                        level.Level,
+                        'Traps.Landmine.Damage'
+                    );
+
+                    return damage * level.MaxTraps;
+                },
+            },
+        },
+        BearTrapDPS: {
+            Default: {
+                For: ['Trapper'],
+
+                Value: (level) => {
+                    const damage = level.levels.getCell(
+                        level.Level,
+                        'Traps.BearTrap.Damage'
+                    );
+
+                    const cooldown = level.levels.getCell(
+                        level.Level,
+                        'Traps.BearTrap.Cooldown'
+                    );
+
+                    const dps = damage / cooldown;
+                    return isFinite(dps) ? dps : 0;
+                },
+            },
+        },
+        BearTrapMaxPileDamage: {
+            Default: {
+                For: ['Trapper'],
+
+                Value: (level) => {
+                    const damage = level.levels.getCell(
+                        level.Level,
+                        'Traps.BearTrap.Damage'
+                    );
+
+                    return damage * level.MaxTraps;
+                },
+            },
+        },
         LaserTime: {
             Default: {
                 For: ['Accelerator'],
@@ -303,6 +405,16 @@ class CalculatedManager {
                     return unitDPS + towerDPS + ramDPS;
                 },
             },
+            Trapper: {
+                For: ['Trapper'],
+                Value: (level) => {
+                    const spikeDPS = level.SpikeDPS;
+                    const landmineDPS = level.LandmineDPS;
+                    const bearTrapDPS = level.BearTrapDPS;
+
+                    return Math.max(spikeDPS, landmineDPS, bearTrapDPS);
+                },
+            },
         },
         LimitDPS: {
             Default: {
@@ -314,7 +426,7 @@ class CalculatedManager {
         NetCost: {
             Default: {
                 Value: (level) => (level.levels.levels.reduce(
-					(total, nextLevel) => nextLevel.Level > level.Level? total: total + nextLevel.Cost, 0)), // prettier-ignore
+					(total, nextLevel) => nextLevel.Level > level.Level ? total : total + nextLevel.Cost, 0)), // prettier-ignore
             },
         },
         CostEfficiency: {
@@ -491,6 +603,12 @@ class CalculatedManager {
         this.#add('Cost', skinData);
         this.#add('SpawnTime', skinData);
         this.#add('LaserDPS', skinData);
+        this.#add('SpikeDPS', skinData);
+        this.#add('LandmineDPS', skinData);
+        this.#add('BearTrapDPS', skinData);
+        this.#add('SpikeMaxPileDamage', skinData);
+        this.#add('LandmineMaxPileDamage', skinData);
+        this.#add('BearTrapMaxPileDamage', skinData);
         this.#add('TowerDPS', skinData);
         this.#add('UnitDPS', skinData);
         this.#add('RamDPS', skinData);

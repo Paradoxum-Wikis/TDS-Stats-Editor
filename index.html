@@ -445,6 +445,35 @@
                 <!-- JSON Body -->
                 <div id="json" class="overflow-auto"></div>
             </div>
+
+            <!-- Body Lua -->
+            <div id="lua-panel" class="d-none d-flex flex-column p-3 pb-0">
+                <!-- Lua Header -->
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3  ">
+                    <div class="btn-toolbar mb-2 mb-md-0 ">
+                        <!-- Copy Button -->
+                        <div class="btn-group me-2">
+                            <button id="json-copy" class="btn btn-sm btn-outline-secondary">Copy to
+                                Clipboard</button>
+                        </div>
+                        <div class="btn-group me-2">
+                            <!-- Import Button -->
+                            <button id="lua-import" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
+                                data-target="#json-import-modal"
+                                title="Imports tower data that you might have gotten from other 🦊">Import</button>
+
+                            <!-- Export Button -->
+                            <button id="lua-export" class="btn btn-sm btn-outline-secondary"
+                                title="Saves json as a file. You can also access all your data by typing localStorage.getItem('New') in the f12 console">Export</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JSON Body -->
+                <div id="lua" class="overflow-auto">
+                    Sample text
+                </div>
+            </div>
         </main>
     </div>
     <!--- Models --->

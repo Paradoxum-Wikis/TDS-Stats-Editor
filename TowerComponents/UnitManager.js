@@ -49,9 +49,31 @@ export default class UnitManager {
         this.load();
     }
 
+    flattenStats(statObject, unitStats) {
+        for (const [statName, statValue] of Object.entries(unitStats)) {
+            if (statValue instanceof Object) {
+                this.flattenStats(statObject, statValue);
+            } else {
+                statObject[statName] = statValue;
+            }
+        }
+
+        return statObject;
+    }
+
+    flatten(unitData) {
+        const newUnitData = {};
+
+        for (const [unitName, unitStats] of Object.entries(unitData)) {
+            newUnitData[unitName] = this.flattenStats({}, unitStats);
+        }
+
+        return newUnitData;
+    }
+
     load() {
         this.baseData = this.getData();
-        this.unitData = JSON.parse(JSON.stringify(this.baseData));
+        this.unitData = this.flatten(JSON.parse(JSON.stringify(this.baseData)));
 
         this.unitAttributes = {};
 

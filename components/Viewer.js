@@ -15,6 +15,7 @@ import RemoveAttributeForm from './RemoveAttributeForm.js';
 import UnitManager from '../TowerComponents/UnitManager.js';
 import BoostPanel from './BoostPanel.js';
 import CloneTowerForm from './CloneTowerForm.js';
+import LuaViewer from './LuaConverter/index.js';
 
 class Viewer {
     /**
@@ -45,7 +46,7 @@ class Viewer {
 
         this.tableView = new ButtonSelection(
             document.querySelector('#table-view')
-        ).setButtons(['Table', 'JSON']);
+        ).setButtons(['Table', 'JSON', 'Lua']);
         this.tableView.root.addEventListener('submit', (() => this.#loadBody()).bind(this)); // prettier-ignore
 
         this.buttonDeltaButton = new ToggleButton(
@@ -69,6 +70,7 @@ class Viewer {
         );
 
         this.jsonViewer = new JSONViewer();
+        this.luaViewer = new LuaViewer();
 
         this.jsonCopy = document.querySelector('#json-copy');
         this.jsonCopy.addEventListener('click', this.#onCopyJSON.bind(this));
@@ -225,6 +227,7 @@ class Viewer {
 
         this.#hideJSON();
         this.#hideTable();
+        this.#hideLua();
 
         this.sidePanel.onUpdate();
         this.upgradeViewer.load(this.getActiveSkin());
@@ -240,6 +243,10 @@ class Viewer {
                 this.#clearJSON();
                 this.#loadJSON();
                 break;
+            case 'Lua':
+            //this.#showLua();
+            //this.#clearLua();
+            //this.#loadLua();
         }
     }
 
@@ -280,13 +287,23 @@ class Viewer {
     #clearJSON() {
         document.querySelector('#json').innerHTML = '';
     }
+    #clearLua() {
+        document.querySelector('#lua').innerHTML = '';
+    }
 
     #hideJSON() {
         document.querySelector('#json-panel').classList.add('d-none');
     }
 
+    #hideLua() {
+        document.querySelector('#lua-panel').classList.add('d-none');
+    }
+
     #showJSON() {
         document.querySelector('#json-panel').classList.remove('d-none');
+    }
+    #showLua() {
+        document.querySelector('#lua-panel').classList.remove('d-none');
     }
 
     #loadJSON() {
@@ -294,6 +311,13 @@ class Viewer {
             .querySelector('#json')
             .appendChild(this.jsonViewer.getContainer());
         this.jsonViewer.showJSON(this.tower.json);
+    }
+    #loadLua() {
+        document
+            .querySelector('#lua')
+            .appendChild(this.luaViewer.getContainer());
+
+        this.luaViewer.showJSONAsLua(this.tower.json);
     }
 
     #onCopyJSON() {
