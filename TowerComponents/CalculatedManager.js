@@ -162,13 +162,33 @@ class CalculatedManager {
                         'Traps.Landmine.Damage'
                     );
 
+                    const burnDamage = level.levels.getCell(
+                        level.Level,
+                        'Traps.Landmine.BurnDamage'
+                    );
+
+                    const burnTime = level.levels.getCell(
+                        level.Level,
+                        'Traps.Landmine.BurnTime'
+                    );
+
+                    const burnTick = level.levels.getCell(
+                        level.Level,
+                        'Traps.Landmine.BurnTick'
+                    );
+
                     const cooldown = level.levels.getCell(
                         level.Level,
                         'Traps.Landmine.Cooldown'
                     );
 
-                    const dps = damage / cooldown;
-                    return isFinite(dps) ? dps : 0;
+                    const burnDPS = (burnTick * burnDamage) / burnTime;
+                    const actualBurnDPS = isFinite(burnDPS) ? burnDPS : 0;
+                    const explosionDPS = damage / cooldown;
+                    const actualExplosionDPS = isFinite(explosionDPS)
+                        ? explosionDPS
+                        : 0;
+                    return actualBurnDPS + actualExplosionDPS;
                 },
             },
         },
