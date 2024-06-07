@@ -10,21 +10,40 @@ const calculated = {
     },
     Range: (range) => range * (window.state.boosts.unit.rangeBuff + 1),
     DPS: (unit) => {
-        const damage = unit?.Damage ?? 0;
-        const cooldown = unit?.Cooldown ?? 0;
-        const baseDPS = cooldown > 0 ? damage / cooldown : 0;
+        switch (unit.Name) {
+            case 'Rifleman1':
+            case 'Rifleman2':
+            case 'Rifleman3':
+                return (() => {
+                    const damage = unit.Damage;
+                    const burstAmount = unit.BurstAmount;
 
-        const missileAmount = unit?.MissileAmount ?? 1;
-        const missileCooldown = unit?.TimeBetweenMissiles ?? 0;
-        const missileDamage = unit?.ExplosionDamage ?? 0;
+                    const cooldown = unit.Cooldown;
+                    const burstCooldown = unit.BurstCooldown;
 
-        const missileDPS =
-            missileCooldown > 0
-                ? (missileAmount * missileDamage) / missileCooldown
-                : 0;
+                    const totalDamage = damage * burstAmount;
+                    const totalTime = cooldown * burstAmount + burstCooldown;
+                    return totalDamage / totalTime;
+                })();
 
-        return baseDPS + missileDPS;
+            default:
+                const damage = unit?.Damage ?? 0;
+                const cooldown = unit?.Cooldown ?? 0;
+                const baseDPS = cooldown > 0 ? damage / cooldown : 0;
+
+                const missileAmount = unit?.MissileAmount ?? 1;
+                const missileCooldown = unit?.TimeBetweenMissiles ?? 0;
+                const missileDamage = unit?.ExplosionDamage ?? 0;
+
+                const missileDPS =
+                    missileCooldown > 0
+                        ? (missileAmount * missileDamage) / missileCooldown
+                        : 0;
+
+                return baseDPS + missileDPS;
+        }
     },
+    DPSRampPerMinute: (unit) => {},
 };
 
 const register = {
@@ -39,6 +58,20 @@ const register = {
     'Crook Boss': {
         Golden: ['GoldenGoon1', 'GoldenGoon2', 'GoldenGoon3'],
         Default: ['Goon1', 'Goon2', 'Goon3'],
+    },
+    'Mercenary Base': {
+        Default: [
+            'Rifleman1',
+            'Rifleman2',
+            'Rifleman3',
+            'Grenadier1',
+            'Grenadier2',
+            'Grenadier3',
+            'RiotGuard1',
+            'RiotGuard2',
+            'FieldMedic1',
+            'FieldMedic2',
+        ],
     },
 };
 
