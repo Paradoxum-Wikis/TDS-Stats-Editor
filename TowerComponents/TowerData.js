@@ -4462,6 +4462,7 @@ export default {
                             SlowPercent: 30,
                             FreezeTime: 1.5,
                             DebuffLength: 3,
+                            MaxSlow: 80,
                         },
                         Detections: {
                             Flying: false,
@@ -4488,6 +4489,7 @@ export default {
                             SlowPercent: 30,
                             FreezeTime: 1.5,
                             DebuffLength: 3,
+                            MaxSlow: 80,
                         },
                         Detections: {
                             Flying: false,
@@ -4517,6 +4519,7 @@ export default {
                             SlowPercent: 50,
                             FreezeTime: 1.5,
                             DebuffLength: 3,
+                            MaxSlow: 80,
                         },
                         Detections: {
                             Flying: false,
@@ -4546,6 +4549,7 @@ export default {
                             SlowPercent: 50,
                             FreezeTime: 1.5,
                             DebuffLength: 3,
+                            MaxSlow: 80,
                         },
                         Detections: {
                             Flying: false,
@@ -4572,6 +4576,7 @@ export default {
                             SlowPercent: 50,
                             FreezeTime: 1.5,
                             DebuffLength: 3,
+                            MaxSlow: 80,
                         },
                         Detections: {
                             Flying: false,
@@ -4596,6 +4601,7 @@ export default {
                     SlowPercent: 30,
                     FreezeTime: 1.5,
                     DebuffLength: 3,
+                    MaxSlow: 80,
                 },
                 Detections: { Flying: false, Hidden: false, Lead: false },
                 Range: 6.5,
