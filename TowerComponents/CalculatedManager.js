@@ -307,6 +307,24 @@ class CalculatedManager {
                     return totalDamage / (level.LaserTime + burstCooldown);
                 },
             },
+            Brawler: {
+                For: ['Brawler'],
+                Value: (level) => {
+                    if (level.ComboLength == 1) {
+                        return level.Damage / level.Cooldown;
+                    }
+
+                    const totalNormalHits = level.ComboLength - 1;
+                    const totalDamage =
+                        totalNormalHits * level.Damage + level.FinalHitDamage;
+
+                    const comboLength =
+                        level.ComboLength * level.Cooldown +
+                        level.ComboCooldown;
+
+                    return totalDamage / comboLength;
+                },
+            },
             BurnTower: {
                 For: ['Archer, Pyromancer'],
                 Requires: ['Damage', 'Cooldown', 'BurnDamage', 'BurnTick'],
