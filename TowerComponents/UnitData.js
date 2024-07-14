@@ -221,7 +221,6 @@ export default {
 
     Sentry1: {
         Range: 18,
-        ScrapCost: 16,
         Health: 20,
         Lifetime: 20,
         Speed: 1.25,
@@ -239,7 +238,6 @@ export default {
     },
     Sentry2: {
         Range: 20,
-        ScrapCost: 36,
         Health: 40,
         Lifetime: 30,
         Speed: 1.25,
@@ -257,7 +255,6 @@ export default {
     },
     Sentry3: {
         Range: 20,
-        ScrapCost: 140,
         Health: 60,
         Lifetime: 45,
         Speed: 1.25,
@@ -320,7 +317,7 @@ export default {
         TimeBetweenMissiles: 3,
     },
     ['Railgun Tank']: {
-        Health: 15000,
+        Health: 1500,
         Damage: 24,
         Cooldown: 0.15,
         Range: 30,

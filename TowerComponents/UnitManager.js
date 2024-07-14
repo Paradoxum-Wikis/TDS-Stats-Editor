@@ -1,4 +1,5 @@
 import UnitData from './UnitData.js';
+import Locator from './Locator.js';
 
 const calculated = {
     Health: (health) => health * (window.state.boosts.unit.healthBuff + 1),
@@ -78,6 +79,7 @@ const register = {
 export default class UnitManager {
     constructor(dataKey) {
         this.dataKey = dataKey;
+        this.locator = new Locator();
 
         this.load();
     }
@@ -166,11 +168,32 @@ export default class UnitManager {
         return loadedLocal;
     }
 
+    findPropertyData(unitData, attributeName) {
+        for (let [key, value] of Object.entries(unitData)) {
+            if (typeof value === 'object') {
+                const propertyData = this.findPropertyData(
+                    value,
+                    attributeName
+                );
+
+                if (propertyData) return propertyData;
+            }
+
+            if (key === attributeName) return unitData;
+        }
+    }
+
     set(unitName, attribute, value) {
         if (this.baseData[unitName] === undefined) return;
-        if (this.baseData[unitName][attribute] === undefined) return;
 
-        this.baseData[unitName][attribute] = value;
+        const propertyData = this.findPropertyData(
+            this.baseData[unitName],
+            attribute
+        );
+
+        if (propertyData?.[attribute] === undefined) return;
+
+        propertyData[attribute] = value;
         this.save();
     }
 
