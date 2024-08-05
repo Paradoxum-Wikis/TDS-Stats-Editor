@@ -262,6 +262,22 @@ class CalculatedManager {
                     (level.StingTime * level.BeeDamage) / level.TickRate,
             },
         },
+        KnifeSingleDPS: {
+            Default: {
+                For: ['Slasher'],
+                Requires: ['KnifeCooldown', 'Damage'],
+                Value: (level) => {
+                    const knifeMultiplier = level?.KnifeMultiplier ?? 1;
+                    const knives = level?.Knives ?? 1;
+
+                    return (
+                        knives *
+                        knifeMultiplier *
+                        (level.Damage / level.KnifeCooldown)
+                    );
+                },
+            },
+        },
         DPS: {
             Default: {
                 Requires: ['Damage', 'Cooldown'],
@@ -283,6 +299,11 @@ class CalculatedManager {
             Cowboy: {
                 For: ['Cowboy'],
                 Value: (level) => ((level.Damage * level.MaxAmmo) / (level.Cooldown * level.MaxAmmo + level.SpinDuration)), // prettier-ignore
+            },
+            Slasher: {
+                For: ['Slasher'],
+                Value: (level) =>
+                    level.Damage / level.Cooldown + level?.KnifeSingleDPS ?? 0,
             },
             Ace: {
                 For: ['Ace Pilot'],
@@ -641,6 +662,7 @@ class CalculatedManager {
         this.#add('Cost', skinData);
         this.#add('SpawnTime', skinData);
         this.#add('LaserDPS', skinData);
+        this.#add('KnifeSingleDPS', skinData);
         this.#add('SpikeDPS', skinData);
         this.#add('LandmineDPS', skinData);
         this.#add('BearTrapDPS', skinData);
