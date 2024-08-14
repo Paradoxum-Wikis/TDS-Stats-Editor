@@ -488,10 +488,42 @@ class CalculatedManager {
 					(total, nextLevel) => nextLevel.Level > level.Level ? total : total + nextLevel.Cost, 0)), // prettier-ignore
             },
         },
+        LimitNetCost: {
+            Default: {
+                Requires: ['NetCost', 'Limit'],
+                Value: (level) => level.NetCost * level.Limit,
+            },
+        },
         CostEfficiency: {
             Default: {
                 Requires: ['NetCost', 'DPS'],
                 Value: (level) => level.NetCost / level.DPS,
+            },
+        },
+        Coverage: {
+            Default: {
+                Requires: ['Range'],
+                Value: (level) => {
+                    const x = level.Range;
+                    const a = -0.00229008361916565;
+                    const b = 0.165383660474954;
+                    const c = 0.234910819904625;
+                    const d = 2.62040766713282;
+
+                    return a * x ** 3 + b * x ** 2 + c * x + d;
+                },
+            },
+        },
+        BossPotential: {
+            Default: {
+                Requires: ['Coverage', 'DPS'],
+                Value: (level) => level.Coverage * level.DPS,
+            },
+        },
+        BossValue: {
+            Default: {
+                Requires: ['BossPotential', 'NetCost'],
+                Value: (level) => (60 * level.BossPotential) / level.NetCost,
             },
         },
         Value: {
@@ -678,7 +710,11 @@ class CalculatedManager {
         this.#add('DPS', skinData);
         this.#add('LimitDPS', skinData);
         this.#add('NetCost', skinData);
+        this.#add('LimitNetCost', skinData);
         this.#add('CostEfficiency', skinData);
+        this.#add('Coverage', skinData);
+        this.#add('BossPotential', skinData);
+        this.#add('BossValue', skinData);
         this.#add('Value', skinData);
         this.#add('IncomeFactor', skinData);
         this.#add('IncomePerSecond', skinData);

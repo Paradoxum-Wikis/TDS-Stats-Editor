@@ -1,5 +1,5 @@
-import Levels from "../TowerComponents/Levels.js";
-import Viewer from "./Viewer.js";
+import Levels from '../TowerComponents/Levels.js';
+import Viewer from './Viewer.js';
 
 export default class TableInput {
     /**
@@ -54,14 +54,14 @@ export default class TableInput {
     }
 
     #createBase() {
-        const td = document.createElement("td");
-        td.classList.add("table-cell");
+        const td = document.createElement('td');
+        td.classList.add('table-cell');
 
         return td;
     }
 
     #getInput(value, deltaData) {
-        if (["true", "false"].includes(String(value))) {
+        if (['true', 'false'].includes(String(value))) {
             return this.#createBooleanInput(value, deltaData);
         }
 
@@ -73,19 +73,19 @@ export default class TableInput {
     }
 
     #createBooleanInput(value, deltaData) {
-        const input = document.createElement("input");
+        const input = document.createElement('input');
 
-        input.type = "checkbox";
+        input.type = 'checkbox';
         input.checked = value;
 
         if (this.useDelta && value != deltaData) {
-            input.classList.add("form-check-input-delta");
+            input.classList.add('form-check-input-delta');
         }
 
-        input.classList.add("form-check-input");
-        input.classList.add("child-center");
-        input.style.padding = "0.6em";
-        this.base.style.position = "relative";
+        input.classList.add('form-check-input');
+        input.classList.add('child-center');
+        input.style.padding = '0.6em';
+        this.base.style.position = 'relative';
 
         input.addEventListener('change', this.#onBooleanSubmit.bind(this)); // prettier-ignore
         this.base.appendChild(input);
@@ -94,23 +94,23 @@ export default class TableInput {
     }
 
     #createNumberInput(value, deltaData) {
-        const input = document.createElement("input");
-        const form = document.createElement("form");
+        const input = document.createElement('input');
+        const form = document.createElement('form');
 
-        input.classList.add("table-cell-input");
+        input.classList.add('table-cell-input');
 
         input.size = 1;
 
         input.addEventListener('focusin', (() => input.value = '').bind(this)); // prettier-ignore
-        input.addEventListener("focusout", this.#onNumberSubmit.bind(this));
+        input.addEventListener('focusout', this.#onNumberSubmit.bind(this));
         form.addEventListener(
-            "submit",
+            'submit',
             ((e) => {
                 e.preventDefault();
                 input.blur();
             }).bind(this)
         );
-        input.addEventListener("mouseup", () => {
+        input.addEventListener('mouseup', () => {
             input.focus();
         });
 
@@ -137,21 +137,21 @@ export default class TableInput {
             this.viewer.activeUnits[value] =
                 this.viewer.unitManager.unitData[value];
         }
-        const input = document.createElement("input");
+        const input = document.createElement('input');
         input.size = 1;
 
-        input.classList.add("table-cell-input");
+        input.classList.add('table-cell-input');
 
         input.addEventListener('focusin', (() => {
 			input.value = ''
 		}).bind(this)); // prettier-ignore
-        input.addEventListener("focusout", this.#onTextSubmit.bind(this));
-        input.addEventListener("mouseup", () => {
+        input.addEventListener('focusout', this.#onTextSubmit.bind(this));
+        input.addEventListener('mouseup', () => {
             input.focus();
         });
 
         if (this.useDelta && value != deltaData) {
-            input.classList.add("table-cell-input-delta");
+            input.classList.add('table-cell-input-delta');
         }
 
         const computedSize = String(value).length / this.sizeFactor;
@@ -174,7 +174,7 @@ export default class TableInput {
     #onNumberSubmit() {
         const newValue = this.input.value;
 
-        if (newValue !== "" && Number.isFinite(+newValue))
+        if (newValue !== '' && Number.isFinite(+newValue))
             this.towerLevels.set(this.level, this.attribute, +newValue);
 
         this.viewer.reload();
@@ -183,7 +183,7 @@ export default class TableInput {
     #onTextSubmit() {
         const newValue = this.input.value;
 
-        if (newValue != "")
+        if (newValue != '')
             this.towerLevels.set(this.level, this.attribute, newValue);
 
         this.viewer.reload();
@@ -191,9 +191,10 @@ export default class TableInput {
 
     #formatNumber(value) {
         switch (this.attribute) {
-            case "Cost":
-            case "NetCost":
-            case "Income":
+            case 'Cost':
+            case 'NetCost':
+            case 'Income':
+            case 'LimitNetCost':
                 return `$${Intl.NumberFormat().format(value)}`;
         }
 
@@ -207,33 +208,33 @@ export default class TableInput {
     }
 
     flipped = [
-        "Cooldown",
-        "Cost",
-        "CostEfficiency",
-        "NetCost",
-        "ChargeTime",
-        "LaserCooldown",
-        "BombTime",
-        "MissileCooldown",
-        "SpinDuration",
-        "BurstCool",
-        "ReloadSpeed",
-        "TickRate",
+        'Cooldown',
+        'Cost',
+        'CostEfficiency',
+        'NetCost',
+        'ChargeTime',
+        'LaserCooldown',
+        'BombTime',
+        'MissileCooldown',
+        'SpinDuration',
+        'BurstCool',
+        'ReloadSpeed',
+        'TickRate',
     ];
 
     #getDelta(cellData, deltaData, input) {
         const difference = cellData - deltaData;
-        if (difference === 0) return "";
+        if (difference === 0) return '';
 
-        const sign = Math.sign(difference) > 0 ? "+" : "-";
+        const sign = Math.sign(difference) > 0 ? '+' : '-';
         const absDifference = Math.abs(difference);
 
         const flipFactor = this.flipped.includes(this.attribute) ? -1 : 1;
 
         if (difference * flipFactor > 0) {
-            input.classList.add("table-cell-input-delta-positive");
+            input.classList.add('table-cell-input-delta-positive');
         } else {
-            input.classList.add("table-cell-input-delta-negative");
+            input.classList.add('table-cell-input-delta-negative');
         }
         this.sizeModifier = this.sizeDeltaModifier;
 
