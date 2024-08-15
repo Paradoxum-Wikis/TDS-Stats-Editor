@@ -520,6 +520,12 @@ class CalculatedManager {
                 Value: (level) => level.Coverage * level.DPS,
             },
         },
+        LimitBossPotential: {
+            Default: {
+                Requires: ['BossPotential', 'Limit'],
+                Value: (level) => level.BossPotential * level.Limit,
+            },
+        },
         BossValue: {
             Default: {
                 Requires: ['BossPotential', 'NetCost'],
@@ -714,6 +720,7 @@ class CalculatedManager {
         this.#add('CostEfficiency', skinData);
         this.#add('Coverage', skinData);
         this.#add('BossPotential', skinData);
+        this.#add('LimitBossPotential', skinData);
         this.#add('BossValue', skinData);
         this.#add('Value', skinData);
         this.#add('IncomeFactor', skinData);

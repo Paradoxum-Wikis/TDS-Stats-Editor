@@ -15,6 +15,7 @@ export default class PropertyViewer {
             'Value',
             'Coverage',
             'BossPotential',
+            'LimitBossPotential',
         ];
         this.baseProperties = [
             'Damage',
