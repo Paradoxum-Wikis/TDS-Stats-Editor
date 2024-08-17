@@ -2,8 +2,8 @@ import SkinData from './SkinData.js';
 import UnitManager from './UnitManager.js';
 
 class CalculatedManager {
-    constructor() {
-        this.unitManager = new UnitManager('units');
+    constructor(unitKey) {
+        this.unitManager = new UnitManager(unitKey);
         this.unitManager.load();
     }
 
@@ -32,7 +32,7 @@ class CalculatedManager {
                     if (!this.unitManager.hasUnit(level.UnitToSend)) return 0;
                     const unit = this.unitManager.unitData[level.UnitToSend];
 
-                    return unit.Health / level.SpawnTime;
+                    return unit.attributes.Health / level.SpawnTime;
                 },
             },
             Crook: {
@@ -54,14 +54,15 @@ class CalculatedManager {
 
                     let goon1Ram =
                         level.PistolCrookSpawnTime &&
-                        goon1.Health / level.PistolCrookSpawnTime;
+                        goon1.attributes.Health / level.PistolCrookSpawnTime;
                     if (level.DoublePistolCrooks) goon1Ram *= 2;
 
                     let goon2Ram =
                         level.TommyCrookSpawnTime &&
-                        goon2.Health / level.TommyCrookSpawnTime;
+                        goon2.attributes.Health / level.TommyCrookSpawnTime;
                     if (level.TommyDrum)
-                        goon2Ram = goon3.Health / level.TommyCrookSpawnTime;
+                        goon2Ram =
+                            goon3.attributes.Health / level.TommyCrookSpawnTime;
 
                     return goon1Ram + goon2Ram;
                 },
@@ -72,11 +73,13 @@ class CalculatedManager {
                 Requires: ['UnitToSend'],
                 Value: (level) => {
                     this.unitManager.load();
-                    if (!this.unitManager.hasUnit(level.UnitToSend)) return 0;
 
-                    return (
-                        this.unitManager.unitData[level.UnitToSend]?.DPS ?? 0
-                    );
+                    const unitName = level.UnitToSend;
+                    if (!this.unitManager.hasUnit(unitName)) return 0;
+
+                    const unitData = this.unitManager.unitData[unitName];
+
+                    return unitData.attributes.DPS;
                 },
             },
             Engineer: {
@@ -88,7 +91,7 @@ class CalculatedManager {
 
                     const unit = this.unitManager.unitData[level.UnitToSend];
 
-                    return unit.DPS * level.MaxUnits;
+                    return unit.attributes.DPS * level.MaxUnits;
                 },
             },
             Crook: {
@@ -108,11 +111,13 @@ class CalculatedManager {
                     const goon2 = this.unitManager.unitData[`${goldText}Goon2`];
                     const goon3 = this.unitManager.unitData[`${goldText}Goon3`];
 
-                    let goon1DPS = level.PistolCrookSpawnTime && goon1.DPS;
+                    let goon1DPS =
+                        level.PistolCrookSpawnTime && goon1.attributes.DPS;
                     if (level.DoublePistolCrooks) goon1DPS *= 2;
 
-                    let goon2DPS = level.TommyCrookSpawnTime && goon2.DPS;
-                    if (level.TommyDrum) goon2DPS = goon3.DPS;
+                    let goon2DPS =
+                        level.TommyCrookSpawnTime && goon2.attributes.DPS;
+                    if (level.TommyDrum) goon2DPS = goon3.attributes.DPS;
 
                     return goon1DPS + goon2DPS;
                 },
@@ -731,4 +736,4 @@ class CalculatedManager {
     }
 }
 
-export default new CalculatedManager();
+export default CalculatedManager;

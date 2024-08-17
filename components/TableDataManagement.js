@@ -19,12 +19,30 @@ export default class TableDataManagement {
         this.addLevelButton = document.querySelector('#table-add-level');
         this.removeLevelButton = document.querySelector('#table-remove-level');
 
-        this.clearUnitChangesButton =
-            document.querySelector('#table-unit-reset');
+        this.clearUnitButton = document.querySelector('#table-unit-clear');
+        this.applyUnitButton = document.querySelector('#table-unit-apply');
+        this.resetUnitButton = document.querySelector('#table-unit-reset');
+
+        this.clearUnitChangesButton = document.querySelector(
+            '#table-unit-resetAll'
+        );
 
         this.clearButton.addEventListener('click', this.clearTable.bind(this));
         this.applyButton.addEventListener('click', this.applyTable.bind(this));
         this.resetButton.addEventListener('click', this.resetTable.bind(this));
+
+        this.clearUnitButton.addEventListener(
+            'click',
+            this.clearUnitTable.bind(this)
+        );
+        this.applyUnitButton.addEventListener(
+            'click',
+            this.applyUnitTable.bind(this)
+        );
+        this.resetUnitButton.addEventListener(
+            'click',
+            this.resetUnitTable.bind(this)
+        );
 
         this.clearDataButton.addEventListener(
             'click',
@@ -72,6 +90,16 @@ export default class TableDataManagement {
     clearUnitChanges() {
         this.viewer.clearUnitChanges();
     }
+    clearUnitTable() {
+        this.viewer.clearUnitTable();
+    }
+    applyUnitTable() {
+        this.viewer.applyUnitTable();
+    }
+    resetUnitTable() {
+        this.viewer.resetUnitTable();
+    }
+
     clearTable() {
         this.viewer.import(JSON.stringify(this.viewer.deltaTower.json));
     }

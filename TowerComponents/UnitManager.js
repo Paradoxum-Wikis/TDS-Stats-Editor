@@ -1,6 +1,8 @@
 import UnitData from './UnitData.js';
 import Locator from './Locator.js';
 
+import Unit from './Unit.js';
+
 const calculated = {
     Health: (health) => health * (window.state.boosts.unit.healthBuff + 1),
     Damage: (damage) => damage * (window.state.boosts.unit.damageBuff + 1),
@@ -108,25 +110,13 @@ export default class UnitManager {
 
     load() {
         this.baseData = this.getData();
-        this.unitData = this.flatten(JSON.parse(JSON.stringify(this.baseData)));
 
-        this.unitAttributes = {};
-
-        Object.keys(this.unitData).forEach((unitName) => {
-            this.unitAttributes[unitName] = Object.keys(
-                this.unitData[unitName]
-            );
-        });
-
-        Object.keys(this.unitData).forEach(
-            ((unitName) => {
-                this.#override(unitName, 'Health');
-                this.#override(unitName, 'Damage');
-                this.#override(unitName, 'Cooldown');
-                this.#override(unitName, 'Range');
-
-                this.#addCalculated(unitName, 'DPS');
-            }).bind(this)
+        this.unitData = Object.entries(this.baseData).reduce(
+            (unitData, [unitName, unitValue]) => {
+                unitData[unitName] = new Unit(unitName, unitValue);
+                return unitData;
+            },
+            {}
         );
     }
 
@@ -140,10 +130,6 @@ export default class UnitManager {
 
     getLocalData() {
         if (!this.dataKey) return;
-
-        if (window.state && window.state.cache.unitData !== undefined) {
-            return window.state.cache.unitData;
-        }
 
         const localData = localStorage.getItem(this.dataKey);
         if (!localData) return;
@@ -197,40 +183,6 @@ export default class UnitManager {
         this.save();
     }
 
-    #override(unitName, propertyName) {
-        if (this.unitData[unitName][propertyName] == undefined) return;
-
-        const propertyDescriptor = Object.getOwnPropertyDescriptor(
-            this.unitData[unitName],
-            propertyName
-        );
-        if (propertyDescriptor.get !== undefined) return;
-
-        const originalCooldown = this.unitData[unitName][propertyName];
-
-        Object.defineProperty(this.unitData[unitName], propertyName, {
-            get() {
-                return calculated[propertyName](originalCooldown);
-            },
-        });
-    }
-
-    #addCalculated(unitName, propertyName) {
-        this.unitAttributes[unitName].push(propertyName);
-        if (
-            Object.getOwnPropertyNames(this.unitData[unitName]).includes(
-                propertyName
-            )
-        )
-            return;
-
-        Object.defineProperty(this.unitData[unitName], propertyName, {
-            get() {
-                return calculated[propertyName](this);
-            },
-        });
-    }
-
     get unitNames() {
         return Object.keys(this.unitData);
     }
@@ -241,11 +193,14 @@ export default class UnitManager {
 
     populate(towerName, towerSkin) {
         const output = {};
-        const units = register?.[towerName]?.[towerSkin];
-        if (units == null) return output;
+        const unitNames = register?.[towerName]?.[towerSkin];
 
-        for (const unit of units) {
-            output[unit] = this.unitData[unit];
+        if (unitNames == null) return output;
+
+        for (const unitName of unitNames) {
+            const unitData = this.unitData[unitName];
+
+            output[unitName] = unitData;
         }
         return output;
     }

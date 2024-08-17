@@ -15,10 +15,11 @@ class SkinData {
      * 	Defaults: {any},
      * 	Upgrades: [any]}} data
      */
-    constructor(tower, name, data) {
+    constructor(tower, name, data, unitKey) {
         this.tower = tower;
         this.name = name;
         this.data = data;
+        this.calculatedManager = new CalculatedManager(unitKey ?? 'units');
 
         this.createData();
     }
@@ -31,7 +32,7 @@ class SkinData {
         );
         this.levels = new Levels(this);
 
-        CalculatedManager.addCalculate(this);
+        this.calculatedManager.addCalculate(this);
     }
 
     getAttributeType(attributeName) {

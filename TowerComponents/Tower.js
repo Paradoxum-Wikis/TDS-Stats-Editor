@@ -1,7 +1,7 @@
 import SkinData from './SkinData.js';
 
 class Tower {
-    constructor(name, data) {
+    constructor(name, data, unitKey) {
         this.json = {
             [name]: data,
         };
@@ -9,6 +9,7 @@ class Tower {
         this.name = this.#getName();
         this.skinNames = this.#getSkinNames();
         this.skins = this.#getSkins();
+        this.unitKey = unitKey;
     }
 
     importJSON(json) {
@@ -34,7 +35,12 @@ class Tower {
     #getSkins() {
         return this.skinNames.reduce((output, skinName) => {
             const skinData = this.json[this.name][skinName];
-            output[skinName] = new SkinData(this, skinName, skinData);
+            output[skinName] = new SkinData(
+                this,
+                skinName,
+                skinData,
+                this.unitKey
+            );
             return output;
         }, {});
     }

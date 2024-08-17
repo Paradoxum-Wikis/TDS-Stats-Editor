@@ -37,7 +37,7 @@ class TowerManager {
         this.towerData[name] = json;
 
         this.towerNames = this.parseTowerNames(this.towerData);
-        const towerData = new Tower(name, json);
+        const towerData = new Tower(name, json, this.getUnitKey());
         this.towers[name] = towerData;
         this.saveTower(towerData);
     }
@@ -84,10 +84,27 @@ class TowerManager {
         return Object.keys(towerData).sort((a, b) => a > b);
     }
 
+    getUnitKey() {
+        if (!this.dataKey) return 'units';
+
+        switch (this.dataKey) {
+            case 'delta':
+                return 'unitDeltas';
+            case 'new':
+            case 'default':
+            default:
+                return 'units';
+        }
+    }
+
     parseTowers(towerData) {
         return Object.entries(towerData).reduce(
             (towers, [towerName, towerData]) => {
-                towers[towerName] = new Tower(towerName, towerData);
+                towers[towerName] = new Tower(
+                    towerName,
+                    towerData,
+                    this.getUnitKey()
+                );
 
                 return towers;
             },

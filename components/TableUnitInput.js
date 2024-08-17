@@ -1,12 +1,13 @@
 import Viewer from './Viewer.js';
-
+import Unit from '../TowerComponents/Unit.js';
 export default class TableUnitInput {
     /**
      *
      * @param {{
 	 * unitName: string,
 	 * attribute: string,
-	 * unitData: {},
+	 * unitData: Unit,
+     * deltaData: Unit,
 	 * viewer: Viewer,
 	 * }} data
  
@@ -15,10 +16,13 @@ export default class TableUnitInput {
     constructor(data) {
         this.base = this.#createBase();
 
-        this.name = data.unitData;
+        this.name = data.unitName;
         this.attribute = data.attribute;
         this.unitData = data.unitData;
+        this.deltaData = data.deltaData;
         this.viewer = data.viewer;
+
+        this.useDelta = this.viewer.buttonDeltaButton.state;
 
         this.sizeFactor = 1.35;
         this.sizeDeltaModifier = 0;
@@ -26,8 +30,10 @@ export default class TableUnitInput {
     }
 
     createInput() {
-        const cellData = this.unitData[this.attribute];
-        const input = this.#getInput(cellData);
+        const cellData = this.unitData.attributes[this.attribute];
+        const deltaData = this.deltaData.attributes[this.attribute];
+
+        const input = this.#getInput(cellData, deltaData);
 
         this.input = input;
     }
@@ -39,18 +45,18 @@ export default class TableUnitInput {
         return td;
     }
 
-    #getInput(value) {
+    #getInput(value, deltaValue) {
         if (value === undefined) return this.#createNullInput(value);
 
         if (['true', 'false'].includes(String(value))) {
-            return this.#createBooleanInput(value);
+            return this.#createBooleanInput(value, deltaValue);
         }
 
         if (Number.isFinite(+value)) {
-            return this.#createNumberInput(value);
+            return this.#createNumberInput(value, deltaValue);
         }
 
-        return this.#createTextInput(value);
+        return this.#createTextInput(value, deltaValue);
     }
 
     #createNullInput(value) {
@@ -92,7 +98,6 @@ export default class TableUnitInput {
         const form = document.createElement('form');
 
         input.classList.add('table-cell-input');
-
         input.size = 1;
 
         input.addEventListener('focusin', (() => input.value = '').bind(this)); // prettier-ignore
@@ -109,6 +114,10 @@ export default class TableUnitInput {
         });
 
         let outputValue = this.#formatNumber(value);
+        if (this.useDelta)
+            outputValue =
+                String(outputValue) +
+                String(this.#getDelta(value, deltaData, input));
 
         const computedSize =
             String(outputValue).length / this.sizeFactor + this.sizeModifier;
@@ -123,10 +132,6 @@ export default class TableUnitInput {
     }
 
     #createTextInput(value, deltaData) {
-        if (this.viewer.unitManager.hasUnit(value)) {
-            this.viewer.activeUnits[value] =
-                this.viewer.unitManager.unitData[value];
-        }
         const input = document.createElement('input');
         input.size = 1;
         input.classList.add('table-cell-input');
@@ -157,44 +162,43 @@ export default class TableUnitInput {
         const newValue = this.input.checked;
 
         try {
-            this.viewer.unitManager.set(
-                this.unitData.Name,
-                this.attribute,
-                newValue
-            );
-        } catch (error) {}
+            this.unitData.set(this.attribute, newValue);
+            this.viewer.unitManager.save();
+        } catch (error) {
+            console.warn(error);
+        }
 
-        this.viewer.load(this.viewer.tower);
+        this.viewer.reload();
     }
 
     #onNumberSubmit() {
         const newValue = this.input.value;
 
         try {
-            if (newValue !== '' && Number.isFinite(+newValue))
-                this.viewer.unitManager.set(
-                    this.unitData.Name,
-                    this.attribute,
-                    newValue
-                );
-        } catch (error) {}
+            if (newValue !== '' && Number.isFinite(+newValue)) {
+                this.unitData.set(this.attribute, +newValue);
+                this.viewer.unitManager.save();
+            }
+        } catch (error) {
+            console.warn(error);
+        }
 
-        this.viewer.load(this.viewer.tower);
+        this.viewer.reload();
     }
 
     #onTextSubmit() {
         const newValue = this.input.value;
 
         try {
-            if (newValue !== '' || this.attribute !== 'Name')
-                this.viewer.unitManager.set(
-                    this.unitData.Name,
-                    this.attribute,
-                    newValue
-                );
-        } catch (error) {}
+            if (newValue !== '' || this.attribute !== 'Name') {
+                this.unitData.set(this.attribute, newValue);
+                this.viewer.unitManager.save();
+            }
+        } catch (error) {
+            console.warn(error);
+        }
 
-        this.viewer.load(this.viewer.tower);
+        this.viewer.reload();
     }
 
     #formatNumber(number) {
@@ -205,5 +209,39 @@ export default class TableUnitInput {
                 return `$${Intl.NumberFormat().format(number)}`;
         }
         return +(+number).toFixed(2);
+    }
+
+    flipped = [
+        'Cooldown',
+        'Cost',
+        'CostEfficiency',
+        'NetCost',
+        'ChargeTime',
+        'LaserCooldown',
+        'BombTime',
+        'MissileCooldown',
+        'SpinDuration',
+        'BurstCool',
+        'ReloadSpeed',
+        'TickRate',
+    ];
+
+    #getDelta(cellData, deltaData, input) {
+        const difference = cellData - deltaData;
+        if (difference === 0) return '';
+
+        const sign = Math.sign(difference) > 0 ? '+' : '-';
+        const absDifference = Math.abs(difference);
+
+        const flipFactor = this.flipped.includes(this.attribute) ? -1 : 1;
+
+        if (difference * flipFactor > 0) {
+            input.classList.add('table-cell-input-delta-positive');
+        } else {
+            input.classList.add('table-cell-input-delta-negative');
+        }
+        this.sizeModifier = this.sizeDeltaModifier;
+
+        return ` (${sign}${this.#formatNumber(absDifference)})`;
     }
 }

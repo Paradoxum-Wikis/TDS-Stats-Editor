@@ -25,6 +25,7 @@ class Viewer {
         this.app = app;
 
         this.unitManager = new UnitManager('units');
+        this.unitDeltaManager = new UnitManager('unitDeltas');
         this.defaultTowerManager = new TowerManager('default');
         this.deltaTowerManager = new TowerManager('delta');
 
@@ -50,7 +51,8 @@ class Viewer {
         this.tableView.root.addEventListener('submit', (() => this.#loadBody()).bind(this)); // prettier-ignore
 
         this.buttonDeltaButton = new ToggleButton(
-            document.querySelector('#button-delta button')
+            document.querySelector('#button-delta button'),
+            { state: true }
         );
 
         this.buttonDeltaButton.element.addEventListener('toggled', (() => {this.reload()}).bind(this)) // prettier-ignore
@@ -116,11 +118,15 @@ class Viewer {
 
         this.#setVariantButtons();
         this.unitManager.load();
+        this.unitDeltaManager.load();
+
         this.#loadBody();
     }
 
     reload() {
         this.unitManager.load();
+        this.unitDeltaManager.load();
+
         this.#loadBody();
     }
 
@@ -181,6 +187,15 @@ class Viewer {
 
         this.reload();
     }
+    applyUnitTable() {
+        Object.entries(this.activeUnits).forEach(([unitName, unitData]) => {
+            this.unitDeltaManager.baseData[unitName] = unitData.data;
+        });
+
+        this.unitDeltaManager.save();
+
+        this.reload();
+    }
 
     reset() {
         const towerManager = new TowerManager();
@@ -193,13 +208,40 @@ class Viewer {
 
         this.reload();
     }
+    resetUnitTable() {
+        const defaultUnitManager = new UnitManager();
+
+        Object.entries(this.activeUnits).forEach(([unitName, unitData]) => {
+            this.unitManager.baseData[unitName] =
+                defaultUnitManager.baseData[unitName];
+            this.unitDeltaManager.baseData[unitName] =
+                defaultUnitManager.baseData[unitName];
+        });
+
+        this.unitManager.save();
+        this.unitDeltaManager.save();
+
+        this.reload();
+    }
 
     getActiveSkin() {
         return this.tower.skins[this.towerVariants.getSelectedName()];
     }
 
+    clearUnitTable() {
+        Object.entries(this.activeUnits).forEach(([unitName, unitData]) => {
+            this.unitManager.baseData[unitName] =
+                this.unitDeltaManager.baseData[unitName];
+        });
+
+        this.unitManager.save();
+
+        this.reload();
+    }
+
     clearUnitChanges() {
-        this.unitManager.clear();
+        localStorage.removeItem(this.unitManager.dataKey);
+        localStorage.removeItem(this.unitDeltaManager.dataKey);
         this.reload();
     }
 
@@ -221,6 +263,9 @@ class Viewer {
     #loadBody() {
         this.app.towerManager.saveTower(this.tower);
         this.deltaTowerManager.saveTower(this.deltaTower);
+        this.unitManager.save();
+        this.unitDeltaManager.save();
+
         this.boostPanel.reload();
 
         this.#loadName();

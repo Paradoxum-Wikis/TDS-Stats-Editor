@@ -1,5 +1,4 @@
 import Table from './Table.js';
-
 import TableUnitInput from './TableUnitInput.js';
 
 export default class UnitTable extends Table {
@@ -32,7 +31,10 @@ export default class UnitTable extends Table {
 
     #addBody(data) {
         Object.entries(data).forEach(([unitName, unitData]) => {
-            unitData.Name = unitName;
+            unitData.attributes.Name = unitName;
+
+            const deltaUnit = this.viewer.unitDeltaManager.unitData[unitName];
+            deltaUnit.attributes.Name = unitName;
             const tr = this.createRow();
 
             this.attributes.forEach((attribute) => {
@@ -40,6 +42,7 @@ export default class UnitTable extends Table {
                     unitName: unitName,
                     attribute: attribute,
                     unitData: unitData,
+                    deltaData: deltaUnit,
                     viewer: this.viewer,
                 });
 
@@ -52,9 +55,9 @@ export default class UnitTable extends Table {
         });
     }
 
-    #getAttributes(data, attributes) {
-        attributes = Object.keys(data).reduce(
-            (a, k) => [...a, ...attributes[k]],
+    #getAttributes(data) {
+        const attributes = Object.values(data).reduce(
+            (a, unitData) => [...a, ...unitData.attributeNames],
             []
         );
 
@@ -73,10 +76,7 @@ export default class UnitTable extends Table {
             .getElementById('unit-table-buttons')
             .classList.remove('d-none');
 
-        this.attributes = this.#getAttributes(
-            data,
-            this.viewer.unitManager.unitAttributes
-        );
+        this.attributes = this.#getAttributes(data);
         this.#createBaseTable();
 
         this.#addHeader(this.attributes);
