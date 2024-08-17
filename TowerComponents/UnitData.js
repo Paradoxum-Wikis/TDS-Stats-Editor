@@ -16,6 +16,8 @@ export default {
         Damage: 15,
         Detections: {
             Hidden: true,
+            Flying: false,
+            Lead: false,
         },
         Attributes: {},
     },
@@ -27,6 +29,8 @@ export default {
         Damage: 35,
         Detections: {
             Hidden: true,
+            Flying: false,
+            Lead: false,
         },
         Attributes: {},
     },
@@ -35,7 +39,9 @@ export default {
         Speed: 1.8,
         Range: 2,
         Detections: {
-            Hidden: false,
+            Hidden: true,
+            Flying: false,
+            Lead: false,
         },
         Attributes: {},
     },
@@ -47,6 +53,8 @@ export default {
         Damage: 50,
         Detections: {
             Hidden: true,
+            Flying: false,
+            Lead: false,
         },
         Attributes: {},
     },
@@ -56,36 +64,66 @@ export default {
         Health: 10,
         Cooldown: 1,
         Damage: 2,
+        Detections: {
+            Hidden: true,
+            Flying: false,
+            Lead: false,
+        },
     },
     Goon2: {
         Range: 16,
         Health: 35,
         Cooldown: 0.25,
         Damage: 3,
+        Detections: {
+            Hidden: true,
+            Flying: false,
+            Lead: false,
+        },
     },
     Goon3: {
         Range: 18,
         Health: 50,
         Cooldown: 0.18,
         Damage: 4,
+        Detections: {
+            Hidden: true,
+            Flying: false,
+            Lead: false,
+        },
     },
     GoldenGoon1: {
         Range: 14,
         Health: 15,
         Cooldown: 1,
         Damage: 2,
+        Detections: {
+            Hidden: true,
+            Flying: false,
+            Lead: false,
+        },
     },
     GoldenGoon2: {
         Range: 16,
         Health: 40,
         Cooldown: 0.22,
         Damage: 4,
+        Detections: {
+            Hidden: true,
+            Flying: false,
+            Lead: false,
+        },
     },
     GoldenGoon3: {
         Range: 18,
         Health: 65,
         Cooldown: 0.15,
         Damage: 5,
+        Detections: {
+            Hidden: true,
+            Flying: false,
+            Lead: false,
+        },
     },
     // Mercenary base
     Rifleman1: {
@@ -97,9 +135,11 @@ export default {
         Cooldown: 0.15,
         BurstCooldown: 1.75,
         Range: 18,
-        Hidden: false,
-        Flying: false,
-        Lead: false,
+        Detections: {
+            Hidden: false,
+            Flying: false,
+            Lead: false,
+        },
     },
     Rifleman2: {
         Unlocks: 3,
@@ -110,9 +150,11 @@ export default {
         Cooldown: 0.15,
         BurstCooldown: 1.5,
         Range: 23,
-        Hidden: true,
-        Flying: true,
-        Lead: false,
+        Detections: {
+            Hidden: true,
+            Flying: true,
+            Lead: false,
+        },
     },
     Rifleman3: {
         Unlocks: 6,
@@ -123,9 +165,11 @@ export default {
         Cooldown: 0.15,
         BurstCooldown: 1.25,
         Range: 30,
-        Hidden: true,
-        Flying: true,
-        Lead: false,
+        Detections: {
+            Hidden: true,
+            Flying: true,
+            Lead: false,
+        },
     },
     Grenadier1: {
         Unlocks: 2,
@@ -136,9 +180,11 @@ export default {
         Defense: 0,
         Range: 17,
         ExplosiveRange: 3,
-        Hidden: false,
-        Flying: false,
-        Lead: true,
+        Detections: {
+            Hidden: false,
+            Flying: false,
+            Lead: true,
+        },
     },
     Grenadier2: {
         Unlocks: 3,
@@ -149,9 +195,11 @@ export default {
         Defense: 0,
         Range: 19,
         ExplosiveRange: 4.5,
-        Hidden: false,
-        Flying: false,
-        Lead: true,
+        Detections: {
+            Hidden: false,
+            Flying: false,
+            Lead: true,
+        },
     },
     Grenadier3: {
         Unlocks: 6,
@@ -162,9 +210,11 @@ export default {
         Defense: 0.1,
         Range: 21,
         ExplosiveRange: 4.5,
-        Hidden: false,
-        Flying: false,
-        Lead: true,
+        Detections: {
+            Hidden: false,
+            Flying: false,
+            Lead: true,
+        },
     },
 
     RiotGuard1: {
@@ -175,9 +225,11 @@ export default {
         Defense: 0.1,
         Cooldown: 1.5,
         Range: 4,
-        Hidden: false,
-        Flying: false,
-        Lead: false,
+        Detections: {
+            Hidden: false,
+            Flying: false,
+            Lead: false,
+        },
     },
     RiotGuard2: {
         Unlocks: 6,
@@ -187,9 +239,11 @@ export default {
         Defense: 0.15,
         Cooldown: 1,
         Range: 4,
-        Hidden: false,
-        Flying: false,
-        Lead: false,
+        Detections: {
+            Hidden: false,
+            Flying: false,
+            Lead: false,
+        },
     },
 
     FieldMedic1: {
@@ -201,9 +255,11 @@ export default {
         MaxTargets: 4,
         Cooldown: 0.2,
         Range: 25,
-        Hidden: false,
-        Flying: false,
-        Lead: false,
+        Detections: {
+            Hidden: false,
+            Flying: false,
+            Lead: false,
+        },
     },
     FieldMedic2: {
         Unlocks: 6,
@@ -214,9 +270,11 @@ export default {
         MaxTargets: 8,
         Cooldown: 0.2,
         Range: 25,
-        Hidden: false,
-        Flying: false,
-        Lead: false,
+        Detections: {
+            Hidden: false,
+            Flying: false,
+            Lead: false,
+        },
     },
 
     Sentry1: {
@@ -229,6 +287,8 @@ export default {
         Damage: 1,
         Detections: {
             Hidden: false,
+            Flying: false,
+            Lead: false,
         },
         Attributes: {
             SendTime: 1.25,
@@ -246,6 +306,8 @@ export default {
         Damage: 2,
         Detections: {
             Hidden: false,
+            Flying: false,
+            Lead: false,
         },
         Attributes: {
             SendTime: 1.5,
@@ -263,6 +325,8 @@ export default {
         Damage: 5,
         Detections: {
             Hidden: true,
+            Flying: false,
+            Lead: false,
         },
         Attributes: {
             SendTime: 1.75,
@@ -283,6 +347,8 @@ export default {
         Damage: 9,
         Detections: {
             Hidden: true,
+            Flying: false,
+            Lead: false,
         },
         Attributes: {
             SendTime: 1.75,
@@ -295,18 +361,33 @@ export default {
         Damage: 0,
         Cooldown: 0.2,
         Range: 5,
+        Detections: {
+            Hidden: false,
+            Flying: false,
+            Lead: false,
+        },
     },
     ['Humvee 2']: {
         Health: 60,
         Damage: 0,
         Cooldown: 0.2,
         Range: 5,
+        Detections: {
+            Hidden: false,
+            Flying: false,
+            Lead: false,
+        },
     },
     ['Humvee 3']: {
         Health: 90,
         Damage: 3,
         Cooldown: 0.2,
         Range: 30,
+        Detections: {
+            Hidden: true,
+            Flying: false,
+            Lead: false,
+        },
     },
     Tank: {
         Health: 500,
@@ -315,6 +396,11 @@ export default {
         Range: 30,
         ExplosionDamage: 50,
         TimeBetweenMissiles: 3,
+        Detections: {
+            Hidden: true,
+            Flying: false,
+            Lead: false,
+        },
     },
     ['Railgun Tank']: {
         Health: 1500,
@@ -323,12 +409,22 @@ export default {
         Range: 30,
         ExplosionDamage: 80,
         TimeBetweenMissiles: 3,
+        Detections: {
+            Hidden: true,
+            Flying: false,
+            Lead: false,
+        },
     },
     Mark1: {
         Health: 400,
         Damage: 8,
         Cooldown: 0.2,
         Range: 30,
+        Detections: {
+            Hidden: true,
+            Flying: false,
+            Lead: false,
+        },
     },
     Mark1Rocket: {
         Health: 400,
@@ -337,6 +433,11 @@ export default {
         Range: 30,
         ExplosionDamage: 8,
         TimeBetweenMissiles: 5,
+        Detections: {
+            Hidden: true,
+            Flying: false,
+            Lead: false,
+        },
     },
     Mark2: {
         Health: 750,
@@ -345,6 +446,11 @@ export default {
         Range: 25,
         ExplosionDamage: 8,
         TimeBetweenMissiles: 5,
+        Detections: {
+            Hidden: true,
+            Flying: false,
+            Lead: false,
+        },
     },
     Mark3: {
         Health: 1200,
@@ -353,6 +459,11 @@ export default {
         Range: 25,
         ExplosionDamage: 8,
         TimeBetweenMissiles: 3,
+        Detections: {
+            Hidden: true,
+            Flying: false,
+            Lead: false,
+        },
     },
     Mark4: {
         Health: 2000,
@@ -362,6 +473,11 @@ export default {
         ExplosionDamage: 8,
         TimeBetweenMissiles: 3,
         MissileAmount: 4,
+        Detections: {
+            Hidden: true,
+            Flying: false,
+            Lead: false,
+        },
     },
     Mark5: {
         Health: 5000,
@@ -371,5 +487,10 @@ export default {
         ExplosionDamage: 8,
         TimeBetweenMissiles: 3,
         MissileAmount: 4,
+        Detections: {
+            Hidden: true,
+            Flying: false,
+            Lead: false,
+        },
     },
 };
