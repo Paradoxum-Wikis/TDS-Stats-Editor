@@ -17,9 +17,38 @@ class CalculatedManager {
         },
         TowerDPS: {
             Default: {
-                For: ['Engineer', 'Crook Boss'],
+                For: ['Engineer'],
                 Requires: ['Damage', 'Cooldown'],
                 Value: (level) => level.Damage / level.Cooldown,
+            },
+            Crook: {
+                For: ['Crook Boss'],
+                Requires: [
+                    'Damage',
+                    'Cooldown',
+                    'PistolCrookSpawnTime',
+                    'TommyCrookSpawnTime',
+                    'BackupCallTime',
+                ],
+                Value: (level) => {
+                    const pistolDelayPerMinute =
+                        level.PistolCrookSpawnTime > 0
+                            ? level.BackupCallTime *
+                              (60 / level.PistolCrookSpawnTime)
+                            : 0;
+                    const tommyDelayPerMinute =
+                        level.TommyCrookSpawnTime > 0
+                            ? level.BackupCallTime *
+                              (60 / level.TommyCrookSpawnTime)
+                            : 0;
+
+                    const dpm =
+                        (level.Damage *
+                            (60 - pistolDelayPerMinute - tommyDelayPerMinute)) /
+                        level.Cooldown;
+
+                    return dpm / 60;
+                },
             },
         },
         RamDPS: {
