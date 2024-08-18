@@ -154,6 +154,7 @@ class Viewer {
             alert.timeBeforeShow = 0.1;
             alert.alertTimeInSeconds = 1;
             alert.fire();
+            console.error(e);
         }
 
         this.reload();

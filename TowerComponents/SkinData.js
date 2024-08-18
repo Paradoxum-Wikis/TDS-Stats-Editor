@@ -26,10 +26,13 @@ class SkinData {
 
     createData() {
         this.locator = new Locator();
+
         this.defaults = new Defaults(this.data.Defaults, this.locator);
+
         this.upgrades = this.data.Upgrades.map(
             (upgrade) => new Upgrade(upgrade, this.locator)
         );
+
         this.levels = new Levels(this);
 
         this.calculatedManager.addCalculate(this);

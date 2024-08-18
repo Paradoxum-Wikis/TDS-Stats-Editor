@@ -123,6 +123,76 @@ class CalculatedManager {
                 },
             },
         },
+        AggregateUnitDPS: {
+            Default: {
+                Requires: ['UnitDPS', 'SpawnTime'],
+                Value: (level) => {
+                    let damage = 0;
+                    let remainingTime = 60;
+
+                    if (level.SpawnTime <= 0.1) {
+                        return Infinity;
+                    }
+
+                    while (remainingTime > 0) {
+                        damage += level.UnitDPS * remainingTime;
+
+                        remainingTime -= level.SpawnTime;
+                    }
+
+                    return damage / 60;
+                },
+            },
+            Crook: {
+                For: ['Crook Boss'],
+                Requires: [
+                    'PistolCrookSpawnTime',
+                    'TommyCrookSpawnTime',
+                    'DoublePistolCrooks',
+                    'TommyDrum',
+                ],
+                Value: (level) => {
+                    const skin = level.levels.skinData.name;
+                    this.unitManager.load();
+
+                    const goldText = skin == 'Golden' ? 'Golden' : '';
+                    const goon1 = this.unitManager.unitData[`${goldText}Goon1`];
+                    const goon2 = this.unitManager.unitData[`${goldText}Goon2`];
+                    const goon3 = this.unitManager.unitData[`${goldText}Goon3`];
+
+                    let goon1DPS =
+                        level.PistolCrookSpawnTime && goon1.attributes.DPS;
+                    if (level.DoublePistolCrooks) goon1DPS *= 2;
+
+                    let goon2DPS =
+                        level.TommyCrookSpawnTime && goon2.attributes.DPS;
+                    if (level.TommyDrum) goon2DPS = goon3.attributes.DPS;
+
+                    let damage = 0;
+                    let remainingTime = 60;
+
+                    if (level.PistolCrookSpawnTime > 0.1) {
+                        while (remainingTime > 0) {
+                            damage += goon1DPS * remainingTime;
+
+                            remainingTime -= level.PistolCrookSpawnTime;
+                        }
+                    }
+
+                    remainingTime = 60;
+
+                    if (level.TommyCrookSpawnTime > 0.1) {
+                        while (remainingTime > 0) {
+                            damage += goon2DPS * remainingTime;
+
+                            remainingTime -= level.TommyCrookSpawnTime;
+                        }
+                    }
+
+                    return damage / 60;
+                },
+            },
+        },
         SpikeDPS: {
             Default: {
                 For: ['Trapper'],
@@ -509,11 +579,15 @@ class CalculatedManager {
             Default: {
                 Requires: ['Range'],
                 Value: (level) => {
-                    const x = level.Range;
+                    let x = level.Range;
                     const a = -0.00229008361916565;
                     const b = 0.165383660474954;
                     const c = 0.234910819904625;
                     const d = 2.62040766713282;
+
+                    if (x > 45) {
+                        x = 45;
+                    }
 
                     return a * x ** 3 + b * x ** 2 + c * x + d;
                 },
@@ -714,6 +788,7 @@ class CalculatedManager {
         this.#add('BearTrapMaxPileDamage', skinData);
         this.#add('TowerDPS', skinData);
         this.#add('UnitDPS', skinData);
+        this.#add('AggregateUnitDPS', skinData);
         this.#add('RamDPS', skinData);
         this.#add('LaserTime', skinData);
         this.#add('BeeDps', skinData);

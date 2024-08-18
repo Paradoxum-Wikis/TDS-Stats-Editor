@@ -47,6 +47,35 @@ class UnitCalculations {
                 },
             },
         },
+        AggregateDPS: {
+            Default: {
+                Requires: ['DPS', 'Spawnrate'],
+                Value: (level) => {
+                    let damage = 0;
+                    let remainingTime = 60;
+
+                    if (level.Spawnrate <= 0.1) {
+                        return Infinity;
+                    }
+
+                    while (remainingTime > 0) {
+                        damage += level.DPS * remainingTime;
+
+                        remainingTime -= level.Spawnrate;
+                    }
+
+                    return damage / 60;
+                },
+            },
+        },
+        RamDPS: {
+            Default: {
+                Requires: ['Health', 'Spawnrate'],
+                Value: (level) => {
+                    return level.Health / level.Spawnrate;
+                },
+            },
+        },
         Cooldown: {
             Type: 'Override',
 
@@ -142,6 +171,8 @@ class UnitCalculations {
 
     addCalculate(unitData) {
         this.#add('DPS', unitData);
+        this.#add('AggregateDPS', unitData);
+        this.#add('RamDPS', unitData);
 
         this.#add('Health', unitData);
         this.#add('Damage', unitData);

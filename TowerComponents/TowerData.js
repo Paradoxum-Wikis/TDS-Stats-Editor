@@ -4654,6 +4654,7 @@ export default {
             },
         },
     },
+
     Sniper: {
         Default: {
             Upgrades: [
