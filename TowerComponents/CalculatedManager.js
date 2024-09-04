@@ -444,7 +444,7 @@ class CalculatedManager {
                         totalNormalHits * level.Damage + level.FinalHitDamage;
 
                     const comboLength =
-                        level.ComboLength * level.Cooldown +
+                        totalNormalHits * level.Cooldown +
                         level.ComboCooldown;
 
                     return totalDamage / comboLength;
