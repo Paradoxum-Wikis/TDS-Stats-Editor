@@ -470,9 +470,9 @@ class CalculatedManager {
             },
             AmmoTower: {
                 For: ["Gatling Gun"],
-                Requires: ["Damage", "FireTime", "ReloadTime", "WindUpTime"],
+                Requires: ["Damage", "Cooldown", "FireTime", "ReloadTime", "WindUpTime"],
                 Value: (level) => {
-                    const totalDamage = level.Damage * level.FireTime
+                    const totalDamage = (level.Damage / level.Cooldown) * level.FireTime
                     const totalTime = level.FireTime + level.ReloadTime + level.WindUpTime
 
                     return totalDamage / totalTime
