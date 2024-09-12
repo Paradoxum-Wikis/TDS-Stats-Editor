@@ -830,6 +830,7 @@ class CalculatedManager {
         this.#add('SpikeDPS', skinData);
         this.#add('LandmineDPS', skinData);
         this.#add('BearTrapDPS', skinData);
+        this.#add('FireTime', skinData);
         this.#add('SpikeMaxPileDamage', skinData);
         this.#add('LandmineMaxPileDamage', skinData);
         this.#add('BearTrapMaxPileDamage', skinData);
