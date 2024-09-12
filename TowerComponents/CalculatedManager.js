@@ -351,6 +351,14 @@ class CalculatedManager {
                 Value: (level) => level.MaxAmmo / level.LaserDPS,
             },
         },
+        FireTime: {
+            Default: {
+                For: ['Gatling Gun'],
+                Requires: ['Ammo', 'Cooldown'],
+                Value: (level) => level.Ammo * level.Cooldown,
+            },
+        },
+
         BeeDps: {
             Default: {
                 For: ['Swarmer'],
@@ -459,6 +467,16 @@ class CalculatedManager {
 
                     return dps + burnDPS;
                 },
+            },
+            AmmoTower: {
+                For: ["Gatling Gun"],
+                Requires: ["Damage", "FireTime", "ReloadTime", "WindUpTime"],
+                Value: (level) => {
+                    const totalDamage = level.Damage * level.FireTime
+                    const totalTime = level.FireTime + level.ReloadTime + level.WindUpTime
+
+                    return totalDamage / totalTime
+                }
             },
             MultiHit: {
                 For: ['Electroshocker'],
