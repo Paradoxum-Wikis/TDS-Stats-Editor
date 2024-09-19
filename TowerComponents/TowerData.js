@@ -1167,107 +1167,107 @@ export default {
     },
   },
   "DJ Booth": {
-      Default: {
-        Upgrades: [
-          {
-            Stats: {
-              Range: 17,
-              Attributes: { PurpleTrackBuffs: { Range: 15 } },
-            },
-            Image: 5523221280,
-            Title: "Laptop Studio",
-            Cost: 300,
+    Default: {
+      Upgrades: [
+        {
+          Stats: {
+            Range: 17,
+            Attributes: { PurpleTrackBuffs: { Range: 15 } },
           },
-          {
-            Stats: {
-              Extras: ["15% range buff"],
-              Attributes: {
-                GreenTrackBuffs: { Discount: 10, Range: 7.5 },
-                PurpleTrackBuffs: { Range: 15, Discount: 5 },
-              },
-            },
-            Image: 5523222880,
-            Title: "Party Mode",
-            Cost: 850,
-          },
-          {
-            Stats: {
-              Attributes: {
-                RedTrackBuffs: { Discount: 5, Range: 17.5, Damage: 10 },
-                PurpleTrackBuffs: { Discount: 5, Range: 25, Damage: 5 },
-                MeterUnlocked: true,
-                GreenTrackBuffs: { Discount: 10, Range: 17.5, Damage: 5 },
-              },
-              Range: 18,
-              Extras: ["10% discount buff"],
-            },
-            Image: 5523224020,
-            Title: "Thrifty Music",
-            Cost: 2500,
-          },
-          {
-            Stats: {
-              Attributes: {
-                RedTrackBuffs: { Discount: 10, Range: 12.5, Damage: 10 },
-                PurpleTrackBuffs: { Discount: 10, Range: 25, Damage: 5 },
-                GreenTrackBuffs: { Discount: 20, Range: 12.5, Damage: 5 },
-              },
-              Range: 18,
-              Extras: ["25% range buff"],
-            },
-            Image: 5523225033,
-            Title: "Audio Visualizer",
-            Cost: 4000,
-          },
-          {
-            Stats: {
-              Attributes: {
-                Knockback: 20,
-                GreenTrackBuffs: { Discount: 20, Range: 17.5, Damage: 7.5 },
-                StunDuration: 3,
-                RedTrackBuffs: { Discount: 10, Range: 17.5, Damage: 15 },
-                CashPerTower: 25,
-                PurpleTrackBuffs: { Discount: 10, Range: 35, Damage: 7.5 },
-              },
-              Range: 20,
-              Extras: ["35% range buff", "20% discount buff"],
-            },
-            Image: 5523225756,
-            Title: "Apocalypse Rave",
-            Cost: 9000,
-          },
-        ],
-        Defaults: {
-          Detections: { Hidden: false, Flying: false },
-          Price: 600,
-          Range: 15,
-          MaxAmmo: 30,
-          Limit: 1,
-          Attributes: {
-            Knockback: 25,
-            PulseCD: 1,
-            GreenTrackBuffs: { Discount: 0 },
-            BaseSlowDebuff: 25,
-            MaxSlowDebuff: 50,
-            SlowDuration: 4,
-            MaxCash: 500,
-            MaxDefMelt: 25,
-            PurpleTrackBuffs: { Range: 10 },
-            BaseDefenseMelt: 5,
-            PulseCount: 3,
-            RedTrackBuffs: { Damage: 0 },
-            SlowDebuffPerTwr: 1,
-            CashPerTower: 10,
-            DefenseMeltPerTwr: 0.5,
-          },
-          Abilities: [
-            { Icon: 14606405886, Level: 2, Name: "Switch it Up", Debounce: 1 },
-            { Icon: 10931263897, Level: 3, Name: "Drop The Beat", Debounce: 1 },
-          ],
-          Cooldown: 1,
-          Damage: 0,
+          Image: 5523221280,
+          Title: "Laptop Studio",
+          Cost: 300,
         },
+        {
+          Stats: {
+            Extras: ["15% range buff"],
+            Attributes: {
+              GreenTrackBuffs: { Discount: 10, Range: 7.5 },
+              PurpleTrackBuffs: { Range: 15, Discount: 5 },
+            },
+          },
+          Image: 5523222880,
+          Title: "Party Mode",
+          Cost: 850,
+        },
+        {
+          Stats: {
+            Attributes: {
+              RedTrackBuffs: { Discount: 5, Range: 17.5, Damage: 10 },
+              PurpleTrackBuffs: { Discount: 5, Range: 25, Damage: 5 },
+              MeterUnlocked: true,
+              GreenTrackBuffs: { Discount: 10, Range: 17.5, Damage: 5 },
+            },
+            Range: 18,
+            Extras: ["10% discount buff"],
+          },
+          Image: 5523224020,
+          Title: "Thrifty Music",
+          Cost: 2500,
+        },
+        {
+          Stats: {
+            Attributes: {
+              RedTrackBuffs: { Discount: 10, Range: 12.5, Damage: 10 },
+              PurpleTrackBuffs: { Discount: 10, Range: 25, Damage: 5 },
+              GreenTrackBuffs: { Discount: 20, Range: 12.5, Damage: 5 },
+            },
+            Range: 18,
+            Extras: ["25% range buff"],
+          },
+          Image: 5523225033,
+          Title: "Audio Visualizer",
+          Cost: 4000,
+        },
+        {
+          Stats: {
+            Attributes: {
+              Knockback: 20,
+              GreenTrackBuffs: { Discount: 20, Range: 17.5, Damage: 7.5 },
+              StunDuration: 3,
+              RedTrackBuffs: { Discount: 10, Range: 17.5, Damage: 15 },
+              CashPerTower: 25,
+              PurpleTrackBuffs: { Discount: 10, Range: 35, Damage: 7.5 },
+            },
+            Range: 20,
+            Extras: ["35% range buff", "20% discount buff"],
+          },
+          Image: 5523225756,
+          Title: "Apocalypse Rave",
+          Cost: 9000,
+        },
+      ],
+      Defaults: {
+        Detections: { Hidden: false, Flying: false },
+        Price: 600,
+        Range: 15,
+        MaxAmmo: 30,
+        Limit: 1,
+        Attributes: {
+          Knockback: 25,
+          PulseCD: 1,
+          GreenTrackBuffs: { Discount: 0 },
+          BaseSlowDebuff: 25,
+          MaxSlowDebuff: 50,
+          SlowDuration: 4,
+          MaxCash: 500,
+          MaxDefMelt: 25,
+          PurpleTrackBuffs: { Range: 10 },
+          BaseDefenseMelt: 5,
+          PulseCount: 3,
+          RedTrackBuffs: { Damage: 0 },
+          SlowDebuffPerTwr: 1,
+          CashPerTower: 10,
+          DefenseMeltPerTwr: 0.5,
+        },
+        Abilities: [
+          { Icon: 14606405886, Level: 2, Name: "Switch it Up", Debounce: 1 },
+          { Icon: 10931263897, Level: 3, Name: "Drop The Beat", Debounce: 1 },
+        ],
+        Cooldown: 1,
+        Damage: 0,
       },
+    },
   },
   Electroshocker: {
     Default: {
@@ -2177,6 +2177,7 @@ export default {
       },
     },
   },
+  "Gatling Gun":{"Default":{"Defaults":{"Detections":{"Flying":true},"Price":5000,"Ammo":50,"Range":25,"Attributes":{"ReloadTime":2.5,"Angle":45,"Recoil":0.08,"SpreadAdd":10,"WindDownTime":2},"Abilities":[{"Name":"FPS","Debounce":0.5,"Price":0,"Level":0,"Icon":94564306265259}],"Limit":1,"Cooldown":0.15,"Damage":6},"Upgrades":[{"Stats":{"Detections":[],"Cooldown":0.15,"Attributes":{"ReloadTime":2.5,"Angle":45,"SpreadAdd":10,"Recoil":0.08},"Ammo":50,"Range":30,"Damage":8,"Extras":["Increased Firing Angle (30 --> 45)"]},"Image":5523212631,"Title":"Heavier Bullets","Cost":3000},{"Stats":{"Attributes":{"SpreadAdd":9,"Angle":45,"Recoil":0.08,"ReloadTime":2},"Cooldown":0.15,"Range":30,"Damage":12,"Ammo":100,"Extras":["Doubles Ammo Size"]},"Image":5523212631,"Title":"Bigger Magazine","Cost":8250},{"Stats":{"Attributes":{"ReloadTime":2,"Angle":60,"SpreadAdd":7.5,"Recoil":0.08},"Range":35,"Ammo":200,"Cooldown":0.12,"Damage":18,"Extras":["Increases Some Stats"],"Detections":{"Hidden":true}},"Image":5523212631,"Title":"Double Trouble","Cost":17500},{"Stats":{"Attributes":{"SpreadAdd":6.5,"WindUpTime":0,"WindDownTime":2,"Angle":60,"DeadZone":1.25,"ReloadTime":2,"Recoil":0.06},"Cooldown":0.09,"Ammo":200,"Range":45,"Damage":28,"Extras":["Increases Some Stats"]},"Image":5523212631,"Title":"Minigun Barrel","Cost":35000},{"Stats":{"Detections":{"Flying":true},"Attributes":{"SpreadAdd":6.5,"WindUpTime":0,"WindDownTime":2,"Angle":75,"DeadZone":2,"ReloadTime":6,"Recoil":0.03},"Cooldown":0.09,"Ammo":400,"Range":50,"Damage":55,"Extras":["Increases Some Stats"]},"Image":5523212631,"Title":"Impenetrable Fortress","Cost":60000},{"Stats":{"Attributes":{"ReloadTime":6,"Angle":75,"SpreadAdd":6.5,"Recoil":0.03,"WindUpTime":0,"WindDownTime":2},"Cooldown":0.09,"Ammo":600,"Range":50,"Damage":100,"Detections":{"Hidden":true},"Extras":["Increases Some Stats"]},"Image":5523212631,"Title":"Destruction-Oriented Output Machine","Cost":100000}]}},
   Gladiator: {
     Default: {
       Upgrades: [
