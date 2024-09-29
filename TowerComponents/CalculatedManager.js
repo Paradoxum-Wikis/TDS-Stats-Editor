@@ -671,9 +671,7 @@ class CalculatedManager {
                 For: ['Cowboy'],
                 Value: (level) => {
                     const damagePerCylinder = level.Damage * level.MaxAmmo;
-                    return (
-                        (level.Income + damagePerCylinder) / damagePerCylinder
-                    );
+                    return (level.Income + damagePerCylinder) / damagePerCylinder;
                 },
             },
         },
@@ -819,11 +817,12 @@ class CalculatedManager {
 
     addCalculate(skinData) {
         this.unitManager.load();
-
+        
         this.#add('Cooldown', skinData);
         this.#add('Damage', skinData);
         this.#add('Range', skinData);
         this.#add('Cost', skinData);
+        this.#add('Unit', skinData);
         this.#add('SpawnTime', skinData);
         this.#add('LaserDPS', skinData);
         this.#add('KnifeSingleDPS', skinData);
