@@ -452,8 +452,7 @@ class CalculatedManager {
                         totalNormalHits * level.Damage + level.FinalHitDamage;
 
                     const comboLength =
-                        totalNormalHits * level.Cooldown +
-                        level.ComboCooldown;
+                        totalNormalHits * level.Cooldown + level.ComboCooldown;
 
                     return totalDamage / comboLength;
                 },
@@ -469,14 +468,22 @@ class CalculatedManager {
                 },
             },
             AmmoTower: {
-                For: ["Gatling Gun"],
-                Requires: ["Damage", "Cooldown", "FireTime", "ReloadTime", "WindUpTime"],
+                For: ['Gatling Gun'],
+                Requires: [
+                    'Damage',
+                    'Cooldown',
+                    'FireTime',
+                    'ReloadTime',
+                    'WindUpTime',
+                ],
                 Value: (level) => {
-                    const totalDamage = (level.Damage / level.Cooldown) * level.FireTime
-                    const totalTime = level.FireTime + level.ReloadTime + level.WindUpTime
+                    const totalDamage =
+                        (level.Damage / level.Cooldown) * level.FireTime;
+                    const totalTime =
+                        level.FireTime + level.ReloadTime + level.WindUpTime;
 
-                    return totalDamage / totalTime
-                }
+                    return totalDamage / totalTime;
+                },
             },
             MultiHit: {
                 For: ['Electroshocker'],
@@ -671,7 +678,9 @@ class CalculatedManager {
                 For: ['Cowboy'],
                 Value: (level) => {
                     const damagePerCylinder = level.Damage * level.MaxAmmo;
-                    return (level.Income + damagePerCylinder) / damagePerCylinder;
+                    return (
+                        (level.Income + damagePerCylinder) / damagePerCylinder
+                    );
                 },
             },
         },
@@ -817,12 +826,11 @@ class CalculatedManager {
 
     addCalculate(skinData) {
         this.unitManager.load();
-        
+
         this.#add('Cooldown', skinData);
         this.#add('Damage', skinData);
         this.#add('Range', skinData);
         this.#add('Cost', skinData);
-        this.#add('Unit', skinData);
         this.#add('SpawnTime', skinData);
         this.#add('LaserDPS', skinData);
         this.#add('KnifeSingleDPS', skinData);
