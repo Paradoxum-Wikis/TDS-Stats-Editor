@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-
-
     <link href="./Styles/bootstrap.css" rel="stylesheet">
     <link href="./Styles/Dashboard.css" rel="stylesheet">
     <link href="./Styles/Sidebars.css" rel="stylesheet">
@@ -24,10 +22,11 @@
         crossorigin="anonymous"></script>
 
     <script src="./json-viewer.js"></script>
+    <script src="Light.js"></script>
     <script defer type="module" src="./Main.js"></script>
 
     </style>
-    <title>Stat Editor</title>
+    <title>TDS Statistics Editor</title>
 </head>
 
 
@@ -42,7 +41,7 @@
         <div class="aside d-flex flex-column flex-shrink-0  text-white" style="min-width: 240px; width: 20%;">
             <!-- Title -->
             <a href="/" class="d-flex align-items-center mb-0 mt-3 ms-3 text-white text-decoration-none">
-                <span class="fs-4">Stat Editor</span>
+                <span class="fs-4"><img src='https://static.wikia.nocookie.net/tower-defense-sim/images/e/e6/Site-logo.png/revision/latest'></span>
             </a>
             <hr>
 
@@ -427,6 +426,9 @@
                 </div>
             </div>
 
+            <!-- light mode button
+            <button id="toggle-light-mode" class="btn btn-sm btn-outline-secondary">Toggle Light Mode</button>
+            -->
             <!-- Body JSON -->
             <div id="json-panel" class="d-none d-flex flex-column p-3 pb-0">
                 <!-- JSON Header -->

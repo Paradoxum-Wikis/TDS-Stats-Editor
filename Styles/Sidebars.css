@@ -2,6 +2,10 @@
     background-color: rgba(0, 0, 0, 0.45);
 }
 
+.aside-light {
+    background-color: #ededed;
+}
+
 .bi {
     vertical-align: -0.125em;
     pointer-events: none;

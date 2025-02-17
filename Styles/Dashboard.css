@@ -4,13 +4,14 @@ body {
 
 main {
     display: flex;
-    background-color: rgba(0, 0, 0, 0.25);
+    background-color: rgba(0, 0, 0, 0.05);
     flex-grow: 1;
 }
 
 main > header {
     background-color: rgba(0, 0, 0, 0.15);
 }
+
 #alert-container {
     pointer-events: none;
 }

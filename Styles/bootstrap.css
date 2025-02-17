@@ -73,7 +73,8 @@ hr {
 }
 
 hr:not([size]) {
-    height: 1px;
+    height: 2px;
+    color: #0484AE;
 }
 
 h6,
@@ -2245,8 +2246,8 @@ progress {
 }
 .form-control:disabled,
 .form-control[readonly] {
-    color: rgba(255, 212, 248, 0.59);
-    opacity: 1;
+    color: white;
+    font-weight: bold;
 }
 .form-control::file-selector-button {
     padding: 0.375rem 0.75rem;
@@ -3044,13 +3045,13 @@ fieldset:disabled .btn {
 
 .btn-primary {
     color: #fff;
-    background-color: #0d6efd;
-    border-color: #0d6efd;
+    background-color: #035D7C;
+    border-color: #035D7C;
 }
 .btn-primary:hover {
     color: #fff;
-    background-color: #0b5ed7;
-    border-color: #0a58ca;
+    background-color: #0484AE;
+    border-color: #0484AE;
 }
 .btn-check:focus + .btn-primary,
 .btn-primary:focus {
@@ -7714,6 +7715,10 @@ fieldset:disabled .btn {
     color: #fff;
 }
 
+.text-black {
+    color: black;
+}
+
 .text-body {
     color: #212529;
 }
@@ -7759,7 +7764,7 @@ fieldset:disabled .btn {
 }
 
 .bg-light {
-    background-color: #f8f9fa;
+    background-color: white;
 }
 
 .bg-dark {
