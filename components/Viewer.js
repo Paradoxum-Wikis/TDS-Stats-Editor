@@ -47,7 +47,7 @@ class Viewer {
 
         this.tableView = new ButtonSelection(
             document.querySelector('#table-view')
-        ).setButtons(['Table', 'JSON', 'Lua']);
+        ).setButtons(['Table', 'JSON']);
         this.tableView.root.addEventListener('submit', (() => this.#loadBody()).bind(this)); // prettier-ignore
 
         this.buttonDeltaButton = new ToggleButton(

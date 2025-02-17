@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <link href="./Styles/bootstrap.css" rel="stylesheet">
-    <link href="./Styles/Dashboard.css" rel="stylesheet">
-    <link href="./Styles/Sidebars.css" rel="stylesheet">
-    <link href="./Styles/json-viewer.css" rel="stylesheet">
+    <link href="Styles/bootstrap.css" rel="stylesheet">
+    <link href="Styles/Dashboard.css" rel="stylesheet">
+    <link href="Styles/Sidebars.css" rel="stylesheet">
+    <link href="Styles/json-viewer.css" rel="stylesheet">
+    <link href="Styles/torus.css" rel="stylesheet">
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -21,7 +22,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
-    <script src="./json-viewer.js"></script>
+    <script src="json-viewer.js"></script>
     <script src="Light.js"></script>
     <script defer type="module" src="./Main.js"></script>
 
@@ -41,7 +42,7 @@
         <div class="aside d-flex flex-column flex-shrink-0  text-white" style="min-width: 240px; width: 20%;">
             <!-- Title -->
             <a href="https://tds.fandom.com/wiki/" style="margin: 0 auto">
-                <span class="fs-4"><br/><img src='https://static.wikia.nocookie.net/tower-defense-sim/images/e/e6/Site-logo.png'></span>
+                <span class="fs-4"><br/><img class="zoomup" src='https://static.wikia.nocookie.net/tower-defense-sim/images/e/e6/Site-logo.png'></span>
             </a>
             <hr>
 
@@ -186,8 +187,8 @@
                     <div class="btn-toolbar mb-2 mb-md-0 ">
                         <!-- Search -->
                         <form id="Tower-Selector" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                            <input type="search" class="form-control form-control-dark text-bg-dark text-white"
-                                placeholder="Search..." aria-label="Search">
+                            <input type="search" class="form-control form-control-dark text-bg-dark"
+                                placeholder="Search a Tower" aria-label="Search">
                             <div class="dropdown-menu bg-dark text-white">
                                 <a class="dropdown-item" href="#">Action</a>
                                 <a class="dropdown-item" href="#">Action</a>

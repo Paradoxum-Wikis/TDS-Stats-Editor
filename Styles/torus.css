@@ -1,0 +1,11 @@
+.zoomup {
+    transition: transform 0.2s ease;
+}
+
+.zoomup:hover {
+    transform: scale(1.2);
+}
+
+#Tower-Selector input {
+    color: white !important;
+}
