@@ -22,6 +22,7 @@ class BaseStats {
         'Lead',
         'Cost',
     ];
+
     /**
      * @param {{
      * 	Damage: Number,
@@ -35,6 +36,7 @@ class BaseStats {
      * }}} data
      * @param {Locator} locator
      */
+    
     constructor(data, locator) {
         this.data = data;
         this.locator = locator;

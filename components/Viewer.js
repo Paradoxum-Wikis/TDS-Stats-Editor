@@ -9,7 +9,7 @@ import PropertyViewer from './PropertyViewer.js';
 import SidePanel from './SidePanel.js';
 import UpgradeViewer from './UpgradeViewer.js';
 import Alert from './Alert.js';
-import Dropdown from './Dropdown.js';
+// import Dropdown from './Dropdown.js';
 import AddAttributeForm from './AddAttributeForm.js';
 import RemoveAttributeForm from './RemoveAttributeForm.js';
 import UnitManager from '../TowerComponents/UnitManager.js';
@@ -148,7 +148,7 @@ class Viewer {
             }
         } catch (e) {
             this.tower.importJSON(oldJSON);
-            const alert = new Alert('Unable to load that 🦊', {
+            const alert = new Alert('Unable to load that.', {
                 alertStyle: 'alert-danger',
             });
             alert.timeBeforeShow = 0.1;

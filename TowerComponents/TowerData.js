@@ -2,67 +2,74 @@ export default {
   Accelerator: {
     Default: {
       Upgrades: [
+        // Level 1
         {
-          Stats: { Detections: { Hidden: true }, Damage: 15 },
+          Stats: { Detections: { Hidden: true }, Damage: 20 },
           Image: 11821094308,
           Title: "Extra Juice",
-          Cost: 800,
+          Cost: 1200,
         },
+        // Level 2
         {
           Stats: {
+            Damage: 20,
             Extras: ["Overcharge: 180 → 375"],
-            Range: 17.5,
-            MaxAmmo: 300,
+            Range: 19,
+            MaxAmmo: 420,
           },
           Image: 11821094198,
           Title: "Second Energy Canister",
-          Cost: 1350,
+          Cost: 2250,
         },
+        // Level 3
         {
           Stats: {
             MaxAmmo: 600,
             Extras: ["Overcharge: 375 → 625"],
-            Damage: 20,
+            Damage: 30,
           },
           Image: 11821093989,
           Title: "Powerhouse Armor",
           Cost: 4000,
         },
+        // Level 4
         {
           Stats: {
-            MaxAmmo: 1200,
+            MaxAmmo: 1050,
             Cooldown: 0.15,
             Extras: ["Overcharge: 625 → 1350"],
+            Attributes: { ChargeTime: 1.5 },
             Damage: 30,
-            Range: 17.5,
+            Range: 20.5,
           },
           Image: 11821093828,
           Title: "Supercharger",
-          Cost: 10500,
+          Cost: 9500,
         },
+        // Level 5
         {
           Stats: {
-            MaxAmmo: 3600,
+            MaxAmmo: 4800,
             Cooldown: 0.1,
-            Attributes: { ChargeTime: 2 },
-            Range: 20,
+            Range: 22,
             Extras: ["Overcharge: 1200 → 3000", "Faster Charge"],
-            Damage: 45,
+            Damage: 40,
           },
           Image: 11821093672,
           Title: "Vessel Of Infinite Destruction",
-          Cost: 34000,
+          Cost: 30000,
         },
       ],
+      // Level 0
       Defaults: {
-        MaxAmmo: 180,
+        MaxAmmo: 240,
         Detections: { Flying: false, Hidden: false, Lead: true },
         Limit: 8,
         Cooldown: 0.2,
         Price: 4250,
-        Attributes: { ChargeTime: 3, LaserCooldown: 2 },
+        Attributes: { ChargeTime: 2.5, LaserCooldown: 2.5 },
         Range: 17.5,
-        Damage: 10,
+        Damage: 12,
       },
     },
   },

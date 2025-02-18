@@ -25,20 +25,19 @@
 
     <script src="json-viewer.js"></script>
     <!-- <script src="Light.js"></script> -->
-    <script defer type="module" src="./Main.js"></script>
+    <script defer type="module" src="Main.js"></script>
 
     </style>
     <title>TDS Statistics Editor</title>
 </head>
 
-
 <body class="bg-dark">
     <div id="alert-container" class="position-absolute w-100 p-4 text-center d-flex flex-column">
 
     </div>
+    
     <!-- Document -->
     <div class="container-main">
-
         <!-- Side Panel -->
         <div class="aside d-flex flex-column flex-shrink-0  text-white" style="min-width: 240px; width: 20%;">
             <!-- Title -->
@@ -228,8 +227,7 @@
 
             <!-- Body Table -->
             <div class="d-none table-responsive p-2">
-                <table id="tower-table" class="table table-striped table-md table-dark mb-2">
-
+                <table id="tower-table" class="table table-striped table-md table-dark mb-2" style="margin-right: 3%">
                     <thead>
 
                         <tr>
@@ -416,7 +414,7 @@
                                 title="Stats will be cleared and compared to the current stats.">Apply
                                 Changes</button>
                             <button id="table-unit-reset" class="btn btn-sm btn-outline-secondary"
-                                title="Reverts stats and references back to its original state. Perfect for 🦊">Reset to
+                                title="Reverts stats and references back to its original state.">Reset to
                                 Default</button>
                             <button id="table-unit-resetAll" class="btn btn-sm btn-outline-danger"
                                 title="Clears all unit changes">Clear
@@ -445,7 +443,7 @@
                             <!-- Import Button -->
                             <button id="json-import" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
                                 data-target="#json-import-modal"
-                                title="Imports tower data that you might have gotten from other 🦊">Import</button>
+                                title="Imports tower data.">Import</button>
 
                             <!-- Export Button -->
                             <button id="json-export" class="btn btn-sm btn-outline-secondary"
@@ -472,7 +470,7 @@
                             <!-- Import Button -->
                             <button id="lua-import" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
                                 data-target="#json-import-modal"
-                                title="Imports tower data that you might have gotten from other 🦊">Import</button>
+                                title="Imports tower data.">Import</button>
 
                             <!-- Export Button -->
                             <button id="lua-export" class="btn btn-sm btn-outline-secondary"
