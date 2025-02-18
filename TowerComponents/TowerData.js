@@ -342,7 +342,7 @@ export default {
     Default: {
       Upgrades: [
         {
-          Image: "0",
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/8/8c/Transparent.png/revision/latest?cb=20210107190223",
           Stats: {
             Extras: [],
             Attributes: {
@@ -364,7 +364,7 @@ export default {
           Cost: 350,
         },
         {
-          Image: "0",
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/b/bb/BrawlerUpgrade2.png/revision/latest?cb=20240518064009",
           Stats: {
             Extras: [],
             Attributes: {
@@ -386,7 +386,7 @@ export default {
           Cost: 850,
         },
         {
-          Image: "0",
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/2/25/BrawlerUpgrade3.png/revision/latest?cb=20240518064013",
           Stats: {
             Extras: [],
             Attributes: {
@@ -408,7 +408,7 @@ export default {
           Cost: 2250,
         },
         {
-          Image: "0",
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/4/48/BrawlerUpgrade4.png/revision/latest?cb=20240518064018",
           Stats: {
             Extras: [],
             Attributes: {
@@ -430,7 +430,7 @@ export default {
           Cost: 6000,
         },
         {
-          Image: "0",
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/5/57/BrawlerUpgrade5.png/revision/latest?cb=20240518064023",
           Stats: {
             Extras: [],
             Attributes: {
