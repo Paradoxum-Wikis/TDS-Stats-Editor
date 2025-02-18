@@ -171,19 +171,16 @@ export default class UpgradeViewer {
             // Try RoProxy first
             const roProxyUrl = `https://assetdelivery.RoProxy.com/v2/assetId/${imageId}`;
             try {
-                console.log('Fetching from RoProxy:', roProxyUrl);
                 const response = await fetch(roProxyUrl, {
                     method: 'GET',
                     mode: 'cors',
                 });
-                console.log('RoProxy response status:', response.status);
                 const data = await response.json();
-                console.log('RoProxy response data:', data);
                 if (data?.locations?.[0]?.location) {
                     return data.locations[0].location;
                 }
             } catch (error) {
-                console.error('RoProxy failed, using fallback:', error);
+                // Fallback to fandom if RoProxy fails
             }
     
             // Fallback to fandom
@@ -202,25 +199,24 @@ export default class UpgradeViewer {
         }
         return fullUrl; // Return the original URL if no match is found
     }
-
+    
     async #loadImage() {
         const imageId = this.imageInput.value.trim();
-
+    
         if (!imageId) {
-            console.error('Image ID is empty');
-            document.getElementById('upgrade-image').src = ''; // Set default empty image if no ID, print console error
+            document.getElementById('upgrade-image').src = ''; // Set default empty image if no ID
             return;
         }
-
+    
         // Check cache first
         let imageLocation = imageCache[imageId];
-
+    
         if (!imageLocation) {
             imageLocation = await this.#fetchImage(imageId); // Fetch the image location
         }
-
+    
         document.getElementById('upgrade-image').src = imageLocation; // Set image source
-    }
+    }    
 
     #loadExtras(upgrade) {
         const extras = upgrade?.data?.Extras ?? [];
