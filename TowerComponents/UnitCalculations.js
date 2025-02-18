@@ -82,9 +82,9 @@ class UnitCalculations {
             Default: {
                 Requires: ['Cooldown'],
                 Value: (cooldown) => {
-                    const { extraCooldown, firerateBuff } = window.state.boosts.unit; // prettier-ignore
+                    const { extraCooldown, firerateBuff, RateOfFireBug } = window.state.boosts.unit; // prettier-ignore
 
-                    return cooldown / (firerateBuff + 1) + extraCooldown;
+                    return cooldown / (firerateBuff + 1) + extraCooldown + RateOfFireBug;
                 },
             },
         },

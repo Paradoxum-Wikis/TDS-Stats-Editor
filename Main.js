@@ -9,6 +9,7 @@ class App {
         window.state = {
             boosts: {
                 tower: {
+                    RateOfFireBug: 0,
                     extraCooldown: 0,
                     firerateBuff: 0,
                     damageBuff: 0,
@@ -16,6 +17,7 @@ class App {
                     discount: 0,
                 },
                 unit: {
+                    RateOfFireBug: 0,
                     extraCooldown: 0,
                     firerateBuff: 0,
                     damageBuff: 0,

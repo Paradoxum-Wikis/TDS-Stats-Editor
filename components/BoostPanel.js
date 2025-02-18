@@ -48,6 +48,44 @@ export default class BoostPanel {
         this.boostForm.appendChild(form);
     }
 
+    #createYesNoInput(labelText, defaultValue) {
+        const form = document.createElement('form');
+        form.classList.add('d-flex', 'mb-1');
+
+        const label = document.createElement('label');
+        label.classList.add('col-sm-8', 'col-form-label', 'fs-6');
+        label.textContent = this.#formatHeader(labelText);
+
+        const inputDiv = document.createElement('div');
+        inputDiv.classList.add('col-sm-4');
+
+        const select = document.createElement('select');
+        select.classList.add('form-control', 'text-white');
+
+        const optionYes = document.createElement('option');
+        optionYes.value = 'Yes';
+        optionYes.textContent = 'Yes';
+        const optionNo = document.createElement('option');
+        optionNo.value = 'No';
+        optionNo.textContent = 'No';
+
+        select.appendChild(optionYes);
+        select.appendChild(optionNo);
+        select.value = defaultValue;
+
+        form.appendChild(label);
+        form.appendChild(inputDiv);
+        inputDiv.appendChild(select);
+
+        form.addEventListener('submit', () => select.blur());
+        form.addEventListener('mouseup', () => select.focus());
+        select.addEventListener('focusout', () =>
+            this.onInputYesNo(labelText, select.value)
+        );
+
+        this.boostForm.appendChild(form);
+    }
+
     onInput(name, value) {
         if (value !== '') {
             const boosts = this.#getBoosts();
@@ -62,6 +100,27 @@ export default class BoostPanel {
             }
         }
 
+        console.log(window.state.boosts);
+        this.viewer.reload();
+    }
+
+    onInputYesNo(name, value) {
+        const boosts = this.#getBoosts();
+    
+        if (name === 'RateOfFireBug') {
+            if (value === 'Yes') {
+                boosts[name] = +0.008;
+            } else {
+                boosts[name] = 0;
+            }
+        } else {
+            if (value === 'Yes') {
+                boosts[name] = +0.008;
+            } else {
+                boosts[name] = 0;
+            }
+        }
+    
         console.log(window.state.boosts);
         this.viewer.reload();
     }
@@ -119,7 +178,13 @@ export default class BoostPanel {
         const boosts = this.#getBoosts();
 
         for (const [boostName, boostValue] of Object.entries(boosts)) {
-            this.#createInput(boostName, boostValue);
+            if (boostName === 'extraCooldown') {
+                this.#createInput(boostName, boostValue);
+            } else if (boostName === 'RateOfFireBug') {
+                this.#createYesNoInput(boostName, boostValue === 0.008 ? 'Yes' : 'No');
+            } else {
+                this.#createInput(boostName, boostValue);
+            }
         }
     }
 }
