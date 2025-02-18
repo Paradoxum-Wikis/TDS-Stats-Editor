@@ -86,7 +86,7 @@ export default class UpgradeViewer {
 
         this.#loadExtras(this.upgrade);
         this.#loadUpgradeChanges();
-        this.#loadImage();
+        this.#loadImage(); // Ensure the image loads automatically
     }
 
     #loadUpgradeChanges() {
@@ -159,47 +159,73 @@ export default class UpgradeViewer {
     }
 
     async #fetchImage(imageId) {
-        const protocol = 'https://';
-        const baseUrl = 'assetdelivery.RoProxy.com';
-        const path = '/v2/assetId/';
-
-        var url = `${protocol}${baseUrl}${path}${imageId}`;
-
-        const response = await fetch(url, {
-            method: 'GET',
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            redirect: 'follow',
-            referrerPolicy: 'no-referrer',
-        });
-
-        const data = await response.json();
-        const imageLocation = data?.locations?.[0]?.location;
-        imageCache[imageId] = imageLocation;
-        return imageLocation;
+        let url;
+        if (imageId.startsWith('https')) {
+            // check if it's a url or fandom url
+            if (imageId.includes('static.wikia.nocookie.net')) {
+                url = this.#trimFandomUrl(imageId); // Trim the url to the base file path (fandom doesn't allow it otherwise)
+            } else {
+                url = imageId; // Use the url as is for non fandom urls
+            }
+        } else {
+            // Try RoProxy first
+            const roProxyUrl = `https://assetdelivery.RoProxy.com/v2/assetId/${imageId}`;
+            try {
+                console.log('Fetching from RoProxy:', roProxyUrl);
+                const response = await fetch(roProxyUrl, {
+                    method: 'GET',
+                    mode: 'cors',
+                });
+                console.log('RoProxy response status:', response.status);
+                const data = await response.json();
+                console.log('RoProxy response data:', data);
+                if (data?.locations?.[0]?.location) {
+                    return data.locations[0].location;
+                }
+            } catch (error) {
+                console.error('RoProxy failed, using fallback:', error);
+            }
+    
+            // Fallback to fandom
+            url = `https://static.wikia.nocookie.net/tower-defense-sim/images/${imageId}`;
+        }
+    
+        imageCache[imageId] = url;
+        return url;
+    }
+    
+    #trimFandomUrl(fullUrl) {
+        // Fandom url chopping
+        const match = fullUrl.match(/https:\/\/static\.wikia\.nocookie\.net\/.*?\.(png|jpg|jpeg|gif)/i);
+        if (match) {
+            return match[0]; // Return the base URL
+        }
+        return fullUrl; // Return the original URL if no match is found
     }
 
     async #loadImage() {
-        const imageId = this.upgrade.upgradeData.Image;
+        const imageId = this.imageInput.value.trim();
 
-        const imageLocation =
-            imageCache[imageId] ?? (await this.#fetchImage(imageId));
-
-        if (imageLocation) {
-            document.getElementById('upgrade-image').src = imageLocation;
-        } else {
-            document.getElementById('upgrade-image').src = '';
+        if (!imageId) {
+            console.error('Image ID is empty');
+            document.getElementById('upgrade-image').src = ''; // Set default empty image if no ID, print console error
+            return;
         }
+
+        // Check cache first
+        let imageLocation = imageCache[imageId];
+
+        if (!imageLocation) {
+            imageLocation = await this.#fetchImage(imageId); // Fetch the image location
+        }
+
+        document.getElementById('upgrade-image').src = imageLocation; // Set image source
     }
 
     #loadExtras(upgrade) {
         const extras = upgrade?.data?.Extras ?? [];
 
-        this.extrasInput.innerHTML = [];
+        this.extrasInput.innerHTML = '';
 
         extras.forEach((extra, index) => {
             this.#addExtra(extra, index);
