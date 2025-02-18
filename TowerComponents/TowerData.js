@@ -5652,7 +5652,7 @@ export default {
         {
           Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/6/6d/HallowPunkUpgrade2.png/revision/latest?cb=20241031024354",
           Stats: {
-            Extras: [],
+            Extras: ["Explosion Radius: 3.5 -> 5", "Rocket Speed: 20 -> 25", "Knockback: 10 -> 12.5"],
             Attributes: { RocketSpeed: 25, ExplosionRadius: 5, Knockback: 12.5 },
             Detections: { Flying: false, Lead: true },
             Range: 22.5,
@@ -5664,7 +5664,7 @@ export default {
         {
           Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/6/62/HallowPunkMaxUpgrade.png/revision/latest?cb=20241031024416",
           Stats: {
-            Extras: ["Explosion Radius: 2.3 -> 3.5", "Deadzone: 12 -> 10"],
+            Extras: ["Explosion Radius: 5 -> 5.5", "Deadzone: 12 -> 10", "Knockback: 12.5 -> 17.5", "Burn Damage 0 -> 3", "Burn Time 0 -> 16", "Burn Tick 0 -> 0.25"],
             Attributes: { Knockback: 17.5, ExplosionRadius: 5.5, BurnDamage: 3, BurnTime: 16, BurnTick: 0.25 },
             Detections: { Flying: true, Hidden: false, Lead: true },
             Range: 26,
