@@ -204,7 +204,7 @@ export default class TableInput {
         if (+value < 10) {
             return +(+value).toFixed(3);
         }
-        return +(+value).toFixed(1);
+        return +(+value).toFixed(2);
     }
 
     flipped = [

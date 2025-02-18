@@ -162,9 +162,9 @@ export default class BoostPanel {
             return +(+value).toFixed(3);
         }
         if (+value < 10) {
-            return +(+value).toFixed(2);
+            return +(+value).toFixed(3);
         }
-        return +(+value).toFixed(1);
+        return +(+value).toFixed(2);
     }
 
     #formatPercent(value) {
