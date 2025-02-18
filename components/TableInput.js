@@ -202,7 +202,7 @@ export default class TableInput {
             return +(+value).toFixed(3);
         }
         if (+value < 10) {
-            return +(+value).toFixed(2);
+            return +(+value).toFixed(3);
         }
         return +(+value).toFixed(1);
     }

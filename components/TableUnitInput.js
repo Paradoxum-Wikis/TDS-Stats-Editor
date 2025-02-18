@@ -208,7 +208,7 @@ export default class TableUnitInput {
             case 'Income':
                 return `$${Intl.NumberFormat().format(number)}`;
         }
-        return +(+number).toFixed(2);
+        return +(+number).toFixed(3);
     }
 
     flipped = [

@@ -2216,6 +2216,7 @@ progress {
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
 @media (prefers-reduced-motion: reduce) {
     .form-control {
         transition: none;
@@ -2227,24 +2228,29 @@ progress {
 .form-control[type='file']:not(:disabled):not([readonly]) {
     cursor: pointer;
 }
+
 .form-control:focus {
     color: #212529;
     background-color: #fff;
     border-color: #86b7fe;
     outline: 0;
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    box-shadow: 0 0 0 0.25rem rgba(130, 138, 145, 0.5);
 }
+
 .form-control::-webkit-date-and-time-value {
     height: 1.5em;
 }
+
 .form-control::-moz-placeholder {
     color: #6c757d;
     opacity: 1;
 }
+
 .form-control::placeholder {
     color: #6c757d;
     opacity: 1;
 }
+
 .form-control:disabled,
 .form-control[readonly] {
     color: white;
