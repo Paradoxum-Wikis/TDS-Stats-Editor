@@ -5685,6 +5685,61 @@ export default {
       },
     },
   },
+  Snowballer: {
+    Default: {
+      Upgrades: [
+        {
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/d/dd/Freezer_Upgrade_1.png/revision/latest?cb=20231221115311",
+          Stats: {
+            Extras: [ "Max Slowdown: 30% -> 40%", "Slowdown per Hit: 15% -> 20%" ],
+            Attributes: { MaxSlowdown: '40%', ExplosionRadius: 2, FreezeTime: 0, SlowdownPerHit: '20%' },
+            Detections: {
+              Flying: false,
+              Hidden: false,
+              Lead: false,
+            },
+            Cooldown: 2.5,
+            Range: 11,
+          },
+          Title: "Snow Day",
+          Cost: 100,
+        },
+        {
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/8/8b/Freezer_Upgrade_2.png/revision/latest?cb=20231221115243",
+          Stats: {
+            Extras: [ "Max Slowdown: 40% -> 60%", "Slowdown per Hit: 20% -> 30%", "Slowdown Time: 3 -> 4" ],
+            Attributes: { MaxSlowdown: '60%', ExplosionRadius: 2, FreezeTime: 0, SlowdownPerHit: '30%', SlowdownTime: 4 },
+            Detections: { Flying: false, Lead: false },
+            Range: 14,
+            Damage: 8,
+          },
+          Title: "Frigid Temperatures",
+          Cost: 450,
+        },
+        {
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/0/06/Freezer_Upgrade_3.png/revision/latest?cb=20231221115338",
+          Stats: {
+            Extras: ["Freeze Time: 0 -> 2", "Explosion Radius: 2 -> 4", "Max Hits: 1 -> 4"],
+            Attributes: { ExplosionRadius: 4, FreezeTime: 2, SlowdownPerHit: '30%', SlowdownTime: 4, MaxHits: 4 },
+            Detections: { Flying: false, Hidden: false, Lead: true },
+            Range: 18,
+            Damage: 20,
+            Cooldown: 2,
+          },
+          Title: "Snowball Cannon",
+          Cost: 1850,
+        },
+      ],
+      Defaults: {
+        Attributes: { MaxSlowdown: '30%', ExplosionRadius: 2, ProjectileSpeed: 20, FreezeTime: 0, SlowdownPerHit: '15%', SlowdownTime: 3, MaxHits: 1 },
+        Detections: { Flying: false, Hidden: false, Lead: false },
+        Range: 9.5,
+        Price: 300,
+        Cooldown: 3,
+        Damage: 4,
+      },
+    },
+  },
   Warden: {
     Default: {
       Upgrades: [
