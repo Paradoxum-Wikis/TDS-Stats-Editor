@@ -603,6 +603,14 @@ class CalculatedManager {
                     return Math.max(spikeDPS, landmineDPS, bearTrapDPS);
                 },
             },
+            HallowPunk: {
+                For: ['Hallow Punk'],
+                Value: (level) => {
+                    const dps = level.Damage / level.Cooldown;
+                    const burnDPS = (level.BurnDamage && level.BurnTick) ? level.BurnDamage / level.BurnTick : 0;
+                    return dps + burnDPS;
+                },
+            },
         },
         LimitDPS: {
             Default: {

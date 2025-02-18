@@ -5629,6 +5629,62 @@ export default {
       },
     },
   },
+  "Hallow Punk": {
+    Default: {
+      Upgrades: [
+        {
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/2/23/HallowPunkUpgrade1.png/revision/latest?cb=20241031024338",
+          Stats: {
+            Extras: [],
+            Attributes: { RocketSpeed: 20, ExplosionRadius: 3.5, Knockback: 10 },
+            Detections: {
+              Flying: false,
+              Hidden: false,
+              Lead: true,
+            },
+            Cooldown: 3.75,
+            Range: 20,
+            Damage: 6,
+          },
+          Title: "Bigger Boom",
+          Cost: 450,
+        },
+        {
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/6/6d/HallowPunkUpgrade2.png/revision/latest?cb=20241031024354",
+          Stats: {
+            Extras: [],
+            Attributes: { RocketSpeed: 25, ExplosionRadius: 5, Knockback: 12.5 },
+            Detections: { Flying: false, Lead: true },
+            Range: 22.5,
+            Damage: 25,
+          },
+          Title: "Rapid Reload",
+          Cost: 2750,
+        },
+        {
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/6/62/HallowPunkMaxUpgrade.png/revision/latest?cb=20241031024416",
+          Stats: {
+            Extras: ["Explosion Radius: 2.3 -> 3.5", "Deadzone: 12 -> 10"],
+            Attributes: { Knockback: 17.5, ExplosionRadius: 5.5, BurnDamage: 3, BurnTime: 16, BurnTick: 0.25 },
+            Detections: { Flying: true, Hidden: false, Lead: true },
+            Range: 26,
+            Damage: 60,
+          },
+          Title: "Vengeful Missles",
+          Cost: 5000,
+        },
+      ],
+      Defaults: {
+        Attributes: { Knockback: 10, ExplosionRadius: 3.5, RocketSpeed: 20, BurnDamage: 0, BurnTime: 0, BurnTick: 0 },
+        Detections: { Flying: false, Hidden: false, Lead: true },
+        Range: 18,
+        Price: 300,
+        Limit: 12,
+        Cooldown: 5,
+        Damage: 3,
+      },
+    },
+  },
   Warden: {
     Default: {
       Upgrades: [
