@@ -9,3 +9,7 @@
 input {
     color: white !important;
 }
+
+#upgrade-image {
+    aspect-ratio: 1 / 1;
+}
