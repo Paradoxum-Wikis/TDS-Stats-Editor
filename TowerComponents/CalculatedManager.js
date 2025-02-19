@@ -394,7 +394,11 @@ class CalculatedManager {
             Default: {
                 Requires: ['BurnDamage', 'BurnTime', 'BurnTick'],
                 Value: (level) => level.BurnDamage * level.BurnTime / level.BurnTick,
-            }
+            },
+            Cryomancer: {
+                For: ['Cryomancer'],
+                Value: (level) => level.DebuffDamage * level.FreezeTime / level.TickRate,
+            },
         },
         DPS: {
             Default: {
