@@ -397,7 +397,7 @@ class CalculatedManager {
             },
             Cryomancer: {
                 For: ['Cryomancer'],
-                Value: (level) => level.DebuffDamage * level.FreezeTime / level.TickRate,
+                Value: (level) => level.DebuffDamage * level.DebuffLength / level.TickRate,
             },
         },
         DPS: {

@@ -5797,6 +5797,111 @@ export default {
       },
     },
   },
+  Harvester: {
+    Default: {
+      Upgrades: [
+        {
+          Image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/a/ad/HarvesterUpgrade1.png/revision/latest?cb=20241031032753',
+          Stats: {
+            Attributes: {},
+            Extras: [],
+            Income: 100,
+            Detections: {
+              Flying: false,
+              Hidden: false,
+              Lead: false,
+            },
+            Cooldown: 0,
+            Range: 3,
+            Damage: 0,
+          },
+          Title: "Carrot Farm",
+          Cost: 200,
+        },
+        {
+          Image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/7/71/HarvesterUpgrade2.png/revision/latest?cb=20241031032744',
+          Stats: {
+            Attributes: {},
+            Extras: [],
+            Income: 250,
+            Detections: {
+              Flying: false,
+              Hidden: false,
+              Lead: false,
+            },
+            Cooldown: 0,
+            Range: 3,
+            Damage: 0,
+          },
+          Title: "Wheat Farm",
+          Cost: 550,
+        },
+        {
+          Image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/c/c5/HarvesterUpgrade3.png/revision/latest?cb=20241031032737',
+          Stats: {
+            Attributes: {},
+            Extras: [],
+            Income: 500,
+            Detections: {
+              Flying: false,
+              Hidden: false,
+              Lead: false,
+            },
+            Cooldown: 0,
+            Range: 3,
+            Damage: 0,
+          },
+          Title: "Tree Farm",
+          Cost: 1000,
+        },
+        {
+          Image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/8/89/HarvesterUpgrade4.png/revision/latest?cb=20241031032728',
+          Stats: {
+            Attributes: {},
+            Extras: [],
+            Income: 750,
+            Detections: {
+              Flying: false,
+              Hidden: false,
+              Lead: false,
+            },
+            Cooldown: 0,
+            Range: 3,
+            Damage: 0,
+          },
+          Title: "Apple Farm",
+          Cost: 2500,
+        },
+        {
+          Image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/c/c8/HarvesterUpgrade5.png/revision/latest?cb=20241031032711',
+          Stats: {
+            Attributes: {},
+            Extras: [],
+            Income: 1500,
+            Detections: {
+              Flying: false,
+              Hidden: false,
+              Lead: false,
+            },
+            Cooldown: 0,
+            Range: 3,
+            Damage: 0,
+          },
+          Title: "Space Fruit Farm",
+          Cost: 5000,
+        },
+      ],
+      Defaults: {
+        Income: 50,
+        Detections: { Flying: false, Hidden: false, Lead: false },
+        Range: 3,
+        Price: 250,
+        Limit: 8,
+        Cooldown: 0,
+        Damage: 0,
+      },
+    },
+  },
   Warden: {
     Default: {
       Upgrades: [
