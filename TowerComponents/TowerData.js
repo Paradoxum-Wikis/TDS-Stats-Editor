@@ -5740,6 +5740,63 @@ export default {
       },
     },
   },
+  'Firework Technician': {
+    Default: {
+      Upgrades: [
+        {
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/5/54/FireworkTechnicianLevel1.png/revision/latest?cb=20241231081028",
+          Stats: {
+            Extras: [ "Detection Buff Time: 15 -> 20", "Firework Chance Cap: 50% -> 60%", "Burn Damage: 1 -> 2" ],
+            Attributes: { DetectionBuffTime: 20, FireworkChanceCap: '60%', BurnDamage: 2, BurnTick: 0.5, },
+            Detections: { Flying: false, Hidden: false, Lead: true },
+            Range: 9,
+            Damage: 10,
+          },
+          Title: "Pyrotechnics",
+          Cost: 2000,
+        },
+        {
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/2/28/FireworkTechnicianLevel2.png/revision/latest?cb=20241231081029",
+          Stats: {
+            Extras: [ "Detection Buff Time: 20 -> 25", "Explosion Radius: 1 -> 2", "Firework Chance Cap: 60% -> 70%", "Burn Tick: 0.5 -> 0.25" ],
+            Attributes: { DetectionBuffTime: 25, ExplosionRadius: 2, FireworkChanceCap: '70%', BurnTick: 0.25, },
+            Damage: 20,
+          },
+          Title: "Bigger Boom",
+          Cost: 6500,
+        },
+        {
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/4/46/FireworkTechnicianLevel3.png/revision/latest?cb=20241231081026",
+          Stats: {
+            Extras: ["Detection Buff Time: 25 -> 30", "FireworkChanceCap: 70% -> 85%" ],
+            Attributes: { DetectionBuffTime: 30, FireworkChanceCap: '85%', BurnDamage: 4, BurnTick: 0.25, },
+            Damage: 30,
+          },
+          Title: "Light the Sky",
+          Cost: 12000,
+        },
+        {
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/1/16/FireworkTechnicianLevel4.png/revision/latest?cb=20241231081027",
+          Stats: {
+            Extras: [ "Detection Buff Time: 30 -> 40", "Firework Chance Cap: 85% -> 100%", "Burn Damage: 4 -> 7", "Explosion Radius: 2 -> 3" ],
+            Attributes: { DetectionBuffTime: 40, FireworkChanceCap: '100%', BurnDamage: 7, BurnTick: 0.25, ExplosionRadius: 3, },
+            Damage: 45,
+            Range: 10,
+          },
+          Title: "The Finale",
+          Cost: 22000,
+        },
+      ],
+      Defaults: {
+        Attributes: { DetectionBuffTime: 15, ExplosionRadius: 1, FireworkChanceCap: '50%', BurnDamage: 1, BurnTick: 0.5, BurnTime: 5, },
+        Detections: { Flying: false, Hidden: false, Lead: true },
+        Range: 8,
+        Price: 1500,
+        Damage: 5,
+        Limit: 1,
+      },
+    },
+  },
   Warden: {
     Default: {
       Upgrades: [

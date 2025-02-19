@@ -390,6 +390,12 @@ class CalculatedManager {
                 },
             },
         },
+        TotalElapsedDamage: {
+            Default: {
+                Requires: ['BurnDamage', 'BurnTime', 'BurnTick'],
+                Value: (level) => level.BurnDamage * level.BurnTime / level.BurnTick,
+            }
+        },
         DPS: {
             Default: {
                 Requires: ['Damage', 'Cooldown'],
@@ -399,6 +405,7 @@ class CalculatedManager {
                     'Elf Camp',
                     'Military Base',
                     'Mecha Base',
+                    'Firework Technician',
                 ],
                 Value: (level) => level.Damage / level.Cooldown,
             },
@@ -841,6 +848,7 @@ class CalculatedManager {
         this.#add('Cost', skinData);
         this.#add('SpawnTime', skinData);
         this.#add('LaserDPS', skinData);
+        this.#add('TotalElapsedDamage', skinData);
         this.#add('KnifeSingleDPS', skinData);
         this.#add('SpikeDPS', skinData);
         this.#add('LandmineDPS', skinData);
