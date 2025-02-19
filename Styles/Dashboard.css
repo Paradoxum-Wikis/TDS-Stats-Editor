@@ -72,7 +72,7 @@ main > header {
     border-color: hsl(210, 11%, 5%);
 }
 .btn-outline-dark {
-    border-color: hsl(210, 11%, 4%);
+    border-color: rgba(255, 255, 255, 0.3) !important;
 }
 
 .table-cell-input {
@@ -144,7 +144,7 @@ main > header {
 
 .form-control {
     background-color: rgba(0, 0, 2, 0.2);
-    border-color: rgba(0, 0, 2, 0.3);
+    border-color: rgba(255, 255, 255, 0.3);
     border-radius: 25px 0 25px 0;
     padding-left: 16px;
 }
