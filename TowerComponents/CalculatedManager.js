@@ -645,7 +645,10 @@ class CalculatedManager {
         CostEfficiency: {
             Default: {
                 Requires: ['NetCost', 'DPS'],
-                Value: (level) => level.NetCost / level.DPS,
+                Value: (level) => {
+                    const efficiency = level.NetCost / level.DPS;
+                    return isFinite(efficiency) ? efficiency : NaN;
+                },
             },
         },
         Coverage: {
