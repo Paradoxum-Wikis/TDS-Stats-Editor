@@ -1,4 +1,5 @@
 import Unit from './Unit.js';
+import TowerData from './TowerData.js';
 
 class UnitCalculations {
     constructor() {}
@@ -9,6 +10,11 @@ class UnitCalculations {
                 Requires: ['Damage', 'Cooldown'],
                 Exclude: [],
                 Value: (level) => level.Damage / level.Cooldown,
+            },
+
+            Thorns: {
+                For: ['Thorns 0', 'Thorns 1', 'Thorns 2', 'Thorns 3', 'Thorns 4', 'Thorns 5'],
+                Value: (level) => level.Damage / level.TickRate,
             },
 
             Rocket: {
@@ -124,6 +130,27 @@ class UnitCalculations {
                 },
             },
         },
+
+        CostEfficiency: {
+            Harvester: {
+                For: ['Thorns 0', 'Thorns 1', 'Thorns 2', 'Thorns 3', 'Thorns 4', 'Thorns 5'],
+                Value: (level) => {
+                    // Extract the level number from the string
+                    const levelNum = parseInt(level.Name.split(' ')[1]);
+                    
+                    // Base cost for level 0
+                    let harvesterNetCost = TowerData.Harvester.Default.Defaults.Price;
+                    
+                    // Add costs for each upgrade up to the current level
+                    for (let i = 0; i < levelNum; i++) {
+                        harvesterNetCost += TowerData.Harvester.Default.Upgrades[i].Cost;
+                    }
+                    
+                    const efficiency = harvesterNetCost / level.DPS;
+                    return isFinite(efficiency) ? efficiency : NaN;
+                },
+            },
+        },
     };
 
     /**
@@ -153,22 +180,23 @@ class UnitCalculations {
      * @param {Unit} unitData
      */
     getValue(calculatedField, unitData) {
+        if (!calculatedField) return null;
         for (let [_, value] of Object.entries(calculatedField)) {
             if (value?.For?.includes(unitData.name)) return value;
         }
-
-        return calculatedField.Default;
-    }
+        return calculatedField.Default ?? null;
+    }    
 
     /**
      * @param {Unit} unitData
      */
     #add(name, unitData) {
         const calculated = this.getValue(this.calculated[name], unitData);
-        if (this.validate(calculated, unitData))
+        if (calculated && this.validate(calculated, unitData)) {
             unitData.addCalculated(name, calculated.Value);
+        }
     }
-
+    
     addCalculate(unitData) {
         this.#add('DPS', unitData);
         this.#add('AggregateDPS', unitData);
@@ -178,6 +206,8 @@ class UnitCalculations {
         this.#add('Damage', unitData);
         this.#add('Cooldown', unitData);
         this.#add('Range', unitData);
+        
+        this.#add('CostEfficiency', unitData);
     }
 }
 
