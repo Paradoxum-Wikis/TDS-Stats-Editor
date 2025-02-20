@@ -76,6 +76,16 @@ const register = {
             'FieldMedic2',
         ],
     },
+    Harvester: {
+        Default: [
+            'Thorns 0',
+            'Thorns 1',
+            'Thorns 2',
+            'Thorns 3',
+            'Thorns 4',
+            'Thorns 5',
+        ],
+    },
 };
 
 export default class UnitManager {

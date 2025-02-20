@@ -493,4 +493,47 @@ export default {
             Lead: false,
         },
     },
+
+    'Thorns 0': {
+        Damage: 2,
+        Range: 10,
+        Duration: 8,
+        Slowdown: '15%',
+        TickRate: 0.5,
+    },
+    'Thorns 1': {
+        Damage: 2,
+        Range: 10,
+        Duration: 8,
+        Slowdown: '15%',
+        TickRate: 0.5,
+    },
+    'Thorns 2': {
+        Damage: 4,
+        Range: 12,
+        Duration: 8,
+        Slowdown: '20%',
+        TickRate: 0.5,
+    },
+    'Thorns 3': {
+        Damage: 6,
+        Range: 12,
+        Duration: 10,
+        Slowdown: '20%',
+        TickRate: 0.5,
+    },
+    'Thorns 4': {
+        Damage: 20,
+        Range: 18,
+        Duration: 16,
+        Slowdown: '25%',
+        TickRate: 0.5,
+    },
+    'Thorns 5': {
+        Damage: 30,
+        Range: 20,
+        Duration: 16,
+        Slowdown: '30%',
+        TickRate: 0.5,
+    },
 };
