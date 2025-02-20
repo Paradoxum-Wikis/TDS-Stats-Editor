@@ -5838,12 +5838,6 @@ export default {
           Stats: {
             Attributes: {},
             Extras: [],
-            Income: 750,
-            Detections: {
-              Flying: false,
-              Hidden: false,
-              Lead: false,
-            },
             Cooldown: 0.75,
             Range: 17.5,
             Damage: 30,
@@ -5856,12 +5850,6 @@ export default {
           Stats: {
             Attributes: {},
             Extras: [],
-            Income: 1500,
-            Detections: {
-              Flying: false,
-              Hidden: false,
-              Lead: false,
-            },
             Cooldown: 0,
             Range: 22.5,
             Damage: 90,
