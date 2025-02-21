@@ -22,6 +22,7 @@ export default class UpgradeViewer {
             'focusout',
             (() => {
                 this.#onTextChanged('Image', this.imageInput.value);
+                this.#loadImage();
                 this.viewer.reload();
             }).bind(this)
         );
@@ -36,35 +37,63 @@ export default class UpgradeViewer {
         );
 
         this.extrasInput = document.getElementById('side-upgrade-extras');
-        this.addExtraButton = document.getElementById(
-            'side-upgrade-extras-add'
-        );
+        this.addExtraButton = document.getElementById('side-upgrade-extras-add');
         this.addExtraButton.addEventListener('click', () => {
             const upgradeIndex = this.index;
             const skin = this.viewer.getActiveSkin();
-
             const upgradeStats = skin.data.Upgrades[upgradeIndex].Stats;
-
             if (upgradeStats.Extras === undefined) {
                 upgradeStats.Extras = [];
             }
-
             upgradeStats.Extras.push('');
             this.viewer.reload();
         });
 
-        this.upgradeChanges = document.getElementById(
-            'side-upgrade-extras-output'
+        this.upgradeChanges = document.getElementById('side-upgrade-extras-output');
+        this.abilityImage = document.getElementById('ability-image');
+        this.abilityImageInput = document.getElementById('side-ability-image');
+
+        this.abilityImageInput.addEventListener(
+            'focusout',
+            (async () => {
+                const newValue = this.abilityImageInput.value.trim();
+                this.#onAbilityImageChanged(newValue);
+                await this.#loadAbilityImage();
+                this.viewer.reload();
+            }).bind(this)
+        );
+
+        this.abilityTitleInput = document.getElementById('side-ability-title');
+        this.abilityTitleInput.addEventListener(
+            'focusout',
+            (() => {
+                const newTitle = this.abilityTitleInput.value.trim();
+                this.#onAbilityTitleChanged(newTitle);
+                this.viewer.reload();
+            }).bind(this)
         );
     }
 
-    load(skinData) {
+    async load(skinData) {
         if (skinData.upgrades.length === 0) {
             document.getElementById('level-view').classList.add('d-none');
         } else if (this.skinData == skinData) {
             this.loadUpgrade(this.levelButtons.getSelectedName() - 1);
         } else {
             this.skinData = skinData;
+            const abilities = (
+                skinData?.defaults?.Abilities || 
+                skinData?.Defaults?.Abilities || 
+                skinData?.Default?.Defaults?.Abilities || 
+                skinData?.data?.Abilities || 
+                skinData?.defaults?.data?.Abilities || 
+                skinData?.defaults?.attributes?.Abilities
+            );
+            const initialIcon = abilities && abilities.length > 0 ? (abilities[0].Icon || '') : '';
+            const initialTitle = abilities && abilities.length > 0 ? (abilities[0].Name || '') : '';
+            this.abilityImageInput.value = initialIcon;
+            this.abilityTitleInput.value = initialTitle;
+            await this.#loadAbilityImage();
             this.#loadLevelHeader(skinData);
         }
     }
@@ -73,17 +102,14 @@ export default class UpgradeViewer {
         this.levelButtons.setButtons(
             skinData.upgrades.map((_, index) => index + 1)
         );
-
         this.loadUpgrade(this.levelButtons.getSelectedName() - 1);
     }
 
     loadUpgrade(index) {
         this.index = index;
         this.upgrade = this.skinData.upgrades[index];
-
         this.imageInput.value = this.upgrade.upgradeData.Image;
         this.titleInput.value = this.upgrade.upgradeData.Title;
-
         this.#loadExtras(this.upgrade);
         this.#loadUpgradeChanges();
         this.#loadImage(); // Ensure the image loads automatically
@@ -92,29 +118,131 @@ export default class UpgradeViewer {
     #loadUpgradeChanges() {
         const upgradeChanges = this.skinData.getUpgradeChangeOutput(this.index);
         const minRows = 5;
-
         this.upgradeChanges.textContent = '';
         this.upgradeChanges.value = '';
-
         this.upgradeChanges.value = upgradeChanges.join('\n');
         this.upgradeChanges.rows = Math.max(upgradeChanges.length, minRows);
     }
 
+    async #fetchImage(imageId) {
+        let url;
+        if (imageId.startsWith('https')) { // check if it's a url or fandom url
+            if (imageId.includes('static.wikia.nocookie.net')) {
+                url = this.#trimFandomUrl(imageId); // Trim the url to the base file path (fandom doesn't allow it otherwise)
+            } else {
+                url = imageId; // Use the url as is for non fandom urls
+            }
+        } else {
+            // Try RoProxy first
+            const roProxyUrl = `https://assetdelivery.RoProxy.com/v2/assetId/${imageId}`;
+            try {
+                const response = await fetch(roProxyUrl, {
+                    method: 'GET',
+                    mode: 'cors',
+                });
+                const data = await response.json();
+                if (data?.locations?.[0]?.location) {
+                    url = data.locations[0].location;
+                } else {
+                    url = `https://static.wikia.nocookie.net/tower-defense-sim/images/${imageId}`;
+                }
+            } catch (error) {
+                url = `https://static.wikia.nocookie.net/tower-defense-sim/images/${imageId}`;
+            }
+        }
+        if (url) {
+            imageCache[imageId] = url;
+        }
+        return url;
+    }
+
+    #trimFandomUrl(fullUrl) {
+        // Fandom url chopping
+        const match = fullUrl.match(/https:\/\/static\.wikia\.nocookie\.net\/.*?\.(png|jpg|jpeg|gif)/i);
+        if (match) {
+            return match[0];
+        }
+        return fullUrl;
+    }
+
+    async #loadImage() {
+        const imageId = this.imageInput.value.trim();
+        if (!imageId) {
+            document.getElementById('upgrade-image').src = ''; // Set default empty image if no ID
+            return;
+        }
+        // Check cache first
+        let imageLocation = imageCache[imageId];
+        if (!imageLocation) {
+            imageLocation = await this.#fetchImage(imageId); // Fetch the image location
+        }
+        document.getElementById('upgrade-image').src = imageLocation || ''; // Set image source
+    }
+
+    async #loadAbilityImage() {
+        const iconId = this.abilityImageInput.value.trim();
+        if (!iconId) {
+            this.abilityImage.src = '';
+            return;
+        }
+        let imageLocation = imageCache[iconId];
+        if (!imageLocation) {
+            imageLocation = await this.#fetchImage(iconId);
+        }
+        this.abilityImage.src = imageLocation || '';
+    }
+
+    #onTextChanged(property, value) {
+        this.skinData.set(this.index + 1, property, value);
+    }
+
+    #onAbilityImageChanged(value) {
+        const abilities = (
+            this.skinData?.defaults?.Abilities || 
+            this.skinData?.Defaults?.Abilities || 
+            this.skinData?.Default?.Defaults?.Abilities || 
+            this.skinData?.data?.Abilities || 
+            this.skinData?.defaults?.data?.Abilities || 
+            this.skinData?.defaults?.attributes?.Abilities
+        );
+        if (abilities && abilities.length > 0) {
+            abilities[0].Icon = value;
+        }
+    }
+
+    #onAbilityTitleChanged(value) {
+        const abilities = (
+            this.skinData?.defaults?.Abilities || 
+            this.skinData?.Defaults?.Abilities || 
+            this.skinData?.Default?.Defaults?.Abilities || 
+            this.skinData?.data?.Abilities || 
+            this.skinData?.defaults?.data?.Abilities || 
+            this.skinData?.defaults?.attributes?.Abilities
+        );
+        if (abilities && abilities.length > 0) {
+            abilities[0].Name = value;
+        }
+    }
+
+    #loadExtras(upgrade) {
+        const extras = upgrade?.data?.Extras ?? [];
+        this.extrasInput.innerHTML = '';
+        extras.forEach((extra, index) => {
+            this.#addExtra(extra, index);
+        });
+    }
+
     #addExtra(extra, index) {
         const inputGroup = document.createElement('form');
-        ['input-group', 'mb-2'].forEach(className => inputGroup.classList.add(className)) // prettier-ignore
-
+        ['input-group', 'mb-2'].forEach(className => inputGroup.classList.add(className)); // prettier-ignore
         const inputText = document.createElement('input');
-        ['form-control', 'form-control-sm', 'text-white'].forEach(className => inputText.classList.add(className)) // prettier-ignore
+        ['form-control', 'form-control-sm', 'text-white'].forEach(className => inputText.classList.add(className)); // prettier-ignore
         inputText.type = 'text';
         inputText.value = extra;
-
         const inputButtonGroup = document.createElement('div');
-
         const removeButton = document.createElement('div');
-        ['btn', 'btn-sm', 'btn-outline-danger'].forEach(className => removeButton.classList.add(className)) // prettier-ignore
+        ['btn', 'btn-sm', 'btn-outline-danger'].forEach(className => removeButton.classList.add(className));
         removeButton.innerText = 'Remove';
-
         inputButtonGroup.appendChild(removeButton);
         inputGroup.appendChild(inputText);
         inputGroup.appendChild(inputButtonGroup);
@@ -140,7 +268,6 @@ export default class UpgradeViewer {
             'mouseup',
             (() => inputText.focus()).bind(this)
         );
-
         removeButton.addEventListener(
             'mouseup',
             (() => {
@@ -154,98 +281,19 @@ export default class UpgradeViewer {
         if (value !== '') {
             this.updateExtra(index, value);
         }
-
         this.viewer.reload();
-    }
-
-    async #fetchImage(imageId) {
-        let url;
-        if (imageId.startsWith('https')) {
-            // check if it's a url or fandom url
-            if (imageId.includes('static.wikia.nocookie.net')) {
-                url = this.#trimFandomUrl(imageId); // Trim the url to the base file path (fandom doesn't allow it otherwise)
-            } else {
-                url = imageId; // Use the url as is for non fandom urls
-            }
-        } else {
-            // Try RoProxy first
-            const roProxyUrl = `https://assetdelivery.RoProxy.com/v2/assetId/${imageId}`;
-            try {
-                const response = await fetch(roProxyUrl, {
-                    method: 'GET',
-                    mode: 'cors',
-                });
-                const data = await response.json();
-                if (data?.locations?.[0]?.location) {
-                    return data.locations[0].location;
-                }
-            } catch (error) {
-                // Fallback to fandom if RoProxy fails
-            }
-    
-            // Fallback to fandom
-            url = `https://static.wikia.nocookie.net/tower-defense-sim/images/${imageId}`;
-        }
-    
-        imageCache[imageId] = url;
-        return url;
-    }
-    
-    #trimFandomUrl(fullUrl) {
-        // Fandom url chopping
-        const match = fullUrl.match(/https:\/\/static\.wikia\.nocookie\.net\/.*?\.(png|jpg|jpeg|gif)/i);
-        if (match) {
-            return match[0]; // Return the base URL
-        }
-        return fullUrl; // Return the original URL if no match is found
-    }
-    
-    async #loadImage() {
-        const imageId = this.imageInput.value.trim();
-    
-        if (!imageId) {
-            document.getElementById('upgrade-image').src = ''; // Set default empty image if no ID
-            return;
-        }
-    
-        // Check cache first
-        let imageLocation = imageCache[imageId];
-    
-        if (!imageLocation) {
-            imageLocation = await this.#fetchImage(imageId); // Fetch the image location
-        }
-    
-        document.getElementById('upgrade-image').src = imageLocation; // Set image source
-    }    
-
-    #loadExtras(upgrade) {
-        const extras = upgrade?.data?.Extras ?? [];
-
-        this.extrasInput.innerHTML = '';
-
-        extras.forEach((extra, index) => {
-            this.#addExtra(extra, index);
-        });
-    }
-
-    #onTextChanged(property, value) {
-        this.skinData.set(this.index + 1, property, value);
     }
 
     updateExtra(extraIndex, value) {
         const upgradeIndex = this.index;
         const skin = this.viewer.getActiveSkin();
-
         skin.data.Upgrades[upgradeIndex].Stats.Extras[extraIndex] = value;
     }
 
     removeExtra(deletedIndex) {
         const upgradeIndex = this.index;
         const skin = this.viewer.getActiveSkin();
-
         const stats = skin.data.Upgrades[upgradeIndex].Stats;
-        stats.Extras = stats.Extras.filter(
-            (_, index) => index !== deletedIndex
-        );
+        stats.Extras = stats.Extras.filter((_, index) => index !== deletedIndex);
     }
 }

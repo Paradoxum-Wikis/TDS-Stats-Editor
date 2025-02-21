@@ -52,7 +52,9 @@ const calculated = {
 const register = {
     Necromancer: {
         Default: [
+            'Skeleton',
             'Sword Skeleton',
+            'Giant Skeleton',
             'Skeleton Knight',
             'Hallow Guard',
             'Executioner Skeleton',

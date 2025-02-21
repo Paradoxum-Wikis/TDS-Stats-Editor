@@ -17,6 +17,13 @@ export default class PropertyViewer {
             'BossPotential',
             'LimitBossPotential',
             'BossValue',
+            'Summon_Debounce',
+            'BookAim',
+            'Summon_Debounce',
+            'BookDebounce',
+            'Grave_Cooldown',
+            'MustAim',
+            'Abilities.0',
         ];
         this.baseProperties = [
             'Damage',

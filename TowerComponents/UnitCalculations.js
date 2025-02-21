@@ -17,6 +17,11 @@ class UnitCalculations {
                 Value: (level) => level.Damage / level.TickRate,
             },
 
+            ExecutionerSkeleton: {
+                For: ['Executioner Skeleton' ],
+                Value: (level) => level.Damage / level.TickRate / level.Cooldown,
+            },
+
             Rocket: {
                 For: ['Sentry4', 'Tank', 'RailgunTank'],
                 Requires: ['Damage', 'Cooldown'],

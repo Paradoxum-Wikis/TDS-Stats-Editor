@@ -13,3 +13,8 @@ input {
 #upgrade-image {
     aspect-ratio: 1 / 1;
 }
+
+#ability-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
