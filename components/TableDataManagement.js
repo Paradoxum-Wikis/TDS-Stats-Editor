@@ -55,10 +55,10 @@ export default class TableDataManagement {
             this.removeLevel.bind(this)
         );
 
-        this.clearUnitChangesButton.addEventListener(
-            'click',
-            this.clearUnitChanges.bind(this)
-        );
+//        this.clearUnitChangesButton.addEventListener(
+//            'click',
+//            this.clearUnitChanges.bind(this)
+//        );
     }
 
     renderButtonOutlines() {
