@@ -1016,7 +1016,7 @@ export default {
           Stats: {
             MaxAmmo: 50,
             Range: 12,
-            Extras: ["Ammo: 40 -> 50", "❄️ Max Slowness: 50% > 65%"],
+            Extras: ["Ammo: 40 → 50", "❄️ Max Slowness: 50% > 65%"],
             Attributes: { MaxSlow: '65%' },
           },
           Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/4/41/CryomancerLevel1.png/revision/latest?cb=20231222082645",
@@ -1027,7 +1027,7 @@ export default {
           Stats: {
             MaxAmmo: 80,
             Extras: [
-              "Ammo: 50 -> 80",
+              "Ammo: 50 → 80",
               "Chilled Enemies take tick-based damage",
               "❄️ Tick Damage: (1)",
             ],
@@ -1041,9 +1041,9 @@ export default {
         {
           Stats: {
             Extras: [
-              "Chill Slowness: 5% -> 10%",
+              "Chill Slowness: 5% → 10%",
               "Larger Frost Beam",
-              "Debuff Duration: 2 -> 4",
+              "Debuff Duration: 2 → 4",
               "❄️ Max Slowness: 65% > 75%",
             ],
             Attributes: {
@@ -1063,8 +1063,8 @@ export default {
             Extras: [
               "🧊 Enemies now freeze at max 'Chill'",
               "Even Larger Frost Beam",
-              "❄️ Tick Damage: 1 -> 3",
-              "Max Hits: 3 -> 6",
+              "❄️ Tick Damage: 1 → 3",
+              "Max Hits: 3 → 6",
             ],
             Attributes: {
               CanFreeze: true,
@@ -1972,7 +1972,7 @@ export default {
         {
           Image: 3354968287,
           Stats: {
-            Extras: ["❄Max Slowness: 45% -> 60%", "Chill Slowness: 15% -> 20%"],
+            Extras: ["❄Max Slowness: 45% → 60%", "Chill Slowness: 15% → 20%"],
             Attributes: {
               DefenseMelt: 0,
               FreezeTime: 1.5,
@@ -1997,7 +1997,7 @@ export default {
         {
           Image: 3354969462,
           Stats: {
-            Extras: ["🧊Freeze Time: 1.5 -> 2", "Defense Melt: 10"],
+            Extras: ["🧊Freeze Time: 1.5 → 2", "Defense Melt: 10"],
             Attributes: {
               DefenseMelt: 10,
               FreezeTime: 2,
@@ -2023,10 +2023,10 @@ export default {
           Image: 3354970959,
           Stats: {
             Extras: [
-              "Burst: 1 -> 3",
+              "Burst: 1 → 3",
               "Burst Cooldown: 1",
-              "❄Max Slowness: 60% -> 75%",
-              "Chill Slowness: 20% -> 25%",
+              "❄Max Slowness: 60% → 75%",
+              "Chill Slowness: 20% → 25%",
             ],
             Attributes: {
               DefenseMelt: 10,
@@ -2053,10 +2053,10 @@ export default {
           Image: 3354972102,
           Stats: {
             Extras: [
-              "Burst: 3 -> 6",
+              "Burst: 3 → 6",
               "🧊Frost Grenade Ability",
-              "❄Max Slowness: 60% -> 75%",
-              "Chill Slowness: 20% -> 25%",
+              "❄Max Slowness: 60% → 75%",
+              "Chill Slowness: 20% → 25%",
             ],
             Attributes: {
               DefenseMelt: 10,
@@ -2121,7 +2121,7 @@ export default {
         {
           Image: 3354969462,
           Stats: {
-            Extras: ["Max Hits: 3 -> 4"],
+            Extras: ["Max Hits: 3 → 4"],
             Attributes: {
               DefenseMelt: 10,
               FreezeTime: 0.5,
@@ -2138,7 +2138,7 @@ export default {
         {
           Image: 3354970959,
           Stats: {
-            Extras: ["🧊Freeze Time: 0.5 > 0.75", "Max Hits: 4 -> 5"],
+            Extras: ["🧊Freeze Time: 0.5 > 0.75", "Max Hits: 4 → 5"],
             Attributes: {
               DefenseMelt: 10,
               FreezeTime: 0.75,
@@ -2157,7 +2157,7 @@ export default {
           Stats: {
             Extras: [
               "🧊Freeze Time: 0.75 > 1.25",
-              "Max Hits: 5 -> 7",
+              "Max Hits: 5 → 7",
               "Faster projectile speed",
             ],
             Attributes: {
@@ -2225,7 +2225,7 @@ export default {
             Ammo: 50,
             Range: 30,
             Damage: 8,
-            Extras: ["Increased Firing Angle (30 --> 45)"],
+            Extras: ["Increased Firing Angle (30 -→ 45)"],
           },
           Image: 5523212631,
           Title: "Heavier Bullets",
@@ -2540,7 +2540,7 @@ export default {
         {
           Stats: {
             Extras: [
-              "Fire Time: 3 -> 4",
+              "Fire Time: 3 → 4",
               "Ice Bomb",
               "1/2 Base Damage, 30% Chill, 60% Max Chill",
             ],
@@ -2554,7 +2554,7 @@ export default {
         {
           Stats: {
             Extras: [
-              "Fire Time: 4 -> 6",
+              "Fire Time: 4 → 6",
               "Acid Puddle Bomb",
               "3/10 Base Damage, 0.5 Tick, 10s Duration, Defense Melt",
             ],
@@ -3094,7 +3094,7 @@ export default {
         {
           Image: 3877875003,
           Stats: {
-            Extras: ["Health: 30 -> 60"],
+            Extras: ["Health: 30 → 60"],
             Attributes: { SpawnTime: 35, UnitToSend: "Humvee 2" },
             Detections: {
               Flying: false,
@@ -3111,7 +3111,7 @@ export default {
         {
           Image: 3877873543,
           Stats: {
-            Extras: ["Mounted gunner", "Health: 60 -> 90"],
+            Extras: ["Mounted gunner", "Health: 60 → 90"],
             Attributes: { SpawnTime: 35, UnitToSend: "Humvee 3" },
             Detections: {
               Flying: false,
@@ -3129,7 +3129,7 @@ export default {
           Image: 3444568329,
           Stats: {
             Extras: [
-              "Health: 90 -> 500",
+              "Health: 90 → 500",
               "Explosive Damage: 50",
               "Airstrike ability",
               "Airstrike damage: 450",
@@ -3151,10 +3151,10 @@ export default {
           Image: 3444568580,
           Stats: {
             Extras: [
-              "Health: 500 -> 1500",
-              "Explosive damage: 50 -> 80",
-              "Airstrike damage: 450 -> 750",
-              "Airstrike explosion range: 8 -> 12",
+              "Health: 500 → 1500",
+              "Explosive damage: 50 → 80",
+              "Airstrike damage: 450 → 750",
+              "Airstrike explosion range: 8 → 12",
             ],
             Attributes: {
               SpawnTime: 35,
@@ -3468,7 +3468,7 @@ export default {
       Upgrades: [
         {
           Stats: {
-            Extras: ["Max Graves: 2 -> 4", "Max Hits: 1 -> 2", "Max Ammo: 50 -> 60", "Build Time: 1.5 -> 1" ],
+            Extras: ["Max Graves: 2 → 4", "Max Hits: 1 → 2", "Max Ammo: 50 → 60", "Build Time: 1.5 → 1" ],
             Attributes: { SpawnCount: 3, MaxHits: 2, MaxAmmo: 60, BuildTime: 1, Max_Graves: 4 },
             Cooldown: 1.2,
             Damage: 12,
@@ -3480,9 +3480,9 @@ export default {
         {
           Stats: {
             Extras: [
-              "Max Ammo: 60 -> 96",
-              "Max Graves: 4 -> 6",
-              "Spawn Count: 2 -> 3",
+              "Max Ammo: 60 → 96",
+              "Max Graves: 4 → 6",
+              "Spawn Count: 2 → 3",
               "Spawns Sword Skeletons",
             ],
             Attributes: {
@@ -3501,8 +3501,8 @@ export default {
         {
           Stats: {
             Extras: [
-              "Max Ammo: 96 -> 450",
-              "Max Grave Level: 2 -> 3",
+              "Max Ammo: 96 → 450",
+              "Max Grave Level: 2 → 3",
               "Spawns Giant Skeletons",
               "Spawns Skeleton Knights",
             ],
@@ -3525,13 +3525,13 @@ export default {
         {
           Stats: {
             Extras: [
-              "Explosion Range: 0 -> 4",
-              "Explosion Damage: 0 -> 500",
-              "Max Hits: 3 -> 5",
-              "Projectile Speed: 50 -> 0",
-              "Max Graves: 6 -> 9",
-              "Max Grave Level: 2 -> 3",
-              "Max Ammo: 450 -> 1440",
+              "Explosion Range: 0 → 4",
+              "Explosion Damage: 0 → 500",
+              "Max Hits: 3 → 5",
+              "Projectile Speed: 50 → 0",
+              "Max Graves: 6 → 9",
+              "Max Grave Level: 2 → 3",
+              "Max Ammo: 450 → 1440",
               "Spawns Executioner Skeleton",
               "Spawns Hallow Guards",
             ],
@@ -4211,7 +4211,7 @@ export default {
         {
           Image: 5523200004,
           Stats: {
-            Extras: ["Explosion Radius: 2.3 -> 3.5", "Deadzone: 12 -> 10"],
+            Extras: ["Explosion Radius: 2.3 → 3.5", "Deadzone: 12 → 10"],
             Attributes: { Deadzone: 10, ExplosionRadius: 3.5 },
             Detections: { Flying: false, Hidden: true, Lead: true },
             Cooldown: 3.5,
@@ -4224,7 +4224,7 @@ export default {
         {
           Image: 5523202707,
           Stats: {
-            Extras: ["Explosion Radius: 3.5 -> 4.5", "Deadzone: 12 > 10"],
+            Extras: ["Explosion Radius: 3.5 → 4.5", "Deadzone: 12 > 10"],
             Attributes: { Deadzone: 10, ExplosionRadius: 4.5 },
             Detections: { Flying: false, Hidden: true, Lead: true },
             Cooldown: 3,
@@ -4629,7 +4629,7 @@ export default {
         {
           Image: 141745478,
           Stats: {
-            Extras: ["Max Hits: 2 -> 3"],
+            Extras: ["Max Hits: 2 → 3"],
             Attributes: {
               CanFreeze: false,
               DefenseMelt: 0,
@@ -4658,7 +4658,7 @@ export default {
           Stats: {
             Extras: [
               "🧊Freeze enemies on max chills",
-              "Slow Debuff: 30% -> 50%",
+              "Slow Debuff: 30% → 50%",
             ],
             Attributes: {
               CanFreeze: true,
@@ -4686,7 +4686,7 @@ export default {
         {
           Image: 16620737,
           Stats: {
-            Extras: ["Frozen enemies take x2 damage.", "Max Hits: 3 -> 4"],
+            Extras: ["Frozen enemies take x2 damage.", "Max Hits: 3 → 4"],
             Attributes: {
               CanFreeze: true,
               DefenseMelt: 0,
@@ -4713,7 +4713,7 @@ export default {
         {
           Image: 16868189,
           Stats: {
-            Extras: ["Max Hit: 4 -> 5", "Longer Freeze Time"],
+            Extras: ["Max Hit: 4 → 5", "Longer Freeze Time"],
             Attributes: {
               CanFreeze: true,
               DefenseMelt: 0,
@@ -5660,7 +5660,7 @@ export default {
         {
           Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/6/6d/HallowPunkUpgrade2.png/revision/latest?cb=20241031024354",
           Stats: {
-            Extras: ["Explosion Radius: 3.5 -> 5", "Rocket Speed: 20 -> 25", "Knockback: 10 -> 12.5"],
+            Extras: ["Explosion Radius: 3.5 → 5", "Rocket Speed: 20 → 25", "Knockback: 10 → 12.5"],
             Attributes: { RocketSpeed: 25, ExplosionRadius: 5, Knockback: 12.5 },
             Detections: { Flying: false, Lead: true },
             Range: 22.5,
@@ -5672,7 +5672,7 @@ export default {
         {
           Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/6/62/HallowPunkMaxUpgrade.png/revision/latest?cb=20241031024416",
           Stats: {
-            Extras: ["Explosion Radius: 5 -> 5.5", "Deadzone: 12 -> 10", "Knockback: 12.5 -> 17.5", "Burn Damage 0 -> 3", "Burn Time 0 -> 16", "Burn Tick 0 -> 0.25"],
+            Extras: ["Explosion Radius: 5 → 5.5", "Deadzone: 12 → 10", "Knockback: 12.5 → 17.5", "Burn Damage 0 → 3", "Burn Time 0 → 16", "Burn Tick 0 → 0.25"],
             Attributes: { Knockback: 17.5, ExplosionRadius: 5.5, BurnDamage: 3, BurnTime: 16, BurnTick: 0.25 },
             Detections: { Flying: true, Hidden: false, Lead: true },
             Range: 26,
@@ -5699,7 +5699,7 @@ export default {
         {
           Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/d/dd/Freezer_Upgrade_1.png/revision/latest?cb=20231221115311",
           Stats: {
-            Extras: [ "Max Slowdown: 30% -> 40%", "Slowdown per Hit: 15% -> 20%" ],
+            Extras: [ "Max Slowdown: 30% → 40%", "Slowdown per Hit: 15% → 20%" ],
             Attributes: { MaxSlow: '40%', ExplosionRadius: 2, FreezeTime: 0, SlowdownPerHit: '20%' },
             Detections: {
               Flying: false,
@@ -5715,7 +5715,7 @@ export default {
         {
           Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/8/8b/Freezer_Upgrade_2.png/revision/latest?cb=20231221115243",
           Stats: {
-            Extras: [ "Max Slowdown: 40% -> 60%", "Slowdown per Hit: 20% -> 30%", "Slowdown Time: 3 -> 4" ],
+            Extras: [ "Max Slowdown: 40% → 60%", "Slowdown per Hit: 20% → 30%", "Slowdown Time: 3 → 4" ],
             Attributes: { MaxSlow: '60%', ExplosionRadius: 2, FreezeTime: 0, SlowdownPerHit: '30%', SlowdownTime: 4 },
             Detections: { Flying: false, Lead: false },
             Range: 14,
@@ -5727,7 +5727,7 @@ export default {
         {
           Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/0/06/Freezer_Upgrade_3.png/revision/latest?cb=20231221115338",
           Stats: {
-            Extras: ["Freeze Time: 0 -> 2", "Explosion Radius: 2 -> 4", "Max Hits: 1 -> 4"],
+            Extras: ["Freeze Time: 0 → 2", "Explosion Radius: 2 → 4", "Max Hits: 1 → 4"],
             Attributes: { ExplosionRadius: 4, FreezeTime: 2, SlowdownPerHit: '30%', SlowdownTime: 4, MaxHits: 4 },
             Detections: { Flying: false, Hidden: false, Lead: true },
             Range: 18,
@@ -5754,7 +5754,7 @@ export default {
         {
           Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/5/54/FireworkTechnicianLevel1.png/revision/latest?cb=20241231081028",
           Stats: {
-            Extras: [ "Detection Buff Time: 15 -> 20", "Firework Chance Cap: 50% -> 60%", "Burn Damage: 1 -> 2" ],
+            Extras: [ "Detection Buff Time: 15 → 20", "Firework Chance Cap: 50% → 60%", "Burn Damage: 1 → 2" ],
             Attributes: { DetectionBuffTime: 20, FireworkChanceCap: '60%', BurnDamage: 2, BurnTick: 0.5, },
             Detections: { Flying: false, Hidden: false, Lead: true },
             Range: 9,
@@ -5766,7 +5766,7 @@ export default {
         {
           Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/2/28/FireworkTechnicianLevel2.png/revision/latest?cb=20241231081029",
           Stats: {
-            Extras: [ "Detection Buff Time: 20 -> 25", "Explosion Radius: 1 -> 2", "Firework Chance Cap: 60% -> 70%", "Burn Tick: 0.5 -> 0.25" ],
+            Extras: [ "Detection Buff Time: 20 → 25", "Explosion Radius: 1 → 2", "Firework Chance Cap: 60% → 70%", "Burn Tick: 0.5 → 0.25" ],
             Attributes: { DetectionBuffTime: 25, ExplosionRadius: 2, FireworkChanceCap: '70%', BurnTick: 0.25, },
             Damage: 20,
           },
@@ -5776,7 +5776,7 @@ export default {
         {
           Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/4/46/FireworkTechnicianLevel3.png/revision/latest?cb=20241231081026",
           Stats: {
-            Extras: ["Detection Buff Time: 25 -> 30", "FireworkChanceCap: 70% -> 85%" ],
+            Extras: ["Detection Buff Time: 25 → 30", "FireworkChanceCap: 70% → 85%" ],
             Attributes: { DetectionBuffTime: 30, FireworkChanceCap: '85%', BurnDamage: 4, BurnTick: 0.25, },
             Damage: 30,
           },
@@ -5786,7 +5786,7 @@ export default {
         {
           Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/1/16/FireworkTechnicianLevel4.png/revision/latest?cb=20241231081027",
           Stats: {
-            Extras: [ "Detection Buff Time: 30 -> 40", "Firework Chance Cap: 85% -> 100%", "Burn Damage: 4 -> 7", "Explosion Radius: 2 -> 3" ],
+            Extras: [ "Detection Buff Time: 30 → 40", "Firework Chance Cap: 85% → 100%", "Burn Damage: 4 → 7", "Explosion Radius: 2 → 3" ],
             Attributes: { DetectionBuffTime: 40, FireworkChanceCap: '100%', BurnDamage: 7, BurnTick: 0.25, ExplosionRadius: 3, },
             Damage: 45,
             Range: 10,
