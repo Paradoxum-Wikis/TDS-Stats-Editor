@@ -478,7 +478,7 @@ export default {
         {
           Image: 5525000768,
           Stats: {
-            Extras: ["Firerate Buff: 12.5% > 15%"],
+            Extras: ["Firerate Buff: 12.5% → 15%"],
             Attributes: { FirerateBuff: 15 },
             Cooldown: 0,
             Range: 9,
@@ -507,7 +507,7 @@ export default {
           Image: 5525002879,
           Stats: {
             Extras: [
-              "Firerate Buff: 15% > 17.5%",
+              "Firerate Buff: 15% → 17.5%",
               "Call to Arms (22.5% Firerate Buff)",
             ],
             Attributes: { FirerateBuff: 17.5 },
@@ -527,7 +527,7 @@ export default {
           Image: 5525003528,
           Stats: {
             Extras: [
-              "Firerate Buff: 17.5% > 20%",
+              "Firerate Buff: 17.5% → 20%",
               "Support Caravan (60 Seconds)",
               "Call to Arms (30% Firerate Buff)",
             ],
@@ -694,7 +694,7 @@ export default {
           Image: 5523231844,
           Stats: {
             Attributes: { MaxAmmo: 6, SpinDuration: 1.2 },
-            Extras: ["Spin: 1.7 > 1.3 secs"],
+            Extras: ["Spin: 1.7 → 1.3 secs"],
             Income: 40,
             Detections: {
               Flying: false,
@@ -871,7 +871,7 @@ export default {
             Attributes: { PistolCrookSpawnTime: 25 },
             Range: 12,
             Cooldown: 1,
-            Extras: ["Pistol Crook Spawn Time: 35 > 25"],
+            Extras: ["Pistol Crook Spawn Time: 35 → 25"],
             Damage: 4,
           },
           Image: 3032133716,
@@ -916,7 +916,7 @@ export default {
             Extras: [
               "Upgraded Tommy Crooks",
               "4 Damage, 0.18 Firerate",
-              "Tommy Crook Spawn Time: 30 > 20",
+              "Tommy Crook Spawn Time: 30 → 20",
             ],
             Cooldown: 0.1,
             Damage: 6,
@@ -943,7 +943,7 @@ export default {
             Attributes: { PistolCrookSpawnTime: 25 },
             Range: 12.5,
             Cooldown: 1.35,
-            Extras: ["Pistol Crook Spawn Time: 35 > 25"],
+            Extras: ["Pistol Crook Spawn Time: 35 → 25"],
             Damage: 8,
           },
           Image: 3032133716,
@@ -988,7 +988,7 @@ export default {
             Extras: [
               "Upgraded Gold Tommy Crooks",
               "5 Damage, 0.15 Firerate",
-              "Gold Tommy Crook Spawn Time: 25 > 20",
+              "Gold Tommy Crook Spawn Time: 25 → 20",
             ],
             Cooldown: 0.1,
             Damage: 11,
@@ -1016,7 +1016,7 @@ export default {
           Stats: {
             MaxAmmo: 50,
             Range: 12,
-            Extras: ["Ammo: 40 → 50", "❄️ Max Slowness: 50% > 65%"],
+            Extras: ["Ammo: 40 → 50", "❄️ Max Slowness: 50% → 65%"],
             Attributes: { MaxSlow: '65%' },
           },
           Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/4/41/CryomancerLevel1.png/revision/latest?cb=20231222082645",
@@ -1044,7 +1044,7 @@ export default {
               "Chill Slowness: 5% → 10%",
               "Larger Frost Beam",
               "Debuff Duration: 2 → 4",
-              "❄️ Max Slowness: 65% > 75%",
+              "❄️ Max Slowness: 65% → 75%",
             ],
             Attributes: {
               DebuffLength: 4,
@@ -1606,7 +1606,7 @@ export default {
             Attributes: {
               BuildTime: 2,
               MaxUnits: 1,
-              UnitToSend: "Sentry1",
+              UnitToSend: "Sentry",
               SpawnTime: 1,
               SentryShield: false,
               Buildzone: 4,
@@ -1631,7 +1631,7 @@ export default {
             Attributes: {
               BuildTime: 2,
               MaxUnits: 2,
-              UnitToSend: "Sentry1",
+              UnitToSend: "Sentry",
               SpawnTime: 1,
               SentryShield: false,
               Buildzone: 4,
@@ -1652,7 +1652,7 @@ export default {
             Attributes: {
               BuildTime: 2,
               MaxUnits: 2,
-              UnitToSend: "Sentry2",
+              UnitToSend: "Rifle Sentry",
               SpawnTime: 1,
               SentryShield: false,
               Buildzone: 4,
@@ -1673,7 +1673,7 @@ export default {
             Attributes: {
               BuildTime: 2,
               MaxUnits: 3,
-              UnitToSend: "Sentry2",
+              UnitToSend: "Rifle Sentry",
               SpawnTime: 1,
               SentryShield: true,
               Buildzone: 4,
@@ -1694,7 +1694,7 @@ export default {
             Attributes: {
               BuildTime: 2,
               MaxUnits: 3,
-              UnitToSend: "Sentry3",
+              UnitToSend: "Minigun Sentry",
               SpawnTime: 1,
               SentryShield: true,
               Buildzone: 4,
@@ -1715,7 +1715,7 @@ export default {
             Attributes: {
               BuildTime: 2,
               MaxUnits: 4,
-              UnitToSend: "Sentry4",
+              UnitToSend: "War Machine Sentry",
               SpawnTime: 1,
               SentryShield: true,
               Buildzone: 4,
@@ -1738,7 +1738,7 @@ export default {
         Attributes: {
           BuildTime: 2,
           MaxUnits: 1,
-          UnitToSend: "Sentry1",
+          UnitToSend: "Sentry",
           SpawnTime: 1,
           SentryShield: false,
           Buildzone: 4,
@@ -2138,7 +2138,7 @@ export default {
         {
           Image: 3354970959,
           Stats: {
-            Extras: ["🧊Freeze Time: 0.5 > 0.75", "Max Hits: 4 → 5"],
+            Extras: ["🧊Freeze Time: 0.5 → 0.75", "Max Hits: 4 → 5"],
             Attributes: {
               DefenseMelt: 10,
               FreezeTime: 0.75,
@@ -2156,7 +2156,7 @@ export default {
           Image: 3354972102,
           Stats: {
             Extras: [
-              "🧊Freeze Time: 0.75 > 1.25",
+              "🧊Freeze Time: 0.75 → 1.25",
               "Max Hits: 5 → 7",
               "Faster projectile speed",
             ],
@@ -4179,70 +4179,74 @@ export default {
     Default: {
       Upgrades: [
         {
-          Image: 5523197925,
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/4/4b/RocketeerLevel1.png/revision/latest?cb=20250130015322",
           Stats: {
             Extras: [],
-            Attributes: { Deadzone: 12, ExplosionRadius: 2.5 },
+            Attributes: { Deadzone: 10, ExplosionRadius: 3.5 },
             Detections: {
               Flying: false,
               Hidden: false,
               Lead: true,
             },
-            Cooldown: 4,
+            Cooldown: 3,
             Range: 22,
-            Damage: 40,
+            Damage: 30,
           },
           Title: "Faster Reloading",
-          Cost: 300,
+          Cost: 250,
         },
         {
-          Image: 5523199083,
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/b/b8/RocketeerLevel2.png/revision/latest?cb=20250130015135",
           Stats: {
             Extras: [],
-            Attributes: { Deadzone: 12, ExplosionRadius: 2.5 },
-            Detections: { Flying: false, Hidden: true, Lead: true },
-            Cooldown: 4,
-            Range: 25,
-            Damage: 70,
-          },
-          Title: "Direct Hit",
-          Cost: 1250,
-        },
-        {
-          Image: 5523200004,
-          Stats: {
-            Extras: ["Explosion Radius: 2.3 → 3.5", "Deadzone: 12 → 10"],
             Attributes: { Deadzone: 10, ExplosionRadius: 3.5 },
             Detections: { Flying: false, Hidden: true, Lead: true },
-            Cooldown: 3.5,
+            Cooldown: 3,
             Range: 25,
-            Damage: 135,
+            Damage: 60,
           },
-          Title: "Explosive Risks",
-          Cost: 5500,
+          Title: "Heavier Payload",
+          Cost: 1600,
         },
         {
-          Image: 5523202707,
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/5/56/RocketeerLevel3.png/revision/latest?cb=20250130015213",
           Stats: {
-            Extras: ["Explosion Radius: 3.5 → 4.5", "Deadzone: 12 > 10"],
+            Extras: ["Explosion Radius: 3 → 4", "Deadzone: 12 → 10"],
+            Attributes: { Deadzone: 10, ExplosionRadius: 4 },
+            Detections: { Flying: false, Hidden: true, Lead: true },
+            Cooldown: 3,
+            Range: 25,
+            Damage: 150,
+          },
+          Title: "Explosive Risks",
+          Cost: 7500,
+        },
+        {
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/a/a6/RocketeerLevel4.png/revision/latest?cb=20250130015530",
+          Stats: {
+            Extras: ["Explosion Radius: 4 → 5", "Deadzone: 12 → 10", "Missle Amount: 1 → 2", "Accuracy: 1 → 0.5"],
             Attributes: { Deadzone: 10, ExplosionRadius: 4.5 },
             Detections: { Flying: false, Hidden: true, Lead: true },
             Cooldown: 3,
-            Range: 28,
-            Damage: 275,
+            Range: 30,
+            Damage: 90,
+            MissileAmount: 4,
+            SpreadAngle: 60,
+            Accuracy: 0.5,
           },
-          Title: "Artillery Cannon",
-          Cost: 18000,
+          Title: "Missle Maelstorm",
+          Cost: 18500,
         },
       ],
       Defaults: {
-        Attributes: { Deadzone: 12, ExplosionRadius: 2.5 },
+        Attributes: { Deadzone: 10, ExplosionRadius: 3 },
         Detections: { Flying: false, Hidden: false, Lead: true },
         Range: 22,
-        Price: 2000,
+        Price: 1500,
         Limit: 8,
-        Cooldown: 5,
-        Damage: 40,
+        Cooldown: 3.5,
+        Damage: 30,
+        Accuracy: 1,
       },
     },
   },
@@ -4482,7 +4486,7 @@ export default {
         {
           Image: 4157646701,
           Stats: {
-            Extras: ["🔪 Knife Throw Cooldown: 2 > 1.75"],
+            Extras: ["🔪 Knife Throw Cooldown: 2 → 1.75"],
             Attributes: {
               KnifeAngles: [0],
               MaxHits: 1,
@@ -4506,7 +4510,7 @@ export default {
         {
           Image: 4157647195,
           Stats: {
-            Extras: ["🔪 Knife Max Hits: 1 > 2"],
+            Extras: ["🔪 Knife Max Hits: 1 → 2"],
             Attributes: {
               KnifeAngles: [0],
               MaxHits: 2,
@@ -4531,8 +4535,8 @@ export default {
           Image: 4157647659,
           Stats: {
             Extras: [
-              "🔪 Knife Throw Cooldown: 1.75 > 1.2",
-              "🔪 Knife Max Hits: 2 > 3",
+              "🔪 Knife Throw Cooldown: 1.75 → 1.2",
+              "🔪 Knife Max Hits: 2 → 3",
             ],
             Attributes: {
               KnifeAngles: [0],
@@ -4557,7 +4561,7 @@ export default {
         {
           Image: 4157648765,
           Stats: {
-            Extras: ["🔪 Knife Count: 1 > 3"],
+            Extras: ["🔪 Knife Count: 1 → 3"],
             Attributes: {
               KnifeAngles: [0, 7.5, -7.5],
               MaxHits: 3,
@@ -5172,7 +5176,7 @@ export default {
         {
           Image: 5523195646,
           Stats: {
-            Extras: ["Burst 6 > 10", "Poison Damage 2 > 3"],
+            Extras: ["Burst 6 → 10", "Poison Damage 2 → 3"],
             Attributes: {
               PoisonTick: 0.5,
               Burst: 10,
@@ -5199,8 +5203,8 @@ export default {
           Stats: {
             Extras: [
               "Full Auto Minigun",
-              "Poison Duration 6 > 10",
-              "Poison Damage 3 > 5",
+              "Poison Duration 6 → 10",
+              "Poison Damage 3 → 5",
             ],
             Attributes: {
               PoisonTick: 0.5,

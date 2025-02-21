@@ -20,7 +20,7 @@ class CalculatedManager {
                 For: ['Engineer'],
                 Requires: ['Damage', 'Cooldown'],
                 Value: (level) => level.Damage / level.Cooldown,
-            },
+            },      
             Crook: {
                 For: ['Crook Boss'],
                 Requires: [
@@ -427,6 +427,13 @@ class CalculatedManager {
                 For: ['Slasher'],
                 Value: (level) =>
                     level.Damage / level.Cooldown + level?.KnifeSingleDPS ?? 0,
+            },
+            Rocketeer: {
+                For: ['Rocketeer'],
+                Requires: ['Damage', 'Cooldown', 'MissileAmount'],
+                Value: (level) => level.MissileAmount > 0 
+                    ? (level.Damage * level.MissileAmount) / level.Cooldown 
+                    : level.Damage / level.Cooldown,
             },
             Ace: {
                 For: ['Ace Pilot'],
