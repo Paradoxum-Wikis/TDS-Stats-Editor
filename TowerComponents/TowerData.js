@@ -5876,6 +5876,12 @@ export default {
         Damage: 6,
         MaxHits: 2,
         ProjectileSpeed: 45,
+        Abilities: [
+          {
+            Name: "Thorns",
+            Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/2/2d/ThornsAbility.png/revision/latest?cb=20241101095523",
+          },
+        ],
       },
     },
   },
