@@ -24,6 +24,7 @@ export default class PropertyViewer {
             'Grave_Cooldown',
             'MustAim',
             'Abilities.0',
+            'AggregateUnitDPS',
         ];
         this.baseProperties = [
             'Damage',

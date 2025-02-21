@@ -309,14 +309,18 @@ export default {
         },
     },
 
-    Sentry1: {
+    Sentry: {
         Range: 18,
         Health: 20,
-        Lifetime: 20,
+        Lifetime: 30,
         Speed: 1.25,
         IgnoreCollisionDamage: true,
         Cooldown: 0.45,
         Damage: 1,
+        ExplosionDamage: 0,
+        TimeBetweenMissiles: 0,
+        MissileAmount: 0,
+        ExplosionRadius: 0,
         Detections: {
             Hidden: false,
             Flying: false,
@@ -328,14 +332,18 @@ export default {
             Lifetime: 20,
         },
     },
-    Sentry2: {
+    'Rifle Sentry': {
         Range: 20,
         Health: 40,
         Lifetime: 30,
         Speed: 1.25,
         IgnoreCollisionDamage: true,
-        Cooldown: 0.25,
+        Cooldown: 0.3,
         Damage: 2,
+        ExplosionRadius: 0,
+        ExplosionDamage: 0,
+        TimeBetweenMissiles: 0,
+        MissileAmount: 0,
         Detections: {
             Hidden: false,
             Flying: false,
@@ -347,14 +355,18 @@ export default {
             Lifetime: 30,
         },
     },
-    Sentry3: {
+    'Minigun Sentry': {
         Range: 20,
         Health: 60,
         Lifetime: 45,
         Speed: 1.25,
         IgnoreCollisionDamage: true,
         Cooldown: 0.16,
+        ExplosionRadius: 0,
         Damage: 5,
+        ExplosionDamage: 0,
+        TimeBetweenMissiles: 0,
+        MissileAmount: 0,
         Detections: {
             Hidden: true,
             Flying: false,
@@ -362,11 +374,11 @@ export default {
         },
         Attributes: {
             SendTime: 1.75,
-            ScrapCost: 140,
+            ScrapCost: 120,
             Lifetime: 45,
         },
     },
-    Sentry4: {
+    'War Machine Sentry': {
         ExplosionDamage: 35,
         TimeBetweenMissiles: 4,
         MissileAmount: 2,
@@ -375,8 +387,9 @@ export default {
         Lifetime: 60,
         Speed: 1.5,
         IgnoreCollisionDamage: true,
-        Cooldown: 0.115,
-        Damage: 9,
+        Cooldown: 0.12,
+        Damage: 8,
+        ExplosionRadius: 5,
         Detections: {
             Hidden: true,
             Flying: false,
@@ -384,7 +397,7 @@ export default {
         },
         Attributes: {
             SendTime: 1.75,
-            ScrapCost: 300,
+            ScrapCost: 250,
             Lifetime: 60,
         },
     },
