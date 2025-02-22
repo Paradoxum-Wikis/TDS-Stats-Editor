@@ -5003,7 +5003,7 @@ export default {
             Attributes: {
               StingTime: 4,
               ExplosionRadius: 8,
-              BeeDamage: 1,
+              BeeDamage: 2,
               TickRate: 0.75,
             },
             Detections: {
@@ -5011,7 +5011,7 @@ export default {
               Hidden: false,
               Lead: false,
             },
-            Cooldown: 2,
+            Cooldown: 4,
             Range: 12,
             Damage: 1,
           },
@@ -5025,7 +5025,7 @@ export default {
             Attributes: {
               StingTime: 4,
               ExplosionRadius: 8,
-              BeeDamage: 1,
+              BeeDamage: 2,
               TickRate: 0.75,
             },
             Detections: {
@@ -5033,7 +5033,7 @@ export default {
               Hidden: false,
               Lead: false,
             },
-            Cooldown: 2,
+            Cooldown: 3,
             Range: 16,
             Damage: 1,
           },
@@ -5047,7 +5047,7 @@ export default {
             Attributes: {
               StingTime: 4,
               ExplosionRadius: 8,
-              BeeDamage: 1,
+              BeeDamage: 2,
               TickRate: 0.75,
             },
             Detections: {
@@ -5055,7 +5055,7 @@ export default {
               Hidden: false,
               Lead: false,
             },
-            Cooldown: 1,
+            Cooldown: 2,
             Range: 18,
             Damage: 1,
           },
@@ -5074,15 +5074,15 @@ export default {
             Attributes: {
               StingTime: 6,
               ExplosionRadius: 8,
-              BeeDamage: 2,
+              BeeDamage: 4,
               TickRate: 0.5,
             },
             Detections: {
               Flying: false,
               Hidden: false,
-              Lead: false,
+              Lead: true,
             },
-            Cooldown: 1,
+            Cooldown: 2,
             Range: 18,
             Damage: 1,
           },
@@ -5096,15 +5096,15 @@ export default {
             Attributes: {
               StingTime: 8,
               ExplosionRadius: 8,
-              BeeDamage: 4,
+              BeeDamage: 6,
               TickRate: 0.25,
             },
             Detections: {
               Flying: false,
               Hidden: false,
-              Lead: false,
+              Lead: true,
             },
-            Cooldown: 0.5,
+            Cooldown: 1,
             Range: 20,
             Damage: 1,
           },
@@ -5115,14 +5115,21 @@ export default {
       Defaults: {
         Detections: { Flying: false, Hidden: false, Lead: false },
         Attributes: {
-          StingTime: 3,
+          StingTime: 4,
           ExplosionRadius: 8,
-          BeeDamage: 1,
+          BeeDamage: 2,
           TickRate: 1,
         },
+        Abilities: [
+          {
+            Name: "Beehive Grenade",
+            Level: 4,
+            Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/e/e7/Swarmer_Ability.png/revision/latest?cb=20240712150918",
+          },
+        ],
         Price: 300,
         Range: 12,
-        Cooldown: 2,
+        Cooldown: 4,
         Damage: 1,
       },
     },
@@ -5893,6 +5900,7 @@ export default {
         Abilities: [
           {
             Name: "Thorns",
+            Level: 0,
             Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/2/2d/ThornsAbility.png/revision/latest?cb=20241101095523",
           },
         ],

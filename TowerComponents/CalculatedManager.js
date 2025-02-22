@@ -366,14 +366,6 @@ class CalculatedManager {
                 Value: (level) => level.BeeDamage / level.TickRate,
             },
         },
-        TotalStingDamage: {
-            Default: {
-                For: ['Swarmer'],
-                Requires: ['StingTime', 'BeeDamage', 'TickRate'],
-                Value: (level) =>
-                    (level.StingTime * level.BeeDamage) / level.TickRate,
-            },
-        },
         KnifeSingleDPS: {
             Default: {
                 For: ['Slasher'],
@@ -398,6 +390,12 @@ class CalculatedManager {
             Cryomancer: {
                 For: ['Cryomancer'],
                 Value: (level) => level.DebuffDamage * level.DebuffLength / level.TickRate,
+            },
+            Swarmer: {
+                For: ['Swarmer'],
+                Requires: ['StingTime', 'BeeDamage', 'TickRate'],
+                Value: (level) =>
+                (level.StingTime * level.BeeDamage) / level.TickRate,
             },
         },
         DPS: {
@@ -534,8 +532,8 @@ class CalculatedManager {
             },
             Swarmer: {
                 For: ['Swarmer'],
-                Requires: ['TotalStingDamage', 'Cooldown'],
-                Value: (level) => level.TotalStingDamage / level.Cooldown,
+                Requires: ['TotalElapsedDamage', 'Cooldown'],
+                Value: (level) => level.TotalElapsedDamage / level.Cooldown,
             },
             Burst: {
                 For: ['Freezer'],
@@ -877,7 +875,6 @@ class CalculatedManager {
         this.#add('RamDPS', skinData);
         this.#add('LaserTime', skinData);
         this.#add('BeeDps', skinData);
-        this.#add('TotalStingDamage', skinData);
         this.#add('DPS', skinData);
         this.#add('LimitDPS', skinData);
         this.#add('NetCost', skinData);
