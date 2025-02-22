@@ -88,6 +88,13 @@ const register = {
             'Thorns 5',
         ],
     },
+    'Elementalist (Fire)': {
+        Default: [
+            'Heatwave 2',
+            'Heatwave 3',
+            'Heatwave 4',
+        ],
+    },
 };
 
 export default class UnitManager {

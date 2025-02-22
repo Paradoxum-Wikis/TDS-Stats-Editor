@@ -17,6 +17,13 @@ class UnitCalculations {
                 Value: (level) => level.Damage / level.TickRate,
             },
 
+            Heatwave: {
+                For: ['Heatwave 2', 'Heatwave 3', 'Heatwave 4'],
+                Value: (level) => {
+                    return (level.Damage / TowerData['Elementalist (Fire)'].Default.Defaults.Abilities[0].Cooldown) + (level.BurnDamage / level.TickRate);
+                },
+            },            
+
             ExecutionerSkeleton: {
                 For: ['Executioner Skeleton' ],
                 Value: (level) => level.Damage / level.TickRate / level.Cooldown,
@@ -58,6 +65,14 @@ class UnitCalculations {
                 },
             },
         },
+
+        TotalElapsedDamage: {
+            Default: {
+                Requires: ['BurnDamage', 'BurnTime', 'TickRate' ],
+                Value: (level) => level.BurnDamage * level.BurnTime / level.TickRate,
+            },
+        },
+
         AggregateDPS: {
             Default: {
                 Requires: ['DPS', 'Spawnrate'],
@@ -203,6 +218,7 @@ class UnitCalculations {
     }
     
     addCalculate(unitData) {
+        this.#add('TotalElapsedDamage', unitData);
         this.#add('DPS', unitData);
         this.#add('AggregateDPS', unitData);
         this.#add('RamDPS', unitData);

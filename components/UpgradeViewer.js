@@ -82,6 +82,16 @@ export default class UpgradeViewer {
                 this.viewer.reload();
             }).bind(this)
         );
+
+        this.cdTitleInput = document.getElementById('side-cd-title');
+        this.cdTitleInput.addEventListener(
+            'focusout',
+            (() => {
+                const newCooldown = this.cdTitleInput.value.trim();
+                this.#onCooldownChanged(newCooldown);
+                this.viewer.reload();
+            }).bind(this)
+        );
     }
 
     async load(skinData) {
@@ -102,9 +112,11 @@ export default class UpgradeViewer {
             const initialIcon = abilities && abilities.length > 0 ? (abilities[0].Icon || '') : '';
             const initialTitle = abilities && abilities.length > 0 ? (abilities[0].Name || '') : '';
             const initialLevel = abilities && abilities.length > 0 ? (abilities[0].Level ?? '') : '';
+            const initialCooldown = abilities && abilities.length > 0 ? (abilities[0].Cooldown ?? '') : '';
             this.abilityImageInput.value = initialIcon;
             this.abilityTitleInput.value = initialTitle;
             this.unlockTitleInput.value = initialLevel;
+            this.cdTitleInput.value = initialCooldown;
             await this.#loadAbilityImage();
             this.#loadLevelHeader(skinData);
         }
@@ -124,7 +136,7 @@ export default class UpgradeViewer {
         this.titleInput.value = this.upgrade.upgradeData.Title;
         this.#loadExtras(this.upgrade);
         this.#loadUpgradeChanges();
-        this.#loadImage(); // Ensure the image loads automatically
+        this.#loadImage(); // make the image loads automatically
     }
 
     #loadUpgradeChanges() {
@@ -237,6 +249,9 @@ export default class UpgradeViewer {
     }
 
     #onUnlockLevelChanged(value) {
+        const numValue = Number(value);
+        if (!Number.isFinite(numValue)) return;
+    
         const abilities = (
             this.skinData?.defaults?.Abilities || 
             this.skinData?.Defaults?.Abilities || 
@@ -246,9 +261,27 @@ export default class UpgradeViewer {
             this.skinData?.defaults?.attributes?.Abilities
         );
         if (abilities && abilities.length > 0) {
-            abilities[0].Level = value;
+            abilities[0].Level = numValue;
         }
     }
+    
+    #onCooldownChanged(value) {
+        const numValue = Number(value);
+        if (!Number.isFinite(numValue)) return;
+    
+        const abilities = (
+            this.skinData?.defaults?.Abilities || 
+            this.skinData?.Defaults?.Abilities || 
+            this.skinData?.Default?.Defaults?.Abilities || 
+            this.skinData?.data?.Abilities || 
+            this.skinData?.defaults?.data?.Abilities || 
+            this.skinData?.defaults?.attributes?.Abilities
+        );
+        if (abilities && abilities.length > 0) {
+            abilities[0].Cooldown = numValue;
+        }
+    }
+    
 
     #loadExtras(upgrade) {
         const extras = upgrade?.data?.Extras ?? [];

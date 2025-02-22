@@ -278,7 +278,7 @@ class CalculatedManager {
 
                     const burnTick = level.levels.getCell(
                         level.Level,
-                        'Traps.Landmine.BurnTick'
+                        'Traps.Landmine.TickRate'
                     );
 
                     const cooldown = level.levels.getCell(
@@ -384,8 +384,8 @@ class CalculatedManager {
         },
         TotalElapsedDamage: {
             Default: {
-                Requires: ['BurnDamage', 'BurnTime', 'BurnTick'],
-                Value: (level) => level.BurnDamage * level.BurnTime / level.BurnTick,
+                Requires: ['BurnDamage', 'BurnTime', 'TickRate'],
+                Value: (level) => level.BurnDamage * level.BurnTime / level.TickRate,
             },
             Cryomancer: {
                 For: ['Cryomancer'],
@@ -438,6 +438,11 @@ class CalculatedManager {
                     ? (level.Damage * level.MissileAmount) / level.Cooldown 
                     : level.Damage / level.Cooldown,
             },
+            ElementalistF: {
+                For: ['Elementalist (Fire)'],
+                Value: (level) =>
+                    level.Damage * level.Burst / ((level.Burst - 1) * level.Cooldown + level.BurstCooldown) + level.BurnDamage / level.TickRate,
+            },
             Ace: {
                 For: ['Ace Pilot'],
                 Value: (level) => {
@@ -455,10 +460,10 @@ class CalculatedManager {
                 Value: (level) => {
                     const totalDamage = level.MaxAmmo;
 
-                    const burstCooldown =
+                    const burstCool =
                         level.ChargeTime + level.LaserCooldown;
 
-                    return totalDamage / (level.LaserTime + burstCooldown);
+                    return totalDamage / (level.LaserTime + burstCool);
                 },
             },
             Brawler: {
@@ -480,10 +485,10 @@ class CalculatedManager {
             },
             BurnTower: {
                 For: ['Archer, Pyromancer'],
-                Requires: ['Damage', 'Cooldown', 'BurnDamage', 'BurnTick'],
+                Requires: ['Damage', 'Cooldown', 'BurnDamage', 'TickRate'],
                 Value: (level) => {
                     const dps = level.Damage / level.Cooldown;
-                    const burnDPS = level.BurnDamage / level.BurnTick;
+                    const burnDPS = level.BurnDamage / level.TickRate;
 
                     return dps + burnDPS;
                 },
@@ -569,7 +574,7 @@ class CalculatedManager {
                 Value: (level) => {
                     const totalDamage = level.Damage * level.Burst;
                     const totalTime =
-                        level.Cooldown * level.Burst + level.BurstCool;
+                        level.Cooldown * level.Burst + level.BurstCooldown;
 
                     return totalDamage / totalTime;
                 },
@@ -628,7 +633,7 @@ class CalculatedManager {
                 For: ['Hallow Punk'],
                 Value: (level) => {
                     const dps = level.Damage / level.Cooldown;
-                    const burnDPS = (level.BurnDamage && level.BurnTick) ? level.BurnDamage / level.BurnTick : 0;
+                    const burnDPS = (level.BurnDamage && level.TickRate) ? level.BurnDamage / level.TickRate : 0;
                     return dps + burnDPS;
                 },
             },

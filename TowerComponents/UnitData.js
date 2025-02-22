@@ -581,4 +581,29 @@ export default {
         Slowdown: '30%',
         TickRate: 0.5,
     },
+
+    'Heatwave 2': {
+        Damage: 150,
+        BurnDamage: 10,
+        Range: 12.5,
+        BurnTime: 5,
+        Knockback: 20,
+        TickRate: 0.5,
+    },
+    'Heatwave 3': {
+        Damage: 250,
+        BurnDamage: 15,
+        Range: 13.5,
+        BurnTime: 5,
+        Knockback: 22.5,
+        TickRate: 0.5,
+    },
+    'Heatwave 4': {
+        Damage: 400,
+        BurnDamage: 20,
+        Range: 15,
+        BurnTime: 5,
+        Knockback: 25,
+        TickRate: 0.5,
+    },
 };
