@@ -2447,6 +2447,16 @@ export default {
       Defaults: {
         Detections: { Flying: false, Hidden: false, Lead: false },
         Attributes: { ParryCooldown: 5, MaxHits: 3, ParryLength: 1.25 },
+        Abilities: [
+        {
+          Name: "Warrior's Call",
+          ParryCooldown: 5,
+          MaxHits: 3,
+          ParryLength: 1.25,
+          Price: 0,
+          Level: 3,
+          Icon: 4118882122,
+        }, ],
         Price: 300,
         Range: 5,
         Cooldown: 1,

@@ -72,6 +72,16 @@ export default class UpgradeViewer {
                 this.viewer.reload();
             }).bind(this)
         );
+
+        this.unlockTitleInput = document.getElementById('side-unlock-title');
+        this.unlockTitleInput.addEventListener(
+            'focusout',
+            (() => {
+                const newLevel = this.unlockTitleInput.value.trim();
+                this.#onUnlockLevelChanged(newLevel);
+                this.viewer.reload();
+            }).bind(this)
+        );
     }
 
     async load(skinData) {
@@ -91,8 +101,10 @@ export default class UpgradeViewer {
             );
             const initialIcon = abilities && abilities.length > 0 ? (abilities[0].Icon || '') : '';
             const initialTitle = abilities && abilities.length > 0 ? (abilities[0].Name || '') : '';
+            const initialLevel = abilities && abilities.length > 0 ? (abilities[0].Level ?? '') : '';
             this.abilityImageInput.value = initialIcon;
             this.abilityTitleInput.value = initialTitle;
+            this.unlockTitleInput.value = initialLevel;
             await this.#loadAbilityImage();
             this.#loadLevelHeader(skinData);
         }
@@ -221,6 +233,20 @@ export default class UpgradeViewer {
         );
         if (abilities && abilities.length > 0) {
             abilities[0].Name = value;
+        }
+    }
+
+    #onUnlockLevelChanged(value) {
+        const abilities = (
+            this.skinData?.defaults?.Abilities || 
+            this.skinData?.Defaults?.Abilities || 
+            this.skinData?.Default?.Defaults?.Abilities || 
+            this.skinData?.data?.Abilities || 
+            this.skinData?.defaults?.data?.Abilities || 
+            this.skinData?.defaults?.attributes?.Abilities
+        );
+        if (abilities && abilities.length > 0) {
+            abilities[0].Level = value;
         }
     }
 
