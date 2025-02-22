@@ -206,6 +206,7 @@ export default class TableUnitInput {
             case 'Cost':
             case 'NetCost':
             case 'Income':
+            case 'CostEfficiency':
                 return `$${Intl.NumberFormat().format(number)}`;
         }
         return +(+number).toFixed(3);

@@ -195,6 +195,7 @@ export default class TableInput {
             case 'NetCost':
             case 'Income':
             case 'LimitNetCost':
+            case 'CostEfficiency':
                 return `$${Intl.NumberFormat().format(value)}`;
         }
 
