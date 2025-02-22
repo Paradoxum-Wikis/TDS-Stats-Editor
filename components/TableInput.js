@@ -197,8 +197,14 @@ export default class TableInput {
             case 'LimitNetCost':
             case 'CostEfficiency':
                 return `$${Intl.NumberFormat().format(value)}`;
+            
+            case 'MaxDefMelt':
+            case 'DefenseMelt':
+            case 'SlowdownPerHit':
+            case 'MaxSlow':
+                return Intl.NumberFormat().format(value) + '%';
         }
-
+    
         if (+value < 1) {
             return +(+value).toFixed(3);
         }
@@ -207,6 +213,7 @@ export default class TableInput {
         }
         return +(+value).toFixed(2);
     }
+    
 
     flipped = [
         'Cooldown',

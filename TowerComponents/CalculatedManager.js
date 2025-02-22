@@ -397,6 +397,11 @@ class CalculatedManager {
                 Value: (level) =>
                 (level.StingTime * level.BeeDamage) / level.TickRate,
             },
+            ToxicGunner: {
+                For: ['Toxic Gunner'],
+                Value: (level) =>
+                (level.PoisonDamage * level.SlowdownTime) / level.TickRate,
+            },
         },
         DPS: {
             Default: {
@@ -573,11 +578,11 @@ class CalculatedManager {
                 For: ['Toxic Gunner'],
                 Value: (level) => {
                     const totalDamage = level.Damage * level.Burst;
-                    const totalTime =
-                        level.Cooldown * level.Burst + level.ReloadSpeed * 0.12;
+                    const totalReload =
+                        level.ReloadTime + level.Cooldown * level.Burst
 
-                    const burstDPS = totalDamage / totalTime;
-                    const poisonDPS = level.PoisonDamage / level.PoisonTick;
+                    const burstDPS = totalDamage / totalReload;
+                    const poisonDPS = level.PoisonDamage / level.TickRate;
 
                     return burstDPS + poisonDPS;
                 },
