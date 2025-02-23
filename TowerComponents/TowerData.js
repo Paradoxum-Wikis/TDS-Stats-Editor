@@ -5874,7 +5874,7 @@ export default {
           Image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/2/25/ElementalistLevel1.png/revision/latest?cb=20241217145711',
           Stats: {
             Attributes: {},
-            Extras: [],
+            Extras: [ "Burn Damage: 8 → 10", "Burn Time: 2 → 3", "Burst Size: 3 → 4" ],
             Range: 15,
             BurnDamage: 8,
             Damage: 5,
@@ -5888,7 +5888,7 @@ export default {
           Image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/3/39/ElementalistLevel2.png/revision/latest?cb=20241217145734',
           Stats: {
             Attributes: { Hidden: true },
-            Extras: [],
+            Extras: [ "Burn Time: 3 → 4", "Heatwave" ],
             Damage: 10,
             BurnTime: 4,
             Range: 17,
@@ -5900,7 +5900,7 @@ export default {
           Image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/b/b0/ElementalistLevel3.png/revision/latest?cb=20241217145753',
           Stats: {
             Attributes: {},
-            Extras: [],
+            Extras: [ "Burn Damage: 8 → 10", "Burst Size: 4 → 5", "Burst Cooldown: 0.6 → 0.5", "Tick Rate: 0.5 → 0.25", "Burn Time: 4 → 2" ],
             Damage: 13,
             BurnDamage: 10,
             Burst: 5,
@@ -5915,7 +5915,7 @@ export default {
           Image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/8/8a/ElementalistLevel4.png/revision/latest?cb=20241217145814',
           Stats: {
             Attributes: {},
-            Extras: [],
+            Extras: [ "Burst Size: 5 → 7", "Burst Cooldown: 0.5 → 0.4", "Burn Time: 2 → 4" ],
             Cooldown: 0.125,
             Range: 17.5,
             Damage: 18,
@@ -5957,7 +5957,7 @@ export default {
             Image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/2/25/ElementalistLevel1.png/revision/latest?cb=20241217145711',
             Stats: {
               Attributes: {},
-              Extras: [],
+              Extras: [ "Slowdown Per Hit: 5% → 7.5%" ],
               Range: 15,
               BurnDamage: 8,
               Damage: 5,
@@ -5971,7 +5971,7 @@ export default {
             Image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/3/39/ElementalistLevel2.png/revision/latest?cb=20241217145734',
             Stats: {
               Attributes: { Hidden: true },
-              Extras: [],
+              Extras: [ "Max Slow: 45% → 50%" ],
               Damage: 10,
               Range: 17,
               MaxSlow: 50,
@@ -5983,7 +5983,7 @@ export default {
             Image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/b/b0/ElementalistLevel3.png/revision/latest?cb=20241217145753',
             Stats: {
               Attributes: {},
-              Extras: [],
+              Extras: [ "Slowdown Per Hit: 7.5% → 10%" ],
               Damage: 13,
               SlowdownPerHit: 10,
               Burst: 5,
@@ -5997,7 +5997,7 @@ export default {
             Image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/8/8a/ElementalistLevel4.png/revision/latest?cb=20241217145814',
             Stats: {
               Attributes: {},
-              Extras: [],
+              Extras: [ "Slowdown Per Hit: 10% → 12.5%", "Max Slow: 50% → 60%" ],
               Cooldown: 0.125,
               Range: 17.5,
               Damage: 18,
