@@ -3747,6 +3747,14 @@ export default {
         },
         Cooldown: 0.25,
         Damage: 6,
+        Abilities: [
+          {
+            Name: "Patrol",
+            Level: 0,
+            Cooldown: 20,
+            Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/4/4b/PatrolAbility.png/revision/latest?cb=20241128075124",
+          },
+        ],
       },
     },
   },
