@@ -5936,7 +5936,6 @@ export default {
           Stats: {
             Attributes: { Hidden: true },
             Extras: [],
-            Cooldown: 0.85,
             Damage: 10,
             BurnTime: 4,
             Range: 17,
@@ -6020,7 +6019,6 @@ export default {
             Stats: {
               Attributes: { Hidden: true },
               Extras: [],
-              Cooldown: 0.85,
               Damage: 10,
               Range: 17,
               MaxSlow: 50,
