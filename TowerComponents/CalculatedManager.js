@@ -443,6 +443,11 @@ class CalculatedManager {
                 Value: (level) =>
                     level.Damage * level.Burst / ((level.Burst - 1) * level.Cooldown + level.BurstCooldown) + level.BurnDamage / level.TickRate,
             },
+            ElementalistFrost: {
+                For: ['Elementalist (Frost)'],
+                Value: (level) =>
+                    level.Damage * level.Burst / ((level.Burst - 1) * level.Cooldown + level.BurstCooldown)
+            },
             Ace: {
                 For: ['Ace Pilot'],
                 Value: (level) => {

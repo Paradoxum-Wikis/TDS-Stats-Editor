@@ -95,6 +95,13 @@ const register = {
             'Heatwave 4',
         ],
     },
+    'Elementalist (Frost)': {
+        Default: [
+            'Ice Turret 2',
+            'Ice Turret 3',
+            'Ice Turret 4',
+        ],
+    },
 };
 
 export default class UnitManager {
