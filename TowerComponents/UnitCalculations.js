@@ -1,8 +1,11 @@
 import Unit from './Unit.js';
 import TowerData from './TowerData.js';
+import UpgradeViewer from '../components/UpgradeViewer.js';
 
 class UnitCalculations {
-    constructor() {}
+    constructor(upgradeViewer) {
+        this.upgradeViewer = upgradeViewer;
+    }
 
     calculated = {
         DPS: {
@@ -20,7 +23,8 @@ class UnitCalculations {
             Heatwave: {
                 For: ['Heatwave 2', 'Heatwave 3', 'Heatwave 4'],
                 Value: (level) => {
-                    return (level.Damage / TowerData['Elementalist (Fire)'].Default.Defaults.Abilities[0].Cooldown) + (level.BurnDamage / level.TickRate);
+                    const cooldown = this.upgradeViewer.cdTitleInput.value; // extract cooldown from UpgradeViewer
+                    return (level.Damage / cooldown) + (level.BurnDamage / level.TickRate);
                 },
             },            
 
@@ -232,4 +236,4 @@ class UnitCalculations {
     }
 }
 
-export default new UnitCalculations();
+export default new UnitCalculations(new UpgradeViewer());

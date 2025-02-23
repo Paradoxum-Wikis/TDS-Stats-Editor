@@ -3565,6 +3565,7 @@ export default {
             Price: 0,
             Level: 0,
             Icon: 15229477810,
+            Cooldown: 5,
           },
         ],
         Limit: 3,
