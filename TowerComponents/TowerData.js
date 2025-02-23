@@ -928,7 +928,7 @@ export default {
       ],
       Defaults: {
         Range: 10,
-        Attributes: { PistolCrookSpawnTime: 35, BackupCallTime: 1.5 },
+        Attributes: { PistolCrookSpawnTime: 35, BackupCallTime: 1.5, DoublePistolCrooks: false, TommyCrookSpawnTime: false, TommyDrum: false },
         Limit: 6,
         Price: 600,
         Detections: { Flying: false, Hidden: false, Lead: false },
@@ -1000,7 +1000,7 @@ export default {
       ],
       Defaults: {
         Range: 12.5,
-        Attributes: { PistolCrookSpawnTime: 35, BackupCallTime: 1.5 },
+        Attributes: { PistolCrookSpawnTime: 35, BackupCallTime: 1.5, DoublePistolCrooks: false, TommyCrookSpawnTime: false, TommyDrum: false, },
         Limit: 6,
         Price: 800,
         Detections: { Flying: false, Hidden: false, Lead: false },
