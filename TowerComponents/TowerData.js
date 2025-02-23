@@ -3198,7 +3198,7 @@ export default {
     Default: {
       Upgrades: [
         {
-          Image: 5523183082,
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/2/29/MinigunnerUpgradeLevel1.png/revision/latest?cb=20231028082050",
           Stats: {
             Extras: ["Faster Rev Time (1.4)"],
             Attributes: { RevTime: 1.25 },
@@ -3215,7 +3215,7 @@ export default {
           Cost: 950,
         },
         {
-          Image: 5523183560,
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/c/c4/MinigunnerUpgradeLevel2.png/revision/latest?cb=20231028082106",
           Stats: {
             Extras: ["Faster Rev Time (1.3)"],
             Attributes: { RevTime: 1.25 },
@@ -3233,7 +3233,7 @@ export default {
           Cost: 2250,
         },
         {
-          Image: 5523183784,
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/9/92/MinigunnerUpgradeLevel3.png/revision/latest?cb=20231028082119",
           Stats: {
             Extras: [],
             Attributes: { RevTime: 0.75 },
@@ -3246,7 +3246,7 @@ export default {
           Cost: 6250,
         },
         {
-          Image: 5523184267,
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/a/ab/MiniLevel4.png/revision/latest?cb=20231028032508",
           Stats: {
             Extras: ["Faster Rev Time (1.2)"],
             Attributes: { RevTime: 0.75 },
@@ -3255,7 +3255,7 @@ export default {
             Range: 15,
             Damage: 17,
           },
-          Title: "Death Machine",
+          Title: "Futuristic Armory",
           Cost: 15000,
         },
       ],
@@ -3271,7 +3271,7 @@ export default {
     Golden: {
       Upgrades: [
         {
-          Image: 5523183082,
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/2/29/MinigunnerUpgradeLevel1.png/revision/latest?cb=20231028082050",
           Stats: {
             Extras: ["Faster Rev Time (1.4)"],
             Attributes: { RevTime: 0.75 },
@@ -3289,7 +3289,7 @@ export default {
           Cost: 800,
         },
         {
-          Image: 5523183560,
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/c/c4/MinigunnerUpgradeLevel2.png/revision/latest?cb=20231028082106",
           Stats: {
             Extras: ["Faster Rev Time (1.3)"],
             Attributes: { RevTime: 0.75 },
@@ -3307,7 +3307,7 @@ export default {
           Cost: 2400,
         },
         {
-          Image: 5523183784,
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/9/92/MinigunnerUpgradeLevel3.png/revision/latest?cb=20231028082119",
           Stats: {
             Extras: [],
             Attributes: { RevTime: 0.75 },
@@ -3321,7 +3321,7 @@ export default {
           Cost: 7750,
         },
         {
-          Image: 5523184267,
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/a/ab/MiniLevel4.png/revision/latest?cb=20231028032508",
           Stats: {
             Extras: [
               "Faster Rev Time (1.2)",
