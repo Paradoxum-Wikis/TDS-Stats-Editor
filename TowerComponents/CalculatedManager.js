@@ -530,20 +530,20 @@ class CalculatedManager {
                 Requires: [
                     'Damage',
                     'Cooldown',
-                    'MissilesEnabled',
                     'ExplosionDamage',
                     'MissileAmount',
                     'MissileCooldown',
+                    'Ammo',
+                    'ReloadTime',
+                    'BurstCooldown',
                 ],
                 Value: (level) => {
-                    const dps = level.Damage / level.Cooldown;
-                    const missileDPS = level.MissilesEnabled
-                        ? (level.ExplosionDamage * level.MissileAmount) /
-                          level.MissileCooldown
+                    let baseDamage = (level.Damage * level.Ammo) / (level.ReloadTime + (level.Cooldown * level.Ammo));
+                    let explosionDamage = (level.ExplosionDamage && (level.MissileCooldown + level.BurstCooldown * level.MissileAmount) > 0)
+                        ? ((level.ExplosionDamage * level.MissileAmount) / (level.MissileCooldown + level.BurstCooldown * level.MissileAmount))
                         : 0;
-
-                    return dps + missileDPS;
-                },
+                    return baseDamage + explosionDamage;
+                }
             },
             Swarmer: {
                 For: ['Swarmer'],

@@ -102,6 +102,14 @@ const register = {
             'Ice Turret 4',
         ],
     },
+    Pursuit: {
+        Default: [
+            'Top 4',
+            'Top 5',
+            'Bottom 4',
+            'Bottom 5',
+        ],
+    },
 };
 
 export default class UnitManager {

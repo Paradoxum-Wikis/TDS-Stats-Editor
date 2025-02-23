@@ -26,7 +26,18 @@ class UnitCalculations {
                     const cooldown = this.upgradeViewer.cdTitleInput.value; // extract cooldown from UpgradeViewer
                     return (level.Damage / cooldown) + (level.BurnDamage / level.TickRate);
                 },
-            },            
+            },
+            
+            Missiles: {
+                For: ['Top 4', 'Top 5', 'Bottom 4', 'Bottom 5'],
+                Value: (level) => {
+                    let baseDamage = (level.Damage * level.Ammo) / (level.ReloadTime + (level.Cooldown * level.Ammo));
+                    let explosionDamage = (level.ExplosionDamage && (level.MissileCooldown + level.BurstCooldown * level.MissileAmount) > 0)
+                        ? ((level.ExplosionDamage * level.MissileAmount) / (level.MissileCooldown + level.BurstCooldown * level.MissileAmount))
+                        : 0;
+                    return baseDamage + explosionDamage;
+                }
+            },     
 
             ExecutionerSkeleton: {
                 For: ['Executioner Skeleton' ],
@@ -155,7 +166,37 @@ class UnitCalculations {
             },
         },
 
+        NetCost: {
+            Pursuit: {
+                For: ['Top 4', 'Top 5', 'Bottom 4', 'Bottom 5'],
+                Value: (level) => {
+                    let pursuitNetCost = TowerData.Pursuit.Default.Defaults.Price;
+
+                    if (level === undefined) {
+                        return pursuitNetCost + TowerData.Pursuit.Default.Upgrades.reduce((sum, upgrade) => sum + upgrade.Cost, 0);
+                    }
+
+                    const levelNum = parseInt(level.Name.split(' ')[1]) - 1; // Adjust for 0-based indexing
+                    
+                    for (let i = 0; i < levelNum && i < TowerData.Pursuit.Default.Upgrades.length; i++) {
+                        pursuitNetCost += TowerData.Pursuit.Default.Upgrades[i].Cost;
+                    }
+                    
+                    return pursuitNetCost + level.Cost;
+                },
+            },
+        },
+
         CostEfficiency: {
+            Pursuit: {
+                For: ['Top 4', 'Top 5', 'Bottom 4', 'Bottom 5'],
+                Requires: ['NetCost', 'DPS'],
+                Value: (level) => {
+                    const efficiency = level.NetCost / level.DPS;
+                    return isFinite(efficiency) ? efficiency : NaN;
+                },
+            },
+
             Harvester: {
                 For: ['Thorns 0', 'Thorns 1', 'Thorns 2', 'Thorns 3', 'Thorns 4', 'Thorns 5'],
                 Value: (level) => {
@@ -232,6 +273,7 @@ class UnitCalculations {
         this.#add('Cooldown', unitData);
         this.#add('Range', unitData);
         
+        this.#add('NetCost', unitData);
         this.#add('CostEfficiency', unitData);
     }
 }
