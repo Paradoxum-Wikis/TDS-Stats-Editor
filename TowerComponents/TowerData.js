@@ -3680,7 +3680,7 @@ export default {
         {
           Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/9/9b/PursuitLevel1.png/revision/latest?cb=20241127205439",
           Stats: {
-            Extras: [],
+            Extras: [ "Speed: 25 → 16" ],
             Attributes: {
               Speed: 16,
             },
@@ -3693,7 +3693,7 @@ export default {
         {
           Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/9/9b/PursuitLevel1.png/revision/latest?cb=20241127205439",
           Stats: {
-            Extras: [],
+            Extras: [ "Speed: 16 → 25", "Patrol Range: 14 → 16" ],
             Attributes: {
               PatrolRange: 16,
               Speed: 25,
@@ -3708,7 +3708,7 @@ export default {
         {
           Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/c/ca/PursuitLevel3.png/revision/latest?cb=20241127205438",
           Stats: {
-            Extras: [],
+            Extras: [ "Ammo: 35 → 75", "Reload Time: 4 → 3.5", "Explosion Damage: 0 → 35", "Explosion Radius: 0 → 3", "Missile Cooldown: 0 → 7", "Missile Count: 0 → 2", "Burst Time: 0 → 0.5", "Missile Speed: 20" ],
             Attributes: {
               Ammo: 75,
               ExplosionDamage: 35,
@@ -3725,6 +3725,55 @@ export default {
           },
           Title: "Air to Ground Missiles",
           Cost: 4750,
+        },
+        {
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/c/cb/PursuitLevelT4.png/revision/latest?cb=20241127205437",
+          Stats: {
+            Extras: [ "Damage: 10 → 12", "Cooldown: 0.2 → 0.1", "Patrol Range: 16 → 18.5", "Ammo: 75 → 150", "Reload Time: 3.5 → 3", "Rev Time: 0 → 1.5", "Missile Cooldown: 7 → 6", "Missile Amount: 2 → 4" ],
+            Attributes: {
+              NoTable: true,
+              SideLevel: '4T',
+            },
+          },
+          Title: "Tri-Barrel Minigun",
+          Cost: 13500,
+        },
+        {
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/0/07/PursuitLevelB4.png/revision/latest?cb=20241127205437",
+          Stats: {
+            Extras: [ "Patrol Range: 16 → 17.5", "Reload Time: 3.5 → 2.25", "Explosion Damage: 35 → 45", "Missile Cooldown: 7 → 5", "Missile Amount: 2 → 6", "Burst Time: 0.5 → 0.25" ],
+            Attributes: {
+              NoTable: true,
+              SideLevel: '4B',
+            },
+          },
+          Title: "Upgraded Payload",
+          Cost: 13500,
+        },
+        {
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/c/cb/PursuitLevelT4.png/revision/latest?cb=20241127205437",
+          Stats: {
+            Extras: [ "Damage: 12 → 18", "Cooldown: 0.1 → 0.85", "Range: 10.5 → 12", "Patrol Range: 18.5 → 21", "Ammo: 150 → 200", "Reload Time: 3 → 2.5", "Explosion Radius: 3 → 4" ],
+            Detections: { Flying: true, Hidden: true, Lead: false },
+            Attributes: {
+              NoTable: true,
+              SideLevel: '5T',
+            },
+          },
+          Title: "Sky Shredder",
+          Cost: 45000,
+        },
+        {
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/0/07/PursuitLevelB4.png/revision/latest?cb=20241127205437",
+          Stats: {
+            Extras: [ "Damage: 10 → 20", "Patrol Range: 17.5 → 19.5", "Explosion Damage: 45 → 60", "Missile Cooldown: 5 → 3.5", "Missile Amount: 6 → 8", "Burst Time: 0.25 → 0.15" ],
+            Attributes: {
+              NoTable: true,
+              SideLevel: '5B',
+            },
+          },
+          Title: "Demolition Sunship",
+          Cost: 40000,
         },
       ],
       Defaults: {

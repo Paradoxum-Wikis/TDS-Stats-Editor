@@ -31,19 +31,23 @@ export default class TowerTable extends Table {
     }
 
     #addBody(levels) {
-        const deltaLevels =
-            this.viewer.deltaTower.skins[
-                this.viewer.towerVariants.getSelectedName()
-            ].levels;
-
-        levels.levels.forEach((_, level) => {
+        const deltaLevels = this.viewer.deltaTower.skins[
+            this.viewer.towerVariants.getSelectedName()
+        ].levels;
+    
+        levels.levels.forEach((level, index) => {
+            // skip if NoTable =true
+            if (level.NoTable === true) {
+                return;
+            }
+            
             const tr = this.createRow();
-
+    
             levels.attributes
                 .filter((attribute) => !this.ignore.includes(attribute))
                 .forEach((attribute, column) => {
                     const tableInput = new TableInput({
-                        level: level,
+                        level: index,
                         attribute: attribute,
                         towerLevels: levels,
                         referenceLevels: deltaLevels,
@@ -51,17 +55,15 @@ export default class TowerTable extends Table {
                         viewer: this.viewer,
                         isComplex: false,
                     });
-
                     tableInput.createInput();
-
                     tr.appendChild(tableInput.base);
                 });
-
+    
             levels.complexValues
                 .filter(this.#viewFilter.bind(this))
                 .forEach((attribute, column) => {
                     const tableInput = new TableInput({
-                        level: level,
+                        level: index,
                         attribute: attribute,
                         towerLevels: levels,
                         referenceLevels: deltaLevels,
@@ -69,12 +71,10 @@ export default class TowerTable extends Table {
                         viewer: this.viewer,
                         isComplex: true,
                     });
-
                     tableInput.createInput();
-
                     tr.appendChild(tableInput.base);
                 });
-
+    
             this.body.appendChild(tr);
         });
     }

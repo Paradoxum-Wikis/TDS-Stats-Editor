@@ -10,12 +10,12 @@ export default class UpgradeViewer {
         this.levelButtons.activeClass = 'btn-dark';
         this.levelButtons.inactiveClass = 'btn-outline-dark';
 
-        this.levelButtons.root.addEventListener(
-            'submit',
-            ((e) => {
-                this.loadUpgrade(e.detail - 1);
-            }).bind(this)
-        );
+//        this.levelButtons.root.addEventListener(
+//            'submit',
+//            ((e) => {
+//                this.loadUpgrade(e.detail - 1);
+//            }).bind(this)
+//        );
 
         this.imageInput = document.getElementById('side-upgrade-image');
         this.imageInput.addEventListener(
@@ -101,43 +101,88 @@ export default class UpgradeViewer {
             this.loadUpgrade(this.levelButtons.getSelectedName() - 1);
         } else {
             this.skinData = skinData;
-            const abilities = (
-                skinData?.defaults?.Abilities || 
-                skinData?.Defaults?.Abilities || 
-                skinData?.Default?.Defaults?.Abilities || 
-                skinData?.data?.Abilities || 
-                skinData?.defaults?.data?.Abilities || 
-                skinData?.defaults?.attributes?.Abilities
-            );
-            const initialIcon = abilities && abilities.length > 0 ? (abilities[0].Icon || '') : '';
-            const initialTitle = abilities && abilities.length > 0 ? (abilities[0].Name || '') : '';
-            const initialLevel = abilities && abilities.length > 0 ? (abilities[0].Level ?? '') : '';
-            const initialCooldown = abilities && abilities.length > 0 ? (abilities[0].Cooldown ?? '') : '';
-            this.abilityImageInput.value = initialIcon;
-            this.abilityTitleInput.value = initialTitle;
-            this.unlockTitleInput.value = initialLevel;
-            this.cdTitleInput.value = initialCooldown;
-            await this.#loadAbilityImage();
+            const levelNames = skinData.upgrades.map((upgrade) => {
+                return upgrade.upgradeData.Stats?.Attributes?.SideLevel ?? '';
+            });
+
+            // Check if any level name is a custom string (e.g., "4T", "5B")
+            const hasCustomLevel = levelNames.some(name => isNaN(parseInt(name)) && name !== '');
+
+            if (!hasCustomLevel) {
+                const abilities = (
+                    skinData?.defaults?.Abilities ||
+                    skinData?.Defaults?.Abilities ||
+                    skinData?.Default?.Defaults?.Abilities ||
+                    skinData?.data?.Abilities ||
+                    skinData?.defaults?.data?.Abilities ||
+                    skinData?.defaults?.attributes?.Abilities
+                );
+                const initialIcon = abilities && abilities.length > 0 ? (abilities[0].Icon || '') : '';
+                const initialTitle = abilities && abilities.length > 0 ? (abilities[0].Name || '') : '';
+                const initialLevel = abilities && abilities.length > 0 ? (abilities[0].Level ?? '') : '';
+                const initialCooldown = abilities && abilities.length > 0 ? (abilities[0].Cooldown ?? '') : '';
+                this.abilityImageInput.value = initialIcon;
+                this.abilityTitleInput.value = initialTitle;
+                this.unlockTitleInput.value = initialLevel;
+                this.cdTitleInput.value = initialCooldown;
+                await this.#loadAbilityImage();
+            } else {
+                this.abilityImageInput.value = '';
+                this.abilityTitleInput.value = '';
+                this.unlockTitleInput.value = '';
+                this.cdTitleInput.value = '';
+                this.abilityImage.src = '';
+            }
             this.#loadLevelHeader(skinData);
         }
     }
 
     #loadLevelHeader(skinData) {
-        this.levelButtons.setButtons(
-            skinData.upgrades.map((_, index) => index + 1)
+        const levelNames = skinData.upgrades.map((upgrade, index) => {
+            return upgrade.upgradeData.Stats?.Attributes?.SideLevel ?? index + 1;
+        });
+    
+        this.levelButtons.setButtons(levelNames);
+        //this.loadUpgrade(this.levelButtons.getSelectedName() - 1);
+        this.levelButtons.root.addEventListener(
+            'submit',
+            ((e) => {
+                const selectedName = e.detail;
+                const index = levelNames.indexOf(selectedName);
+                this.loadUpgrade(index);
+            }).bind(this)
         );
-        this.loadUpgrade(this.levelButtons.getSelectedName() - 1);
+        if (skinData.upgrades.length > 0) {
+            this.loadUpgrade(0);
+        }
     }
-
+    
     loadUpgrade(index) {
+        if (!this.skinData) {
+            return;
+        }
+    
+        if (!this.skinData.upgrades || this.skinData.upgrades.length === 0) {
+            return;
+        }
+    
+        if (index === undefined || index < 0 || index >= this.skinData.upgrades.length) {
+            return;
+        }
+    
         this.index = index;
         this.upgrade = this.skinData.upgrades[index];
+    
+        if (!this.upgrade) {
+            return;
+        }
+    
         this.imageInput.value = this.upgrade.upgradeData.Image;
         this.titleInput.value = this.upgrade.upgradeData.Title;
         this.#loadExtras(this.upgrade);
         this.#loadUpgradeChanges();
-        this.#loadImage(); // make the image loads automatically
-    }
+        this.#loadImage();
+    }    
 
     #loadUpgradeChanges() {
         const upgradeChanges = this.skinData.getUpgradeChangeOutput(this.index);

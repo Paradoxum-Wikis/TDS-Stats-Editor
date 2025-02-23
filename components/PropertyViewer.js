@@ -26,11 +26,14 @@ export default class PropertyViewer {
             'Abilities.0',
             'AggregateUnitDPS',
         ];
+        this.hidden = [
+            'NoTable',
+            'SideLevel',
+        ];
         this.baseProperties = [
             'Damage',
             'Cooldown',
             'Range',
-            'Hidden',
             'Flying',
             'Lead',
             'Cost',
@@ -130,6 +133,10 @@ export default class PropertyViewer {
         return this.disabled.includes(property);
     }
 
+    isHidden(property) {
+        return this.hidden.includes(property);
+    }
+
     hide(property) {
         if (!this.isDisabled(property)) {
             this.disabled.push(property);
@@ -143,6 +150,11 @@ export default class PropertyViewer {
     }
 
     createButton(innerText) {
+        if (this.isHidden(innerText)) {
+            this.hide(innerText);
+            return null;
+        }
+
         const listElement = document.createElement('li');
         const button = document.createElement('button');
 
@@ -160,9 +172,9 @@ export default class PropertyViewer {
             }).bind(this)
         );
         toggleButton.element.addEventListener('disabled', ((e) => {
-			this.hide(innerText);
-			this.viewer.reload();
-		}).bind(this)); // prettier-ignore
+            this.hide(innerText);
+            this.viewer.reload();
+        }).bind(this)); // prettier-ignore
 
         this.liClasses.forEach((className) =>
             listElement.classList.add(className)
@@ -182,7 +194,9 @@ export default class PropertyViewer {
 
         attributes.forEach((attributeName) => {
             const button = this.createButton(attributeName);
-            this.root.appendChild(button);
+            if (button) {
+                this.root.appendChild(button);
+            }
         });
     }
 }
