@@ -830,7 +830,7 @@ export default {
             Range: 18,
             Damage: 12,
           },
-          Title: "Double Tap",
+          Title: "Double Tap II",
           Cost: 5850,
         },
         {

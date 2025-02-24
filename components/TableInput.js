@@ -196,6 +196,9 @@ export default class TableInput {
             case 'Income':
             case 'LimitNetCost':
             case 'CostEfficiency':
+            case 'IncomeEfficiency':
+            case 'IncomePerSecond':
+            case 'TotalIncomePerSecond':
                 return `$${Intl.NumberFormat().format(value)}`;
             
             case 'MaxDefMelt':

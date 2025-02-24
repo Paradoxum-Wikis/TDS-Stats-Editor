@@ -424,7 +424,7 @@ class CalculatedManager {
             },
             Cowboy: {
                 For: ['Cowboy'],
-                Value: (level) => ((level.Damage * level.MaxAmmo) / (level.Cooldown * level.MaxAmmo + level.SpinDuration)), // prettier-ignore
+                Value: (level) => (level.Damage * level.MaxAmmo) / (level.SpinDuration + (level.Cooldown * (level.MaxAmmo -1))), // prettier-ignore
             },
             Slasher: {
                 For: ['Slasher'],
@@ -714,16 +714,11 @@ class CalculatedManager {
                     (1000 * level.DPS * level.Range ** 0.4) / level.NetCost,
             },
         },
-        IncomeFactor: {
+        IncomeEfficiency: {
             Default: {
                 Requires: ['NetCost', 'DPS'],
                 For: ['Cowboy'],
-                Value: (level) => {
-                    const damagePerCylinder = level.Damage * level.MaxAmmo;
-                    return (
-                        (level.Income + damagePerCylinder) / damagePerCylinder
-                    );
-                },
+                Value: (level) => (level.Income + level.MaxAmmo * level.Damage) / (level.MaxAmmo * level.Damage),
             },
         },
         IncomePerSecond: {
@@ -732,7 +727,7 @@ class CalculatedManager {
                 For: ['Cowboy'],
                 Value: (level) =>
                     level.Income /
-                    (level.Cooldown * level.MaxAmmo + level.SpinDuration),
+                    (level.SpinDuration + (level.Cooldown * (level.MaxAmmo - 1))),
             },
         },
         TotalIncomePerSecond: {
@@ -900,7 +895,7 @@ class CalculatedManager {
         this.#add('LimitBossPotential', skinData);
         this.#add('BossValue', skinData);
         this.#add('Value', skinData);
-        this.#add('IncomeFactor', skinData);
+        this.#add('IncomeEfficiency', skinData);
         this.#add('IncomePerSecond', skinData);
         this.#add('TotalIncomePerSecond', skinData);
         this.#add('WavesUntilNetProfit', skinData);
