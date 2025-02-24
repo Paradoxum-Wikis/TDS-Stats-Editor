@@ -208,9 +208,16 @@ export default class TableUnitInput {
             case 'Income':
             case 'CostEfficiency':
                 return `$${Intl.NumberFormat().format(number)}`;
+            case 'Duration':
+            case 'BurnDamage':
+            case 'MissileCooldown':
+            case 'BurstCooldown':
+            case 'RevTime':
+            case 'ReloadTime':    
+                return Intl.NumberFormat().format(number) + 's';
         }
         return +(+number).toFixed(3);
-    }
+    }    
 
     flipped = [
         'Cooldown',

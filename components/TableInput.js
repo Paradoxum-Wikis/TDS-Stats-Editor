@@ -202,7 +202,25 @@ export default class TableInput {
             case 'DefenseMelt':
             case 'SlowdownPerHit':
             case 'MaxSlow':
+            case 'RangeBuff':
                 return Intl.NumberFormat().format(value) + '%';
+    
+            case 'BuffLength':
+            case 'BurnTime':
+            case 'FreezeTime':
+            case 'Duration':
+            case 'ChargeTime':
+            case 'LaserCooldown':
+            case 'MissileCooldown':
+            case 'BurstCooldown':
+            case 'RevTime':
+            case 'ReloadTime':    
+            case 'DetectionBuffLength':
+            case 'ComboLength':
+            case 'ComboCooldown':
+            case 'RepositionCooldown':
+            case 'KnockbackCooldown':    
+                return Intl.NumberFormat().format(value) + 's';
         }
     
         if (+value < 1) {
@@ -213,7 +231,6 @@ export default class TableInput {
         }
         return +(+value).toFixed(2);
     }
-    
 
     flipped = [
         'Cooldown',
