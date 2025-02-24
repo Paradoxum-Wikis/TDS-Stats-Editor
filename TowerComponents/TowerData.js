@@ -4957,7 +4957,7 @@ export default {
             Range: 17,
             Damage: 2,
           },
-          Title: "Critical Aim",
+          Title: "Better Aiming",
           Cost: 800,
         },
         {
@@ -4970,7 +4970,7 @@ export default {
             Range: 17,
             Damage: 4,
           },
-          Title: "Mag Dump",
+          Title: "Equipment Upgrades",
           Cost: 3000,
         },
         {
