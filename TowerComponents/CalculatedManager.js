@@ -359,6 +359,14 @@ class CalculatedManager {
             },
         },
 
+        MaxDPS: {
+            Default: {
+                For: ['Paintballer'],
+                Requires: ['DPS', 'MaxHits'],
+                Value: (level) => level.DPS * level.MaxHits,
+            },
+        },
+
         BeeDps: {
             Default: {
                 For: ['Swarmer'],
@@ -887,6 +895,7 @@ class CalculatedManager {
         this.#add('BeeDps', skinData);
         this.#add('DPS', skinData);
         this.#add('LimitDPS', skinData);
+        this.#add('MaxDPS', skinData);
         this.#add('NetCost', skinData);
         this.#add('LimitNetCost', skinData);
         this.#add('CostEfficiency', skinData);
