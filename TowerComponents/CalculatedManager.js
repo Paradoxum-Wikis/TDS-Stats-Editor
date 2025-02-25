@@ -497,14 +497,10 @@ class CalculatedManager {
                 },
             },
             BurnTower: {
-                For: ['Archer, Pyromancer'],
+                For: ['Pyromancer', 'Archer'],
                 Requires: ['Damage', 'Cooldown', 'BurnDamage', 'TickRate'],
-                Value: (level) => {
-                    const dps = level.Damage / level.Cooldown;
-                    const burnDPS = level.BurnDamage / level.TickRate;
-
-                    return dps + burnDPS;
-                },
+                Value: (level) => 
+                    (level.Damage / level.Cooldown) + (level.BurnDamage / level.TickRate)
             },
             AmmoTower: {
                 For: ['Gatling Gun'],

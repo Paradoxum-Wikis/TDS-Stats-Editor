@@ -25,6 +25,7 @@ export default class PropertyViewer {
             'MustAim',
             'Abilities.0',
             'AggregateUnitDPS',
+            'EnemyBuff',
         ];
         this.hidden = [
             'NoTable',
