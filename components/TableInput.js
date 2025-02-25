@@ -222,7 +222,10 @@ export default class TableInput {
             case 'ComboLength':
             case 'ComboCooldown':
             case 'RepositionCooldown':
-            case 'KnockbackCooldown':    
+            case 'KnockbackCooldown':
+            case 'SpawnTime':
+            case 'BuildTime':
+            case 'Cooldown':
                 return Intl.NumberFormat().format(value) + 's';
         }
     

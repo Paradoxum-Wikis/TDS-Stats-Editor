@@ -61,11 +61,10 @@ export default {
     },
     'Hallow Guard': {
         Health: 1500,
-        Defense: '20%',
+        Defense: 20,
         Speed: 2.4,
         Cooldown: 0,
         Range: 2,
-        Defense: 0,
         Damage: 0,
         TickRate: 0,
         Attributes: {},
@@ -330,7 +329,7 @@ export default {
         Cooldown: 0.45,
         Damage: 1,
         ExplosionDamage: 0,
-        TimeBetweenMissiles: 0,
+        BurstCooldown: 0,
         MissileAmount: 0,
         ExplosionRadius: 0,
         Detections: {
@@ -354,7 +353,7 @@ export default {
         Damage: 2,
         ExplosionRadius: 0,
         ExplosionDamage: 0,
-        TimeBetweenMissiles: 0,
+        BurstCooldown: 0,
         MissileAmount: 0,
         Detections: {
             Hidden: false,
@@ -377,7 +376,7 @@ export default {
         ExplosionRadius: 0,
         Damage: 5,
         ExplosionDamage: 0,
-        TimeBetweenMissiles: 0,
+        BurstCooldown: 0,
         MissileAmount: 0,
         Detections: {
             Hidden: true,
@@ -392,7 +391,7 @@ export default {
     },
     'War Machine Sentry': {
         ExplosionDamage: 35,
-        TimeBetweenMissiles: 4,
+        BurstCooldown: 4,
         MissileAmount: 2,
         Range: 24,
         Health: 120,
