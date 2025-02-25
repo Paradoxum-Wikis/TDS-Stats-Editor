@@ -206,6 +206,7 @@ export default class TableInput {
             case 'SlowdownPerHit':
             case 'MaxSlow':
             case 'RangeBuff':
+            case 'FirerateBuff':
                 return Intl.NumberFormat().format(value) + '%';
     
             case 'BuffLength':

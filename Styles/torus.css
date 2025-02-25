@@ -14,9 +14,9 @@ input {
     aspect-ratio: 1 / 1;
 }
 
-#ability-image {
-    width: 100%;
+.ability-image {
     aspect-ratio: 1 / 1;
+    width: 100%;
 }
 
 #side-upgrade-levels {

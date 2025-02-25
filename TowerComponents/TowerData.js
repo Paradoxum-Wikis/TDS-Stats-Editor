@@ -474,6 +474,10 @@ export default {
   },
   Commander: {
     Default: {
+      Abilities: [
+        { Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/e/e5/Commander_Upgrade_3.png/revision/latest?cb=20240704134001", Level: 2, Name: "Call to Arms", Cooldown: 30 },
+        { Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/a/a7/SupportCaravanIcon.png/revision/latest?cb=20240517142905", Level: 3, Name: "Support Caravan", Cooldown: 60 },
+      ],
       Upgrades: [
         {
           Image: 5525000768,
@@ -1121,7 +1125,7 @@ export default {
             Damage: 6,
             Attributes: { ExplosionRadius: 3.5 },
           },
-          Image: 0,
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/8/8c/Transparent.png/revision/latest?cb=20210107190223",
           Title: "Further Throwing",
           Cost: 150,
         },
@@ -1143,6 +1147,7 @@ export default {
               Velocity: 20,
               MustAim: false,
               ExplosionRadius: 4,
+              AimTime: 0,
             },
             Extras: ["Faster Projectile", "No Aim Time"],
             Range: 14,

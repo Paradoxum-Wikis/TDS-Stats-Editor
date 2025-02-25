@@ -10,13 +10,6 @@ export default class UpgradeViewer {
         this.levelButtons.activeClass = 'btn-dark';
         this.levelButtons.inactiveClass = 'btn-outline-dark';
 
-//        this.levelButtons.root.addEventListener(
-//            'submit',
-//            ((e) => {
-//                this.loadUpgrade(e.detail - 1);
-//            }).bind(this)
-//        );
-
         this.imageInput = document.getElementById('side-upgrade-image');
         this.imageInput.addEventListener(
             'focusout',
@@ -50,89 +43,18 @@ export default class UpgradeViewer {
         });
 
         this.upgradeChanges = document.getElementById('side-upgrade-extras-output');
-        this.abilityImage = document.getElementById('ability-image');
-        this.abilityImageInput = document.getElementById('side-ability-image');
-
-        this.abilityImageInput.addEventListener(
-            'focusout',
-            (async () => {
-                const newValue = this.abilityImageInput.value.trim();
-                this.#onAbilityImageChanged(newValue);
-                await this.#loadAbilityImage();
-                this.viewer.reload();
-            }).bind(this)
-        );
-
-        this.abilityTitleInput = document.getElementById('side-ability-title');
-        this.abilityTitleInput.addEventListener(
-            'focusout',
-            (() => {
-                const newTitle = this.abilityTitleInput.value.trim();
-                this.#onAbilityTitleChanged(newTitle);
-                this.viewer.reload();
-            }).bind(this)
-        );
-
-        this.unlockTitleInput = document.getElementById('side-unlock-title');
-        this.unlockTitleInput.addEventListener(
-            'focusout',
-            (() => {
-                const newLevel = this.unlockTitleInput.value.trim();
-                this.#onUnlockLevelChanged(newLevel);
-                this.viewer.reload();
-            }).bind(this)
-        );
-
-        this.cdTitleInput = document.getElementById('side-cd-title');
-        this.cdTitleInput.addEventListener(
-            'focusout',
-            (() => {
-                const newCooldown = this.cdTitleInput.value.trim();
-                this.#onCooldownChanged(newCooldown);
-                this.viewer.reload();
-            }).bind(this)
-        );
+        this.abilityContainer = document.getElementById('side-ability-container');
     }
 
+     // this checks if any level name is a custom string (ex "4T", "5B")
     async load(skinData) {
         if (skinData.upgrades.length === 0) {
             document.getElementById('level-view').classList.add('d-none');
-        } else if (this.skinData == skinData) {
+        } else if (this.skinData === skinData) {
             this.loadUpgrade(this.levelButtons.getSelectedName() - 1);
         } else {
             this.skinData = skinData;
-            const levelNames = skinData.upgrades.map((upgrade) => {
-                return upgrade.upgradeData.Stats?.Attributes?.SideLevel ?? '';
-            });
-
-            // Check if any level name is a custom string (e.g., "4T", "5B")
-            const hasCustomLevel = levelNames.some(name => isNaN(parseInt(name)) && name !== '');
-
-            if (!hasCustomLevel) {
-                const abilities = (
-                    skinData?.defaults?.Abilities ||
-                    skinData?.Defaults?.Abilities ||
-                    skinData?.Default?.Defaults?.Abilities ||
-                    skinData?.data?.Abilities ||
-                    skinData?.defaults?.data?.Abilities ||
-                    skinData?.defaults?.attributes?.Abilities
-                );
-                const initialIcon = abilities && abilities.length > 0 ? (abilities[0].Icon || '') : '';
-                const initialTitle = abilities && abilities.length > 0 ? (abilities[0].Name || '') : '';
-                const initialLevel = abilities && abilities.length > 0 ? (abilities[0].Level ?? '') : '';
-                const initialCooldown = abilities && abilities.length > 0 ? (abilities[0].Cooldown ?? '') : '';
-                this.abilityImageInput.value = initialIcon;
-                this.abilityTitleInput.value = initialTitle;
-                this.unlockTitleInput.value = initialLevel;
-                this.cdTitleInput.value = initialCooldown;
-                await this.#loadAbilityImage();
-            } else {
-                this.abilityImageInput.value = '';
-                this.abilityTitleInput.value = '';
-                this.unlockTitleInput.value = '';
-                this.cdTitleInput.value = '';
-                this.abilityImage.src = '';
-            }
+    
             this.#loadLevelHeader(skinData);
         }
     }
@@ -143,7 +65,6 @@ export default class UpgradeViewer {
         });
     
         this.levelButtons.setButtons(levelNames);
-        //this.loadUpgrade(this.levelButtons.getSelectedName() - 1);
         this.levelButtons.root.addEventListener(
             'submit',
             ((e) => {
@@ -158,15 +79,7 @@ export default class UpgradeViewer {
     }
     
     loadUpgrade(index) {
-        if (!this.skinData) {
-            return;
-        }
-    
-        if (!this.skinData.upgrades || this.skinData.upgrades.length === 0) {
-            return;
-        }
-    
-        if (index === undefined || index < 0 || index >= this.skinData.upgrades.length) {
+        if (!this.skinData?.upgrades || index < 0 || index >= this.skinData.upgrades.length) {
             return;
         }
     
@@ -177,33 +90,35 @@ export default class UpgradeViewer {
             return;
         }
     
-        this.imageInput.value = this.upgrade.upgradeData.Image;
-        this.titleInput.value = this.upgrade.upgradeData.Title;
+        this.imageInput.value = this.upgrade.upgradeData.Image || '';
+        this.titleInput.value = this.upgrade.upgradeData.Title || '';
         this.#loadExtras(this.upgrade);
         this.#loadUpgradeChanges();
         this.#loadImage();
+        this.#loadAbilities(this.skinData);
     }    
 
     #loadUpgradeChanges() {
         const upgradeChanges = this.skinData.getUpgradeChangeOutput(this.index);
         const minRows = 5;
-        this.upgradeChanges.textContent = '';
-        this.upgradeChanges.value = '';
         this.upgradeChanges.value = upgradeChanges.join('\n');
         this.upgradeChanges.rows = Math.max(upgradeChanges.length, minRows);
     }
 
     async #fetchImage(imageId) {
         let url;
-        if (imageId.startsWith('https')) { // check if it's a url or fandom url
-            if (imageId.includes('static.wikia.nocookie.net')) {
-                url = this.#trimFandomUrl(imageId); // Trim the url to the base file path (fandom doesn't allow it otherwise)
+        // convert to imageid to string to safely use string methods
+        const imageIdStr = String(imageId);
+    
+        if (imageIdStr.startsWith('https')) { // check if its a url
+            if (imageIdStr.includes('static.wikia.nocookie.net')) {
+                url = this.#trimFandomUrl(imageIdStr); // Trim Fandom URL if needed
             } else {
-                url = imageId; // Use the url as is for non fandom urls
+                url = imageIdStr; // use the url as is
             }
         } else {
-            // Try RoProxy first
-            const roProxyUrl = `https://assetdelivery.RoProxy.com/v2/assetId/${imageId}`;
+            // assume that it's a Roblox asset id
+            const roProxyUrl = `https://assetdelivery.RoProxy.com/v2/assetId/${imageIdStr}`;
             try {
                 const response = await fetch(roProxyUrl, {
                     method: 'GET',
@@ -213,14 +128,16 @@ export default class UpgradeViewer {
                 if (data?.locations?.[0]?.location) {
                     url = data.locations[0].location;
                 } else {
-                    url = `https://static.wikia.nocookie.net/tower-defense-sim/images/${imageId}`;
+                    url = `https://static.wikia.nocookie.net/tower-defense-sim/images/${imageIdStr}`;
                 }
             } catch (error) {
-                url = `https://static.wikia.nocookie.net/tower-defense-sim/images/${imageId}`;
+                console.error(`Failed to fetch image ${imageIdStr}:`, error); // Log errors for debugging
+                url = ''; // Fallback to empty string
             }
         }
+    
         if (url) {
-            imageCache[imageId] = url;
+            imageCache[imageId] = url; // cache using original imageid
         }
         return url;
     }
@@ -228,105 +145,180 @@ export default class UpgradeViewer {
     #trimFandomUrl(fullUrl) {
         // Fandom url chopping
         const match = fullUrl.match(/https:\/\/static\.wikia\.nocookie\.net\/.*?\.(png|jpg|jpeg|gif)/i);
-        if (match) {
-            return match[0];
-        }
-        return fullUrl;
+        return match ? match[0] : fullUrl;
     }
 
     async #loadImage() {
         const imageId = this.imageInput.value.trim();
         if (!imageId) {
-            document.getElementById('upgrade-image').src = ''; // Set default empty image if no ID
+            document.getElementById('upgrade-image').src = '';
             return;
         }
-        // Check cache first
+        // check cache first
         let imageLocation = imageCache[imageId];
         if (!imageLocation) {
-            imageLocation = await this.#fetchImage(imageId); // Fetch the image location
+            imageLocation = await this.#fetchImage(imageId);
         }
-        document.getElementById('upgrade-image').src = imageLocation || ''; // Set image source
+        document.getElementById('upgrade-image').src = imageLocation || '';
     }
 
-    async #loadAbilityImage() {
-        const iconId = this.abilityImageInput.value.trim();
+    async #loadAbilityImage(iconId, imageElement) {
         if (!iconId) {
-            this.abilityImage.src = '';
+            imageElement.src = '';
             return;
         }
         let imageLocation = imageCache[iconId];
         if (!imageLocation) {
             imageLocation = await this.#fetchImage(iconId);
         }
-        this.abilityImage.src = imageLocation || '';
+        imageElement.src = imageLocation || '';
     }
 
     #onTextChanged(property, value) {
         this.skinData.set(this.index + 1, property, value);
     }
 
-    #onAbilityImageChanged(value) {
-        const abilities = (
-            this.skinData?.defaults?.Abilities || 
-            this.skinData?.Defaults?.Abilities || 
-            this.skinData?.Default?.Defaults?.Abilities || 
-            this.skinData?.data?.Abilities || 
-            this.skinData?.defaults?.data?.Abilities || 
-            this.skinData?.defaults?.attributes?.Abilities
-        );
-        if (abilities && abilities.length > 0) {
-            abilities[0].Icon = value;
+    #onAbilityImageChanged(abilityIndex, value) {
+        const abilities = this.#getAbilities();
+        if (abilities?.[abilityIndex]) {
+            abilities[abilityIndex].Icon = value;
         }
     }
 
-    #onAbilityTitleChanged(value) {
-        const abilities = (
-            this.skinData?.defaults?.Abilities || 
-            this.skinData?.Defaults?.Abilities || 
-            this.skinData?.Default?.Defaults?.Abilities || 
-            this.skinData?.data?.Abilities || 
-            this.skinData?.defaults?.data?.Abilities || 
-            this.skinData?.defaults?.attributes?.Abilities
-        );
-        if (abilities && abilities.length > 0) {
-            abilities[0].Name = value;
+    #onAbilityTitleChanged(abilityIndex, value) {
+        const abilities = this.#getAbilities();
+        if (abilities?.[abilityIndex]) {
+            abilities[abilityIndex].Name = value;
         }
     }
 
-    #onUnlockLevelChanged(value) {
+    #onUnlockLevelChanged(abilityIndex, value) {
         const numValue = Number(value);
         if (!Number.isFinite(numValue)) return;
     
-        const abilities = (
+        const abilities = this.#getAbilities();
+        if (abilities?.[abilityIndex]) {
+            abilities[abilityIndex].Level = numValue;
+        }
+    }
+    
+    #onCooldownChanged(abilityIndex, value) {
+        const numValue = Number(value);
+        if (!Number.isFinite(numValue)) return;
+    
+        const abilities = this.#getAbilities();
+        if (abilities?.[abilityIndex]) {
+            abilities[abilityIndex].Cooldown = numValue;
+        }
+    }
+
+    #getAbilities() {
+        return (
             this.skinData?.defaults?.Abilities || 
             this.skinData?.Defaults?.Abilities || 
             this.skinData?.Default?.Defaults?.Abilities || 
             this.skinData?.data?.Abilities || 
             this.skinData?.defaults?.data?.Abilities || 
-            this.skinData?.defaults?.attributes?.Abilities
+            this.skinData?.defaults?.attributes?.Abilities || 
+            []
         );
-        if (abilities && abilities.length > 0) {
-            abilities[0].Level = numValue;
+    }
+
+    #loadAbilities(skinData) {
+        const abilities = this.#getAbilities();
+        this.abilityContainer.innerHTML = '';
+        if (abilities?.length > 0) {
+            abilities.forEach((ability, index) => {
+                this.#addAbilityFields(ability, index);
+            });
         }
     }
-    
-    #onCooldownChanged(value) {
-        const numValue = Number(value);
-        if (!Number.isFinite(numValue)) return;
-    
-        const abilities = (
-            this.skinData?.defaults?.Abilities || 
-            this.skinData?.Defaults?.Abilities || 
-            this.skinData?.Default?.Defaults?.Abilities || 
-            this.skinData?.data?.Abilities || 
-            this.skinData?.defaults?.data?.Abilities || 
-            this.skinData?.defaults?.attributes?.Abilities
+
+    #addAbilityFields(ability, index) {
+        const abilityDiv = document.createElement('div');
+        abilityDiv.classList.add('ability-group', 'mb-3');
+
+        const imageElement = document.createElement('img');
+        imageElement.src = '';
+        imageElement.classList.add('p-3', 'border-dark', 'ability-image');
+        this.#loadAbilityImage(ability.Icon, imageElement);
+        abilityDiv.appendChild(imageElement);
+
+        const imageInput = this.#createInputField(
+            `side-ability-image-${index}`, 
+            'Image URL / Roblox ID', 
+            ability.Icon, 
+            (value) => {
+                this.#onAbilityImageChanged(index, value);
+                this.#loadAbilityImage(value, imageElement);
+                this.viewer.reload();
+            }, 
+            'text'
         );
-        if (abilities && abilities.length > 0) {
-            abilities[0].Cooldown = numValue;
-        }
-    }
+        abilityDiv.appendChild(imageInput);
+
+        const titleInput = this.#createInputField(
+            `side-ability-title-${index}`, 
+            'Ability Name', 
+            ability.Name, 
+            (value) => {
+                this.#onAbilityTitleChanged(index, value);
+                this.viewer.reload();
+            }, 
+            'text'
+        );
+        abilityDiv.appendChild(titleInput);
+
+        const unlockLevelInput = this.#createInputField(
+            `side-unlock-title-${index}`, 
+            'Unlock Level', 
+            ability.Level, 
+            (value) => {
+                this.#onUnlockLevelChanged(index, value);
+                this.viewer.reload();
+            }, 
+            'number'
+        );
+        abilityDiv.appendChild(unlockLevelInput);
     
+        const cooldownInput = this.#createInputField(
+            `side-cd-title-${index}`, 
+            'Ability Cooldown', 
+            ability.Cooldown, 
+            (value) => {
+                this.#onCooldownChanged(index, value);
+                this.viewer.reload();
+            }, 
+            'number'
+        );
+        abilityDiv.appendChild(cooldownInput);
+
+        this.abilityContainer.appendChild(abilityDiv);
+    }
+
+    #createInputField(id, placeholder, value, onChange) {
+        const formGroup = document.createElement('div');
+        formGroup.classList.add('form-group', 'm-2');
+
+        const label = document.createElement('label');
+        label.setAttribute('for', id);
+        label.textContent = placeholder.split(' ')[0];
+        formGroup.appendChild(label);
+
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.classList.add('form-control', 'form-control-sm', 'text-white', 'bg-dark');
+        input.id = id;
+        input.placeholder = placeholder;
+        input.value = value || '';
+
+        input.addEventListener('focusout', () => {
+            onChange(input.value.trim());
+        });
+
+        formGroup.appendChild(input);
+        return formGroup;
+    }
 
     #loadExtras(upgrade) {
         const extras = upgrade?.data?.Extras ?? [];
