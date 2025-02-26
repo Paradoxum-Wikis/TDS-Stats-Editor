@@ -235,7 +235,7 @@ export default class TableUnitInput {
         'BombTime',
         'MissileCooldown',
         'SpinDuration',
-        'BurstCool',
+        'BurstCooldown',
         'ReloadSpeed',
         'TickRate',
     ];

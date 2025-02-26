@@ -559,14 +559,9 @@ class CalculatedManager {
             },
             Burst: {
                 For: ['Freezer'],
-                Requires: ['Damage', 'Cooldown', 'Burst', 'ReloadTime'],
-                Value: (level) => {
-                    const totalDamage = level.Damage * level.Burst;
-                    const totalTime =
-                        level.Cooldown * level.Burst + level.ReloadTime;
-
-                    return totalDamage / totalTime;
-                },
+                Requires: ['Damage', 'Cooldown', 'Burst', 'BurstCooldown' ],
+                Value: (level) =>
+                    (level.Damage * level.Burst) / (level.BurstCooldown + (level.Cooldown * level.Burst)),
             },
             Cryomancer: {
                 For: ['Cryomancer'],

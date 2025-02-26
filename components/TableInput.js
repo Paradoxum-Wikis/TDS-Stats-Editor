@@ -229,6 +229,7 @@ export default class TableInput {
             case 'SpawnTime':
             case 'BuildTime':
             case 'Cooldown':
+            case 'SlowdownTime':
                 return Intl.NumberFormat().format(value) + 's';
         }
     
@@ -251,7 +252,7 @@ export default class TableInput {
         'BombTime',
         'MissileCooldown',
         'SpinDuration',
-        'BurstCool',
+        'BurstCooldown',
         'ReloadSpeed',
         'TickRate',
     ];

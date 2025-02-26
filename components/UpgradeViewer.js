@@ -267,7 +267,7 @@ export default class UpgradeViewer {
                 this.viewer.reload();
             }, 
             'text',
-            'Name'
+            'Title'
         );
         abilityDiv.appendChild(titleInput);
     
