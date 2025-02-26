@@ -207,6 +207,7 @@ export default class TableInput {
             case 'MaxSlow':
             case 'RangeBuff':
             case 'FirerateBuff':
+            case 'CallToArmsBuff':
                 return Intl.NumberFormat().format(value) + '%';
     
             case 'BuffLength':

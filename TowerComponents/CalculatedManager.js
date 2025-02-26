@@ -1,10 +1,12 @@
 import SkinData from './SkinData.js';
 import UnitManager from './UnitManager.js';
+import UpgradeViewer from '../components/UpgradeViewer.js';
 
 class CalculatedManager {
     constructor(unitKey) {
         this.unitManager = new UnitManager(unitKey);
         this.unitManager.load();
+        this.upgradeViewer = new UpgradeViewer();
     }
 
     calculated = {
@@ -421,6 +423,7 @@ class CalculatedManager {
                     'Military Base',
                     'Mecha Base',
                     'Firework Technician',
+                    'Commander',
                 ],
                 Value: (level) => level.Damage / level.Cooldown,
             },
@@ -646,11 +649,30 @@ class CalculatedManager {
                     return dps + burnDPS;
                 },
             },
-            CallToArmsDPS: {
-                For: ['Commander'],
-                Value: (level) => ((level.Damage / level.Cooldown) * level.Attack),
+        },
+        CallToArmsDPS: {
+            Default: {
+            For: ['Commander'],
+            Value: (level) => {
+                const abilitycd = this.upgradeViewer.getAbilityCooldownValue(0);
+                return ((level.Damage / level.Cooldown) * level.AttackTime) / abilitycd;
+                },
             },
         },
+        CaravanDPS: {
+            Default: {
+                For: ['Commander'],
+                Value: (level) => {
+                    const abilitylvl = this.upgradeViewer.getAbilityLevelValue(1);
+                    if (level.Level < abilitylvl) {
+                        return NaN;
+                    }
+                    const abilitycd = this.upgradeViewer.getAbilityCooldownValue(1);
+                    return ((level.Damage / level.Cooldown) * level.AttackTime) / abilitycd;
+                },
+            },
+        },
+
         LimitDPS: {
             Default: {
                 Requires: ['DPS', 'Limit'],
@@ -675,6 +697,13 @@ class CalculatedManager {
                 Requires: ['NetCost', 'DPS'],
                 Value: (level) => {
                     const efficiency = level.NetCost / level.DPS;
+                    return isFinite(efficiency) ? efficiency : NaN;
+                },
+            },
+            Commander: {
+                For: ['Commander'],
+                Value: (level) => {
+                    const efficiency = level.NetCost / level.CallToArmsDPS;
                     return isFinite(efficiency) ? efficiency : NaN;
                 },
             },
@@ -880,7 +909,7 @@ class CalculatedManager {
         this.#add('LaserDPS', skinData);
         this.#add('TotalElapsedDamage', skinData);
         this.#add('KnifeSingleDPS', skinData);
-        this.#add('SpikeDPS', skinData);
+        this.#add('SpikeDPS', skinData);    
         this.#add('LandmineDPS', skinData);
         this.#add('BearTrapDPS', skinData);
         this.#add('FireTime', skinData);
@@ -894,6 +923,8 @@ class CalculatedManager {
         this.#add('LaserTime', skinData);
         this.#add('BeeDps', skinData);
         this.#add('DPS', skinData);
+        this.#add('CallToArmsDPS', skinData);
+        this.#add('CaravanDPS', skinData);
         this.#add('LimitDPS', skinData);
         this.#add('MaxDPS', skinData);
         this.#add('NetCost', skinData);

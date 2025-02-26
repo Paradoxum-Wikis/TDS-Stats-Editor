@@ -110,6 +110,12 @@ const register = {
             'Bottom 5',
         ],
     },
+    Commander: {
+        Default: [
+            'Gunner APC',
+            'Missile APC',
+        ],
+    },
 };
 
 export default class UnitManager {

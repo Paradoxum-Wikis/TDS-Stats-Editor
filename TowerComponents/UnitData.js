@@ -728,4 +728,29 @@ export default {
         PatrolRange: 19.5,
         Speed: 25,
     },
+
+    'Gunner APC': {
+        Health: 250,
+        Damage: 10,
+        MissileAmount: 0,
+        Cooldown: 0.2,
+        Range: 30,
+        Detections: {
+            Hidden: true,
+            Flying: true,
+            Lead: false,
+        },
+    },
+    'Missile APC': {
+        Health: 400,
+        Damage: 50,
+        MissileAmount: 4,
+        Cooldown: 2,
+        Range: 25,
+        Detections: {
+            Hidden: true,
+            Flying: true,
+            Lead: true,
+        },
+    },
 };

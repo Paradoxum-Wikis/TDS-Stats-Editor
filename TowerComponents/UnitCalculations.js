@@ -36,8 +36,13 @@ class UnitCalculations {
                         ? ((level.ExplosionDamage * level.MissileAmount) / (level.MissileCooldown + level.BurstCooldown * level.MissileAmount))
                         : 0;
                     return baseDamage + explosionDamage;
-                }
-            },     
+                },
+            },
+
+            APC: {
+                For: ['Missile APC'],
+                Value: (level) => level.Damage * level.MissileAmount / level.Cooldown,
+            },
 
             ExecutionerSkeleton: {
                 For: ['Executioner Skeleton' ],

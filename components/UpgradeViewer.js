@@ -296,8 +296,31 @@ export default class UpgradeViewer {
             'Cooldown'
         );
         abilityDiv.appendChild(cooldownInput);
+
+        // Store the cooldown input element for later access
+        abilityDiv.cooldownInput = cooldownInput.querySelector('input');
+
+        // Store the level input element for later access
+        abilityDiv.levelInput = unlockLevelInput.querySelector('input');
     
         this.abilityContainer.appendChild(abilityDiv);
+    }
+
+    getAbilityCooldownValue(abilityIndex) {
+        const abilityDiv = this.abilityContainer.children[abilityIndex];
+        if (abilityDiv && abilityDiv.cooldownInput) {
+            return abilityDiv.cooldownInput.value;
+        }
+        return null;
+    }
+
+    // New function to get the ability level value
+    getAbilityLevelValue(abilityIndex) {
+        const abilityDiv = this.abilityContainer.children[abilityIndex];
+        if (abilityDiv && abilityDiv.levelInput) {
+            return abilityDiv.levelInput.value;
+        }
+        return null;
     }
 
     #createInputField(id, placeholder, value, onChange, type = 'text', labelText = '') {

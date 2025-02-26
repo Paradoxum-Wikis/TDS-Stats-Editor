@@ -476,7 +476,7 @@ export default {
     Default: {
       Abilities: [
         { Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/e/e5/Commander_Upgrade_3.png/revision/latest?cb=20240704134001", Level: 2, Name: "Call to Arms", Cooldown: 30 },
-        { Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/a/a7/SupportCaravanIcon.png/revision/latest?cb=20240517142905", Level: 3, Name: "Support Caravan", Cooldown: 60 },
+        { Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/a/a7/SupportCaravanIcon.png/revision/latest?cb=20240517142905", Level: 4, Name: "Support Caravan", Cooldown: 60 },
       ],
       Upgrades: [
         {
@@ -495,10 +495,9 @@ export default {
           Image: 4594880289,
           Stats: {
             Extras: [
-              "Call to Arms (40s Cooldown)",
-              "Give surrounding towers +15% Firerate for 10s",
+              "Call to Arms Buff: 0% → 15%",
             ],
-            Attributes: { FirerateBuff: 15 },
+            Attributes: { FirerateBuff: 15, CallToArmsBuff: 15, },
             Detections: { Flying: true, Hidden: true, Lead: true },
             Cooldown: 0.6,
             Range: 11,
@@ -512,9 +511,9 @@ export default {
           Stats: {
             Extras: [
               "Firerate Buff: 15% → 17.5%",
-              "Call to Arms (22.5% Firerate Buff)",
+              "Call to Arms Buff: 15% → 22.5%",
             ],
-            Attributes: { FirerateBuff: 17.5 },
+            Attributes: { FirerateBuff: 17.5, CallToArmsBuff: 22.5, },
             Detections: {
               Flying: false,
               Hidden: false,
@@ -532,10 +531,10 @@ export default {
           Stats: {
             Extras: [
               "Firerate Buff: 17.5% → 20%",
+              "Call to Arms: 22.5% → 30%",
               "Support Caravan (60 Seconds)",
-              "Call to Arms (30% Firerate Buff)",
             ],
-            Attributes: { FirerateBuff: 20 },
+            Attributes: { FirerateBuff: 20, CallToArmsBuff: 30, },
             Detections: { Flying: false, Hidden: false },
             Cooldown: 0.6,
             Range: 14,
@@ -547,7 +546,7 @@ export default {
       ],
       Defaults: {
         Detections: { Flying: true, Hidden: true, Lead: false },
-        Attributes: { FirerateBuff: 12.5 },
+        Attributes: { FirerateBuff: 12.5, CallToArmsBuff: 0, AttackTime: 10, },
         Price: 850,
         Range: 9,
         Cooldown: 0,
