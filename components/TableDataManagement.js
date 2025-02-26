@@ -23,10 +23,6 @@ export default class TableDataManagement {
         this.applyUnitButton = document.querySelector('#table-unit-apply');
         this.resetUnitButton = document.querySelector('#table-unit-reset');
 
-        this.clearUnitChangesButton = document.querySelector(
-            '#table-unit-resetAll'
-        );
-
         this.clearButton.addEventListener('click', this.clearTable.bind(this));
         this.applyButton.addEventListener('click', this.applyTable.bind(this));
         this.resetButton.addEventListener('click', this.resetTable.bind(this));
@@ -54,11 +50,6 @@ export default class TableDataManagement {
             'click',
             this.removeLevel.bind(this)
         );
-
-//        this.clearUnitChangesButton.addEventListener(
-//            'click',
-//            this.clearUnitChanges.bind(this)
-//        );
     }
 
     renderButtonOutlines() {
@@ -105,6 +96,7 @@ export default class TableDataManagement {
     }
 
     clearTableFull() {
+        this.viewer.clearUnitChanges();
         localStorage.removeItem('New');
         localStorage.removeItem('delta');
         localStorage.removeItem('default');
