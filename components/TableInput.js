@@ -208,6 +208,7 @@ export default class TableInput {
             case 'RangeBuff':
             case 'FirerateBuff':
             case 'CallToArmsBuff':
+            case 'ThornPower':
                 return Intl.NumberFormat().format(value) + '%';
     
             case 'BuffLength':

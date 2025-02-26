@@ -794,6 +794,18 @@ class CalculatedManager {
                 },
             },
         },
+        NetPriceToIncomeRatio: {
+            Default: {
+                Requires: ['Income', 'NetCost'],
+                For: ['Farm'],
+                Value: (level) => {
+                    const ratio = level.NetCost / level.Income;
+                    const roundedRatio = Math.round(ratio * 100) / 100;
+                    const formattedRatio = String(roundedRatio).replace(/\.?0+$/, '');
+                    return `${formattedRatio}:1`;
+                },
+            },
+        },
         Cooldown: {
             Type: 'Override',
 
@@ -940,6 +952,7 @@ class CalculatedManager {
         this.#add('TotalIncomePerSecond', skinData);
         this.#add('WavesUntilNetProfit', skinData);
         this.#add('WavesUntilUpgradeProfit', skinData);
+        this.#add('NetPriceToIncomeRatio', skinData);
     }
 }
 

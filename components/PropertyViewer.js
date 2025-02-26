@@ -51,6 +51,14 @@ export default class PropertyViewer {
         this.calcBtn.addEventListener('click', this.toggleCalc.bind(this));
     }
 
+    // Check if the current tower is a Farm
+    isFarmTower() {
+        const activeSkin = this.viewer.getActiveSkin();
+        if (!activeSkin) return false;
+        
+        return activeSkin.tower.name === 'Farm';
+    }
+
     getProperties() {
         const levelData = this.viewer.getActiveSkin().levels;
         return [...levelData.attributes, ...levelData.complexAttributes];
@@ -135,6 +143,9 @@ export default class PropertyViewer {
     }
 
     isHidden(property) {
+        if (this.isFarmTower() && (property === 'Damage' || property === 'Cooldown' || property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
+            return true;
+        }
         return this.hidden.includes(property);
     }
 
@@ -145,6 +156,12 @@ export default class PropertyViewer {
     }
 
     show(property) {
+        // Don't show "Damage" and "Cooldown" if the tower is a Farm
+        if (this.isFarmTower() && (property === 'Damage' || property === 'Cooldown' || property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
+            this.hide(property);
+            return;
+        }
+        
         if (this.isDisabled(property)) {
             this.disabled = this.disabled.filter((v) => v !== property);
         }
