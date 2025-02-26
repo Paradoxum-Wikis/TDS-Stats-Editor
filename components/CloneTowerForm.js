@@ -115,6 +115,6 @@ export default class AddAttributeForm {
     }
 
     #onTowerChange() {
-        console.log('onTowerChange');
+//        console.log('onTowerChange');
     }
 }

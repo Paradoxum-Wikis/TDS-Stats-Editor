@@ -3082,7 +3082,7 @@ export default {
         {
           Image: 3877874591,
           Stats: {
-            Extras: [],
+            Extras: ["Spawn Time: 50 → 35"],
             Attributes: { SpawnTime: 35, UnitToSend: "Humvee" },
             Detections: {
               Flying: false,
@@ -3096,7 +3096,7 @@ export default {
         {
           Image: 3877875003,
           Stats: {
-            Extras: ["Health: 30 → 60"],
+            Extras: ["Humvee 2", "Health: 30 → 60"],
             Attributes: { SpawnTime: 35, UnitToSend: "Humvee 2" },
             Detections: {
               Flying: false,
@@ -3110,7 +3110,7 @@ export default {
         {
           Image: 3877873543,
           Stats: {
-            Extras: ["Mounted gunner", "Health: 60 → 90"],
+            Extras: ["Humvee 3", "Health: 60 → 90", "Damage: 0 → 3", "Cooldown: 0 → 0.2", "Range: 0 → 30"],
             Attributes: { SpawnTime: 35, UnitToSend: "Humvee 3" },
             Detections: {
               Flying: false,
@@ -3125,12 +3125,17 @@ export default {
           Image: 3444568329,
           Stats: {
             Extras: [
+              "Tank",
               "Health: 90 → 500",
-              "Explosive Damage: 50",
-              "Airstrike ability",
-              "Airstrike damage: 450",
+              "Damage: 3 → 10",
+              "Explosive Damage: 0 → 40",
+              "Explosive Radius: 0 → 7",
+              "Airstrike",
+              "Airstrike Damage: 450",
+              "Missile Amount: 6",
+              "Airstrike Radius: 0 → 8",
             ],
-            Attributes: { SpawnTime: 35, UnitToSend: "Tank", AirstrikeDamage: 75, MissileAmount: 6 },
+            Attributes: { SpawnTime: 35, UnitToSend: "Tank", AirstrikeDamage: 75, MissileAmount: 6, AirstrikeRadius: 8, },
             Detections: {
               Flying: false,
               Hidden: false,
@@ -3144,15 +3149,18 @@ export default {
           Image: 3444568580,
           Stats: {
             Extras: [
+              "Railgun Tank",
               "Health: 500 → 1500",
-              "Explosive damage: 50 → 80",
-              "Airstrike damage: 450 → 750",
-              "Airstrike explosion range: 8 → 12",
+              "Damage: 10 → 24",
+              "Explosive Damage: 40 → 80",
+              "Explosive Radius: 8 → 7",
+              "Airstrike Damage: 450 → 750",
+              "Airstrike Radius: 8 → 12",
             ],
             Attributes: {
               SpawnTime: 35,
               UnitToSend: "Railgun Tank",
-              AirstrikeDamage: 125, MissileAmount: 6
+              AirstrikeDamage: 125, MissileAmount: 6, AirstrikeRadius: 12,
             },
             Detections: {
               Flying: false,
@@ -3588,7 +3596,7 @@ export default {
           Image: 3280081327,
           Stats: {
             Extras: [],
-            Attributes: { ExplosiveRange: 3 },
+            Attributes: { ExplosionRadius: 3 },
             Detections: { Flying: false, Hidden: true },
             Cooldown: 1.6,
             Range: 8,
@@ -3601,7 +3609,7 @@ export default {
           Image: 3319083300,
           Stats: {
             Extras: ["Larger splash"],
-            Attributes: { ExplosiveRange: 3.5 },
+            Attributes: { ExplosionRadius: 3.5 },
             Detections: { Flying: false, Hidden: false },
             Cooldown: 1.6,
             Range: 8,
@@ -3614,7 +3622,7 @@ export default {
           Image: 3280082028,
           Stats: {
             Extras: [],
-            Attributes: { ExplosiveRange: 3.5 },
+            Attributes: { ExplosionRadius: 3.5 },
             Detections: { Flying: false, Hidden: true },
             Cooldown: 0.9,
             Range: 8,
@@ -3627,7 +3635,7 @@ export default {
           Image: 3319084508,
           Stats: {
             Extras: ["Larger splash"],
-            Attributes: { ExplosiveRange: 4 },
+            Attributes: { ExplosionRadius: 4 },
             Detections: { Flying: false, Hidden: false },
             Cooldown: 0.75,
             Range: 9,
@@ -3640,7 +3648,7 @@ export default {
           Image: 3319085582,
           Stats: {
             Extras: ["Larger splash"],
-            Attributes: { ExplosiveRange: 4.5 },
+            Attributes: { ExplosionRadius: 4.5 },
             Detections: { Flying: false, Hidden: false },
             Cooldown: 0.6,
             Range: 10,
@@ -3652,7 +3660,7 @@ export default {
       ],
       Defaults: {
         Detections: { Flying: false, Hidden: false, Lead: false },
-        Attributes: { ExplosiveRange: 3, MaxHits: 5 },
+        Attributes: { ExplosionRadius: 3, MaxHits: 5 },
         Price: 400,
         Range: 7,
         Cooldown: 1.6,
