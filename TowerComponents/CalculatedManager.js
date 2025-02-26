@@ -646,6 +646,10 @@ class CalculatedManager {
                     return dps + burnDPS;
                 },
             },
+            CallToArmsDPS: {
+                For: ['Commander'],
+                Value: (level) => ((level.Damage / level.Cooldown) * level.Attack),
+            },
         },
         LimitDPS: {
             Default: {

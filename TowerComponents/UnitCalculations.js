@@ -23,7 +23,7 @@ class UnitCalculations {
             Heatwave: {
                 For: ['Heatwave 2', 'Heatwave 3', 'Heatwave 4'],
                 Value: (level) => {
-                    const cooldown = this.upgradeViewer.cdTitleInput.value; // extract cooldown from UpgradeViewer
+                    const cooldown = this.upgradeViewer.getAbilityCooldownValue(0); // extract cooldown from UpgradeViewer
                     return (level.Damage / cooldown) + (level.BurnDamage / level.TickRate);
                 },
             },

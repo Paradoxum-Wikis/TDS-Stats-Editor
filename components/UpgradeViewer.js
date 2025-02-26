@@ -237,13 +237,13 @@ export default class UpgradeViewer {
     #addAbilityFields(ability, index) {
         const abilityDiv = document.createElement('div');
         abilityDiv.classList.add('ability-group', 'mb-3');
-
+    
         const imageElement = document.createElement('img');
         imageElement.src = '';
         imageElement.classList.add('p-3', 'border-dark', 'ability-image');
         this.#loadAbilityImage(ability.Icon, imageElement);
         abilityDiv.appendChild(imageElement);
-
+    
         const imageInput = this.#createInputField(
             `side-ability-image-${index}`, 
             'Image URL / Roblox ID', 
@@ -253,10 +253,11 @@ export default class UpgradeViewer {
                 this.#loadAbilityImage(value, imageElement);
                 this.viewer.reload();
             }, 
-            'text'
+            'text',
+            'Icon'
         );
         abilityDiv.appendChild(imageInput);
-
+    
         const titleInput = this.#createInputField(
             `side-ability-title-${index}`, 
             'Ability Name', 
@@ -265,10 +266,11 @@ export default class UpgradeViewer {
                 this.#onAbilityTitleChanged(index, value);
                 this.viewer.reload();
             }, 
-            'text'
+            'text',
+            'Name'
         );
         abilityDiv.appendChild(titleInput);
-
+    
         const unlockLevelInput = this.#createInputField(
             `side-unlock-title-${index}`, 
             'Unlock Level', 
@@ -277,10 +279,11 @@ export default class UpgradeViewer {
                 this.#onUnlockLevelChanged(index, value);
                 this.viewer.reload();
             }, 
-            'number'
+            'text',
+            'Level'
         );
         abilityDiv.appendChild(unlockLevelInput);
-    
+        
         const cooldownInput = this.#createInputField(
             `side-cd-title-${index}`, 
             'Ability Cooldown', 
@@ -289,33 +292,34 @@ export default class UpgradeViewer {
                 this.#onCooldownChanged(index, value);
                 this.viewer.reload();
             }, 
-            'number'
+            'text',
+            'Cooldown'
         );
         abilityDiv.appendChild(cooldownInput);
-
+    
         this.abilityContainer.appendChild(abilityDiv);
     }
 
-    #createInputField(id, placeholder, value, onChange) {
+    #createInputField(id, placeholder, value, onChange, type = 'text', labelText = '') {
         const formGroup = document.createElement('div');
         formGroup.classList.add('form-group', 'm-2');
-
+    
         const label = document.createElement('label');
         label.setAttribute('for', id);
-        label.textContent = placeholder.split(' ')[0];
+        label.textContent = labelText || placeholder.split(' ')[0];
         formGroup.appendChild(label);
-
+    
         const input = document.createElement('input');
-        input.type = 'text';
+        input.type = type;
         input.classList.add('form-control', 'form-control-sm', 'text-white', 'bg-dark');
         input.id = id;
         input.placeholder = placeholder;
-        input.value = value || '';
-
+        input.value = value !== undefined && value !== null ? value : '';
+    
         input.addEventListener('focusout', () => {
             onChange(input.value.trim());
         });
-
+    
         formGroup.appendChild(input);
         return formGroup;
     }
