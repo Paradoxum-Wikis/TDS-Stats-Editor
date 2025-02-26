@@ -2840,6 +2840,14 @@ export default {
       Defaults: {
         Detections: { Flying: false, Hidden: false, Lead: false },
         Attributes: { Healing: 5 },
+        Abilities: [
+          {
+            Name: "Cleansing",
+            Level: 5,
+            Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/0/06/Medic_Ability.png/revision/latest?cb=20230531131231",
+            Cooldown: 30,
+          },
+        ],
         Price: 900,
         Range: 10,
         Cooldown: 1,
