@@ -216,6 +216,7 @@ export default class TableUnitInput {
             case 'BurnDamage':
             case 'MissileCooldown':
             case 'BurstCooldown':
+            case 'TimeBetweenMissiles':
             case 'RevTime':
             case 'ReloadTime':
             case 'SendTime':

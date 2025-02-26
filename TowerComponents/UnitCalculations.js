@@ -32,8 +32,8 @@ class UnitCalculations {
                 For: ['Top 4', 'Top 5', 'Bottom 4', 'Bottom 5'],
                 Value: (level) => {
                     let baseDamage = (level.Damage * level.Ammo) / (level.ReloadTime + (level.Cooldown * level.Ammo));
-                    let explosionDamage = (level.ExplosionDamage && (level.MissileCooldown + level.BurstCooldown * level.MissileAmount) > 0)
-                        ? ((level.ExplosionDamage * level.MissileAmount) / (level.MissileCooldown + level.BurstCooldown * level.MissileAmount))
+                    let explosionDamage = (level.ExplosionDamage && (level.MissileCooldown + level.TimeBetweenMissiles * level.MissileAmount) > 0)
+                        ? ((level.ExplosionDamage * level.MissileAmount) / (level.MissileCooldown + level.TimeBetweenMissiles * level.MissileAmount))
                         : 0;
                     return baseDamage + explosionDamage;
                 },
@@ -58,7 +58,7 @@ class UnitCalculations {
                     const baseDPS = cooldown > 0 ? damage / cooldown : 0;
 
                     const missileAmount = unit?.MissileAmount ?? 1;
-                    const missileCooldown = unit?.BurstCooldown ?? 0;
+                    const missileCooldown = unit?.TimeBetweenMissiles ?? 0;
                     const missileDamage = unit?.ExplosionDamage ?? 0;
 
                     const missileDPS =
