@@ -13,7 +13,7 @@ export default {
         {
           Stats: {
             Damage: 20,
-            Extras: ["Overcharge: 180 → 375"],
+            Extras: ["Max Ammo: 240 → 420"],
             Range: 19,
             MaxAmmo: 420,
           },
@@ -25,7 +25,7 @@ export default {
         {
           Stats: {
             MaxAmmo: 600,
-            Extras: ["Overcharge: 375 → 625"],
+            Extras: ["Max Ammo: 420 → 600"],
             Damage: 30,
           },
           Image: 11821093989,
@@ -37,7 +37,7 @@ export default {
           Stats: {
             MaxAmmo: 1050,
             Cooldown: 0.15,
-            Extras: ["Overcharge: 625 → 1350"],
+            Extras: ["Max Ammo: 600 → 1050", "Charge Time: 2.5 → 1.5"],
             Attributes: { ChargeTime: 1.5 },
             Damage: 30,
             Range: 20.5,
@@ -52,7 +52,7 @@ export default {
             MaxAmmo: 4800,
             Cooldown: 0.1,
             Range: 22,
-            Extras: ["Overcharge: 1200 → 3000", "Faster Charge"],
+            Extras: ["Max Ammo: 1050 → 4800"],
             Damage: 40,
           },
           Image: 11821093672,

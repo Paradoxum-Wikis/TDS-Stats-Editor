@@ -65,6 +65,13 @@ export default class TableDataManagement {
         this.#setEnabled(this.clearButton, activeChanges);
         this.#setEnabled(this.applyButton, activeChanges);
         this.#setEnabled(this.resetButton, deltaChanges, 'btn-outline-danger');
+        
+        const unitActiveChanges = this.viewer.hasUnitChanges();
+        const unitDeltaChanges = this.viewer.hasUnitDeltaChanges();
+        
+        this.#setEnabled(this.clearUnitButton, unitActiveChanges);
+        this.#setEnabled(this.applyUnitButton, unitActiveChanges);
+        this.#setEnabled(this.resetUnitButton, unitDeltaChanges, 'btn-outline-danger');
     }
 
     #setEnabled(button, state, active) {

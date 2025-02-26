@@ -48,7 +48,7 @@ class Viewer {
         this.tableView = new ButtonSelection(
             document.querySelector('#table-view')
         ).setButtons(['Table', 'JSON']);
-        this.tableView.root.addEventListener('submit', (() => this.#loadBody()).bind(this)); // prettier-ignore
+        this.tableView.root.addEventListener('submit', () => this.#loadBody());
 
         this.buttonDeltaButton = new ToggleButton(
             document.querySelector('#button-delta button'),
@@ -256,9 +256,40 @@ class Viewer {
         this.load(this.defaultTowerManager.towers[name]);
     }
 
+    hasUnitChanges() {
+        if (!this.activeUnits) return false;
+        
+        for (const [unitName, unitData] of Object.entries(this.activeUnits)) {
+            const currentData = JSON.stringify(this.unitManager.baseData[unitName] || {});
+            const referenceData = JSON.stringify(this.unitDeltaManager.baseData[unitName] || {});
+            
+            if (currentData !== referenceData) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    hasUnitDeltaChanges() {
+        if (!this.activeUnits) return false;
+        
+        // temp unit manager to get default data
+        const defaultUnitManager = new UnitManager();
+        
+        for (const [unitName, unitData] of Object.entries(this.activeUnits)) {
+            const deltaData = JSON.stringify(this.unitDeltaManager.baseData[unitName] || {});
+            const defaultData = JSON.stringify(defaultUnitManager.baseData[unitName] || {});
+            
+            if (deltaData !== defaultData) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     #setVariantButtons() {
         this.towerVariants.setButtons(this.tower.skinNames);
-        this.towerVariants.root.addEventListener('submit', (() => this.#loadBody()).bind(this)); // prettier-ignore
+        this.towerVariants.root.addEventListener('submit', () => this.#loadBody());
     }
 
     #loadBody() {
