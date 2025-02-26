@@ -12,11 +12,13 @@ input {
 
 #upgrade-image {
     aspect-ratio: 1 / 1;
+    object-fit: cover;
 }
 
 .ability-image {
     aspect-ratio: 1 / 1;
     width: 100%;
+    object-fit: cover;
 }
 
 #side-upgrade-levels {
