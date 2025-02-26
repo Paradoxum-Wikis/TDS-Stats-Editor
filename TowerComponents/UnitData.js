@@ -732,9 +732,11 @@ export default {
     'Gunner APC': {
         Health: 250,
         Damage: 10,
+        ExplosionRadius: 0,
         MissileAmount: 0,
         Cooldown: 0.2,
         Range: 30,
+        Speed: 4,
         Detections: {
             Hidden: true,
             Flying: true,
@@ -744,9 +746,11 @@ export default {
     'Missile APC': {
         Health: 400,
         Damage: 50,
+        ExplosionRadius: 5,
         MissileAmount: 4,
         Cooldown: 2,
         Range: 25,
+        Speed: 4,
         Detections: {
             Hidden: true,
             Flying: true,
