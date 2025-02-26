@@ -50,7 +50,7 @@ class UnitCalculations {
             },
 
             Rocket: {
-                For: ['War Machine Sentry', 'Tank', 'RailgunTank'],
+                For: ['War Machine Sentry', 'Tank', 'Railgun Tank'],
                 Requires: ['Damage', 'Cooldown'],
                 Value: (unit) => {
                     const damage = unit?.Damage ?? 0;
@@ -58,7 +58,7 @@ class UnitCalculations {
                     const baseDPS = cooldown > 0 ? damage / cooldown : 0;
 
                     const missileAmount = unit?.MissileAmount ?? 1;
-                    const missileCooldown = unit?.TimeBetweenMissiles ?? 0;
+                    const missileCooldown = unit?.BurstCooldown ?? 0;
                     const missileDamage = unit?.ExplosionDamage ?? 0;
 
                     const missileDPS =
