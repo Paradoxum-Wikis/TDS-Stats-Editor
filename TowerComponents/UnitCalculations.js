@@ -237,6 +237,26 @@ class UnitCalculations {
                     return isFinite(efficiency) ? efficiency : NaN;
                 },
             },
+
+            Trapper: {
+                For: ['Spike 0', 'Spike 1', 'Spike 2', 'Spike 3', 'Spike 4', 'Spike 5', 
+                      'Landmine 2', 'Landmine 3', 'Landmine 4', 'Landmine 5',
+                      'Bear Trap 4', 'Bear Trap 5'],
+                Value: (level) => {
+                    // get level number (regex for bear trap)
+                    const match = level.Name.match(/(\d+)$/);
+                    const trapperLevel = match ? parseInt(match[1]) : 0;
+                    
+                    let trapperNetCost = TowerData.Trapper.Default.Defaults.Price;
+                    
+                    for (let i = 0; i < trapperLevel && i < TowerData.Trapper.Default.Upgrades.length; i++) {
+                        trapperNetCost += TowerData.Trapper.Default.Upgrades[i].Cost;
+                    }
+                    
+                    const efficiency = trapperNetCost / level.DPS;
+                    return isFinite(efficiency) ? efficiency : NaN;
+                },
+            },
         },
     };
 
