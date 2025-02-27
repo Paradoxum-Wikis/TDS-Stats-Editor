@@ -20,9 +20,8 @@ export default class PropertyViewer {
             'BookAim',
             'Summon_Debounce',
             'BookDebounce',
-            'Grave_Cooldown',
+            'GraveCooldown',
             'MustAim',
-            'Abilities.0',
             'AggregateUnitDPS',
             'EnemyBuff',
             'Velocity',
@@ -30,6 +29,8 @@ export default class PropertyViewer {
         this.hidden = [
             'NoTable',
             'SideLevel',
+            'Abilities.0',
+            'Abilities',
         ];
         this.baseProperties = [
             'Damage',
