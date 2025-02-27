@@ -17,7 +17,6 @@ export default class PropertyViewer {
             'BossPotential',
             'LimitBossPotential',
             'BossValue',
-            'Summon_Debounce',
             'BookAim',
             'Summon_Debounce',
             'BookDebounce',
@@ -26,6 +25,7 @@ export default class PropertyViewer {
             'Abilities.0',
             'AggregateUnitDPS',
             'EnemyBuff',
+            'Velocity',
         ];
         this.hidden = [
             'NoTable',
