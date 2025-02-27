@@ -632,6 +632,18 @@ class CalculatedManager {
             },
         },
 
+        ClusterDPS: {
+            Default: {
+                For: ['Mortar'],
+                Value: (level) => {
+                    if (level.ClusterDamage === 0 || level.ClusterCount === 0) {
+                        return NaN;
+                    }
+                    return Math.ceil(level.ClusterDamage * level.ClusterCount / level.Cooldown);
+                },
+            },
+        },
+
         CallToArmsDPS: {
             Default: {
             For: ['Commander'],
@@ -686,6 +698,14 @@ class CalculatedManager {
                 For: ['Commander'],
                 Value: (level) => {
                     const efficiency = level.NetCost / level.CallToArmsDPS;
+                    return isFinite(efficiency) ? efficiency : NaN;
+                },
+            },
+            Mortar: {
+                For: ['Mortar'],
+                Value: (level) => {
+                    const clusterDPS = isNaN(level.ClusterDPS) ? 0 : level.ClusterDPS;
+                    const efficiency = level.NetCost / (level.DPS + clusterDPS);
                     return isFinite(efficiency) ? efficiency : NaN;
                 },
             },
@@ -907,14 +927,15 @@ class CalculatedManager {
         this.#add('SpikeMaxDamage', skinData);
         this.#add('LandmineMaxDamage', skinData);
         this.#add('BearTrapMaxDamage', skinData);
+        this.#add('CriticalDamage', skinData);
         this.#add('TowerDPS', skinData);
         this.#add('UnitDPS', skinData);
         this.#add('AggregateUnitDPS', skinData);
         this.#add('RamDPS', skinData);
         this.#add('LaserTime', skinData);
         this.#add('BeeDps', skinData);
-        this.#add('CriticalDamage', skinData);
         this.#add('DPS', skinData);
+        this.#add('ClusterDPS', skinData);
         this.#add('CallToArmsDPS', skinData);
         this.#add('CaravanDPS', skinData);
         this.#add('LimitDPS', skinData);
