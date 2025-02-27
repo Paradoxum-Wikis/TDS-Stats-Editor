@@ -24,3 +24,27 @@ input {
 #side-upgrade-levels {
     overflow-x: auto;
 }
+
+/* Scrollbar for webkit browsers */
+::-webkit-scrollbar{
+	width: 7px;
+    height: 7px;
+}
+
+::-webkit-scrollbar-track-piece{
+	background-color: #035D7C;
+    border-radius: 25px;
+    margin: 5px;
+}
+
+::-webkit-scrollbar-thumb{
+	background-color: #909090;
+	outline: 2px solid #121D23;
+	outline-offset: -2px;
+	border: .1px solid #035D7C;
+    border-radius: 25px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+	background-color: #0484AE;
+}

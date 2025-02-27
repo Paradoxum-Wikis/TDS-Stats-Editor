@@ -325,7 +325,7 @@ export default class UpgradeViewer {
 
     #createInputField(id, placeholder, value, onChange, type = 'text', labelText = '') {
         const formGroup = document.createElement('div');
-        formGroup.classList.add('form-group', 'm-2');
+        formGroup.classList.add('form-group', 'mb-2');
     
         const label = document.createElement('label');
         label.setAttribute('for', id);
