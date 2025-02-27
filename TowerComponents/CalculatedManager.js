@@ -224,125 +224,77 @@ class CalculatedManager {
                 },
             },
         },
-        SpikeDPS: {
+        SpikeMaxDamage: {
             Default: {
                 For: ['Trapper'],
-
                 Value: (level) => {
-                    const damage =
-                        level.levels.getCell(
-                            level.Level,
-                            'Traps.Spike.Damage'
-                        ) ?? 0;
-
-                    const cooldown = level.levels.getCell(
-                        level.Level,
-                        'Traps.Spike.Cooldown'
-                    );
-
-                    return damage / cooldown;
+                    this.unitManager.load();
+                    
+                    // map tower level to spike level
+                    const spikeLevel = Math.min(level.Level, 4);
+                    const spikeName = `Spike ${spikeLevel}`;
+                    
+                    if (!this.unitManager.hasUnit(spikeName)) {
+                        return 0;
+                    }
+                    
+                    const spikeUnit = this.unitManager.unitData[spikeName];
+                    const damage = spikeUnit.attributes.Damage || 0;
+                    
+                    const result = damage * level.MaxTraps;
+                    return result;
+                    },
+                },
+        },
+        LandmineMaxDamage: {
+            Default: {
+                For: ['Trapper'],
+                Value: (level) => {
+                    this.unitManager.load();
+                    
+                    // landmine only available at levels 2+
+                    if (level.Level < 2) {
+                        return NaN;
+                    }
+                    
+                    const landmineLevel = Math.min(level.Level, 4);
+                    const landmineName = `Landmine ${landmineLevel}`;
+                    
+                    if (!this.unitManager.hasUnit(landmineName)) {
+                        return 0;
+                    }
+                    
+                    const landmineUnit = this.unitManager.unitData[landmineName];
+                    const damage = landmineUnit.attributes.Damage || 0;
+                    
+                    const result = damage * level.MaxTraps;
+                    return result;
                 },
             },
         },
-        SpikeMaxPileDamage: {
+        BearTrapMaxDamage: {
             Default: {
                 For: ['Trapper'],
-
                 Value: (level) => {
-                    const damage = level.levels.getCell(
-                        level.Level,
-                        'Traps.Spike.Damage'
-                    );
-
-                    return damage * level.MaxTraps;
-                },
-            },
-        },
-        LandmineDPS: {
-            Default: {
-                For: ['Trapper'],
-
-                Value: (level) => {
-                    const damage = level.levels.getCell(
-                        level.Level,
-                        'Traps.Landmine.Damage'
-                    );
-
-                    const burnDamage = level.levels.getCell(
-                        level.Level,
-                        'Traps.Landmine.BurnDamage'
-                    );
-
-                    const burnTime = level.levels.getCell(
-                        level.Level,
-                        'Traps.Landmine.BurnTime'
-                    );
-
-                    const burnTick = level.levels.getCell(
-                        level.Level,
-                        'Traps.Landmine.TickRate'
-                    );
-
-                    const cooldown = level.levels.getCell(
-                        level.Level,
-                        'Traps.Landmine.Cooldown'
-                    );
-
-                    const burnDPS = (burnTick * burnDamage) / burnTime;
-                    const actualBurnDPS = isFinite(burnDPS) ? burnDPS : 0;
-                    const explosionDPS = damage / cooldown;
-                    const actualExplosionDPS = isFinite(explosionDPS)
-                        ? explosionDPS
-                        : 0;
-                    return actualBurnDPS + actualExplosionDPS;
-                },
-            },
-        },
-        LandmineMaxPileDamage: {
-            Default: {
-                For: ['Trapper'],
-
-                Value: (level) => {
-                    const damage = level.levels.getCell(
-                        level.Level,
-                        'Traps.Landmine.Damage'
-                    );
-
-                    return damage * level.MaxTraps;
-                },
-            },
-        },
-        BearTrapDPS: {
-            Default: {
-                For: ['Trapper'],
-
-                Value: (level) => {
-                    const damage = level.levels.getCell(
-                        level.Level,
-                        'Traps.BearTrap.Damage'
-                    );
-
-                    const cooldown = level.levels.getCell(
-                        level.Level,
-                        'Traps.BearTrap.Cooldown'
-                    );
-
-                    const dps = damage / cooldown;
-                    return isFinite(dps) ? dps : 0;
-                },
-            },
-        },
-        BearTrapMaxPileDamage: {
-            Default: {
-                For: ['Trapper'],
-
-                Value: (level) => {
-                    const damage = level.levels.getCell(
-                        level.Level,
-                        'Traps.BearTrap.Damage'
-                    );
-
-                    return damage * level.MaxTraps;
+                    this.unitManager.load();
+                    
+                    // beartrap only available at levels 4+
+                    if (level.Level < 4) {
+                        return NaN;
+                    }
+                    
+                    const beartrapLevel = Math.min(level.Level, 4);
+                    const beartrapName = `Bear Trap ${beartrapLevel}`;
+                    
+                    if (!this.unitManager.hasUnit(beartrapName)) {
+                        return 0;
+                    }
+                    
+                    const beartrapUnit = this.unitManager.unitData[beartrapName];
+                    const damage = beartrapUnit.attributes.Damage || 0;
+                    
+                    const result = damage * level.MaxTraps;
+                    return result;
                 },
             },
         },
@@ -366,6 +318,38 @@ class CalculatedManager {
                 For: ['Paintballer'],
                 Requires: ['DPS', 'MaxHits'],
                 Value: (level) => level.DPS * level.MaxHits,
+            },
+
+            Trapper: {
+                For: ['Trapper'],
+                Value: (level) => {
+                    this.unitManager.load();
+                    
+                    let beartrapDPS = 0;
+                    let landmineDPS = 0;
+                    let spikeDPS = 0;
+                    
+                    if (level.Level >= 4) {
+                        const beartrapName = `Bear Trap ${Math.min(level.Level, 4)}`;
+                        if (this.unitManager.hasUnit(beartrapName)) {
+                            beartrapDPS = this.unitManager.unitData[beartrapName].attributes.DPS || 0;
+                        }
+                    }
+                    
+                    if (level.Level >= 2) {
+                        const landmineName = `Landmine ${Math.min(level.Level, 4)}`;
+                        if (this.unitManager.hasUnit(landmineName)) {
+                            landmineDPS = this.unitManager.unitData[landmineName].attributes.DPS || 0;
+                        }
+                    }
+                    
+                    const spikeName = `Spike ${Math.min(level.Level, 4)}`;
+                    if (this.unitManager.hasUnit(spikeName)) {
+                        spikeDPS = this.unitManager.unitData[spikeName].attributes.DPS || 0;
+                    }
+
+                    return Math.max(spikeDPS, landmineDPS, beartrapDPS);
+                },
             },
         },
 
@@ -424,6 +408,7 @@ class CalculatedManager {
                     'Mecha Base',
                     'Firework Technician',
                     'Commander',
+                    'Trapper',
                 ],
                 Value: (level) => level.Damage / level.Cooldown,
             },
@@ -624,16 +609,6 @@ class CalculatedManager {
                     const ramDPS = level.RamDPS ?? 0;
 
                     return unitDPS + towerDPS + ramDPS;
-                },
-            },
-            Trapper: {
-                For: ['Trapper'],
-                Value: (level) => {
-                    const spikeDPS = level.SpikeDPS;
-                    const landmineDPS = level.LandmineDPS;
-                    const bearTrapDPS = level.BearTrapDPS;
-
-                    return Math.max(spikeDPS, landmineDPS, bearTrapDPS);
                 },
             },
             HallowPunk: {
@@ -916,13 +891,10 @@ class CalculatedManager {
         this.#add('LaserDPS', skinData);
         this.#add('TotalElapsedDamage', skinData);
         this.#add('KnifeSingleDPS', skinData);
-        this.#add('SpikeDPS', skinData);    
-        this.#add('LandmineDPS', skinData);
-        this.#add('BearTrapDPS', skinData);
         this.#add('FireTime', skinData);
-        this.#add('SpikeMaxPileDamage', skinData);
-        this.#add('LandmineMaxPileDamage', skinData);
-        this.#add('BearTrapMaxPileDamage', skinData);
+        this.#add('SpikeMaxDamage', skinData);
+        this.#add('LandmineMaxDamage', skinData);
+        this.#add('BearTrapMaxDamage', skinData);
         this.#add('TowerDPS', skinData);
         this.#add('UnitDPS', skinData);
         this.#add('AggregateUnitDPS', skinData);

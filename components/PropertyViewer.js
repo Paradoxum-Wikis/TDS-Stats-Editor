@@ -67,6 +67,14 @@ export default class PropertyViewer {
         return activeSkin.tower.name === 'Military Base';
     }
 
+    // check if the tower is trapper
+    isTrapperTower() {
+        const activeSkin = this.viewer.getActiveSkin();
+        if (!activeSkin) return false;
+        
+        return activeSkin.tower.name === 'Trapper';
+    }
+
     getProperties() {
         const levelData = this.viewer.getActiveSkin().levels;
         return [...levelData.attributes, ...levelData.complexAttributes];
@@ -159,6 +167,10 @@ export default class PropertyViewer {
             return true;
         }
         
+        if (this.isTrapperTower() && property === 'Damage') {
+            return true;
+        }
+        
         return this.hidden.includes(property);
     }
 
@@ -177,6 +189,12 @@ export default class PropertyViewer {
         
         // Don't show specific properties if the tower is Mili base
         if (this.isMilitaryBaseTower() && (property === 'Damage' || property === 'Cooldown' || property === 'Range' || property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
+            this.hide(property);
+            return;
+        }
+        
+        // Don't show damage property if the tower is Trapper
+        if (this.isTrapperTower() && property === 'Damage') {
             this.hide(property);
             return;
         }

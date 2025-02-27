@@ -116,6 +116,20 @@ const register = {
             'Missile APC',
         ],
     },
+
+    Trapper: {
+        Default: [
+            'Spike 0',
+            'Spike 1',
+            'Spike 2',
+            'Spike 3',
+            'Spike 4',
+            'Landmine 2',
+            'Landmine 3',
+            'Landmine 4',
+            'Bear Trap 4',
+        ],
+    },
 };
 
 export default class UnitManager {

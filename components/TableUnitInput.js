@@ -213,7 +213,6 @@ export default class TableUnitInput {
                 return Intl.NumberFormat().format(number) + '%';
             
             case 'Duration':
-            case 'BurnDamage':
             case 'MissileCooldown':
             case 'BurstCooldown':
             case 'TimeBetweenMissiles':
@@ -221,6 +220,8 @@ export default class TableUnitInput {
             case 'ReloadTime':
             case 'SendTime':
             case 'Cooldown':
+            case 'BurnTime':
+            case 'StunLength':
                 return Intl.NumberFormat().format(number) + 's';
         }
         return +(+number).toFixed(3);

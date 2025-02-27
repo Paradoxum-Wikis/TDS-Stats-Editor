@@ -44,6 +44,23 @@ class UnitCalculations {
                 Value: (level) => level.Damage * level.MissileAmount / level.Cooldown,
             },
 
+            Spike: {
+                For: ['Spike 0', 'Spike 1', 'Spike 2', 'Spike 3', 'Spike 4', 'Spike 5'],
+                Value: (level) => level.Health / level.Cooldown,
+            },
+
+            Landmind: {
+                For: ['Landmine 2', 'Landmine 3', 'Landmine 4', 'Landmine 5'],
+                Value: (level) => {
+                    const normalDPS = level.Damage / level.Cooldown;
+                    const burnDPS = level.BurnDuration <= 1 
+                        ? level.BurnDamage / level.Cooldown 
+                        : level.BurnDamage / level.TickRate;
+
+                    return normalDPS + burnDPS;
+                },
+            },
+            
             ExecutionerSkeleton: {
                 For: ['Executioner Skeleton' ],
                 Value: (level) => level.Damage / level.TickRate / level.Cooldown,
