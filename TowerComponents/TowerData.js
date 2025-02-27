@@ -187,6 +187,14 @@ export default {
         Detections: { Flying: true, Hidden: false, Lead: false },
         Range: 7,
         Price: 450,
+        Abilities: [
+          {
+            Name: "Toggle Reverse",
+            Level: 0,
+            Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/b/b4/ToggleReverseAbility.png/revision/latest?cb=20240621192919",
+            Cooldown: 10,
+          },
+        ],
         Attributes: {
           BombTime: 0,
           BombDropping: false,
