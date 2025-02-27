@@ -2097,14 +2097,11 @@ export default {
     Default: {
       Upgrades: [
         {
-          Image: "3354968287",
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/a/a5/Frost_Blaster_Upgrade_1_New.png/revision/latest?cb=20231221115540",
           Stats: {
             Extras: [],
-            Attributes: {
-              DefenseMelt: 0,
-              FreezeTime: 0.5,
-              MaxHits: 3,
-            },
+            Detections: { Flying: false, Hidden: false, Lead: true },
+            Attributes: { FreezeTime: 0.5, MaxHits: 3, DefenseMelt: 0, ProjectileSpeed: 60, },
             Detections: { Flying: false, Hidden: true },
             Cooldown: 0.75,
             Range: 12,
@@ -2114,14 +2111,10 @@ export default {
           Cost: 300,
         },
         {
-          Image: 3354969462,
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/b/bc/Frost_Blaster_Upgrade_2_New.png/revision/latest?cb=20231221115610",
           Stats: {
             Extras: ["Max Hits: 3 → 4"],
-            Attributes: {
-              DefenseMelt: 10,
-              FreezeTime: 0.5,
-              MaxHits: 4,
-            },
+            Attributes: { FreezeTime: 0.5, MaxHits: 4, DefenseMelt: 10, ProjectileSpeed: 60, },
             Detections: { Flying: false, Hidden: true },
             Cooldown: 0.75,
             Range: 14,
@@ -2131,14 +2124,10 @@ export default {
           Cost: 950,
         },
         {
-          Image: 3354970959,
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/8/8a/Frost_Blaster_Upgrade_3_New.png/revision/latest?cb=20231221115658",
           Stats: {
             Extras: ["🧊Freeze Time: 0.5 → 0.75", "Max Hits: 4 → 5"],
-            Attributes: {
-              DefenseMelt: 10,
-              FreezeTime: 0.75,
-              MaxHits: 5,
-            },
+            Attributes: { FreezeTime: 0.75, MaxHits: 5, ProjectileSpeed: 60, },
             Detections: { Flying: false, Hidden: true },
             Cooldown: 0.75,
             Range: 16,
@@ -2148,18 +2137,14 @@ export default {
           Cost: 3500,
         },
         {
-          Image: 3354972102,
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/0/0d/Frost_Blaster_Upgrade_4_New.png/revision/latest?cb=20231221115734",
           Stats: {
             Extras: [
               "🧊Freeze Time: 0.75 → 1.25",
               "Max Hits: 5 → 7",
               "Faster projectile speed",
             ],
-            Attributes: {
-              DefenseMelt: 10,
-              FreezeTime: 1.25,
-              MaxHits: 7,
-            },
+            Attributes: { FreezeTime: 1.25, MaxHits: 7, ProjectileSpeed: 90, },
             Detections: { Flying: false, Hidden: true },
             Cooldown: 1.5,
             Range: 22,
@@ -2171,7 +2156,7 @@ export default {
       ],
       Defaults: {
         Detections: { Flying: false, Hidden: false, Lead: true },
-        Attributes: { DefenseMelt: 0, FreezeTime: 0.5, MaxHits: 3 },
+        Attributes: { SlowdownPerHit: 30, MaxSlow: 30, SlowdownTime: 2, FreezeTime: 0.5, MaxHits: 3, DefenseMelt: 0, ProjectileSpeed: 60, },
         Price: 850,
         Range: 12,
         Cooldown: 0.85,
