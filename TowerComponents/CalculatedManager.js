@@ -508,15 +508,15 @@ class CalculatedManager {
                     return totalDamage / totalTime;
                 },
             },
-            MultiHit: {
-                For: ['Electroshocker'],
-                Requires: ['Damage', 'Cooldown', 'MaxHits'],
-                Value: (level) => {
-                    const dps = level.Damage / level.Cooldown;
+//            MultiHit: {
+//                For: ['Electroshocker'],
+//                Requires: ['Damage', 'Cooldown', 'MaxHits'],
+//                Value: (level) => {
+//                    const dps = level.Damage / level.Cooldown;
 
-                    return dps * level.MaxHits;
-                },
-            },
+//                    return dps * level.MaxHits;
+//                },
+//            },
             Missiles: {
                 For: ['Pursuit'],
                 Requires: [
