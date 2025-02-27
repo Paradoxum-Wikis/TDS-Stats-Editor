@@ -619,7 +619,19 @@ class CalculatedManager {
                     return dps + burnDPS;
                 },
             },
+            Warden: {
+                For: ['Warden'],
+                Value: (level) => ((level.Damage * 2) + level.CriticalDamage) / 3 / level.Cooldown
+            },
         },
+
+        CriticalDamage: {
+            Default: {
+            For: ['Warden'],
+            Value: (level) => Math.ceil(level.Damage + level.Damage * 0.5)
+            },
+        },
+
         CallToArmsDPS: {
             Default: {
             For: ['Commander'],
@@ -901,6 +913,7 @@ class CalculatedManager {
         this.#add('RamDPS', skinData);
         this.#add('LaserTime', skinData);
         this.#add('BeeDps', skinData);
+        this.#add('CriticalDamage', skinData);
         this.#add('DPS', skinData);
         this.#add('CallToArmsDPS', skinData);
         this.#add('CaravanDPS', skinData);
