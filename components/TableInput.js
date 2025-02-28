@@ -100,10 +100,10 @@ export default class TableInput {
         input.classList.add('table-cell-input');
         input.size = 1;
 
-        // .zero-value css
-        if (value === 0) {
-            input.classList.add('zero-value');
-        }
+    // .zero-value css
+    if (value === 0 && this.attribute !== "Level") {
+        input.classList.add('zero-value');
+    }
 
         input.addEventListener('focusin', (() => input.value = '').bind(this)); // prettier-ignore
         input.addEventListener('focusout', this.#onNumberSubmit.bind(this));
