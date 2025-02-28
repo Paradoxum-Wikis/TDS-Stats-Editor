@@ -211,6 +211,7 @@ export default class TableInput {
             case 'ThornPower':
             case 'DamageBuff':
             case 'Defense':
+            case 'CriticalMultiplier':
                 return Intl.NumberFormat().format(value) + '%';
     
             case 'BuffLength':

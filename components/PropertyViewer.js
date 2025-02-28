@@ -25,6 +25,16 @@ export default class PropertyViewer {
             'AggregateUnitDPS',
             'EnemyBuff',
             'Velocity',
+            'BleedCollaspeDamage (10HP)',
+            'BleedCollaspeDamage (1000HP)',
+            'BleedCollaspeDamage (10000HP)',
+            'BleedCollaspeDamage (100000HP)',
+            'BleedCollaspeDamage (1000000HP)',
+            'BleedDamageTick (10HP)',
+            'BleedDamageTick (1000HP)',
+            'BleedDamageTick (10000HP)',
+            'BleedDamageTick (100000HP)',
+            'BleedDamageTick (1000000HP)',
         ];
         this.hidden = [
             'NoTable',

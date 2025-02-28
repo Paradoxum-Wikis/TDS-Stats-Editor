@@ -300,22 +300,6 @@ class CalculatedManager {
                 Value: (level) => level.BeeDamage / level.TickRate,
             },
         },
-        KnifeSingleDPS: {
-            Default: {
-                For: ['Slasher'],
-                Requires: ['KnifeCooldown', 'Damage'],
-                Value: (level) => {
-                    const knifeMultiplier = level?.KnifeMultiplier ?? 1;
-                    const knives = level?.Knives ?? 1;
-
-                    return (
-                        knives *
-                        knifeMultiplier *
-                        (level.Damage / level.KnifeCooldown)
-                    );
-                },
-            },
-        },
         TotalElapsedDamage: {
             Default: {
                 Requires: ['BurnDamage', 'BurnTime', 'TickRate'],
@@ -369,7 +353,7 @@ class CalculatedManager {
             Slasher: {
                 For: ['Slasher'],
                 Value: (level) =>
-                    level.Damage / level.Cooldown + level?.KnifeSingleDPS ?? 0,
+                    (level.Damage * 2 + level.CriticalDamage) / level.CriticalSwing / level.Cooldown,
             },
             Rocketeer: {
                 For: ['Rocketeer'],
@@ -565,14 +549,14 @@ class CalculatedManager {
             },
             Warden: {
                 For: ['Warden'],
-                Value: (level) => ((level.Damage * 2) + level.CriticalDamage) / 3 / level.Cooldown
+                Value: (level) => ((level.Damage * 2) + level.CriticalDamage) / level.CriticalSwing / level.Cooldown
             },
         },
 
         CriticalDamage: {
             Default: {
-            For: ['Warden'],
-            Value: (level) => Math.ceil(level.Damage + level.Damage * 0.5)
+            Requires: ['Damage', 'CriticalMultiplier'],
+            Value: (level) => Math.ceil(level.Damage + level.Damage * (level.CriticalMultiplier / 100))
             },
         },
 
@@ -741,6 +725,90 @@ class CalculatedManager {
                 },
             },
         },
+        "BleedDamageTick (100HP)": {
+        Default: {
+        For: ['Slasher'],
+        Value: (level) =>
+            (level.BleedDamage * (level.BleedStack**level.ExponentialValue)) * 100**level.ExponentialValue,
+            },
+        },
+        "BleedCollaspeDamage (100HP)": {
+        Default: {
+        For: ['Slasher'],
+        Value: (level) =>
+            (level.BleedDamage * (level.MaxStack**level.ExponentialValue)) * 100**level.ExponentialValue,
+            },
+        },
+        "BleedDamageTick (10HP)": {
+        Default: {
+        For: ['Slasher'],
+        Value: (level) =>
+            (level.BleedDamage * (level.BleedStack**level.ExponentialValue)) * 10**level.ExponentialValue,
+    },
+},
+        "BleedCollaspeDamage (10HP)": {
+        Default: {
+        For: ['Slasher'],
+        Value: (level) =>
+            (level.BleedDamage * (level.MaxStack**level.ExponentialValue)) * 10**level.ExponentialValue,
+    },
+},
+        "BleedDamageTick (1000HP)": {
+        Default: {
+        For: ['Slasher'],
+        Value: (level) =>
+            (level.BleedDamage * (level.BleedStack**level.ExponentialValue)) * 1000**level.ExponentialValue,
+    },
+},
+        "BleedCollaspeDamage (1000HP)": {
+        Default: {
+        For: ['Slasher'],
+        Value: (level) =>
+            (level.BleedDamage * (level.MaxStack**level.ExponentialValue)) * 1000**level.ExponentialValue,
+    },
+},
+        "BleedDamageTick (10000HP)": {
+        Default: {
+        For: ['Slasher'],
+        Value: (level) =>
+            (level.BleedDamage * (level.BleedStack**level.ExponentialValue)) * 10000**level.ExponentialValue,
+    },
+},
+        "BleedCollaspeDamage (10000HP)": {
+        Default: {
+        For: ['Slasher'],
+        Value: (level) =>
+            (level.BleedDamage * (level.MaxStack**level.ExponentialValue)) * 10000**level.ExponentialValue,
+    },
+},
+        "BleedDamageTick (100000HP)": {
+        Default: {
+        For: ['Slasher'],
+        Value: (level) =>
+            (level.BleedDamage * (level.BleedStack**level.ExponentialValue)) * 100000**level.ExponentialValue,
+    },
+},
+        "BleedCollaspeDamage (100000HP)": {
+        Default: {
+        For: ['Slasher'],
+        Value: (level) =>
+            (level.BleedDamage * (level.MaxStack**level.ExponentialValue)) * 100000**level.ExponentialValue,
+    },
+},
+        "BleedDamageTick (1000000HP)": {
+        Default: {
+            For: ['Slasher'],
+            Value: (level) =>
+            (level.BleedDamage * (level.BleedStack**level.ExponentialValue)) * 1000000**level.ExponentialValue,
+            },
+        },
+        "BleedCollaspeDamage (1000000HP)": {
+            Default: {
+                For: ['Slasher'],
+                Value: (level) =>
+                (level.BleedDamage * (level.MaxStack**level.ExponentialValue)) * 1000000**level.ExponentialValue,
+                },
+            },
         NetPriceToIncomeRatio: {
             Default: {
                 Requires: ['Income', 'NetCost'],
@@ -867,7 +935,18 @@ class CalculatedManager {
         this.#add('SpawnTime', skinData);
         this.#add('LaserDPS', skinData);
         this.#add('TotalElapsedDamage', skinData);
-        this.#add('KnifeSingleDPS', skinData);
+        this.#add('BleedDamageTick (10HP)', skinData);
+        this.#add('BleedCollaspeDamage (10HP)', skinData);
+        this.#add('BleedDamageTick (100HP)', skinData);
+        this.#add('BleedCollaspeDamage (100HP)', skinData);
+        this.#add('BleedDamageTick (1000HP)', skinData);
+        this.#add('BleedCollaspeDamage (1000HP)', skinData);
+        this.#add('BleedDamageTick (10000HP)', skinData);
+        this.#add('BleedCollaspeDamage (10000HP)', skinData);
+        this.#add('BleedDamageTick (100000HP)', skinData);
+        this.#add('BleedCollaspeDamage (100000HP)', skinData);
+        this.#add('BleedDamageTick (1000000HP)', skinData);
+        this.#add('BleedCollaspeDamage (1000000HP)', skinData);
         this.#add('FireTime', skinData);
         this.#add('SpikeMaxDamage', skinData);
         this.#add('LandmineMaxDamage', skinData);
