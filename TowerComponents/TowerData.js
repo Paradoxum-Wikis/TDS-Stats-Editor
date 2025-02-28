@@ -2173,6 +2173,9 @@ export default {
           Recoil: 0.08,
           Spread: 10,
           WindDownTime: 2,
+          WindUpTime: 0,
+          DeadZone: 0,
+          FireTime: 7.5,
         },
         Abilities: [
           {
