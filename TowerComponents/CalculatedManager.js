@@ -350,11 +350,6 @@ class CalculatedManager {
                 For: ['Cowboy'],
                 Value: (level) => (level.Damage * level.MaxAmmo) / (level.SpinDuration + (level.Cooldown * (level.MaxAmmo -1))), // prettier-ignore
             },
-            Slasher: {
-                For: ['Slasher'],
-                Value: (level) =>
-                    (level.Damage * 2 + level.CriticalDamage) / level.CriticalSwing / level.Cooldown,
-            },
             Rocketeer: {
                 For: ['Rocketeer'],
                 Requires: ['Damage', 'Cooldown', 'MissileAmount'],
@@ -547,8 +542,8 @@ class CalculatedManager {
                     return dps + burnDPS;
                 },
             },
-            Warden: {
-                For: ['Warden'],
+            CriticalMelee: {
+                For: ['Warden', 'Slasher'],
                 Value: (level) => ((level.Damage * 2) + level.CriticalDamage) / level.CriticalSwing / level.Cooldown
             },
         },
