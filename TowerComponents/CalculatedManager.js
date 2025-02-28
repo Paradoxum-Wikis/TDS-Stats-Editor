@@ -66,38 +66,6 @@ class CalculatedManager {
                     return unit.attributes.Health / level.SpawnTime;
                 },
             },
-            Crook: {
-                For: ['Crook Boss'],
-                Requires: [
-                    'PistolCrookSpawnTime',
-                    'DoublePistolCrooks',
-                    'TommyCrookSpawnTime',
-                    'TommyDrum',
-                ],
-                Value: (level) => {
-                    const skin = level.levels.skinData.name;
-                    this.unitManager.load();
-
-                    const goldText = skin == 'Golden' ? 'Golden' : '';
-                    const goon1 = this.unitManager.unitData[`${goldText}Goon1`];
-                    const goon2 = this.unitManager.unitData[`${goldText}Goon2`];
-                    const goon3 = this.unitManager.unitData[`${goldText}Goon3`];
-
-                    let goon1Ram =
-                        level.PistolCrookSpawnTime &&
-                        goon1.attributes.Health / level.PistolCrookSpawnTime;
-                    if (level.DoublePistolCrooks) goon1Ram *= 2;
-
-                    let goon2Ram =
-                        level.TommyCrookSpawnTime &&
-                        goon2.attributes.Health / level.TommyCrookSpawnTime;
-                    if (level.TommyDrum)
-                        goon2Ram =
-                            goon3.attributes.Health / level.TommyCrookSpawnTime;
-
-                    return goon1Ram + goon2Ram;
-                },
-            },
         },
         UnitDPS: {
             Default: {
@@ -123,34 +91,6 @@ class CalculatedManager {
                     const unit = this.unitManager.unitData[level.UnitToSend];
 
                     return unit.attributes.DPS * level.MaxUnits;
-                },
-            },
-            Crook: {
-                For: ['Crook Boss'],
-                Requires: [
-                    'PistolCrookSpawnTime',
-                    'DoublePistolCrooks',
-                    'TommyCrookSpawnTime',
-                    'TommyDrum',
-                ],
-                Value: (level) => {
-                    const skin = level.levels.skinData.name;
-                    this.unitManager.load();
-
-                    const goldText = skin == 'Golden' ? 'Golden' : '';
-                    const goon1 = this.unitManager.unitData[`${goldText}Goon1`];
-                    const goon2 = this.unitManager.unitData[`${goldText}Goon2`];
-                    const goon3 = this.unitManager.unitData[`${goldText}Goon3`];
-
-                    let goon1DPS =
-                        level.PistolCrookSpawnTime && goon1.attributes.DPS;
-                    if (level.DoublePistolCrooks) goon1DPS *= 2;
-
-                    let goon2DPS =
-                        level.TommyCrookSpawnTime && goon2.attributes.DPS;
-                    if (level.TommyDrum) goon2DPS = goon3.attributes.DPS;
-
-                    return goon1DPS + goon2DPS;
                 },
             },
         },
@@ -187,9 +127,9 @@ class CalculatedManager {
                     this.unitManager.load();
 
                     const goldText = skin == 'Golden' ? 'Golden' : '';
-                    const goon1 = this.unitManager.unitData[`${goldText}Goon1`];
-                    const goon2 = this.unitManager.unitData[`${goldText}Goon2`];
-                    const goon3 = this.unitManager.unitData[`${goldText}Goon3`];
+                    const goon1 = this.unitManager.unitData[`${goldText} Pistol Goon`];
+                    const goon2 = this.unitManager.unitData[`${goldText} Tommy Goon 1`];
+                    const goon3 = this.unitManager.unitData[`${goldText} Tommy Goon 2`];
 
                     let goon1DPS =
                         level.PistolCrookSpawnTime && goon1.attributes.DPS;
@@ -409,8 +349,12 @@ class CalculatedManager {
                     'Firework Technician',
                     'Commander',
                     'Trapper',
+                    'Mercenary Base',
                 ],
-                Value: (level) => level.Damage / level.Cooldown,
+                Value: (level) => {
+                    const DPS = level.Damage / level.Cooldown;
+                    return DPS === 0 ? NaN : DPS;
+                },
             },
             Ranger: {
                 For: ['Ranger'],
@@ -602,7 +546,7 @@ class CalculatedManager {
                 },
             },
             Spawner: {
-                For: ['Engineer', 'Crook Boss', 'Military Base', 'Mecha Base'],
+                For: ['Engineer', 'Military Base', 'Mecha Base'],
                 Value: (level) => {
                     const unitDPS = level.UnitDPS ?? 0;
                     const towerDPS = level.TowerDPS ?? 0;
@@ -689,6 +633,7 @@ class CalculatedManager {
         CostEfficiency: {
             Default: {
                 Requires: ['NetCost', 'DPS'],
+                Exclude: ['Mercenary Base'],
                 Value: (level) => {
                     const efficiency = level.NetCost / level.DPS;
                     return isFinite(efficiency) ? efficiency : NaN;

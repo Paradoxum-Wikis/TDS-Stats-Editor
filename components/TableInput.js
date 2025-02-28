@@ -209,6 +209,8 @@ export default class TableInput {
             case 'FirerateBuff':
             case 'CallToArmsBuff':
             case 'ThornPower':
+            case 'DamageBuff':
+            case 'Defense':
                 return Intl.NumberFormat().format(value) + '%';
     
             case 'BuffLength':
@@ -225,7 +227,7 @@ export default class TableInput {
             case 'ComboLength':
             case 'ComboCooldown':
             case 'RepositionCooldown':
-            case 'KnockbackCooldown':
+            case 'Knockback Cooldown':
             case 'SpawnTime':
             case 'BuildTime':
             case 'Cooldown':

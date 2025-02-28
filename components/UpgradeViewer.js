@@ -212,6 +212,16 @@ export default class UpgradeViewer {
         }
     }
 
+    #onAbilityCostChanged(abilityIndex, value) {
+        const numValue = Number(value);
+        if (!Number.isFinite(numValue)) return;
+    
+        const abilities = this.#getAbilities();
+        if (abilities?.[abilityIndex]) {
+            abilities[abilityIndex].Cost = numValue;
+        }
+    }
+
     #getAbilities() {
         return (
             this.skinData?.defaults?.Abilities || 
@@ -297,11 +307,27 @@ export default class UpgradeViewer {
         );
         abilityDiv.appendChild(cooldownInput);
 
+        const abilityCostInput = this.#createInputField(
+            `side-unlock-title-${index}`, 
+            'Ability Price',
+            ability.Cost, 
+            (value) => {
+                this.#onAbilityCostChanged(index, value);
+                this.viewer.reload();
+            }, 
+            'text',
+            'Cost'
+        );
+        abilityDiv.appendChild(abilityCostInput);
+
         // Store the cooldown input element for later access
         abilityDiv.cooldownInput = cooldownInput.querySelector('input');
 
         // Store the level input element for later access
         abilityDiv.levelInput = unlockLevelInput.querySelector('input');
+
+        // Store the level input element for later access
+        abilityDiv.levelInput = abilityCostInput.querySelector('input');
     
         this.abilityContainer.appendChild(abilityDiv);
     }

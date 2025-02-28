@@ -1,6 +1,7 @@
 import Unit from './Unit.js';
 import TowerData from './TowerData.js';
 import UpgradeViewer from '../components/UpgradeViewer.js';
+import Defaults from './Defaults.js';
 
 class UnitCalculations {
     constructor(upgradeViewer) {
@@ -12,7 +13,10 @@ class UnitCalculations {
             Default: {
                 Requires: ['Damage', 'Cooldown'],
                 Exclude: [],
-                Value: (level) => level.Damage / level.Cooldown,
+                Value: (level) => {
+                    const DPS = level.Damage / level.Cooldown;
+                    return DPS === 0 ? NaN : DPS;
+                },
             },
 
             Thorns: {
@@ -88,16 +92,11 @@ class UnitCalculations {
             },
             Burst: {
                 For: ['Rifleman1', 'Rifleman2', 'Rifleman3'],
-                Requires: ['Damage', 'Cooldown', 'BurstAmount'],
-                Value: (unit) => {
-                    const damage = unit.Damage;
-                    const burstAmount = unit.BurstAmount;
+                Requires: ['Damage', 'Cooldown', 'Burst', 'BurstCooldown', 'AimTime'],
+                Value: (level) => {
+                    const totalDamage = level.Damage * level.Burst;
+                    const totalTime = (level.BurstCooldown + level.AimTime + (level.Burst * level.Cooldown));
 
-                    const cooldown = unit.Cooldown;
-                    const burstCooldown = unit.BurstCooldown;
-
-                    const totalDamage = damage * burstAmount;
-                    const totalTime = cooldown * burstAmount + burstCooldown;
                     return totalDamage / totalTime;
                 },
             },
@@ -258,6 +257,16 @@ class UnitCalculations {
                 },
             },
         },
+
+        HealPS: {
+            Default: {
+                Requires: ['Heal', 'Cooldown'],
+                Value: (level) => {
+                    const healdps = level.Heal / level.Cooldown;
+                    return healdps === 0 ? NaN : healdps;
+                },
+        },
+        },
     };
 
     /**
@@ -308,6 +317,7 @@ class UnitCalculations {
         this.#add('TotalElapsedDamage', unitData);
         this.#add('DPS', unitData);
         this.#add('AggregateDPS', unitData);
+        this.#add('HealPS', unitData);
         this.#add('RamDPS', unitData);
 
         this.#add('Health', unitData);

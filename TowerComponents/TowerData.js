@@ -350,7 +350,7 @@ export default {
     Default: {
       Upgrades: [
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/8/8c/Transparent.png/revision/latest?cb=20210107190223",
+          Image: "",
           Stats: {
             Extras: [],
             Attributes: {
@@ -484,7 +484,7 @@ export default {
     Default: {
       Abilities: [
         { Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/e/e5/Commander_Upgrade_3.png/revision/latest?cb=20240704134001", Level: 2, Name: "Call to Arms", Cooldown: 30 },
-        { Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/a/a7/SupportCaravanIcon.png/revision/latest?cb=20240517142905", Level: 4, Name: "Support Caravan", Cooldown: 60 },
+        { Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/a/a7/SupportCaravanIcon.png/revision/latest?cb=20240517142905", Level: 4, Name: "Support Caravan", Cooldown: 60, Cost: 2000 },
       ],
       Upgrades: [
         {
@@ -879,7 +879,7 @@ export default {
       Upgrades: [
         {
           Stats: {
-            Attributes: { PistolCrookSpawnTime: 50 },
+            Attributes: {},
             Range: 12.5,
             Cooldown: 0.75,
             Extras: ["Pistol Goon (50s Spawn Time)"],
@@ -891,7 +891,7 @@ export default {
         },
         {
           Stats: {
-            Attributes: { DoublePistolCrooks: true },
+            Attributes: { DoublePistolGoons: true },
             Range: 14,
             Detections: { Hidden: true },
             Cooldown: 0.75,
@@ -904,7 +904,7 @@ export default {
         },
         {
           Stats: {
-            Attributes: { TommyCrookSpawnTime: 50 },
+            Attributes: {},
             Range: 15,
             Extras: [
               "Tommy Goon (50s Spawn Time)",
@@ -919,8 +919,6 @@ export default {
         {
           Stats: {
             Attributes: {
-              TommyDrum: true,
-              TommyCrookSpawnTime: 50,
             },
             Range: 16.5,
             Extras: [
@@ -936,7 +934,7 @@ export default {
       ],
       Defaults: {
         Range: 12.5,
-        Attributes: { PistolCrookSpawnTime: 50, BackupCallTime: 1.5, DoublePistolCrooks: false, TommyCrookSpawnTime: false, TommyDrum: false },
+        Attributes: { DoublePistolGoons: false },
         Limit: 5,
         Price: 600,
         Detections: { Flying: false, Hidden: false, Lead: false },
@@ -948,7 +946,7 @@ export default {
       Upgrades: [
         {
           Stats: {
-            Attributes: { PistolCrookSpawnTime: 50 },
+            Attributes: {},
             Range: 14,
             Cooldown: 0.7,
             Extras: ["Golden Pistol Goon (50s Spawn Time)"],
@@ -960,7 +958,7 @@ export default {
         },
         {
           Stats: {
-            Attributes: { DoublePistolCrooks: true },
+            Attributes: { DoublePistolGoons: true },
             Range: 15,
             Detections: { Hidden: true, Flying: true },
             Cooldown: 0.7,
@@ -973,7 +971,7 @@ export default {
         },
         {
           Stats: {
-            Attributes: { TommyCrookSpawnTime: 50 },
+            Attributes: {},
             Range: 16,
             Extras: [
               "Golden Tommy Goon (50s Spawn Time)",
@@ -988,8 +986,6 @@ export default {
         {
           Stats: {
             Attributes: {
-              TommyDrum: true,
-              TommyCrookSpawnTime: 20,
             },
             Range: 17.5,
             Extras: [
@@ -1005,7 +1001,7 @@ export default {
       ],
       Defaults: {
         Range: 14,
-        Attributes: { PistolCrookSpawnTime: 50, BackupCallTime: 1.5, DoublePistolCrooks: false, TommyCrookSpawnTime: false, TommyDrum: false, },
+        Attributes: { DoublePistolGoons: false },
         Limit: 5,
         Price: 800,
         Detections: { Flying: false, Hidden: false, Lead: false },
@@ -1132,7 +1128,7 @@ export default {
             Damage: 6,
             Attributes: { ExplosionRadius: 3.5 },
           },
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/8/8c/Transparent.png/revision/latest?cb=20210107190223",
+          Image: "",
           Title: "Further Throwing",
           Cost: 150,
         },
@@ -1882,7 +1878,7 @@ export default {
               Lead: false,
             },
             Cooldown: 0,
-            Range: 3,
+            Range: 5,
             Damage: 0,
             ThornPower: 60,
           },
@@ -1901,7 +1897,7 @@ export default {
               Lead: false,
             },
             Cooldown: 0,
-            Range: 3,
+            Range: 5,
             Damage: 0,
             ThornPower: 70,
           },
@@ -1920,7 +1916,7 @@ export default {
               Lead: false,
             },
             Cooldown: 0,
-            Range: 3,
+            Range: 5,
             Damage: 0,
             ThornPower: 80,
           },
@@ -1939,7 +1935,7 @@ export default {
               Lead: false,
             },
             Cooldown: 0,
-            Range: 3,
+            Range: 5,
             Damage: 0,
             ThornPower: 90,
           },
@@ -1958,7 +1954,7 @@ export default {
               Lead: false,
             },
             Cooldown: 0,
-            Range: 3,
+            Range: 5,
             Damage: 0,
             ThornPower: 100,
           },
@@ -1971,7 +1967,7 @@ export default {
         ThornPower: 50,
         Income: 50,
         Detections: { Flying: false, Hidden: false, Lead: false },
-        Range: 3,
+        Range: 5,
         Price: 250,
         Cooldown: 0,
         Damage: 0,
@@ -2835,6 +2831,15 @@ export default {
     Default: {
       Defaults: {
         Detections: { Flying: false, Hidden: false },
+        Abilities : [
+          {
+            Name: "Air-Drop",
+            Level: 5,
+            Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/b/b9/AirDropAbility.png/revision/latest?cb=20240420124127",
+            Cooldown: 75,
+            Cost: 2500,
+          },
+        ],
         Attributes: {
           UnitQueues: 1,
           Queue1: "Rifleman1",
@@ -2842,9 +2847,6 @@ export default {
           Queue3: "N/A",
           Queue4: "N/A",
           DamageBuff: 0,
-          AirDrop: false,
-          AirDropCost: 0,
-          AirDropCooldown: 0,
           MaxUnits: 3,
         },
         Price: 1200,
@@ -2859,20 +2861,17 @@ export default {
             Cooldown: 0,
             Damage: 0,
             Attributes: {
-              UnitQueues: 2,
+              UnitQueues: 1,
               Queue1: "Rifleman1",
-              Queue2: "N/A",
+              Queue2: "Grenadier1",
               Queue3: "N/A",
               Queue4: "N/A",
               DamageBuff: 0,
-              AirDrop: false,
-              AirDropCost: 0,
-              AirDropCooldown: 0,
               MaxUnits: 6,
             },
           },
-          Image: 0,
-          Title: "Upgraded Barracks",
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/0/05/Mercenary_Base_Level_2_Icon.png/revision/latest?cb=20240420123656",
+          Title: "Explosive Experts",
           Cost: 1000,
         },
         {
@@ -2884,18 +2883,15 @@ export default {
               Queue3: "N/A",
               Queue4: "N/A",
               DamageBuff: 0,
-              AirDrop: false,
-              AirDropCost: 0,
-              AirDropCooldown: 0,
               MaxUnits: 6,
             },
             Cooldown: 0,
             Range: 8,
             Damage: 0,
           },
-          Image: "0",
-          Title: "Explosive Experts",
-          Cost: 2200,
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/5/5e/Mercenary_Base_Level_1_Icon.png/revision/latest?cb=20240420123639",
+          Title: "Upgraded Barracks",
+          Cost: 2000,
         },
         {
           Stats: {
@@ -2906,17 +2902,14 @@ export default {
               Queue2: "Grenadier2",
               Queue3: "N/A",
               Queue4: "N/A",
-              DamageBuff: 0.1,
-              AirDrop: false,
-              AirDropCost: 0,
-              AirDropCooldown: 0,
+              DamageBuff: 10,
               MaxUnits: 6,
             },
             Extras: [],
             Range: 10,
             Damage: 0,
           },
-          Image: "0",
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/0/00/Mercenary_Base_Level_3_Icon.png/revision/latest?cb=20240420123820",
           Title: "Improved Training",
           Cost: 7000,
         },
@@ -2925,13 +2918,10 @@ export default {
             Attributes: {
               UnitQueues: 3,
               Queue1: "Rifleman2",
-              Queue2: "Grenadier1",
+              Queue2: "Grenadier2",
               Queue3: "RiotGuard1",
               Queue4: "N/A",
-              DamageBuff: 0.1,
-              AirDrop: false,
-              AirDropCost: 0,
-              AirDropCooldown: 0,
+              DamageBuff: 10,
               MaxUnits: 9,
             },
             Extras: [],
@@ -2939,22 +2929,19 @@ export default {
             Range: 10,
             Damage: 0,
           },
-          Image: "0",
+          Image: "",
           Title: "Riot Control",
-          Cost: 12500,
+          Cost: 10000,
         },
         {
           Stats: {
             Attributes: {
               UnitQueues: 3,
               Queue1: "Rifleman2",
-              Queue2: "Grenadier1",
+              Queue2: "Grenadier2",
               Queue3: "RiotGuard1",
               Queue4: "FieldMedic1",
-              DamageBuff: 0.1,
-              AirDrop: true,
-              AirDropCost: 2500,
-              AirDropCooldown: 40,
+              DamageBuff: 10,
               MaxUnits: 9,
             },
             Extras: [],
@@ -2962,7 +2949,7 @@ export default {
             Range: 10,
             Damage: 0,
           },
-          Image: "0",
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/8/8b/Mercenary_Base_Level_5_Icon.png/revision/latest?cb=20240420123925",
           Title: "Air Transport",
           Cost: 15000,
         },
@@ -2974,10 +2961,7 @@ export default {
               Queue2: "Grenadier3",
               Queue3: "RiotGuard2",
               Queue4: "FieldMedic2",
-              DamageBuff: 0.2,
-              AirDrop: true,
-              AirDropCost: 2500,
-              AirDropCooldown: 40,
+              DamageBuff: 20,
               MaxUnits: 9,
             },
             Extras: [],
@@ -2985,9 +2969,9 @@ export default {
             Range: 10,
             Damage: 0,
           },
-          Image: "0",
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/f/ff/Mercenary_Base_Level_6_Icon.png/revision/latest?cb=20240420124100",
           Title: "Enhanced Equipment",
-          Cost: 32500,
+          Cost: 35000,
         },
       ],
     },

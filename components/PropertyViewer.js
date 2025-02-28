@@ -76,6 +76,13 @@ export default class PropertyViewer {
         return activeSkin.tower.name === 'Trapper';
     }
 
+    isMercenaryBaseTower() {
+        const activeSkin = this.viewer.getActiveSkin();
+        if (!activeSkin) return false;
+        
+        return activeSkin.tower.name === 'Mercenary Base';
+    }
+
     getProperties() {
         const levelData = this.viewer.getActiveSkin().levels;
         return [...levelData.attributes, ...levelData.complexAttributes];
@@ -171,6 +178,10 @@ export default class PropertyViewer {
         if (this.isTrapperTower() && property === 'Damage') {
             return true;
         }
+
+        if (this.isMercenaryBaseTower() && (property === 'Damage' || property === 'Cooldown' || property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
+            return true;
+        }
         
         return this.hidden.includes(property);
     }
@@ -198,6 +209,10 @@ export default class PropertyViewer {
         if (this.isTrapperTower() && property === 'Damage') {
             this.hide(property);
             return;
+        }
+
+        if (this.isMercenaryBaseTower() && (property === 'Damage' || property === 'Cooldown' || property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
+            return true;
         }
         
         if (this.isDisabled(property)) {
