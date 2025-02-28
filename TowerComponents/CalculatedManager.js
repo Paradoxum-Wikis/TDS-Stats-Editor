@@ -822,6 +822,40 @@ class CalculatedManager {
                 },
             },
         },
+        TotalDPS: {
+            Default: {
+                For: ['Commando'],
+                Value: (level) => {
+                    this.unitManager.load();
+                    let missile1DPS = 0;
+                    let missile2DPS = 0;
+        
+                    if (level.Level >= 3) {
+                        const missile1 = this.unitManager.unitData["Missile 1"];
+                        const missileNumber1 = parseInt("Missile 1".match(/\d+$/)[0]);
+                        const missileLevel1 = missileNumber1 - 1;
+                        const cooldown1 = this.upgradeViewer.getAbilityCooldownValue(missileLevel1);
+        
+                        if (missile1 && missile1.attributes && missile1.attributes.ExplosionDamage && cooldown1) {
+                            missile1DPS = missile1.attributes.ExplosionDamage / cooldown1;
+                        }
+                    }
+        
+                    if (level.Level >= 4) {
+                        const missile2 = this.unitManager.unitData["Missile 2"];
+                        const missileNumber2 = parseInt("Missile 2".match(/\d+$/)[0]); // extracts the number
+                        const missileLevel2 = missileNumber2 - 1; // subtracts 1
+                        const cooldown2 = this.upgradeViewer.getAbilityCooldownValue(missileLevel2);
+        
+                        if (missile2 && missile2.attributes && missile2.attributes.ExplosionDamage && cooldown2) {
+                            missile2DPS = missile2.attributes.ExplosionDamage / cooldown2;
+                        }
+                    }
+        
+                    return level.DPS + missile1DPS + missile2DPS;
+                },
+            },
+        },
         Cooldown: {
             Type: 'Override',
 
@@ -960,6 +994,7 @@ class CalculatedManager {
         this.#add('LaserTime', skinData);
         this.#add('BeeDps', skinData);
         this.#add('DPS', skinData);
+        this.#add('TotalDPS', skinData);
         this.#add('ClusterDPS', skinData);
         this.#add('CallToArmsDPS', skinData);
         this.#add('CaravanDPS', skinData);

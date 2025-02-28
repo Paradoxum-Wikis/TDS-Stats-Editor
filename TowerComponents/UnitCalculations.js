@@ -146,32 +146,6 @@ class UnitCalculations {
                 },
             },
         },
-        TotalDPS: {
-            Default: {
-                For: ['Missile 1', 'Missile 2'],
-                Value: (level) => {
-                    const missileType = level.Name;
-                    const commandoLevelIndex = missileType === 'Missile 1' ? 2 : 3;
-                    const commandoData = TowerData.Commando?.Default;
-                    const commandoStats = (commandoData?.Upgrades?.[commandoLevelIndex]?.Stats) || commandoData?.Defaults;
-                    
-                    const stats = commandoStats || commandoData.Defaults;
-                    const damage = stats.Damage;
-                    const cooldown = stats.Cooldown;
-                    const attrs = stats.Attributes || {};
-                    
-                    const ammo = attrs.Ammo || 1;
-                    const burst = attrs.Burst || 1;
-                    const burstCooldown = attrs.BurstCooldown || 0;
-                    const reloadTime = attrs.ReloadTime || 0;
-                    
-                    const ammoPerBurst = ammo / burst;
-                    const denominator = (ammo * cooldown) + ((ammoPerBurst - 1) * burstCooldown) + reloadTime;
-                    
-                    return level.DPS + (damage * ammo / denominator);
-                },
-            },
-        },
         Cooldown: {
             Type: 'Override',
 
@@ -350,7 +324,6 @@ class UnitCalculations {
     addCalculate(unitData) {
         this.#add('TotalElapsedDamage', unitData);
         this.#add('DPS', unitData);
-        this.#add('TotalDPS', unitData);
         this.#add('AggregateDPS', unitData);
         this.#add('HealPS', unitData);
         this.#add('RamDPS', unitData);
