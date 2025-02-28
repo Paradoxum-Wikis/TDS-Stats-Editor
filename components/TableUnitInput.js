@@ -100,6 +100,11 @@ export default class TableUnitInput {
         input.classList.add('table-cell-input');
         input.size = 1;
 
+        // zero color style
+        if (value === 0) {
+            input.classList.add('zero-value');
+        }
+
         input.addEventListener('focusin', (() => input.value = '').bind(this)); // prettier-ignore
         input.addEventListener('focusout', this.#onNumberSubmit.bind(this));
         form.addEventListener(

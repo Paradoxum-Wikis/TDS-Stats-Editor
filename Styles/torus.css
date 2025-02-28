@@ -48,3 +48,8 @@ input {
 ::-webkit-scrollbar-thumb:hover{
 	background-color: #0484AE;
 }
+
+
+.zero-value {
+    color: #ff77bb !important; /* Hot pink color */
+  }
