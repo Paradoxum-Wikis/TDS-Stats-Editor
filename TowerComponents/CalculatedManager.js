@@ -935,6 +935,7 @@ class CalculatedManager {
         this.#add('SpawnTime', skinData);
         this.#add('LaserDPS', skinData);
         this.#add('TotalElapsedDamage', skinData);
+        this.#add('CriticalDamage', skinData);
         this.#add('BleedDamageTick (10HP)', skinData);
         this.#add('BleedCollaspeDamage (10HP)', skinData);
         this.#add('BleedDamageTick (100HP)', skinData);
@@ -951,7 +952,6 @@ class CalculatedManager {
         this.#add('SpikeMaxDamage', skinData);
         this.#add('LandmineMaxDamage', skinData);
         this.#add('BearTrapMaxDamage', skinData);
-        this.#add('CriticalDamage', skinData);
         this.#add('TowerDPS', skinData);
         this.#add('UnitDPS', skinData);
         this.#add('AggregateUnitDPS', skinData);
