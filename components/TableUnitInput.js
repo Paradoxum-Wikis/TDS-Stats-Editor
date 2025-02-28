@@ -227,6 +227,7 @@ export default class TableUnitInput {
             case 'Cooldown':
             case 'BurnTime':
             case 'StunLength':
+            case 'Lifetime':
                 return Intl.NumberFormat().format(number) + 's';
         }
         return +(+number).toFixed(3);

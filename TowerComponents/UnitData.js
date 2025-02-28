@@ -947,4 +947,21 @@ export default {
         StunLength: 3,
         Cooldown: 3.5,
     },
+
+    'Missile 1': {
+        ExplosionDamage: 150,
+        MissileAmount: 2,
+        StunLength: 1.5,
+        Lifetime: 60,
+        Range: 30,
+        ExplosionRadius: 4,
+    },
+    'Missile 2': {
+        ExplosionDamage: 200,
+        MissileAmount: 4,
+        StunLength: 2,
+        Lifetime: 60,
+        Range: 34,
+        ExplosionRadius: 6,
+    },
 };

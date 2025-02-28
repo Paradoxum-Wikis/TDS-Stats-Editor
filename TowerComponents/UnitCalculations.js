@@ -1,7 +1,6 @@
 import Unit from './Unit.js';
 import TowerData from './TowerData.js';
 import UpgradeViewer from '../components/UpgradeViewer.js';
-import Defaults from './Defaults.js';
 
 class UnitCalculations {
     constructor(upgradeViewer) {
@@ -29,6 +28,15 @@ class UnitCalculations {
                 Value: (level) => {
                     const cooldown = this.upgradeViewer.getAbilityCooldownValue(0); // extract cooldown from UpgradeViewer
                     return (level.Damage / cooldown) + (level.BurnDamage / level.TickRate);
+                },
+            },
+
+            Commando: {
+                For: ['Missile 1', 'Missile 2'],
+                Value: (level) => {
+                    const missileLevel = parseInt(level.Name.split(' ')[1]) - 1;
+                    const cooldown = this.upgradeViewer.getAbilityCooldownValue(missileLevel);
+                    return level.ExplosionDamage / cooldown;
                 },
             },
             
@@ -135,6 +143,32 @@ class UnitCalculations {
                 Requires: ['Health', 'Spawnrate'],
                 Value: (level) => {
                     return level.Health / level.Spawnrate;
+                },
+            },
+        },
+        TotalDPS: {
+            Default: {
+                For: ['Missile 1', 'Missile 2'],
+                Value: (level) => {
+                    const missileType = level.Name;
+                    const commandoLevelIndex = missileType === 'Missile 1' ? 2 : 3;
+                    const commandoData = TowerData.Commando?.Default;
+                    const commandoStats = (commandoData?.Upgrades?.[commandoLevelIndex]?.Stats) || commandoData?.Defaults;
+                    
+                    const stats = commandoStats || commandoData.Defaults;
+                    const damage = stats.Damage;
+                    const cooldown = stats.Cooldown;
+                    const attrs = stats.Attributes || {};
+                    
+                    const ammo = attrs.Ammo || 1;
+                    const burst = attrs.Burst || 1;
+                    const burstCooldown = attrs.BurstCooldown || 0;
+                    const reloadTime = attrs.ReloadTime || 0;
+                    
+                    const ammoPerBurst = ammo / burst;
+                    const denominator = (ammo * cooldown) + ((ammoPerBurst - 1) * burstCooldown) + reloadTime;
+                    
+                    return level.DPS + (damage * ammo / denominator);
                 },
             },
         },
@@ -316,6 +350,7 @@ class UnitCalculations {
     addCalculate(unitData) {
         this.#add('TotalElapsedDamage', unitData);
         this.#add('DPS', unitData);
+        this.#add('TotalDPS', unitData);
         this.#add('AggregateDPS', unitData);
         this.#add('HealPS', unitData);
         this.#add('RamDPS', unitData);

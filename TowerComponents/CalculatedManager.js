@@ -407,6 +407,11 @@ class CalculatedManager {
                     return totalDamage / comboLength;
                 },
             },
+            Commando: {
+                For: ['Commando'],
+                Value: (level) =>
+                    level.Damage * level.Ammo / (level.Ammo * level.Cooldown + (level.Ammo / level.Burst - 1) * level.BurstCooldown + level.ReloadTime)
+            },
             BurnTower: {
                 For: ['Pyromancer', 'Archer'],
                 Requires: ['Damage', 'Cooldown', 'BurnDamage', 'TickRate'],
@@ -597,6 +602,7 @@ class CalculatedManager {
                 Value: (level) => level.DPS * level.Limit,
             },
         },
+
         NetCost: {
             Default: {
                 Value: (level) => (level.levels.levels.reduce(

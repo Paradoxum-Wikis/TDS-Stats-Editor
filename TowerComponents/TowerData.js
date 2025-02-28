@@ -566,97 +566,85 @@ export default {
     Default: {
       Upgrades: [
         {
-          Image: 3615110168,
+          Image: 119448063654848,
           Stats: {
             Extras: [],
-            Attributes: {},
+            Attributes: { BurstCooldown: 0.5, ReloadTime: 2.5, Burst: 3, Ammo: 30, MaxHits: 2},
             Detections: {
               Flying: false,
               Hidden: false,
               Lead: false,
             },
-            Cooldown: 0.5,
-            Range: 14,
-            Damage: 2,
+            Cooldown: 0.2,
+            Range: 12,
+            Damage: 8,
           },
-          Title: "Radar Pack",
-          Cost: 350,
+          Title: "Recon Mission",
+          Cost: 935,
         },
         {
-          Image: 3615110536,
+          Image: 72540829223100,
           Stats: {
-            Extras: ["Missile launcher"],
-            Attributes: {},
+            Extras: ["Burst: 3 → 5", "Ammo: 30 → 45", "Reload Time: 2.5 → 2"],
+            Attributes: { BurstCooldown: 0.5, ReloadTime: 2, Burst: 5, Ammo: 45, MaxHits: 2},
             Detections: {
               Flying: false,
-              Hidden: false,
+              Hidden: true,
               Lead: false,
             },
             Cooldown: 0.5,
-            Range: 16,
-            Damage: 2,
+            Range: 13.5,
+            Damage: 12,
           },
-          Title: "Disposable Missile",
-          Cost: 700,
+          Title: "Titanium Rounds",
+          Cost: 3250,
         },
         {
-          Image: 3615110964,
+          Image: 111526844050563,
           Stats: {
-            Extras: [],
-            Attributes: {},
+            Extras: ["Burst: 5 → 6", "Burst Cooldown: 0.5s → 0.35s", "Ammo: 45 → 60", "Max Hits: 2 → 3", "Reload Time: 2 → 1.5", "Missile", "Cooldown: 20s", "Explosion Damage: 150", "Missile Amount: 2", "Stun Length: 1.5s", "Lifetime: 60s", "Range: 30", "Explosion Radius: 4"],
+            Attributes: { BurstCooldown: 0.35, ReloadTime: 1.5, Burst: 6, Ammo: 60, MaxHits: 3},
             Detections: {
               Flying: false,
-              Hidden: false,
-              Lead: false,
+              Hidden: true,
+              Lead: true,
             },
-            Cooldown: 0.5,
+            Cooldown: 0.15,
+            Range: 15,
+            Damage: 15,
+          },
+          Title: "Jericho Missiles",
+          Cost: 8500,
+        },
+        {
+          Image: 113494545335861,
+          Stats: {
+            Extras: ["Burst: 6 → 10", "Burst Cooldown: 0.35s → 0.3s", "Ammo: 60 → 80", "Reload Time: 1.5 → 1.25", "Missile 2", "Cooldown: 20s → 10s", "Explosion Damage: 150 → 200", "Stun Length: 1.5s → 2s", "Range: 30 → 34", "Explosion Radius: 4 → 6"],
+            Attributes: { BurstCooldown: 0.3, ReloadTime: 1.25, Burst: 10, Ammo: 80, MaxHits: 3},
+            Detections: {
+              Flying: false,
+              Hidden: true,
+              Lead: true,
+            },
+            Cooldown: 0.125,
             Range: 17,
-            Damage: 4,
+            Damage: 20,
           },
-          Title: "Recon Armor",
-          Cost: 2000,
-        },
-        {
-          Image: 3615111324,
-          Stats: {
-            Extras: ["Quad missiles"],
-            Attributes: {},
-            Detections: {
-              Flying: false,
-              Hidden: false,
-              Lead: false,
-            },
-            Cooldown: 0.5,
-            Range: 19,
-            Damage: 10,
-          },
-          Title: "Quad Launcher",
-          Cost: 7500,
-        },
-        {
-          Image: 3615112120,
-          Stats: {
-            Extras: ["Really cool armor"],
-            Attributes: {},
-            Detections: {
-              Flying: false,
-              Hidden: false,
-              Lead: false,
-            },
-            Cooldown: 0.5,
-            Range: 22,
-            Damage: 22,
-          },
-          Title: "Flex Armor",
-          Cost: 10000,
+          Title: "Death & Taxes",
+          Cost: 20000,
         },
       ],
       Defaults: {
         Detections: { Flying: false, Hidden: false, Lead: false },
-        Price: 1600,
+        Attributes: { BurstCooldown: 0.5, ReloadTime: 2.5, Burst: 3, Ammo: 30, MaxHits: 2},
+        Abilities: [
+          { Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/9/9d/MissileAbility.png/revision/latest?cb=20241121110046", Level: 3, Name: "Missile", Cooldown: 20 },
+          { Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/9/9d/MissileAbility.png/revision/latest?cb=20241121110046", Level: 4, Name: "Missile", Cooldown: 10 },
+        ],
+        Price: 2250,
         Range: 12,
-        Cooldown: 0.5,
-        Damage: 2,
+        Cooldown: 0.2,
+        Damage: 6,
       },
     },
   },
@@ -5811,7 +5799,7 @@ export default {
     Default: {
       Upgrades: [
         {
-          Image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/2/25/ElementalistLevel1.png/revision/latest?cb=20241217145711',
+          Image: 136223791844063,
           Stats: {
             Attributes: {},
             Extras: [ "Burn Damage: 8 → 10", "Burn Time: 2 → 3", "Burst Size: 3 → 4" ],
@@ -5825,7 +5813,7 @@ export default {
           Cost: 1500,
         },
         {
-          Image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/3/39/ElementalistLevel2.png/revision/latest?cb=20241217145734',
+          Image: 124219033045691,
           Stats: {
             Attributes: { Hidden: true },
             Extras: [ "Burn Time: 3 → 4", "Heatwave" ],
@@ -5837,7 +5825,7 @@ export default {
           Cost: 4000,
         },
         {
-          Image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/b/b0/ElementalistLevel3.png/revision/latest?cb=20241217145753',
+          Image: 77890912829468,
           Stats: {
             Attributes: {},
             Extras: [ "Burn Damage: 8 → 10", "Burst Size: 4 → 5", "Burst Cooldown: 0.6 → 0.5", "Tick Rate: 0.5 → 0.25", "Burn Time: 4 → 2" ],
@@ -5852,7 +5840,7 @@ export default {
           Cost: 8000,
         },
         {
-          Image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/8/8a/ElementalistLevel4.png/revision/latest?cb=20241217145814',
+          Image: 90889171304008,
           Stats: {
             Attributes: {},
             Extras: [ "Burst Size: 5 → 7", "Burst Cooldown: 0.5 → 0.4", "Burn Time: 2 → 4" ],
@@ -5894,7 +5882,7 @@ export default {
       Default: {
         Upgrades: [
           {
-            Image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/2/25/ElementalistLevel1.png/revision/latest?cb=20241217145711',
+            Image: 136223791844063,
             Stats: {
               Attributes: {},
               Extras: [ "Slowdown per Hit: 5% → 7.5%" ],
@@ -5908,7 +5896,7 @@ export default {
             Cost: 1500,
           },
           {
-            Image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/3/39/ElementalistLevel2.png/revision/latest?cb=20241217145734',
+            Image: 124219033045691,
             Stats: {
               Attributes: { Hidden: true },
               Extras: [ "Max Slow: 45% → 50%" ],
@@ -5920,7 +5908,7 @@ export default {
             Cost: 4000,
           },
           {
-            Image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/b/b0/ElementalistLevel3.png/revision/latest?cb=20241217145753',
+            Image: 77890912829468,
             Stats: {
               Attributes: {},
               Extras: [ "Slowdown per Hit: 7.5% → 10%" ],
@@ -5934,7 +5922,7 @@ export default {
             Cost: 8000,
           },
           {
-            Image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/8/8a/ElementalistLevel4.png/revision/latest?cb=20241217145814',
+            Image: 90889171304008,
             Stats: {
               Attributes: {},
               Extras: [ "Slowdown per Hit: 10% → 12.5%", "Max Slow: 50% → 60%" ],

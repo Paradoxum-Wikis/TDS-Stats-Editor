@@ -130,6 +130,13 @@ const register = {
             'Bear Trap 4',
         ],
     },
+
+    Commando: {
+        Default: [
+            'Missile 1',
+            'Missile 2',
+        ],
+    },
 };
 
 export default class UnitManager {
