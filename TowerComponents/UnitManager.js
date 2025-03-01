@@ -137,6 +137,22 @@ const register = {
             'Missile 2',
         ],
     },
+
+    Jester: {
+        Default: [
+            'Fire Bomb 0',
+            'Fire Bomb 1',
+            'Fire Bomb 2',
+            'Fire Bomb 3',
+            'Fire Bomb 4',
+            'Ice Bomb 2',
+            'Ice Bomb 3',
+            'Ice Bomb 4',
+            'Poison Bomb 3',
+            'Poison Bomb 4',
+            'Confusion Bomb 4',
+        ],
+    }
 };
 
 export default class UnitManager {

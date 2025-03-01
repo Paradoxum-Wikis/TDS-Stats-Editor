@@ -215,6 +215,9 @@ export default class TableUnitInput {
                 return `$${Intl.NumberFormat().format(number)}`;
 
             case 'Defense':
+            case 'SlowdownPerHit':
+            case 'MaxSlow':
+            case 'DefenseMelt':
                 return Intl.NumberFormat().format(number) + '%';
             
             case 'Duration':
@@ -228,6 +231,10 @@ export default class TableUnitInput {
             case 'BurnTime':
             case 'StunLength':
             case 'Lifetime':
+            case 'ConfusionTime':
+            case 'ConfusionCooldown':
+            case 'PoisonLength':
+            case 'SlowdownTime':
                 return Intl.NumberFormat().format(number) + 's';
         }
         return +(+number).toFixed(3);

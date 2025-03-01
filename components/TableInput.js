@@ -239,6 +239,9 @@ export default class TableInput {
             case 'Cooldown':
             case 'SlowdownTime':
             case 'AftershockCooldown':
+            case 'PoisonLength':
+            case 'AimTime':
+            case 'EquipTime':
                 return Intl.NumberFormat().format(value) + 's';
         }
     

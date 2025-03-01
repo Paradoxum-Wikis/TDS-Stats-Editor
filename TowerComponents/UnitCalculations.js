@@ -108,6 +108,16 @@ class UnitCalculations {
                     return totalDamage / totalTime;
                 },
             },
+
+            PoisonBomb: {
+                For: ['Poison Bomb 3', 'Poison Bomb 4'],
+                Value: (level) => level.Damage / level.TickRate,
+            },
+
+            FireBomb: {
+                For: ['Fire Bomb 0' , 'Fire Bomb 1', 'Fire Bomb 2', 'Fire Bomb 3', 'Fire Bomb 4'],
+                Value: (level) => level.Damage / level.Cooldown + level.BurnDamage / level.TickRate,
+            },
         },
 
         TotalElapsedDamage: {

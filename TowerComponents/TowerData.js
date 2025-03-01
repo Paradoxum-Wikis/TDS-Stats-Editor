@@ -1596,7 +1596,7 @@ export default {
               BuildTime: 2,
               MaxUnits: 1,
               UnitToSend: "Sentry",
-              SpawnTime: 1,
+              Spawnrate: 1,
               SentryShield: false,
               Buildzone: 4,
               Deadzone: 1,
@@ -1621,7 +1621,7 @@ export default {
               BuildTime: 2,
               MaxUnits: 2,
               UnitToSend: "Sentry",
-              SpawnTime: 1,
+              Spawnrate: 1,
               SentryShield: false,
               Buildzone: 4,
               Deadzone: 1,
@@ -1642,7 +1642,7 @@ export default {
               BuildTime: 2,
               MaxUnits: 2,
               UnitToSend: "Rifle Sentry",
-              SpawnTime: 1,
+              Spawnrate: 1,
               SentryShield: false,
               Buildzone: 4,
               Deadzone: 1,
@@ -1663,7 +1663,7 @@ export default {
               BuildTime: 2,
               MaxUnits: 3,
               UnitToSend: "Rifle Sentry",
-              SpawnTime: 1,
+              Spawnrate: 1,
               SentryShield: true,
               Buildzone: 4,
               Deadzone: 1,
@@ -1684,7 +1684,7 @@ export default {
               BuildTime: 2,
               MaxUnits: 3,
               UnitToSend: "Minigun Sentry",
-              SpawnTime: 1,
+              Spawnrate: 1,
               SentryShield: true,
               Buildzone: 4,
               Deadzone: 1,
@@ -1705,7 +1705,7 @@ export default {
               BuildTime: 2,
               MaxUnits: 4,
               UnitToSend: "War Machine Sentry",
-              SpawnTime: 1,
+              Spawnrate: 1,
               SentryShield: true,
               Buildzone: 4,
               Deadzone: 0.5,
@@ -1728,7 +1728,7 @@ export default {
           BuildTime: 2,
           MaxUnits: 1,
           UnitToSend: "Sentry",
-          SpawnTime: 1,
+          Spawnrate: 1,
           SentryShield: false,
           Buildzone: 4,
           Deadzone: 1,
@@ -2520,7 +2520,7 @@ export default {
               "Ice Bomb",
               "1/2 Base Damage, 30% Chill, 60% Max Chill",
             ],
-            Attributes: { FireStats: { BurnTime: 4, TickRate: 1 } },
+            Attributes: { },
             Damage: 4,
           },
           Image: 0,
@@ -2534,7 +2534,7 @@ export default {
               "Acid Puddle Bomb",
               "3/10 Base Damage, 0.5 Tick, 10s Duration, Defense Melt",
             ],
-            Attributes: { FireStats: { BurnTime: 6, TickRate: 1 } },
+            Attributes: { },
             Detections: { Hidden: true },
             Damage: 12,
           },
@@ -2545,8 +2545,6 @@ export default {
         {
           Stats: {
             Attributes: {
-              FireStats: { BurnTime: 6, TickRate: 0.5 },
-              BombCount: 2,
             },
             Extras: [
               "Double Bombs",
@@ -2566,12 +2564,6 @@ export default {
         Range: 10,
         Detections: { Flying: false, Hidden: false, Lead: true },
         Attributes: {
-          PoisonStats: {
-            DefenseMelt: 1,
-            Radius: 3.5,
-            Length: 10,
-            TickRate: 0.5,
-          },
           AnimTimes: {
             0: { Equip: 0.23, Fire: 0.57 },
             4: { Equip: 0.46, Right: 0.6, Left: 0.6 },
@@ -2579,17 +2571,7 @@ export default {
           Velocity: 30,
           AimTime: 0.2,
           EquipTime: 0.4,
-          MaxHits: 5,
-          IceStats: {
-            DefenseMelt: 0,
-            Length: 2,
-            SlowPercent: 30,
-            TickRate: 0.25,
-          },
-          FireStats: { TickRate: 1, BurnTime: 3 },
-          ExplosionRadius: 3,
           BombCount: 1,
-          ConfuseStats: { Debounce: 8, Length: 2 },
         },
         Abilities: [
           {
@@ -2615,7 +2597,7 @@ export default {
           Stats: {
             Extras: [],
             Attributes: {
-              SpawnTime: 40,
+              Spawnrate: 40,
               UnitToSend: "Mark1Rocket",
             },
             Detections: {
@@ -2634,7 +2616,7 @@ export default {
           Image: 4119547593,
           Stats: {
             Extras: [],
-            Attributes: { SpawnTime: 40, UnitToSend: "Mark2" },
+            Attributes: { Spawnrate: 40, UnitToSend: "Mark2" },
             Detections: {
               Flying: false,
               Hidden: false,
@@ -2651,7 +2633,7 @@ export default {
           Image: 4119548000,
           Stats: {
             Extras: [],
-            Attributes: { SpawnTime: 40, UnitToSend: "Mark3" },
+            Attributes: { Spawnrate: 40, UnitToSend: "Mark3" },
             Detections: {
               Flying: false,
               Hidden: false,
@@ -2668,7 +2650,7 @@ export default {
           Image: 4119548431,
           Stats: {
             Extras: [],
-            Attributes: { SpawnTime: 40, UnitToSend: "Mark4" },
+            Attributes: { Spawnrate: 40, UnitToSend: "Mark4" },
             Detections: {
               Flying: false,
               Hidden: false,
@@ -2685,7 +2667,7 @@ export default {
           Image: 4119548907,
           Stats: {
             Extras: [],
-            Attributes: { SpawnTime: 40, UnitToSend: "Mark5" },
+            Attributes: { Spawnrate: 40, UnitToSend: "Mark5" },
             Detections: {
               Flying: false,
               Hidden: false,
@@ -2704,7 +2686,7 @@ export default {
         Detections: { Flying: false, Hidden: false, Lead: false },
         Range: 3,
         Price: 5000,
-        Attributes: { SpawnTime: 60, UnitToSend: "Mark1" },
+        Attributes: { Spawnrate: 60, UnitToSend: "Mark1" },
         Cooldown: 0.5,
         Damage: 0,
       },
@@ -3050,7 +3032,7 @@ export default {
           Image: 3877874591,
           Stats: {
             Extras: ["Spawn Time: 50 → 35"],
-            Attributes: { SpawnTime: 35, UnitToSend: "Humvee" },
+            Attributes: { Spawnrate: 35, UnitToSend: "Humvee" },
             Detections: {
               Flying: false,
               Hidden: false,
@@ -3064,7 +3046,7 @@ export default {
           Image: 3877875003,
           Stats: {
             Extras: ["Humvee 2", "Health: 30 → 60"],
-            Attributes: { SpawnTime: 35, UnitToSend: "Humvee 2" },
+            Attributes: { Spawnrate: 35, UnitToSend: "Humvee 2" },
             Detections: {
               Flying: false,
               Hidden: false,
@@ -3078,7 +3060,7 @@ export default {
           Image: 3877873543,
           Stats: {
             Extras: ["Humvee 3", "Health: 60 → 90", "Damage: 0 → 3", "Cooldown: 0 → 0.2", "Range: 0 → 30"],
-            Attributes: { SpawnTime: 35, UnitToSend: "Humvee 3" },
+            Attributes: { Spawnrate: 35, UnitToSend: "Humvee 3" },
             Detections: {
               Flying: false,
               Hidden: false,
@@ -3102,7 +3084,7 @@ export default {
               "Missile Amount: 6",
               "Airstrike Radius: 0 → 8",
             ],
-            Attributes: { SpawnTime: 35, UnitToSend: "Tank", AirstrikeDamage: 75, MissileAmount: 6, AirstrikeRadius: 8, },
+            Attributes: { Spawnrate: 35, UnitToSend: "Tank", AirstrikeDamage: 75, MissileAmount: 6, AirstrikeRadius: 8, },
             Detections: {
               Flying: false,
               Hidden: false,
@@ -3125,7 +3107,7 @@ export default {
               "Airstrike Radius: 8 → 12",
             ],
             Attributes: {
-              SpawnTime: 35,
+              Spawnrate: 35,
               UnitToSend: "Railgun Tank",
               AirstrikeDamage: 125, MissileAmount: 6, AirstrikeRadius: 12,
             },
@@ -3140,7 +3122,7 @@ export default {
         },
       ],
       Defaults: {
-        Attributes: { SpawnTime: 50, UnitToSend: "Humvee", AirstrikeDamage: 0, MissileAmount: 1 },
+        Attributes: { Spawnrate: 50, UnitToSend: "Humvee", AirstrikeDamage: 0, MissileAmount: 1 },
         Detections: { Flying: false, Hidden: false, Lead: false },
         Abilities: [
           {
