@@ -174,6 +174,20 @@ const register = {
         'Red Track 5',
         ],
     },
+
+    "Archer": {
+        Default: [
+            'Arrow 0',
+            'Arrow 1',
+            'Arrow 2',
+            'Flame Arrow 3',
+            'Flame Arrow 4',
+            'Flame Arrow 5',
+            'Shock Arrow 4',
+            'Shock Arrow 5',
+            'Explosive Arrow 5',
+        ],
+    }
 };
 
 export default class UnitManager {

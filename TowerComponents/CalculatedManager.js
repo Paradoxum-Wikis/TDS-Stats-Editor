@@ -406,7 +406,7 @@ class CalculatedManager {
                     level.Damage * level.Ammo / (level.Ammo * level.Cooldown + (level.Ammo / level.Burst - 1) * level.BurstCooldown + level.ReloadTime)
             },
             BurnTower: {
-                For: ['Pyromancer', 'Archer'],
+                For: ['Pyromancer'],
                 Requires: ['Damage', 'Cooldown', 'BurnDamage', 'TickRate'],
                 Value: (level) => 
                     (level.Damage / level.Cooldown) + (level.BurnDamage / level.TickRate)
@@ -762,6 +762,52 @@ class CalculatedManager {
             },
         },
 
+        BurnDPS: {
+            Default: {
+                For: ['Archer'],
+                Value: (level) => {
+                    this.unitManager.load();
+                    
+                    let arrowName;
+                    if (level.Level >= 5) {
+                        arrowName = 'Flame Arrow 5';
+                    } else if (level.Level >= 4) {
+                        arrowName = 'Flame Arrow 4';
+                    } else if (level.Level >= 3) {
+                        arrowName = 'Flame Arrow 3';
+                    } else {
+                        return 0;
+                    }
+                    
+                    if (!this.unitManager.hasUnit(arrowName)) return 0;
+                    
+                    const arrow = this.unitManager.unitData[arrowName];
+                    return arrow.attributes.BurnDamage / arrow.attributes.TickRate;
+                },
+            },
+        },
+        
+        ExplosionDPS: {
+            Default: {
+                For: ['Archer'],
+                Value: (level) => {
+                    this.unitManager.load();
+                    
+                    if (level.Level < 5) {
+                        return 0;
+                    }
+                    
+                    const arrowName = 'Explosive Arrow 5';
+                    if (!this.unitManager.hasUnit(arrowName)) return 0;
+                    
+                    const arrow = this.unitManager.unitData[arrowName];
+                    if (!arrow || !arrow.attributes || !arrow.attributes.ExplosionDamage) return 0;
+                    
+                    return arrow.attributes.ExplosionDamage / level.Cooldown;
+                },
+            },
+        },     
+
         "BleedDamageTick (100HP)": {
         Default: {
         For: ['Slasher'],
@@ -1064,6 +1110,8 @@ class CalculatedManager {
         this.#add('LaserTime', skinData);
         this.#add('MissileDPS', skinData);
         this.#add('DPS', skinData);
+        this.#add('BurnDPS', skinData);
+        this.#add('ExplosionDPS', skinData);
         this.#add('TotalDPS', skinData);
         this.#add('ClusterDPS', skinData);
         this.#add('CallToArmsDPS', skinData);

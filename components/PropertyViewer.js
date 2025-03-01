@@ -115,6 +115,13 @@ export default class PropertyViewer {
         return activeSkin.tower.name === 'DJ Booth';
     }
 
+    isArcherTower() {
+        const activeSkin = this.viewer.getActiveSkin();
+        if (!activeSkin) return false;
+        
+        return activeSkin.tower.name === 'Archer';
+    }
+
     getProperties() {
         const levelData = this.viewer.getActiveSkin().levels;
         return [...levelData.attributes, ...levelData.complexAttributes];
@@ -218,6 +225,10 @@ export default class PropertyViewer {
         if (this.isDJTower() && (property === 'Damage' || property === 'Cooldown')) {
             return true;
         }
+
+        if (this.isArcherTower() && (property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
+            return true;
+        }
         
         return this.hidden.includes(property);
     }
@@ -252,6 +263,10 @@ export default class PropertyViewer {
         }
 
         if (this.isDJTower() && (property === 'Damage' || property === 'Cooldown')) {
+            return true;
+        }
+
+        if (this.isArcherTower() && (property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
             return true;
         }
         
