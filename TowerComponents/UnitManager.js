@@ -187,6 +187,20 @@ const register = {
             'Shock Arrow 5',
             'Explosive Arrow 5',
         ],
+    },
+
+    "Elf Camp": {
+        Default: [
+            'Elf 0',
+            'Elf 1',
+            'Snowball Elf',
+            'Bomber Elf',
+            'Cannoneer Elf',
+            'Guardian Elf',
+            'Gunner Elf',
+            'Gift Bomber',
+            'Ripped Elf',
+        ],
     }
 };
 

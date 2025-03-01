@@ -122,6 +122,13 @@ export default class PropertyViewer {
         return activeSkin.tower.name === 'Archer';
     }
 
+    isElfCampTower() {
+        const activeSkin = this.viewer.getActiveSkin();
+        if (!activeSkin) return false;
+        
+        return activeSkin.tower.name === 'Elf Camp';
+    }
+
     getProperties() {
         const levelData = this.viewer.getActiveSkin().levels;
         return [...levelData.attributes, ...levelData.complexAttributes];
@@ -210,7 +217,7 @@ export default class PropertyViewer {
             return true;
         }
         
-        if ((this.isMilitaryBaseTower() || this.isMechaBaseTower()) && (property === 'Damage' || property === 'Cooldown' || property === 'Range' || property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
+        if ((this.isMilitaryBaseTower() || this.isMechaBaseTower() || this.isElfCampTower()) && (property === 'Damage' || property === 'Cooldown' || property === 'Range' || property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
             return true;
         }
         
@@ -247,7 +254,7 @@ export default class PropertyViewer {
         }
         
         // Don't show specific properties if the tower is Mili base
-        if ((this.isMilitaryBaseTower() || this.isMechaBaseTower()) && (property === 'Damage' || property === 'Cooldown' || property === 'Range' || property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
+        if ((this.isMilitaryBaseTower() || this.isMechaBaseTower() || this.isElfCampTower()) && (property === 'Damage' || property === 'Cooldown' || property === 'Range' || property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
             this.hide(property);
             return;
         }

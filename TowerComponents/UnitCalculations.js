@@ -98,13 +98,15 @@ class UnitCalculations {
                     return baseDPS + missileDPS;
                 },
             },
+
             Burst: {
-                For: ['Rifleman1', 'Rifleman2', 'Rifleman3'],
-                Requires: ['Damage', 'Cooldown', 'Burst', 'BurstCooldown', 'AimTime'],
+                For: ['Rifleman1', 'Rifleman2', 'Rifleman3', 'Gunner Elf'],
+                Requires: ['Damage', 'Cooldown', 'Burst', 'BurstCooldown'],
                 Value: (level) => {
                     const totalDamage = level.Damage * level.Burst;
-                    const totalTime = (level.BurstCooldown + level.AimTime + (level.Burst * level.Cooldown));
-
+                    const aimTime = level.AimTime || 0;
+                    const totalTime = (level.BurstCooldown + aimTime + (level.Burst * level.Cooldown));
+            
                     return totalDamage / totalTime;
                 },
             },
@@ -230,10 +232,10 @@ class UnitCalculations {
             Default: {
                 Requires: ['ExplosionDamage', 'Cooldown'],
                 Value: (level) => {
-                    if (level.ExplosionDamage === 0) {
+                    if (level.Cooldown === 0) {
                         return NaN;
                     }
-                    return level.ExplosionDamage * level.Cooldown;
+                    return level.ExplosionDamage / level.Cooldown;
                 },
             },
         },
