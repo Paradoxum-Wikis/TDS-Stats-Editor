@@ -290,7 +290,8 @@ class UnitCalculations {
 
         TotalDPS: {
             Default: {
-            Value: (level) => {
+                Requires: ['DPS', 'MissileDPS'],
+                Value: (level) => {
                 const unitDPS = level.DPS;
                 const missileDPS = isNaN(level.MissileDPS) ? 0 : level.MissileDPS;
                 return unitDPS + missileDPS;
