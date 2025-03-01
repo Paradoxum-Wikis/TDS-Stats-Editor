@@ -2509,7 +2509,7 @@ export default {
       Upgrades: [
         {
           Stats: { Cooldown: 1, Range: 12 },
-          Image: 0,
+          Image: 15332518871,
           Title: "Trained Juggling",
           Cost: 100,
         },
@@ -2523,7 +2523,7 @@ export default {
             Attributes: { },
             Damage: 4,
           },
-          Image: 0,
+          Image: 15332518503,
           Title: "Cold Humor",
           Cost: 550,
         },
@@ -2538,7 +2538,7 @@ export default {
             Detections: { Hidden: true },
             Damage: 12,
           },
-          Image: 0,
+          Image: 15332518237,
           Title: "Potent Bombs",
           Cost: 2250,
         },
@@ -2555,7 +2555,7 @@ export default {
             Range: 14,
             Damage: 22,
           },
-          Image: 0,
+          Image: 15332519184,
           Title: "Harlequin of Doom",
           Cost: 8500,
         },
@@ -2576,7 +2576,7 @@ export default {
         Abilities: [
           {
             Name: "Equip Bombs",
-            Debounce: 5,
+            Cooldown: 5,
             Price: 0,
             Level: 0,
             Icon: 4594880289,
@@ -4332,7 +4332,7 @@ export default {
               Hidden: true,
               Lead: false,
             },
-            Cooldown: 0.75,
+            Cooldown: 0.8,
             Range: 16.5,
             Damage: 15,
           },
