@@ -512,16 +512,6 @@ class CalculatedManager {
                     return burstDPS + poisonDPS;
                 },
             },
-            WarMachine: {
-                For: ['War Machine'],
-                Value: (level) => {
-                    const dps = level.Damage / level.Cooldown;
-                    const missileDPS =
-                        level.ExplosionDamage / level.MissileTime;
-
-                    return dps + missileDPS;
-                },
-            },
             Shotgun: {
                 For: ['Shotgunner'],
                 Value: (level) => {
@@ -663,6 +653,11 @@ class CalculatedManager {
                     return isFinite(efficiency) ? efficiency : NaN;
                 },
             },
+
+            TotalDPS: {
+                For: ['Commando', 'Sledger', 'War Machine'],
+                Value: (level) => level.NetCost / level.TotalDPS,
+            }
         },
         Coverage: {
             Default: {
@@ -750,6 +745,14 @@ class CalculatedManager {
                 },
             },
         },
+
+        MissileDPS: {
+            Default: {
+            For: ['War Machine'],
+            Value: (level) => level.ExplosionDamage * level.MissileAmount / level.ReloadTime
+            },
+        },
+
         "BleedDamageTick (100HP)": {
         Default: {
         For: ['Slasher'],
@@ -886,6 +889,17 @@ class CalculatedManager {
                     let totalDPS = level.DPS;
                     if (!isNaN(level.AftershockDPS)) {
                         totalDPS += level.AftershockDPS;
+                    }
+                    return totalDPS;
+                },
+            },
+
+            WarMachine: {
+                For: ['War Machine'],
+                Value: (level) => {
+                    let totalDPS = level.DPS;
+                    if (!isNaN(level.MissileDPS)) {
+                        totalDPS += level.MissileDPS;
                     }
                     return totalDPS;
                 },
@@ -1031,6 +1045,7 @@ class CalculatedManager {
         this.#add('RamDPS', skinData);
         this.#add('LaserTime', skinData);
         this.#add('BeeDps', skinData);
+        this.#add('MissileDPS', skinData);
         this.#add('DPS', skinData);
         this.#add('TotalDPS', skinData);
         this.#add('ClusterDPS', skinData);
