@@ -93,6 +93,13 @@ export default class PropertyViewer {
         return activeSkin.tower.name === 'Mercenary Base';
     }
 
+    isSwarmerTower() {
+        const activeSkin = this.viewer.getActiveSkin();
+        if (!activeSkin) return false;
+        
+        return activeSkin.tower.name === 'Swarmer';
+    }
+
     getProperties() {
         const levelData = this.viewer.getActiveSkin().levels;
         return [...levelData.attributes, ...levelData.complexAttributes];
@@ -185,10 +192,10 @@ export default class PropertyViewer {
             return true;
         }
         
-        if (this.isTrapperTower() && property === 'Damage') {
+        if ((this.isTrapperTower() || this.isSwarmerTower()) && property === 'Damage') {
             return true;
         }
-
+        
         if (this.isMercenaryBaseTower() && (property === 'Damage' || property === 'Cooldown' || property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
             return true;
         }
@@ -215,8 +222,8 @@ export default class PropertyViewer {
             return;
         }
         
-        // Don't show damage property if the tower is Trapper
-        if (this.isTrapperTower() && property === 'Damage') {
+        // Don't show damage property
+        if ((this.isTrapperTower() || this.isSwarmerTower()) && property === 'Damage') {
             this.hide(property);
             return;
         }

@@ -4971,7 +4971,7 @@ export default {
             Damage: 1,
           },
           Title: "Aggressive Bees",
-          Cost: 250,
+          Cost: 300,
         },
         {
           Image: 4865025274,
@@ -4993,7 +4993,7 @@ export default {
             Damage: 1,
           },
           Title: "Improve Handling",
-          Cost: 300,
+          Cost: 350,
         },
         {
           Image: 4865025421,
@@ -5042,7 +5042,7 @@ export default {
             Damage: 1,
           },
           Title: "Beehive of Madness",
-          Cost: 1200,
+          Cost: 1400,
         },
         {
           Image: 4865025676,
@@ -5070,9 +5070,9 @@ export default {
       Defaults: {
         Detections: { Flying: false, Hidden: false, Lead: false },
         Attributes: {
+          BeeDamage: 2,
           StingTime: 4,
           ExplosionRadius: 8,
-          BeeDamage: 2,
           TickRate: 1,
         },
         Abilities: [

@@ -293,13 +293,6 @@ class CalculatedManager {
             },
         },
 
-        BeeDps: {
-            Default: {
-                For: ['Swarmer'],
-                Requires: ['StingTime', 'BeeDamage', 'TickRate'],
-                Value: (level) => level.BeeDamage / level.TickRate,
-            },
-        },
         TotalElapsedDamage: {
             Default: {
                 Requires: ['BurnDamage', 'BurnTime', 'TickRate'],
@@ -313,7 +306,7 @@ class CalculatedManager {
                 For: ['Swarmer'],
                 Requires: ['StingTime', 'BeeDamage', 'TickRate'],
                 Value: (level) =>
-                (level.StingTime * level.BeeDamage) / level.TickRate,
+                level.BeeDamage * (level.StingTime / level.TickRate),
             },
             ToxicGunner: {
                 For: ['Toxic Gunner'],
@@ -418,6 +411,7 @@ class CalculatedManager {
                 Value: (level) => 
                     (level.Damage / level.Cooldown) + (level.BurnDamage / level.TickRate)
             },
+
             AmmoTower: {
                 For: ['Gatling Gun'],
                 Requires: [
@@ -465,11 +459,13 @@ class CalculatedManager {
                     return baseDamage + explosionDamage;
                 }
             },
+
             Swarmer: {
-                For: ['Swarmer'],
-                Requires: ['TotalElapsedDamage', 'Cooldown'],
-                Value: (level) => level.TotalElapsedDamage / level.Cooldown,
+                    For: ['Swarmer'],
+                    Requires: ['BeeDamage', 'TickRate'],
+                    Value: (level) => level.BeeDamage / level.TickRate,
             },
+
             Burst: {
                 For: ['Freezer'],
                 Requires: ['Damage', 'Cooldown', 'Burst', 'BurstCooldown' ],
@@ -1044,7 +1040,6 @@ class CalculatedManager {
         this.#add('AggregateUnitDPS', skinData);
         this.#add('RamDPS', skinData);
         this.#add('LaserTime', skinData);
-        this.#add('BeeDps', skinData);
         this.#add('MissileDPS', skinData);
         this.#add('DPS', skinData);
         this.#add('TotalDPS', skinData);
