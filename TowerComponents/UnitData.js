@@ -573,6 +573,9 @@ export default {
     Mark1: {
         Health: 400,
         Damage: 8,
+        ExplosionDamage: 0,
+        MissileAmount: 1,
+        TimeBetweenMissiles: 0,
         Cooldown: 0.2,
         Range: 30,
         Detections: {
@@ -587,11 +590,12 @@ export default {
         Cooldown: 0.2,
         Range: 30,
         ExplosionDamage: 8,
+        MissileAmount: 1,
         TimeBetweenMissiles: 5,
         Detections: {
             Hidden: true,
             Flying: false,
-            Lead: false,
+            Lead: true,
         },
     },
     Mark2: {
@@ -600,11 +604,12 @@ export default {
         Cooldown: 0.15,
         Range: 25,
         ExplosionDamage: 8,
+        MissileAmount: 1,
         TimeBetweenMissiles: 5,
         Detections: {
             Hidden: true,
             Flying: false,
-            Lead: false,
+            Lead: true,
         },
     },
     Mark3: {
@@ -613,11 +618,12 @@ export default {
         Cooldown: 0.08,
         Range: 25,
         ExplosionDamage: 8,
+        MissileAmount: 1,
         TimeBetweenMissiles: 3,
         Detections: {
             Hidden: true,
             Flying: false,
-            Lead: false,
+            Lead: true,
         },
     },
     Mark4: {
@@ -631,7 +637,7 @@ export default {
         Detections: {
             Hidden: true,
             Flying: false,
-            Lead: false,
+            Lead: true,
         },
     },
     Mark5: {
@@ -645,7 +651,7 @@ export default {
         Detections: {
             Hidden: true,
             Flying: false,
-            Lead: false,
+            Lead: true,
         },
     },
 

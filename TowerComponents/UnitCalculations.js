@@ -216,6 +216,18 @@ class UnitCalculations {
             },
         },
 
+        MissileDPS: {
+            Default: {
+                Requires: ['ExplosionDamage', 'Cooldown'],
+                Value: (level) => {
+                    if (level.ExplosionDamage === 0) {
+                        return NaN;
+                    }
+                    return level.ExplosionDamage * level.Cooldown;
+                },
+            },
+        },
+
         CostEfficiency: {
             Pursuit: {
                 For: ['Top 4', 'Top 5', 'Bottom 4', 'Bottom 5'],
@@ -275,6 +287,16 @@ class UnitCalculations {
                 },
         },
         },
+
+        TotalDPS: {
+            Default: {
+            Value: (level) => {
+                const unitDPS = level.DPS;
+                const missileDPS = isNaN(level.MissileDPS) ? 0 : level.MissileDPS;
+                return unitDPS + missileDPS;
+                },
+            },
+        },
     };
 
     /**
@@ -323,7 +345,10 @@ class UnitCalculations {
     
     addCalculate(unitData) {
         this.#add('TotalElapsedDamage', unitData);
+        this.#add('MissileDPS', unitData);
         this.#add('DPS', unitData);
+        this.#add('TotalDPS', unitData);
+
         this.#add('AggregateDPS', unitData);
         this.#add('HealPS', unitData);
         this.#add('RamDPS', unitData);

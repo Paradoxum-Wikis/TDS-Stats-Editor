@@ -56,14 +56,14 @@ class CalculatedManager {
         RamDPS: {
             Default: {
                 Exclude: ['Engineer'],
-                Requires: ['UnitToSend', 'SpawnTime'],
+                Requires: ['UnitToSend', 'Spawnrate'],
                 Value: (level) => {
                     this.unitManager.load();
 
                     if (!this.unitManager.hasUnit(level.UnitToSend)) return 0;
                     const unit = this.unitManager.unitData[level.UnitToSend];
 
-                    return unit.attributes.Health / level.SpawnTime;
+                    return unit.attributes.Health / level.Spawnrate;
                 },
             },
         },
@@ -96,19 +96,19 @@ class CalculatedManager {
         },
         AggregateUnitDPS: {
             Default: {
-                Requires: ['UnitDPS', 'SpawnTime'],
+                Requires: ['UnitDPS', 'Spawnrate'],
                 Value: (level) => {
                     let damage = 0;
                     let remainingTime = 60;
 
-                    if (level.SpawnTime <= 0.1) {
+                    if (level.Spawnrate <= 0.1) {
                         return Infinity;
                     }
 
                     while (remainingTime > 0) {
                         damage += level.UnitDPS * remainingTime;
 
-                        remainingTime -= level.SpawnTime;
+                        remainingTime -= level.Spawnrate;
                     }
 
                     return damage / 60;
@@ -516,7 +516,7 @@ class CalculatedManager {
                 },
             },
             Spawner: {
-                For: ['Engineer', 'Military Base', 'Mecha Base'],
+                For: ['Engineer', 'Military Base'],
                 Value: (level) => {
                     const unitDPS = level.UnitDPS ?? 0;
                     const towerDPS = level.TowerDPS ?? 0;
@@ -747,6 +747,19 @@ class CalculatedManager {
             For: ['War Machine'],
             Value: (level) => level.ExplosionDamage * level.MissileAmount / level.ReloadTime
             },
+            MechaBase: {
+                For: ['Mecha Base'],
+                Value: (level) => {
+                    this.unitManager.load();
+    
+                    const unitName = level.UnitToSend;
+                    if (!this.unitManager.hasUnit(unitName)) return 0;
+    
+                    const unitData = this.unitManager.unitData[unitName];
+    
+                    return unitData.attributes.MissileDPS;
+                },
+            },
         },
 
         "BleedDamageTick (100HP)": {
@@ -898,6 +911,15 @@ class CalculatedManager {
                         totalDPS += level.MissileDPS;
                     }
                     return totalDPS;
+                },
+            },
+
+            MechaBase: {
+                For: ['Mecha Base'],
+                Value: (level) => {
+                    const unitDPS = level.UnitDPS;
+                    const missileDPS = isNaN(level.MissileDPS) ? 0 : level.MissileDPS;
+                    return unitDPS + missileDPS + level.RamDPS;
                 },
             },
         },

@@ -234,7 +234,7 @@ export default class TableInput {
             case 'ComboCooldown':
             case 'RepositionCooldown':
             case 'Knockback Cooldown':
-            case 'SpawnTime':
+            case 'Spawnrate':
             case 'BuildTime':
             case 'Cooldown':
             case 'SlowdownTime':
