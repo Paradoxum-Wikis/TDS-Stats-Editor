@@ -47,7 +47,7 @@ class Viewer {
 
         this.tableView = new ButtonSelection(
             document.querySelector('#table-view')
-        ).setButtons(['Table', 'JSON']);
+        ).setButtons(['Table', 'Wikitable', 'JSON']);
         this.tableView.root.addEventListener('submit', () => this.#loadBody());
 
         this.buttonDeltaButton = new ToggleButton(
@@ -302,6 +302,7 @@ class Viewer {
 
         this.#loadName();
 
+        // Hide all views
         this.#hideJSON();
         this.#hideTable();
         this.#hideLua();
@@ -321,9 +322,15 @@ class Viewer {
                 this.#loadJSON();
                 break;
             case 'Lua':
-            //this.#showLua();
-            //this.#clearLua();
-            //this.#loadLua();
+                // this.#showLua();
+                // this.#clearLua();
+                // this.#loadLua();
+                break;
+            case 'Wikitable':
+                this.#showTable();
+                this.#clearTable();
+                this.#loadWikitableContent();
+                break;
         }
     }
 
@@ -351,8 +358,8 @@ class Viewer {
         ]);
 
         this.towerTable.load(skinData, {
-			ignore: this.propertyViewer.disabled
-		}); // prettier-ignore
+            ignore: this.propertyViewer.disabled
+        }); // prettier-ignore
 
         this.unitTable.load(this.activeUnits);
     }
@@ -361,11 +368,19 @@ class Viewer {
         this.towerTable.root.parentElement.classList.add('d-none');
     }
 
-    #clearJSON() {
-        document.querySelector('#json').innerHTML = '';
+    #clearTable() {
+        this.towerTable.root.innerHTML = '';
     }
-    #clearLua() {
-        document.querySelector('#lua').innerHTML = '';
+
+    #showTable() {
+        this.towerTable.root.parentElement.classList.remove('d-none');
+    }
+
+    #loadWikitableContent() {
+        const message = document.createElement('h2');
+        message.textContent = 'Wikitable coming soon, hopefully.';
+        message.className = 'display-4 text-muted';
+        this.towerTable.root.appendChild(message);
     }
 
     #hideJSON() {
@@ -379,8 +394,9 @@ class Viewer {
     #showJSON() {
         document.querySelector('#json-panel').classList.remove('d-none');
     }
-    #showLua() {
-        document.querySelector('#lua-panel').classList.remove('d-none');
+
+    #clearJSON() {
+        document.querySelector('#json').innerHTML = '';
     }
 
     #loadJSON() {
@@ -388,13 +404,6 @@ class Viewer {
             .querySelector('#json')
             .appendChild(this.jsonViewer.getContainer());
         this.jsonViewer.showJSON(this.tower.json);
-    }
-    #loadLua() {
-        document
-            .querySelector('#lua')
-            .appendChild(this.luaViewer.getContainer());
-
-        this.luaViewer.showJSONAsLua(this.tower.json);
     }
 
     #onCopyJSON() {
