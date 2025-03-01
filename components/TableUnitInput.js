@@ -212,12 +212,22 @@ export default class TableUnitInput {
             case 'NetCost':
             case 'Income':
             case 'CostEfficiency':
+            case 'BaseIncome':
+            case 'IncomePerTower':
+            case 'MaxIncome':
                 return `$${Intl.NumberFormat().format(number)}`;
 
             case 'Defense':
             case 'SlowdownPerHit':
             case 'MaxSlow':
             case 'DefenseMelt':
+            case 'Active':
+            case 'Inactive':
+            case 'BaseSlowdown:':
+            case 'SlowdownPerTower':
+            case 'BaseDefenseMelt':
+            case 'DefenseMeltPerTower':
+            case 'MaxDefenseMelt':
                 return Intl.NumberFormat().format(number) + '%';
             
             case 'Duration':

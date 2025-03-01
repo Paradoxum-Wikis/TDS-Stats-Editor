@@ -152,7 +152,28 @@ const register = {
             'Poison Bomb 4',
             'Confusion Bomb 4',
         ],
-    }
+    },
+
+    'DJ Booth': {
+        Default: [
+        'Purple Track 0',
+        'Purple Track 1',
+        'Purple Track 2',
+        'Purple Track 3',
+        'Purple Track 4',
+        'Purple Track 5',
+        'Green Track 0',
+        'Green Track 1',
+        'Green Track 2',
+        'Green Track 3',
+        'Green Track 4',
+        'Green Track 5',
+        'Red Track 2',
+        'Red Track 3',
+        'Red Track 4',
+        'Red Track 5',
+        ],
+    },
 };
 
 export default class UnitManager {

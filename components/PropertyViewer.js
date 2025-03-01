@@ -35,11 +35,7 @@ export default class PropertyViewer {
             'BleedDamageTick (10000HP)',
             'BleedDamageTick (100000HP)',
             'BleedDamageTick (1000000HP)',
-            'AnimTimes.0.Equip',
-            'AnimTimes.0.Fire',
-            'AnimTimes.4.Equip',
-            'AnimTimes.4.Right',
-            'AnimTimes.4.Left',
+            'AnimTimes',
         ];
         this.hidden = [
             'NoTable',
@@ -110,6 +106,13 @@ export default class PropertyViewer {
         if (!activeSkin) return false;
         
         return activeSkin.tower.name === 'Swarmer';
+    }
+    
+    isDJTower() {
+        const activeSkin = this.viewer.getActiveSkin();
+        if (!activeSkin) return false;
+        
+        return activeSkin.tower.name === 'DJ Booth';
     }
 
     getProperties() {
@@ -211,6 +214,10 @@ export default class PropertyViewer {
         if (this.isMercenaryBaseTower() && (property === 'Damage' || property === 'Cooldown' || property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
             return true;
         }
+
+        if (this.isDJTower() && (property === 'Damage' || property === 'Cooldown')) {
+            return true;
+        }
         
         return this.hidden.includes(property);
     }
@@ -241,6 +248,10 @@ export default class PropertyViewer {
         }
 
         if (this.isMercenaryBaseTower() && (property === 'Damage' || property === 'Cooldown' || property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
+            return true;
+        }
+
+        if (this.isDJTower() && (property === 'Damage' || property === 'Cooldown')) {
             return true;
         }
         
