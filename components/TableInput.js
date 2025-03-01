@@ -216,6 +216,7 @@ export default class TableInput {
             case 'DamageBuff':
             case 'Defense':
             case 'CriticalMultiplier':
+            case 'AftershockMultiplier':
                 return Intl.NumberFormat().format(value) + '%';
     
             case 'BuffLength':
@@ -237,6 +238,7 @@ export default class TableInput {
             case 'BuildTime':
             case 'Cooldown':
             case 'SlowdownTime':
+            case 'AftershockCooldown':
                 return Intl.NumberFormat().format(value) + 's';
         }
     

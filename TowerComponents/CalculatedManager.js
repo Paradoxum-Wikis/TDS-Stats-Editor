@@ -556,7 +556,31 @@ class CalculatedManager {
         CriticalDamage: {
             Default: {
             Requires: ['Damage', 'CriticalMultiplier'],
-            Value: (level) => Math.ceil(level.Damage + level.Damage * (level.CriticalMultiplier / 100))
+            Value: (level) => {
+                if (level.CriticalMultiplier === 0) {
+                    return NaN;
+                }
+                return Math.ceil(level.Damage + level.Damage * (level.CriticalMultiplier / 100));
+                },
+            },
+        },
+
+        AftershockDamage: {
+            Default: {
+                Requires: ['Damage', 'AftershockMultiplier'],
+                Value: (level) => {
+                    if (level.AftershockMultiplier === 0) {
+                        return NaN;
+                    }
+                    return Math.ceil(level.Damage * (level.AftershockMultiplier / 100));
+                }
+            },
+        },
+
+        AftershockDPS: {
+            Default: {
+                Requires: ['AftershockDamage'],
+                Value: (level) => level.AftershockDamage / level.Cooldown
             },
         },
 
@@ -855,7 +879,19 @@ class CalculatedManager {
                     return level.DPS + missile1DPS + missile2DPS;
                 },
             },
+
+            Sledger: {
+                For: ['Sledger'],
+                Value: (level) => {
+                    let totalDPS = level.DPS;
+                    if (!isNaN(level.AftershockDPS)) {
+                        totalDPS += level.AftershockDPS;
+                    }
+                    return totalDPS;
+                },
+            },
         },
+
         Cooldown: {
             Type: 'Override',
 
@@ -971,6 +1007,8 @@ class CalculatedManager {
         this.#add('LaserDPS', skinData);
         this.#add('TotalElapsedDamage', skinData);
         this.#add('CriticalDamage', skinData);
+        this.#add('AftershockDamage', skinData);
+        this.#add('AftershockDPS', skinData);
         this.#add('BleedDamageTick (10HP)', skinData);
         this.#add('BleedCollaspeDamage (10HP)', skinData);
         this.#add('BleedDamageTick (100HP)', skinData);
