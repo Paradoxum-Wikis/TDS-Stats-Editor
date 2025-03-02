@@ -404,9 +404,9 @@ export default class UpgradeViewer {
                 this.#processExtraInput(index, inputText.value);
             }).bind(this)
         );
-        inputText.addEventListener('focusin', () => {
-            inputText.value = '';
-        });
+//        inputText.addEventListener('focusin', () => {
+//            inputText.value = '';
+//        });
         inputText.addEventListener(
             'focusout',
             (() => {

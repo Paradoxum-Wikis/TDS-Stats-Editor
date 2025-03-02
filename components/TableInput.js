@@ -242,6 +242,7 @@ export default class TableInput {
             case 'PoisonLength':
             case 'AimTime':
             case 'EquipTime':
+            case 'BuildDelay':
                 return Intl.NumberFormat().format(value) + 's';
         }
     
