@@ -2737,7 +2737,7 @@ export default {
             Range: 10,
             Damage: 0,
           },
-          Image: "",
+          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/6/66/Defense.png/revision/latest?cb=20230409160856",
           Title: "Riot Control",
           Cost: 10000,
         },
