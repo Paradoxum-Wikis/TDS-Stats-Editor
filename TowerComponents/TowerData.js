@@ -3974,7 +3974,7 @@ export default {
           Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/4/4b/RocketeerLevel1.png/revision/latest?cb=20250130015322",
           Stats: {
             Extras: [],
-            Attributes: { Deadzone: 10, ExplosionRadius: 3.5 },
+            Attributes: { Deadzone: 10, ExplosionRadius: 3 },
             Detections: {
               Flying: false,
               Hidden: false,
@@ -3991,7 +3991,7 @@ export default {
           Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/b/b8/RocketeerLevel2.png/revision/latest?cb=20250130015135",
           Stats: {
             Extras: [],
-            Attributes: { Deadzone: 10, ExplosionRadius: 3.5 },
+            Attributes: { Deadzone: 10, ExplosionRadius: 3 },
             Detections: { Flying: false, Hidden: true, Lead: true },
             Cooldown: 3,
             Range: 25,
@@ -4017,7 +4017,7 @@ export default {
           Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/a/a6/RocketeerLevel4.png/revision/latest?cb=20250130015530",
           Stats: {
             Extras: ["Explosion Radius: 4 → 5", "Deadzone: 12 → 10", "Missle Amount: 1 → 2", "Accuracy: 1 → 0.5"],
-            Attributes: { Deadzone: 10, ExplosionRadius: 4.5 },
+            Attributes: { Deadzone: 10, ExplosionRadius: 5 },
             Detections: { Flying: false, Hidden: true, Lead: true },
             Cooldown: 3,
             Range: 30,
