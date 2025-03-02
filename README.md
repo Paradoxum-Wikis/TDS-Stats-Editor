@@ -4,11 +4,8 @@ A forked version that aims to keep the editor up to date. It includes many quali
 You are free to contribute if you wish to (sorry for the spaghetti code, by the way).
 
 # FAQ
-## How far is it in development currently?
-Very early, an announcement will be made after every tower is up to date. After that, I will be working on features that are moreso "fun" than practical.
-
-## When will this be done?
-I have no ETA as of right now, however, I believe everything will be done before April 2025. Tower statistics should be up to date much earlier of course.
+## Will there be new features?
+Yes, there are a few on the backburner, bug fixes have the highest priority.
 
 ## How long will it be supported?
 I can make no guarantees that it'd be forever updated, although I do expect it to be around for quite a while. Even if it were to shut down, due to the nature of it being open source, anyone can contribute directly to it or make forks of the site. (Like what I did, duhuhu.)
