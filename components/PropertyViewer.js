@@ -36,6 +36,8 @@ export default class PropertyViewer {
             'BleedDamageTick (100000HP)',
             'BleedDamageTick (1000000HP)',
             'AnimTimes',
+            'SummonDebounce',
+            'BookDebounce',
         ];
         this.hidden = [
             'NoTable',
