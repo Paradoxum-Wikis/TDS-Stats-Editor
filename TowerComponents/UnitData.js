@@ -1691,7 +1691,7 @@ export default {
     },
     'Gift Bomber': {
         Detections: { Flying: false, Hidden: true, Lead: true },
-        Health: 100,
+        Health: 140,
         Damage: 0,
         ExplosionDamage: 40,
         Burst: 0,
