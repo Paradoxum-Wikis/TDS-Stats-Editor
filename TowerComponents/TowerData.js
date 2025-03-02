@@ -3258,7 +3258,7 @@ export default {
         {
           Stats: {
             Extras: ["Max Graves: 2 → 4", "Max Hits: 1 → 2", "Max Ammo: 50 → 60", "Build Time: 1.5 → 1" ],
-            Attributes: { SpawnCount: 3, MaxHits: 2, MaxAmmo: 60, BuildTime: 1, MaxGraves: 4 },
+            Attributes: { SpawnCount: 2, MaxHits: 2, MaxAmmo: 60, BuildTime: 1, MaxGraves: 4 },
             Cooldown: 1.2,
             Damage: 12,
           },
@@ -3355,7 +3355,7 @@ export default {
           SummonDelay: 1.33,
           BuildTime: 1.5,
           ExplosionRadius: 0,
-          Buildzone: 8,
+          Buildzone: 6.5,
           BuildDelay: 0.85,
           BookAim: 0.8,
           SummonDebounce: 3,
