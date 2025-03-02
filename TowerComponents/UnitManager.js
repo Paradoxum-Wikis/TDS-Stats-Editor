@@ -88,15 +88,13 @@ const register = {
             'Thorns 5',
         ],
     },
-    'Elementalist (Fire)': {
-        Default: [
+    'Elementalist': {
+        Fire: [
             'Heatwave 2',
             'Heatwave 3',
             'Heatwave 4',
         ],
-    },
-    'Elementalist (Frost)': {
-        Default: [
+        Frost: [
             'Ice Turret 2',
             'Ice Turret 3',
             'Ice Turret 4',

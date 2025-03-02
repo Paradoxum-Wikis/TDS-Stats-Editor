@@ -350,15 +350,17 @@ class CalculatedManager {
                     ? (level.Damage * level.MissileAmount) / level.Cooldown 
                     : level.Damage / level.Cooldown,
             },
-            ElementalistF: {
-                For: ['Elementalist (Fire)'],
+            ElementalistFire: {
+                For: ['Elementalist'],
                 Value: (level) =>
                     level.Damage * level.Burst / ((level.Burst - 1) * level.Cooldown + level.BurstCooldown) + level.BurnDamage / level.TickRate,
+                Subtype: (skinData) => skinData.name.includes('Fire') || !skinData.name.includes('Frost'),
             },
             ElementalistFrost: {
-                For: ['Elementalist (Frost)'],
+                For: ['Elementalist'],
                 Value: (level) =>
-                    level.Damage * level.Burst / ((level.Burst - 1) * level.Cooldown + level.BurstCooldown)
+                    level.Damage * level.Burst / ((level.Burst - 1) * level.Cooldown + level.BurstCooldown),
+                Subtype: (skinData) => skinData.name.includes('Frost'),
             },
             Ace: {
                 For: ['Ace Pilot'],
@@ -1036,9 +1038,17 @@ class CalculatedManager {
 
     getValue(calculatedField, skinData) {
         for (let [_, value] of Object.entries(calculatedField)) {
-            if (value?.For?.includes(skinData.tower.name)) return value;
+            if (value?.For?.includes(skinData.tower.name)) {
+                // checks subtypes
+                if (value.Subtype && value.Subtype(skinData)) {
+                    return value;
+                }
+                else if (!value.Subtype) {
+                    return value;
+                }
+            }
         }
-
+    
         return calculatedField.Default;
     }
 

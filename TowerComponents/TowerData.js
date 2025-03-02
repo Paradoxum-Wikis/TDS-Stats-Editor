@@ -5605,8 +5605,8 @@ export default {
       },
     },
   },
-  'Elementalist (Fire)': {
-    Default: {
+  Elementalist: {
+    Fire: {
       Upgrades: [
         {
           Image: 136223791844063,
@@ -5687,89 +5687,86 @@ export default {
         ],
       },
     },
-  },
-  'Elementalist (Frost)': {
-      Default: {
-        Upgrades: [
-          {
-            Image: 136223791844063,
-            Stats: {
-              Attributes: {},
-              Extras: [ "Slowdown per Hit: 5% → 7.5%" ],
-              Range: 15,
-              BurnDamage: 8,
-              Damage: 5,
-              Burst: 4,
-              SlowdownPerHit: 7.5,
-            },
-            Title: "Elemental Armory",
-            Cost: 1500,
+    Frost: {
+      Upgrades: [
+        {
+          Image: 136223791844063,
+          Stats: {
+            Attributes: {},
+            Extras: [ "Slowdown per Hit: 5% → 7.5%" ],
+            Range: 15,
+            Damage: 5,
+            Burst: 4,
+            SlowdownPerHit: 7.5,
           },
-          {
-            Image: 124219033045691,
-            Stats: {
-              Attributes: { Hidden: true },
-              Extras: [ "Max Slow: 45% → 50%" ],
-              Damage: 10,
-              Range: 17,
-              MaxSlow: 50,
-            },
-            Title: "Experimental Tech",
-            Cost: 4000,
+          Title: "Elemental Armory",
+          Cost: 1500,
+        },
+        {
+          Image: 124219033045691,
+          Stats: {
+            Attributes: { Hidden: true },
+            Extras: [ "Max Slow: 45% → 50%" ],
+            Damage: 10,
+            Range: 17,
+            MaxSlow: 50,
           },
-          {
-            Image: 77890912829468,
-            Stats: {
-              Attributes: {},
-              Extras: [ "Slowdown per Hit: 7.5% → 10%" ],
-              Damage: 13,
-              SlowdownPerHit: 10,
-              Burst: 5,
-              BurstCooldown: 0.5,
-              TickRate: 0.25,
-            },
-            Title: "Improved Exhaust Systems",
-            Cost: 8000,
+          Title: "Experimental Tech",
+          Cost: 4000,
+        },
+        {
+          Image: 77890912829468,
+          Stats: {
+            Attributes: {},
+            Extras: [ "Slowdown per Hit: 7.5% → 10%" ],
+            Damage: 13,
+            SlowdownPerHit: 10,
+            Burst: 5,
+            BurstCooldown: 0.5,
+            TickRate: 0.25,
           },
+          Title: "Improved Exhaust Systems",
+          Cost: 8000,
+        },
+        {
+          Image: 90889171304008,
+          Stats: {
+            Attributes: {},
+            Extras: [ "Slowdown per Hit: 10% → 12.5%", "Max Slow: 50% → 60%" ],
+            Cooldown: 0.125,
+            Range: 17,
+            Damage: 18,
+            Burst: 7,
+            BurstCooldown: 0.4,
+            SlowdownPerHit: 12.5,
+            MaxSlow: 60,
+          },
+          Title: "Frost Fire Specialist",
+          Cost: 15000,
+        },
+      ],
+      Defaults: {
+        Detections: { Flying: false, Hidden: false, Lead: false },
+        Range: 12,
+        Price: 2000,
+        Cooldown: 0.2,
+        Damage: 3,
+        Burst: 3,
+        BurstCooldown: 0.6,
+        TickRate: 0.5,
+        SlowdownPerHit: 5,
+        MaxSlow: 45,
+        Limit: 5,
+        Abilities: [
           {
-            Image: 90889171304008,
-            Stats: {
-              Attributes: {},
-              Extras: [ "Slowdown per Hit: 10% → 12.5%", "Max Slow: 50% → 60%" ],
-              Cooldown: 0.125,
-              Range: 17,
-              Damage: 18,
-              Burst: 7,
-              BurstCooldown: 0.4,
-              SlowdownPerHit: 12.5,
-              MaxSlow: 60,
-            },
-            Title: "Frost Fire Specialist",
-            Cost: 15000,
+            Name: "Ice Turret",
+            Level: 2,
+            Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/2/24/Ice_TurretElementalistAbility.png/revision/latest?cb=20241217163246",
+            Cooldown: 50,
           },
         ],
-        Defaults: {
-          Detections: { Flying: false, Hidden: false, Lead: false },
-          Range: 12,
-          Price: 2000,
-          Cooldown: 0.2,
-          Damage: 3,
-          Burst: 3,
-          BurstCooldown: 0.6,
-          TickRate: 0.5,
-          SlowdownPerHit: 5,
-          MaxSlow: 45,
-          Limit: 5,
-          Abilities: [
-            {
-              Name: "Ice Turret",
-              Level: 2,
-              Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/2/24/Ice_TurretElementalistAbility.png/revision/latest?cb=20241217163246",
-              Cooldown: 50,
-            },
-          ],
-        },
       },
+    },
   },
   Warden: {
     Default: {
