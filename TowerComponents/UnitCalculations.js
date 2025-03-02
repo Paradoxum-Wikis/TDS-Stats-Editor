@@ -2,6 +2,16 @@ import Unit from './Unit.js';
 import TowerData from './TowerData.js';
 import UpgradeViewer from '../components/UpgradeViewer.js';
 
+// probably will rework most of these "dynamic" calculations
+let storedNetCosts = {
+    base: TowerData.Pursuit.Default.Defaults.Price + 
+          TowerData.Pursuit.Default.Upgrades.slice(0, 3).reduce((sum, upgrade) => sum + upgrade.Cost, 0),
+    'Top 4': 0,
+    'Top 5': 0,
+    'Bottom 4': 0,
+    'Bottom 5': 0,
+};
+
 class UnitCalculations {
     constructor(upgradeViewer) {
         this.upgradeViewer = upgradeViewer;
@@ -217,13 +227,37 @@ class UnitCalculations {
                         return pursuitNetCost + TowerData.Pursuit.Default.Upgrades.reduce((sum, upgrade) => sum + upgrade.Cost, 0);
                     }
 
-                    const levelNum = parseInt(level.Name.split(' ')[1]) - 1; // Adjust for 0-based indexing
+                    const levelNum = parseInt(level.Name.split(' ')[1]) - 1;
                     
                     for (let i = 0; i < levelNum && i < TowerData.Pursuit.Default.Upgrades.length; i++) {
                         pursuitNetCost += TowerData.Pursuit.Default.Upgrades[i].Cost;
                     }
                     
-                    return pursuitNetCost + level.Cost;
+                    switch (level.Name) {
+                      case 'Top 4': {
+                        storedNetCosts['Top 4'] = storedNetCosts.base + level.Cost;
+                        return storedNetCosts['Top 4'];
+                      }
+                
+                      case 'Top 5': {
+                        storedNetCosts['Top 5'] = storedNetCosts['Top 4'] + level.Cost;
+                        return storedNetCosts['Top 5'];
+                      }
+                
+                      case 'Bottom 4': {
+                        storedNetCosts['Bottom 4'] = storedNetCosts.base + level.Cost;
+                        return storedNetCosts['Bottom 4'];
+                      }
+                
+                      case 'Bottom 5': {
+                        storedNetCosts['Bottom 5'] = storedNetCosts['Bottom 4'] + level.Cost;
+                        return storedNetCosts['Bottom 5'];
+                      }
+                
+                      default: {
+                        return storedNetCosts.base + level.Cost;
+                      }
+                    }
                 },
             },
         },
@@ -238,6 +272,10 @@ class UnitCalculations {
                     return level.ExplosionDamage / level.TimeBetweenMissiles;
                 },
             },
+            WarMachineSentry: {
+                For: ['War Machine Sentry'],
+                Value: (level) => level.ExplosionDamage * level.MissileAmount / level.BurstCooldown,
+            }
         },
 
         CostEfficiency: {
