@@ -79,7 +79,7 @@ class UnitCalculations {
             },
 
             Rocket: {
-                For: ['War Machine Sentry', 'Tank', 'Railgun Tank'],
+                For: ['War Machine Sentry'],
                 Requires: ['Damage', 'Cooldown'],
                 Value: (unit) => {
                     const damage = unit?.Damage ?? 0;
@@ -235,7 +235,7 @@ class UnitCalculations {
                     if (level.Cooldown === 0) {
                         return NaN;
                     }
-                    return level.ExplosionDamage / level.Cooldown;
+                    return level.ExplosionDamage / level.TimeBetweenMissiles;
                 },
             },
         },
