@@ -30,7 +30,7 @@ export default {
         Attributes: {},
     },
     'Giant Skeleton': {
-        Health: 6000,
+        Health: 600,
         Speed: 2.4,
         Range: 2,
         Cooldown: 0,
