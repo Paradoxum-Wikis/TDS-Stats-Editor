@@ -158,13 +158,7 @@ export default class BoostPanel {
     }
 
     #formatNumber(value) {
-        if (+value < 1) {
-            return +(+value).toFixed(3);
-        }
-        if (+value < 10) {
-            return +(+value).toFixed(3);
-        }
-        return +(+value).toFixed(2);
+        return (Math.ceil(+value * 100) / 100).toFixed(2);
     }
 
     #formatPercent(value) {

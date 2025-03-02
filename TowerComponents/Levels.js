@@ -111,7 +111,7 @@ class Levels {
 
         switch (typeof cell) {
             case 'number':
-                return Number.parseFloat(cell.toFixed(2)).toString();
+                return (Math.ceil(cell * 100) / 100).toFixed(2);
             default:
                 return cell;
         }
