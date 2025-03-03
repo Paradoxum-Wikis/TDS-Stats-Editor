@@ -1956,7 +1956,7 @@ export default {
           Cost: 3500,
         },
         {
-          Image: 15686412306,
+          Image: 'https://static.wikia.nocookie.net/0091553a-cf86-42a1-94e3-730515d3fca8',
           Stats: {
             Extras: [
               "🧊Freeze Time: 0.75 → 1.25",
