@@ -1801,7 +1801,7 @@ export default {
     Default: {
       Upgrades: [
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/d/dd/Freezer_Upgrade_1.png/revision/latest?cb=20231221115311",
+          Image: 15686418975,
           Stats: {
             Extras: ["Max Slowdown: 50% → 60%", "Slowdown per Hit: 10% → 15%"],
             Attributes: { 
@@ -1819,7 +1819,7 @@ export default {
           Cost: 225,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/8/8b/Freezer_Upgrade_2.png/revision/latest?cb=20231221115243",
+          Image: 15686418835,
           Stats: {
             Extras: ["Slowdown per Hit: 15% → 20%", "Freeze Time: 0s → 2s"],
             Attributes: {
@@ -1837,7 +1837,7 @@ export default {
           Cost: 650,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/0/06/Freezer_Upgrade_3.png/revision/latest?cb=20231221115338",
+          Image: 15686418748,
           Stats: {
             Extras: [
               "Max Slowdown: 60% → 75%", "Slowdown per Hit: 20% → 25%", "Defense Melt: 0% → 10%", "Burst: 1 → 4", "Burst Cooldown: 1s → 0.75s",
@@ -1863,7 +1863,7 @@ export default {
           Cost: 2000,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/9/9f/Freezer_Upgrade_4.png/revision/latest?cb=20231221115206",
+          Image: 15686418571,
           Stats: {
             Extras: [
               "Frost Grenade",
@@ -5443,7 +5443,7 @@ export default {
           Cost: 450,
         },
         {
-          Image: 15686418571,
+          Image: 15686418748,
           Stats: {
             Extras: ["Freeze Time: 0 → 2", "Explosion Radius: 2 → 4", "Max Hits: 1 → 4"],
             Attributes: { ExplosionRadius: 4, FreezeTime: 2, SlowdownPerHit: 30, SlowdownTime: 4, MaxHits: 4 },
