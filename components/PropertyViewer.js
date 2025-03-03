@@ -325,6 +325,8 @@ export default class PropertyViewer {
     }
 
     createButtons(attributes) {
+        // this resets disabled properties on switch
+        this.disabled = [];
         this.root.innerHTML = '';
 
         attributes.forEach((attributeName) => {
