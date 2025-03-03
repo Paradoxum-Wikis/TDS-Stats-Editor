@@ -77,7 +77,7 @@ export default {
     Default: {
       Upgrades: [
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/a/ad/AcePilotLevel1.png",
+          Image: 17847640091,
           Stats: {
             Extras: [],
             Attributes: {
@@ -98,7 +98,7 @@ export default {
           Cost: 300,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/2/27/AcePilotLevel2.png/revision/latest?cb=20240827164048",
+          Image: 17847639896,
           Stats: {
             Extras: ["Bomb Dropping", "Figure8"],
             Attributes: {
@@ -119,7 +119,7 @@ export default {
           Cost: 350,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/5/52/AcePilotLevel3.png/revision/latest?cb=20240827162628",
+          Image: 17847640366,
           Stats: {
             Extras: ["Upgraded Bombs"],
             Attributes: {
@@ -140,7 +140,7 @@ export default {
           Cost: 1500,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/5/52/AcePilotLevel3.png/revision/latest?cb=20240827162628",
+          Image: 17847640366,
           Stats: {
             Extras: ["Nearby towers get Hidden Detection", "Upgraded Bombs"],
             Attributes: {
@@ -161,7 +161,7 @@ export default {
           Cost: 3500,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/b/bb/AcePilotLevel5.png/revision/latest?cb=20240827162702",
+          Image: 17847640211,
           Stats: {
             Extras: ["Speed increased by 35%", "Upgraded Bombs"],
             Attributes: {
@@ -1916,7 +1916,7 @@ export default {
     Default: {
       Upgrades: [
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/a/a5/Frost_Blaster_Upgrade_1_New.png/revision/latest?cb=20231221115540",
+          Image: 15686412605,
           Stats: {
             Extras: [],
             Detections: { Flying: false, Hidden: false, Lead: true },
@@ -1930,7 +1930,7 @@ export default {
           Cost: 300,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/b/bc/Frost_Blaster_Upgrade_2_New.png/revision/latest?cb=20231221115610",
+          Image: 15686412501,
           Stats: {
             Extras: ["Max Hits: 3 → 4"],
             Attributes: { FreezeTime: 0.5, MaxHits: 4, DefenseMelt: 10, ProjectileSpeed: 60, },
@@ -1943,7 +1943,7 @@ export default {
           Cost: 950,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/8/8a/Frost_Blaster_Upgrade_3_New.png/revision/latest?cb=20231221115658",
+          Image: 15686412400,
           Stats: {
             Extras: ["🧊Freeze Time: 0.5 → 0.75", "Max Hits: 4 → 5"],
             Attributes: { FreezeTime: 0.75, MaxHits: 5, ProjectileSpeed: 60, },
@@ -1956,7 +1956,7 @@ export default {
           Cost: 3500,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/0/0d/Frost_Blaster_Upgrade_4_New.png/revision/latest?cb=20231221115734",
+          Image: 15686412306,
           Stats: {
             Extras: [
               "🧊Freeze Time: 0.75 → 1.25",
@@ -2977,7 +2977,7 @@ export default {
     Default: {
       Upgrades: [
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/2/29/MinigunnerUpgradeLevel1.png/revision/latest?cb=20231028082050",
+          Image: 15184753790,
           Stats: {
             Extras: ["Faster Rev Time (1.4)"],
             Attributes: { RevTime: 1.25 },
@@ -2994,7 +2994,7 @@ export default {
           Cost: 950,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/c/c4/MinigunnerUpgradeLevel2.png/revision/latest?cb=20231028082106",
+          Image: 15184753514,
           Stats: {
             Extras: ["Faster Rev Time (1.3)"],
             Attributes: { RevTime: 1.25 },
@@ -3012,7 +3012,7 @@ export default {
           Cost: 2250,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/9/92/MinigunnerUpgradeLevel3.png/revision/latest?cb=20231028082119",
+          Image: 15184753289,
           Stats: {
             Extras: [],
             Attributes: { RevTime: 0.75 },
@@ -3025,7 +3025,7 @@ export default {
           Cost: 6250,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/a/ab/MiniLevel4.png/revision/latest?cb=20231028032508",
+          Image: 15184752970,
           Stats: {
             Extras: ["Faster Rev Time (1.2)"],
             Attributes: { RevTime: 0.75 },
@@ -3456,7 +3456,7 @@ export default {
     Default: {
       Upgrades: [
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/9/9b/PursuitLevel1.png/revision/latest?cb=20241127205439",
+          Image: 117186100008439,
           Stats: {
             Extras: [ "Speed: 25 → 16" ],
             Attributes: {
@@ -3469,7 +3469,7 @@ export default {
           Cost: 1200,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/9/9b/PursuitLevel1.png/revision/latest?cb=20241127205439",
+          Image: 117186100008439,
           Stats: {
             Extras: [ "Speed: 16 → 25", "Patrol Range: 14 → 16" ],
             Attributes: {
@@ -3484,7 +3484,7 @@ export default {
           Cost: 1850,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/c/ca/PursuitLevel3.png/revision/latest?cb=20241127205438",
+          Image: 98101516586169,
           Stats: {
             Extras: [ "Ammo: 35 → 75", "Reload Time: 4 → 3.5", "Explosion Damage: 0 → 35", "Explosion Radius: 0 → 3", "Missile Cooldown: 0 → 7", "Missile Count: 0 → 2", "Burst Time: 0 → 0.5", "Missile Speed: 20" ],
             Attributes: {
@@ -3505,7 +3505,7 @@ export default {
           Cost: 4750,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/c/cb/PursuitLevelT4.png/revision/latest?cb=20241127205437",
+          Image: 110652411715254,
           Stats: {
             Extras: [ "Damage: 10 → 12", "Cooldown: 0.2 → 0.1", "Patrol Range: 16 → 18.5", "Ammo: 75 → 150", "Reload Time: 3.5 → 3", "Rev Time: 0 → 1.5", "Missile Cooldown: 7 → 6", "Missile Amount: 2 → 4" ],
             Attributes: {
@@ -3517,7 +3517,7 @@ export default {
           Cost: 13500,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/0/07/PursuitLevelB4.png/revision/latest?cb=20241127205437",
+          Image: 138033956206562,
           Stats: {
             Extras: [ "Patrol Range: 16 → 17.5", "Reload Time: 3.5 → 2.25", "Explosion Damage: 35 → 45", "Missile Cooldown: 7 → 5", "Missile Amount: 2 → 6", "Burst Time: 0.5 → 0.25" ],
             Attributes: {
@@ -3529,7 +3529,7 @@ export default {
           Cost: 13500,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/c/cb/PursuitLevelT4.png/revision/latest?cb=20241127205437",
+          Image: 110652411715254,
           Stats: {
             Extras: [ "Damage: 12 → 18", "Cooldown: 0.1 → 0.85", "Range: 10.5 → 12", "Patrol Range: 18.5 → 21", "Ammo: 150 → 200", "Reload Time: 3 → 2.5", "Explosion Radius: 3 → 4" ],
             Detections: { Flying: true, Hidden: true, Lead: false },
@@ -3542,7 +3542,7 @@ export default {
           Cost: 45000,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/0/07/PursuitLevelB4.png/revision/latest?cb=20241127205437",
+          Image: 138033956206562,
           Stats: {
             Extras: [ "Damage: 10 → 20", "Patrol Range: 17.5 → 19.5", "Explosion Damage: 45 → 60", "Missile Cooldown: 5 → 3.5", "Missile Amount: 6 → 8", "Burst Time: 0.25 → 0.15" ],
             Attributes: {
@@ -3971,7 +3971,7 @@ export default {
     Default: {
       Upgrades: [
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/4/4b/RocketeerLevel1.png/revision/latest?cb=20250130015322",
+          Image: 84475876520565,
           Stats: {
             Extras: [],
             Attributes: { Deadzone: 10, ExplosionRadius: 3 },
@@ -3988,7 +3988,7 @@ export default {
           Cost: 250,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/b/b8/RocketeerLevel2.png/revision/latest?cb=20250130015135",
+          Image: 76900038470572,
           Stats: {
             Extras: [],
             Attributes: { Deadzone: 10, ExplosionRadius: 3 },
@@ -4001,7 +4001,7 @@ export default {
           Cost: 1600,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/5/56/RocketeerLevel3.png/revision/latest?cb=20250130015213",
+          Image: 103303357353083,
           Stats: {
             Extras: ["Explosion Radius: 3 → 4", "Deadzone: 12 → 10"],
             Attributes: { Deadzone: 10, ExplosionRadius: 4 },
@@ -4014,7 +4014,7 @@ export default {
           Cost: 7500,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/a/a6/RocketeerLevel4.png/revision/latest?cb=20250130015530",
+          Image: 133610100963797,
           Stats: {
             Extras: ["Explosion Radius: 4 → 5", "Deadzone: 12 → 10", "Missle Amount: 1 → 2", "Accuracy: 1 → 0.5"],
             Attributes: { Deadzone: 10, ExplosionRadius: 5 },
@@ -5415,7 +5415,7 @@ export default {
     Default: {
       Upgrades: [
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/d/dd/Freezer_Upgrade_1.png/revision/latest?cb=20231221115311",
+          Image: 15686418975,
           Stats: {
             Extras: [ "Max Slowdown: 30% → 40%", "Slowdown per Hit: 15% → 20%" ],
             Attributes: { MaxSlow: 40, ExplosionRadius: 2, FreezeTime: 0, SlowdownPerHit: 20 },
@@ -5431,7 +5431,7 @@ export default {
           Cost: 100,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/8/8b/Freezer_Upgrade_2.png/revision/latest?cb=20231221115243",
+          Image: 15686418835,
           Stats: {
             Extras: [ "Max Slowdown: 40% → 60%", "Slowdown per Hit: 20% → 30%", "Slowdown Time: 3 → 4" ],
             Attributes: { MaxSlow: 60, ExplosionRadius: 2, FreezeTime: 0, SlowdownPerHit: 30, SlowdownTime: 4 },
@@ -5443,7 +5443,7 @@ export default {
           Cost: 450,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/0/06/Freezer_Upgrade_3.png/revision/latest?cb=20231221115338",
+          Image: 15686418571,
           Stats: {
             Extras: ["Freeze Time: 0 → 2", "Explosion Radius: 2 → 4", "Max Hits: 1 → 4"],
             Attributes: { ExplosionRadius: 4, FreezeTime: 2, SlowdownPerHit: 30, SlowdownTime: 4, MaxHits: 4 },
@@ -5470,7 +5470,7 @@ export default {
     Default: {
       Upgrades: [
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/5/54/FireworkTechnicianLevel1.png/revision/latest?cb=20241231081028",
+          Image: 113918271734207,
           Stats: {
             Extras: [ "Detection Buff Time: 15 → 20", "Firework Chance Cap: 50% → 60%", "Burn Damage: 1 → 2" ],
             Attributes: { DetectionBuffLength: 20, FireworkChanceCap: '60%', BurnDamage: 2, TickRate: 0.5, },
@@ -5482,7 +5482,7 @@ export default {
           Cost: 2000,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/2/28/FireworkTechnicianLevel2.png/revision/latest?cb=20241231081029",
+          Image: 102159060729309,
           Stats: {
             Extras: [ "Detection Buff Time: 20 → 25", "Explosion Radius: 1 → 2", "Firework Chance Cap: 60% → 70%", "Burn Tick: 0.5 → 0.25" ],
             Attributes: { DetectionBuffLength: 25, ExplosionRadius: 2, FireworkChanceCap: '70%', TickRate: 0.25, },
@@ -5492,7 +5492,7 @@ export default {
           Cost: 6500,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/4/46/FireworkTechnicianLevel3.png/revision/latest?cb=20241231081026",
+          Image: 76789690706169,
           Stats: {
             Extras: ["Detection Buff Time: 25 → 30", "FireworkChanceCap: 70% → 85%" ],
             Attributes: { DetectionBuffLength: 30, FireworkChanceCap: '85%', BurnDamage: 4, TickRate: 0.25, },
@@ -5502,7 +5502,7 @@ export default {
           Cost: 12000,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/1/16/FireworkTechnicianLevel4.png/revision/latest?cb=20241231081027",
+          Image: 83889465749773,
           Stats: {
             Extras: [ "Detection Buff Time: 30 → 40", "Firework Chance Cap: 85% → 100%", "Burn Damage: 4 → 7", "Explosion Radius: 2 → 3" ],
             Attributes: { DetectionBuffLength: 40, FireworkChanceCap: '100%', BurnDamage: 7, TickRate: 0.25, ExplosionRadius: 3, },
@@ -5527,7 +5527,7 @@ export default {
     Default: {
       Upgrades: [
         {
-          Image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/a/ad/HarvesterUpgrade1.png/revision/latest?cb=20241031032753',
+          Image: 84794687219284,
           Stats: {
             Attributes: {},
             Extras: [],
@@ -5538,7 +5538,7 @@ export default {
           Cost: 650,
         },
         {
-          Image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/7/71/HarvesterUpgrade2.png/revision/latest?cb=20241031032744',
+          Image: 128833693887182,
           Stats: {
             Attributes: {},
             Extras: [],
@@ -5550,7 +5550,7 @@ export default {
           Cost: 2000,
         },
         {
-          Image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/c/c5/HarvesterUpgrade3.png/revision/latest?cb=20241031032737',
+          Image: 140040939003373,
           Stats: {
             Attributes: {},
             Extras: [],
@@ -5560,7 +5560,7 @@ export default {
           Cost: 5000,
         },
         {
-          Image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/8/89/HarvesterUpgrade4.png/revision/latest?cb=20241031032728',
+          Image: 83141210249578,
           Stats: {
             Attributes: {},
             Extras: [],
@@ -5572,7 +5572,7 @@ export default {
           Cost: 8500,
         },
         {
-          Image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/c/c8/HarvesterUpgrade5.png/revision/latest?cb=20241031032711',
+          Image: 117691212648454,
           Stats: {
             Attributes: {},
             Extras: [],
