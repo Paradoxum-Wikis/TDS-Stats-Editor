@@ -151,14 +151,20 @@ export default class BoostPanel {
     #formatInput(value, attribute) {
         switch (attribute) {
             case 'extraCooldown':
-                return this.#formatNumber(value);
+                return `${this.#formatNumber(value)}s`;
             default:
                 return this.#formatPercent(value);
         }
     }
 
     #formatNumber(value) {
-        return (Math.ceil(+value * 100) / 100).toFixed(2);
+        if (+value < 1) {
+            return +(+value).toFixed(3);
+        }
+        if (+value < 10) {
+            return +(+value).toFixed(3);
+        }
+        return +(+value).toFixed(1);
     }
 
     #formatPercent(value) {
