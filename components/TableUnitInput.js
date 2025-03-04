@@ -207,6 +207,8 @@ export default class TableUnitInput {
     }
 
     #formatNumber(number) {
+        const enUSFormatter = Intl.NumberFormat('en-US');
+
         switch (this.attribute) {
             case 'Cost':
             case 'NetCost':
@@ -215,7 +217,7 @@ export default class TableUnitInput {
             case 'BaseIncome':
             case 'IncomePerTower':
             case 'MaxIncome':
-                return `$${Intl.NumberFormat().format(number)}`;
+                return `$${enUSFormatter.format(number)}`;
 
             case 'Defense':
             case 'SlowdownPerHit':
@@ -228,7 +230,7 @@ export default class TableUnitInput {
             case 'BaseDefenseMelt':
             case 'DefenseMeltPerTower':
             case 'MaxDefenseMelt':
-                return Intl.NumberFormat().format(number) + '%';
+                return enUSFormatter.format(number) + '%';
             
             case 'Duration':
             case 'MissileCooldown':
@@ -245,10 +247,10 @@ export default class TableUnitInput {
             case 'ConfusionCooldown':
             case 'PoisonLength':
             case 'SlowdownTime':
-                return Intl.NumberFormat().format(number) + 's';
+                return enUSFormatter.format(number) + 's';
         }
         return +(+number).toFixed(3);
-    }    
+    }
 
     flipped = [
         'Cooldown',
