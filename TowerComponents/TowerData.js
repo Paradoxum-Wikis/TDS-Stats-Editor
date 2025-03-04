@@ -1998,7 +1998,6 @@ export default {
           WindDownTime: 2,
           WindUpTime: 0,
           DeadZone: 0,
-          FireTime: 7.5,
         },
         Abilities: [
           {
