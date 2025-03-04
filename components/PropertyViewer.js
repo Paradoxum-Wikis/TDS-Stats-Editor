@@ -9,7 +9,7 @@ export default class PropertyViewer {
         this.buttonClasses = ['btn', 'btn-sm', 'w-100', 'text-white'];
         this.activeButtonClass = 'btn-outline-secondary';
         this.inactiveButtonClass = 'btn-outline-dark';
-        this.disabled = [
+        this.defaultDisabled = [
             'LimitDPS',
             'LimitNetCost',
             'Value',
@@ -39,6 +39,7 @@ export default class PropertyViewer {
             'SummonDebounce',
             'BookDebounce',
         ];
+        this.disabled = [...this.defaultDisabled];
         this.hidden = [
             'NoTable',
             'SideLevel',
@@ -268,15 +269,18 @@ export default class PropertyViewer {
         }
 
         if (this.isMercenaryBaseTower() && (property === 'Damage' || property === 'Cooldown' || property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
-            return true;
+            this.hide(property);
+            return;
         }
 
         if (this.isDJTower() && (property === 'Damage' || property === 'Cooldown')) {
-            return true;
+            this.hide(property);
+            return;
         }
 
         if (this.isArcherTower() && (property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
-            return true;
+            this.hide(property);
+            return;
         }
         
         if (this.isDisabled(property)) {
@@ -292,7 +296,11 @@ export default class PropertyViewer {
 
         const listElement = document.createElement('li');
         const button = document.createElement('button');
-
+        
+        this.buttonClasses.forEach((className) =>
+            button.classList.add(className)
+        );
+        
         const toggleButton = new ToggleButton(button, {
             state: !this.isDisabled(innerText),
             activeClass: this.activeButtonClass,
@@ -306,27 +314,26 @@ export default class PropertyViewer {
                 this.viewer.reload();
             }).bind(this)
         );
-        toggleButton.element.addEventListener('disabled', ((e) => {
-            this.hide(innerText);
-            this.viewer.reload();
-        }).bind(this)); // prettier-ignore
+        
+        toggleButton.element.addEventListener(
+            'disabled', 
+            ((e) => {
+                this.hide(innerText);
+                this.viewer.reload();
+            }).bind(this)
+        );
 
         this.liClasses.forEach((className) =>
             listElement.classList.add(className)
         );
-        this.buttonClasses.forEach((className) =>
-            button.classList.add(className)
-        );
 
         button.innerText = innerText;
-
         listElement.appendChild(button);
         return listElement;
     }
 
     createButtons(attributes) {
-        // this resets disabled properties on switch
-        this.disabled = [];
+        this.disabled = [...this.defaultDisabled];
         this.root.innerHTML = '';
 
         attributes.forEach((attributeName) => {
@@ -336,4 +343,3 @@ export default class PropertyViewer {
             }
         });
     }
-}
