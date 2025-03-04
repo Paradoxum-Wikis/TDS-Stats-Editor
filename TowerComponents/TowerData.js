@@ -544,7 +544,7 @@ export default {
               Hidden: true,
               Lead: false,
             },
-            Cooldown: 0.5,
+            Cooldown: 0.2,
             Range: 13.5,
             Damage: 12,
           },
