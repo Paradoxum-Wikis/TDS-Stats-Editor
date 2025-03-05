@@ -84,7 +84,23 @@ class Viewer {
         // toggle for showing combined json
         this.showCombinedJSON = document.querySelector('#show-combined-json');
         if (this.showCombinedJSON) {
-            this.showCombinedJSON.addEventListener('change', () => {
+            this.showCombinedJSONActive = true; // default to active state
+            
+            // applies active styling immediately
+            this.showCombinedJSON.classList.remove('btn-outline-secondary');
+            this.showCombinedJSON.classList.add('btn-primary');
+            
+            this.showCombinedJSON.addEventListener('click', () => {
+                this.showCombinedJSONActive = !this.showCombinedJSONActive; // toggle state
+                
+                // toggles button appearance
+                if (this.showCombinedJSONActive) {
+                    this.showCombinedJSON.classList.remove('btn-outline-secondary');
+                    this.showCombinedJSON.classList.add('btn-primary');
+                } else {
+                    this.showCombinedJSON.classList.remove('btn-primary');
+                    this.showCombinedJSON.classList.add('btn-outline-secondary');
+                }
                 this.#clearJSON();
                 this.#loadJSON();
             });
@@ -116,7 +132,7 @@ class Viewer {
         this.exportButton.addEventListener(
             'click',
             (() => {
-                if (this.showCombinedJSON && this.showCombinedJSON.checked) {
+                if (this.showCombinedJSON && this.showCombinedJSONActive) {
                     this.exportTowerWithUnits();
                 } else {
                     this.export(JSON.stringify(this.tower.json));
@@ -513,7 +529,7 @@ class Viewer {
     // loads json view
     #loadJSON() {
         document.querySelector('#json').appendChild(this.jsonViewer.getContainer());
-        if (this.showCombinedJSON && this.showCombinedJSON.checked) {
+        if (this.showCombinedJSON && this.showCombinedJSONActive) {
             this.jsonViewer.showJSON(this._getCombinedData());
         } else {
             this.jsonViewer.showJSON(this.tower.json);

@@ -248,18 +248,18 @@
 
                         <!-- Delta Toggle -->
                         <div id="button-delta" class="btn-group me-2">
-                            <button class="btn btn-sm" title="Visualize your changes">Show
+                            <button class="btn btn-sm" title="Visualize your changes.">Show
                                 Deltas</button>
                         </div>
 
                         <!-- Clone Toggle -->
                         <div id="button-clone" class="btn-group me-2">
-                            <button title="Breed your tower" class="btn btn-sm btn-outline-secondary"
+                            <button title="Create your own abomination." class="btn btn-sm btn-outline-secondary"
                                 data-toggle="modal" data-target="#clone-tower">Clone</button>
                         </div>
 
                         <div id="button-discord" class="btn-group me-2">
-                            <button title="About this website" class="btn btn-sm btn-outline-secondary"
+                            <button title="Information about this website." class="btn btn-sm btn-outline-secondary"
                                 data-toggle="modal" data-target="#discord-modal">
                                 About
                             </button>
@@ -491,16 +491,13 @@
 
                             <!-- Export Button -->
                             <button id="json-export" class="btn btn-sm btn-outline-secondary"
-                                title="Saves json as a file. You can also access all your data by typing localStorage.getItem('New') in the f12 console">Export</button>
+                                title="Saves json as a file. You can also access all your data by typing localStorage.getItem('New') in the f12 console.">Export</button>
                         </div>
 
                         <!-- JSON Type Toggle -->
-                        <div class="btn-group me-2">
-                            <div class="btn btn-sm btn-outline-secondary" style="cursor: default">
-                                <input class="form-check-input" type="checkbox" id="show-combined-json" style="margin-right: 0.25em;">
-                                <label class="form-check-label" for="show-combined-json" style="cursor: pointer">Use New Format</label>
-                            </div>
-                        </div>
+                    <div class="btn-group me-2">
+                        <button id="show-combined-json" class="btn btn-sm btn-outline-secondary" title="The new format has support for towers with 2 tables. The legacy format is kept for backwards compatibility.">Use New Format</button>
+                    </div>
                     </div>
                 </div>
 
