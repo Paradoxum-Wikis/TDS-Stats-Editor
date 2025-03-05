@@ -590,8 +590,8 @@ export default {
         Detections: { Flying: false, Hidden: false, Lead: false },
         Attributes: { BurstCooldown: 0.5, ReloadTime: 2.5, Burst: 3, Ammo: 30, MaxHits: 2},
         Abilities: [
-          { Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/9/9d/MissileAbility.png/revision/latest?cb=20241121110046", Level: 3, Name: "Missile", Cooldown: 20 },
-          { Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/9/9d/MissileAbility.png/revision/latest?cb=20241121110046", Level: 4, Name: "Missile", Cooldown: 10 },
+          { Icon: 80456675021529, Level: 3, Name: "Missile", Cooldown: 20 },
+          { Icon: 80456675021529, Level: 4, Name: "Missile", Cooldown: 10 },
         ],
         Price: 2250,
         Range: 12,
