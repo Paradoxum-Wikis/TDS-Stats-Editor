@@ -1,4 +1,4 @@
-import Tower from '../TowerComponents/Tower.js';
+// import Tower from '../TowerComponents/Tower.js';
 import TowerTable from './TowerTable.js';
 import UnitTable from './UnitTable.js';
 import ButtonSelection from './ButtonSelection.js';
@@ -180,7 +180,14 @@ class Viewer {
             const importedData = JSON.parse(json);
             
             // handling combined tower and units data
-            if (importedData.tower && importedData.units) {
+            if (importedData.master && importedData.slave) {
+                this.tower.importJSON(importedData.master);
+                Object.entries(importedData.slave).forEach(([unitName, unitData]) => {
+                    this.unitManager.baseData[unitName] = unitData;
+                });
+                this.unitManager.save();
+            } else if (importedData.tower && importedData.units) {
+                // Handle legacy format
                 this.tower.importJSON(importedData.tower);
                 Object.entries(importedData.units).forEach(([unitName, unitData]) => {
                     this.unitManager.baseData[unitName] = unitData;
@@ -243,22 +250,7 @@ class Viewer {
 
     // exports tower and units together
     exportTowerWithUnits() {
-        if (!this.activeUnits) {
-            this.activeUnits = this.unitManager.populate(
-                this.tower.name,
-                this.getActiveSkin().name
-            );
-        }
-
-        const combinedData = {
-            tower: this.tower.json,
-            units: {}
-        };
-        
-        Object.entries(this.activeUnits).forEach(([unitName, unitData]) => {
-            combinedData.units[unitName] = this.unitManager.baseData[unitName];
-        });
-        
+        const combinedData = this._getCombinedData();
         const filename = `${this.tower.name}-full.json`;
         const json = JSON.stringify(combinedData, null, 2);
         const file = new Blob([json], { type: 'json' });
@@ -315,7 +307,7 @@ class Viewer {
     resetUnitTable() {
         const defaultUnitManager = new UnitManager();
 
-        Object.entries(this.activeUnits).forEach(([unitName, unitData]) => {
+        Object.entries(this.activeUnits).forEach(([unitName, _]) => {
             this.unitManager.baseData[unitName] =
                 defaultUnitManager.baseData[unitName];
             this.unitDeltaManager.baseData[unitName] =
@@ -335,7 +327,7 @@ class Viewer {
 
     // clears unit table changes
     clearUnitTable() {
-        Object.entries(this.activeUnits).forEach(([unitName, unitData]) => {
+        Object.entries(this.activeUnits).forEach(([unitName, _]) => {
             this.unitManager.baseData[unitName] =
                 this.unitDeltaManager.baseData[unitName];
         });
@@ -384,7 +376,7 @@ class Viewer {
         
         const defaultUnitManager = new UnitManager();
         
-        for (const [unitName, unitData] of Object.entries(this.activeUnits)) {
+        for (const [unitName, _] of Object.entries(this.activeUnits)) {
             const deltaData = JSON.stringify(this.unitDeltaManager.baseData[unitName] || {});
             const defaultData = JSON.stringify(defaultUnitManager.baseData[unitName] || {});
             
@@ -520,26 +512,9 @@ class Viewer {
 
     // loads json view
     #loadJSON() {
-        document
-            .querySelector('#json')
-            .appendChild(this.jsonViewer.getContainer());
-        
+        document.querySelector('#json').appendChild(this.jsonViewer.getContainer());
         if (this.showCombinedJSON && this.showCombinedJSON.checked) {
-            this.activeUnits = this.unitManager.populate(
-                this.tower.name,
-                this.getActiveSkin().name
-            );
-            
-            const combinedData = {
-                tower: this.tower.json,
-                units: {}
-            };
-            
-            Object.entries(this.activeUnits).forEach(([unitName, unitData]) => {
-                combinedData.units[unitName] = this.unitManager.baseData[unitName];
-            });
-            
-            this.jsonViewer.showJSON(combinedData);
+            this.jsonViewer.showJSON(this._getCombinedData());
         } else {
             this.jsonViewer.showJSON(this.tower.json);
         }
@@ -547,35 +522,29 @@ class Viewer {
 
     // handles copying json to clipboard
     #onCopyJSON() {
-        let jsonToCopy;
-        
-        if (this.showCombinedJSON && this.showCombinedJSON.checked) {
-            if (!this.activeUnits) {
-                this.activeUnits = this.unitManager.populate(
-                    this.tower.name,
-                    this.getActiveSkin().name
-                );
-            }
-            
-            const combinedData = {
-                tower: this.tower.json,
-                units: {}
-            };
-            
-            Object.entries(this.activeUnits).forEach(([unitName, unitData]) => {
-                combinedData.units[unitName] = this.unitManager.baseData[unitName];
-            });
-            
-            jsonToCopy = JSON.stringify(combinedData);
-        } else {
-            jsonToCopy = JSON.stringify(this.tower.json);
-        }
-        
-        navigator.clipboard.writeText(jsonToCopy);
+        const data = (this.showCombinedJSON && this.showCombinedJSON.checked)
+            ? this._getCombinedData()
+            : this.tower.json;
+        navigator.clipboard.writeText(JSON.stringify(data));
         const alert = new Alert('JSON Copied!', {
             alertStyle: 'alert-success',
         });
         alert.fire();
+    }
+
+    _getCombinedData() {
+        this.activeUnits = this.unitManager.populate(
+            this.tower.name,
+            this.getActiveSkin().name
+        );
+        const combinedData = {
+            master: this.tower.json,
+            slave: {}
+        };
+        Object.entries(this.activeUnits).forEach(([unitName, _]) => {
+            combinedData.slave[unitName] = this.unitManager.baseData[unitName];
+        });
+        return combinedData;
     }
 }
 
