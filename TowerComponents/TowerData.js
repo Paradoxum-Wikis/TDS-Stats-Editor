@@ -191,7 +191,7 @@ export default {
           {
             Name: "Toggle Reverse",
             Level: 0,
-            Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/b/b4/ToggleReverseAbility.png/revision/latest?cb=20240621192919",
+            Icon: 17846960799,
             Cooldown: 10,
           },
         ],
@@ -324,7 +324,7 @@ export default {
           Cost: 350,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/b/bb/BrawlerUpgrade2.png/revision/latest?cb=20240518064009",
+          Image: 17522564142,
           Stats: {
             Extras: [],
             Attributes: {
@@ -346,7 +346,7 @@ export default {
           Cost: 850,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/2/25/BrawlerUpgrade3.png/revision/latest?cb=20240518064013",
+          Image: 17522564023,
           Stats: {
             Extras: [],
             Attributes: {
@@ -368,7 +368,7 @@ export default {
           Cost: 2250,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/4/48/BrawlerUpgrade4.png/revision/latest?cb=20240518064018",
+          Image: 17522564307,
           Stats: {
             Extras: [],
             Attributes: {
@@ -390,7 +390,7 @@ export default {
           Cost: 6000,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/5/57/BrawlerUpgrade5.png/revision/latest?cb=20240518064023",
+          Image: 17522563932,
           Stats: {
             Extras: [],
             Attributes: {
@@ -424,6 +424,14 @@ export default {
           "Knockback Cooldown": 0,
           RepositionCooldown: 20,
         },
+        Abilities: [
+          {
+            Name: "Reposition",
+            Level: 0,
+            Icon: 17408583420,
+            Cooldown: 20,
+          },
+        ],
         Limit: 6,
         Price: 600,
         Range: 6,
@@ -435,8 +443,8 @@ export default {
   Commander: {
     Default: {
       Abilities: [
-        { Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/e/e5/Commander_Upgrade_3.png/revision/latest?cb=20240704134001", Level: 2, Name: "Call to Arms", Cooldown: 30 },
-        { Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/a/a7/SupportCaravanIcon.png/revision/latest?cb=20240517142905", Level: 4, Name: "Support Caravan", Cooldown: 60, Cost: 2000 },
+        { Icon: 4594880289, Level: 2, Name: "Call to Arms", Cooldown: 30 },
+        { Icon: 17512145719 , Level: 4, Name: "Support Caravan", Cooldown: 60, Cost: 2000 },
       ],
       Upgrades: [
         {
@@ -487,7 +495,7 @@ export default {
           Cost: 5500,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/a/a7/SupportCaravanIcon.png/revision/latest?cb=20240517142905",
+          Image: 17512145719,
           Stats: {
             Extras: [
               "Firerate Buff: 17.5% → 20%",
