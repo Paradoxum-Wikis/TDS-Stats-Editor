@@ -169,7 +169,7 @@ class Viewer {
         
         // saving current unit data just in case (i think)
         if (this.activeUnits) {
-            Object.entries(this.activeUnits).forEach(([unitName, unitData]) => {
+            Object.entries(this.activeUnits).forEach(([unitName, _]) => {
                 if (this.unitManager.baseData[unitName]) {
                     oldUnits[unitName] = JSON.parse(JSON.stringify(this.unitManager.baseData[unitName]));
                 }
@@ -359,7 +359,7 @@ class Viewer {
     hasUnitChanges() {
         if (!this.activeUnits) return false;
         
-        for (const [unitName, unitData] of Object.entries(this.activeUnits)) {
+        for (const [unitName, _] of Object.entries(this.activeUnits)) {
             const currentData = JSON.stringify(this.unitManager.baseData[unitName] || {});
             const referenceData = JSON.stringify(this.unitDeltaManager.baseData[unitName] || {});
             
