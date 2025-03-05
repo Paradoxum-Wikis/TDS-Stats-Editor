@@ -219,6 +219,7 @@ export default class TableInput {
             case 'Defense':
             case 'CriticalMultiplier':
             case 'AftershockMultiplier':
+            case 'SpeedMultiplier':
                 return enUSFormatter.format(value) + '%';
     
             case 'BuffLength':
