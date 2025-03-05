@@ -18,17 +18,17 @@ import CloneTowerForm from './CloneTowerForm.js';
 import LuaViewer from './LuaConverter/index.js';
 
 class Viewer {
-    /**
-     * @param {HTMLDivElement} root
-     */
+    // takes a div element to start things up
     constructor(app) {
         this.app = app;
 
+        // setting up managers for units and towers
         this.unitManager = new UnitManager('units');
         this.unitDeltaManager = new UnitManager('unitDeltas');
         this.defaultTowerManager = new TowerManager('default');
         this.deltaTowerManager = new TowerManager('delta');
 
+        // hooking up the property viewer and side panel
         this.propertyViewer = new PropertyViewer(
             this,
             document.getElementById('property-viewer')
@@ -38,9 +38,10 @@ class Viewer {
         this.upgradeViewer = new UpgradeViewer(this);
         this.boostPanel = new BoostPanel(this);
 
-        /** @type {HTMLHeadingElement} */
+        // grabbing the tower name heading
         this.towerNameH1 = document.querySelector('#tower-name');
 
+        // setting up button selections for variants and views
         this.towerVariants = new ButtonSelection(
             document.querySelector('#tower-variants')
         );
@@ -50,18 +51,20 @@ class Viewer {
         ).setButtons(['Table', 'Wikitable', 'JSON']);
         this.tableView.root.addEventListener('submit', () => this.#loadBody());
 
+        // toggle button for delta view
         this.buttonDeltaButton = new ToggleButton(
             document.querySelector('#button-delta button'),
             { state: true }
         );
 
-        this.buttonDeltaButton.element.addEventListener('toggled', (() => {this.reload()}).bind(this)) // prettier-ignore
+        // reloads when toggle changes
+        this.buttonDeltaButton.element.addEventListener('toggled', (() => {this.reload()}).bind(this))
 
-        /** @type {HTMLButtonElement} */
         this.towerViewDropdownButton = document.querySelector(
             '#tower-view-dropdown'
         );
 
+        // setting up tables and viewers
         this.towerTable = new TowerTable(
             document.querySelector('#tower-table'),
             this
@@ -74,9 +77,20 @@ class Viewer {
         this.jsonViewer = new JSONViewer();
         this.luaViewer = new LuaViewer();
 
+        // json copy button setup
         this.jsonCopy = document.querySelector('#json-copy');
         this.jsonCopy.addEventListener('click', this.#onCopyJSON.bind(this));
+        
+        // toggle for showing combined json
+        this.showCombinedJSON = document.querySelector('#show-combined-json');
+        if (this.showCombinedJSON) {
+            this.showCombinedJSON.addEventListener('change', () => {
+                this.#clearJSON();
+                this.#loadJSON();
+            });
+        }
 
+        // import button setup
         this.importButtonOpen = document.querySelector('#json-import');
         this.importButtonOpen.addEventListener(
             'click',
@@ -85,6 +99,7 @@ class Viewer {
             }).bind(this)
         );
 
+        // import submit button
         this.importButtonSubmit = document.querySelector('#json-import-submit');
         this.importButtonSubmit.addEventListener(
             'click',
@@ -96,22 +111,36 @@ class Viewer {
             }).bind(this)
         );
 
+        // export button
         this.exportButton = document.querySelector('#json-export');
         this.exportButton.addEventListener(
             'click',
             (() => {
-                this.export(JSON.stringify(this.tower.json));
+                if (this.showCombinedJSON && this.showCombinedJSON.checked) {
+                    this.exportTowerWithUnits();
+                } else {
+                    this.export(JSON.stringify(this.tower.json));
+                }
             }).bind(this)
         );
+        
+        // export with units button
+        this.exportWithUnitsButton = document.querySelector('#json-export-with-units');
+        if (this.exportWithUnitsButton) {
+            this.exportWithUnitsButton.addEventListener(
+                'click',
+                this.exportTowerWithUnits.bind(this)
+            );
+        }
+
+        // setting up more management stuff
         this.tableManagement = new TableDataManagement(this);
         new AddAttributeForm(this);
         new CloneTowerForm(this);
         this.removeAttributeForm = new RemoveAttributeForm(this);
     }
 
-    /**
-     * @param {Tower} tower
-     */
+    // loads up a tower to show
     load(tower) {
         this.tower = tower;
         this.deltaTower = this.deltaTowerManager.towers[this.tower.name];
@@ -123,6 +152,7 @@ class Viewer {
         this.#loadBody();
     }
 
+    // refreshes everything
     reload() {
         this.unitManager.load();
         this.unitDeltaManager.load();
@@ -130,24 +160,54 @@ class Viewer {
         this.#loadBody();
     }
 
+    // brings in json data
     import(json, enableAlert) {
         enableAlert = enableAlert ?? false;
 
         const oldJSON = JSON.parse(JSON.stringify(this.tower.json));
+        const oldUnits = {};
+        
+        // saving current unit data just in case (i think)
+        if (this.activeUnits) {
+            Object.entries(this.activeUnits).forEach(([unitName, unitData]) => {
+                if (this.unitManager.baseData[unitName]) {
+                    oldUnits[unitName] = JSON.parse(JSON.stringify(this.unitManager.baseData[unitName]));
+                }
+            });
+        }
+        
         try {
-            const towerData = JSON.parse(json);
-            this.tower.importJSON(towerData);
+            const importedData = JSON.parse(json);
+            
+            // handling combined tower and units data
+            if (importedData.tower && importedData.units) {
+                this.tower.importJSON(importedData.tower);
+                Object.entries(importedData.units).forEach(([unitName, unitData]) => {
+                    this.unitManager.baseData[unitName] = unitData;
+                });
+                this.unitManager.save();
+            } else {
+                // just tower data
+                this.tower.importJSON(importedData);
+            }
 
             if (enableAlert) {
                 const alert = new Alert('JSON Imported!', {
                     alertStyle: 'alert-success',
                 });
                 alert.timeBeforeShow = 0.1;
-
                 alert.fire();
             }
         } catch (e) {
+            // oops, something went wrong, let's roll back
             this.tower.importJSON(oldJSON);
+            if (Object.keys(oldUnits).length > 0) {
+                Object.entries(oldUnits).forEach(([unitName, unitData]) => {
+                    this.unitManager.baseData[unitName] = unitData;
+                });
+                this.unitManager.save();
+            }
+            
             const alert = new Alert('Unable to load that.', {
                 alertStyle: 'alert-danger',
             });
@@ -160,15 +220,14 @@ class Viewer {
         this.reload();
     }
 
+    // saves json to a file
     export(json) {
         const filename = `${this.tower.name}-stats.json`;
         const file = new Blob([json], { type: 'json' });
 
         if (window.navigator.msSaveOrOpenBlob)
-            // IE10+
             window.navigator.msSaveOrOpenBlob(file, filename);
         else {
-            // Others
             var a = document.createElement('a'),
                 url = URL.createObjectURL(file);
             a.href = url;
@@ -182,12 +241,53 @@ class Viewer {
         }
     }
 
+    // exports tower and units together
+    exportTowerWithUnits() {
+        if (!this.activeUnits) {
+            this.activeUnits = this.unitManager.populate(
+                this.tower.name,
+                this.getActiveSkin().name
+            );
+        }
+
+        const combinedData = {
+            tower: this.tower.json,
+            units: {}
+        };
+        
+        Object.entries(this.activeUnits).forEach(([unitName, unitData]) => {
+            combinedData.units[unitName] = this.unitManager.baseData[unitName];
+        });
+        
+        const filename = `${this.tower.name}-full.json`;
+        const json = JSON.stringify(combinedData, null, 2);
+        const file = new Blob([json], { type: 'json' });
+
+        if (window.navigator.msSaveOrOpenBlob)
+            window.navigator.msSaveOrOpenBlob(file, filename);
+        else {
+            var a = document.createElement('a'),
+                url = URL.createObjectURL(file);
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function () {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            }, 0);
+        }
+    }
+
+    // applies json changes
     apply(json) {
         const towerData = JSON.parse(json);
         this.deltaTower.importJSON(towerData);
 
         this.reload();
     }
+
+    // updates unit table data
     applyUnitTable() {
         Object.entries(this.activeUnits).forEach(([unitName, unitData]) => {
             this.unitDeltaManager.baseData[unitName] = unitData.data;
@@ -198,6 +298,7 @@ class Viewer {
         this.reload();
     }
 
+    // resets tower to default
     reset() {
         const towerManager = new TowerManager();
         const towerJSON = JSON.stringify(
@@ -209,6 +310,8 @@ class Viewer {
 
         this.reload();
     }
+
+    // resets unit table to default
     resetUnitTable() {
         const defaultUnitManager = new UnitManager();
 
@@ -225,10 +328,12 @@ class Viewer {
         this.reload();
     }
 
+    // gets the current skin being viewed
     getActiveSkin() {
         return this.tower.skins[this.towerVariants.getSelectedName()];
     }
 
+    // clears unit table changes
     clearUnitTable() {
         Object.entries(this.activeUnits).forEach(([unitName, unitData]) => {
             this.unitManager.baseData[unitName] =
@@ -240,12 +345,14 @@ class Viewer {
         this.reload();
     }
 
+    // wipes all unit changes
     clearUnitChanges() {
         localStorage.removeItem(this.unitManager.dataKey);
         localStorage.removeItem(this.unitDeltaManager.dataKey);
         this.reload();
     }
 
+    // adds a new tower
     addNewTower(name, json) {
         this.app.towerManager.addTower(name, json);
         this.deltaTowerManager.addTower(name, json);
@@ -256,6 +363,7 @@ class Viewer {
         this.load(this.defaultTowerManager.towers[name]);
     }
 
+    // checks if units have changes
     hasUnitChanges() {
         if (!this.activeUnits) return false;
         
@@ -270,10 +378,10 @@ class Viewer {
         return false;
     }
 
+    // checks if unit deltas have changes
     hasUnitDeltaChanges() {
         if (!this.activeUnits) return false;
         
-        // temp unit manager to get default data
         const defaultUnitManager = new UnitManager();
         
         for (const [unitName, unitData] of Object.entries(this.activeUnits)) {
@@ -287,11 +395,13 @@ class Viewer {
         return false;
     }
 
+    // sets up the variant buttons
     #setVariantButtons() {
         this.towerVariants.setButtons(this.tower.skinNames);
         this.towerVariants.root.addEventListener('submit', () => this.#loadBody());
     }
 
+    // loads the main content
     #loadBody() {
         this.app.towerManager.saveTower(this.tower);
         this.deltaTowerManager.saveTower(this.deltaTower);
@@ -302,7 +412,6 @@ class Viewer {
 
         this.#loadName();
 
-        // Hide all views
         this.#hideJSON();
         this.#hideTable();
         this.#hideLua();
@@ -334,6 +443,7 @@ class Viewer {
         }
     }
 
+    // updates the tower name display
     #loadName() {
         const towerName = this.tower.name;
         const activeVariant = this.towerVariants.getSelectedName();
@@ -343,6 +453,7 @@ class Viewer {
         this.towerNameH1.innerText = displayedVariant + towerName;
     }
 
+    // loads the table view
     #loadTable() {
         this.activeUnits = this.unitManager.populate(
             this.tower.name,
@@ -359,23 +470,27 @@ class Viewer {
 
         this.towerTable.load(skinData, {
             ignore: this.propertyViewer.disabled
-        }); // prettier-ignore
+        });
 
         this.unitTable.load(this.activeUnits);
     }
 
+    // hides the table
     #hideTable() {
         this.towerTable.root.parentElement.classList.add('d-none');
     }
 
+    // clears table content
     #clearTable() {
         this.towerTable.root.innerHTML = '';
     }
 
+    // shows the table
     #showTable() {
         this.towerTable.root.parentElement.classList.remove('d-none');
     }
 
+    // loads placeholder for wikitable lolololol
     #loadWikitableContent() {
         const message = document.createElement('h2');
         message.textContent = 'Wikitable coming soon, hopefully.';
@@ -383,31 +498,80 @@ class Viewer {
         this.towerTable.root.appendChild(message);
     }
 
+    // hides json panel
     #hideJSON() {
         document.querySelector('#json-panel').classList.add('d-none');
     }
 
+    // hides lua panel
     #hideLua() {
         document.querySelector('#lua-panel').classList.add('d-none');
     }
 
+    // shows json panel
     #showJSON() {
         document.querySelector('#json-panel').classList.remove('d-none');
     }
 
+    // clears json display
     #clearJSON() {
         document.querySelector('#json').innerHTML = '';
     }
 
+    // loads json view
     #loadJSON() {
         document
             .querySelector('#json')
             .appendChild(this.jsonViewer.getContainer());
-        this.jsonViewer.showJSON(this.tower.json);
+        
+        if (this.showCombinedJSON && this.showCombinedJSON.checked) {
+            this.activeUnits = this.unitManager.populate(
+                this.tower.name,
+                this.getActiveSkin().name
+            );
+            
+            const combinedData = {
+                tower: this.tower.json,
+                units: {}
+            };
+            
+            Object.entries(this.activeUnits).forEach(([unitName, unitData]) => {
+                combinedData.units[unitName] = this.unitManager.baseData[unitName];
+            });
+            
+            this.jsonViewer.showJSON(combinedData);
+        } else {
+            this.jsonViewer.showJSON(this.tower.json);
+        }
     }
 
+    // handles copying json to clipboard
     #onCopyJSON() {
-        navigator.clipboard.writeText(JSON.stringify(this.tower.json));
+        let jsonToCopy;
+        
+        if (this.showCombinedJSON && this.showCombinedJSON.checked) {
+            if (!this.activeUnits) {
+                this.activeUnits = this.unitManager.populate(
+                    this.tower.name,
+                    this.getActiveSkin().name
+                );
+            }
+            
+            const combinedData = {
+                tower: this.tower.json,
+                units: {}
+            };
+            
+            Object.entries(this.activeUnits).forEach(([unitName, unitData]) => {
+                combinedData.units[unitName] = this.unitManager.baseData[unitName];
+            });
+            
+            jsonToCopy = JSON.stringify(combinedData);
+        } else {
+            jsonToCopy = JSON.stringify(this.tower.json);
+        }
+        
+        navigator.clipboard.writeText(jsonToCopy);
         const alert = new Alert('JSON Copied!', {
             alertStyle: 'alert-success',
         });
