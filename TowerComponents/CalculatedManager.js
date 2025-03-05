@@ -300,7 +300,7 @@ class CalculatedManager {
             },
             Cryomancer: {
                 For: ['Cryomancer'],
-                Value: (level) => level.DebuffDamage * level.DebuffLength / level.TickRate,
+                Value: (level) => level.DebuffDamage * level.SlowdownTime / level.TickRate,
             },
             Swarmer: {
                 For: ['Swarmer'],
