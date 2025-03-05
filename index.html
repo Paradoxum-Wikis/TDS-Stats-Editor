@@ -258,9 +258,12 @@
                                 data-toggle="modal" data-target="#clone-tower">Clone</button>
                         </div>
 
-                        <a href="https://discord.gg/fBgQzudY3h"  target="_blank">
-                            <img style="width: 42px; margin-left: 5px;" class="zoomup type1" title="Join the Tower Defense Simulator Wiki Discord server!" src="https://static.wikia.nocookie.net/tower-defense-sim/images/4/4c/Discord-Symbol-Blurple.svg">
-                        </a>
+                        <div id="button-discord" class="btn-group me-2">
+                            <button title="About this website" class="btn btn-sm btn-outline-secondary"
+                                data-toggle="modal" data-target="#discord-modal">
+                                About
+                            </button>
+                        </div>
                     </div>
                 </div>
             </header>
@@ -543,7 +546,7 @@
         <div class="modal-dialog modal-xl " role="document">
             <div class="modal-content bg-dark text-white">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="json-import-label">Import Stats</h5>
+                    <h5 class="modal-title" id="json-import-label"><img style="width: 25px; margin-right: 0.25rem; vertical-align: sub;" src="https://static.wikia.nocookie.net/tower-defense-sim/images/8/8f/Book-closed.svg">Import Stats</h5>
                 </div>
                 <div class="modal-body">
                     <form>
@@ -570,7 +573,7 @@
             <div class="modal-content bg-dark text-white">
                 <!-- Model Header-->
                 <div class="modal-header">
-                    <h5 class="modal-title" id="json-import-label">Add Attribute</h5>
+                    <h5 class="modal-title" id="json-import-label"><img style="width: 25px; margin-right: 0.25rem; vertical-align: sub;" src="https://static.wikia.nocookie.net/tower-defense-sim/images/b/b0/Staffs.svg">Add Attribute</h5>
                 </div>
 
                 <!-- Model Body-->
@@ -659,7 +662,7 @@
             <div class="modal-content bg-dark text-white">
                 <!-- Model Header-->
                 <div class="modal-header">
-                    <h5 class="modal-title" id="json-import-label">Remove Attribute</h5>
+                    <h5 class="modal-title" id="json-import-label"><img style="width: 25px; margin-right: 0.25rem; vertical-align: sub;" src="https://static.wikia.nocookie.net/tower-defense-sim/images/b/b0/Staffs.svg">Remove Attribute</h5>
                 </div>
 
                 <!-- Model Body-->
@@ -699,7 +702,7 @@
             <div class="modal-content bg-dark text-white">
                 <!-- Model Header-->
                 <div class="modal-header">
-                    <h5 class="modal-title" id="json-import-label">Clone Tower</h5>
+                    <h5 class="modal-title" id="json-import-label"><img style="width: 25px; margin-right: 0.25rem; vertical-align: sub;" src="https://static.wikia.nocookie.net/tower-defense-sim/images/6/68/Pencil.svg">Clone Tower</h5>
                 </div>
 
                 <!-- Model Body-->
@@ -738,6 +741,40 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button id="clone-submit" type="button" class="btn btn-primary" data-dismiss="modal">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Discord Modal -->
+    <div class="modal fade" id="discord-modal" tabindex="-1" role="dialog" aria-labelledby="discord-modal-label"
+        aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content bg-dark text-white">
+                <!-- Modal Header-->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="discord-modal-label"><img style="width: 25px; margin-right: 0.25rem; vertical-align: sub;" src="https://static.wikia.nocookie.net/tower-defense-sim/images/2/21/About.svg">About Us</h5>
+                </div>
+
+                <!-- Modal Body-->
+                <div class="modal-body text-center">
+                    <p>The Statistics Editor is a website and project owned by the community of Tower Defense Simulator Wiki.
+                    <br/><br/>
+                    The official Tower Defense Simulator Wiki is hosted and owned by <img width="60px" src="https://static.wikia.nocookie.net/6a181c72-e8bf-419b-b4db-18fd56a0eb60" style="vertical-align: baseline;"> and this website has no direct affiliation to it.</p>
+                    
+                    <div class="d-flex align-items-center justify-content-center">
+                        <a href="https://discord.gg/fBgQzudY3h" target="_blank" class="mx-2">
+                            <img style="width: 42px;" class="zoomup type1" title="Join the Tower Defense Simulator Wiki Discord server!" src="https://static.wikia.nocookie.net/tower-defense-sim/images/4/4c/Discord-Symbol-Blurple.svg">
+                        </a>
+                        <a href="https://github.com/t7ru/TDS-Stats-Editor/" target="_blank" class="mx-2">
+                            <img style="width: 42px;" class="zoomup type1" title="Contribute to the website's source code!" src="htmlassets/github-mark-white.svg">
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Modal Footer-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
