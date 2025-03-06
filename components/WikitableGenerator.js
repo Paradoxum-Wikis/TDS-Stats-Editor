@@ -71,9 +71,17 @@ class WikitableGenerator {
             return '';
         }
         
-        const attributes = Object.keys(firstUnit.data).filter(attr => 
+        let attributes = Object.keys(firstUnit.data).filter(attr => 
             !['id', 'uuid', 'type', 'parent', 'hidden'].includes(attr.toLowerCase())
         );
+        
+        // Split Detections into separate columns
+        const detectionsIndex = attributes.indexOf('Detections');
+        if (detectionsIndex !== -1) {
+            // Remove Detections and add individual detection attributes
+            attributes.splice(detectionsIndex, 1);
+            attributes.push('Hidden', 'Flying', 'Lead');
+        }
         
         let wikitable = `<div style="overflow-x: scroll">\n{| class="wikitable sortable" style="margin: 0 auto"\n`; // prettier-ignore
         wikitable += `|+ '''${fullTowerName} Slave'''\n`;
@@ -92,7 +100,15 @@ class WikitableGenerator {
             wikitable += `| ${unitName}`;
             
             attributes.forEach(attr => {
-                const value = unitData.data[attr];
+                let value;
+                
+                // Handle detection attributes separately
+                if (['Hidden', 'Flying', 'Lead'].includes(attr) && unitData.data.Detections) {
+                    value = unitData.data.Detections[attr] || false;
+                } else {
+                    value = unitData.data[attr];
+                }
+                
                 wikitable += ` || ${this.#formatWikitableCell(value, attr)}`;
             });
             
@@ -111,6 +127,10 @@ class WikitableGenerator {
             'LaserDPS': 'Laser DPS',
             'MissileDPS': 'Missile DPS',
             'TotalDPS': 'Total DPS',
+            'RamDPS': 'Ram DPS',
+            'UnitDPS': 'Unit DPS',
+            'ExplosionDPS': 'Explosion DPS',
+            'BurnDPS': 'Burn DPS',
         };
         
         if (acronyms[attribute]) {

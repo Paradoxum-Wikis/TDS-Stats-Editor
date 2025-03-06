@@ -553,7 +553,7 @@ class Viewer {
         }
         
         // add notice at the very end
-        this.currentWikitableContent += `\n<!-- Generated using the TDS Stats Editor (BETA 1.0) on ${new Date().toUTCString()} -->\n`;
+        this.currentWikitableContent += `\n<!-- Generated using the TDS Stats Editor (BETA 1.1) on ${new Date().toUTCString()} -->\n`;
         
         // show the wikitextViewer with syntax highlighting
         this.wikitextViewer.showWikitext(this.currentWikitableContent);
