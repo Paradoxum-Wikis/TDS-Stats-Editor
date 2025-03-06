@@ -199,7 +199,28 @@ const register = {
             'Gift Bomber',
             'Ripped Elf',
         ],
-    }
+    },
+
+    "Mecha Base": {
+        Default: [
+            'Mark1',
+            'Mark1Rocket',
+            'Mark2',
+            'Mark3',
+            'Mark4',
+            'Mark5',
+            ],
+    },
+
+    "Military Base": {
+        Default: [
+            'Humvee',
+            'Humvee 2',
+            'Humvee 3',
+            'Tank',
+            'Railgun Tank',
+            ],
+    },
 };
 
 export default class UnitManager {

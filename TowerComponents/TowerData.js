@@ -2969,7 +2969,7 @@ export default {
         },
       ],
       Defaults: {
-        Attributes: { Spawnrate: 50, UnitToSend: "Humvee", AirstrikeDamage: 0, MissileAmount: 1 },
+        Attributes: { Spawnrate: 50, UnitToSend: "Humvee", AirstrikeDamage: 0, MissileAmount: 1, AirstrikeRadius: 0 },
         Detections: { Flying: false, Hidden: false, Lead: false },
         Abilities: [
           {

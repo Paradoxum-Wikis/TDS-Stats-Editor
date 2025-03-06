@@ -24,8 +24,7 @@ class WikitableGenerator {
                    !['NoTable', 'SideLevel', 'Level'].includes(attr);
         });
         
-        let wikitable = `<div style="overflow-x: scroll;">
-{| class="wikitable sortable" style="margin: 0 auto"\n`; // prettier-ignore
+        let wikitable = `<div style="overflow-x: scroll;">\n{| class="wikitable sortable" style="margin: 0 auto"\n`; // prettier-ignore
         wikitable += `|+ '''${fullTowerName} Master'''\n`;
         
         wikitable += `|-\n`;
@@ -76,12 +75,11 @@ class WikitableGenerator {
             !['id', 'uuid', 'type', 'parent', 'hidden'].includes(attr.toLowerCase())
         );
         
-        let wikitable = `<div style="overflow-x: scroll">
-{| class="wikitable sortable" style="margin: 0 auto"\n`; // prettier-ignore
+        let wikitable = `<div style="overflow-x: scroll">\n{| class="wikitable sortable" style="margin: 0 auto"\n`; // prettier-ignore
         wikitable += `|+ '''${fullTowerName} Slave'''\n`;
         
         wikitable += `|-\n`;
-        wikitable += `! Unit`;
+        wikitable += `! Name`;
         attributes.forEach(attr => {
             wikitable += ` !! ${this.#formatWikitableHeader(attr)}`;
         });
@@ -126,7 +124,7 @@ class WikitableGenerator {
     }
 
     #formatWikitableCell(value, attribute) {
-        // formats the wikitable cell based on the attribute type
+        // formats cell values with appropriate units
         if (value === undefined || value === null) {
             return '';
         }
@@ -147,48 +145,54 @@ class WikitableGenerator {
             }
         }
         
-        switch (attribute) {
-            case 'Cost':
-            case 'NetCost':
-            case 'Income':
-            case 'CostEfficiency':
-            case 'IncomeEfficiency':
-                return `$${this.#formatNumber(value)}`;
+        // currency formatting
+        if ([
+            'Cost', 'NetCost', 'Income', 'CostEfficiency', 'IncomeEfficiency',
+            'LimitNetCost', 'IncomePerSecond', 'TotalIncomePerSecond', 
+            'BaseIncome', 'IncomePerTower', 'MaxIncome'
+        ].includes(attribute)) {
+            return `$${this.#formatNumber(value)}`;
+        }
+        
+        // percentage formatting
+        if ([
+            'Defense', 'SlowdownPerHit', 'MaxSlow', 'RangeBuff', 'DamageBuff', 
+            'FirerateBuff', 'DefenseMelt', 'MaxDefMelt', 'CallToArmsBuff', 
+            'ThornPower', 'CriticalMultiplier', 'AftershockMultiplier', 
+            'SpeedMultiplier', 'Active', 'Inactive', 'BaseSlowdown',
+            'SlowdownPerTower', 'BaseDefenseMelt', 'DefenseMeltPerTower',
+            'MaxDefenseMelt'
+        ].includes(attribute)) {
+            return `${this.#formatNumber(value)}%`;
+        }
+        
+        // time formatting
+        if ([
+            'Cooldown', 'ChargeTime', 'SlowdownTime', 'BurnTime', 'PoisonLength',
+            'BuffLength', 'FreezeTime', 'Duration', 'LaserCooldown', 'MissileCooldown',
+            'BurstCooldown', 'RevTime', 'ReloadTime', 'DetectionBuffLength',
+            'ComboLength', 'ComboCooldown', 'RepositionCooldown', 'Knockback Cooldown',
+            'Spawnrate', 'BuildTime', 'AftershockCooldown', 'AimTime', 'EquipTime',
+            'BuildDelay', 'TimeBetweenMissiles', 'SendTime', 'StunLength',
+            'Lifetime', 'ConfusionTime', 'ConfusionCooldown'
+        ].includes(attribute)) {
+            return `${this.#formatNumber(value)}s`;
+        }
+        
+        // boolean values
+        if ([
+            'Hidden', 'Flying', 'Lead', 'Boss'
+        ].includes(attribute)) {
+            return value ? 'Yes' : 'No';
+        }
                 
-            case 'Damage':
-            case 'Range':
-            case 'DPS':
-                return this.#formatNumber(value);
-                
-            case 'Cooldown':
-            case 'ChargeTime':
-            case 'SlowdownTime':
-            case 'BurnTime':
-            case 'PoisonLength':
-                return `${this.#formatNumber(value)}s`;
-                
-            case 'Defense':
-            case 'SlowdownPerHit':
-            case 'MaxSlow':
-            case 'RangeBuff':
-            case 'DamageBuff':
-            case 'FirerateBuff':
-                return `${this.#formatNumber(value)}%`;
-                
-            case 'Hidden':
-            case 'Flying':
-            case 'Lead':
-            case 'Boss':
-                return value ? 'Yes' : 'No';
-                
-            default:
-                if (typeof value === 'boolean') {
-                    return value ? 'Yes' : 'No';
-                } else if (typeof value === 'number') {
-                    return this.#formatNumber(value);
-                } else {
-                    return value.toString();
-                }
+        // default handling
+        if (typeof value === 'boolean') {
+            return value ? 'Yes' : 'No';
+        } else if (typeof value === 'number') {
+            return this.#formatNumber(value);
+        } else {
+            return value.toString();
         }
     }
 

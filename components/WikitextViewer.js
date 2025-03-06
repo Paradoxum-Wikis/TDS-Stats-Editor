@@ -9,9 +9,6 @@ class WikitextViewer {
         // this creates pre/code elements for syntax highlighting
         this.pre = document.createElement('pre');
         this.pre.className = 'text-white mb-3';
-        this.pre.style.height = '100%';
-        this.pre.style.overflow = 'auto';
-        this.pre.style.flex = '1';
         
         this.code = document.createElement('code');
         this.code.className = 'wikitable-code';
