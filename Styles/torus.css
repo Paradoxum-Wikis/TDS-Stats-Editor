@@ -60,3 +60,68 @@ input {
 .zero-value {
     color: #ff77bb !important; /* Hot pink color */
   }
+
+  .wikitable-code-container {
+    margin-bottom: 1rem;
+}
+
+.wikitable-code {
+    display: block;
+    font-family: monospace;
+    white-space: pre;
+    color: #f8f9fa;
+}
+
+/* Syntax highlighting for wikitable elements */
+.table-delimiter {
+    color: #ff79c6;
+    font-weight: bold;
+}
+
+.table-row {
+    color: #bd93f9;
+}
+
+.table-caption {
+    color: #ff79c6;
+}
+
+.table-caption-text {
+    color: #50fa7b;
+    font-weight: bold;
+}
+
+.table-header {
+    color: #ff79c6;
+    font-weight: bold;
+}
+
+.header-content {
+    color: #8be9fd;
+}
+
+.table-cell-delimiter {
+    color: #ff79c6;
+}
+
+.wiki-bold {
+    color: #ff2c2c;
+}
+
+.wiki-bold-text {
+    color: #50fa7b;
+    font-weight: bold;
+}
+
+.wiki-comment {
+    color: #6272a4;
+    font-style: italic;
+}
+
+.table-header-delimiter {
+    color: #ffcc00;
+}
+
+.wiki-div {
+    color: #90ee90;
+}

@@ -16,6 +16,8 @@ import UnitManager from '../TowerComponents/UnitManager.js';
 import BoostPanel from './BoostPanel.js';
 import CloneTowerForm from './CloneTowerForm.js';
 import LuaViewer from './LuaConverter/index.js';
+import WikitextViewer from './WikitextViewer.js';
+import WikitableGenerator from './WikitableGenerator.js'; // Import the new class
 
 class Viewer {
     // takes a div element to start things up
@@ -154,6 +156,18 @@ class Viewer {
         new AddAttributeForm(this);
         new CloneTowerForm(this);
         this.removeAttributeForm = new RemoveAttributeForm(this);
+
+        // starts wikitable setup
+        this.wikitablePanel = document.querySelector('#wikitable-panel');
+        this.wikitableContent = document.querySelector('#wikitable');
+        this.wikitableCopy = document.querySelector('#wikitable-copy');
+        this.wikitableCopy.addEventListener('click', this.#onCopyWikitable.bind(this));
+        
+        this.wikitableExport = document.querySelector('#wikitable-export');
+        this.wikitableExport.addEventListener('click', this.#exportWikitable.bind(this));
+
+        // Create wikitable viewer instance
+        this.wikitextViewer = new WikitextViewer();
     }
 
     // loads up a tower to show
@@ -203,7 +217,7 @@ class Viewer {
                 });
                 this.unitManager.save();
             } else if (importedData.tower && importedData.units) {
-                // Handle legacy format
+                // legacy format
                 this.tower.importJSON(importedData.tower);
                 Object.entries(importedData.units).forEach(([unitName, unitData]) => {
                     this.unitManager.baseData[unitName] = unitData;
@@ -423,6 +437,7 @@ class Viewer {
         this.#hideJSON();
         this.#hideTable();
         this.#hideLua();
+        this.#hideWikitable(); // Add this line
 
         this.sidePanel.onUpdate();
         this.upgradeViewer.load(this.getActiveSkin());
@@ -432,21 +447,24 @@ class Viewer {
                 this.#loadTable();
                 this.tableManagement.renderButtonOutlines();
                 this.removeAttributeForm.load();
+                document.querySelector('.btn-toolbar.mb-2.mb-md-0.mt-0').classList.remove('d-none');
                 break;
             case 'JSON':
                 this.#showJSON();
                 this.#clearJSON();
                 this.#loadJSON();
+                document.querySelector('.btn-toolbar.mb-2.mb-md-0.mt-0').classList.add('d-none');
                 break;
-            case 'Lua':
-                // this.#showLua();
-                // this.#clearLua();
-                // this.#loadLua();
-                break;
+//            case 'Lua':
+//                this.#showLua();
+//                this.#clearLua();
+//                this.#loadLua();
+//                document.querySelector('.btn-toolbar.mb-2.mb-md-0.mt-0').classList.add('d-none');
+//                break;
             case 'Wikitable':
-                this.#showTable();
-                this.#clearTable();
+                this.#showWikitable();
                 this.#loadWikitableContent();
+                document.querySelector('.btn-toolbar.mb-2.mb-md-0.mt-0').classList.add('d-none');
                 break;
         }
     }
@@ -463,12 +481,21 @@ class Viewer {
 
     // loads the table view
     #loadTable() {
+        // clear old wikitable boxes before a fresh start
+        const existingContainers = this.towerTable.root.parentElement.querySelectorAll('.wikitable-container');
+        existingContainers.forEach(container => container.remove());
+        
         this.activeUnits = this.unitManager.populate(
             this.tower.name,
             this.getActiveSkin().name
         );
 
         this.towerTable.root.parentElement.classList.remove('d-none');
+        
+        // unit table shows up in table view
+        if (this.unitTable && this.unitTable.root) {
+            this.unitTable.root.classList.remove('d-none');
+        }
 
         const skinData = this.getActiveSkin();
         this.propertyViewer.createButtons([
@@ -488,22 +515,48 @@ class Viewer {
         this.towerTable.root.parentElement.classList.add('d-none');
     }
 
-    // clears table content
-    #clearTable() {
-        this.towerTable.root.innerHTML = '';
-    }
-
-    // shows the table
-    #showTable() {
-        this.towerTable.root.parentElement.classList.remove('d-none');
-    }
-
-    // loads placeholder for wikitable lolololol
     #loadWikitableContent() {
-        const message = document.createElement('h2');
-        message.textContent = 'Wikitable coming soon, hopefully.';
-        message.className = 'display-4 text-muted';
-        this.towerTable.root.appendChild(message);
+        // wipe the content first
+        this.wikitableContent.innerHTML = '';
+        
+        // set up a responsive div for the table
+        const responsiveDiv = document.createElement('div');
+        responsiveDiv.className = 'table-responsive';
+        
+        // add the wikitext viewer's container to the responsive div
+        responsiveDiv.appendChild(this.wikitextViewer.getContainer());
+        
+        // attach the responsive div to the wikitable content
+        this.wikitableContent.appendChild(responsiveDiv);
+        
+        // make sure we have loaded the unit data
+        this.activeUnits = this.unitManager.populate(
+            this.tower.name,
+            this.getActiveSkin().name
+        );
+        
+        // create a WikitableGenerator instance
+        this.wikitableGenerator = new WikitableGenerator(
+            this.tower,
+            this.activeUnits,
+            this.propertyViewer,
+            this.towerVariants,
+            this // pass the viewer instance (not broken, i hope)
+        );
+        
+        // generates the wikitable content
+        this.currentWikitableContent = this.wikitableGenerator.generateWikitableContent();
+        
+        // add unit table if units exist
+        if (this.activeUnits && Object.keys(this.activeUnits).length > 0) {
+            this.currentWikitableContent += "\n\n" + this.wikitableGenerator.generateUnitWikitableContent();
+        }
+        
+        // add notice at the very end
+        this.currentWikitableContent += `\n<!-- Generated using the TDS Stats Editor (BETA 1.0) on ${new Date().toUTCString()} -->\n`;
+        
+        // show the wikitextViewer with syntax highlighting
+        this.wikitextViewer.showWikitext(this.currentWikitableContent);
     }
 
     // hides json panel
@@ -561,6 +614,49 @@ class Viewer {
             combinedData.slave[unitName] = this.unitManager.baseData[unitName];
         });
         return combinedData;
+    }
+
+    // hides wikitable panel
+    #hideWikitable() {
+        this.wikitablePanel.classList.add('d-none');
+    }
+
+    // shows wikitable panel
+    #showWikitable() {
+        this.wikitablePanel.classList.remove('d-none');
+    }
+
+    // handles copying wikitable to clipboard
+    #onCopyWikitable() {
+        navigator.clipboard.writeText(this.currentWikitableContent);
+        const alert = new Alert('Wikitable Copied!', {
+            alertStyle: 'alert-success',
+        });
+        alert.fire();
+    }
+
+    // exports wikitable to a file
+    #exportWikitable() {
+        const towerName = this.tower.name;
+        const activeVariant = this.towerVariants.getSelectedName();
+        const displayedVariant = activeVariant === 'Default' ? '' : `${activeVariant}-`;
+        const filename = `${displayedVariant}${towerName}-wikitable.txt`;
+        const file = new Blob([this.currentWikitableContent], { type: 'text/plain' });
+
+        if (window.navigator.msSaveOrOpenBlob) {
+            window.navigator.msSaveOrOpenBlob(file, filename);
+        } else {
+            var a = document.createElement('a'),
+                url = URL.createObjectURL(file);
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function () {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            }, 0);
+        }
     }
 }
 

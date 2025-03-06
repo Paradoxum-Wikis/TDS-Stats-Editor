@@ -505,6 +505,26 @@
                 <div id="json" class="overflow-auto"></div>
             </div>
 
+            <!-- Body Wikitable -->
+            <div id="wikitable-panel" class="d-none d-flex flex-column p-3 pb-0">
+                <!-- Wikitable Header -->
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <!-- Copy Button -->
+                        <div class="btn-group me-2">
+                            <button id="wikitable-copy" class="btn btn-sm btn-outline-secondary">Copy to Clipboard</button>
+                        </div>
+                        <!-- Export Button -->
+                        <div class="btn-group me-2">
+                            <button id="wikitable-export" class="btn btn-sm btn-outline-secondary" title="Saves wikitable code as a file.">Export</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wikitable Body -->
+                <div id="wikitable" class="overflow-auto"></div>
+            </div>
+
             <!-- Body Lua -->
             <div id="lua-panel" class="d-none d-flex flex-column p-3 pb-0">
                 <!-- Lua Header -->
