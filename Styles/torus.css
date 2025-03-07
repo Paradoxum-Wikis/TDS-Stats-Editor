@@ -125,3 +125,55 @@ input {
 .wiki-div {
     color: #90ee90;
 }
+
+.logo-slideshow {
+    position: relative;
+    max-width: 240px;
+    margin: 0 auto;
+}
+
+.slides-container {
+    position: relative;
+    height: auto;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: all 0.5s ease-in-out;
+}
+
+.slide.active {
+    position: relative;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slide-nav {
+    position: absolute;
+    top: 42%;
+    color: white;
+    padding: 8px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.slide-nav:hover {
+    color: #0484AE;
+}
+
+.slide-prev {
+    left: -20px;
+}
+
+.slide-next {
+    right: -20px;
+}
