@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Edit and balance towers for the Roblox game Tower Defense Simulator and export it to the wiki!">
+
+    <meta property="og:title" content="TDS Database Browser">
+    <meta property="og:description" content="Browse and share your custom tower ideas for the Roblox game Tower Defense Simulator!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tds-editor.live/">
+    <meta property="og:image" content="https://tds-editor.live/htmlassets/thumbnail.png?v=2">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="Tower Defense Simulator Database Browser">
+    <meta name="twitter:title" content="TDS Database Browser">
+    <meta name="twitter:description" content="Browse and share your custom tower ideas for the Roblox game Tower Defense Simulator!">
+    <meta name="twitter:image:src" content="https://tds-editor.live/htmlassets/thumbnail.png?v=2">
+    <meta name="theme-color" content="#035D7C">
+
+    <!-- Newer bootstrap version -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha256-PI8n5gCcz9cQqQXm3PEtDuPG8qx9oFsFctPg0S5zb8g=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" integrity="sha256-9kPW/n5nn53j4WMRYAxe9c1rCY96Oogo/MKSVdKzPmI=" crossorigin="anonymous">
+    <link href="../Styles/torus.css" rel="stylesheet">
+    <link href="../Styles/bootstrap.css" rel="stylesheet">
+    <link href="Style.css" rel="stylesheet">
+    <link rel="shortcut icon" href="https://static.wikia.nocookie.net/tower-defense-sim/images/4/4a/Site-favicon.ico">
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha256-3gQJhtmj7YnV1fmtbVcnAV6eI4ws0Tr48bVZCThtCGQ=" crossorigin="anonymous"></script>
+    <script src="TDSWikiFetcher.js"></script>
+    <script src="TDSWikiLoader.js"></script>
+    <script src="TDSWikiUploader.js"></script>
+
+    <title>TDS Database Browser</title>
+</head>
+
+<body class="bg-dark">
+    <!-- header and nav -->
+    <header class="navbar navbar-dark sticky-top bg-darker flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-md-3 col-lg-2 mx-auto px-3 fs-4">
+            <img src="https://static.wikia.nocookie.net/tower-defense-sim/images/4/4a/Site-favicon.ico" alt="TDSW Logo" width="30" style="vertical-align: text-bottom;">
+            TDS Database
+        </a>
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="w-100 d-none d-md-block px-3">
+            <input class="form-control form-control-dark w-100" type="text" placeholder="Search a Tower" aria-label="Search">
+        </div>
+        <div class="navbar-nav">
+            <div class="nav-item text-nowrap">
+                <a class="nav-link px-3 text-light" href="../index.html">Back to Editor</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- main container -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- "sidebar" lmao -->
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-darker sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 fw-bold">
+                        <p class="fs-2">Filter By</p>
+                    </h6>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <div class="form-check ms-3 my-2">
+                                <input class="form-check-input" type="checkbox" value="" id="filterNewTower">
+                                <label class="form-check-label text-light" for="filterNewTower">
+                                    New Tower
+                                </label>
+                            </div>
+                            <div class="form-check ms-3 my-2">
+                                <input class="form-check-input" type="checkbox" value="" id="filterTowerRework">
+                                <label class="form-check-label text-light" for="filterTowerRework">
+                                    Tower Rework
+                                </label>
+                            </div>
+                            <div class="form-check ms-3 my-2">
+                                <input class="form-check-input" type="checkbox" value="" id="filterTowerRebalance">
+                                <label class="form-check-label text-light" for="filterTowerRebalance">
+                                    Tower Rebalance
+                                </label>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 fw-bold">
+                        <p class="fs-2">Sort By</p>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link active text-light" href="#">Most Popular</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="#">Newest</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="#">Highest Rated</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- main content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">
+                    <h1 class="h2 text-white">Custom Tower Browser (BETA 1.0)</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0 d-flex align-items-center">
+                        <div class="btn-group me-2">
+                            <button type="button" class="btn btn-sm btn-outline-secondary text-light" id="grid-view-btn">Grid</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary text-light" id="list-view-btn">List</button>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-secondary text-light" id="upload-tower-btn">
+                            <i class="bi bi-upload me-1"></i> Upload Tower
+                        </button>
+                    </div>
+                </div>
+                <hr>
+
+                <!-- featured towers section -->
+                <div class="mb-4">
+                    <h4 class="text-white">Featured Towers</h4>
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 featured-towers" id="featured-towers">
+                        <div class="col">
+                            <div class="card h-100 bg-dark text-white border-info">
+                                <div class="position-absolute top-0 end-0 p-2">
+                                    <span class="badge bg-info">Featured</span>
+                                </div>
+                                <img src="https://static.wikia.nocookie.net/tower-defense-sim/images/2/23/SlasherReworkUpgrade4.png" class="card-img-top p-3" alt="Frost Knight">
+                                <div class="card-body">
+                                    <h5 class="card-title">GAIA</h5>
+                                    <p class="card-text">GAIA is an Earth Simulator developed by the GAI Computer Corporation.</p>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between align-items-center">
+                                    <small class="fw-bold">By Nishijou</small>
+                                    <div>
+                                        <small><i class="bi bi-clock text-info me-1"></i>2 days ago</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 bg-dark text-white border-info">
+                                <div class="position-absolute top-0 end-0 p-2">
+                                    <span class="badge bg-info">Featured</span>
+                                </div>
+                                <img src="https://static.wikia.nocookie.net/tower-defense-sim/images/a/ab/MiniLevel4.png" class="card-img-top p-3" alt="Laser Gunner">
+                                <div class="card-body">
+                                    <h5 class="card-title">Noah II</h5>
+                                    <p class="card-text">Noah II is a second-generation artificial Gigalomaniac device developed by N.O.Z.O.M.I.</p>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between align-items-center">
+                                    <small class="fw-bold">By Takumi</small>
+                                    <div>
+                                        <span class="me-2"><i class="bi bi-star-fill text-warning"></i> 4.6</span>
+                                        <span><i class="bi bi-download text-info"></i> 983</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- all towers sec -->
+                <h4 class="text-white">All Towers</h4>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 all-towers" id="all-towers">
+                    <div class="col">
+                        <div class="card h-100 bg-dark text-white">
+                            <img src="https://static.wikia.nocookie.net/tower-defense-sim/images/9/92/MinigunnerUpgradeLevel3.png" class="card-img-top p-3" alt="Pyro Mage">
+                            <div class="card-body">
+                                <h5 class="card-title">Pyro Mage</h5>
+                                <p class="card-text">Deals fire damage over time to enemies in a wide area.</p>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between align-items-center">
+                                <small class="fw-bold">By Takuru</small>
+                                <div>
+                                    <span class="me-2"><i class="bi bi-star-fill text-warning"></i> 4.2</span>
+                                    <span><i class="bi bi-download text-info"></i> 756</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-dark text-white">
+                            <img src="https://static.wikia.nocookie.net/tower-defense-sim/images/c/c4/MinigunnerUpgradeLevel2.png" class="card-img-top p-3" alt="Shadow Assassin">
+                            <div class="card-body">
+                                <h5 class="card-title">Shadow Assassin</h5>
+                                <p class="card-text">Stealthy tower with high critical damage and hidden detection.</p>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between align-items-center">
+                                <small class="fw-bold">By Miyashiro</small>
+                                <div>
+                                    <span class="me-2"><i class="bi bi-star-fill text-warning"></i> 4.1</span>
+                                    <span><i class="bi bi-download text-info"></i> 612</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-dark text-white">
+                            <img src="https://static.wikia.nocookie.net/tower-defense-sim/images/5/5e/SlasherReworkUpgrade2.png" class="card-img-top p-3" alt="Thunder Shaman">
+                            <div class="card-body">
+                                <h5 class="card-title">Thunder Shaman</h5>
+                                <p class="card-text">Chain lightning attacks that can hit multiple enemies at once.</p>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between align-items-center">
+                                <small class="fw-bold">By Okabe</small>
+                                <div>
+                                    <span class="me-2"><i class="bi bi-star-fill text-warning"></i> 3.9</span>
+                                    <span><i class="bi bi-download text-info"></i> 527</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-dark text-white">
+                            <img src="https://static.wikia.nocookie.net/tower-defense-sim/images/3/3c/SlasherReworkUpgrade3.png" class="card-img-top p-3" alt="Rocket Engineer">
+                            <div class="card-body">
+                                <h5 class="card-title">Rocket Engineer</h5>
+                                <p class="card-text">Launches explosive rockets with area damage and lead detection.</p>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between align-items-center">
+                                <small class="fw-bold">By Rintaro</small>
+                                <div>
+                                    <span class="me-2"><i class="bi bi-star-fill text-warning"></i> 4.0</span>
+                                    <span><i class="bi bi-download text-info"></i> 489</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- page clicker
+                <nav class="my-4">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                        </li>
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="#">1</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">2</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">3</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </main>
+        </div>
+    </div> -->
+
+    <!-- tower upload modal -->
+    <div class="modal fade" id="uploadTowerModal" tabindex="-1" aria-labelledby="uploadTowerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="uploadTowerModalLabel"><i class="bi bi-upload me-1"></i>Upload Custom Tower</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <hr class="mx-3 my-0">
+                <div class="modal-body">
+                    <form id="uploadTowerForm">
+                        <div class="mb-3">
+                            <label for="fandomUsername" class="form-label"><img width="68px" src="https://static.wikia.nocookie.net/6a181c72-e8bf-419b-b4db-18fd56a0eb60" style ="vertical-align: text-top;"> Username</label>
+                            <input type="text" class="form-control" id="fandomUsername" placeholder="Enter your Fandom username, create an account if you don't have one." required>
+                            <div class="invalid-feedback">Please enter your Fandom username.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="towerName" class="form-label">Tower Name</label>
+                            <input type="text" class="form-control" id="towerName" placeholder="Enter your desired tower name." required>
+                            <div class="invalid-feedback">Please enter a tower name.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="towerDescription" class="form-label">Description</label>
+                            <textarea class="form-control" id="towerDescription" rows="3" placeholder="Describe what this tower is meant to be." required></textarea>
+                            <div class="invalid-feedback">Please enter a description.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Tower Image (Optional)</label>
+                            <div class="btn-group w-100 mb-2" role="group">
+                                <input type="radio" class="btn-check" name="imageInputType" id="imageUrlOption" autocomplete="off" checked>
+                                <label class="btn btn-outline-primary" for="imageUrlOption">Paste URL</label>
+                                
+                                <input type="radio" class="btn-check" name="imageInputType" id="imageUploadOption" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="imageUploadOption">Upload File</label>
+                            </div>
+                            
+                            <div id="imageUrlInput" class="mb-3">
+                                <input type="text" class="form-control" id="towerImageUrl" placeholder="https://example.com/image.png">
+                            </div>
+                            
+                            <div id="imageUploadInput" class="mb-3 d-none">
+                                <div class="btn-group w-100">
+                                    <label class="btn btn-outline-primary w-75" for="towerImage">
+                                        <i class="bi bi-upload"></i> Select Image
+                                    </label>
+                                    <button type="button" class="btn btn-outline-danger" style="width: 1%;" id="clearImageFile" title="Clear file">
+                                        <i class="bi bi-x-lg"></i>
+                                    </button>
+                                </div>
+                                <input class="form-control d-none" type="file" id="towerImage" accept="image/*">
+                                <div class="form-text mt-2" id="selectedImageName">No file selected</div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Tower JSON Data</label>
+                            <div class="btn-group w-100 mb-2" role="group">
+                                <input type="radio" class="btn-check" name="jsonInputType" id="jsonPasteOption" autocomplete="off" checked>
+                                <label class="btn btn-outline-primary" for="jsonPasteOption">Paste JSON</label>
+                                
+                                <input type="radio" class="btn-check" name="jsonInputType" id="jsonFileOption" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="jsonFileOption">Upload File</label>
+                            </div>
+                            
+                            <div id="jsonPasteInput" class="mb-3">
+                                <textarea class="form-control" id="towerJSONText" rows="5" placeholder="Paste your tower JSON here."></textarea>
+                                <div class="invalid-feedback">JSON data is required.</div>
+                            </div>
+                            
+                            <div id="jsonFileInput" class="mb-3 d-none">
+                                <div class="btn-group w-100">
+                                    <label class="btn btn-outline-primary w-75" for="towerJSON">
+                                        <i class="bi bi-upload"></i> Select JSON File
+                                    </label>
+                                    <button type="button" class="btn btn-outline-danger" style="width: 1%;" id="clearJSONFile" title="Clear file">
+                                        <i class="bi bi-x-lg"></i>
+                                    </button>
+                                </div>
+                                <input class="form-control d-none" type="file" id="towerJSON" accept=".json">
+                                <div class="form-text mt-2" id="selectedJSONName">No file selected</div>
+                                <div class="invalid-feedback">JSON data is required.</div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Tag</label>
+                            <div class="btn-group w-100" role="group">
+                                <input type="radio" class="btn-check" name="towerType" id="typeNew" autocomplete="off" checked>
+                                <label class="btn btn-outline-primary" for="typeNew">New</label>
+                                
+                                <input type="radio" class="btn-check" name="towerType" id="typeRework" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="typeRework">Rework</label>
+                                
+                                <input type="radio" class="btn-check" name="towerType" id="typeRebalance" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="typeRebalance">Rebalance</label>
+                            </div>
+                        </div>
+
+                        <p class="fs-3 text-center">After clicking upload, you will be redirected to a page, paste your clipboard inside of it and then save.</p>
+                    </form>
+                </div>
+                <hr class="mx-3 my-0">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="uploadTowerButton">Upload Tower</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br/>
+    <br/>
+</body>
+</html>

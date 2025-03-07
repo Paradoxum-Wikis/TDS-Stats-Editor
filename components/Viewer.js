@@ -591,7 +591,7 @@ class Viewer {
 
     // handles copying json to clipboard
     #onCopyJSON() {
-        const data = (this.showCombinedJSON && this.showCombinedJSON.checked)
+        const data = (this.showCombinedJSON && this.showCombinedJSONActive)
             ? this._getCombinedData()
             : this.tower.json;
         navigator.clipboard.writeText(JSON.stringify(data));
