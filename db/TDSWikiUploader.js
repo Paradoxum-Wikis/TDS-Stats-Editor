@@ -532,4 +532,84 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }, 500));
+
+    setupRadioButtonHandlers();
 });
+
+// improved setupRadioButtonHandlers function to fix all radio button groups
+function setupRadioButtonHandlers() {
+    const imageUrlOption = document.getElementById('imageUrlOption');
+    const imageUploadOption = document.getElementById('imageUploadOption');
+    const imageUrlInput = document.getElementById('imageUrlInput');
+    const imageUploadInput = document.getElementById('imageUploadInput');
+    
+    // add click handlers to the labels for more reliable response
+    document.querySelector('label[for="imageUrlOption"]').addEventListener('click', function() {
+        imageUrlOption.checked = true;
+        imageUrlInput.classList.remove('d-none');
+        imageUploadInput.classList.add('d-none');
+    });
+    
+    document.querySelector('label[for="imageUploadOption"]').addEventListener('click', function() {
+        imageUploadOption.checked = true;
+        imageUrlInput.classList.add('d-none');
+        imageUploadInput.classList.remove('d-none');
+    });
+    
+    const jsonFileOption = document.getElementById('jsonFileOption');
+    const jsonPasteOption = document.getElementById('jsonPasteOption');
+    const jsonLinkOption = document.getElementById('jsonLinkOption');
+    const jsonFileInput = document.getElementById('jsonFileInput');
+    const jsonPasteInput = document.getElementById('jsonPasteInput');
+    const jsonLinkInput = document.getElementById('jsonLinkInput');
+    
+    document.querySelector('label[for="jsonPasteOption"]')?.addEventListener('click', function() {
+        jsonPasteOption.checked = true;
+        jsonFileInput.classList.add('d-none');
+        jsonPasteInput.classList.remove('d-none');
+        jsonLinkInput.classList.add('d-none');
+    });
+    
+    document.querySelector('label[for="jsonFileOption"]')?.addEventListener('click', function() {
+        jsonFileOption.checked = true;
+        jsonFileInput.classList.remove('d-none');
+        jsonPasteInput.classList.add('d-none');
+        jsonLinkInput.classList.add('d-none');
+    });
+    
+    document.querySelector('label[for="jsonLinkOption"]')?.addEventListener('click', function() {
+        jsonLinkOption.checked = true;
+        jsonFileInput.classList.add('d-none');
+        jsonPasteInput.classList.add('d-none');
+        jsonLinkInput.classList.remove('d-none');
+    });
+    
+    const typeNew = document.getElementById('typeNew');
+    const typeRework = document.getElementById('typeRework');
+    const typeRebalance = document.getElementById('typeRebalance');
+    
+    document.querySelector('label[for="typeNew"]')?.addEventListener('click', function() {
+        typeNew.checked = true;
+    });
+    
+    document.querySelector('label[for="typeRework"]')?.addEventListener('click', function() {
+        typeRework.checked = true;
+    });
+    
+    document.querySelector('label[for="typeRebalance"]')?.addEventListener('click', function() {
+        typeRebalance.checked = true;
+    });
+    
+    document.querySelectorAll('.btn-check').forEach(radio => {
+        const label = document.querySelector(`label[for="${radio.id}"]`);
+        if (label) {
+            label.addEventListener('click', function() {
+                setTimeout(() => {
+                    radio.checked = true;
+                    const event = new Event('change', { bubbles: true });
+                    radio.dispatchEvent(event);
+                }, 0);
+            });
+        }
+    });
+}

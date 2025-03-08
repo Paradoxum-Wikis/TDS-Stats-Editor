@@ -120,6 +120,14 @@ function renderTowerCard(tower, container) {
         </div>`;
     }
 
+    // Format author name as a link to their Fandom profile page
+    const authorLink = `<a href="https://tds.fandom.com/wiki/User:${encodeURIComponent(tower.author)}" 
+                          target="_blank" 
+                          class="author-link" 
+                          title="View ${tower.author}'s profile">
+                          ${tower.author}
+                       </a>`;
+
     col.innerHTML = `
         <div class="card h-100 bg-dark text-white ${tower.featured ? 'border-gold' : ''} ${isListView ? 'list-view-card' : ''}">
             <div class="position-absolute top-0 end-0 p-2">
@@ -133,7 +141,7 @@ function renderTowerCard(tower, container) {
                 ${dataSection}
             </div>
             <div class="card-footer ${tower.featured ? 'gold' : ''} d-flex justify-content-between align-items-center">
-                <small class="fw-bold">By ${tower.author}</small>
+                <small class="fw-bold">By ${authorLink}</small>
                 <div>
                     <small><i class="bi bi-clock text-info me-1"></i>${tower.uploadDate || 'Recently'}</small>
                 </div>

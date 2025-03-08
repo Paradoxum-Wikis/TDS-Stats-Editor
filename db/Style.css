@@ -213,3 +213,14 @@ textarea {
     background-color: #035D7C !important;
     border-color: #035D7C !important;
   }
+
+.author-link {
+    color: #0dcaf0 !important;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.author-link:hover {
+    color: #0aa3c2 !important;
+    text-decoration: none;
+}
