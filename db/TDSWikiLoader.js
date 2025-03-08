@@ -78,14 +78,14 @@ function renderTowerCard(tower, container) {
     const col = document.createElement('div');
     col.className = 'col';
     
-    // create unique id
+    // Create unique id
     const towerId = `tower-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`;
     
-    // save tower data in cache
+    // Save tower data in cache
     if (!window.towerDataCache) window.towerDataCache = {};
     if (tower.data) window.towerDataCache[towerId] = tower.data;
 
-    // set badge color based on tag
+    // Set badge color based on tag
     let tagClass = 'bg-secondary';
     if (tower.tag === 'New') {
         tagClass = 'bg-success';
@@ -95,9 +95,31 @@ function renderTowerCard(tower, container) {
         tagClass = 'bg-info';
     }
 
-    // check if we're in list view
+    // Check if we're in list view
     const isListView = container.id === 'all-towers' && container.classList.contains('row-cols-1');
     
+    // Create data section HTML based on tower type
+    let dataSection = '';
+    
+    if (tower.isLink && tower.linkedTower) {
+        // For linked towers
+        dataSection = `<div class="d-flex gap-2 mt-3">
+            <a href="${tower.linkedTower}" target="_blank" class="btn btn-sm btn-outline-primary">
+                <i class="bi bi-box-arrow-up-right me-1"></i> Visit Blog
+            </a>
+        </div>`;
+    } else if (tower.data) {
+        // For towers with JSON data
+        dataSection = `<div class="d-flex gap-2 mt-3">
+            <button class="btn btn-sm btn-outline-info copy-json" data-tower-id="${towerId}">
+                <i class="bi bi-clipboard me-1"></i> Copy JSON
+            </button>
+            <button class="btn btn-sm btn-outline-primary download-json" data-tower-id="${towerId}">
+                <i class="bi bi-download me-1"></i> Download
+            </button>
+        </div>`;
+    }
+
     col.innerHTML = `
         <div class="card h-100 bg-dark text-white ${tower.featured ? 'border-gold' : ''} ${isListView ? 'list-view-card' : ''}">
             <div class="position-absolute top-0 end-0 p-2">
@@ -108,16 +130,7 @@ function renderTowerCard(tower, container) {
             <div class="card-body">
                 <h5 class="card-title">${tower.name}</h5>
                 <p class="card-text">${tower.description || 'No description available.'}</p>
-                ${tower.data ? `
-                <div class="d-flex gap-2 mt-3">
-                    <button class="btn btn-sm btn-outline-info copy-json" data-tower-id="${towerId}">
-                        <i class="bi bi-clipboard me-1"></i> Copy JSON
-                    </button>
-                    <button class="btn btn-sm btn-outline-primary download-json" data-tower-id="${towerId}">
-                        <i class="bi bi-download me-1"></i> Download
-                    </button>
-                </div>
-                ` : ''}
+                ${dataSection}
             </div>
             <div class="card-footer ${tower.featured ? 'gold' : ''} d-flex justify-content-between align-items-center">
                 <small class="fw-bold">By ${tower.author}</small>

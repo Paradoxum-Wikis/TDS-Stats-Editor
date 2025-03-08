@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const imageUrlInput = document.getElementById('towerImageUrl');
     const imageUrlOption = document.getElementById('imageUrlOption');
     const imageUploadOption = document.getElementById('imageUploadOption');
+    const jsonLinkOption = document.getElementById('jsonLinkOption');
+    const jsonLinkInput = document.getElementById('jsonLinkInput');
     
     // add a preview for the image
     const previewContainer = document.createElement('div');
@@ -75,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (this.checked) {
             jsonFileInput.classList.remove('d-none');
             jsonPasteInput.classList.add('d-none');
+            jsonLinkInput.classList.add('d-none');
         }
     });
 
@@ -82,6 +85,15 @@ document.addEventListener('DOMContentLoaded', function() {
         if (this.checked) {
             jsonFileInput.classList.add('d-none');
             jsonPasteInput.classList.remove('d-none');
+            jsonLinkInput.classList.add('d-none');
+        }
+    });
+
+    jsonLinkOption.addEventListener('change', function() {
+        if (this.checked) {
+            jsonFileInput.classList.add('d-none');
+            jsonPasteInput.classList.add('d-none');
+            jsonLinkInput.classList.remove('d-none');
         }
     });
 
@@ -168,7 +180,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // check if the form is filled properly
     function validateForm() {
         let isValid = true;
-        const requiredFields = ['fandomUsername', 'towerName', 'towerDescription'];
+        let requiredFields = ['towerDescription'];
+        
+        // Only require username and tower name if not using link option
+        if (!jsonLinkOption.checked) {
+            requiredFields.push('fandomUsername', 'towerName');
+        }
 
         requiredFields.forEach(field => {
             const element = document.getElementById(field);
@@ -180,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // make sure we have json data
+        // Validate link or JSON data
         if (jsonFileOption.checked) {
             const jsonFile = document.getElementById('towerJSON');
             if (!jsonFile.files || jsonFile.files.length === 0) {
@@ -189,13 +206,37 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 jsonFile.classList.remove('is-invalid');
             }
-        } else {
+        } else if (jsonPasteOption.checked) {
             const jsonText = document.getElementById('towerJSONText');
             if (!jsonText.value.trim()) {
                 jsonText.classList.add('is-invalid');
                 isValid = false;
             } else {
                 jsonText.classList.remove('is-invalid');
+            }
+        } else if (jsonLinkOption.checked) {
+            const linkInput = document.getElementById('towerJSONLink');
+            const linkValue = linkInput.value.trim();
+            const validLink = linkValue && linkValue.match(/https?:\/\/tds\.fandom\.com\/wiki\/User_blog:.+\/.+/i);
+            
+            if (!validLink) {
+                linkInput.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                linkInput.classList.remove('is-invalid');
+                
+                // Auto-fill username and tower name fields from the link
+                const linkInfo = extractInfoFromBlogLink(linkValue);
+                if (linkInfo) {
+                    const usernameField = document.getElementById('fandomUsername');
+                    const towerNameField = document.getElementById('towerName');
+                    
+                    usernameField.value = linkInfo.username;
+                    usernameField.classList.remove('is-invalid');
+                    
+                    towerNameField.value = linkInfo.towerName;
+                    towerNameField.classList.remove('is-invalid');
+                }
             }
         }
 
@@ -223,7 +264,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 };
                 reader.readAsText(jsonFile);
             });
-        } else {
+        } else if (jsonPasteOption.checked) {
             const jsonText = document.getElementById('towerJSONText').value.trim();
             if (!jsonText) return null;
             
@@ -233,6 +274,11 @@ document.addEventListener('DOMContentLoaded', function() {
             } catch (error) {
                 throw new Error('Invalid JSON format');
             }
+        } else if (jsonLinkOption.checked) {
+            const linkValue = document.getElementById('towerJSONLink').value.trim();
+            if (!linkValue) return null;
+            
+            return `<a href="${linkValue}">${linkValue}</a>`;
         }
     }
 
@@ -278,10 +324,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // open the wiki edit page
     function openFandomEditPage() {
-        const username = document.getElementById('fandomUsername').value.trim();
-        const towerName = document.getElementById('towerName').value.trim().replace(/\s+/g, '_');
-        const url = `https://tds.fandom.com/wiki/User_blog:${encodeURIComponent(username)}/${encodeURIComponent(towerName)}?action=edit`;
+        let username, towerName;
         
+        // If using link option, extract info from link
+        if (jsonLinkOption.checked) {
+            const linkValue = document.getElementById('towerJSONLink').value.trim();
+            const linkInfo = extractInfoFromBlogLink(linkValue);
+            
+            if (linkInfo) {
+                username = linkInfo.username;
+                towerName = linkInfo.towerName.replace(/\s+/g, '_');
+            } else {
+                // Fallback to input fields if extraction fails
+                username = document.getElementById('fandomUsername').value.trim();
+                towerName = document.getElementById('towerName').value.trim().replace(/\s+/g, '_');
+            }
+        } else {
+            // Use input fields directly for other options
+            username = document.getElementById('fandomUsername').value.trim();
+            towerName = document.getElementById('towerName').value.trim().replace(/\s+/g, '_');
+        }
+        
+        const url = `https://tds.fandom.com/wiki/User_blog:${encodeURIComponent(username)}/${encodeURIComponent(towerName)}?action=edit`;
         window.open(url, '_blank');
     }
 
@@ -442,4 +506,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // expose this function globally
     window.formatWikiContent = formatWikiContent;
+
+    function extractInfoFromBlogLink(link) {
+        // Pattern: https://tds.fandom.com/wiki/User_blog:USERNAME/TOWERNAME
+        const match = link.match(/https?:\/\/tds\.fandom\.com\/wiki\/User_blog:([^\/]+)\/([^?&#]+)/i);
+        
+        if (match) {
+            return {
+                username: decodeURIComponent(match[1]),
+                towerName: decodeURIComponent(match[2]).replace(/_/g, ' ')
+            };
+        }
+        
+        return null;
+    }
+
+    // change handler for the link input to auto-fill username and tower name
+    document.getElementById('towerJSONLink')?.addEventListener('input', debounce(function() {
+        const linkValue = this.value.trim();
+        if (linkValue) {
+            const linkInfo = extractInfoFromBlogLink(linkValue);
+            if (linkInfo) {
+                document.getElementById('fandomUsername').value = linkInfo.username;
+                document.getElementById('towerName').value = linkInfo.towerName;
+            }
+        }
+    }, 500));
 });

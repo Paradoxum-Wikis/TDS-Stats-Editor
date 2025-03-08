@@ -120,7 +120,7 @@
             <!-- main content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">
-                    <h1 class="h2 text-white">Custom Tower Browser (BETA 1.0)</h1>
+                    <h1 class="h2 text-white">Custom Tower Browser (BETA 1.1)</h1>
                     <div class="btn-toolbar mb-2 mb-md-0 d-flex align-items-center">
                         <div class="btn-group me-2">
                             <button type="button" class="btn btn-sm btn-outline-secondary text-light" id="grid-view-btn">Grid</button>
@@ -331,6 +331,9 @@
                                 
                                 <input type="radio" class="btn-check" name="jsonInputType" id="jsonFileOption" autocomplete="off">
                                 <label class="btn btn-outline-primary" for="jsonFileOption">Upload File</label>
+                                
+                                <input type="radio" class="btn-check" name="jsonInputType" id="jsonLinkOption" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="jsonLinkOption">Link Tower</label>
                             </div>
                             
                             <div id="jsonPasteInput" class="mb-3">
@@ -350,6 +353,12 @@
                                 <input class="form-control d-none" type="file" id="towerJSON" accept=".json">
                                 <div class="form-text mt-2" id="selectedJSONName">No file selected</div>
                                 <div class="invalid-feedback">JSON data is required.</div>
+                            </div>
+                            
+                            <div id="jsonLinkInput" class="mb-3 d-none">
+                                <input type="text" class="form-control" id="towerJSONLink" placeholder="https://tds.fandom.com/wiki/User_blog:Username/Tower_Name">
+                                <div class="invalid-feedback">Valid TDS Fandom blog link is required.</div>
+                                <div class="form-text">Using this option will override Fandom Username with the one from the link</div>
                             </div>
                         </div>
                         <div class="mb-3">

@@ -232,21 +232,31 @@ class TDSWikiFetcher {
                               doc.querySelector('pre');
             
             if (preElement) {
-                const jsonText = preElement.textContent.trim();
-                try {
-                    const jsonData = JSON.parse(jsonText);
-                    tower.data = jsonData;
-                    
-                    // get tower name from json
-                    const firstKey = Object.keys(jsonData)[0];
-                    if (firstKey && typeof firstKey === 'string') {
-                        tower.jsonName = firstKey;
+                const preContent = preElement.innerHTML.trim();
+                
+                // First check if the pre contains an anchor tag or a plain URL
+                const linkMatch = preContent.match(/<a\s+href="(https?:\/\/tds\.fandom\.com\/wiki\/User_blog:.+\/.+)".*?>.*?<\/a>/i) || 
+                                 preContent.match(/(https?:\/\/tds\.fandom\.com\/wiki\/User_blog:.+\/.+)/i);
+                
+                if (linkMatch) {
+                    // Extract just the URL from either the href attribute or direct text
+                    tower.linkedTower = linkMatch[1]; 
+                    tower.isLink = true;
+                } else {
+                    // Regular JSON approach
+                    try {
+                        const jsonData = JSON.parse(preContent);
+                        tower.data = jsonData;
+                        
+                        // get tower name from json
+                        const firstKey = Object.keys(jsonData)[0];
+                        if (firstKey && typeof firstKey === 'string') {
+                            tower.jsonName = firstKey;
+                        }
+                    } catch (jsonError) {
+                        console.warn(`bad json for ${tower.name}:`, jsonError);
                     }
-                } catch (jsonError) {
-                    console.warn(`bad json for ${tower.name}:`, jsonError);
                 }
-            } else {
-                console.warn(`no json found for ${tower.name}`);
             }
 
             // get date posted
