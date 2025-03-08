@@ -118,11 +118,23 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!validateForm()) {
                 return;
             }
+
+            // store original button content and disable the button
+            const originalButtonContent = uploadTowerButton.innerHTML;
+            uploadTowerButton.disabled = true;
+            uploadTowerButton.innerHTML = `
+                <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+                Processing...
+            `;
             
             // get and check the json data
             const jsonData = await getJsonData();
             if (!jsonData) {
                 showValidationError('JSON data is required');
+                
+                // Restore button
+                uploadTowerButton.innerHTML = originalButtonContent;
+                uploadTowerButton.disabled = false;
                 return;
             }
         
@@ -152,8 +164,16 @@ document.addEventListener('DOMContentLoaded', function() {
                         throw new Error('Copy failed');
                     }
                 }
+                
+                // Add a 2-second delay before opening the new page
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
             } catch (copyError) {
+                // Restore button if copy fails
+                uploadTowerButton.innerHTML = originalButtonContent;
+                uploadTowerButton.disabled = false;
                 showManualCopyDialog(finalContent);
+                return;
             }
         
             // open the wiki page
@@ -161,6 +181,11 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // make sure modal is fully gone
             towerModal.hide();
+            
+            // Always restore button at the end
+            uploadTowerButton.innerHTML = originalButtonContent;
+            uploadTowerButton.disabled = false;
+            
             setTimeout(() => {
                 const backdrop = document.querySelector('.modal-backdrop');
                 if (backdrop) {
@@ -174,6 +199,12 @@ document.addEventListener('DOMContentLoaded', function() {
         } catch (error) {
             // show error if something went wrong
             showValidationError('Error: ' + error.message);
+            
+            // Restore button on error
+            if (originalButtonContent) {
+                uploadTowerButton.innerHTML = originalButtonContent;
+                uploadTowerButton.disabled = false;
+            }
         }
     });
 
