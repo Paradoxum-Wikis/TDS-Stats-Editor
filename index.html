@@ -36,6 +36,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" integrity="sha256-9kPW/n5nn53j4WMRYAxe9c1rCY96Oogo/MKSVdKzPmI=" crossorigin="anonymous">
        
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D48H2PL948"></script>
@@ -49,6 +50,7 @@
 
     <script src="json-viewer.js"></script>
     <script src="Slides.js"></script>
+    <script src="JSONUploader.js"></script>
     <script defer type="module" src="Main.js"></script>
     <!--<script defer type="module" src="Converter.js"></script> -->
 
@@ -567,22 +569,47 @@
     </div>
     <!--- Models --->
 
-    <!-- JSON Import Model -->
+    <!-- JSON Import Modal -->
     <div class="modal fade" id="json-import-modal" tabindex="-1" role="dialog" aria-labelledby="json-import-label"
         aria-hidden="true">
-        <div class="modal-dialog modal-xl " role="document">
+        <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content bg-dark text-white">
                 <div class="modal-header">
                     <h5 class="modal-title" id="json-import-label"><img style="width: 25px; margin-right: 0.25rem; vertical-align: sub;" src="https://static.wikia.nocookie.net/tower-defense-sim/images/8/8f/Book-closed.svg">Import Stats</h5>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <!-- Add option toggles -->
+                    <div class="btn-group w-100 mb-3" role="group">
+                        <input type="radio" class="btn-check" name="importInputType" id="importPasteOption" autocomplete="off" checked>
+                        <label class="btn btn-outline-primary" for="importPasteOption">Paste JSON</label>
+                        
+                        <input type="radio" class="btn-check" name="importInputType" id="importFileOption" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="importFileOption">Upload File</label>
+                    </div>
+                    
+                    <!-- Paste JSON section -->
+                    <div id="importPasteInput">
                         <div class="form-group bg-dark text-white">
-                            <label for="message-text" class="col-form-label">JSON:</label>
-                            <textarea class="form-control form-control-sm" style="color: #fff;" rows="32"
-                                id="json-import-text"></textarea>
+                            <textarea class="form-control form-control-sm" style="color: #fff;" rows="22"
+                                id="json-import-text" placeholder="Paste your JSON here."></textarea>
                         </div>
-                    </form>
+                    </div>
+                    
+                    <!-- File upload section -->
+                    <div id="importFileInput" class="d-none">
+                        <div class="btn-group w-100 mb-3">
+                            <label class="btn btn-outline-primary w-75" for="json-import-file">
+                                <i class="bi bi-upload"></i> Select JSON File
+                            </label>
+                            <button type="button" class="btn btn-outline-danger" style="width: 1%;" id="clearImportFile" title="Clear file">
+                                <i class="bi bi-x-lg"></i>
+                            </button>
+                        </div>
+                        <input class="form-control d-none" type="file" id="json-import-file" accept="application/json,.json">
+                        <div class="form-text mt-2" id="selectedImportFileName">No file selected</div>
+                        <div class="mt-4" id="json-file-preview">
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
