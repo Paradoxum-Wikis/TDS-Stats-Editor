@@ -16,7 +16,8 @@ class TDSWikiFetcher {
         
         // towers to show in featured section
         this.featuredTowers = [
-            "Vessel Of Infinite Destruction/Golden Crook Boss"
+            "Vessel Of Infinite Destruction/Golden Crook Boss",
+            "Vessel Of Infinite Destruction/Ranger",
             // add more here
         ];
     }

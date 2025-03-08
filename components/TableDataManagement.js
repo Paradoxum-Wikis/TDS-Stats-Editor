@@ -53,21 +53,33 @@ export default class TableDataManagement {
     }
 
     renderButtonOutlines() {
+        // get the reference to current tower data
         const currentJSON = JSON.stringify(this.viewer.tower.json);
-        const referenceJSON = JSON.stringify(this.viewer.deltaTower.json);
-        const savedJSON = JSON.stringify(
-            this.viewer.defaultTowerManager.towers[this.viewer.tower.name].json
-        );
-
-        const activeChanges = currentJSON !== referenceJSON;
-        const deltaChanges = savedJSON !== referenceJSON;
-
+        
+        let referenceJSON, savedJSON;
+        
+        try {
+            referenceJSON = JSON.stringify(this.viewer.deltaTower.json);
+            savedJSON = JSON.stringify(
+                this.viewer.defaultTowerManager.towers[this.viewer.tower.name]?.json || {}
+            );
+        } catch (e) {
+            // if references don't exist (custom tower), create empty objects
+            referenceJSON = "{}";
+            savedJSON = "{}";
+        }
+        
+        // for custom towers it always consider there are changes to enable the buttons
+        const isCustomTower = !this.viewer.defaultTowerManager.towers[this.viewer.tower.name];
+        const activeChanges = isCustomTower || currentJSON !== referenceJSON;
+        const deltaChanges = isCustomTower || savedJSON !== referenceJSON;
+    
         this.#setEnabled(this.clearButton, activeChanges);
         this.#setEnabled(this.applyButton, activeChanges);
         this.#setEnabled(this.resetButton, deltaChanges, 'btn-outline-danger');
         
-        const unitActiveChanges = this.viewer.hasUnitChanges();
-        const unitDeltaChanges = this.viewer.hasUnitDeltaChanges();
+        const unitActiveChanges = this.viewer.hasUnitChanges() || isCustomTower;
+        const unitDeltaChanges = this.viewer.hasUnitDeltaChanges() || isCustomTower;
         
         this.#setEnabled(this.clearUnitButton, unitActiveChanges);
         this.#setEnabled(this.applyUnitButton, unitActiveChanges);
