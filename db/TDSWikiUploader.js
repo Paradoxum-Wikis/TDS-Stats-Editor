@@ -350,7 +350,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // add wiki categories
-        return `${description}\n\n${imageContent}\n\n${towerType}\n\n<pre id="towerdata">JSONDATA</pre>\n\n[[Category:TDSDatabase]][[Category:Blog posts]]`;
+        return `${description}\n\n${imageContent}\n\n${towerType}\n\n<pre id="towerdata" style="display: none">JSONDATA</pre>\n\n<!-- DO NOT EDIT, MODIFY, DELETE, ANYTHING IN HERE UNLESS YOU KNOW WHAT YOU ARE DOING. MAKE SURE THE CODE YOU PASTED IS THE ONLY THING HERE. -->\n[[Category:TDSDatabase]]\n[[Category:Blog posts]]`;
     }
 
     // open the wiki edit page
