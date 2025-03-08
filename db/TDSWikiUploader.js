@@ -1,60 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const imageCache = {};
-    
     const uploadTowerBtn = document.getElementById('upload-tower-btn');
     const uploadTowerModal = document.getElementById('uploadTowerModal');
     const uploadTowerButton = document.getElementById('uploadTowerButton');
     const jsonFileOption = document.getElementById('jsonFileOption');
     const jsonPasteOption = document.getElementById('jsonPasteOption');
-    const jsonFileInput = document.getElementById('jsonFileInput');
-    const jsonPasteInput = document.getElementById('jsonPasteInput');
-    const imageUrlInput = document.getElementById('towerImageUrl');
-    const imageUrlOption = document.getElementById('imageUrlOption');
-    const imageUploadOption = document.getElementById('imageUploadOption');
     const jsonLinkOption = document.getElementById('jsonLinkOption');
-    const jsonLinkInput = document.getElementById('jsonLinkInput');
-    
-    // add a preview for the image
-    const previewContainer = document.createElement('div');
-    previewContainer.className = 'mt-2 text-center';
-    previewContainer.innerHTML = '<img id="image-preview" class="img-fluid border border-secondary rounded" style="max-height: 150px; display: none;">';
-    imageUrlInput.parentNode.appendChild(previewContainer);
-    const imagePreview = document.getElementById('image-preview');
     
     // setup the modal
     const towerModal = new bootstrap.Modal(uploadTowerModal);
-    
-    // handle json file selection
-    document.getElementById('towerJSON').addEventListener('change', function() {
-        const selectedText = document.getElementById('selectedJSONName');
-        if (this.files && this.files.length > 0) {
-            selectedText.textContent = 'Selected: ' + this.files[0].name;
-        } else {
-            selectedText.textContent = 'No file selected';
-        }
-    });
-
-    document.getElementById('clearJSONFile').addEventListener('click', function() {
-        const fileInput = document.getElementById('towerJSON');
-        fileInput.value = '';
-        document.getElementById('selectedJSONName').textContent = 'No file selected';
-    });
-    
-    // handle image file selection
-    document.getElementById('towerImage').addEventListener('change', function() {
-        const selectedText = document.getElementById('selectedImageName');
-        if (this.files && this.files.length > 0) {
-            selectedText.textContent = 'Selected: ' + this.files[0].name;
-        } else {
-            selectedText.textContent = 'No file selected';
-        }
-    });
-
-    document.getElementById('clearImageFile').addEventListener('click', function() {
-        const fileInput = document.getElementById('towerImage');
-        fileInput.value = '';
-        document.getElementById('selectedImageName').textContent = 'No file selected';
-    });
     
     // clean up when modal is closed
     uploadTowerModal.addEventListener('hidden.bs.modal', function() {
@@ -71,46 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
     uploadTowerBtn.addEventListener('click', function() {
         towerModal.show();
     });
-
-    // switch between json file and pasted json
-    jsonFileOption.addEventListener('change', function() {
-        if (this.checked) {
-            jsonFileInput.classList.remove('d-none');
-            jsonPasteInput.classList.add('d-none');
-            jsonLinkInput.classList.add('d-none');
-        }
-    });
-
-    jsonPasteOption.addEventListener('change', function() {
-        if (this.checked) {
-            jsonFileInput.classList.add('d-none');
-            jsonPasteInput.classList.remove('d-none');
-            jsonLinkInput.classList.add('d-none');
-        }
-    });
-
-    jsonLinkOption.addEventListener('change', function() {
-        if (this.checked) {
-            jsonFileInput.classList.add('d-none');
-            jsonPasteInput.classList.add('d-none');
-            jsonLinkInput.classList.remove('d-none');
-        }
-    });
-
-    // switch between image url and file upload
-    if (imageUrlOption && imageUploadOption) {
-        document.querySelectorAll('input[name="imageInputType"]').forEach((radio) => {
-            radio.addEventListener('change', () => {
-                if (radio.id === 'imageUrlOption') {
-                    document.getElementById('imageUrlInput').classList.remove('d-none');
-                    document.getElementById('imageUploadInput').classList.add('d-none');
-                } else {
-                    document.getElementById('imageUrlInput').classList.add('d-none');
-                    document.getElementById('imageUploadInput').classList.remove('d-none');
-                }
-            });
-        });
-    }
 
     // when the upload button is clicked
     uploadTowerButton.addEventListener('click', async () => {
@@ -130,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // get and check the json data
             const jsonData = await getJsonData();
             if (!jsonData) {
-                showValidationError('JSON data is required');
+                window.showValidationError('JSON data is required');
                 
                 // Restore button
                 uploadTowerButton.innerHTML = originalButtonContent;
@@ -146,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
             try {
                 if (navigator.clipboard && navigator.clipboard.writeText) {
                     await navigator.clipboard.writeText(finalContent);
-                    showAlert('Content copied to clipboard!', 'success');
+                    window.showAlert('Content copied to clipboard!', 'success');
                 } else {
                     // old browser fallback
                     const textarea = document.createElement('textarea');
@@ -159,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const success = document.execCommand('copy');
                     document.body.removeChild(textarea);
                     if (success) {
-                        showAlert('Content copied to clipboard!', 'success');
+                        window.showAlert('Content copied to clipboard!', 'success');
                     } else {
                         throw new Error('Copy failed');
                     }
@@ -172,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Restore button if copy fails
                 uploadTowerButton.innerHTML = originalButtonContent;
                 uploadTowerButton.disabled = false;
-                showManualCopyDialog(finalContent);
+                window.showManualCopyDialog(finalContent);
                 return;
             }
         
@@ -198,13 +111,11 @@ document.addEventListener('DOMContentLoaded', function() {
             
         } catch (error) {
             // show error if something went wrong
-            showValidationError('Error: ' + error.message);
+            window.showValidationError('Error: ' + error.message);
             
             // Restore button on error
-            if (originalButtonContent) {
-                uploadTowerButton.innerHTML = originalButtonContent;
-                uploadTowerButton.disabled = false;
-            }
+            uploadTowerButton.innerHTML = originalButtonContent;
+            uploadTowerButton.disabled = false;
         }
     });
 
@@ -334,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const imageUrl = document.getElementById('towerImageUrl').value.trim();
             if (imageUrl) {
                 // check if we already have a formatted version
-                const contentFormat = imageCache[`content_${imageUrl}`];
+                const contentFormat = window.imageCache?.[`content_${imageUrl}`];
                 imageContent = contentFormat || imageUrl;
                 
                 // handle roblox ids
@@ -380,164 +291,6 @@ document.addEventListener('DOMContentLoaded', function() {
         window.open(url, '_blank');
     }
 
-    // display validation error
-    function showValidationError(message) {
-        showAlert(message, 'danger');
-    }
-
-    // display alert message
-    function showAlert(message, type) {
-        const alertPlaceholder = document.createElement('div');
-        alertPlaceholder.className = 'position-fixed bottom-0 end-0 p-3';
-        alertPlaceholder.style.zIndex = '1337';
-        
-        const wrapper = document.createElement('div');
-        wrapper.className = `alert alert-${type} alert-dismissible fade`;
-        wrapper.innerHTML = `
-            <div>${message}</div>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        `;
-        
-        alertPlaceholder.appendChild(wrapper);
-        document.body.appendChild(alertPlaceholder);
-        
-        wrapper.offsetHeight;
-        setTimeout(() => {
-            wrapper.classList.add('show');
-        }, 10);
-        
-        setTimeout(() => {
-            wrapper.classList.remove('show');
-            setTimeout(() => {
-                document.body.removeChild(alertPlaceholder);
-            }, 300);
-        }, 3000);
-    }
-
-    // process image url as you type
-    imageUrlInput.addEventListener('input', debounce(function() {
-        processImageUrl(imageUrlInput.value.trim());
-    }, 500));
-    
-    // prevent too many requests while typing
-    function debounce(func, wait) {
-        let timeout;
-        return function() {
-            const context = this;
-            const args = arguments;
-            clearTimeout(timeout);
-            timeout = setTimeout(() => func.apply(context, args), wait);
-        };
-    }
-    
-    // handle image url
-    async function processImageUrl(imageId) {
-        if (!imageId) {
-            imagePreview.style.display = 'none';
-            return '';
-        }
-        
-        try {
-            const imageUrl = await fetchImage(imageId);
-            if (imageUrl) {
-                // show preview
-                imagePreview.src = imageUrl;
-                imagePreview.style.display = 'block';
-                return imageUrl;
-            } else {
-                imagePreview.style.display = 'none';
-                return '';
-            }
-        } catch (error) {
-            console.error('Failed to process image URL:', error);
-            imagePreview.style.display = 'none';
-            return '';
-        }
-    }
-
-    // get image from url or roblox id
-    async function fetchImage(imageId) {
-        if (!imageId) return '';
-        
-        const imageIdStr = String(imageId);
-        
-        // for the preview
-        let previewUrl;
-        // for the wiki content
-        let contentUrl;
-        
-        // check if we already loaded this image
-        if (imageCache[imageIdStr]) {
-            previewUrl = imageCache[imageIdStr];
-        } else {
-            if (imageIdStr.startsWith('https')) { // handle urls
-                if (imageIdStr.includes('static.wikia.nocookie.net')) {
-                    previewUrl = trimFandomUrl(imageIdStr); // clean up fandom urls
-                    contentUrl = previewUrl; // use same url for content
-                } else {
-                    previewUrl = imageIdStr; // use url directly
-                    contentUrl = previewUrl; // keep same url for content
-                }
-            } else {
-                // check for roblox ids
-                if (/^\d+$/.test(imageIdStr)) {
-                    // format as robloxid for wiki
-                    contentUrl = `RobloxID${imageIdStr}`;
-                    
-                    // get actual image for preview
-                    const roProxyUrl = `https://assetdelivery.RoProxy.com/v2/assetId/${imageIdStr}`;
-                    try {
-                        const response = await fetch(roProxyUrl, {
-                            method: 'GET',
-                            mode: 'cors',
-                        });
-                        const data = await response.json();
-                        if (data?.locations?.[0]?.location) {
-                            previewUrl = data.locations[0].location;
-                        } else {
-                            previewUrl = `https://static.wikia.nocookie.net/tower-defense-sim/images/${imageIdStr}`;
-                        }
-                    } catch (error) {
-                        console.error(`Failed to fetch Roblox asset ${imageIdStr}:`, error);
-                        previewUrl = ''; // nothing to show if failed
-                    }
-                } else {
-                    // use as-is for other input
-                    previewUrl = imageIdStr;
-                    contentUrl = imageIdStr;
-                }
-            }
-            
-            // save for later
-            if (previewUrl) {
-                imageCache[imageIdStr] = previewUrl;
-            }
-        }
-        
-        // save formatted url for wiki content
-        if (contentUrl) {
-            imageCache[`content_${imageIdStr}`] = contentUrl;
-        }
-        
-        // return url for preview
-        return previewUrl;
-    }
-    
-    // clean up fandom urls
-    function trimFandomUrl(fullUrl) {
-        // extract the basic url without parameters
-        const match = fullUrl.match(/https:\/\/static\.wikia\.nocookie\.net\/.*?\.(png|jpg|jpeg|gif)/i);
-        return match ? match[0] : fullUrl;
-    }
-
-    // process url if already filled in
-    if (imageUrlInput.value) {
-        processImageUrl(imageUrlInput.value.trim());
-    }
-
-    // expose this function globally
-    window.formatWikiContent = formatWikiContent;
-
     function extractInfoFromBlogLink(link) {
         // Pattern: https://tds.fandom.com/wiki/User_blog:USERNAME/TOWERNAME
         const match = link.match(/https?:\/\/tds\.fandom\.com\/wiki\/User_blog:([^\/]+)\/([^?&#]+)/i);
@@ -552,95 +305,13 @@ document.addEventListener('DOMContentLoaded', function() {
         return null;
     }
 
-    // change handler for the link input to auto-fill username and tower name
-    document.getElementById('towerJSONLink')?.addEventListener('input', debounce(function() {
-        const linkValue = this.value.trim();
-        if (linkValue) {
-            const linkInfo = extractInfoFromBlogLink(linkValue);
-            if (linkInfo) {
-                document.getElementById('fandomUsername').value = linkInfo.username;
-                document.getElementById('towerName').value = linkInfo.towerName;
-            }
-        }
-    }, 500));
+    // expose this function globally
+    window.formatWikiContent = formatWikiContent;
+    window.openFandomEditPage = openFandomEditPage;
+    window.extractInfoFromBlogLink = extractInfoFromBlogLink;
 
-    setupRadioButtonHandlers();
+    // Setup radio buttons if they exist
+    if (typeof window.setupRadioButtonHandlers === 'function') {
+        window.setupRadioButtonHandlers();
+    }
 });
-
-// improved setupRadioButtonHandlers function to fix all radio button groups
-function setupRadioButtonHandlers() {
-    const imageUrlOption = document.getElementById('imageUrlOption');
-    const imageUploadOption = document.getElementById('imageUploadOption');
-    const imageUrlInput = document.getElementById('imageUrlInput');
-    const imageUploadInput = document.getElementById('imageUploadInput');
-    
-    // add click handlers to the labels for more reliable response
-    document.querySelector('label[for="imageUrlOption"]').addEventListener('click', function() {
-        imageUrlOption.checked = true;
-        imageUrlInput.classList.remove('d-none');
-        imageUploadInput.classList.add('d-none');
-    });
-    
-    document.querySelector('label[for="imageUploadOption"]').addEventListener('click', function() {
-        imageUploadOption.checked = true;
-        imageUrlInput.classList.add('d-none');
-        imageUploadInput.classList.remove('d-none');
-    });
-    
-    const jsonFileOption = document.getElementById('jsonFileOption');
-    const jsonPasteOption = document.getElementById('jsonPasteOption');
-    const jsonLinkOption = document.getElementById('jsonLinkOption');
-    const jsonFileInput = document.getElementById('jsonFileInput');
-    const jsonPasteInput = document.getElementById('jsonPasteInput');
-    const jsonLinkInput = document.getElementById('jsonLinkInput');
-    
-    document.querySelector('label[for="jsonPasteOption"]')?.addEventListener('click', function() {
-        jsonPasteOption.checked = true;
-        jsonFileInput.classList.add('d-none');
-        jsonPasteInput.classList.remove('d-none');
-        jsonLinkInput.classList.add('d-none');
-    });
-    
-    document.querySelector('label[for="jsonFileOption"]')?.addEventListener('click', function() {
-        jsonFileOption.checked = true;
-        jsonFileInput.classList.remove('d-none');
-        jsonPasteInput.classList.add('d-none');
-        jsonLinkInput.classList.add('d-none');
-    });
-    
-    document.querySelector('label[for="jsonLinkOption"]')?.addEventListener('click', function() {
-        jsonLinkOption.checked = true;
-        jsonFileInput.classList.add('d-none');
-        jsonPasteInput.classList.add('d-none');
-        jsonLinkInput.classList.remove('d-none');
-    });
-    
-    const typeNew = document.getElementById('typeNew');
-    const typeRework = document.getElementById('typeRework');
-    const typeRebalance = document.getElementById('typeRebalance');
-    
-    document.querySelector('label[for="typeNew"]')?.addEventListener('click', function() {
-        typeNew.checked = true;
-    });
-    
-    document.querySelector('label[for="typeRework"]')?.addEventListener('click', function() {
-        typeRework.checked = true;
-    });
-    
-    document.querySelector('label[for="typeRebalance"]')?.addEventListener('click', function() {
-        typeRebalance.checked = true;
-    });
-    
-    document.querySelectorAll('.btn-check').forEach(radio => {
-        const label = document.querySelector(`label[for="${radio.id}"]`);
-        if (label) {
-            label.addEventListener('click', function() {
-                setTimeout(() => {
-                    radio.checked = true;
-                    const event = new Event('change', { bubbles: true });
-                    radio.dispatchEvent(event);
-                }, 0);
-            });
-        }
-    });
-}
