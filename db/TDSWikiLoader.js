@@ -206,28 +206,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // load towers on page load
     loadTowersFromWiki();
 
-    // add refresh button
-    const refreshButton = document.createElement('button');
-    refreshButton.className = 'btn btn-sm btn-outline-secondary text-light';
-    refreshButton.innerHTML = '<i class="bi bi-arrow-clockwise me-1"></i> Refresh';
-    refreshButton.addEventListener('click', loadTowersFromWiki);
-
-    // setup button group
-    const toolbar = document.querySelector('.btn-toolbar');
-    const uploadButton = document.getElementById('upload-tower-btn');
-
-    if (!uploadButton.parentElement.classList.contains('btn-group')) {
-        const actionGroup = document.createElement('div');
-        actionGroup.className = 'btn-group';
-        
-        const uploadParent = uploadButton.parentElement;
-        actionGroup.appendChild(uploadButton);
-        actionGroup.appendChild(refreshButton);
-        
-        toolbar.appendChild(actionGroup);
-    } else {
-        uploadButton.parentElement.appendChild(refreshButton);
-    }
+    // add event listener for refresh button
+    document.getElementById('refresh-towers-btn').addEventListener('click', loadTowersFromWiki);
 
     // Set all filter checkboxes to checked by default
     document.getElementById('filterNewTower').checked = true;
