@@ -159,6 +159,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // load towers from wiki
     async function loadTowersFromWiki() {
+        // reset the stored original cards to prevent duplicates when using the refresh button
+        window.originalCardsOrder = [];
+        
         // show loading spinners
         document.getElementById('featured-towers').innerHTML = 
         '<div class="col-12 text-center text-light p-5"><div class="spinner-border" role="status"></div><p class="mt-2">Getting featured data...</p></div>';
