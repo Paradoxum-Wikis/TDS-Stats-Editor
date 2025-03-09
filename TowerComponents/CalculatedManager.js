@@ -972,6 +972,7 @@ class CalculatedManager {
             },
         },
 
+        // boosts
         Cooldown: {
             Type: 'Override',
 
@@ -993,6 +994,18 @@ class CalculatedManager {
                     const { damageBuff } = window.state.boosts.tower; // prettier-ignore
 
                     return damage * (damageBuff + 1);
+                },
+            },
+        },
+        ExplosionDamage: {
+            Type: 'Override',
+
+            Default: {
+                Requires: ['ExplosionDamage'],
+                Value: (explosionDamage) => {
+                    const { damageBuff } = window.state.boosts.tower; // prettier-ignore
+
+                    return explosionDamage * (damageBuff + 1);
                 },
             },
         },
@@ -1091,6 +1104,7 @@ class CalculatedManager {
         this.#add('Damage', skinData);
         this.#add('Range', skinData);
         this.#add('Cost', skinData);
+        this.#add('ExplosionDamage', skinData);
         this.#add('SpawnTime', skinData);
         this.#add('LaserDPS', skinData);
         this.#add('TotalElapsedDamage', skinData);

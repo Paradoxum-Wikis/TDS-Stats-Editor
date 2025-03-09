@@ -168,6 +168,8 @@ class UnitCalculations {
                 },
             },
         },
+
+        // boosts
         Cooldown: {
             Type: 'Override',
 
@@ -189,6 +191,18 @@ class UnitCalculations {
                     const { damageBuff } = window?.state?.boosts?.unit ?? 0; // prettier-ignore
 
                     return damage * (damageBuff + 1);
+                },
+            },
+        },
+        ExplosionDamage: {
+            Type: 'Override',
+
+            Default: {
+                Requires: ['ExplosionDamage'],
+                Value: (explosionDamage) => {
+                    const { damageBuff } = window.state.boosts.unit; // prettier-ignore
+
+                    return explosionDamage * (damageBuff + 1);
                 },
             },
         },
@@ -408,6 +422,7 @@ class UnitCalculations {
         this.#add('Damage', unitData);
         this.#add('Cooldown', unitData);
         this.#add('Range', unitData);
+        this.#add('ExplosionDamage', unitData);
         
         this.#add('NetCost', unitData);
         this.#add('CostEfficiency', unitData);
