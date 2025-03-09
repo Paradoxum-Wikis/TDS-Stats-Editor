@@ -46,6 +46,7 @@
     <script src="TDSWikiLoader.js"></script>
     <script src="TDSWikiUploader.js"></script>
     <script src="TDSWikiUploaderUI.js"></script>
+    <script src="TDSWikiSorter.js"></script>
 
     <title>TDS Database Browser</title>
 </head>
@@ -61,7 +62,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="w-100 d-none d-md-block px-3">
-            <input class="form-control form-control-dark w-100" type="text" placeholder="Search a Tower" aria-label="Search">
+            <input class="form-control form-control-dark w-100" type="text" placeholder="Search a Tower" aria-label="Search" autocomplete="off">
         </div>
         <div class="navbar-nav">
             <div class="nav-item text-nowrap">
@@ -82,19 +83,19 @@
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <div class="form-check ms-3 my-2">
-                                <input class="form-check-input" type="checkbox" value="" id="filterNewTower">
+                                <input class="form-check-input" type="checkbox" value="" id="filterNewTower" checked>
                                 <label class="form-check-label text-light" for="filterNewTower">
                                     New Tower
                                 </label>
                             </div>
                             <div class="form-check ms-3 my-2">
-                                <input class="form-check-input" type="checkbox" value="" id="filterTowerRework">
+                                <input class="form-check-input" type="checkbox" value="" id="filterTowerRework" checked>
                                 <label class="form-check-label text-light" for="filterTowerRework">
                                     Tower Rework
                                 </label>
                             </div>
                             <div class="form-check ms-3 my-2">
-                                <input class="form-check-input" type="checkbox" value="" id="filterTowerRebalance">
+                                <input class="form-check-input" type="checkbox" value="" id="filterTowerRebalance" checked>
                                 <label class="form-check-label text-light" for="filterTowerRebalance">
                                     Tower Rebalance
                                 </label>
@@ -107,13 +108,16 @@
                     </h6>
                     <ul class="nav flex-column mb-2">
                         <li class="nav-item">
-                            <a class="nav-link active text-light" href="#">Most Popular</a>
+                            <a class="nav-link active text-light" href="#">Wiki Listing</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="#">Newest</a>
+                            <a class="nav-link active text-light" href="#">Alphabet (Tower)</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="#">Highest Rated</a>
+                            <a class="nav-link text-light" href="#">Alphabet (User)</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="#">Time</a>
                         </li>
                     </ul>
                 </div>
@@ -122,7 +126,7 @@
             <!-- main content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">
-                    <h1 class="h2 text-white">Custom Tower Browser (BETA 1.1)</h1>
+                    <h1 class="h2 text-white">Custom Tower Browser (BETA 1.2)</h1>
                     <div class="btn-toolbar mb-2 mb-md-0 d-flex align-items-center">
                         <div class="btn-group me-2">
                             <button type="button" class="btn btn-sm btn-outline-secondary text-light" id="grid-view-btn">Grid</button>

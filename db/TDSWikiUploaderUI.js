@@ -1,11 +1,12 @@
+/**
+ * TDSWikiUploaderUI.js
+ * UI related things built on top of the main uploader script
+ */
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize global image cache
     window.imageCache = {};
-    
-    // UI element references
     const imageUrlInput = document.getElementById('towerImageUrl');
-    
-    // add a preview for the image
+
     const previewContainer = document.createElement('div');
     previewContainer.className = 'mt-2 text-center';
     previewContainer.innerHTML = '<img id="image-preview" class="img-fluid border border-secondary rounded" style="max-height: 150px; display: none;">';
@@ -284,7 +285,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     setTimeout(() => {
                         manualModal.hide();
-                        // After modal is hidden, we proceed to edit page
                         window.openFandomEditPage?.();
                     }, 1000);
                 }
@@ -293,13 +293,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Cleanup when the modal is hidden
         modalDiv.addEventListener('hidden.bs.modal', function() {
             document.body.removeChild(modalDiv);
         });
     }
 
-    // Export functions to be used by main uploader
+    // Export functions used by TDSWikiUploader.js
     window.showAlert = showAlert;
     window.showValidationError = showValidationError;
     window.showManualCopyDialog = showManualCopyDialog;

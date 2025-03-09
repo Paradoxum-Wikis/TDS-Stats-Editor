@@ -1,6 +1,8 @@
 /**
- * gets tower data from the tds wiki
+ * TDSWiki.js
+ * gets tower data from the TDS wiki
  */
+
 class TDSWikiFetcher {
     constructor() {
         this.wikiBaseUrl = 'https://tds.fandom.com';
@@ -244,7 +246,6 @@ class TDSWikiFetcher {
                     tower.linkedTower = linkMatch[1]; 
                     tower.isLink = true;
                 } else {
-                    // Regular JSON approach
                     try {
                         const jsonData = JSON.parse(preContent);
                         tower.data = jsonData;
@@ -292,7 +293,7 @@ class TDSWikiFetcher {
     }
     
     /**
-     * fallback towers if wiki fails
+     * fallback towers if wiki fails (placeholder data for testing mostly tbh)
      */
     getFallbackTowers() {
         console.log("using fallback towers");

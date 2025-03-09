@@ -159,6 +159,7 @@ textarea {
 .border-gold {
     border-color: #FFD700 !important;
     border-width: 2px !important;
+    box-shadow: 0 0 10px #ffd70080;
 }
 
 .badge.bg-gold {
@@ -223,4 +224,56 @@ textarea {
 .author-link:hover {
     color: #0aa3c2 !important;
     text-decoration: none;
+}
+
+@keyframes card-highlight-blue {
+    0% { box-shadow: 0 0 0 0 #0dcaf000; }
+    40% { box-shadow: 0 0 0 6px #0dcaf066; }
+    100% { box-shadow: 0 0 0 0 #0dcaf000; }
+}
+
+.search-highlight {
+    animation: card-highlight-blue 2s ease-out;
+    border: 2px solid #0dcaf0 !important;
+    transition: all 0.5s ease;
+}
+
+.search-highlight .card-title {
+    color: #0dcaf0 !important;
+}
+
+.search-highlight .card-footer {
+    border-top-color: #0dcaf0 !important;
+}
+
+/* featured card overrides */
+@keyframes card-highlight-gold {
+    0% { box-shadow: 0 0 10px #ffd70080; }
+    40% { box-shadow: 0 0 0 6px #ffd70066, 0 0 10px #ffd70080; }
+    100% { box-shadow: 0 0 10px #ffd70080; }
+}
+
+.search-highlight.border-gold {
+    animation: card-highlight-gold 2s ease-out !important;
+    border: 2px solid #FFD700 !important;
+    box-shadow: 0 0 10px #ffd70080;
+    transition: box-shadow 0.5s ease;
+}
+
+.search-highlight.border-gold {
+    animation: card-highlight-gold 2s ease-out !important;
+    border: 2px solid #FFD700 !important;
+    box-shadow: 0 0 10px #ffd70080;
+}
+
+.search-highlight.border-gold .card-title {
+    color: #FFD700 !important;
+}
+
+.search-highlight.border-gold .card-footer.gold {
+    border-top-color: #FFD700 !important;
+}
+
+.position-sticky {
+    top: 3vw;
 }

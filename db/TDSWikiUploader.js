@@ -1,3 +1,8 @@
+/**
+ * TDSWiki.js
+ * The uploading script to upload towers to the database
+ */
+
 document.addEventListener('DOMContentLoaded', function() {
     const uploadTowerBtn = document.getElementById('upload-tower-btn');
     const uploadTowerModal = document.getElementById('uploadTowerModal');
@@ -78,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
                 
-                // Add a 2-second delay before opening the new page
+                // Add a 2s delay before opening the new page
                 await new Promise(resolve => setTimeout(resolve, 2000));
                 
             } catch (copyError) {
@@ -167,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 linkInput.classList.remove('is-invalid');
                 
-                // Auto-fill username and tower name fields from the link
+                // autofill username and tower name fields from the link
                 const linkInfo = extractInfoFromBlogLink(linkValue);
                 if (linkInfo) {
                     const usernameField = document.getElementById('fandomUsername');

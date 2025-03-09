@@ -1,3 +1,8 @@
+/**
+ * TDSWikiLoader.js
+ * Loads the content it got from the fetcher
+ */
+
 document.addEventListener('DOMContentLoaded', function () {
     // start in grid view by default
     const allTowers = document.getElementById('all-towers');
@@ -74,83 +79,83 @@ document.addEventListener('DOMContentLoaded', function () {
     const wikiFetcher = new TDSWikiFetcher();
 
     // render a tower card
-function renderTowerCard(tower, container) {
-    const col = document.createElement('div');
-    col.className = 'col';
-    
-    // Create unique id
-    const towerId = `tower-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`;
-    
-    // Save tower data in cache
-    if (!window.towerDataCache) window.towerDataCache = {};
-    if (tower.data) window.towerDataCache[towerId] = tower.data;
+    function renderTowerCard(tower, container) {
+        const col = document.createElement('div');
+        col.className = 'col';
+        
+        // Create unique id
+        const towerId = `tower-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`;
+        
+        // Save tower data in cache
+        if (!window.towerDataCache) window.towerDataCache = {};
+        if (tower.data) window.towerDataCache[towerId] = tower.data;
 
-    // Set badge color based on tag
-    let tagClass = 'bg-secondary';
-    if (tower.tag === 'New') {
-        tagClass = 'bg-success';
-    } else if (tower.tag === 'Rework') {
-        tagClass = 'bg-warning';
-    } else if (tower.tag === 'Rebalance') {
-        tagClass = 'bg-info';
-    }
+        // Set badge color based on tag
+        let tagClass = 'bg-secondary';
+        if (tower.tag === 'New') {
+            tagClass = 'bg-success';
+        } else if (tower.tag === 'Rework') {
+            tagClass = 'bg-warning';
+        } else if (tower.tag === 'Rebalance') {
+            tagClass = 'bg-info';
+        }
 
-    // Check if we're in list view
-    const isListView = container.id === 'all-towers' && container.classList.contains('row-cols-1');
-    
-    // Create data section HTML based on tower type
-    let dataSection = '';
-    
-    if (tower.isLink && tower.linkedTower) {
-        // For linked towers
-        dataSection = `<div class="d-flex gap-2 mt-3">
-            <a href="${tower.linkedTower}" target="_blank" class="btn btn-sm btn-outline-primary">
-                <i class="bi bi-box-arrow-up-right me-1"></i> Visit Blog
-            </a>
-        </div>`;
-    } else if (tower.data) {
-        // For towers with JSON data
-        dataSection = `<div class="d-flex gap-2 mt-3">
-            <button class="btn btn-sm btn-outline-info copy-json" data-tower-id="${towerId}">
-                <i class="bi bi-clipboard me-1"></i> Copy JSON
-            </button>
-            <button class="btn btn-sm btn-outline-primary download-json" data-tower-id="${towerId}">
-                <i class="bi bi-download me-1"></i> Download
-            </button>
-        </div>`;
-    }
+        // Check if we're in list view
+        const isListView = container.id === 'all-towers' && container.classList.contains('row-cols-1');
+        
+        // Create data section HTML based on tower type
+        let dataSection = '';
+        
+        if (tower.isLink && tower.linkedTower) {
+            // For linked towers
+            dataSection = `<div class="d-flex gap-2 mt-3">
+                <a href="${tower.linkedTower}" target="_blank" class="btn btn-sm btn-outline-primary">
+                    <i class="bi bi-box-arrow-up-right me-1"></i> Visit Blog
+                </a>
+            </div>`;
+        } else if (tower.data) {
+            // For towers with JSON data
+            dataSection = `<div class="d-flex gap-2 mt-3">
+                <button class="btn btn-sm btn-outline-info copy-json" data-tower-id="${towerId}">
+                    <i class="bi bi-clipboard me-1"></i> Copy JSON
+                </button>
+                <button class="btn btn-sm btn-outline-primary download-json" data-tower-id="${towerId}">
+                    <i class="bi bi-download me-1"></i> Download
+                </button>
+            </div>`;
+        }
 
-    // Format author name as a link to their Fandom profile page
-    const authorLink = `<a href="https://tds.fandom.com/wiki/User:${encodeURIComponent(tower.author)}" 
-                          target="_blank" 
-                          class="author-link" 
-                          title="View ${tower.author}'s profile">
-                          ${tower.author}
-                       </a>`;
+        // Format author name as a link to his/her Fandom profile page
+        const authorLink = `<a href="https://tds.fandom.com/wiki/User:${encodeURIComponent(tower.author)}" 
+                              target="_blank" 
+                              class="author-link" 
+                              title="View ${tower.author}'s profile">
+                              ${tower.author}
+                           </a>`;
 
-    col.innerHTML = `
-        <div class="card h-100 bg-dark text-white ${tower.featured ? 'border-gold' : ''} ${isListView ? 'list-view-card' : ''}">
-            <div class="position-absolute top-0 end-0 p-2">
-                ${tower.featured ? '<span class="badge bg-gold me-1">Featured</span>' : ''}
-                ${tower.tag ? `<span class="badge ${tagClass}">${tower.tag}</span>` : ''}
-            </div>
-            <img src="${tower.image}" class="card-img-top" alt="${tower.name}" onerror="this.src='https://static.wikia.nocookie.net/tower-defense-sim/images/4/4a/Site-favicon.ico'">
-            <div class="card-body">
-                <h5 class="card-title">${tower.name}</h5>
-                <p class="card-text">${tower.description || 'No description available.'}</p>
-                ${dataSection}
-            </div>
-            <div class="card-footer ${tower.featured ? 'gold' : ''} d-flex justify-content-between align-items-center">
-                <small class="fw-bold">By ${authorLink}</small>
-                <div>
-                    <small><i class="bi bi-clock text-info me-1"></i>${tower.uploadDate || 'Recently'}</small>
+        col.innerHTML = `
+            <div class="card h-100 bg-dark text-white ${tower.featured ? 'border-gold' : ''} ${isListView ? 'list-view-card' : ''}">
+                <div class="position-absolute top-0 end-0 p-2">
+                    ${tower.featured ? '<span class="badge bg-gold me-1">Featured</span>' : ''}
+                    ${tower.tag ? `<span class="badge ${tagClass}">${tower.tag}</span>` : ''}
+                </div>
+                <img src="${tower.image}" class="card-img-top" alt="${tower.name}" onerror="this.src='https://static.wikia.nocookie.net/tower-defense-sim/images/4/4a/Site-favicon.ico'">
+                <div class="card-body">
+                    <h5 class="card-title">${tower.name}</h5>
+                    <p class="card-text">${tower.description || 'No description available.'}</p>
+                    ${dataSection}
+                </div>
+                <div class="card-footer ${tower.featured ? 'gold' : ''} d-flex justify-content-between align-items-center">
+                    <small class="fw-bold">By ${authorLink}</small>
+                    <div>
+                        <small><i class="bi bi-clock text-info me-1"></i>${tower.uploadDate || 'Recently'}</small>
+                    </div>
                 </div>
             </div>
-        </div>
-    `;
+        `;
 
-    container.appendChild(col);
-}
+        container.appendChild(col);
+    }
 
     // load towers from wiki
     async function loadTowersFromWiki() {
@@ -182,6 +187,15 @@ function renderTowerCard(tower, container) {
 
             // show all towers
             towers.forEach(tower => renderTowerCard(tower, allTowersContainer));
+            
+            // Setup search functionality after loading towers
+            if (window.setupSearch) window.setupSearch();
+            
+            // Apply filters
+            if (window.applyFilters) window.applyFilters();
+            
+            // Setup sorting
+            if (window.setupSorting) window.setupSorting();
 
         } catch (error) {
             console.error('Failed to load towers:', error);
@@ -214,6 +228,17 @@ function renderTowerCard(tower, container) {
     } else {
         uploadButton.parentElement.appendChild(refreshButton);
     }
+
+    // Set all filter checkboxes to checked by default
+    document.getElementById('filterNewTower').checked = true;
+    document.getElementById('filterTowerRework').checked = true;
+    document.getElementById('filterTowerRebalance').checked = true;
+    
+    // Setup filter functionality
+    if (window.setupFilters) window.setupFilters();
+    
+    // Setup sorting functionality
+    if (window.setupSorting) window.setupSorting();
 });
 
 // handle json buttons
