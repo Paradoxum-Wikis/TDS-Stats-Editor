@@ -90,7 +90,7 @@ class CalculatedManager {
 
                     const unit = this.unitManager.unitData[level.UnitToSend];
 
-                    return unit.attributes.DPS * level.MaxUnits;
+                    return unit.attributes.TotalDPS * level.MaxUnits;
                 },
             },
         },
