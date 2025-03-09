@@ -46,10 +46,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 buttonContainer.className = 'd-flex gap-2 mt-3';
                 buttonContainer.innerHTML = `
                     <button class="btn btn-sm btn-outline-info copy-json" data-tower-id="${towerId}">
-                        <i class="bi bi-clipboard me-1"></i> Copy JSON
+                        <i class="bi bi-clipboard me-2"></i>Copy JSON
                     </button>
                     <button class="btn btn-sm btn-outline-primary download-json" data-tower-id="${towerId}">
-                        <i class="bi bi-download me-1"></i> Download
+                        <i class="bi bi-download me-2"></i>Download
                     </button>
                 `;
                 const existingButtons = body.querySelector('.d-flex.gap-2.mt-3');
@@ -103,28 +103,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Check if we're in list view
         const isListView = container.id === 'all-towers' && container.classList.contains('row-cols-1');
         
-        // Create data section HTML based on tower type
-        let dataSection = '';
-        
-        if (tower.isLink && tower.linkedTower) {
-            // For linked towers
-            dataSection = `<div class="d-flex gap-2 mt-3">
-                <a href="${tower.linkedTower}" target="_blank" class="btn btn-sm btn-outline-primary">
-                    <i class="bi bi-box-arrow-up-right me-1"></i> Visit Blog
-                </a>
-            </div>`;
-        } else if (tower.data) {
-            // For towers with JSON data
-            dataSection = `<div class="d-flex gap-2 mt-3">
-                <button class="btn btn-sm btn-outline-info copy-json" data-tower-id="${towerId}">
-                    <i class="bi bi-clipboard me-1"></i> Copy JSON
-                </button>
-                <button class="btn btn-sm btn-outline-primary download-json" data-tower-id="${towerId}">
-                    <i class="bi bi-download me-1"></i> Download
-                </button>
-            </div>`;
-        }
-
         // Format author name as a link to his/her Fandom profile page
         const authorLink = `<a href="https://tds.fandom.com/wiki/User:${encodeURIComponent(tower.author)}" 
                               target="_blank" 
@@ -132,6 +110,24 @@ document.addEventListener('DOMContentLoaded', function () {
                               title="View ${tower.author}'s profile">
                               ${tower.author}
                            </a>`;
+
+        // Create buttons HTML based on tower type
+        let buttonsHTML = '';
+        
+        if (tower.isLink && tower.linkedTower) {
+            // For blog linked towers
+            buttonsHTML = `<a href="${tower.linkedTower}" target="_blank" class="btn btn-sm btn-outline-primary">
+                <i class="bi bi-box-arrow-up-right me-1"></i> Visit Blog
+            </a>`;
+        } else if (tower.data) {
+            // For towers with JSON data
+            buttonsHTML = `<button class="btn btn-sm btn-outline-info copy-json me-2" data-tower-id="${towerId}">
+                <i class="bi bi-clipboard me-2"></i>Copy JSON
+            </button>
+            <button class="btn btn-sm btn-outline-primary download-json" data-tower-id="${towerId}">
+                <i class="bi bi-download me-2"></i>Download
+            </button>`;
+        }
 
         col.innerHTML = `
             <div class="card h-100 bg-dark text-white ${tower.featured ? 'border-gold' : ''} ${isListView ? 'list-view-card' : ''}">
@@ -143,13 +139,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="card-body">
                     <h5 class="card-title">${tower.name}</h5>
                     <p class="card-text">${tower.description || 'No description available.'}</p>
-                    ${dataSection}
                 </div>
-                <div class="card-footer ${tower.featured ? 'gold' : ''} d-flex justify-content-between align-items-center">
-                    <small class="fw-bold">By ${authorLink}</small>
-                    <div>
-                        <small><i class="bi bi-clock text-info me-1"></i>${tower.uploadDate || 'Recently'}</small>
+                <div class="card-footer ${tower.featured ? 'gold' : ''} pb-2">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <small class="fw-bold">By ${authorLink}</small>
+                        ${tower.uploadDate ? `<small class="text-end"><i class="bi bi-clock text-info me-1"></i>${tower.uploadDate}</small>` : ''}
                     </div>
+                    ${buttonsHTML ? `<div class="d-flex justify-content-center mt-2">${buttonsHTML}</div>` : ''}
                 </div>
             </div>
         `;
