@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
                 <div class="card-footer ${tower.featured ? 'gold' : ''} pb-2">
                     <div class="d-flex justify-content-between align-items-center mb-2">
-                        <small class="fw-bold">By ${authorLink}</small>
+                        <small class="fw-bold me-1">By ${authorLink}</small>
                         ${tower.uploadDate ? `<small class="text-end"><i class="bi bi-clock text-info me-1"></i>${tower.uploadDate}</small>` : ''}
                     </div>
                     ${buttonsHTML ? `<div class="d-flex justify-content-center mt-2">${buttonsHTML}</div>` : ''}
