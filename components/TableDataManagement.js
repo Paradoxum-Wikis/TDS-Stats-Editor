@@ -1,4 +1,4 @@
-import Viewer from './Viewer.js';
+import Viewer from './Viewer/index.js';
 
 export default class TableDataManagement {
     /**

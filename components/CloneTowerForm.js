@@ -1,8 +1,8 @@
 import Dropdown from './Dropdown.js';
 import Alert from './Alert.js';
-import Viewer from './Viewer.js';
+import Viewer from './Viewer/index.js';
 
-export default class AddAttributeForm {
+export default class CloneTowerForm {
     /**
      *
      * @param {Viewer} viewer
@@ -13,9 +13,9 @@ export default class AddAttributeForm {
         this.towerName = document.getElementById('clone-tower-name');
 
         this.fromTowerName = document.getElementById('clone-tower-reference');
-        this.fromTowerDropdown = document.getElementById('clone-tower-options'); // prettier-ignore
+        this.fromTowerDropdown = document.getElementById('clone-tower-options');
 
-        this.addCloneSubmit = document.getElementById('clone-submit') // prettier-ignore
+        this.addCloneSubmit = document.getElementById('clone-submit')
 
         this.towerNames = [...this.viewer.defaultTowerManager.towerNames];
         this.towerNamesLower = this.towerNames.map((name) =>
@@ -38,7 +38,7 @@ export default class AddAttributeForm {
 
                 if (targetValue === undefined) return;
 
-                this.typeInput.value = targetValue;
+                this.fromTowerName.value = targetValue;
                 this.#onTowerChange();
             }).bind(this)
         );
@@ -97,24 +97,21 @@ export default class AddAttributeForm {
         }
 
         this.viewer.addNewTower(towerName, towerData);
-
-        // const didAdd = this.viewer
-        //     .getActiveSkin()
-        //     .addAttribute(this.nameInput.value, this.#getInput());
-
-        // if (didAdd) {
-        //     const alert = new Alert(
-        //         `${this.nameInput.value} added to ${this.viewer.tower.name}`,
-        //         { alertStyle: 'alert-success' }
-        //     );
-        //     alert.alertTimeInSeconds = 1;
-        //     alert.fire();
-        // }
-
-        // this.viewer.import(JSON.stringify(this.viewer.tower.json));
+        
+        // success notification
+        const alert = new Alert(
+            `Tower "${towerReference}" successfully cloned as "${towerName}"`,
+            { alertStyle: 'alert-success' }
+        );
+        alert.alertTimeInSeconds = 2;
+        alert.fire();
+        
+        // clear the form for next use
+        this.towerName.value = '';
+        this.#onNameInput('');
     }
 
     #onTowerChange() {
-//        console.log('onTowerChange');
+        // validate current tower
     }
 }

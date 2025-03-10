@@ -1,6 +1,6 @@
 import TowerManager from './TowerComponents/TowerManager.js';
 import Dropdown from './components/Dropdown.js';
-import Viewer from './components/Viewer.js';
+import Viewer from './components/Viewer/index.js';
 
 class App {
     constructor() {

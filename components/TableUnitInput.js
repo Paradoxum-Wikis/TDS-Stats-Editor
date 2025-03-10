@@ -1,4 +1,4 @@
-import Viewer from './Viewer.js';
+import Viewer from './Viewer/index.js';
 import Unit from '../TowerComponents/Unit.js';
 export default class TableUnitInput {
     /**
