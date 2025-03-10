@@ -299,13 +299,13 @@ function sortTowers(criteria, direction = 'asc') {
                     const timeTextB = b.querySelector('.card-footer small:last-child')?.textContent || '';
                     comparison = compareUploadDates(timeTextB, timeTextA);
                     
-                    if (direction === 'asc') {
+                    if (direction === 'desc') {
                         comparison = -comparison;
                     }
                     return comparison;
                 }
                 
-                return direction === 'asc' ? comparison : -comparison;
+                return direction === 'desc' ? comparison : -comparison;
             });
         }
     }
