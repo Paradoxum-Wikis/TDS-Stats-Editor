@@ -131,6 +131,8 @@ class WikitableGenerator {
             'UnitDPS': 'Unit DPS',
             'ExplosionDPS': 'Explosion DPS',
             'BurnDPS': 'Burn DPS',
+            'CallToArmsDPS': 'Call To Arms DPS',
+            'CaravanDPS': 'Caravan DPS',
         };
         
         if (acronyms[attribute]) {
