@@ -1,6 +1,7 @@
 import TowerManager from './TowerComponents/TowerManager.js';
 import Dropdown from './components/Dropdown.js';
 import Viewer from './components/Viewer/index.js';
+import UpdateLog from './UpdateLog.js';
 
 class App {
     constructor() {
@@ -53,3 +54,7 @@ class App {
 
 const app = new App();
 app.start();
+
+document.addEventListener('DOMContentLoaded', () => {
+    new UpdateLog();
+});

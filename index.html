@@ -51,8 +51,8 @@
     <script src="json-viewer.js"></script>
     <script src="Slides.js"></script>
     <script src="JSONUploader.js"></script>
+    <script type="module" src="UpdateLog.js"></script>
     <script defer type="module" src="Main.js"></script>
-    <!--<script defer type="module" src="Converter.js"></script> -->
 
     <title>TDS Statistics Editor</title>
 </head>
@@ -585,10 +585,10 @@
                     <!-- Add option toggles -->
                     <div class="btn-group w-100 mb-3" role="group">
                         <input type="radio" class="btn-check" name="importInputType" id="importPasteOption" autocomplete="off" checked>
-                        <label class="btn btn-outline-primary" for="importPasteOption">Paste JSON</label>
+                        <label class="btn btn-outline-primary" for="importPasteOption"><i class="bi bi-clipboard me-2"></i>Paste JSON</label>
                         
                         <input type="radio" class="btn-check" name="importInputType" id="importFileOption" autocomplete="off">
-                        <label class="btn btn-outline-primary" for="importFileOption">Upload File</label>
+                        <label class="btn btn-outline-primary" for="importFileOption"><i class="bi bi-upload me-2"></i>Upload File</label>
                     </div>
                     
                     <!-- Paste JSON section -->
@@ -804,29 +804,49 @@
         </div>
     </div>
 
-    <!-- Discord Modal -->
+    <!-- About Us Modal -->
     <div class="modal fade" id="discord-modal" tabindex="-1" role="dialog" aria-labelledby="discord-modal-label"
         aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content bg-dark text-white">
                 <!-- Modal Header-->
                 <div class="modal-header">
-                    <h5 class="modal-title" id="discord-modal-label"><img style="width: 25px; margin-right: 0.25rem; vertical-align: sub;" src="https://static.wikia.nocookie.net/tower-defense-sim/images/2/21/About.svg">About Us</h5>
+                    <h5 class="modal-title" id="discord-modal-label"><i class="bi bi-info-circle me-2"></i>About Us</h5>
+                </div>
+
+                <div class="btn-group w-100 px-3 pt-3" role="group">
+                    <input type="radio" class="btn-check" name="aboutSection" id="aboutSectionAbout" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary" for="aboutSectionAbout"><i class="bi bi-info-circle me-2"></i>About</label>
+                    
+                    <input type="radio" class="btn-check" name="aboutSection" id="aboutSectionUpdates" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="aboutSectionUpdates"><i class="bi bi-journal-code me-2"></i>Update Log</label>
                 </div>
 
                 <!-- Modal Body-->
-                <div class="modal-body text-center">
-                    <p>The Statistics Editor (and thereby, the Database) is a website and project owned by the community of Tower Defense Simulator Wiki.
-                    <br/><br/>
-                    The official Tower Defense Simulator Wiki is hosted by <img width="60px" src="https://static.wikia.nocookie.net/6a181c72-e8bf-419b-b4db-18fd56a0eb60" style="vertical-align: text-top;"> which manages and maintains the platform for the community.<br/>This website operates independently and is not directly affiliated with it.</p>
+                <div class="modal-body">
+                    <!-- About content section -->
+                    <div id="about-content" class="text-center">
+                        <p>The Statistics Editor (and thereby, the Database) is a website and project owned by the community of Tower Defense Simulator Wiki.
+                        <br/><br/>
+                        The official Tower Defense Simulator Wiki is hosted by <img width="60px" src="https://static.wikia.nocookie.net/6a181c72-e8bf-419b-b4db-18fd56a0eb60" style="vertical-align: text-top;"> which manages and maintains the platform for the community.<br/>This website operates independently and is not directly affiliated with it.</p>
+                        
+                        <div class="d-flex align-items-center justify-content-center">
+                            <a href="https://discord.gg/fBgQzudY3h" target="_blank" class="mx-2">
+                                <img style="width: 42px;" class="zoomup type1" title="Join the Tower Defense Simulator Wiki Discord server!" src="https://static.wikia.nocookie.net/tower-defense-sim/images/4/4c/Discord-Symbol-Blurple.svg">
+                            </a>
+                            <a href="https://github.com/t7ru/TDS-Stats-Editor/" target="_blank" class="mx-2">
+                                <img style="width: 42px;" class="zoomup type1" title="Contribute to the website's source code!" src="htmlassets/github-mark-white.svg">
+                            </a>
+                        </div>
+                    </div>
                     
-                    <div class="d-flex align-items-center justify-content-center">
-                        <a href="https://discord.gg/fBgQzudY3h" target="_blank" class="mx-2">
-                            <img style="width: 42px;" class="zoomup type1" title="Join the Tower Defense Simulator Wiki Discord server!" src="https://static.wikia.nocookie.net/tower-defense-sim/images/4/4c/Discord-Symbol-Blurple.svg">
-                        </a>
-                        <a href="https://github.com/t7ru/TDS-Stats-Editor/" target="_blank" class="mx-2">
-                            <img style="width: 42px;" class="zoomup type1" title="Contribute to the website's source code!" src="htmlassets/github-mark-white.svg">
-                        </a>
+                    <!-- Update Log content section -->
+                    <div id="update-log-content" class="d-none">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border text-secondary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

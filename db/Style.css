@@ -282,3 +282,7 @@ a:hover {
 .col {
     animation: fadeIn 0.5s ease-out forwards;
 }
+
+.text-muted {
+    color: #6c757d !important;
+}

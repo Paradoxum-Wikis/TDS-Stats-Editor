@@ -153,6 +153,9 @@
                             <button title="Information about this website." class="btn btn-sm btn-outline-secondary text-light"
                                 data-bs-toggle="modal" data-bs-target="#guidelines-modal"><i class="bi bi-journal-text me-2"></i>Guidelines
                             </button>
+                            <button title="Information about this website." class="btn btn-sm btn-outline-secondary text-light"
+                            data-bs-toggle="modal" data-bs-target="#updatelog-modal"><i class="bi bi-journal-code me-2"></i>Update Log
+                        </button>
                         </div>
                         <div class="btn-group me-2">
                             <button type="button" class="btn btn-sm btn-outline-secondary text-light" id="upload-tower-btn">
@@ -555,6 +558,32 @@
                     </ul>
 
                     <p class="text-info">Grandfather Clause: Any submissions made before the creation of the guidelines are exempt from them and thus verified. This means that the first 7 towers submitted during the BETA phase should not be used as a reference for standards.</p>
+                </div>
+                <hr class="mx-3 my-0">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update Log Modal -->
+    <div class="modal fade" id="updatelog-modal" tabindex="-1" aria-labelledby="updateLogModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateLogModalLabel"><i class="bi bi-journal-code me-2"></i>Update Log</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <hr class="mx-3 my-0">
+                <div class="modal-body">
+                    <div id="db-update-log-content">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border text-secondary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <hr class="mx-3 my-0">
                 <div class="modal-footer">

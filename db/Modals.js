@@ -1,3 +1,5 @@
+import UpdateLog from '../UpdateLog.js';
+
 // Help modal tab switching
 document.addEventListener('DOMContentLoaded', function() {
     const helpBrowser = document.getElementById('helpBrowser');
@@ -19,3 +21,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const updateLog = new UpdateLog();
+    
+    updateLog.modal = document.getElementById('updatelog-modal');
+    updateLog.contentContainer = document.getElementById('db-update-log-content');
+    
+    updateLog.modal.addEventListener('shown.bs.modal', () => {
+        updateLog.fetchCommits();
+    });
+});
+
+export default UpdateLog;
