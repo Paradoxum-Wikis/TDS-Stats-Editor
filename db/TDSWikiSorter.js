@@ -113,9 +113,6 @@ function applyFilters(maintainSort = true) {
         return;
     }
     
-    document.querySelectorAll('.search-highlight').forEach(el => 
-        el.classList.remove('search-highlight'));
-
     cards.forEach(card => {
         const cardElement = card.querySelector('.card');
         const towerName = card.querySelector('.card-title')?.textContent?.toLowerCase() || '';
@@ -152,10 +149,6 @@ function applyFilters(maintainSort = true) {
         if (matchesSearch && matchesTypeFilter && matchesVerificationFilter) {
             card.classList.remove('d-none');
             matchCount++;
-            
-            if (query) {
-                cardElement.classList.add('search-highlight');
-            }
         } else {
             card.classList.add('d-none');
         }

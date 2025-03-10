@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (tower.tag === 'New') {
             tagClass = 'bg-success';
         } else if (tower.tag === 'Rework') {
-            tagClass = 'bg-warning';
+            tagClass = 'bg-danger';
         } else if (tower.tag === 'Rebalance') {
             tagClass = 'bg-info';
         }
@@ -108,9 +108,9 @@ document.addEventListener('DOMContentLoaded', function () {
         
         if (tower.isLink && tower.linkedTower) {
             // For linked towers
-            buttonsHTML = `<a href="${tower.linkedTower}" target="_blank" class="btn btn-sm btn-outline-primary">
+            buttonsHTML = `<div href="${tower.linkedTower}" target="_blank" class="btn btn-sm btn-outline-primary">
                 <i class="bi bi-box-arrow-up-right me-1"></i> Visit Blog
-            </a>`;
+            </div>`;
         } else if (tower.data) {
             // For towers with JSON data
             buttonsHTML = `<button class="btn btn-sm btn-outline-info copy-json me-2" data-tower-id="${towerId}">
@@ -134,13 +134,14 @@ document.addEventListener('DOMContentLoaded', function () {
             '<span class="badge bg-secondary me-1" data-unverified="true">Unverified</span>' : '';
 
         col.innerHTML = `
-            <div class="card h-100 bg-dark text-white ${tower.featured ? 'border-gold' : ''} ${isListView ? 'list-view-card' : ''}">
+            <div class="card h-100 bg-dark bg-gradient text-white ${tower.featured ? 'border-gold' : ''} ${isListView ? 'list-view-card' : ''}">
                 <div class="position-absolute top-0 end-0 p-2">
                     ${tower.featured ? '<span class="badge bg-gold me-1">Featured</span>' : ''}
                     ${unverifiedBadge}
                     ${tower.tag ? `<span class="badge ${tagClass}">${tower.tag}</span>` : ''}
                 </div>
-                <img src="${tower.image}" class="card-img-top" alt="${tower.name}" onerror="this.src='https://static.wikia.nocookie.net/tower-defense-sim/images/4/4a/Site-favicon.ico'">
+                <img src="${tower.image}" class="card-img-top" loading="lazy" alt="${tower.name}" 
+                     onerror="this.src='https://static.wikia.nocookie.net/tower-defense-sim/images/4/4a/Site-favicon.ico'; this.classList.add('img-error');">
                 <div class="card-body">
                     <h5 class="card-title">${tower.name}</h5>
                     <p class="card-text">${tower.description || 'No description available.'}</p>
