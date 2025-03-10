@@ -270,13 +270,8 @@ a:hover {
     color: #0dcaf0 !important;
 }
 
-.card:focus-within {
-    outline: 3px solid #0dcaf0;
-    box-shadow: 0 0 0 5px rgba(13, 202, 240, 0.3);
-}
-
 .card .btn:focus {
-    box-shadow: 0 0 0 3px rgba(13, 202, 240, 0.5);
+    box-shadow: 0 0 0 3px #0dcaf080;
 }
 
 @keyframes fadeIn {
