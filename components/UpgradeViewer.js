@@ -320,14 +320,10 @@ export default class UpgradeViewer {
         );
         abilityDiv.appendChild(abilityCostInput);
 
-        // Store the cooldown input element for later access
-        abilityDiv.cooldownInput = cooldownInput.querySelector('input');
-
-        // Store the level input element for later access
+        // Store the input elements for later access
         abilityDiv.levelInput = unlockLevelInput.querySelector('input');
-
-        // Store the level input element for later access
-        abilityDiv.levelInput = abilityCostInput.querySelector('input');
+        abilityDiv.cooldownInput = cooldownInput.querySelector('input');
+        abilityDiv.costInput = abilityCostInput.querySelector('input');
     
         this.abilityContainer.appendChild(abilityDiv);
     }

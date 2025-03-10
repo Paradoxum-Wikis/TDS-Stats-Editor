@@ -601,7 +601,7 @@ class CalculatedManager {
                     if (level.Level < abilitylvl) {
                         return NaN;
                     }
-                    const abilitycd = this.upgradeViewer.getAbilityCooldownValue(1);
+                    const abilitycd = this.upgradeViewer.getAbilityCooldownValue(1); 
                     return ((level.Damage / level.Cooldown) * level.AttackTime) / abilitycd;
                 },
             },
