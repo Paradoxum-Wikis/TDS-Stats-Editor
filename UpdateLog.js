@@ -87,7 +87,7 @@ class UpdateLog {
                 <div class="list-group-item bg-dark text-white border-secondary">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">
-                            ${type ? `<span class="badge ${badgeClass} me-2">${type}</span>` : ''}
+                            ${type ? `<span class="badge ${badgeClass} me-1">${type}</span>` : ''}
                             ${scope ? `<span class="text-muted">(${scope})</span> ` : ''}
                             ${description}
                         </h5>
