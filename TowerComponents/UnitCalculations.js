@@ -50,14 +50,10 @@ class UnitCalculations {
                 },
             },
             
-            Missiles: {
+            PursuitMissiles: {
                 For: ['Top 4', 'Top 5', 'Bottom 4', 'Bottom 5'],
                 Value: (level) => {
-                    let baseDamage = (level.Damage * level.Ammo) / (level.ReloadTime + (level.Cooldown * level.Ammo));
-                    let explosionDamage = (level.ExplosionDamage && (level.MissileCooldown + level.TimeBetweenMissiles * level.MissileAmount) > 0)
-                        ? ((level.ExplosionDamage * level.MissileAmount) / (level.MissileCooldown + level.TimeBetweenMissiles * level.MissileAmount))
-                        : 0;
-                    return baseDamage + explosionDamage;
+                    return (level.Damage * level.Ammo) / (level.ReloadTime + (level.Cooldown * level.Ammo));
                 },
             },
 
@@ -285,6 +281,11 @@ class UnitCalculations {
                     }
                     return level.ExplosionDamage / level.TimeBetweenMissiles;
                 },
+            },
+            Pursuit: {
+                For: ['Top 4', 'Top 5', 'Bottom 4', 'Bottom 5'],
+                Requires: ['ExplosionDamage', 'MissileCooldown', 'MissileAmount', 'TimeBetweenMissiles'],
+                Value: (level) => (level.ExplosionDamage * level.MissileAmount) / (level.MissileCooldown + level.TimeBetweenMissiles * level.MissileAmount)
             },
             WarMachineSentry: {
                 For: ['War Machine Sentry'],
