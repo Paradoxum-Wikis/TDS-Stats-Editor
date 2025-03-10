@@ -1,3 +1,5 @@
+import { allowedAttributes, attributeLabels } from './AttributesList.js';
+
 class WikitableGenerator {
     constructor(tower, activeUnits, propertyViewer, towerVariants, viewer) {
         // sets up the wikitable generator with necessary data
@@ -24,30 +26,90 @@ class WikitableGenerator {
                    !['NoTable', 'SideLevel', 'Level'].includes(attr);
         });
         
-        let wikitable = `<div style="overflow-x: scroll;">\n{| class="wikitable sortable" style="margin: 0 auto"\n`; // prettier-ignore
-        wikitable += `|+ '''${fullTowerName} Master'''\n`;
+        let displayAttributes = attributes;
+        if (this.viewer.useFaithfulFormat) {
+            displayAttributes = attributes.filter(attr => allowedAttributes.includes(attr));
+        }
+        
+        let wikitable;
+        if (this.viewer.useFaithfulFormat) {
+            wikitable = `<div style="overflow-x: scroll;">\n{| class="wikitable" style="text-align: center; margin: 0 auto"\n`;
+        } else {
+            wikitable = `<div style="overflow-x: scroll;">\n{| class="wikitable sortable" style="margin: 0 auto"\n`;
+            wikitable += `|+ '''${fullTowerName} Master'''\n`;
+        }
         
         wikitable += `|-\n`;
-        wikitable += `! Level`;
-        attributes.forEach(attr => {
-            wikitable += ` !! ${this.#formatWikitableHeader(attr)}`;
-        });
+        
+        // header formatting for faithful format
+        if (this.viewer.useFaithfulFormat) {
+            // use the order defined in allowedAttributes
+            let orderedAttributes = [];
+            for (const attr of allowedAttributes) {
+                if (attr === 'Level' || displayAttributes.includes(attr)) {
+                    orderedAttributes.push(attr);
+                }
+            }
+            
+            // Use the ordered attributes for headers
+            let isFirst = true;
+            orderedAttributes.forEach(attr => {
+                if (isFirst) {
+                    wikitable += `! scope="col" style="padding: 5px;" |${this.#formatWikitableHeader(attr)}`;
+                    isFirst = false;
+                } else {
+                    wikitable += `\n! scope="col" style="padding: 5px;" |${this.#formatWikitableHeader(attr)}`;
+                }
+            });
+        } else {
+            // regular format remains unchanged
+            wikitable += `! Level`;
+            displayAttributes.forEach(attr => {
+                wikitable += ` !! ${this.#formatWikitableHeader(attr)}`;
+            });
+        }
         wikitable += `\n`;
         
+        // Format rows
         levels.levels.forEach((level, index) => {
             if (level.NoTable === true) return;
             
             wikitable += `|-\n`;
-            wikitable += `| ${level.Level ?? index}`;
             
-            attributes.forEach(attr => {
-                const value = levels.getCell(index, attr);
-                wikitable += ` || ${this.#formatWikitableCell(value, attr)}`;
-            });
+            if (this.viewer.useFaithfulFormat) {
+                // use the same order for the row values
+                let orderedAttributes = [];
+                for (const attr of allowedAttributes) {
+                    if (attr === 'Level' || displayAttributes.includes(attr)) {
+                        orderedAttributes.push(attr);
+                    }
+                }
+                
+                let isFirst = true;
+                orderedAttributes.forEach(attr => {
+                    const value = attr === 'Level' ? (level.Level ?? index) : levels.getCell(index, attr);
+                    
+                    if (isFirst) {
+                        wikitable += `| style="padding: 5px;" |${this.#formatWikitableCell(value, attr)}`;
+                        isFirst = false;
+                    } else {
+                        wikitable += `\n| style="padding: 5px;" |${this.#formatWikitableCell(value, attr)}`;
+                    }
+                });
+            } else {
+                // regular format remains unchanged
+                wikitable += `| ${level.Level ?? index}`;
+                
+                displayAttributes.forEach(attr => {
+                    const value = levels.getCell(index, attr);
+                    wikitable += ` || ${this.#formatWikitableCell(value, attr)}`;
+                });
+            }
             
             wikitable += `\n`;
         });
         
+        // Close table
         wikitable += `|}\n</div>`;
         
         return wikitable;
@@ -75,16 +137,19 @@ class WikitableGenerator {
             !['id', 'uuid', 'type', 'parent', 'hidden'].includes(attr.toLowerCase())
         );
         
-        // Split Detections into separate columns
+        // multiple detecs columns
         const detectionsIndex = attributes.indexOf('Detections');
         if (detectionsIndex !== -1) {
-            // Remove Detections and add individual detection attributes
             attributes.splice(detectionsIndex, 1);
             attributes.push('Hidden', 'Flying', 'Lead');
         }
         
-        let wikitable = `<div style="overflow-x: scroll">\n{| class="wikitable sortable" style="margin: 0 auto"\n`; // prettier-ignore
-        wikitable += `|+ '''${fullTowerName} Slave'''\n`;
+        const sortableClass = this.viewer.useFaithfulFormat ? '' : 'sortable';
+        let wikitable = `<div style="overflow-x: scroll;">\n{| class="wikitable ${sortableClass}" style="text-align: center; margin: 0 auto"\n`;
+        
+        if (!this.viewer.useFaithfulFormat) {
+            wikitable += `|+ '''${fullTowerName} Slave'''\n`;
+        }
         
         wikitable += `|-\n`;
         wikitable += `! Name`;
@@ -97,19 +162,26 @@ class WikitableGenerator {
             if (!unitData.data) return;
             
             wikitable += `|-\n`;
-            wikitable += `| ${unitName}`;
+            if (this.viewer.useFaithfulFormat) {
+                wikitable += `| style="padding: 5px;" | ${unitName}`;
+            } else {
+                wikitable += `| ${unitName}`;
+            }
             
             attributes.forEach(attr => {
                 let value;
                 
-                // Handle detection attributes separately
                 if (['Hidden', 'Flying', 'Lead'].includes(attr) && unitData.data.Detections) {
                     value = unitData.data.Detections[attr] || false;
                 } else {
                     value = unitData.data[attr];
                 }
                 
-                wikitable += ` || ${this.#formatWikitableCell(value, attr)}`;
+                if (this.viewer.useFaithfulFormat) {
+                    wikitable += ` || style="padding: 5px;" | ${this.#formatWikitableCell(value, attr)}`;
+                } else {
+                    wikitable += ` || ${this.#formatWikitableCell(value, attr)}`;
+                }
             });
             
             wikitable += `\n`;
@@ -121,7 +193,12 @@ class WikitableGenerator {
     }
 
     #formatWikitableHeader(attribute) {
-        // formats the wikitable header, handles acronyms
+        // check to use a custom label in faithful format
+        if (this.viewer.useFaithfulFormat && attributeLabels[attribute]) {
+            return attributeLabels[attribute];
+        }
+        
+        // formats both wikitable header, handles acronyms
         const acronyms = {
             'DPS': 'DPS',
             'LaserDPS': 'Laser DPS',
@@ -173,7 +250,11 @@ class WikitableGenerator {
             'LimitNetCost', 'IncomePerSecond', 'TotalIncomePerSecond', 
             'BaseIncome', 'IncomePerTower', 'MaxIncome'
         ].includes(attribute)) {
-            return `$${this.#formatNumber(value)}`;
+            if (this.viewer.useFaithfulFormat) {
+                return `{{Money|${this.#formatNumberWithCommas(value)}}}`;
+            } else {
+                return `$${this.#formatNumber(value)}`;
+            }
         }
         
         // percentage formatting
@@ -185,7 +266,9 @@ class WikitableGenerator {
             'SlowdownPerTower', 'BaseDefenseMelt', 'DefenseMeltPerTower',
             'MaxDefenseMelt'
         ].includes(attribute)) {
-            return `${this.#formatNumber(value)}%`;
+            return this.viewer.useFaithfulFormat
+                ? this.#formatNumber(value)
+                : `${this.#formatNumber(value)}%`;
         }
         
         // time formatting
@@ -198,7 +281,9 @@ class WikitableGenerator {
             'BuildDelay', 'TimeBetweenMissiles', 'SendTime', 'StunLength',
             'Lifetime', 'ConfusionTime', 'ConfusionCooldown'
         ].includes(attribute)) {
-            return `${this.#formatNumber(value)}s`;
+            return this.viewer.useFaithfulFormat
+                ? this.#formatNumber(value)
+                : `${this.#formatNumber(value)}s`;
         }
         
         // boolean values
@@ -233,6 +318,14 @@ class WikitableGenerator {
             minimumFractionDigits: 0,
             maximumFractionDigits: 2
         });
+    }
+
+    // Add a new helper method for formatting numbers with commas but no decimal places
+    #formatNumberWithCommas(num) {
+        if (typeof num !== 'number') return num;
+        
+        // faithful uses a different format for numbers
+        return Math.round(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 }
 

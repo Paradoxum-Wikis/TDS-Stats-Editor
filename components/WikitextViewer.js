@@ -2,7 +2,7 @@ class WikitextViewer {
     constructor() {
         this.container = document.createElement('div');
         this.container.className = 'wikitable-code-container';
-        this.container.style.height = '100%';
+        this.container.style.height = '70vh';
         this.container.style.display = 'flex';
         this.container.style.flexDirection = 'column';
         
