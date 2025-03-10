@@ -911,32 +911,31 @@ class CalculatedManager {
                 For: ['Commando'],
                 Value: (level) => {
                     this.unitManager.load();
-                    let missile1DPS = 0;
-                    let missile2DPS = 0;
-        
-                    if (level.Level >= 3) {
-                        const missile1 = this.unitManager.unitData["Missile 1"];
-                        const missileNumber1 = parseInt("Missile 1".match(/\d+$/)[0]);
-                        const missileLevel1 = missileNumber1 - 1;
-                        const cooldown1 = this.upgradeViewer.getAbilityCooldownValue(missileLevel1);
-        
-                        if (missile1 && missile1.attributes && missile1.attributes.ExplosionDamage && cooldown1) {
-                            missile1DPS = missile1.attributes.ExplosionDamage / cooldown1;
-                        }
-                    }
-        
+                    let missileDPS = 0;
+            
                     if (level.Level >= 4) {
+                        // level 4+ uses missile 2
                         const missile2 = this.unitManager.unitData["Missile 2"];
-                        const missileNumber2 = parseInt("Missile 2".match(/\d+$/)[0]); // extracts the number
-                        const missileLevel2 = missileNumber2 - 1; // subtracts 1
-                        const cooldown2 = this.upgradeViewer.getAbilityCooldownValue(missileLevel2);
-        
-                        if (missile2 && missile2.attributes && missile2.attributes.ExplosionDamage && cooldown2) {
-                            missile2DPS = missile2.attributes.ExplosionDamage / cooldown2;
+                        const missileNumber = parseInt("Missile 2".match(/\d+$/)[0]);
+                        const missileLevel = missileNumber - 1;
+                        const cooldown = this.upgradeViewer.getAbilityCooldownValue(missileLevel);
+            
+                        if (missile2 && missile2.attributes && missile2.attributes.ExplosionDamage && cooldown) {
+                            missileDPS = missile2.attributes.ExplosionDamage / cooldown;
+                        }
+                    } else if (level.Level >= 3) {
+                        // level 3 uses missile 1
+                        const missile1 = this.unitManager.unitData["Missile 1"];
+                        const missileNumber = parseInt("Missile 1".match(/\d+$/)[0]);
+                        const missileLevel = missileNumber - 1;
+                        const cooldown = this.upgradeViewer.getAbilityCooldownValue(missileLevel);
+            
+                        if (missile1 && missile1.attributes && missile1.attributes.ExplosionDamage && cooldown) {
+                            missileDPS = missile1.attributes.ExplosionDamage / cooldown;
                         }
                     }
-        
-                    return level.DPS + missile1DPS + missile2DPS;
+            
+                    return level.DPS + missileDPS;
                 },
             },
 
