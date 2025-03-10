@@ -74,7 +74,7 @@ class UpdateLog {
                 switch (type.toLowerCase()) {
                     case 'feat': badgeClass = 'bg-success'; type = 'Feature'; break;
                     case 'fix': badgeClass = 'bg-danger'; type = 'Fix'; break;
-                    case 'docs': badgeClass = 'bg-info'; type = 'Docs'; break;
+                    case 'docs': badgeClass = 'bg-info'; type = 'Documentation'; break;
                     case 'style': badgeClass = 'bg-primary'; type = 'Style'; break;
                     case 'refactor': badgeClass = 'bg-warning text-dark'; type = 'Refactor'; break;
                     case 'perf': badgeClass = 'bg-purple'; type = 'Performance'; break;
