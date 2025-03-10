@@ -17,7 +17,7 @@ function setupSearch() {
     if (!searchInput) return;
     
     searchInput.addEventListener('input', debounce(function() {
-        applyFilters(); // Apply filters directly when search changes
+        applyFilters(); // Use standalone applyFilters
     }, 300));
 }
 
@@ -33,27 +33,29 @@ function debounce(func, wait) {
 }
 
 // filters functionality
-function setupFilters() {
-    const filterCheckboxes = [
-        document.getElementById('filterNewTower'),
-        document.getElementById('filterTowerRework'),
-        document.getElementById('filterTowerRebalance')
-    ];
+window.setupFilters = function() {
+    const filterNewTower = document.getElementById('filterNewTower');
+    const filterTowerRework = document.getElementById('filterTowerRework');
+    const filterTowerRebalance = document.getElementById('filterTowerRebalance');
+    const filterUnverified = document.getElementById('filterUnverified');
     
-    filterCheckboxes.forEach(checkbox => {
-        if (checkbox) {
-            checkbox.checked = true; // Set checked by default
-            checkbox.addEventListener('change', applyFilters);
-        }
-    });
-}
+    if (filterUnverified) filterUnverified.checked = false;
+    
+    if (filterNewTower) filterNewTower.addEventListener('change', applyFilters);
+    if (filterTowerRework) filterTowerRework.addEventListener('change', applyFilters);
+    if (filterTowerRebalance) filterTowerRebalance.addEventListener('change', applyFilters);
+    if (filterUnverified) filterUnverified.addEventListener('change', applyFilters);
+    
+    applyFilters();
+};
 
 function applyFilters(maintainSort = true) {
     const showNew = document.getElementById('filterNewTower')?.checked ?? true;
     const showRework = document.getElementById('filterTowerRework')?.checked ?? true;
     const showRebalance = document.getElementById('filterTowerRebalance')?.checked ?? true;
+    const showUnverified = document.getElementById('filterUnverified')?.checked ?? false;
     
-    // get search query
+    // Get search query
     const searchInput = document.querySelector('.form-control[placeholder="Search a Tower"]');
     const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
     
@@ -66,7 +68,7 @@ function applyFilters(maintainSort = true) {
     document.getElementById('no-filter-results')?.remove();
     document.getElementById('no-search-results')?.remove();
     
-    // show/hide featured section
+    // Show/hide featured section
     if (query && featuredContainer) {
         featuredContainer.classList.add('d-none');
         headings.forEach(heading => heading.classList.add('d-none'));
@@ -76,7 +78,7 @@ function applyFilters(maintainSort = true) {
     }
     
     // if all filters are off, show no results message
-    if (!showNew && !showRework && !showRebalance) {
+    if (!showNew && !showRework && !showRebalance && !showUnverified) {
         const noResults = document.createElement('div');
         noResults.id = 'no-filter-results';
         noResults.className = 'col-12 text-center text-light p-5';
@@ -93,6 +95,7 @@ function applyFilters(maintainSort = true) {
             document.getElementById('filterNewTower').checked = true;
             document.getElementById('filterTowerRework').checked = true;
             document.getElementById('filterTowerRebalance').checked = true;
+            document.getElementById('filterUnverified').checked = false; // Reset to default
             applyFilters();
         });
         
@@ -102,13 +105,13 @@ function applyFilters(maintainSort = true) {
     
     document.querySelectorAll('.search-highlight').forEach(el => 
         el.classList.remove('search-highlight'));
-    
+
     cards.forEach(card => {
         const cardElement = card.querySelector('.card');
         const towerName = card.querySelector('.card-title')?.textContent?.toLowerCase() || '';
         const towerDescription = card.querySelector('.card-text')?.textContent?.toLowerCase() || '';
         const towerAuthor = card.querySelector('.card-footer .fw-bold')?.textContent?.toLowerCase() || '';
-        const badge = card.querySelector('.badge:not(.bg-gold)');
+        const badge = card.querySelector('.badge:not(.bg-gold):not([data-unverified="true"])'); // Don't count unverified badge here
         const towerTag = badge?.textContent?.trim() || '';
         const tagText = towerTag.toLowerCase();
         
@@ -118,19 +121,25 @@ function applyFilters(maintainSort = true) {
             towerAuthor.includes(query) ||
             tagText.includes(query);
         
-        let matchesFilter = false;
+        // check category filters: New, Rework, Rebalance
+        let matchesTypeFilter = false;
         
         if (badge) {
             if ((towerTag === 'New' && showNew) || 
                 (towerTag === 'Rework' && showRework) || 
                 (towerTag === 'Rebalance' && showRebalance)) {
-                matchesFilter = true;
+                matchesTypeFilter = true;
             }
         } else {
-            matchesFilter = (showNew || showRework || showRebalance);
+            matchesTypeFilter = (showNew || showRework || showRebalance);
         }
         
-        if (matchesSearch && matchesFilter) {
+        // check verification filter separately
+        const isUnverified = card.querySelector('.badge.bg-secondary[data-unverified="true"]') !== null;
+        const matchesVerificationFilter = isUnverified ? showUnverified : true; // Verified towers always match
+        
+        // tower is shown only if it matches search AND type filter AND verified
+        if (matchesSearch && matchesTypeFilter && matchesVerificationFilter) {
             card.classList.remove('d-none');
             matchCount++;
             
@@ -142,7 +151,7 @@ function applyFilters(maintainSort = true) {
         }
     });
     
-    // no results message
+    // no results message for search
     if (matchCount === 0 && query) {
         const noResults = document.createElement('div');
         noResults.id = 'no-search-results';
@@ -170,24 +179,20 @@ function applyFilters(maintainSort = true) {
 
 // sort functionality
 function setupSorting() {
-    // reset sort state
     window.sortState = {
         criteria: 'wiki',
         direction: 'asc'
     };
     
-    // store original (wiki) order of cards
     const allTowersContainer = document.getElementById('all-towers');
     if (allTowersContainer) {
         window.originalCardsOrder = Array.from(allTowersContainer.querySelectorAll('.col'));
     }
     
-    // sort button IDs and event listeners
     const sortLinks = document.querySelectorAll('.sidebar-heading + ul .nav-link');
     const sortIds = ['sort-by-wiki-listing', 'sort-by-tower-name', 'sort-by-user-name', 'sort-by-time'];
     const sortCriteria = ['wiki', 'name', 'author', 'time'];
     
-    // clean and set up each sort button
     for (let i = 0; i < Math.min(sortLinks.length, sortIds.length); i++) {
         sortLinks[i].id = sortIds[i];
         
@@ -200,20 +205,16 @@ function setupSorting() {
         });
     }
     
-    // wiki sort active by default
     const wikiListingBtn = document.getElementById('sort-by-wiki-listing');
     if (wikiListingBtn) {
         setActiveSortButton(wikiListingBtn);
     }
 }
 
-// toggle sort direction
 function toggleSort(criteria, button) {
     if (window.sortState.criteria === criteria) {
-        // same criteria: toggle direction
         window.sortState.direction = window.sortState.direction === 'asc' ? 'desc' : 'asc';
     } else {
-        // new criteria: default to ascending
         window.sortState.criteria = criteria;
         window.sortState.direction = 'asc';
     }
@@ -222,7 +223,6 @@ function toggleSort(criteria, button) {
     sortTowers(criteria, window.sortState.direction);
 }
 
-// set active sort button and its icon
 function setActiveSortButton(activeButton) {
     const sortLinks = document.querySelectorAll('.sidebar-heading + ul .nav-link');
     sortLinks.forEach(link => {
@@ -238,7 +238,6 @@ function setActiveSortButton(activeButton) {
         ? '<i class="bi bi-sort-down-alt"></i>' 
         : '<i class="bi bi-sort-up-alt"></i>';
     
-    // insert icon before the button
     if (activeButton.firstChild) {
         activeButton.insertBefore(sortIcon, activeButton.firstChild);
     } else {
@@ -246,7 +245,6 @@ function setActiveSortButton(activeButton) {
     }
 }
 
-// sort functionality
 function sortTowers(criteria, direction = 'asc') {
     window.sortState.criteria = criteria;
     window.sortState.direction = direction;
@@ -254,10 +252,9 @@ function sortTowers(criteria, direction = 'asc') {
     const allTowersContainer = document.getElementById('all-towers');
     if (!allTowersContainer) return;
     
-    // get cards to sort
     let cards;
     if (criteria === 'wiki' && window.originalCardsOrder.length > 0) {
-        cards = [...window.originalCardsOrder]; // Use original order
+        cards = [...window.originalCardsOrder];
         if (direction === 'desc') {
             cards.reverse();
         }
@@ -283,7 +280,6 @@ function sortTowers(criteria, direction = 'asc') {
                     const timeTextB = b.querySelector('.card-footer small:last-child')?.textContent || '';
                     comparison = compareUploadDates(timeTextB, timeTextA);
                     
-                    // invert for ascending
                     if (direction === 'asc') {
                         comparison = -comparison;
                     }
@@ -295,44 +291,29 @@ function sortTowers(criteria, direction = 'asc') {
         }
     }
     
-    // append cards in sorted order again
     cards.forEach(card => allTowersContainer.appendChild(card));
     
-    // apply any active filters/searches again (without re-sorting)
     applyFilters(false);
 }
 
 // time sort functionality
-// format: seconds ago, minutes ago, hours ago, days ago
-// after days ago, and to a month, it's: Day Month Year, with day and month in numbers, month in full word
 function compareUploadDates(dateA, dateB) {
     function getDateValue(dateText) {
-        // cleans everything
         dateText = dateText.trim();
         if (!dateText) return 0;
         
-        // if it has "ago"
         if (dateText.toLowerCase().includes('ago')) {
             const value = parseInt(dateText) || 0;
             
-            if (dateText.includes('second')) {
-                return Date.now() - (value * 1000);
-            } else if (dateText.includes('minute')) {
-                return Date.now() - (value * 60 * 1000);
-            } else if (dateText.includes('hour')) {
-                return Date.now() - (value * 60 * 60 * 1000);
-            } else if (dateText.includes('day')) {
-                return Date.now() - (value * 24 * 60 * 60 * 1000);
-            } else if (dateText.includes('week')) {
-                return Date.now() - (value * 7 * 24 * 60 * 60 * 1000);
-            } else if (dateText.includes('month')) {
-                return Date.now() - (value * 30 * 24 * 60 * 60 * 1000);
-            } else if (dateText.includes('year')) {
-                return Date.now() - (value * 365 * 24 * 60 * 60 * 1000);
-            }
+            if (dateText.includes('second')) return Date.now() - (value * 1000);
+            if (dateText.includes('minute')) return Date.now() - (value * 60 * 1000);
+            if (dateText.includes('hour')) return Date.now() - (value * 60 * 60 * 1000);
+            if (dateText.includes('day')) return Date.now() - (value * 24 * 60 * 60 * 1000);
+            if (dateText.includes('week')) return Date.now() - (value * 7 * 24 * 60 * 60 * 1000);
+            if (dateText.includes('month')) return Date.now() - (value * 30 * 24 * 60 * 60 * 1000);
+            if (dateText.includes('year')) return Date.now() - (value * 365 * 24 * 60 * 60 * 1000);
         }
         
-        // if it's above a month
         const months = {
             'january': 0, 'february': 1, 'march': 2, 'april': 3, 'may': 4, 'june': 5,
             'july': 6, 'august': 7, 'september': 8, 'october': 9, 'november': 10, 'december': 11
@@ -354,7 +335,7 @@ function compareUploadDates(dateA, dateB) {
     return getDateValue(dateA) - getDateValue(dateB);
 }
 
-// export functions to global scope
+// globals export
 window.setupSearch = setupSearch;
 window.setupFilters = setupFilters;
 window.setupSorting = setupSorting;

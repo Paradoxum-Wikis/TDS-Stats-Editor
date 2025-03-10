@@ -103,7 +103,25 @@ document.addEventListener('DOMContentLoaded', function () {
         // Check if we're in list view
         const isListView = container.id === 'all-towers' && container.classList.contains('row-cols-1');
         
-        // Format author name as a link to his/her Fandom profile page
+        // Create buttons HTML based on tower type
+        let buttonsHTML = '';
+        
+        if (tower.isLink && tower.linkedTower) {
+            // For linked towers
+            buttonsHTML = `<a href="${tower.linkedTower}" target="_blank" class="btn btn-sm btn-outline-primary">
+                <i class="bi bi-box-arrow-up-right me-1"></i> Visit Blog
+            </a>`;
+        } else if (tower.data) {
+            // For towers with JSON data
+            buttonsHTML = `<button class="btn btn-sm btn-outline-info copy-json me-2" data-tower-id="${towerId}">
+                <i class="bi bi-clipboard me-1"></i> Copy JSON
+            </button>
+            <button class="btn btn-sm btn-outline-primary download-json" data-tower-id="${towerId}">
+                <i class="bi bi-download me-1"></i> Download
+            </button>`;
+        }
+
+        // Format author name as a link
         const authorLink = `<a href="https://tds.fandom.com/wiki/User:${encodeURIComponent(tower.author)}" 
                               target="_blank" 
                               class="author-link" 
@@ -111,28 +129,15 @@ document.addEventListener('DOMContentLoaded', function () {
                               ${tower.author}
                            </a>`;
 
-        // Create buttons HTML based on tower type
-        let buttonsHTML = '';
-        
-        if (tower.isLink && tower.linkedTower) {
-            // For blog linked towers
-            buttonsHTML = `<a href="${tower.linkedTower}" target="_blank" class="btn btn-sm btn-outline-primary">
-                <i class="bi bi-box-arrow-up-right me-1"></i> Visit Blog
-            </a>`;
-        } else if (tower.data) {
-            // For towers with JSON data
-            buttonsHTML = `<button class="btn btn-sm btn-outline-info copy-json me-2" data-tower-id="${towerId}">
-                <i class="bi bi-clipboard me-2"></i>Copy JSON
-            </button>
-            <button class="btn btn-sm btn-outline-primary download-json" data-tower-id="${towerId}">
-                <i class="bi bi-download me-2"></i>Download
-            </button>`;
-        }
+        // Add unverified badge if needed
+        const unverifiedBadge = tower.unverified ? 
+            '<span class="badge bg-secondary me-1" data-unverified="true">Unverified</span>' : '';
 
         col.innerHTML = `
             <div class="card h-100 bg-dark text-white ${tower.featured ? 'border-gold' : ''} ${isListView ? 'list-view-card' : ''}">
                 <div class="position-absolute top-0 end-0 p-2">
                     ${tower.featured ? '<span class="badge bg-gold me-1">Featured</span>' : ''}
+                    ${unverifiedBadge}
                     ${tower.tag ? `<span class="badge ${tagClass}">${tower.tag}</span>` : ''}
                 </div>
                 <img src="${tower.image}" class="card-img-top" alt="${tower.name}" onerror="this.src='https://static.wikia.nocookie.net/tower-defense-sim/images/4/4a/Site-favicon.ico'">
@@ -151,6 +156,11 @@ document.addEventListener('DOMContentLoaded', function () {
         `;
 
         container.appendChild(col);
+        
+        // Hide unverified towers by default
+        if (tower.unverified && container.id === 'all-towers') {
+            col.classList.add('d-none');
+        }
     }
 
     // load towers from wiki
@@ -187,13 +197,8 @@ document.addEventListener('DOMContentLoaded', function () {
             // show all towers
             towers.forEach(tower => renderTowerCard(tower, allTowersContainer));
             
-            // Setup search functionality after loading towers
             if (window.setupSearch) window.setupSearch();
-            
-            // Apply filters
             if (window.applyFilters) window.applyFilters();
-            
-            // Setup sorting
             if (window.setupSorting) window.setupSorting();
 
         } catch (error) {
@@ -208,15 +213,12 @@ document.addEventListener('DOMContentLoaded', function () {
     // add event listener for refresh button
     document.getElementById('refresh-towers-btn').addEventListener('click', loadTowersFromWiki);
 
-    // Set all filter checkboxes to checked by default
+    // Set 3 filter checkboxes to checked by default
     document.getElementById('filterNewTower').checked = true;
     document.getElementById('filterTowerRework').checked = true;
     document.getElementById('filterTowerRebalance').checked = true;
     
-    // Setup filter functionality
     if (window.setupFilters) window.setupFilters();
-    
-    // Setup sorting functionality
     if (window.setupSorting) window.setupSorting();
 });
 

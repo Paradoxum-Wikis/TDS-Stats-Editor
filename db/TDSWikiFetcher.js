@@ -16,12 +16,8 @@ class TDSWikiFetcher {
         ];
         this.currentProxyIndex = 0;
         
-        // towers to show in featured section
-        this.featuredTowers = [
-            "Vessel Of Infinite Destruction/Golden Crook Boss",
-            "Vessel Of Infinite Destruction/Ranger",
-            // add more here
-        ];
+        // get featured towers
+        this.featuredTowers = window.featuredTowers || [];
     }
 
     /**
@@ -111,9 +107,9 @@ class TDSWikiFetcher {
                         url: link?.getAttribute('href') || '#',
                         image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/4/4a/Site-favicon.ico',
                         author: fullText.includes('/') ? fullText.split('/')[0] : 'Wiki Contributor',
-                        rating: (Math.random() * 2 + 3).toFixed(1),
-                        downloads: Math.floor(Math.random() * 1000) + 100,
-                        featured: this.featuredTowers.includes(fullText)
+                        featured: this.featuredTowers.includes(fullText),
+                        verified: window.approvedTowers ? window.approvedTowers.includes(fullText) : false,
+                        unverified: window.approvedTowers ? !window.approvedTowers.includes(fullText) : true
                     };
                 });
             
