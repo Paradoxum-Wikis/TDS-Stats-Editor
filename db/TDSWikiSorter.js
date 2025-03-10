@@ -49,6 +49,29 @@ window.setupFilters = function() {
     applyFilters();
 };
 
+// clear filter helper func
+function addClearFilterButton(container, icon, message) {
+    const noResults = document.createElement('div');
+    noResults.id = icon === 'filter' ? 'no-filter-results' : 'no-unverified-results';
+    noResults.className = 'col-12 text-center text-light p-5';
+    noResults.innerHTML = `
+        <i class="bi bi-${icon} fs-1"></i>
+        <p class="mt-2">${message}</p>
+        <div class="mt-3">
+            <button class="btn btn-outline-secondary mt-2" id="enable-all-filters">Clear Filter</button>
+        </div>
+    `;
+    container.appendChild(noResults);
+    
+    document.getElementById('enable-all-filters').addEventListener('click', () => {
+        document.getElementById('filterNewTower').checked = true;
+        document.getElementById('filterTowerRework').checked = true;
+        document.getElementById('filterTowerRebalance').checked = true;
+        document.getElementById('filterUnverified').checked = false; // Reset to default
+        applyFilters();
+    });
+}
+
 function applyFilters(maintainSort = true) {
     const showNew = document.getElementById('filterNewTower')?.checked ?? true;
     const showRework = document.getElementById('filterTowerRework')?.checked ?? true;
@@ -67,6 +90,7 @@ function applyFilters(maintainSort = true) {
     
     document.getElementById('no-filter-results')?.remove();
     document.getElementById('no-search-results')?.remove();
+    document.getElementById('no-unverified-results')?.remove();
     
     // Show/hide featured section
     if (query && featuredContainer) {
@@ -79,25 +103,11 @@ function applyFilters(maintainSort = true) {
     
     // if all filters are off, show no results message
     if (!showNew && !showRework && !showRebalance && !showUnverified) {
-        const noResults = document.createElement('div');
-        noResults.id = 'no-filter-results';
-        noResults.className = 'col-12 text-center text-light p-5';
-        noResults.innerHTML = `
-            <i class="bi bi-filter fs-1"></i>
-            <p class="mt-2">No towers shown because all filters are turned off</p>
-            <div class="mt-3">
-                <button class="btn btn-outline-secondary mt-2" id="enable-all-filters">Clear Filter</button>
-            </div>
-        `;
-        allTowersContainer.appendChild(noResults);
-        
-        document.getElementById('enable-all-filters').addEventListener('click', () => {
-            document.getElementById('filterNewTower').checked = true;
-            document.getElementById('filterTowerRework').checked = true;
-            document.getElementById('filterTowerRebalance').checked = true;
-            document.getElementById('filterUnverified').checked = false; // Reset to default
-            applyFilters();
-        });
+        addClearFilterButton(
+            allTowersContainer,
+            'filter',
+            'No towers shown because all filters are turned off'
+        );
         
         cards.forEach(card => card.classList.add('d-none'));
         return;
@@ -170,6 +180,15 @@ function applyFilters(maintainSort = true) {
                 searchInput.focus();
             }
         });
+    }
+    
+    // message when only unverified filter is on but there are no towers to show
+    if (matchCount === 0 && !query && !showNew && !showRework && !showRebalance && showUnverified) {
+        addClearFilterButton(
+            allTowersContainer,
+            'emoji-smile',
+            'All towers are verified! There are no unverified towers to show'
+        );
     }
     
     if (maintainSort && window.sortState.criteria) {
