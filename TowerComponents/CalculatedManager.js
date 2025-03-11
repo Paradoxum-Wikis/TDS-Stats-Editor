@@ -548,7 +548,7 @@ class CalculatedManager {
                 if (level.CriticalMultiplier === 0) {
                     return NaN;
                 }
-                return Math.ceil(level.Damage + level.Damage * (level.CriticalMultiplier / 100));
+                return Math.ceil(level.Damage * (level.CriticalMultiplier / 100));
                 },
             },
         },
