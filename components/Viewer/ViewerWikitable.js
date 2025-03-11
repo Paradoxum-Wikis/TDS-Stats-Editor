@@ -38,7 +38,7 @@ const ViewerWikitable = {
             }
             
             // add notice at the very end
-            this.currentWikitableContent += `\n<!-- Generated using the TDS Stats Editor (v1.1) on ${new Date().toUTCString()} -->\n`;
+            this.currentWikitableContent += `\n<!-- Generated using the TDS Stats Editor (v1.1) on ${new Date().toUTCString()} -->\n<!-- Faithful format is still very early in development, expect bugs! -->\n`;
             
             // show the wikitextViewer with syntax highlighting
             this.wikitextViewer.showWikitext(this.currentWikitableContent);
