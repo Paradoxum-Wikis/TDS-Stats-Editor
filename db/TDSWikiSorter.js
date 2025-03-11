@@ -106,7 +106,7 @@ function applyFilters(maintainSort = true) {
         addClearFilterButton(
             allTowersContainer,
             'filter',
-            'No towers shown because all filters are turned off'
+            'No towers shown because all filters are turned off.'
         );
         
         cards.forEach(card => card.classList.add('d-none'));
@@ -114,7 +114,6 @@ function applyFilters(maintainSort = true) {
     }
     
     cards.forEach(card => {
-        const cardElement = card.querySelector('.card');
         const towerName = card.querySelector('.card-title')?.textContent?.toLowerCase() || '';
         const towerDescription = card.querySelector('.card-text')?.textContent?.toLowerCase() || '';
         const towerAuthor = card.querySelector('.card-footer .fw-bold')?.textContent?.toLowerCase() || '';
@@ -123,9 +122,7 @@ function applyFilters(maintainSort = true) {
         const tagBadge = card.querySelector('.badge:not(.bg-gold):not(.bg-dark):not([data-unverified="true"])');
         const towerTag = tagBadge?.textContent?.trim() || '';
         const tagText = towerTag.toLowerCase();
-        
-        // Check specifically for grandfather badge
-        const isGrandfathered = card.querySelector('.badge[data-grandfathered="true"]') !== null;
+        const isUnverified = card.querySelector('.badge[data-unverified="true"]') !== null;
         
         const matchesSearch = !query || 
             towerName.includes(query) || 
@@ -135,12 +132,8 @@ function applyFilters(maintainSort = true) {
         
         // check category filters: New, Rework, Rebalance
         let matchesTypeFilter = false;
-        
-        // Grandfathered towers should be shown when any of the type filters are on
-        if (isGrandfathered && (showNew || showRework || showRebalance)) {
-            matchesTypeFilter = true;
-        }
-        else if (tagBadge) {
+
+        if (tagBadge) {
             if ((towerTag === 'New' && showNew) || 
                 (towerTag === 'Rework' && showRework) || 
                 (towerTag === 'Rebalance' && showRebalance)) {
@@ -150,9 +143,7 @@ function applyFilters(maintainSort = true) {
             // No tag at all but filters are on (show them)
             matchesTypeFilter = (showNew || showRework || showRebalance);
         }
-        
-        // check verification filter separately
-        const isUnverified = card.querySelector('.badge.bg-secondary[data-unverified="true"]') !== null;
+
         const matchesVerificationFilter = isUnverified ? showUnverified : true; // Verified towers always match
         
         // tower is shown only if it matches search AND type filter AND verified
@@ -190,7 +181,7 @@ function applyFilters(maintainSort = true) {
         addClearFilterButton(
             allTowersContainer,
             'emoji-smile',
-            'All towers are verified! There are no unverified towers to show'
+            'All towers are verified! There are no unverified towers to show.'
         );
     }
     
@@ -201,11 +192,6 @@ function applyFilters(maintainSort = true) {
 
 // sort functionality
 function setupSorting() {
-    window.sortState = {
-        criteria: 'wiki',
-        direction: 'asc'
-    };
-    
     const allTowersContainer = document.getElementById('all-towers');
     if (allTowersContainer) {
         window.originalCardsOrder = Array.from(allTowersContainer.querySelectorAll('.col'));
@@ -308,7 +294,7 @@ function sortTowers(criteria, direction = 'asc') {
                     return comparison;
                 }
                 
-                return direction === 'desc' ? comparison : -comparison;
+                return direction === 'asc' ? comparison : -comparison;
             });
         }
     }

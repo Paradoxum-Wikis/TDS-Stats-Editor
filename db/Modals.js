@@ -32,5 +32,3 @@ document.addEventListener('DOMContentLoaded', () => {
         updateLog.fetchCommits();
     });
 });
-
-export default UpdateLog;

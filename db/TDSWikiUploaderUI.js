@@ -45,24 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('selectedImageName').textContent = 'No file selected';
     });
     
-    // switch between image url and file upload
-    const imageUrlOption = document.getElementById('imageUrlOption');
-    const imageUploadOption = document.getElementById('imageUploadOption');
-    
-    if (imageUrlOption && imageUploadOption) {
-        document.querySelectorAll('input[name="imageInputType"]').forEach((radio) => {
-            radio.addEventListener('change', () => {
-                if (radio.id === 'imageUrlOption') {
-                    document.getElementById('imageUrlInput').classList.remove('d-none');
-                    document.getElementById('imageUploadInput').classList.add('d-none');
-                } else {
-                    document.getElementById('imageUrlInput').classList.add('d-none');
-                    document.getElementById('imageUploadInput').classList.remove('d-none');
-                }
-            });
-        });
-    }
-
     // display validation error
     function showValidationError(message) {
         showAlert(message, 'danger');
