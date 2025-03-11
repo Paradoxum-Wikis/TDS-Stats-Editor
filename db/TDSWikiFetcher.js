@@ -1,5 +1,5 @@
 /**
- * TDSWiki.js
+ * TDSWikiFetcher.js
  * gets tower data from the TDS wiki
  */
 
