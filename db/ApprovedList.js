@@ -17,6 +17,7 @@ const approvedTowers = [
     "Phidoductom1/Jesus the Navereth",
     "Vessel Of Infinite Destruction/Golden Crook Boss",
     "Vessel Of Infinite Destruction/Ranger",
+    "Vessel Of Infinite Destruction/Golden Cowboy",
 ];
 
 // List of featured towers

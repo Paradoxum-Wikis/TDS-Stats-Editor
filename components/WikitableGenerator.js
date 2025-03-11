@@ -1,4 +1,4 @@
-import { allowedAttributes, attributeLabels } from './AttributesList.js';
+import { allowedAttributes, attributeLabels, getTowerSpecificLabel } from './FaithfulCases.js';
 
 class WikitableGenerator {
     constructor(tower, activeUnits, propertyViewer, towerVariants, viewer) {
@@ -246,9 +246,17 @@ class WikitableGenerator {
     }
 
     #formatWikitableHeader(attribute) {
-        // check to use a custom label in faithful format
-        if (this.viewer.useFaithfulFormat && attributeLabels[attribute]) {
-            return attributeLabels[attribute];
+        // check for tower specific label in faithful format
+        if (this.viewer.useFaithfulFormat) {
+            const towerSpecificLabel = getTowerSpecificLabel(attribute, this.tower.name);
+            if (towerSpecificLabel) {
+                return towerSpecificLabel;
+            }
+            
+            // everything else
+            if (attributeLabels[attribute]) {
+                return attributeLabels[attribute];
+            }
         }
         
         // formats both wikitable header, handles acronyms

@@ -64,12 +64,37 @@ export const attributeLabels = {
     'Cooldown': 'Firerate',
     'ChargeTime': 'Charge-Up',
     'LaserCooldown': 'Cooldown',
-    'MaxAmmo': 'Overcharge',
     'ExplosionDamage': '[[Splash Damage]]',
     'ExplosionRadius': 'Explosion Range',
     'BombTime': 'Bomb Firerate',
     'AssistRange': 'Hidden Det. Range',
     'ComboLength': 'Hit Count',
     'KnockbackCooldown': 'Cooldown',
-
 };
+
+/**
+ * Tower specific attribute labels, basically, special, special cases for some towers
+ * @param {string} attribute - The attribute name
+ * @param {string} towerName - The tower name
+ * @returns {string|null} - The custom label
+ */
+export function getTowerSpecificLabel(attribute, towerName) {
+    const towerNameLower = towerName.toLowerCase();
+    
+    // MaxAmmo special cases
+    if (attribute === 'MaxAmmo') {
+        if (towerNameLower.includes('accelerator')) {
+            return 'Overcharge';
+        } else if (towerNameLower.includes('cowboy')) {
+            return 'Cash Shot';
+        }
+    }
+    
+    // Add more tower specific attribute mappings here
+    // Example:
+    // if (attribute === 'SomeAttribute' && towerNameLower.includes('specificTower')) {
+    //     return 'Custom Label';
+    // }
+    
+    return null; // No custom label for this tower+attribute combination
+}
