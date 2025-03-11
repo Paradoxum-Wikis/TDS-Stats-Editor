@@ -100,9 +100,7 @@ export default class UpgradeViewer {
 
     #loadUpgradeChanges() {
         const upgradeChanges = this.skinData.getUpgradeChangeOutput(this.index);
-        const minRows = 5;
-        this.upgradeChanges.value = upgradeChanges.join('\n');
-        this.upgradeChanges.rows = Math.max(upgradeChanges.length, minRows);
+        this.upgradeChanges.innerHTML = upgradeChanges.map(change => `<div>${change}</div>`).join('');
     }
 
     async #fetchImage(imageId) {

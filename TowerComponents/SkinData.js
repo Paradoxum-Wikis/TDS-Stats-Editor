@@ -136,17 +136,41 @@ class SkinData {
             'Lead',
             'Income',
         ];
-
+    
         const changes = this.getUpgradeChanges(level)
             .filter((value) => filter.includes(value.key))
             .map((value) => {
-                if (['true', 'false'].includes(String(value.original))) {
-                    return value.new ? `● ${value.key}` : `❌ ${value.key}`;
+                let icon = '';
+                switch (value.key) {
+                    case 'Damage':
+                        icon = '<img src="htmlassets/DamageIcon.png" width="16" class="align-text-bottom me-1">';
+                        break;
+                    case 'Cooldown':
+                        icon = '<img src="htmlassets/CooldownIcon.png" width="16" class="align-text-bottom me-1">';
+                        break;
+                    case 'Range':
+                        icon = '<img src="htmlassets/RangeIcon.png" width="16" class="align-text-bottom me-1">';
+                        break;
+                    case 'Hidden':
+                        icon = '<img src="htmlassets/HiddenIcon.png" width="16" class="align-text-bottom me-1">';
+                        break;
+                    case 'Flying':
+                        icon = '<img src="htmlassets/FlyingIcon.png" width="16" class="align-text-bottom me-1">';
+                        break;
+                    case 'Lead':
+                        icon = '<img src="htmlassets/LeadIcon.png" width="16" class="align-text-bottom me-1">';
+                        break;
+                }
+    
+                if (['Hidden', 'Flying', 'Lead'].includes(value.key)) {
+                    return value.new ? `${icon}${value.key}` : `❌ ${icon}${value.key}`;
+                } else if (['true', 'false'].includes(String(value.original))) {
+                    return value.new ? `● ${icon}${value.key}` : `❌ ${icon}${value.key}`;
                 } else {
-                    return `${value.key}: ${value.original} → ${value.new}`;
+                    return `${icon}${value.key}: ${value.original} → ${value.new}`;
                 }
             });
-
+    
         const extras = this.data.Upgrades[level].Stats.Extras ?? [];
         return [...changes, ...extras.map((extra) => `● ${extra}`)];
     }
