@@ -96,7 +96,7 @@ class UpdateLog {
                     <div class="d-flex w-100 justify-content-between">
                         <small>
                             <a href="${commit.html_url}" target="_blank" class="text-info">
-                                View on GitHub
+                                View more on GitHub
                             </a>
                         </small>
                         <small class="text-muted">${formattedDate}</small>
