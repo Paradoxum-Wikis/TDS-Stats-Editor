@@ -137,52 +137,105 @@ class WikitableGenerator {
             !['id', 'uuid', 'type', 'parent', 'hidden'].includes(attr.toLowerCase())
         );
         
-        // multiple detecs columns
         const detectionsIndex = attributes.indexOf('Detections');
         if (detectionsIndex !== -1) {
             attributes.splice(detectionsIndex, 1);
             attributes.push('Hidden', 'Flying', 'Lead');
         }
+
+        if (this.viewer.useFaithfulFormat) {
+            attributes = attributes.filter(attr => allowedAttributes.includes(attr));
+        }
         
         const sortableClass = this.viewer.useFaithfulFormat ? '' : 'sortable';
-        let wikitable = `<div style="overflow-x: scroll;">\n{| class="wikitable ${sortableClass}" style="text-align: center; margin: 0 auto"\n`;
+        
+        // line break for faithful format
+        let wikitable = this.viewer.useFaithfulFormat ? '\n' : '';
+        
+        wikitable += `<div style="overflow-x: scroll;">\n{| class="wikitable ${sortableClass}" style="text-align: center; margin: 0 auto"\n`;
         
         if (!this.viewer.useFaithfulFormat) {
             wikitable += `|+ '''${fullTowerName} Slave'''\n`;
         }
         
         wikitable += `|-\n`;
-        wikitable += `! Name`;
-        attributes.forEach(attr => {
-            wikitable += ` !! ${this.#formatWikitableHeader(attr)}`;
-        });
+        
+        if (this.viewer.useFaithfulFormat) {
+            let orderedAttributes = ['Name'];
+            for (const attr of allowedAttributes) {
+                if (attributes.includes(attr)) {
+                    orderedAttributes.push(attr);
+                }
+            }
+            
+            let isFirst = true;
+            orderedAttributes.forEach(attr => {
+                if (isFirst) {
+                    wikitable += `! scope="col" style="padding: 5px;" |${this.#formatWikitableHeader(attr === 'Name' ? 'Name' : attr)}`;
+                    isFirst = false;
+                } else {
+                    wikitable += `\n! scope="col" style="padding: 5px;" |${this.#formatWikitableHeader(attr)}`;
+                }
+            });
+        } else {
+            // og format
+            wikitable += `! Name`;
+            attributes.forEach(attr => {
+                wikitable += ` !! ${this.#formatWikitableHeader(attr)}`;
+            });
+        }
+        
         wikitable += `\n`;
         
+        // Row formatting
         Object.entries(this.activeUnits).forEach(([unitName, unitData]) => {
             if (!unitData.data) return;
             
             wikitable += `|-\n`;
+            
             if (this.viewer.useFaithfulFormat) {
-                wikitable += `| style="padding: 5px;" | ${unitName}`;
+                // Order attributes according to allowedAttributes
+                let orderedAttributes = ['Name'];
+                for (const attr of allowedAttributes) {
+                    if (attributes.includes(attr)) {
+                        orderedAttributes.push(attr);
+                    }
+                }
+                
+                let isFirst = true;
+                orderedAttributes.forEach(attr => {
+                    let value;
+                    
+                    if (attr === 'Name') {
+                        value = unitName;
+                    } else if (['Hidden', 'Flying', 'Lead'].includes(attr) && unitData.data.Detections) {
+                        value = unitData.data.Detections[attr] || false;
+                    } else {
+                        value = unitData.data[attr];
+                    }
+                    
+                    if (isFirst) {
+                        wikitable += `| style="padding: 5px;" |${this.#formatWikitableCell(value, attr)}`;
+                        isFirst = false;
+                    } else {
+                        wikitable += `\n| style="padding: 5px;" |${this.#formatWikitableCell(value, attr)}`;
+                    }
+                });
             } else {
                 wikitable += `| ${unitName}`;
-            }
-            
-            attributes.forEach(attr => {
-                let value;
                 
-                if (['Hidden', 'Flying', 'Lead'].includes(attr) && unitData.data.Detections) {
-                    value = unitData.data.Detections[attr] || false;
-                } else {
-                    value = unitData.data[attr];
-                }
-                
-                if (this.viewer.useFaithfulFormat) {
-                    wikitable += ` || style="padding: 5px;" | ${this.#formatWikitableCell(value, attr)}`;
-                } else {
+                attributes.forEach(attr => {
+                    let value;
+                    
+                    if (['Hidden', 'Flying', 'Lead'].includes(attr) && unitData.data.Detections) {
+                        value = unitData.data.Detections[attr] || false;
+                    } else {
+                        value = unitData.data[attr];
+                    }
+                    
                     wikitable += ` || ${this.#formatWikitableCell(value, attr)}`;
-                }
-            });
+                });
+            }
             
             wikitable += `\n`;
         });
