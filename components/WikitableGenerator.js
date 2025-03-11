@@ -267,7 +267,7 @@ class WikitableGenerator {
             'MaxDefenseMelt'
         ].includes(attribute)) {
             return this.viewer.useFaithfulFormat
-                ? this.#formatNumber(value)
+                ? this.#formatNumber(value / 100)  // percentage to decimal
                 : `${this.#formatNumber(value)}%`;
         }
         

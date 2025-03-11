@@ -7,20 +7,25 @@ export const allowedAttributes = [
     'Level',
     'NetCost',
     'Damage',
-    'Cooldown',
+    
+    'ExplosionDamage',
+    'BombTime',
+    'ExplosionRadius',
 
+    'Cooldown',
     
     'ChargeTime',
     'LaserCooldown',
     'MaxAmmo',
 
-
     'Range',
+    'AssistRange',
+    'SpeedMultiplier',
+
     'DPS',
     'CostEfficiency',
     
 
-    'ExplosionDamage',
     'Tick',
     'ChargeUp',
     'Overcharge',
@@ -56,5 +61,9 @@ export const attributeLabels = {
     'ChargeTime': 'Charge-Up',
     'LaserCooldown': 'Cooldown',
     'MaxAmmo': 'Overcharge',
+    'ExplosionDamage': '[[Splash Damage]]',
+    'ExplosionRadius': 'Explosion Range',
+    'BombTime': 'Bomb Firerate',
+    'AssistRange': 'Hidden Det. Range',
     
 };
