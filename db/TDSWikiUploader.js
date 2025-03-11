@@ -1,5 +1,5 @@
 /**
- * TDSWiki.js
+ * TDSWikiUploader.js
  * The uploading script to upload towers to the database
  */
 
@@ -172,17 +172,30 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 linkInput.classList.remove('is-invalid');
                 
-                // autofill username and tower name fields from the link
+                // get info from the blog link
                 const linkInfo = extractInfoFromBlogLink(linkValue);
                 if (linkInfo) {
                     const usernameField = document.getElementById('fandomUsername');
                     const towerNameField = document.getElementById('towerName');
+                    const towerNameValue = towerNameField.value.trim();
                     
-                    usernameField.value = linkInfo.username;
-                    usernameField.classList.remove('is-invalid');
+                    // checks if the tower name from the form matches the tower name from the link (it shouldn't)
+                    const formattedLinkTowerName = linkInfo.towerName.toLowerCase().replace(/_/g, ' ');
+                    const formattedInputTowerName = towerNameValue.toLowerCase();
                     
-                    towerNameField.value = linkInfo.towerName;
-                    towerNameField.classList.remove('is-invalid');
+                    if (formattedLinkTowerName === formattedInputTowerName) {
+                        towerNameField.classList.add('is-invalid');
+                        const errorDiv = towerNameField.nextElementSibling || document.createElement('div');
+                        errorDiv.className = 'invalid-feedback';
+                        errorDiv.textContent = 'Tower name must be different from blog post name.';
+                        if (!towerNameField.nextElementSibling) {
+                            towerNameField.parentNode.appendChild(errorDiv);
+                        }
+                        isValid = false;
+                    } else {
+                        usernameField.value = linkInfo.username;
+                        usernameField.classList.remove('is-invalid');
+                    }
                 }
             }
         }
@@ -271,27 +284,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // open the wiki edit page
     function openFandomEditPage() {
-        let username, towerName;
-        
-        // If using link option, extract info from link
-        if (jsonLinkOption.checked) {
-            const linkValue = document.getElementById('towerJSONLink').value.trim();
-            const linkInfo = extractInfoFromBlogLink(linkValue);
-            
-            if (linkInfo) {
-                username = linkInfo.username;
-                towerName = linkInfo.towerName.replace(/\s+/g, '_');
-            } else {
-                // Fallback to input fields if extraction fails
-                username = document.getElementById('fandomUsername').value.trim();
-                towerName = document.getElementById('towerName').value.trim().replace(/\s+/g, '_');
-            }
-        } else {
-            // Use input fields directly for other options
-            username = document.getElementById('fandomUsername').value.trim();
-            towerName = document.getElementById('towerName').value.trim().replace(/\s+/g, '_');
-        }
-        
+        const username = document.getElementById('fandomUsername').value.trim();
+        const towerName = document.getElementById('towerName').value.trim().replace(/\s+/g, '_');
         const url = `https://tds.fandom.com/wiki/User_blog:${encodeURIComponent(username)}/${encodeURIComponent(towerName)}?action=edit`;
         window.open(url, '_blank');
     }

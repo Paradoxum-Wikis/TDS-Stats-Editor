@@ -149,7 +149,7 @@ class WikitableGenerator {
         
         const sortableClass = this.viewer.useFaithfulFormat ? '' : 'sortable';
         
-        // line break for faithful format
+        // line break for faithful format (intentionally 2 empty space)
         let wikitable = this.viewer.useFaithfulFormat ? '\n' : '';
         
         wikitable += `<div style="overflow-x: scroll;">\n{| class="wikitable ${sortableClass}" style="text-align: center; margin: 0 auto"\n`;

@@ -22,7 +22,6 @@ const approvedTowers = [
 
 // List of featured towers
 const featuredTowers = [
-    "Vessel Of Infinite Destruction/Golden Crook Boss",
     "Vessel Of Infinite Destruction/Ranger",
 ];
 
