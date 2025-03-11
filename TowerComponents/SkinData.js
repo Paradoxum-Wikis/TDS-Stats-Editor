@@ -160,6 +160,9 @@ class SkinData {
                     case 'Lead':
                         icon = '<img src="htmlassets/LeadIcon.png" width="16" class="align-text-bottom me-1">';
                         break;
+                    case 'Income':
+                        icon = '<img src="htmlassets/IncomeIcon.png" width="16" class="align-text-bottom me-1">';
+                            break;
                 }
     
                 if (['Hidden', 'Flying', 'Lead'].includes(value.key)) {
