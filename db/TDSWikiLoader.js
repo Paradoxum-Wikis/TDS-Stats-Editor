@@ -100,6 +100,10 @@ document.addEventListener('DOMContentLoaded', function () {
             tagClass = 'bg-info';
         }
 
+        // Add grandfathered badge if applicable
+        const grandfatheredBadge = tower.grandfathered ? 
+            '<span class="badge bg-dark me-1" data-grandfathered="true">Grandfathered</span>' : '';
+
         // Check if we're in list view
         const isListView = container.id === 'all-towers' && container.classList.contains('row-cols-1');
         
@@ -137,6 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <div class="card h-100 bg-dark bg-gradient text-white ${tower.featured ? 'border-gold' : ''} ${isListView ? 'list-view-card' : ''}">
                 <div class="position-absolute top-0 end-0 p-2">
                     ${tower.featured ? '<span class="badge bg-gold me-1">Featured</span>' : ''}
+                    ${grandfatheredBadge}
                     ${unverifiedBadge}
                     ${tower.tag ? `<span class="badge ${tagClass}">${tower.tag}</span>` : ''}
                 </div>

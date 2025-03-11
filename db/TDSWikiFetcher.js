@@ -109,7 +109,8 @@ class TDSWikiFetcher {
                         author: fullText.includes('/') ? fullText.split('/')[0] : 'Wiki Contributor',
                         featured: this.featuredTowers.includes(fullText),
                         verified: window.approvedTowers ? window.approvedTowers.includes(fullText) : false,
-                        unverified: window.approvedTowers ? !window.approvedTowers.includes(fullText) : true
+                        unverified: window.approvedTowers ? !window.approvedTowers.includes(fullText) : true,
+                        grandfathered: window.grandfatheredTowers ? window.grandfatheredTowers.includes(fullText) : false
                     };
                 });
             

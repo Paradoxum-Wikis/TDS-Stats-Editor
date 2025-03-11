@@ -118,9 +118,14 @@ function applyFilters(maintainSort = true) {
         const towerName = card.querySelector('.card-title')?.textContent?.toLowerCase() || '';
         const towerDescription = card.querySelector('.card-text')?.textContent?.toLowerCase() || '';
         const towerAuthor = card.querySelector('.card-footer .fw-bold')?.textContent?.toLowerCase() || '';
-        const badge = card.querySelector('.badge:not(.bg-gold):not([data-unverified="true"])'); // Don't count unverified badge here
-        const towerTag = badge?.textContent?.trim() || '';
+        
+        // Check for normal tag badges: New, Rework, Rebalance
+        const tagBadge = card.querySelector('.badge:not(.bg-gold):not(.bg-dark):not([data-unverified="true"])');
+        const towerTag = tagBadge?.textContent?.trim() || '';
         const tagText = towerTag.toLowerCase();
+        
+        // Check specifically for grandfather badge
+        const isGrandfathered = card.querySelector('.badge[data-grandfathered="true"]') !== null;
         
         const matchesSearch = !query || 
             towerName.includes(query) || 
@@ -131,13 +136,18 @@ function applyFilters(maintainSort = true) {
         // check category filters: New, Rework, Rebalance
         let matchesTypeFilter = false;
         
-        if (badge) {
+        // Grandfathered towers should be shown when any of the type filters are on
+        if (isGrandfathered && (showNew || showRework || showRebalance)) {
+            matchesTypeFilter = true;
+        }
+        else if (tagBadge) {
             if ((towerTag === 'New' && showNew) || 
                 (towerTag === 'Rework' && showRework) || 
                 (towerTag === 'Rebalance' && showRebalance)) {
                 matchesTypeFilter = true;
             }
         } else {
+            // No tag at all but filters are on (show them)
             matchesTypeFilter = (showNew || showRework || showRebalance);
         }
         
