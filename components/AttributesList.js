@@ -11,9 +11,14 @@ export const allowedAttributes = [
     'ExplosionDamage',
     'BombTime',
     'ExplosionRadius',
+    'FinalHitDamage',
+    'RepositionDamage',
+    'ComboLength',
 
     'Cooldown',
-    
+    'KnockbackCooldown',
+
+    'KnockbackForce',
     'ChargeTime',
     'LaserCooldown',
     'MaxAmmo',
@@ -24,7 +29,6 @@ export const allowedAttributes = [
 
     'DPS',
     'CostEfficiency',
-    
 
     'Tick',
     'ChargeUp',
@@ -65,5 +69,7 @@ export const attributeLabels = {
     'ExplosionRadius': 'Explosion Range',
     'BombTime': 'Bomb Firerate',
     'AssistRange': 'Hidden Det. Range',
-    
+    'ComboLength': 'Hit Count',
+    'KnockbackCooldown': 'Cooldown',
+
 };

@@ -228,6 +228,11 @@ class WikitableGenerator {
             return '';
         }
         
+        // don't convert 0 or nan to n/a for levels
+        if (attribute === 'Level') {
+            return value.toString();
+        }
+        
         if (typeof value === 'object' && !Array.isArray(value)) {
             if (attribute === 'Detections') {
                 const detections = [];
@@ -244,20 +249,24 @@ class WikitableGenerator {
             }
         }
         
-        // currency formatting
+        // Currency formatting
         if ([
             'Cost', 'NetCost', 'Income', 'CostEfficiency', 'IncomeEfficiency',
             'LimitNetCost', 'IncomePerSecond', 'TotalIncomePerSecond', 
             'BaseIncome', 'IncomePerTower', 'MaxIncome'
         ].includes(attribute)) {
             if (this.viewer.useFaithfulFormat) {
+                // Check for NaN/0 before using Money template
+                if (isNaN(value) || value === 0) {
+                    return 'N/A';
+                }
                 return `{{Money|${this.#formatNumberWithCommas(value)}}}`;
             } else {
                 return `$${this.#formatNumber(value)}`;
             }
         }
         
-        // percentage formatting
+        // Percentage formatting
         if ([
             'Defense', 'SlowdownPerHit', 'MaxSlow', 'RangeBuff', 'DamageBuff', 
             'FirerateBuff', 'DefenseMelt', 'MaxDefMelt', 'CallToArmsBuff', 
@@ -267,22 +276,22 @@ class WikitableGenerator {
             'MaxDefenseMelt'
         ].includes(attribute)) {
             return this.viewer.useFaithfulFormat
-                ? this.#formatNumber(value / 100)  // percentage to decimal
+                ? this.#formatFaithfulNumber(value / 100)
                 : `${this.#formatNumber(value)}%`;
         }
         
-        // time formatting
+        // Time formatting
         if ([
             'Cooldown', 'ChargeTime', 'SlowdownTime', 'BurnTime', 'PoisonLength',
             'BuffLength', 'FreezeTime', 'Duration', 'LaserCooldown', 'MissileCooldown',
             'BurstCooldown', 'RevTime', 'ReloadTime', 'DetectionBuffLength',
-            'ComboLength', 'ComboCooldown', 'RepositionCooldown', 'Knockback Cooldown',
+            'ComboLength', 'ComboCooldown', 'RepositionCooldown', 'KnockbackCooldown',
             'Spawnrate', 'BuildTime', 'AftershockCooldown', 'AimTime', 'EquipTime',
             'BuildDelay', 'TimeBetweenMissiles', 'SendTime', 'StunLength',
             'Lifetime', 'ConfusionTime', 'ConfusionCooldown'
         ].includes(attribute)) {
             return this.viewer.useFaithfulFormat
-                ? this.#formatNumber(value)
+                ? this.#formatFaithfulNumber(value)
                 : `${this.#formatNumber(value)}s`;
         }
         
@@ -297,7 +306,9 @@ class WikitableGenerator {
         if (typeof value === 'boolean') {
             return value ? 'Yes' : 'No';
         } else if (typeof value === 'number') {
-            return this.#formatNumber(value);
+            return this.viewer.useFaithfulFormat
+                ? this.#formatFaithfulNumber(value)
+                : this.#formatNumber(value);
         } else {
             return value.toString();
         }
@@ -320,12 +331,20 @@ class WikitableGenerator {
         });
     }
 
-    // Add a new helper method for formatting numbers with commas but no decimal places
+    // helper method for formatting numbers with commas but no decimal places
     #formatNumberWithCommas(num) {
         if (typeof num !== 'number') return num;
         
         // faithful uses a different format for numbers
         return Math.round(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    #formatFaithfulNumber(value) {
+        // NaN and 0 to N/A in faithful format
+        if (isNaN(value) || value === 0) {
+            return 'N/A';
+        }
+        return this.#formatNumber(value);
     }
 }
 
