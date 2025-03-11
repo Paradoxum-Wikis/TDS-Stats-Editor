@@ -286,3 +286,7 @@ a:hover {
 .text-muted {
     color: #6c757d !important;
 }
+
+a.btn:hover {
+    color: inherit !important;
+}

@@ -108,9 +108,9 @@ document.addEventListener('DOMContentLoaded', function () {
         
         if (tower.isLink && tower.linkedTower) {
             // For linked towers
-            buttonsHTML = `<div href="${tower.linkedTower}" target="_blank" class="btn btn-sm btn-outline-primary">
-                <i class="bi bi-box-arrow-up-right me-1"></i> Visit Blog
-            </div>`;
+            buttonsHTML = `<a href="${tower.linkedTower}" target="_blank" class="btn btn-sm btn-outline-primary">
+                <i class="bi bi-box-arrow-up-right me-2"></i>Visit Blog
+            </a>`;
         } else if (tower.data) {
             // For towers with JSON data
             buttonsHTML = `<button class="btn btn-sm btn-outline-info copy-json me-2" data-tower-id="${towerId}">
