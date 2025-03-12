@@ -6,7 +6,7 @@ const ViewerData = {
         // brings in json data
         import(json, enableAlert) {
             enableAlert = enableAlert ?? false;
-
+            
             const oldJSON = JSON.parse(JSON.stringify(this.tower.json));
             const oldUnits = {};
             
@@ -21,32 +21,106 @@ const ViewerData = {
             
             try {
                 const importedData = JSON.parse(json);
+                let isCustomTower = false;
+                let towerName = "";
+                let newTowerData = null;
                 
-                // handling combined tower and units data
                 if (importedData.master && importedData.slave) {
-                    this.tower.importJSON(importedData.master);
-                    Object.entries(importedData.slave).forEach(([unitName, unitData]) => {
-                        this.unitManager.baseData[unitName] = unitData;
-                    });
-                    this.unitManager.save();
+                    // get the imported master data to get the tower name
+                    newTowerData = importedData.master;
+                    
+                    for (const [key] of Object.entries(importedData.master)) {
+                        towerName = key;
+                        break;
+                    }
                 } else if (importedData.tower && importedData.units) {
                     // legacy format
-                    this.tower.importJSON(importedData.tower);
-                    Object.entries(importedData.units).forEach(([unitName, unitData]) => {
-                        this.unitManager.baseData[unitName] = unitData;
-                    });
-                    this.unitManager.save();
+                    newTowerData = importedData.tower;
+
+                    for (const [key] of Object.entries(importedData.tower)) {
+                        towerName = key;
+                        break;
+                    }
                 } else {
                     // just tower data
-                    this.tower.importJSON(importedData);
-                }
+                    newTowerData = importedData;
 
-                if (enableAlert) {
-                    const alert = new Alert('JSON Imported!', {
+                    for (const [key] of Object.entries(importedData)) {
+                        towerName = key;
+                        break;
+                    }
+                }
+                
+                // check if it's a custom tower by comparing the tower name with the default tower names
+                const defaultManager = new TowerManager();
+                isCustomTower = !defaultManager.towerData.hasOwnProperty(towerName);
+                
+                if (isCustomTower) {
+                    const originalName = towerName;
+                    
+                    let renamedTowerData = {};
+                    renamedTowerData[originalName] = JSON.parse(JSON.stringify(newTowerData[originalName]));
+                    
+                    this.addNewTower(originalName, renamedTowerData[originalName]);
+                    
+                    // if there's a slave data, handle those too
+                    if (importedData.slave || importedData.units) {
+                        const slaveData = importedData.slave || importedData.units;
+                        const skinName = this.towerVariants.getSelectedName();
+                        
+                        Object.entries(slaveData).forEach(([unitName, unitData]) => {
+                            // add metadata to track which tower this unit belongs to
+                            unitData._towerName = originalName;
+                            unitData._skinName = skinName;
+                            this.unitManager.baseData[unitName] = unitData;
+                            
+                            this.unitDeltaManager.baseData[unitName] = JSON.parse(JSON.stringify(unitData));
+                            
+                            // apply changes automatically
+                            this.unitDeltaManager.unitData[unitName] = JSON.parse(JSON.stringify(unitData));
+                        });
+                        
+                        this.unitManager.save();
+                        this.unitDeltaManager.save();
+                    }
+                    
+                    this.reload();
+                    
+                    this.deltaTower.importJSON(JSON.parse(JSON.stringify(this.tower.json)));
+                    
+                    const alert = new Alert(`Custom tower "${originalName}" imported!`, {
                         alertStyle: 'alert-success',
                     });
                     alert.timeBeforeShow = 0.1;
                     alert.fire();
+                    
+                    return;
+                } else {
+                    // non custom towers
+                    this.tower.importJSON(newTowerData);
+                    
+                    if (importedData.slave || importedData.units) {
+                        const slaveData = importedData.slave || importedData.units;
+                        const skinName = this.towerVariants.getSelectedName();
+                        
+                        Object.entries(slaveData).forEach(([unitName, unitData]) => {
+                            unitData._towerName = towerName;
+                            unitData._skinName = skinName;
+                            this.unitManager.baseData[unitName] = unitData;
+                        });
+                        
+                        this.unitManager.save();
+                    }
+                    
+                    this.reload();
+                    
+                    if (enableAlert) {
+                        const alert = new Alert('JSON Imported!', {
+                            alertStyle: 'alert-success',
+                        });
+                        alert.timeBeforeShow = 0.1;
+                        alert.fire();
+                    }
                 }
             } catch (e) {
                 // oops, something went wrong, let's roll back

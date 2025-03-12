@@ -33,6 +33,12 @@ class App {
 
     addTowerOption(name) {
         this.dropdown.options.push(name);
+        
+        this.dropdown.setOptions(this.dropdown.options);
+        
+        if (window.setupSearch) {
+            window.setupSearch();
+        }
     }
 
     start() {

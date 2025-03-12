@@ -28,6 +28,12 @@ class Dropdown {
         this.nodes = this.#createOptions();
     }
 
+    setOptions(newOptions) {
+        this.options = newOptions;
+        this.#clear();
+        this.nodes = this.#createOptions();
+    }
+
     #hide() {
         this.dropdown.classList.remove('d-block');
     }

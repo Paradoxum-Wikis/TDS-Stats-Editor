@@ -56,10 +56,27 @@ const ViewerUtils = {
         },
 
         populateActiveUnits() {
-            return this.unitManager.populate(
-                this.tower.name,
-                this.getActiveSkin().name
-            );
+            const towerName = this.tower.name;
+            const skinName = this.getActiveSkin().name;
+            
+            const registeredUnits = this.unitManager.populate(towerName, skinName);
+            
+            const customUnits = {};
+            Object.entries(this.unitManager.baseData).forEach(([unitName, unitData]) => {
+                if (unitData._towerName === towerName && unitData._skinName === skinName) {
+                    if (this.unitManager.unitData[unitName]) {
+                        customUnits[unitName] = this.unitManager.unitData[unitName];
+
+                    } else {
+                        const Unit = require('../../TowerComponents/Unit.js').default;
+                        const newUnit = new Unit(unitName, unitData);
+                        this.unitManager.unitData[unitName] = newUnit; 
+                        customUnits[unitName] = newUnit;
+                    }
+                }
+            });
+            
+            return {...registeredUnits, ...customUnits};
         }
     }
 };
