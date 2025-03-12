@@ -3007,7 +3007,7 @@ export default {
         {
           Image: 15184753514,
           Stats: {
-            Extras: [""],
+            Extras: [],
             Attributes: { RevTime: 1.2 },
             Detections: {
               Flying: false,
@@ -3061,7 +3061,7 @@ export default {
     Golden: {
       Upgrades: [
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/2/29/MinigunnerUpgradeLevel1.png/revision/latest?cb=20231028082050",
+          Image: 15184753790,
           Stats: {
             Extras: ["Rev Time: 1.4s → 1.2s"],
             Attributes: { RevTime: 1.2 },
@@ -3079,7 +3079,7 @@ export default {
           Cost: 900,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/c/c4/MinigunnerUpgradeLevel2.png/revision/latest?cb=20231028082106",
+          Image: 15184753514,
           Stats: {
             Extras: [],
             Attributes: { RevTime: 1.2 },
@@ -3097,7 +3097,7 @@ export default {
           Cost: 2000,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/9/92/MinigunnerUpgradeLevel3.png/revision/latest?cb=20231028082119",
+          Image: 15184753289,
           Stats: {
             Extras: ["Rev Time: 1.2s → 1s"],
             Attributes: { RevTime: 1 },
@@ -3111,7 +3111,7 @@ export default {
           Cost: 8500,
         },
         {
-          Image: "https://static.wikia.nocookie.net/tower-defense-sim/images/a/ab/MiniLevel4.png/revision/latest?cb=20231028032508",
+          Image: 15184752970,
           Stats: {
             Extras: [
               "Fires 24K cartridges at 10,000 RPM",
