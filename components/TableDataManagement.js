@@ -111,7 +111,7 @@ export default class TableDataManagement {
     }
 
     clearTable() {
-        this.viewer.import(JSON.stringify(this.viewer.deltaTower.json));
+        this.viewer.import(JSON.stringify(this.viewer.deltaTower.json), false, true);
     }
 
     clearTableFull() {

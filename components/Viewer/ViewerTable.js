@@ -1,4 +1,5 @@
 import UnitManager from '../../TowerComponents/UnitManager.js';
+import TowerManager from '../../TowerComponents/TowerManager.js'; // Add this import
 
 const ViewerTable = {
     methods: {
@@ -44,12 +45,29 @@ const ViewerTable = {
         // resets unit table to default
         resetUnitTable() {
             const defaultUnitManager = new UnitManager();
-
+            const defaultTowerManager = new TowerManager();
+            
+            const isCustomTower = !defaultTowerManager.towerData.hasOwnProperty(this.tower.name);
+            
             Object.entries(this.activeUnits).forEach(([unitName, _]) => {
-                this.unitManager.baseData[unitName] =
-                    defaultUnitManager.baseData[unitName];
-                this.unitDeltaManager.baseData[unitName] =
-                    defaultUnitManager.baseData[unitName];
+                if (isCustomTower || !defaultUnitManager.baseData[unitName]) {
+                    if (this.unitManager.baseData[unitName]) {
+                        if (window.originalCustomUnits && window.originalCustomUnits[unitName]) {
+                            this.unitManager.baseData[unitName] = 
+                                JSON.parse(JSON.stringify(window.originalCustomUnits[unitName]));
+                            this.unitDeltaManager.baseData[unitName] = 
+                                JSON.parse(JSON.stringify(window.originalCustomUnits[unitName]));
+                        } else {
+                            this.unitDeltaManager.baseData[unitName] = 
+                                JSON.parse(JSON.stringify(this.unitManager.baseData[unitName]));
+                            this.unitManager.baseData[unitName] = 
+                                JSON.parse(JSON.stringify(this.unitManager.baseData[unitName]));
+                        }
+                    }
+                } else {
+                    this.unitManager.baseData[unitName] = defaultUnitManager.baseData[unitName];
+                    this.unitDeltaManager.baseData[unitName] = defaultUnitManager.baseData[unitName];
+                }
             });
 
             this.unitManager.save();

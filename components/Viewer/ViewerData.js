@@ -4,7 +4,7 @@ import TowerManager from '../../TowerComponents/TowerManager.js';
 const ViewerData = {
     methods: {
         // brings in json data
-        import(json, enableAlert) {
+        import(json, enableAlert, noCustomAlert = false) {
             enableAlert = enableAlert ?? false;
             
             const oldJSON = JSON.parse(JSON.stringify(this.tower.json));
@@ -63,15 +63,28 @@ const ViewerData = {
                     
                     this.addNewTower(originalName, renamedTowerData[originalName]);
                     
-                    // if there's a slave data, handle those too
+                    if (!window.originalCustomTowers) {
+                        window.originalCustomTowers = {};
+                    }
+
+                    window.originalCustomTowers[originalName] = JSON.parse(JSON.stringify(newTowerData));
+
                     if (importedData.slave || importedData.units) {
                         const slaveData = importedData.slave || importedData.units;
                         const skinName = this.towerVariants.getSelectedName();
                         
+                        if (!window.originalCustomUnits) {
+                            window.originalCustomUnits = {};
+                        }
+
                         Object.entries(slaveData).forEach(([unitName, unitData]) => {
                             // add metadata to track which tower this unit belongs to
                             unitData._towerName = originalName;
                             unitData._skinName = skinName;
+                            
+                            // store the original import state
+                            window.originalCustomUnits[unitName] = JSON.parse(JSON.stringify(unitData));
+                            
                             this.unitManager.baseData[unitName] = unitData;
                             
                             this.unitDeltaManager.baseData[unitName] = JSON.parse(JSON.stringify(unitData));
@@ -88,11 +101,13 @@ const ViewerData = {
                     
                     this.deltaTower.importJSON(JSON.parse(JSON.stringify(this.tower.json)));
                     
-                    const alert = new Alert(`Custom tower "${originalName}" imported!`, {
-                        alertStyle: 'alert-success',
-                    });
-                    alert.timeBeforeShow = 0.1;
-                    alert.fire();
+                    if (!noCustomAlert) {
+                        const alert = new Alert(`Custom tower "${originalName}" imported!`, {
+                            alertStyle: 'alert-success',
+                        });
+                        alert.timeBeforeShow = 0.1;
+                        alert.fire();
+                    }
                     
                     return;
                 } else {
@@ -140,8 +155,6 @@ const ViewerData = {
                 alert.fire();
                 console.error(e);
             }
-
-            this.reload();
         },
 
         // saves json to a file
@@ -169,6 +182,21 @@ const ViewerData = {
         // resets tower to default
         reset() {
             const towerManager = new TowerManager();
+            const defaultTowerManager = new TowerManager();
+            const isCustomTower = !defaultTowerManager.towerData.hasOwnProperty(this.tower.name);
+            
+            if (isCustomTower) {
+                if (window.originalCustomTowers && window.originalCustomTowers[this.tower.name]) {
+                    this.tower.importJSON(JSON.parse(JSON.stringify(window.originalCustomTowers[this.tower.name])));
+                    this.deltaTower.importJSON(JSON.parse(JSON.stringify(window.originalCustomTowers[this.tower.name])));
+                    
+                    this.reload();
+                    return;
+                }
+                
+                return;
+            }
+            
             const towerJSON = JSON.stringify(
                 towerManager.towers[this.tower.name].json
             );
