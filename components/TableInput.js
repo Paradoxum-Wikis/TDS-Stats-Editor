@@ -235,7 +235,6 @@ export default class TableInput {
             case 'DetectionBuffLength':
             case 'ComboLength':
             case 'ComboCooldown':
-            case 'RepositionCooldown':
             case 'KnockbackCooldown':
             case 'Spawnrate':
             case 'BuildTime':

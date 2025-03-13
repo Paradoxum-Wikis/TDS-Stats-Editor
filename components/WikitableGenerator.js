@@ -346,7 +346,7 @@ class WikitableGenerator {
             'Cooldown', 'ChargeTime', 'SlowdownTime', 'BurnTime', 'PoisonLength',
             'BuffLength', 'FreezeTime', 'Duration', 'LaserCooldown', 'MissileCooldown',
             'BurstCooldown', 'RevTime', 'ReloadTime', 'DetectionBuffLength',
-            'ComboLength', 'ComboCooldown', 'RepositionCooldown', 'KnockbackCooldown',
+            'ComboLength', 'ComboCooldown', 'KnockbackCooldown',
             'Spawnrate', 'BuildTime', 'AftershockCooldown', 'AimTime', 'EquipTime',
             'BuildDelay', 'TimeBetweenMissiles', 'SendTime', 'StunLength',
             'Lifetime', 'ConfusionTime', 'ConfusionCooldown'

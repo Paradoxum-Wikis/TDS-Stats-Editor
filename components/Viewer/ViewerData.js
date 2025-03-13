@@ -181,28 +181,36 @@ const ViewerData = {
 
         // resets tower to default
         reset() {
-            const towerManager = new TowerManager();
-            const defaultTowerManager = new TowerManager();
+            // avoid creating new managers and reuse existing ones
+            const defaultTowerManager = window.cachedDefaultTowerManager || new TowerManager();
+            if (!window.cachedDefaultTowerManager) window.cachedDefaultTowerManager = defaultTowerManager;
+            
             const isCustomTower = !defaultTowerManager.towerData.hasOwnProperty(this.tower.name);
             
             if (isCustomTower) {
                 if (window.originalCustomTowers && window.originalCustomTowers[this.tower.name]) {
-                    this.tower.importJSON(JSON.parse(JSON.stringify(window.originalCustomTowers[this.tower.name])));
-                    this.deltaTower.importJSON(JSON.parse(JSON.stringify(window.originalCustomTowers[this.tower.name])));
+                    const originalData = typeof structuredClone !== 'undefined' 
+                        ? structuredClone(window.originalCustomTowers[this.tower.name])
+                        : JSON.parse(JSON.stringify(window.originalCustomTowers[this.tower.name]));
+                        
+                    this.tower.importJSON(originalData);
+                    this.deltaTower.importJSON(originalData);
                     
                     this.reload();
                     return;
                 }
-                
                 return;
             }
             
-            const towerJSON = JSON.stringify(
-                towerManager.towers[this.tower.name].json
-            );
-
-            this.deltaTower.importJSON(JSON.parse(towerJSON));
-            this.tower.importJSON(JSON.parse(towerJSON));
+            // for non custom towers just reset to default
+            const towerData = defaultTowerManager.towers[this.tower.name].json;
+            
+            const towerDataCopy = typeof structuredClone !== 'undefined'
+                ? structuredClone(towerData) 
+                : JSON.parse(JSON.stringify(towerData));
+            
+            this.deltaTower.importJSON(towerDataCopy);
+            this.tower.importJSON(towerDataCopy);
 
             this.reload();
         },

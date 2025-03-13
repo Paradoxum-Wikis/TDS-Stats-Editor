@@ -44,30 +44,45 @@ const ViewerTable = {
 
         // resets unit table to default
         resetUnitTable() {
-            const defaultUnitManager = new UnitManager();
-            const defaultTowerManager = new TowerManager();
+            // cache manager instances
+            const defaultUnitManager = window.cachedDefaultUnitManager || new UnitManager();
+            if (!window.cachedDefaultUnitManager) window.cachedDefaultUnitManager = defaultUnitManager;
+            
+            const defaultTowerManager = window.cachedDefaultTowerManager || new TowerManager();
+            if (!window.cachedDefaultTowerManager) window.cachedDefaultTowerManager = defaultTowerManager;
             
             const isCustomTower = !defaultTowerManager.towerData.hasOwnProperty(this.tower.name);
             
+            // batch process changes before saving/reloading
+            const updates = [];
+            
             Object.entries(this.activeUnits).forEach(([unitName, _]) => {
+                let sourceData;
+                
                 if (isCustomTower || !defaultUnitManager.baseData[unitName]) {
-                    if (this.unitManager.baseData[unitName]) {
-                        if (window.originalCustomUnits && window.originalCustomUnits[unitName]) {
-                            this.unitManager.baseData[unitName] = 
-                                JSON.parse(JSON.stringify(window.originalCustomUnits[unitName]));
-                            this.unitDeltaManager.baseData[unitName] = 
-                                JSON.parse(JSON.stringify(window.originalCustomUnits[unitName]));
-                        } else {
-                            this.unitDeltaManager.baseData[unitName] = 
-                                JSON.parse(JSON.stringify(this.unitManager.baseData[unitName]));
-                            this.unitManager.baseData[unitName] = 
-                                JSON.parse(JSON.stringify(this.unitManager.baseData[unitName]));
-                        }
+                    if (window.originalCustomUnits && window.originalCustomUnits[unitName]) {
+                        sourceData = window.originalCustomUnits[unitName];
+                    } else if (this.unitManager.baseData[unitName]) {
+                        sourceData = this.unitManager.baseData[unitName];
                     }
                 } else {
-                    this.unitManager.baseData[unitName] = defaultUnitManager.baseData[unitName];
-                    this.unitDeltaManager.baseData[unitName] = defaultUnitManager.baseData[unitName];
+                    sourceData = defaultUnitManager.baseData[unitName];
                 }
+                
+                if (sourceData) {
+                    updates.push({ unitName, data: sourceData });
+                }
+            });
+            
+            // apply all updates at once
+            updates.forEach(({ unitName, data }) => {
+                // efficient cloning
+                const dataCopy = typeof structuredClone !== 'undefined'
+                    ? structuredClone(data)
+                    : JSON.parse(JSON.stringify(data));
+                    
+                this.unitManager.baseData[unitName] = dataCopy;
+                this.unitDeltaManager.baseData[unitName] = dataCopy;
             });
 
             this.unitManager.save();
