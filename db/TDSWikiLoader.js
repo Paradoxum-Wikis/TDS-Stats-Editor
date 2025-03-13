@@ -118,10 +118,10 @@ document.addEventListener('DOMContentLoaded', function () {
         } else if (tower.data) {
             // For towers with JSON data
             buttonsHTML = `<button class="btn btn-sm btn-outline-info copy-json me-2" data-tower-id="${towerId}">
-                <i class="bi bi-clipboard me-1"></i> Copy JSON
+                <i class="bi bi-clipboard me-2"></i>Copy JSON
             </button>
             <button class="btn btn-sm btn-outline-primary download-json" data-tower-id="${towerId}">
-                <i class="bi bi-download me-1"></i> Download
+                <i class="bi bi-download me-2"></i>Download
             </button>`;
         }
 
@@ -170,54 +170,93 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // load towers from wiki
-    async function loadTowersFromWiki() {
-        // reset the stored original cards to prevent duplicates when using the refresh button
-        window.originalCardsOrder = [];
+    async function loadTowersFromWiki(forceRefresh = false) {
+        // disable the refresh button while loading
+        const refreshButton = document.getElementById('refresh-towers-btn');
+        refreshButton.disabled = true;
+        refreshButton.innerHTML = '<i class="spinner-border spinner-border-sm me-2"></i>Refreshing...';
         
-        // show loading spinners
-        document.getElementById('featured-towers').innerHTML = 
-        '<div class="col-12 text-center text-light p-5"><div class="spinner-border" role="status"></div><p class="mt-2">Getting featured data...</p></div>';
-        
-        document.getElementById('all-towers').innerHTML = 
-        '<div class="col-12 text-center text-light p-5"><div class="spinner-border" role="status"></div><p class="mt-2">Loading towers from the TDS Wiki...</p></div>';
-
         try {
-            const towers = await wikiFetcher.fetchTowers();
-
-            // clear containers
-            const featuredContainer = document.querySelector('.featured-towers');
-            const allTowersContainer = document.getElementById('all-towers');
-
-            featuredContainer.innerHTML = '';
-            allTowersContainer.innerHTML = '';
-
-            // show featured towers
-            const featuredTowers = towers.filter(tower => tower.featured);
+            // reset the stored original cards to prevent duplicates when using the refresh button
+            window.originalCardsOrder = [];
             
-            if (featuredTowers.length === 0) {
-                featuredContainer.innerHTML = '<div class="col-12 text-center text-light p-3">No featured towers at this time.</div>';
-            } else {
-                featuredTowers.forEach(tower => renderTowerCard(tower, featuredContainer));
+            if (!forceRefresh) {
+                const cachedData = localStorage.getItem('towerDataCache');
+                const cacheTimestamp = localStorage.getItem('towerDataTimestamp');
+                
+                // use cache if it exists
+                if (cachedData && cacheTimestamp) {
+                    const cacheAge = Date.now() - parseInt(cacheTimestamp);
+                    const cacheMaxAge = 8 * 60 * 60 * 1000; // 8 hours (modify the first number only)
+                    
+                    if (cacheAge < cacheMaxAge) {
+                        try {
+                            const towers = JSON.parse(cachedData);
+                            console.log(`Using cached tower data (${Math.round(cacheAge/3600000)}h old)`);
+                            renderAllTowers(towers);
+                            return;
+                        } catch (e) {
+                            console.warn('Cache parsing failed, fetching fresh data');
+                        }
+                    }
+                }
             }
-
-            // show all towers
-            towers.forEach(tower => renderTowerCard(tower, allTowersContainer));
             
-            if (window.setupSearch) window.setupSearch();
-            if (window.applyFilters) window.applyFilters();
-            if (window.setupSorting) window.setupSorting();
+            // show loading spinners
+            document.getElementById('featured-towers').innerHTML = 
+                '<div class="col-12 text-center text-light p-5"><div class="spinner-border" role="status"></div><p class="mt-2">Getting featured data...</p></div>';
+            
+            document.getElementById('all-towers').innerHTML = 
+                '<div class="col-12 text-center text-light p-5"><div class="spinner-border" role="status"></div><p class="mt-2">Loading towers from the TDS Wiki...</p></div>';
 
+            const towers = await wikiFetcher.fetchTowers();
+            
+            // Save to cache
+            localStorage.setItem('towerDataCache', JSON.stringify(towers));
+            localStorage.setItem('towerDataTimestamp', Date.now().toString());
+            
+            renderAllTowers(towers);
         } catch (error) {
             console.error('Failed to load towers:', error);
             document.getElementById('all-towers').innerHTML = '<div class="col-12 text-center text-danger p-5"><i class="bi bi-exclamation-triangle-fill fs-1"></i><p class="mt-2">Failed to load towers from the wiki. Please try again later.</p></div>';
+        } finally {
+            // Re-enable refresh button when done (whether successful or not)
+            refreshButton.disabled = false;
+            refreshButton.innerHTML = '<i class="bi bi-arrow-clockwise me-2"></i>Refresh';
         }
+    }
+
+    // cards renderer
+    function renderAllTowers(towers) {
+        // clear containers
+        const featuredContainer = document.querySelector('.featured-towers');
+        const allTowersContainer = document.getElementById('all-towers');
+
+        featuredContainer.innerHTML = '';
+        allTowersContainer.innerHTML = '';
+
+        // show featured towers
+        const featuredTowers = towers.filter(tower => tower.featured);
+        
+        if (featuredTowers.length === 0) {
+            featuredContainer.innerHTML = '<div class="col-12 text-center text-light p-3">No featured towers at this time.</div>';
+        } else {
+            featuredTowers.forEach(tower => renderTowerCard(tower, featuredContainer));
+        }
+
+        // show all towers
+        towers.forEach(tower => renderTowerCard(tower, allTowersContainer));
+        
+        if (window.setupSearch) window.setupSearch();
+        if (window.applyFilters) window.applyFilters();
+        if (window.setupSorting) window.setupSorting();
     }
 
     // load towers on page load
     loadTowersFromWiki();
 
     // add event listener for refresh button
-    document.getElementById('refresh-towers-btn').addEventListener('click', loadTowersFromWiki);
+    document.getElementById('refresh-towers-btn').addEventListener('click', () => loadTowersFromWiki(true));
 
     // Set 3 filter checkboxes to checked by default
     document.getElementById('filterNewTower').checked = true;
