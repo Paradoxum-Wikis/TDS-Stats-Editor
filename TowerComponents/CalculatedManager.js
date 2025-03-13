@@ -300,6 +300,7 @@ class CalculatedManager {
             },
             Cryomancer: {
                 For: ['Cryomancer'],
+                Requires: ['DebuffDamage', 'SlowdownTime', 'TickRate'],
                 Value: (level) => level.DebuffDamage * level.SlowdownTime / level.TickRate,
             },
             Swarmer: {
@@ -310,6 +311,7 @@ class CalculatedManager {
             },
             ToxicGunner: {
                 For: ['Toxic Gunner'],
+                Requires: ['PoisonDamage', 'SlowdownTime', 'TickRate'],
                 Value: (level) =>
                 (level.PoisonDamage * level.SlowdownTime) / level.TickRate,
             },
