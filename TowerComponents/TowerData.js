@@ -3107,7 +3107,7 @@ export default {
             Damage: 10,
             Limit: 15,
           },
-          Title: "High-Tech Armory",
+          Title: "High Tech Armory",
           Cost: 8500,
         },
         {
