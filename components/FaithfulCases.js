@@ -19,6 +19,7 @@ export const allowedAttributes = [
     'KnockbackCooldown',
 
     'KnockbackForce',
+    'RevTime',
     'ChargeTime',
     'LaserCooldown',
     'MaxAmmo',
@@ -70,6 +71,7 @@ export const attributeLabels = {
     'AssistRange': 'Hidden Det. Range',
     'ComboLength': 'Hit Count',
     'KnockbackCooldown': 'Cooldown',
+    'RevTime': 'Rev-Up Time',
 };
 
 /**
