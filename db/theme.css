@@ -40,14 +40,14 @@
 .light-mode .card {
     background-color: #fff;
     border-color: #ced4da;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px #0000001a;
     transition: all 0.3s ease;
     border: 1px solid #ced4da;
 }
 
 .light-mode .card-footer {
-    background-color: rgba(0, 0, 0, 0.03);
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: #00000008;
+    border-top: 1px solid #0000001a;
 }
 
 /* modals */
@@ -57,7 +57,7 @@
 }
 
 .light-mode .modal-header {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: #0000000d;
 }
 
 /* header and nav */
@@ -98,8 +98,8 @@
 }
 
 .light-mode .form-control:focus {
-    background-color: rgba(0, 0, 0, 0.1);
-    border-color: rgba(0, 0, 0, 0.3);
+    background-color: #0000001a;
+    border-color: #0000004d;
     color: #212529;
 }
 
@@ -115,7 +115,7 @@
 }
 
 .light-mode .btn-outline-secondary.text-light:hover {
-    background-color: rgba(108, 117, 125, 0.1) !important;
+    background-color: #6c757d1a !important;
     color: #212529 !important;
 }
 
@@ -181,7 +181,7 @@
 
 /* horizontal rules */
 .light-mode hr {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid #0000001a;
 }
 
 /* featured section styling */
@@ -192,7 +192,7 @@
 /* card hover effects */
 .light-mode .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 178, 238, 0.15);
+    box-shadow: 0 10px 20px #00b2ee26;
     border-color: #00b2ee;
 }
 
@@ -206,17 +206,17 @@
 }
 
 .light-mode .card.border-info:hover {
-    box-shadow: 0 10px 20px rgba(13, 202, 240, 0.2);
+    box-shadow: 0 10px 20px #0dcaf033;
     border-color: #0dcaf0 !important;
     border-width: 2px;
 }
 
 .light-mode .card:hover .card-body {
-    background-color: rgba(0, 178, 238, 0.03);
+    background-color: #00b2ee08;
 }
 
 .light-mode .card.border-info:hover .card-body {
-    background-color: rgba(13, 202, 240, 0.05);
+    background-color: #0dcaf00d;
 }
 
 /* scrollbar styling */
@@ -236,6 +236,27 @@
     color: black !important;
 }
 
+.light-mode .text-warning {
+    color: #d7a100 !important;
+}
+
+.light-mode .text-info {
+    color: #0fb4d5 !important;
+}
+
+.light-mode .text-danger {
+    color: #dc3545 !important;
+}
+
+.light-mode .text-success {
+    color: #198754 !important;
+}
+
+.light-mode .text-primary {
+    color: #0d6efd !important;
+}
+
+
 .light-mode .badge.bg-dark {
     background-color: #212529 !important;
 }
@@ -249,12 +270,12 @@
 .light-mode .badge.bg-gold {
     background-color: #FFD700 !important;
     color: #000 !important;
-    box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+    box-shadow: 0 0 5px #ffd70080;
 }
 
 .light-mode .card-footer.gold {
     border-top: 1px solid #FFD700 !important;
-    background-color: rgba(255, 215, 0, 0.05);
+    background-color: #ffd7000d;
 }
 
 .light-mode .card.border-gold {
@@ -264,7 +285,7 @@
 
 .light-mode .card.border-gold:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+    box-shadow: 0 10px 20px #ffd7004d;
     border-color: #FFD700 !important;
 }
 
@@ -273,7 +294,7 @@
 }
 
 .light-mode .card.border-gold:hover .card-body {
-    background-color: rgba(255, 215, 0, 0.03);
+    background-color: #ffd70008;
 }
 
 .light-mode .btn-primary {
@@ -296,4 +317,29 @@
     background-color: #0484AE !important;
     border-color: #0484AE !important;
     color: white !important;
+}
+
+.light-mode .card:hover .card-img-top,
+.light-mode .card:hover .card-img,
+.light-mode .card:hover .card-header,
+.light-mode .card:hover .image-container,
+.light-mode .card:hover .tower-image-container {
+    background-color: #00b2ee08;
+}
+
+
+.light-mode .card.border-info:hover .card-img-top,
+.light-mode .card.border-info:hover .card-img,
+.light-mode .card.border-info:hover .card-header,
+.light-mode .card.border-info:hover .image-container,
+.light-mode .card.border-info:hover .tower-image-container {
+    background-color: #0dcaf00d;
+}
+
+.light-mode .card.border-gold:hover .card-img-top,
+.light-mode .card.border-gold:hover .card-img,
+.light-mode .card.border-gold:hover .card-header,
+.light-mode .card.border-gold:hover .image-container,
+.light-mode .card.border-gold:hover .tower-image-container {
+    background-color: #ffd70008;
 }
