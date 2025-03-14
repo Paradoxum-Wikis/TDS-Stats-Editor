@@ -51,44 +51,40 @@ export default class BoostPanel {
     #createYesNoInput(labelText, defaultValue) {
         const form = document.createElement('form');
         form.classList.add('d-flex', 'mb-1');
-    
+
         const label = document.createElement('label');
         label.classList.add('col-sm-8', 'col-form-label', 'fs-6');
         label.textContent = this.#formatHeader(labelText);
-    
+
         const inputDiv = document.createElement('div');
         inputDiv.classList.add('col-sm-4');
-    
+
         const select = document.createElement('select');
-        select.classList.add('form-control', 'text-white');
-    
-        select.style.backgroundColor = '#101113';  
-        select.style.color = 'white';
-    
+        select.classList.add('form-control', 'theme-select');
+
         const optionYes = document.createElement('option');
         optionYes.value = 'Yes';
         optionYes.textContent = 'Yes';
         const optionNo = document.createElement('option');
         optionNo.value = 'No';
         optionNo.textContent = 'No';
-    
+
         select.appendChild(optionYes);
         select.appendChild(optionNo);
         select.value = defaultValue;
-    
+
         form.appendChild(label);
         form.appendChild(inputDiv);
         inputDiv.appendChild(select);
-    
+
         form.addEventListener('submit', () => select.blur());
         form.addEventListener('mouseup', () => select.focus());
         select.addEventListener('focusout', () =>
             this.onInputYesNo(labelText, select.value)
         );
-    
+
         this.boostForm.appendChild(form);
     }
-    
 
     onInput(name, value) {
         if (value !== '') {

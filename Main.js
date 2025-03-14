@@ -142,6 +142,17 @@ function loadTower(tower, viewer) {
     }
 }
 
+function clearUrlAndShowLanding() {
+    // clear URL parameters without refreshing the page
+    const url = new URL(window.location);
+    url.search = '';
+    window.history.replaceState({}, '', url);
+    
+    loadTower(null);
+}
+
+window.clearUrlAndShowLanding = clearUrlAndShowLanding;
+
 const app = new App();
 app.start();
 

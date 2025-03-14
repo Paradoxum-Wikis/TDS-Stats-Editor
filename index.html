@@ -28,6 +28,7 @@
     <link href="Styles/Sidebars.css" rel="stylesheet">
     <link href="Styles/json-viewer.css" rel="stylesheet">
     <link href="Styles/torus.css" rel="stylesheet">
+    <link href="Styles/theme.css" rel="stylesheet">
     <link rel="shortcut icon" href="https://static.wikia.nocookie.net/tower-defense-sim/images/4/4a/Site-favicon.ico">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,6 +52,7 @@
     <script src="json-viewer.js"></script>
     <script src="Slides.js"></script>
     <script src="JSONUploader.js"></script>
+    <script src="ThemeManager.js"></script>
     <script type="module" src="UpdateLog.js"></script>
     <script defer type="module" src="Main.js"></script>
 
@@ -553,10 +555,18 @@
                                 <h4><i class="bi bi-gear me-2"></i>Settings</h4>
                             </div>
                             <div class="card-body">
-                                <h5 class="mt-2 mb-3">Light Mode</h5>
+                                <h5 class="mt-2 mb-3">Theme</h5>
+                                <div class="mb-4">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="themeToggle">
+                                        <label class="form-check-label" for="themeToggle">
+                                            <i class="bi bi-moon-stars me-2"></i>Dark Mode
+                                        </label>
+                                    </div>
+                                </div>
 
                                 <div class="mt-4">
-                                    <h5>Resources:</h5>
+                                    <h5>More</h5>
                                     <a href="https://tds.fandom.com/wiki/" target="_blank" class="btn btn-outline-light mt-2 me-2">
                                         <i class="bi bi-book me-1"></i> TDS Wiki
                                     </a>
@@ -928,7 +938,7 @@
                                 <img style="width: 42px;" class="zoomup type1" title="Join the Tower Defense Simulator Wiki Discord server!" src="https://static.wikia.nocookie.net/tower-defense-sim/images/4/4c/Discord-Symbol-Blurple.svg">
                             </a>
                             <a href="https://github.com/t7ru/TDS-Stats-Editor/" target="_blank" class="mx-2">
-                                <img style="width: 42px;" class="zoomup type1" title="Contribute to the website's source code!" src="htmlassets/github-mark-white.svg">
+                                <img style="width: 42px;" class="zoomup github-logo" title="Contribute to the website's source code!" src="htmlassets/github-mark-white.svg" data-light-src="htmlassets/github-mark.svg" data-dark-src="htmlassets/github-mark-white.svg">
                             </a>
                         </div>
                     </div>
@@ -946,6 +956,8 @@
                 <!-- Modal Footer-->
                 <div class="modal-footer">
                     <span class="text-muted me-auto">Last updated to game version: <b>1.57.3</b></span>
+                    <button type="button" class="btn btn-primary me-2" onclick="clearUrlAndShowLanding()" data-bs-dismiss="modal">Home
+                    </button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>

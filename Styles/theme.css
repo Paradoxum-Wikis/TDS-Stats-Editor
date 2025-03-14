@@ -1,0 +1,363 @@
+/* light mode css - only applies when .light-mode class is present */
+/* preserves all existing dark mode styling by default */
+
+.light-mode {
+    background-color: #f8f9fa;
+}
+
+.light-mode body {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+.light-mode .bg-dark {
+    background-color: #f8f9fa !important;
+}
+
+.light-mode .card.bg-dark {
+    background-color: #fff !important;
+}
+
+.light-mode .card {
+    background-color: #fff;
+    border-color: #ced4da;
+}
+
+.light-mode .text-white {
+    color: black !important;
+}
+
+.light-mode .text-light {
+    color: #343a40 !important;
+}
+
+.light-mode .text-muted {
+    color: #656a6f !important;
+}
+
+.light-mode .aside {
+    background-color: rgba(230, 230, 230, 0.8);
+}
+
+.light-mode .sidebar {
+    background-color: rgba(230, 230, 230, 0.8) !important;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+.light-mode .sidebar .nav-link {
+    color: #333 !important;
+}
+
+.light-mode .sidebar .nav-link:hover {
+    color: #0d6efd !important;
+}
+
+.light-mode .table-dark {
+    --bs-table-bg: #fff;
+    --bs-table-striped-bg: #f2f2f2;
+    --bs-table-striped-color: #212529;
+    --bs-table-active-bg: #e9ecef;
+    --bs-table-active-color: #212529;
+    --bs-table-hover-bg: #f5f5f5;
+    --bs-table-hover-color: #212529;
+    color: #212529;
+    background-color: #fff;
+}
+
+.light-mode .table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.light-mode .table-striped > tbody > tr:nth-of-type(even) {
+    background-color: #fff;
+}
+
+.light-mode .table-striped > tbody > tr:nth-of-type(2n+1) {
+    --bs-table-accent-bg: var(--bs-table-striped-bg);
+    color: var(--bs-table-striped-color);
+}
+
+.light-mode .table-cell-input {
+    background-color: transparent;
+    color: black !important;
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+.light-mode .table-cell-input:hover,
+.light-mode .table-cell-input:focus {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.4);
+}
+
+.light-mode .table-cell-input-delta {
+    color: #0d6efd !important;
+}
+
+.light-mode .table-cell-input-delta-positive {
+    color: #198754 !important;
+    background-color: rgba(25, 135, 84, 0.1);
+}
+
+.light-mode .table-cell-input-delta-negative {
+    color: #dc3545 !important;
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
+.light-mode .table-header-cell {
+    color: #212529;
+    background-color: #f8f9fa;
+}
+
+.light-mode .delta-positive {
+    color: #198754 !important;
+    background-color: rgba(25, 135, 84, 0.1);
+}
+
+.light-mode .delta-negative {
+    color: #dc3545 !important;
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
+.light-mode .table {
+    border-color: #dee2e6;
+}
+
+.light-mode .table > :not(:first-child) {
+    border-top: 2px solid #dee2e6;
+}
+
+.light-mode .table > :not(:last-child) > :last-child > * {
+    background-color: #f8f9fa !important;
+    border-bottom-color: #dee2e6 !important;
+    color: #212529 !important;
+}
+
+.light-mode .table td,
+.light-mode .table th {
+    color: #212529 !important;
+}
+
+.light-mode .table tr {
+    background-color: #fff;
+}
+
+.light-mode .table tbody {
+    background-color: #fff;
+    color: #212529;
+}
+
+.light-mode .table thead tr {
+    background-color: #f8f9fa;
+    color: #212529;
+    border-bottom-color: #dee2e6;
+}
+
+.light-mode #json {
+    background-color: #fff;
+    color: #212529;
+}
+
+.light-mode .json-viewer {
+    background-color: #fff;
+    color: #212529;
+}
+
+.light-mode .json-viewer ul {
+    background-color: #fff;
+    color: #212529;
+}
+
+.light-mode .json-viewer a {
+    color: #0d6efd;
+}
+
+.light-mode .json-viewer .type-string {
+    color: #198754;
+}
+
+.light-mode .json-viewer .type-number {
+    color: #dc3545;
+}
+
+.light-mode .json-viewer .type-boolean {
+    color: #0d6efd;
+}
+
+.light-mode .json-viewer .null {
+    color: #656a6f;
+}
+
+.light-mode #wikitable {
+    background-color: #fff;
+    color: #212529;
+}
+
+.light-mode #wikitable pre {
+    background-color: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #212529;
+}
+
+.light-mode #unit-table {
+    background-color: #fff;
+    color: #212529;
+}
+
+.light-mode .form-control {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.2);
+    color: #212529 !important;
+}
+
+.light-mode .form-control:focus {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.3);
+    color: #212529;
+}
+
+.light-mode input {
+    color: #212529 !important;
+}
+
+.light-mode .form-check-input:hover {
+    background-color: rgba(182, 182, 182, 0.8);
+}
+
+.light-mode .btn-outline-light {
+    color: #212529;
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+.light-mode .btn-outline-light:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #0d6efd !important;
+}
+
+.light-mode .btn-outline-secondary {
+    color: #656a6f;
+    border-color: #656a6f;
+}
+
+.light-mode .btn-outline-secondary:hover {
+    background-color: rgba(108, 117, 125, 0.1);
+    color: black !important;
+}
+
+.light-mode .modal-content.bg-dark {
+    background-color: #fff !important;
+}
+
+.light-mode .modal-header {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.light-mode .container-fluid.bg-dark,
+.light-mode .container.bg-dark {
+    background-color: #f8f9fa !important;
+}
+
+.light-mode header.bg-dark,
+.light-mode footer.bg-dark,
+.light-mode nav.bg-dark {
+    background-color: #f8f9fa !important;
+}
+
+.light-mode .dropdown-menu {
+    background-color: #fff;
+    color: #212529;
+}
+
+.light-mode .dropdown-item {
+    color: #212529;
+}
+
+.light-mode .dropdown-item:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #0d6efd !important;
+}
+
+.light-mode ::-webkit-scrollbar-track-piece {
+    background-color: #d1eef7;
+}
+
+.light-mode ::-webkit-scrollbar-thumb {
+    background-color: #035d7c;
+}
+
+.light-mode ::-webkit-scrollbar-thumb:hover {
+    background-color: #0484ae;
+}
+
+.light-mode .btn-toggle {
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.light-mode .btn-toggle:hover,
+.light-mode .btn-toggle:focus {
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.light-mode .btn-toggle[aria-expanded='true'] {
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.light-mode .btn-toggle::before {
+    content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+}
+
+.light-mode .zoomup.type1 {
+    filter: brightness(0) invert(0);
+}
+
+.light-mode .zoomup.type1:hover {
+    filter: none;
+}
+
+.light-mode .nav-tabs .nav-link {
+    color: #495057;
+}
+
+.light-mode .nav-tabs .nav-link.active {
+    color: #0d6efd;
+}
+
+.light-mode .slide-nav {
+    color: #212529;
+}
+
+.light-mode .slide-nav:hover {
+    color: #0484ae;
+}
+
+.light-mode .carousel-control-prev,
+.light-mode .carousel-control-next {
+    color: #212529;
+}
+
+.light-mode .slide-prev,
+.light-mode .slide-next {
+    color: #212529;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+}
+
+/* rof bug styling for dark mode (default) */
+.form-control.theme-select {
+    background-color: #101113;
+    color: white;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.form-control.theme-select:focus {
+    background-color: #1a1b1f;
+    border-color: rgba(255, 255, 255, 0.5);
+    color: white;
+}
+
+/* Light mode overrides for the above */
+.light-mode .form-control.theme-select {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-color:
+  rgba(0, 0, 0, 0.2);
+    color: #212529 !important;
+}
+
