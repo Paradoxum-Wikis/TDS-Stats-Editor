@@ -194,7 +194,9 @@ export default class TableInput {
     }
 
     #formatNumber(value) {
-        const enUSFormatter = Intl.NumberFormat('en-US');
+        const forceUSFormat = window.state?.settings?.forceUSNumbers !== false;
+        const formatter = forceUSFormat ? Intl.NumberFormat('en-US') : Intl.NumberFormat();
+        const showSeconds = window.state?.settings?.showSeconds !== false;
 
         switch (this.attribute) {
             case 'Cost':
@@ -205,7 +207,7 @@ export default class TableInput {
             case 'IncomeEfficiency':
             case 'IncomePerSecond':
             case 'TotalIncomePerSecond':
-                return `$${enUSFormatter.format(value)}`;
+                return `$${formatter.format(value)}`;
             
             case 'MaxDefMelt':
             case 'DefenseMelt':
@@ -220,7 +222,7 @@ export default class TableInput {
             case 'CriticalMultiplier':
             case 'AftershockMultiplier':
             case 'SpeedMultiplier':
-                return enUSFormatter.format(value) + '%';
+                return formatter.format(value) + '%';
     
             case 'BuffLength':
             case 'BurnTime':
@@ -245,7 +247,7 @@ export default class TableInput {
             case 'AimTime':
             case 'EquipTime':
             case 'BuildDelay':
-                return enUSFormatter.format(value) + 's';
+                return formatter.format(value) + (showSeconds ? 's' : '');
         }
     
         if (+value < 1) {

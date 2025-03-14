@@ -52,7 +52,7 @@
     <script src="json-viewer.js"></script>
     <script src="Slides.js"></script>
     <script src="JSONUploader.js"></script>
-    <script src="ThemeManager.js"></script>
+    <script src="SettingsManager.js"></script>
     <script type="module" src="UpdateLog.js"></script>
     <script defer type="module" src="Main.js"></script>
 
@@ -565,8 +565,25 @@
                                     </div>
                                 </div>
 
+                                <h5 class="mt-2 mb-3">Table</h5>
+                                <div class="mb-4">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="showSecondsToggle" checked>
+                                        <label class="form-check-label" for="showSecondsToggle">
+                                            <i class="bi bi-clock me-2"></i>Show seconds in time values
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="form-check form-switch mt-2">
+                                        <input class="form-check-input" type="checkbox" id="forceUSNumbersToggle" checked>
+                                        <label class="form-check-label" for="forceUSNumbersToggle">
+                                            <i class="bi bi-123 me-2"></i>Use US number format (1,123.58)
+                                        </label>
+                                    </div>
+                                </div>
+
                                 <div class="mt-4">
-                                    <h5>More</h5>
+                                    <h5>More Resources</h5>
                                     <a href="https://tds.fandom.com/wiki/" target="_blank" class="btn btn-outline-light mt-2 me-2">
                                         <i class="bi bi-book me-1"></i> TDS Wiki
                                     </a>

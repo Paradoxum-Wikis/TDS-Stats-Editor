@@ -207,7 +207,9 @@ export default class TableUnitInput {
     }
 
     #formatNumber(number) {
-        const enUSFormatter = Intl.NumberFormat('en-US');
+        const forceUSFormat = window.state?.settings?.forceUSNumbers !== false;
+        const formatter = forceUSFormat ? Intl.NumberFormat('en-US') : Intl.NumberFormat();
+        const showSeconds = window.state?.settings?.showSeconds !== false;
 
         switch (this.attribute) {
             case 'Cost':
@@ -217,7 +219,7 @@ export default class TableUnitInput {
             case 'BaseIncome':
             case 'IncomePerTower':
             case 'MaxIncome':
-                return `$${enUSFormatter.format(number)}`;
+                return `$${formatter.format(number)}`;
 
             case 'Defense':
             case 'SlowdownPerHit':
@@ -230,7 +232,7 @@ export default class TableUnitInput {
             case 'BaseDefenseMelt':
             case 'DefenseMeltPerTower':
             case 'MaxDefenseMelt':
-                return enUSFormatter.format(number) + '%';
+                return formatter.format(number) + '%';
             
             case 'Duration':
             case 'MissileCooldown':
@@ -247,7 +249,7 @@ export default class TableUnitInput {
             case 'ConfusionCooldown':
             case 'PoisonLength':
             case 'SlowdownTime':
-                return enUSFormatter.format(number) + 's';
+                return formatter.format(number) + (showSeconds ? 's' : '');
         }
         return +(+number).toFixed(3);
     }

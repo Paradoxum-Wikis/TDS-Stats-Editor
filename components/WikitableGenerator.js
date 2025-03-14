@@ -341,6 +341,8 @@ class WikitableGenerator {
                 : `${this.#formatNumber(value)}%`;
         }
         
+        const showSeconds = window.state?.settings?.showSeconds !== false;
+        
         // Time formatting
         if ([
             'Cooldown', 'ChargeTime', 'SlowdownTime', 'BurnTime', 'PoisonLength',
@@ -353,7 +355,7 @@ class WikitableGenerator {
         ].includes(attribute)) {
             return this.viewer.useFaithfulFormat
                 ? this.#formatFaithfulNumber(value)
-                : `${this.#formatNumber(value)}s`;
+                : `${this.#formatNumber(value)}${showSeconds ? 's' : ''}`;
         }
         
         // boolean values
@@ -376,20 +378,29 @@ class WikitableGenerator {
     }
 
     #formatNumber(num) {
+        const forceUSFormat = window.state?.settings?.forceUSNumbers !== false;
+        
         // formats a number for display in the wikitable
         if (Math.abs(num) < 0.01) {
             return '0';
         }
         
         if (Number.isInteger(num)) {
-            return num.toLocaleString();
+            return forceUSFormat ? 
+                num.toLocaleString('en-US') : 
+                num.toLocaleString();
         }
         
         const rounded = Math.round(num * 100) / 100;
-        return rounded.toLocaleString(undefined, {
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 2
-        });
+        return forceUSFormat ? 
+            rounded.toLocaleString('en-US', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            }) : 
+            rounded.toLocaleString(undefined, {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            });
     }
 
     // helper method for formatting numbers with commas but no decimal places
