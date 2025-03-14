@@ -31,6 +31,7 @@ class App {
         };
 
         this.towerToSelect = null;
+        this.viewer = null;
 
         // checks tower parameter in URL
         const urlParams = new URLSearchParams(window.location.search);
@@ -56,25 +57,25 @@ class App {
             this.towerManager.towerNames
         );
 
-        const viewer = new Viewer(this);
+        this.viewer = new Viewer(this);
 
         // attach event listener
         this.dropdown.textForm.addEventListener('submit', (e) => {
-            viewer.load(this.towerManager.towers[e.detail]);
-
-            // update url with the selected tower for shareable links
             const towerName = e.detail || e.target?.value;
+            
             if (towerName) {
+                // update url with the selected tower for shareable links
                 const url = new URL(window.location);
                 url.searchParams.set('tower', towerName);
                 window.history.replaceState({}, '', url);
+                
+                loadTower(this.towerManager.towers[towerName], this.viewer);
             }
         });
 
         if (this.towerToSelect) {
             const towerName = this.findClosestTowerName(this.towerToSelect);
             if (towerName) {
-                
                 const event = new CustomEvent('submit', { detail: towerName });
                 this.dropdown.textForm.dispatchEvent(event);
                 
@@ -84,8 +85,8 @@ class App {
                 }, 10);
             }
         } else {
-            // default page if no URL parameter (likely accel)
-            viewer.load(this.towerManager.towers[this.towerManager.towerNames[0]]);
+            // show landing page by default instead of loading first tower (accel)
+            loadTower(null, this.viewer);
         }
     }
     
@@ -113,6 +114,31 @@ class App {
         );
         
         return containsMatch || null;
+    }
+}
+
+// loadTower function to work with the Viewer class
+function loadTower(tower, viewer) {
+    if (tower) {
+        // hide landing page
+        document.getElementById('landing-page').classList.add('d-none');
+        
+        if (viewer) {
+            viewer.load(tower);
+        }
+    } else {
+        // show landing page
+        document.getElementById('landing-page').classList.remove('d-none');
+        
+        document.querySelector('.table-responsive').classList.add('d-none');
+        document.getElementById('json-panel').classList.add('d-none');
+        document.getElementById('wikitable-panel').classList.add('d-none');
+        document.getElementById('lua-panel').classList.add('d-none');
+        
+        const allSpinners = document.querySelectorAll('.spinner-border');
+        allSpinners.forEach(spinner => {
+            spinner.style.display = 'none';
+        });
     }
 }
 

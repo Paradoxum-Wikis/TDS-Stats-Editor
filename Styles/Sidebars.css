@@ -1,5 +1,7 @@
 .aside {
     background-color: rgba(0, 0, 0, 0.45);
+    position: sticky;
+    top: 0;
 }
 
 .aside-light {
@@ -20,7 +22,7 @@
 }
 
 #property-viewer-section {
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .btn-toggle {
