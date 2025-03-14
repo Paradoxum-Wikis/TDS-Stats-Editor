@@ -3,6 +3,8 @@ import Dropdown from './components/Dropdown.js';
 import Viewer from './components/Viewer/index.js';
 import UpdateLog from './UpdateLog.js';
 
+const TDSVersion = '1.57.7';
+
 class App {
     constructor() {
         this.towerManager = new TowerManager('New');
@@ -151,6 +153,14 @@ function clearUrlAndShowLanding() {
     loadTower(null);
 }
 
+// version number html
+function setVersionNumber() {
+    const versionElements = document.querySelectorAll('.tdsversion');
+    versionElements.forEach(element => {
+        element.textContent = TDSVersion;
+    });
+}
+
 window.clearUrlAndShowLanding = clearUrlAndShowLanding;
 
 const app = new App();
@@ -158,4 +168,5 @@ app.start();
 
 document.addEventListener('DOMContentLoaded', () => {
     new UpdateLog();
+    setVersionNumber();
 });
