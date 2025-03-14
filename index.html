@@ -486,19 +486,20 @@
             <!-- Landing Page/Tutorial -->
             <div id="landing-page" class="d-flex flex-column p-4">
                 <div class="text-center mb-4">
-                    <img src="htmlassets/landinglogo.png" alt="TDS Stats Editor Logo" style="max-width: 500px;">
+                    <img src="htmlassets/landinglogo.png" alt="TDS Stats Editor Logo" class="img-fluid" style="max-width: 45%;">
                     <h1 class="text-white mt-3">Welcome to the TDS Statistics Editor!</h1>
                     <p class="text-light">A community made tool for creating and editing Tower Defense Simulator tower stats, duh.</p>
                 </div>
-                
+
+                <!-- First row -->
                 <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <div class="card bg-dark text-white border-secondary">
+                    <div class="col-md-6 mb-4 d-flex">
+                        <div class="card bg-dark text-white border-secondary w-100">
                             <div class="modal-header">
                                 <h4><i class="bi bi-rocket-takeoff me-2"></i>Getting Started</h4>
                             </div>
-                            <div class="modal-body">
-                                <ol class="ps-3">
+                            <div class="card-body d-flex flex-column">
+                                <ol class="ps-3 flex-grow-1">
                                     <li class="mb-2">Select a tower from the search bar in the header</li>
                                     <li class="mb-2">Tinker with the statistic values!</li>
                                     <li class="mb-2">Export your changes as JSON or Wikitable</li>
@@ -507,14 +508,14 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="col-md-6 mb-4">
-                        <div class="card bg-dark text-white border-secondary">
+
+                    <div class="col-md-6 mb-4 d-flex">
+                        <div class="card bg-dark text-white border-secondary w-100">
                             <div class="modal-header">
                                 <h4><i class="bi bi-tools me-2"></i>Key Features</h4>
                             </div>
-                            <div class="card-body">
-                                <ul class="ps-3">
+                            <div class="card-body d-flex flex-column">
+                                <ul class="ps-3 flex-grow-1">
                                     <li class="mb-2">Edit tower stats and attributes</li>
                                     <li class="mb-2">Create custom towers using the clone tool</li>
                                     <li class="mb-2">Delta view to see your changes highlighted</li>
@@ -525,40 +526,42 @@
                         </div>
                     </div>
                 </div>
-                
+
+                <!-- Second row -->
                 <div class="row">
-                    <div class="col-md-6 mb-4">
-                        <div class="card bg-dark text-white border-secondary">
+                    <div class="col-md-6 mb-4 d-flex">
+                        <div class="card bg-dark text-white border-secondary w-100">
                             <div class="modal-header">
                                 <h4><i class="bi bi-grid-3x3 me-2"></i>Understanding the Interface</h4>
                             </div>
-                            <div class="card-body">
-                                <h5 class="mt-2 mb-3">Left Sidebar</h5>
-                                <ul class="ps-3">
-                                    <li>Upgrade Viewer - See tower upgrades, abilities, and edit its summary</li>
-                                    <li>Property Viewer - Toggle which stats will appear in the table</li>
-                                    <li>Boost View - Add various buffs or debuffs to see their effects</li>
-                                </ul>
-                                
-                                <h5 class="mt-4 mb-3">Navigation Bar</h5>
-                                <ul class="ps-3">
-                                    <li>Table - Edit stats with a user friendly interface</li>
-                                    <li>Wikitable - Generate tables to be used anywhere on the wiki</li>
-                                    <li>JSON - View, export, and import JSONs</li>
-                                    <li>Show Deltas - Highlight changes made to values</li>
-                                    <li>Clone - Copy an existing tower and make a new entry</li>
-                                    <li>About - A description, disclaimer, and update log of the site</li>
-                                </ul>
+                            <div class="card-body d-flex flex-column">
+                                <div class="flex-grow-1">
+                                    <h5 class="mt-2 mb-3">Left Sidebar</h5>
+                                    <ul class="ps-3">
+                                        <li>Upgrade Viewer - See tower upgrades, abilities, and edit its summary</li>
+                                        <li>Property Viewer - Toggle which stats will appear in the table</li>
+                                        <li>Boost View - Add various buffs or debuffs to see their effects</li>
+                                    </ul>
+                                    <h5 class="mt-4 mb-3">Navigation Bar</h5>
+                                    <ul class="ps-3">
+                                        <li>Table - Edit stats with a user friendly interface</li>
+                                        <li>Wikitable - Generate tables to be used anywhere on the wiki</li>
+                                        <li>JSON - View, export, and import JSONs</li>
+                                        <li>Show Deltas - Highlight changes made to values</li>
+                                        <li>Clone - Copy an existing tower and make a new entry</li>
+                                        <li>About - A description, disclaimer, and update log of the site</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="col-md-6 mb-4">
-                        <div class="card bg-dark text-white border-secondary">
+
+                    <div class="col-md-6 mb-4 d-flex">
+                        <div class="card bg-dark text-white border-secondary w-100">
                             <div class="modal-header">
                                 <h4><i class="bi bi-gear me-2"></i>Settings</h4>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body d-flex flex-column">
                                 <h5 class="mt-2 mb-3">Theme</h5>
                                 <div class="mb-4">
                                     <div class="form-check form-switch">
@@ -577,7 +580,7 @@
                                             <i class="bi bi-clock me-2"></i>Show seconds in time values
                                         </label>
                                     </div>
-                                    
+
                                     <div class="form-check form-switch mt-2">
                                         <input class="form-check-input" type="checkbox" id="forceUSNumbersToggle" checked>
                                         <label class="form-check-label" for="forceUSNumbersToggle">
@@ -602,6 +605,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
                 
                 <div class="text-center mt-3">
                     <p class="text-muted">This tool is an unofficial creation and is not an official product of Paradoxum Games</p>
