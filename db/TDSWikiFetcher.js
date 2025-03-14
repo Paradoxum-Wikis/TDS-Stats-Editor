@@ -98,7 +98,13 @@ class TDSWikiFetcher {
                 .filter(element => element.querySelector('a')?.href.includes('User_blog:'))
                 .map(element => {
                     const link = element.querySelector('a');
-                    const fullText = link?.textContent?.trim() || 'Unknown Tower';
+                    let fullText = link?.textContent?.trim() || 'Unknown Tower';
+                    
+                    // Handle the new format "User blog:Username/TowerName"
+                    if (fullText.startsWith('User blog:')) {
+                        fullText = fullText.replace('User blog:', '');
+                    }
+                    
                     // get tower name from path
                     const towerName = fullText.includes('/') ? fullText.split('/').pop() : fullText;
                     
