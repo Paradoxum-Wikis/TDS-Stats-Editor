@@ -281,11 +281,11 @@
 }
 
 .light-mode ::-webkit-scrollbar-thumb {
-    background-color: #035d7c;
+    background-color: #00b2ee;
 }
 
 .light-mode ::-webkit-scrollbar-thumb:hover {
-    background-color: #0484ae;
+    background-color: #00bfff;
 }
 
 .light-mode .btn-toggle {
@@ -360,4 +360,3 @@
   rgba(0, 0, 0, 0.2);
     color: #212529 !important;
 }
-
