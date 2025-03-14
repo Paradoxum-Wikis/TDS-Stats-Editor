@@ -290,3 +290,34 @@ a:hover {
 a.btn:hover {
     color: white !important;
 }
+
+.btn-primary {
+    color: #fff !important;
+    background-color: #035D7C !important;
+    border-color: #035D7C !important;
+}
+
+.btn-primary:hover {
+    background-color: #0484AE !important;
+    border-color: #0484AE !important;
+}
+
+.btn.active {
+    background-color: #035D7C !important;
+    border-color: #035D7C !important;
+    color: #fff !important;
+}
+
+.btn.active:hover {
+    background-color: #0484AE !important;
+    border-color: #0484AE !important;
+}
+
+.btn-outline-primary.active:hover,
+.btn-check:checked + .btn-outline-primary:hover,
+.btn-outline-secondary.active:hover,
+.btn-check:checked + .btn-outline-secondary:hover {
+    background-color: #0484AE !important;
+    border-color: #0484AE !important;
+    color: #fff !important;
+}

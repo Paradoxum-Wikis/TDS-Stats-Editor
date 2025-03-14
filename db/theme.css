@@ -1,0 +1,299 @@
+/* light mode css for database - applies when .light-mode class is present */
+
+.light-mode {
+    background-color: #f8f9fa !important;
+}
+
+.light-mode body {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+/* main backgrounds */
+.light-mode .bg-dark {
+    background-color: #f8f9fa !important;
+}
+
+.light-mode .bg-darker {
+    background-color: #e9ecef !important;
+}
+
+/* text colors */
+.light-mode .text-white {
+    color: #212529 !important;
+}
+
+.light-mode .text-light {
+    color: #343a40 !important;
+}
+
+.light-mode .text-muted {
+    color: #656a6f !important;
+}
+
+/* cards */
+.light-mode .card.bg-dark {
+    background-color: #fff !important;
+    border-color: #ced4da;
+}
+
+.light-mode .card {
+    background-color: #fff;
+    border-color: #ced4da;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #ced4da;
+}
+
+.light-mode .card-footer {
+    background-color: rgba(0, 0, 0, 0.03);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* modals */
+.light-mode .modal-content.bg-dark {
+    background-color: #fff !important;
+    color: #212529;
+}
+
+.light-mode .modal-header {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* header and nav */
+.light-mode header.navbar-dark.bg-darker {
+    background-color: #e9ecef !important;
+}
+
+.light-mode .navbar-dark .navbar-brand {
+    color: #212529;
+}
+
+/* sidebar */
+.light-mode .sidebar.bg-darker {
+    background-color: #e9ecef !important;
+}
+
+.light-mode .nav-link.text-light {
+    color: #343a40 !important;
+}
+
+.light-mode .nav-link.text-light:hover {
+    color: #0d6efd !important;
+}
+
+.light-mode .sidebar-heading {
+    color: #212529;
+}
+
+.light-mode .form-check-label.text-light {
+    color: #212529 !important;
+}
+
+/* forms and inputs */
+.light-mode .form-control {
+    background-color: #0000000d !important;
+    border-color: #00000033 !important;
+    color: #212529 !important;
+}
+
+.light-mode .form-control:focus {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.3);
+    color: #212529;
+}
+
+.light-mode .form-check-input:checked {
+    background-color: #00b2ee;
+    border-color: #00b2ee;
+}
+
+/* buttons */
+.light-mode .btn-outline-secondary.text-light {
+    color: #656a6f !important;
+    border-color: #656a6f;
+}
+
+.light-mode .btn-outline-secondary.text-light:hover {
+    background-color: rgba(108, 117, 125, 0.1) !important;
+    color: #212529 !important;
+}
+
+.light-mode .btn-primary {
+    background-color: #00b2ee;
+    border-color: #00b2ee;
+}
+
+.light-mode .btn-primary:hover {
+    background-color: #00bfff;
+    border-color: #00bfff;
+}
+
+.light-mode .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.light-mode .btn-outline-primary {
+    color: #0d6efd;
+    background-color: #ffffff08;
+    border-color: #0d6efd;
+}
+
+.light-mode .btn-outline-primary:hover {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    color: white;
+}
+
+.light-mode .btn-outline-info {
+    color: #0dcaf0;
+    background-color: #ffffff08;
+    border-color: #0dcaf0;
+}
+
+.light-mode .btn-outline-info:hover {
+    background-color: #0dcaf0;
+    border-color: #0dcaf0;
+    color: white;
+}
+
+/* badge styling */
+.light-mode .badge.bg-success {
+    background-color: #198754 !important;
+    color: #fff;
+}
+
+.light-mode .badge.bg-danger {
+    background-color: #dc3545 !important;
+    color: #fff;
+}
+
+.light-mode .badge.bg-info {
+    background-color: #0dcaf0 !important;
+    color: #000;
+}
+
+.light-mode .badge.bg-secondary {
+    background-color: #6c757d !important;
+    color: #fff;
+}
+
+/* horizontal rules */
+.light-mode hr {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* featured section styling */
+.light-mode .card.bg-dark.border-info {
+    border-color: #0dcaf0 !important;
+}
+
+/* card hover effects */
+.light-mode .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 178, 238, 0.15);
+    border-color: #00b2ee;
+}
+
+.light-mode .card:hover .card-title {
+    color: #00b2ee !important;
+}
+
+.light-mode .card.border-info {
+    border-color: #0dcaf0 !important;
+    border-width: 2px;
+}
+
+.light-mode .card.border-info:hover {
+    box-shadow: 0 10px 20px rgba(13, 202, 240, 0.2);
+    border-color: #0dcaf0 !important;
+    border-width: 2px;
+}
+
+.light-mode .card:hover .card-body {
+    background-color: rgba(0, 178, 238, 0.03);
+}
+
+.light-mode .card.border-info:hover .card-body {
+    background-color: rgba(13, 202, 240, 0.05);
+}
+
+/* scrollbar styling */
+.light-mode ::-webkit-scrollbar-track-piece {
+    background-color: #d1eef7;
+}
+
+.light-mode ::-webkit-scrollbar-thumb {
+    background-color: #00b2ee;
+}
+
+.light-mode ::-webkit-scrollbar-thumb:hover {
+    background-color: #00bfff;
+}
+
+.light-mode p {
+    color: black !important;
+}
+
+.light-mode .badge.bg-dark {
+    background-color: #212529 !important;
+}
+
+/* gold styling for featured cards in light mode */
+.light-mode .bg-gold {
+    background-color: #FFD700 !important;
+    color: #000 !important;
+}
+
+.light-mode .badge.bg-gold {
+    background-color: #FFD700 !important;
+    color: #000 !important;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+.light-mode .card-footer.gold {
+    border-top: 1px solid #FFD700 !important;
+    background-color: rgba(255, 215, 0, 0.05);
+}
+
+.light-mode .card.border-gold {
+    border: 2px solid #FFD700 !important;
+    transition: transform 0.3s ease, box-shadow 0.5s ease;
+}
+
+.light-mode .card.border-gold:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+    border-color: #FFD700 !important;
+}
+
+.light-mode .card.border-gold:hover .card-title {
+    color: #DAA520 !important;
+}
+
+.light-mode .card.border-gold:hover .card-body {
+    background-color: rgba(255, 215, 0, 0.03);
+}
+
+.light-mode .btn-primary {
+    background-color: #035D7C !important;
+    border-color: #035D7C !important;
+}
+
+.light-mode .btn-primary:hover {
+    background-color: #035D7C !important;
+    border-color: #035D7C !important;
+}
+
+.light-mode .btn.active {
+    background-color: #035D7C !important;
+    color: white !important;
+    border-color: #035D7C !important;
+}
+
+.light-mode .btn.active:hover {
+    background-color: #0484AE !important;
+    border-color: #0484AE !important;
+    color: white !important;
+}

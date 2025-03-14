@@ -22,12 +22,12 @@
     <meta name="twitter:image:src" content="https://tds-editor.live/htmlassets/thumbnail.png?v=3">
     <meta name="theme-color" content="#035D7C">
 
-    <!-- Newer bootstrap version -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha256-PI8n5gCcz9cQqQXm3PEtDuPG8qx9oFsFctPg0S5zb8g=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" integrity="sha256-9kPW/n5nn53j4WMRYAxe9c1rCY96Oogo/MKSVdKzPmI=" crossorigin="anonymous">
     <link href="../Styles/torus.css" rel="stylesheet">
     <link href="../Styles/bootstrap.css" rel="stylesheet">
     <link href="Style.css" rel="stylesheet">
+    <link href="theme.css" rel="stylesheet">
     <link rel="shortcut icon" href="https://static.wikia.nocookie.net/tower-defense-sim/images/4/4a/Site-favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
@@ -49,6 +49,7 @@
     <script src="TDSWikiSorter.js"></script>
     <script type="module" src="Modals.js"></script>
     <script src="ApprovedList.js"></script>
+    <script src="DBSettingsManager.js"></script>
 
     <title>TDS Database Browser</title>
 </head>
@@ -123,7 +124,7 @@
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 fw-bold">
                         <p class="fs-2">Sort By</p>
                     </h6>
-                    <ul class="nav flex-column mb-2">
+                    <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link active text-light" href="#">Wiki Listing</a>
                         </li>
@@ -137,13 +138,25 @@
                             <a class="nav-link text-light" href="#">Upload Date</a>
                         </li>
                     </ul>
+
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 fw-bold">
+                        <p class="fs-2">Theme</p>
+                    </h6>
+                    <div class="px-3 mb-4 mt-2">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="themeToggle">
+                            <label class="form-check-label text-light" for="themeToggle">
+                                <i class="bi bi-moon-stars me-2"></i>Dark Mode
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </nav>
 
             <!-- main content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">
-                    <h1 class="h2 text-white">Custom Tower Browser (BETA 1.3)</h1>
+                    <h1 class="h2 text-white">Custom Tower Browser</h1>
                     <div class="btn-toolbar mb-2 mb-md-0 d-flex align-items-center">
                         <div class="btn-group me-2">
                             <button title="Information about this website." class="btn btn-sm btn-outline-secondary text-light"
