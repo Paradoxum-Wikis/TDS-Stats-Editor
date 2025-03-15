@@ -423,7 +423,7 @@ export default {
         Detections: {
             Hidden: false,
             Flying: false,
-            Lead: false,
+            Lead: true,
         },
         Attributes: {
             SendTime: 1.25,
@@ -446,7 +446,7 @@ export default {
         Detections: {
             Hidden: false,
             Flying: false,
-            Lead: false,
+            Lead: true,
         },
         Attributes: {
             SendTime: 1.5,
@@ -469,7 +469,7 @@ export default {
         Detections: {
             Hidden: true,
             Flying: false,
-            Lead: false,
+            Lead: true,
         },
         Attributes: {
             SendTime: 1.75,
@@ -492,7 +492,7 @@ export default {
         Detections: {
             Hidden: true,
             Flying: false,
-            Lead: false,
+            Lead: true,
         },
         Attributes: {
             SendTime: 1.75,
