@@ -32,13 +32,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // when the upload button is clicked
     uploadTowerButton.addEventListener('click', async () => {
+        // store original button content
+        const originalButtonContent = uploadTowerButton.innerHTML;
+        
         try {
             if (!validateForm()) {
                 return;
             }
 
-            // store original button content and disable the button
-            const originalButtonContent = uploadTowerButton.innerHTML;
+            // disable the button and show loading state
             uploadTowerButton.disabled = true;
             uploadTowerButton.innerHTML = `
                 <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
@@ -49,10 +51,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const jsonData = await getJsonData();
             if (!jsonData) {
                 window.showValidationError('JSON data is required');
-                
-                // Restore button
-                uploadTowerButton.innerHTML = originalButtonContent;
-                uploadTowerButton.disabled = false;
                 return;
             }
         
@@ -61,64 +59,56 @@ document.addEventListener('DOMContentLoaded', function() {
             const finalContent = content.replace('JSONDATA', jsonData);
         
             // try to copy to clipboard
-            try {
-                if (navigator.clipboard && navigator.clipboard.writeText) {
-                    await navigator.clipboard.writeText(finalContent);
+            let clipboardSuccess = false;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                await navigator.clipboard.writeText(finalContent);
+                window.showAlert('Content copied to clipboard!', 'success');
+                clipboardSuccess = true;
+            } else {
+                // old browser fallback
+                const textarea = document.createElement('textarea');
+                textarea.value = finalContent;
+                textarea.style.position = 'absolute';
+                textarea.style.left = '-9999px';
+                document.body.appendChild(textarea);
+                textarea.focus();
+                textarea.select();
+                clipboardSuccess = document.execCommand('copy');
+                document.body.removeChild(textarea);
+                
+                if (clipboardSuccess) {
                     window.showAlert('Content copied to clipboard!', 'success');
                 } else {
-                    // old browser fallback
-                    const textarea = document.createElement('textarea');
-                    textarea.value = finalContent;
-                    textarea.style.position = 'absolute';
-                    textarea.style.left = '-9999px';
-                    document.body.appendChild(textarea);
-                    textarea.focus();
-                    textarea.select();
-                    const success = document.execCommand('copy');
-                    document.body.removeChild(textarea);
-                    if (success) {
-                        window.showAlert('Content copied to clipboard!', 'success');
-                    } else {
-                        throw new Error('Copy failed');
-                    }
+                    window.showValidationError('Failed to copy content to clipboard. Please try again.');
+                    return;
                 }
-                
-                // Add a 2s delay before opening the new page
+            }
+            
+            if (clipboardSuccess) {
+                // Only add a delay if clipboard copy was successful
                 await new Promise(resolve => setTimeout(resolve, 2000));
                 
-            } catch (copyError) {
-                // Restore button if copy fails
-                uploadTowerButton.innerHTML = originalButtonContent;
-                uploadTowerButton.disabled = false;
-                window.showManualCopyDialog(finalContent);
-                return;
+                // open the wiki page
+                openFandomEditPage();
+                
+                // make sure modal is fully gone
+                towerModal.hide();
+                
+                setTimeout(() => {
+                    const backdrop = document.querySelector('.modal-backdrop');
+                    if (backdrop) {
+                        backdrop.remove();
+                    }
+                    document.body.classList.remove('modal-open');
+                    document.body.style.overflow = '';
+                    document.body.style.paddingRight = '';
+                }, 300);
             }
-        
-            // open the wiki page
-            openFandomEditPage();
-            
-            // make sure modal is fully gone
-            towerModal.hide();
-            
-            // Always restore button at the end
-            uploadTowerButton.innerHTML = originalButtonContent;
-            uploadTowerButton.disabled = false;
-            
-            setTimeout(() => {
-                const backdrop = document.querySelector('.modal-backdrop');
-                if (backdrop) {
-                    backdrop.remove();
-                }
-                document.body.classList.remove('modal-open');
-                document.body.style.overflow = '';
-                document.body.style.paddingRight = '';
-            }, 300);
-            
         } catch (error) {
             // show error if something went wrong
             window.showValidationError('Error: ' + error.message);
-            
-            // Restore button on error
+        } finally {
+            // always restore button state, regardless of success or failure
             uploadTowerButton.innerHTML = originalButtonContent;
             uploadTowerButton.disabled = false;
         }
