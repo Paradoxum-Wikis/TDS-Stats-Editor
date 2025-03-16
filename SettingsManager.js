@@ -24,24 +24,13 @@ class SettingsManager {
         if (this.currentTheme === 'light') {
             this.body.classList.add('light-mode');
             this.themeToggle.checked = false;
-            
-            // Set light version of GitHub logo
-            document.querySelectorAll('.github-logo').forEach(logo => {
-                if (logo.dataset.lightSrc) {
-                    logo.src = logo.dataset.lightSrc;
-                }
-            });
         } else {
             this.body.classList.remove('light-mode');
             this.themeToggle.checked = true;
-            
-            // Set dark version of GitHub logo
-            document.querySelectorAll('.github-logo').forEach(logo => {
-                if (logo.dataset.darkSrc) {
-                    logo.src = logo.dataset.darkSrc;
-                }
-            });
         }
+        
+        // Update theme aware images
+        this.updateThemeImages();
         
         // Set initial seconds display state
         this.showSecondsToggle.checked = this.showSeconds;
@@ -63,25 +52,14 @@ class SettingsManager {
             // Switch to dark mode
             this.body.classList.remove('light-mode');
             this.currentTheme = 'dark';
-            
-            // Update GitHub logo
-            document.querySelectorAll('.github-logo').forEach(logo => {
-                if (logo.dataset.darkSrc) {
-                    logo.src = logo.dataset.darkSrc;
-                }
-            });
         } else {
             // Switch to light mode
             this.body.classList.add('light-mode');
             this.currentTheme = 'light';
-            
-            // Update GitHub logo
-            document.querySelectorAll('.github-logo').forEach(logo => {
-                if (logo.dataset.lightSrc) {
-                    logo.src = logo.dataset.lightSrc;
-                }
-            });
         }
+        
+        // Update theme aware images
+        this.updateThemeImages();
         
         // Save the preference to localStorage
         localStorage.setItem('theme', this.currentTheme);
@@ -117,8 +95,23 @@ class SettingsManager {
         if (this.currentTheme === 'dark') {
             label.innerHTML = '<i class="bi bi-moon-stars me-2"></i>Dark Mode';
         } else {
-            label.innerHTML = '<i class="bi bi-sun me-2"></i>Light Mode (BETA)';
+            label.innerHTML = '<i class="bi bi-sun me-2"></i>Light Mode';
         }
+    }
+    
+    // handle all theme aware images
+    updateThemeImages() {
+        document.querySelectorAll('.theme-image').forEach(img => {
+            if (this.currentTheme === 'light') {
+                if (img.dataset.lightSrc) {
+                    img.src = img.dataset.lightSrc;
+                }
+            } else {
+                if (img.dataset.darkSrc) {
+                    img.src = img.dataset.darkSrc;
+                }
+            }
+        });
     }
 }
 

@@ -20,6 +20,7 @@ class DBSettingsManager {
         this.themeToggle.addEventListener('change', this.toggleTheme.bind(this));
         
         this.updateToggleLabel();
+        this.updateThemeImages();
     }
     
     toggleTheme() {
@@ -35,6 +36,7 @@ class DBSettingsManager {
         localStorage.setItem('theme', this.currentTheme);
         
         this.updateToggleLabel();
+        this.updateThemeImages();
     }
     
     updateToggleLabel() {
@@ -44,6 +46,20 @@ class DBSettingsManager {
         } else {
             label.innerHTML = '<i class="bi bi-sun me-2"></i>Light Mode';
         }
+    }
+    
+    updateThemeImages() {
+        document.querySelectorAll('.theme-image').forEach(img => {
+            if (this.currentTheme === 'light') {
+                if (img.dataset.lightSrc) {
+                    img.src = img.dataset.lightSrc;
+                }
+            } else {
+                if (img.dataset.darkSrc) {
+                    img.src = img.dataset.darkSrc;
+                }
+            }
+        });
     }
 }
 

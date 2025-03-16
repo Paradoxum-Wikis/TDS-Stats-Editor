@@ -19,7 +19,8 @@ const approvedTowers = [
     "Vessel Of Infinite Destruction/Golden Crook Boss",
     "Vessel Of Infinite Destruction/Ranger",
     "Vessel Of Infinite Destruction/Golden Cowboy",
-    'Brainhead1r/Hunter'
+    'Brainhead1r/Hunter',
+    'Bman Shadow/Stewie griffin',
 ];
 
 // List of featured towers

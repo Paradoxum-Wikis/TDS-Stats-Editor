@@ -3,7 +3,7 @@ import Dropdown from './components/Dropdown.js';
 import Viewer from './components/Viewer/index.js';
 import UpdateLog from './UpdateLog.js';
 
-const TDSVersion = '1.57.7';
+const TDSVersion = '1.57.8';
 
 class App {
     constructor() {

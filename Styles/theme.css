@@ -204,7 +204,7 @@
 }
 
 .light-mode .form-control {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, 0.05) !important;
     border-color: rgba(0, 0, 0, 0.2);
     color: #212529 !important;
 }
@@ -359,4 +359,19 @@
     border-color:
   rgba(0, 0, 0, 0.2);
     color: #212529 !important;
+}
+
+.light-mode .btn-outline-info {
+    color: #0fb4d5;
+    border-color: #0fb4d5;
+}
+
+.light-mode .btn-outline-info:hover {
+    color: white;
+    background-color: #0fb4d5;
+}
+
+.light-mode .form-check-input:checked {
+    background-color: #00b2ee;
+    border-color: #00b2ee;
 }
