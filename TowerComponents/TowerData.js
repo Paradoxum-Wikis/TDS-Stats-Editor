@@ -4170,7 +4170,7 @@ export default {
             Detections: {
               Flying: false,
               Hidden: true,
-              Lead: false,
+              Lead: true,
             },
             Cooldown: 0.8,
             Range: 16.5,
@@ -4187,7 +4187,7 @@ export default {
             Detections: {
               Flying: false,
               Hidden: true,
-              Lead: false,
+              Lead: true,
             },
             Cooldown: 0.4,
             Range: 16.5,
