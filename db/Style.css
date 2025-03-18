@@ -322,3 +322,11 @@ a.btn:hover {
     border-color: #007bff !important;
     color: #fff !important;
 }
+
+.zoomup {
+    transition: transform 0.2s ease;
+}
+
+.zoomup:hover {
+    transform: scale(1.2);
+}

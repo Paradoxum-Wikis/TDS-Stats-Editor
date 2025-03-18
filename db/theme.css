@@ -98,7 +98,7 @@
 }
 
 .light-mode .form-control:focus {
-    background-color: #0000001a;
+    background-color: #00b2ee13 !important;
     border-color: #0000004d;
     color: #212529;
 }

@@ -333,10 +333,10 @@
                                 <img width="68px" 
                                      class="theme-image"
                                      src="https://static.wikia.nocookie.net/6a181c72-e8bf-419b-b4db-18fd56a0eb60" 
-                                     data-light-src="https://static.wikia.nocookie.net/logopedia/images/c/cd/Fandom_2021.svg/"
+                                     data-light-src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Fandom.svg"
                                      data-dark-src="https://static.wikia.nocookie.net/6a181c72-e8bf-419b-b4db-18fd56a0eb60"
                                      style="vertical-align: text-top;" 
-                                     alt="Fandom"> Username
+                                     alt="Fandom"> Username (case-sensitive)
                             </label>
                             <input type="text" class="form-control" id="fandomUsername" placeholder="Enter your Fandom username, create an account if you don't have one." required>
                             <div class="invalid-feedback">Please enter your Fandom username.</div>
@@ -352,7 +352,7 @@
                             <div class="invalid-feedback">Please enter a description.</div>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Tower Image (Optional)</label>
+                            <label class="form-label">Tower Image (optional)</label>
                             <div class="btn-group w-100 mb-2" role="group">
                                 <input type="radio" class="btn-check" name="imageInputType" id="imageUrlOption" autocomplete="off" checked>
                                 <label class="btn btn-outline-primary" for="imageUrlOption"><i class="bi bi-clipboard me-2"></i>Paste URL or Roblox ID</label>
@@ -366,16 +366,27 @@
                             </div>
                             
                             <div id="imageUploadInput" class="mb-3 d-none">
-                                <div class="btn-group w-100">
-                                    <label class="btn btn-outline-primary w-75" for="towerImage">
-                                        <i class="bi bi-upload me-2"></i>Select Image
-                                    </label>
-                                    <button type="button" class="btn btn-outline-danger" style="width: 1%;" id="clearImageFile" title="Clear file">
-                                        <i class="bi bi-x-lg"></i>
-                                    </button>
+                                <div class="d-flex align-items-center justify-content-center my-3">
+                                    <a href="https://tds.fandom.com/wiki/Special:Upload" target="_blank" class="text-center p-2" style="flex: 1">
+                                        <img width="50%" 
+                                             class="theme-image mb-2 zoomup" 
+                                             src="https://static.wikia.nocookie.net/6a181c72-e8bf-419b-b4db-18fd56a0eb60" 
+                                             data-light-src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Fandom.svg"
+                                             data-dark-src="https://static.wikia.nocookie.net/6a181c72-e8bf-419b-b4db-18fd56a0eb60"
+                                             alt="Fandom Upload">
+                                    </a>
+                                    
+                                    <div class="vr"></div>
+                                    
+                                    <a href="https://imgur.com/upload" target="_blank" class="text-center p-2" style="flex: 1">
+                                        <img width="40%" 
+                                             class="theme-image mb-2 zoomup" 
+                                             src="https://upload.wikimedia.org/wikipedia/commons/0/07/Imgur_Logo_Light.svg" 
+                                             data-light-src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Imgur_logo.svg" 
+                                             data-dark-src="https://upload.wikimedia.org/wikipedia/commons/0/07/Imgur_Logo_Light.svg"
+                                             alt="Imgur Upload">
+                                    </a>
                                 </div>
-                                <input class="form-control d-none" type="file" id="towerImage" accept="image/*">
-                                <div class="form-text mt-2" id="selectedImageName">No file selected</div>
                             </div>
                         </div>
                         <div class="mb-3">
@@ -592,7 +603,7 @@
                             <img width="68px" 
                                  class="theme-image"
                                  src="https://static.wikia.nocookie.net/6a181c72-e8bf-419b-b4db-18fd56a0eb60" 
-                                 data-light-src="https://static.wikia.nocookie.net/logopedia/images/c/cd/Fandom_2021.svg/"
+                                 data-light-src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Fandom.svg"
                                  data-dark-src="https://static.wikia.nocookie.net/6a181c72-e8bf-419b-b4db-18fd56a0eb60"
                                  style="vertical-align: text-top;" 
                                  alt="Fandom"> account to upload towers

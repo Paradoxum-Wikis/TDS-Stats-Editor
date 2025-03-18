@@ -255,18 +255,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 // check if we already have a formatted version
                 const contentFormat = window.imageCache?.[`content_${imageUrl}`];
                 imageContent = contentFormat || imageUrl;
-                
+        
                 // handle roblox ids
                 if (!contentFormat && /^\d+$/.test(imageUrl)) {
                     imageContent = `RobloxID${imageUrl}`;
                 }
             }
-        } else {
-            const imageFile = document.getElementById('towerImage').files[0];
-            if (imageFile) {
-                imageContent = '<!-- File uploading is currently not supported in this beta. -->';
-            }
-        }
+        }        
 
         // add wiki categories
         return `${description}\n\n${imageContent}\n\n${towerType}\n\n<pre id="towerdata">JSONDATA</pre>\n\n<!-- DO NOT EDIT, MODIFY, DELETE, ANYTHING IN HERE UNLESS YOU KNOW WHAT YOU ARE DOING. MAKE SURE THE CODE YOU PASTED IS THE ONLY THING HERE. -->\n[[Category:TDSDatabase]]\n[[Category:Blog posts]]`;
