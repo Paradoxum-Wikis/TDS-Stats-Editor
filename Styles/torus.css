@@ -181,3 +181,13 @@ input {
 .bg-purple {
     background-color: #6f42c1;
 }
+
+.btn-outline-primary.active:hover,
+.btn-outline-primary:hover,
+.btn-check:checked + .btn-outline-primary:hover,
+.btn-outline-secondary.active:hover,
+.btn-check:checked + .btn-outline-secondary:hover {
+    background-color: #007bff !important;
+    border-color: #007bff !important;
+    color: #fff !important;
+}

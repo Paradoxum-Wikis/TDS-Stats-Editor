@@ -147,6 +147,12 @@
     color: white !important;
 }
 
+.light-mode .btn-check:checked + .btn-outline-primary:hover {
+    border-color: #00a1d6 !important;
+    background-color: #00a1d6 !important;
+    color: white !important;
+}
+
 .light-mode .btn-outline-info {
     color: #0dcaf0;
     background-color: #ffffff08;
