@@ -29,22 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('selectedJSONName').textContent = 'No file selected';
     });
     
-    // handle image file selection
-    document.getElementById('towerImage').addEventListener('change', function() {
-        const selectedText = document.getElementById('selectedImageName');
-        if (this.files && this.files.length > 0) {
-            selectedText.textContent = 'Selected: ' + this.files[0].name;
-        } else {
-            selectedText.textContent = 'No file selected';
-        }
-    });
-
-    document.getElementById('clearImageFile').addEventListener('click', function() {
-        const fileInput = document.getElementById('towerImage');
-        fileInput.value = '';
-        document.getElementById('selectedImageName').textContent = 'No file selected';
-    });
-    
     // display validation error
     function showValidationError(message) {
         showAlert(message, 'danger');

@@ -130,7 +130,7 @@ class UpdateLog {
         const updateContent = document.getElementById('update-log-content');
         
         if (!aboutRadio || !updatesRadio || !aboutContent || !updateContent) {
-            console.warn("Required DOM elements for UpdateLog not found, skipping initialization.");
+            console.warn("Required DOM elements for UpdateLog not found, skipping initialization. (If it's on /db it's fine.)");
             return;
         }
         
