@@ -21,6 +21,7 @@ const approvedTowers = [
     "Vessel Of Infinite Destruction/Golden Cowboy",
     'Brainhead1r/Hunter',
     'Bman Shadow/Stewie griffin',
+    'Bman Shadow/Warden rework',
 ];
 
 // List of featured towers

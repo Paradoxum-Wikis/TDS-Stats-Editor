@@ -78,6 +78,9 @@ function applyFilters(maintainSort = true) {
     const showRebalance = document.getElementById('filterTowerRebalance')?.checked ?? true;
     const showUnverified = document.getElementById('filterUnverified')?.checked ?? false;
     
+    // check if all regular filters are off
+    const allRegularFiltersOff = !showNew && !showRework && !showRebalance;
+    
     // Get search query
     const searchInput = document.querySelector('.form-control[placeholder="Search a Tower"]');
     const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
@@ -118,7 +121,7 @@ function applyFilters(maintainSort = true) {
         const towerDescription = card.querySelector('.card-text')?.textContent?.toLowerCase() || '';
         const towerAuthor = card.querySelector('.card-footer .fw-bold')?.textContent?.toLowerCase() || '';
         
-        // Check for normal tag badges: New, Rework, Rebalance
+        // Check for regular tag badges: New, Rework, Rebalance
         const tagBadge = card.querySelector('.badge:not(.bg-gold):not(.bg-dark):not([data-unverified="true"])');
         const towerTag = tagBadge?.textContent?.trim() || '';
         const tagText = towerTag.toLowerCase();
@@ -132,21 +135,32 @@ function applyFilters(maintainSort = true) {
         
         // check category filters: New, Rework, Rebalance
         let matchesTypeFilter = false;
-
-        if (tagBadge) {
-            if ((towerTag === 'New' && showNew) || 
-                (towerTag === 'Rework' && showRework) || 
-                (towerTag === 'Rebalance' && showRebalance)) {
-                matchesTypeFilter = true;
+        
+        if (isUnverified) {
+            if (allRegularFiltersOff) {
+                matchesTypeFilter = true; // Show all unverified towers when only Unverified filter is on
+            } else {
+                if (!tagBadge || (towerTag === 'New' && showNew) || 
+                    (towerTag === 'Rework' && showRework) || 
+                    (towerTag === 'Rebalance' && showRebalance)) {
+                    matchesTypeFilter = true; // Show if no regular tags or if a regular tag filter matches
+                }
             }
         } else {
-            // No tag at all but filters are on (show them)
-            matchesTypeFilter = (showNew || showRework || showRebalance);
+            if (tagBadge) {
+                if ((towerTag === 'New' && showNew) || 
+                    (towerTag === 'Rework' && showRework) || 
+                    (towerTag === 'Rebalance' && showRebalance)) {
+                    matchesTypeFilter = true;
+                }
+            } else {
+                matchesTypeFilter = (showNew || showRework || showRebalance);
+            }
         }
-
-        const matchesVerificationFilter = isUnverified ? showUnverified : true; // Verified towers always match
         
-        // tower is shown only if it matches search AND type filter AND verified
+        const matchesVerificationFilter = isUnverified ? showUnverified : true; // Unverified towers require the filter
+        
+        // tower is shown only if it matches search AND type filter AND verification
         if (matchesSearch && matchesTypeFilter && matchesVerificationFilter) {
             card.classList.remove('d-none');
             matchCount++;
