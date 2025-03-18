@@ -49,7 +49,7 @@
 }
 
 .light-mode .sidebar .nav-link:hover {
-    color: #0d6efd !important;
+    color: #00b2ee !important;
 }
 
 .light-mode .table-dark {
@@ -90,7 +90,7 @@
 }
 
 .light-mode .table-cell-input-delta {
-    color: #0d6efd !important;
+    color: #00b2ee !important;
 }
 
 .light-mode .table-cell-input-delta-positive {
@@ -230,7 +230,7 @@
 
 .light-mode .btn-outline-light:hover {
     background-color: rgba(0, 0, 0, 0.05);
-    color: #0d6efd !important;
+    color: #00b2ee !important;
 }
 
 .light-mode .btn-outline-secondary {
@@ -240,7 +240,12 @@
 
 .light-mode .btn-outline-secondary:hover {
     background-color: rgba(108, 117, 125, 0.1);
-    color: black !important;
+    color: #0484AE !important;
+}
+
+.btn-outline-dark:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #0484AE !important;
 }
 
 .light-mode .modal-content.bg-dark {
@@ -273,7 +278,7 @@
 
 .light-mode .dropdown-item:hover {
     background-color: rgba(0, 0, 0, 0.05);
-    color: #0d6efd !important;
+    color: #00b2ee !important;
 }
 
 .light-mode ::-webkit-scrollbar-track-piece {
@@ -318,7 +323,7 @@
 }
 
 .light-mode .nav-tabs .nav-link.active {
-    color: #0d6efd;
+    color: #00b2ee;
 }
 
 .light-mode .slide-nav {
@@ -374,4 +379,20 @@
 .light-mode .form-check-input:checked {
     background-color: #00b2ee;
     border-color: #00b2ee;
+}
+
+.light-mode .zero-value {
+    color: #f64ca1 !important;
+}
+
+.light-mode .btn-outline-primary {
+    color: #00b2ee;
+    border-color: #00b2ee;
+}
+
+.light-mode .btn-check:checked + .btn-outline-primary,
+.btn-outline-primary:hover {
+    border-color: #00b2ee;
+    background-color: #00b2ee;
+    color: white;
 }

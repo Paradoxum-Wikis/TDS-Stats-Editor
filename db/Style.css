@@ -314,10 +314,11 @@ a.btn:hover {
 }
 
 .btn-outline-primary.active:hover,
+.btn-outline-primary:hover,
 .btn-check:checked + .btn-outline-primary:hover,
 .btn-outline-secondary.active:hover,
 .btn-check:checked + .btn-outline-secondary:hover {
-    background-color: #0484AE !important;
-    border-color: #0484AE !important;
+    background-color: #007bff !important;
+    border-color: #007bff !important;
     color: #fff !important;
 }

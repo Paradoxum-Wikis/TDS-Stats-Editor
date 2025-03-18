@@ -58,10 +58,10 @@ input {
 }
 
 .zero-value {
-    color: #ff77bb !important; /* Hot pink color */
-  }
+    color: #ff77bb !important;
+}
 
-  .wikitable-code-container {
+.wikitable-code-container {
     margin-bottom: 1rem;
 }
 
