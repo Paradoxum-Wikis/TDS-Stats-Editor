@@ -195,8 +195,14 @@ export default class TableInput {
 
     #formatNumber(value) {
         const forceUSFormat = window.state?.settings?.forceUSNumbers !== false;
-        const formatter = forceUSFormat ? Intl.NumberFormat('en-US') : Intl.NumberFormat();
+        const formatter = forceUSFormat ? Intl.NumberFormat('en-US') : Intl.NumberFormat('ru-RU');
         const showSeconds = window.state?.settings?.showSeconds !== false;
+
+        // allows cooldown to have 3 decimal places
+        if (this.attribute === 'Cooldown') {
+            const formatted = formatter.format(+(+value).toFixed(3));
+            return formatted + (showSeconds ? 's' : '');
+        }
 
         switch (this.attribute) {
             case 'Cost':
@@ -207,7 +213,7 @@ export default class TableInput {
             case 'IncomeEfficiency':
             case 'IncomePerSecond':
             case 'TotalIncomePerSecond':
-                return `$${formatter.format(value)}`;
+                return `$${formatter.format(+(+value).toFixed(2))}`; 
             
             case 'MaxDefMelt':
             case 'DefenseMelt':
@@ -250,13 +256,7 @@ export default class TableInput {
                 return formatter.format(value) + (showSeconds ? 's' : '');
         }
     
-        if (+value < 1) {
-            return +(+value).toFixed(3);
-        }
-        if (+value < 10) {
-            return +(+value).toFixed(3);
-        }
-        return +(+value).toFixed(2);
+        return formatter.format(+(+value).toFixed(2));
     }
 
     flipped = [

@@ -45,6 +45,7 @@ class SettingsManager {
         
         // Update toggle labels
         this.updateToggleLabel();
+        this.updateNumberFormatLabel();
     }
     
     toggleTheme() {
@@ -84,6 +85,8 @@ class SettingsManager {
         window.state.settings.forceUSNumbers = this.forceUSNumbers;
         localStorage.setItem('forceUSNumbers', this.forceUSNumbers);
         
+        this.updateNumberFormatLabel();
+        
         // Refresh the view to apply the new setting
         if (window.app && window.app.viewer) {
             window.app.viewer.reload();
@@ -112,6 +115,15 @@ class SettingsManager {
                 }
             }
         });
+    }
+    
+    updateNumberFormatLabel() {
+        const label = document.querySelector('label[for="forceUSNumbersToggle"]');
+        if (this.forceUSNumbers) {
+            label.innerHTML = '<i class="bi bi-123 me-2"></i>US number format (1,123.58)';
+        } else {
+            label.innerHTML = '<i class="bi bi-123 me-2"></i>RU number format (1 123,58)';
+        }
     }
 }
 

@@ -379,29 +379,17 @@ class WikitableGenerator {
 
     #formatNumber(num) {
         const forceUSFormat = window.state?.settings?.forceUSNumbers !== false;
+        const locale = forceUSFormat ? 'en-US' : 'ru-RU';
         
         // formats a number for display in the wikitable
-        if (Math.abs(num) < 0.01) {
-            return '0';
-        }
+        if (Math.abs(num) < 0.01) return '0';
         
-        if (Number.isInteger(num)) {
-            return forceUSFormat ? 
-                num.toLocaleString('en-US') : 
-                num.toLocaleString();
-        }
+        const options = { minimumFractionDigits: 0, maximumFractionDigits: 2 };
+        if (Number.isInteger(num)) return num.toLocaleString(locale);
         
-        const rounded = Math.round(num * 100) / 100;
-        return forceUSFormat ? 
-            rounded.toLocaleString('en-US', {
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 2
-            }) : 
-            rounded.toLocaleString(undefined, {
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 2
-            });
+        return (Math.round(num * 100) / 100).toLocaleString(locale, options);
     }
+    
 
     // helper method for formatting numbers with commas but no decimal places
     #formatNumberWithCommas(num) {

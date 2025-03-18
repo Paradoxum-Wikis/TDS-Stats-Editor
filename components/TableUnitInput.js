@@ -208,8 +208,14 @@ export default class TableUnitInput {
 
     #formatNumber(number) {
         const forceUSFormat = window.state?.settings?.forceUSNumbers !== false;
-        const formatter = forceUSFormat ? Intl.NumberFormat('en-US') : Intl.NumberFormat();
+        const formatter = forceUSFormat ? Intl.NumberFormat('en-US') : Intl.NumberFormat('ru-RU');
         const showSeconds = window.state?.settings?.showSeconds !== false;
+
+        // allows cooldown to have 3 decimal places
+        if (this.attribute === 'Cooldown') {
+            const formatted = formatter.format(+(+number).toFixed(3));
+            return formatted + (showSeconds ? 's' : '');
+        }
 
         switch (this.attribute) {
             case 'Cost':
@@ -219,7 +225,7 @@ export default class TableUnitInput {
             case 'BaseIncome':
             case 'IncomePerTower':
             case 'MaxIncome':
-                return `$${formatter.format(number)}`;
+                return `$${formatter.format(+(+number).toFixed(2))}`; 
 
             case 'Defense':
             case 'SlowdownPerHit':
@@ -241,7 +247,6 @@ export default class TableUnitInput {
             case 'RevTime':
             case 'ReloadTime':
             case 'SendTime':
-            case 'Cooldown':
             case 'BurnTime':
             case 'StunLength':
             case 'Lifetime':
@@ -251,7 +256,8 @@ export default class TableUnitInput {
             case 'SlowdownTime':
                 return formatter.format(number) + (showSeconds ? 's' : '');
         }
-        return +(+number).toFixed(3);
+        
+        return formatter.format(+(+number).toFixed(2));
     }
 
     flipped = [
