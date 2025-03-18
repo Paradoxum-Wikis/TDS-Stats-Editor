@@ -1,7 +1,7 @@
 import TowerManager from './TowerComponents/TowerManager.js';
 import Dropdown from './components/Dropdown.js';
 import Viewer from './components/Viewer/index.js';
-import UpdateLog from './UpdateLog.js';
+import UpdateLog from './components/UpdateLog.js';
 
 const TDSVersion = '1.57.8';
 
