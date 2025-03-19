@@ -42,6 +42,31 @@ export default class UpgradeViewer {
             this.viewer.reload();
         });
 
+        this.abilityAddButton = document.getElementById('side-ability-add');
+        this.abilityAddButton.addEventListener('click', () => {
+            const newAbility = {
+                Name: "",
+                Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/f/f7/Place.png",
+                Level: "",
+                Cooldown: "",
+                Cost: "",
+            };
+            
+            const abilities = this.#getAbilities();
+            if (abilities) {
+                abilities.push(newAbility);
+                this.viewer.reload();
+            } else {
+                // create ability array if it doesn't have one
+                const defaults = this.skinData?.defaults?.data || this.skinData?.data?.Defaults || {};
+                if (!defaults.Abilities) {
+                    defaults.Abilities = [];
+                }
+                defaults.Abilities.push(newAbility);
+                this.viewer.reload();
+            }
+        });
+
         this.upgradeChanges = document.getElementById('side-upgrade-extras-output');
         this.abilityContainer = document.getElementById('side-ability-container');
     }
@@ -221,18 +246,18 @@ export default class UpgradeViewer {
     }
 
     #getAbilities() {
-        return (
-            this.skinData?.defaults?.Abilities || 
-            this.skinData?.Defaults?.Abilities || 
-            this.skinData?.Default?.Defaults?.Abilities || 
-            this.skinData?.data?.Abilities || 
-            this.skinData?.defaults?.data?.Abilities || 
-            this.skinData?.defaults?.attributes?.Abilities || 
-            []
-        );
+        if (this.skinData?.defaults?.Abilities) return this.skinData.defaults.Abilities;
+        if (this.skinData?.Defaults?.Abilities) return this.skinData.Defaults.Abilities;
+        if (this.skinData?.Default?.Defaults?.Abilities) return this.skinData.Default.Defaults.Abilities;
+        if (this.skinData?.data?.Abilities) return this.skinData.data.Abilities;
+        if (this.skinData?.defaults?.data?.Abilities) return this.skinData.defaults.data.Abilities;
+        if (this.skinData?.defaults?.attributes?.Abilities) return this.skinData.defaults.attributes.Abilities;
+
+        return null;
     }
 
     #loadAbilities(skinData) {
+        this.skinData = skinData
         const abilities = this.#getAbilities();
         this.abilityContainer.innerHTML = '';
         if (abilities?.length > 0) {
