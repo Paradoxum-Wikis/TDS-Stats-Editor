@@ -2,6 +2,7 @@ import TowerManager from './TowerComponents/TowerManager.js';
 import Dropdown from './components/Dropdown.js';
 import Viewer from './components/Viewer/index.js';
 import UpdateLog from './components/UpdateLog.js';
+import SidebarToggle from './components/SidebarToggle.js';
 
 const TDSVersion = '1.57.8';
 
@@ -161,6 +162,46 @@ function setVersionNumber() {
     });
 }
 
+function loadUpdateLog() {
+    fetch('updatelog.json')
+        .then(response => response.json())
+        .then(data => {
+            const updateLogModal = document.getElementById('update-log-content');
+            const updateLogLanding = document.getElementById('landing-update-log');
+            
+            const updateHtml = generateUpdateLogHtml(data);
+
+            if (updateLogModal) updateLogModal.innerHTML = updateHtml;
+            if (updateLogLanding) {
+                updateLogLanding.innerHTML = generateUpdateLogHtml(data);
+            }            
+        })
+        .catch(error => {
+            console.error('Error loading update log:', error);
+            const errorHtml = '<div class="alert alert-danger">Failed to load update log.</div>';
+            
+            const updateLogModal = document.getElementById('update-log-content');
+            const updateLogLanding = document.getElementById('landing-update-log');
+            
+            if (updateLogModal) updateLogModal.innerHTML = errorHtml;
+            if (updateLogLanding) updateLogLanding.innerHTML = errorHtml;
+        });
+}
+
+function generateUpdateLogHtml(updates) {
+    return updates.map(update => `
+        <div class="update-item mb-3">
+            <h5>${update.version} <small class="text-muted">${update.date}</small></h5>
+            <ul class="ps-3">
+                ${update.changes.map(change => `<li>${change}</li>`).join('')}
+                <li>Various changes</li>
+            </ul>
+        </div>
+    `).join('');
+}
+
+document.addEventListener('DOMContentLoaded', loadUpdateLog);
+
 window.clearUrlAndShowLanding = clearUrlAndShowLanding;
 
 const app = new App();
@@ -169,4 +210,5 @@ app.start();
 document.addEventListener('DOMContentLoaded', () => {
     new UpdateLog();
     setVersionNumber();
+    new SidebarToggle();
 });

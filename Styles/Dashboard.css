@@ -27,6 +27,17 @@ main > header {
 }
 
 .table-responsive {
+    max-width: 100%;
+    transition: max-width 0.3s ease;
+}
+
+/* keep the table from expanding too much when sidebar is collapsed */
+.container-main.sidebar-collapsed .table-responsive {
+    max-width: calc(100vw - 60px); /* mini sidebar width */
+}
+
+/* Current table width for expanded sidebar */
+.container-main:not(.sidebar-collapsed) .table-responsive {
     max-width: calc(100vw - 265px);
 }
 
