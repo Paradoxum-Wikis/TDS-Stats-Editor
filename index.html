@@ -224,6 +224,18 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Sidebar toggle button -->
+            <div class="sidebar-toggle-container mt-auto">
+                <div class="flex-column-reverse">
+                    <button id="sidebar-toggle" class="btn btn-sm btn-outline-secondary me-1" title="Toggle sidebar">
+                        <i class="bi bi-layout-sidebar-inset"></i>
+                    </button>
+                    <button id="settings-toggle" class="btn btn-sm btn-outline-secondary" title="Open settings" data-bs-toggle="modal" data-bs-target="#settings-modal">
+                        <i class="bi bi-gear"></i>
+                    </button>
+                </div>
+            </div>
         </div>
 
         <!-- Body -->
@@ -563,48 +575,20 @@
                     <div class="col-md-6 mb-4 d-flex">
                         <div class="card bg-dark text-white border-secondary w-100">
                             <div class="modal-header">
-                                <h4><i class="bi bi-gear me-2"></i>Settings</h4>
+                                <h4><i class="bi bi-journal-code me-2"></i>Update Log</h4>
                             </div>
                             <div class="card-body d-flex flex-column">
-                                <h5 class="mt-2 mb-3">Theme</h5>
-                                <div class="mb-4">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="themeToggle">
-                                        <label class="form-check-label" for="themeToggle">
-                                            <i class="bi bi-moon-stars me-2"></i>Dark Mode
-                                        </label>
+                                <div id="landing-update-log" class="overflow-auto" style="max-height: 300px;">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="spinner-border text-secondary" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <h5 class="mt-2 mb-3">Table</h5>
-                                <div class="mb-4">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="showSecondsToggle" checked>
-                                        <label class="form-check-label" for="showSecondsToggle">
-                                            <i class="bi bi-clock me-2"></i>Show seconds in cooldown values
-                                        </label>
-                                    </div>
-
-                                    <div class="form-check form-switch mt-2">
-                                        <input class="form-check-input" type="checkbox" id="forceUSNumbersToggle" checked>
-                                        <label class="form-check-label" for="forceUSNumbersToggle">
-                                            <i class="bi bi-123 me-2"></i>Use US number format (1,123.58)
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="mt-4">
-                                    <h5>More Resources</h5>
-                                    <a href="https://tds.fandom.com/f" target="_blank" class="btn btn-outline-info mt-2 me-2">
-                                        <i class="bi bi-chat-left-dots me-2"></i>Wiki Discussions
-                                    </a>
-                                    <a href="https://discord.gg/fBgQzudY3h" target="_blank" class="btn btn-outline-info mt-2">
-                                        <i class="bi bi-discord me-2"></i>Wiki Discord
-                                    </a>
-                                    <a href="https://discord.gg/tds" target="_blank" class="btn btn-outline-info mt-2">
-                                        <i class="bi bi-discord me-2"></i>TDS Discord
-                                    </a>
-                                </div>
+                                
+                                <a href="#" class="btn btn-outline-info mt-3" data-bs-toggle="modal" data-bs-target="#discord-modal" onclick="document.getElementById('aboutSectionUpdates').click()">
+                                    <i class="bi bi-list-ul me-2"></i>View More Updates
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -1028,6 +1012,54 @@
                     <span class="text-muted me-auto">Last updated to game version: <b class="tdsversion"></b></span>
                     <button type="button" class="btn btn-primary me-2" onclick="clearUrlAndShowLanding()" data-bs-dismiss="modal">Home
                     </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal fade" id="settings-modal" tabindex="-1" role="dialog" aria-labelledby="settings-modal-label"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content bg-dark text-white">
+                <!-- Modal Header-->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="settings-modal-label"><i class="bi bi-gear me-2"></i>Settings</h5>
+                </div>
+
+                <!-- Modal Body-->
+                <div class="modal-body">
+                    <h5 class="mt-2 mb-3">Theme</h5>
+                    <div class="mb-4">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="themeToggle">
+                            <label class="form-check-label" for="themeToggle">
+                                <i class="bi bi-moon-stars me-2"></i>Dark Mode
+                            </label>
+                        </div>
+                    </div>
+
+                    <h5 class="mt-2 mb-3">Table</h5>
+                    <div class="mb-4">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="showSecondsToggle" checked>
+                            <label class="form-check-label" for="showSecondsToggle">
+                                <i class="bi bi-clock me-2"></i>Show seconds in cooldown values
+                            </label>
+                        </div>
+
+                        <div class="form-check form-switch mt-2">
+                            <input class="form-check-input" type="checkbox" id="forceUSNumbersToggle" checked>
+                            <label class="form-check-label" for="forceUSNumbersToggle">
+                                <i class="bi bi-123 me-2"></i>Use US number format (1,123.58)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Footer-->
+                <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
