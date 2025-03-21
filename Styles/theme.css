@@ -191,17 +191,6 @@
     color: #656a6f;
 }
 
-.light-mode #wikitable {
-    background-color: #fff;
-    color: #212529;
-}
-
-.light-mode #wikitable pre {
-    background-color: rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    color: #212529;
-}
-
 .light-mode #unit-table {
     background-color: #fff;
     color: #212529;
@@ -406,4 +395,58 @@
     border-color: #00a1d6 !important;
     background-color: #00a1d6 !important;
     color: white !important;
+}
+
+/* Fix for WikitextViewer in light mode */
+.light-mode .wikitable-code {
+    color: black !important;
+}
+
+/* Replace the current blue-based colors with darker versions of the original colors */
+.light-mode .wikitable-code .table-delimiter,
+.light-mode .wikitable-code .table-header,
+.light-mode .wikitable-code .table-caption,
+.light-mode .wikitable-code .table-cell-delimiter {
+    color: #d6336c !important;
+    font-weight: bold;
+}
+
+.light-mode .wikitable-code .table-row {
+    color: #7048e8 !important;
+}
+
+.light-mode .wikitable-code .table-header-delimiter {
+    color: #e67700 !important;
+}
+
+.light-mode .wikitable-code .wiki-div {
+    color: #37b24d !important;
+}
+
+.light-mode .wikitable-code .table-caption-text {
+    color: #2b8a3e !important;
+    font-weight: bold;
+}
+
+.light-mode .wikitable-code .wiki-comment {
+    color: #6c757d !important;
+}
+
+.light-mode .wikitable-code .wiki-div {
+    color: #6610f2 !important;
+}
+
+.light-mode .wikitable-code .wiki-bold,
+.light-mode .wikitable-code .wiki-bold-text {
+    color: #212529 !important;
+    font-weight: bold;
+}
+
+.light-mode .wikitable-code .table-caption-text {
+    color: #0a58ca !important;
+    font-weight: bold;
+}
+
+.light-mode .table-responsive {
+    background-color: #fff;
 }
