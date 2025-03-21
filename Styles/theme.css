@@ -2,7 +2,11 @@
 /* preserves all existing dark mode styling by default */
 
 .light-mode {
-    background-color: #f8f9fa;
+    background-color: #fbfbfb;
+}
+
+.light-mode .container-main {
+    background-color: #EBECED;
 }
 
 .light-mode body {

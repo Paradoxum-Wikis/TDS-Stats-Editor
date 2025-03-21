@@ -61,10 +61,6 @@ input {
     color: #ff77bb !important;
 }
 
-.wikitable-code-container {
-    margin-bottom: 1rem;
-}
-
 .wikitable-code {
     display: block;
     font-family: monospace;

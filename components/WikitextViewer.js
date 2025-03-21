@@ -1,11 +1,7 @@
 class WikitextViewer {
     constructor() {
         this.container = document.createElement('div');
-        this.container.className = 'wikitable-code-container';
-        this.container.style.height = '70vh';
-        this.container.style.display = 'flex';
-        this.container.style.flexDirection = 'column';
-        
+
         // this creates pre/code elements for syntax highlighting
         this.pre = document.createElement('pre');
         this.pre.className = 'text-white mb-3';
