@@ -4,7 +4,7 @@ class WikitextViewer {
 
         // this creates pre/code elements for syntax highlighting
         this.pre = document.createElement('pre');
-        this.pre.className = 'text-white mb-3';
+        this.pre.className = 'text-white mb-3 lmwikitable';
         
         this.code = document.createElement('code');
         this.code.className = 'wikitable-code';

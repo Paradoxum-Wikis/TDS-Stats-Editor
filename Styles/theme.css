@@ -40,7 +40,7 @@
 }
 
 .light-mode .aside {
-    background-color: rgba(230, 230, 230, 0.8);
+    background-color: #EBECED;
 }
 
 .light-mode .sidebar {
@@ -402,7 +402,6 @@
     color: black !important;
 }
 
-/* Replace the current blue-based colors with darker versions of the original colors */
 .light-mode .wikitable-code .table-delimiter,
 .light-mode .wikitable-code .table-header,
 .light-mode .wikitable-code .table-caption,
@@ -447,6 +446,6 @@
     font-weight: bold;
 }
 
-.light-mode .table-responsive {
-    background-color: #fff;
+.light-mode .lmwikitable {
+    background-color: white;
 }
