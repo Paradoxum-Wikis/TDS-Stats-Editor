@@ -7,10 +7,31 @@ export default class TowerTable extends Table {
     constructor(root, viewer) {
         super(root);
         this.viewer = viewer;
+        
+        // listen for settings changes
+        document.addEventListener('settingsChanged', (e) => {
+            if (this.isLoaded && (e.detail.setting === 'showSeconds' || e.detail.setting === 'forceUSNumbers')) {
+                this.refresh();
+            }
+        });
+        
+        this.isLoaded = false;
     }
 
     removeTable() {
         super.removeTable();
+        this.isLoaded = false;
+    }
+
+    refresh() {
+        if (!this.isLoaded || !this.loadedData) return;
+        
+        while (this.body.firstChild) {
+            this.body.removeChild(this.body.firstChild);
+        }
+        
+        // rebuild the table body with current data
+        this.#addBody(this.loadedData.levels);
     }
 
     #createBaseTable() {
@@ -45,7 +66,7 @@ export default class TowerTable extends Table {
     
             levels.attributes
                 .filter((attribute) => !this.ignore.includes(attribute))
-                .forEach((attribute, column) => {
+                .forEach((attribute, _) => {
                     const tableInput = new TableInput({
                         level: index,
                         attribute: attribute,
@@ -61,7 +82,7 @@ export default class TowerTable extends Table {
     
             levels.complexValues
                 .filter(this.#viewFilter.bind(this))
-                .forEach((attribute, column) => {
+                .forEach((attribute, _) => {
                     const tableInput = new TableInput({
                         level: index,
                         attribute: attribute,
@@ -96,6 +117,7 @@ export default class TowerTable extends Table {
     load(data, options) {
         options = options ?? {};
         this.ignore = options.ignore ?? [];
+        this.loadedData = data; // store data for refresh ops
 
         this.removeTable();
         this.#createBaseTable();
@@ -107,5 +129,7 @@ export default class TowerTable extends Table {
         );
 
         this.#addBody(data.levels);
+        
+        this.isLoaded = true;
     }
 }

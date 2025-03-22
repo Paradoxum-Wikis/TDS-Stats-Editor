@@ -56,10 +56,6 @@
     color: #212529;
 }
 
-.light-mode .modal-header {
-    background-color: #0000000d;
-}
-
 /* header and nav */
 .light-mode header.navbar-dark.bg-darker {
     background-color: #e9ecef !important;

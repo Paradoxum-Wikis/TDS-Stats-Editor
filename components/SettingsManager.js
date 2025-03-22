@@ -74,10 +74,10 @@ class SettingsManager {
         window.state.settings.showSeconds = this.showSeconds;
         localStorage.setItem('showSeconds', this.showSeconds);
         
-        // Refresh the view to apply the new setting
-        if (window.app && window.app.viewer) {
-            window.app.viewer.reload();
-        }
+        // dispatch settingsChanged event
+        document.dispatchEvent(new CustomEvent('settingsChanged', {
+            detail: { setting: 'showSeconds', value: this.showSeconds }
+        }));
     }
     
     toggleForceUSNumbers() {
@@ -87,10 +87,9 @@ class SettingsManager {
         
         this.updateNumberFormatLabel();
         
-        // Refresh the view to apply the new setting
-        if (window.app && window.app.viewer) {
-            window.app.viewer.reload();
-        }
+        document.dispatchEvent(new CustomEvent('settingsChanged', {
+            detail: { setting: 'forceUSNumbers', value: this.forceUSNumbers }
+        }));
     }
     
     updateToggleLabel() {

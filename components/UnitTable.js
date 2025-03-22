@@ -5,6 +5,14 @@ export default class UnitTable extends Table {
     constructor(root, viewer) {
         super(root);
         this.viewer = viewer;
+        
+        document.addEventListener('settingsChanged', (e) => {
+            if (this.isLoaded && (e.detail.setting === 'showSeconds' || e.detail.setting === 'forceUSNumbers')) {
+                this.refresh();
+            }
+        });
+        
+        this.isLoaded = false;
     }
 
     removeTable() {
@@ -64,13 +72,27 @@ export default class UnitTable extends Table {
         return ['Name', ...new Set(attributes.filter((v) => v !== 'Name'))];
     }
 
+    refresh() {
+        if (!this.isLoaded || !this.data) return;
+        
+        while (this.body.firstChild) {
+            this.body.removeChild(this.body.firstChild);
+        }
+        
+        this.#addBody(this.data);
+    }
+
     /**
      */
     load(data, options) {
         options = options ?? {};
-
+        this.data = data;
+        
         this.removeTable();
-        if (Object.keys(data).length === 0) return;
+        if (Object.keys(data).length === 0) {
+            this.isLoaded = false;
+            return;
+        }
 
         document
             .getElementById('unit-table-buttons')
@@ -81,5 +103,7 @@ export default class UnitTable extends Table {
 
         this.#addHeader(this.attributes);
         this.#addBody(data);
+        
+        this.isLoaded = true;
     }
 }
