@@ -74,7 +74,7 @@ class SettingsManager {
         window.state.settings.showSeconds = this.showSeconds;
         localStorage.setItem('showSeconds', this.showSeconds);
         
-        // dispatch settingsChanged event
+        // dispatch settingsChanged event (found in TowerTable and UnitTable)
         document.dispatchEvent(new CustomEvent('settingsChanged', {
             detail: { setting: 'showSeconds', value: this.showSeconds }
         }));
