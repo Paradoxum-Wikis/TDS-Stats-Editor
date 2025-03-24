@@ -39,6 +39,26 @@
     color: #656a6f !important;
 }
 
+.light-mode .text-warning {
+    color: #d7a100 !important;
+}
+
+.light-mode .text-info {
+    color: #0fb4d5 !important;
+}
+
+.light-mode .text-danger {
+    color: #dc3545 !important;
+}
+
+.light-mode .text-success {
+    color: #198754 !important;
+}
+
+.light-mode .text-primary {
+    color: #0d6efd !important;
+}
+
 .light-mode .aside {
     background-color: #EBECED;
 }
