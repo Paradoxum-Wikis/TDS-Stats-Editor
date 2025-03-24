@@ -3490,7 +3490,16 @@ export default {
         {
           Image: 98101516586169,
           Stats: {
-            Extras: [ "Ammo: 35 → 75", "Reload Time: 4 → 3.5", "Explosion Damage: 0 → 35", "Explosion Radius: 0 → 3", "Missile Cooldown: 0 → 7", "Missile Count: 0 → 2", "Burst Time: 0 → 0.5", "Missile Speed: 20" ],
+            Extras: [
+              "[Collapsible:Upgraded Ammo]Ammo: 35 → 75",
+              "[Collapsible]Reload Time: 4 → 3.5",
+              "[Collapsible1:Unlocks Missiles]Explosion Damage: 0 → 35",
+              "[Collapsible1]Explosion Radius: 0 → 3",
+              "[Collapsible1]Missile Cooldown: 0 → 7",
+              "[Collapsible1]Missile Count: 0 → 2",
+              "[Collapsible1]Burst Time: 0 → 0.5",
+              "[Collapsible1]Missile Speed: 20"
+            ],
             Attributes: {
               Ammo: 75,
               ExplosionDamage: 35,
@@ -3511,7 +3520,15 @@ export default {
         {
           Image: 110652411715254,
           Stats: {
-            Extras: [ "Damage: 10 → 12", "Cooldown: 0.2 → 0.1", "Patrol Range: 16 → 18.5", "Ammo: 75 → 150", "Reload Time: 3.5 → 3", "Rev Time: 0s → 1.5s", "Missile Cooldown: 7 → 6", "Missile Amount: 2 → 4" ],
+            Extras: [
+            "Damage: 10 → 12",
+            "Cooldown: 0.2 → 0.1",
+            "Patrol Range: 16 → 18.5",
+            "[Collapsible:Upgraded Ammo]Ammo: 75 → 150",
+            "[Collapsible]Reload Time: 3.5 → 3",
+            "[Collapsible]Rev Time: 0s → 1.5s",
+            "[Collapsible1:Upgraded Missiles]Missile Cooldown: 7 → 6",
+            "[Collapsible1]Missile Amount: 2 → 4" ],
             Attributes: {
               NoTable: true,
               SideLevel: '4T',
@@ -3523,7 +3540,12 @@ export default {
         {
           Image: 138033956206562,
           Stats: {
-            Extras: [ "Patrol Range: 16 → 17.5", "Reload Time: 3.5 → 2.25", "Explosion Damage: 35 → 45", "Missile Cooldown: 7 → 5", "Missile Amount: 2 → 6", "Burst Time: 0.5 → 0.25" ],
+            Extras: [ "Patrol Range: 16 → 17.5",
+            "[Collapsible:Upgraded Ammo]Reload Time: 3.5 → 2.25",
+            "[Collapsible1:Upgraded Missiles]Explosion Damage: 35 → 45",
+            "[Collapsible1]Missile Cooldown: 7 → 5",
+            "[Collapsible1]Missile Amount: 2 → 6",
+            "[Collapsible1]Burst Time: 0.5 → 0.25" ],
             Attributes: {
               NoTable: true,
               SideLevel: '4B',
@@ -3535,7 +3557,11 @@ export default {
         {
           Image: 110652411715254,
           Stats: {
-            Extras: [ "Damage: 12 → 18", "Cooldown: 0.1 → 0.85", "Range: 10.5 → 12", "Patrol Range: 18.5 → 21", "Ammo: 150 → 200", "Reload Time: 3 → 2.5", "Explosion Radius: 3 → 4" ],
+            Extras: [ "Damage: 12 → 18", "Cooldown: 0.1 → 0.85", "Range: 10.5 → 12", "Patrol Range: 18.5 → 21",
+            "[Collapsible:Upgraded Ammo]Ammo: 150 → 200",
+            "[Collapsible]Reload Time: 3 → 2.5",
+            "[Collapsible1:Upgraded Missiles]Explosion Radius: 3 → 4",
+            "[Collapsible1]Time Between Missiles: 0.5 → 0,25", ],
             Detections: { Flying: true, Hidden: true, Lead: false },
             Attributes: {
               NoTable: true,
@@ -3548,7 +3574,11 @@ export default {
         {
           Image: 138033956206562,
           Stats: {
-            Extras: [ "Damage: 10 → 20", "Patrol Range: 17.5 → 19.5", "Explosion Damage: 45 → 60", "Missile Cooldown: 5 → 3.5", "Missile Amount: 6 → 8", "Burst Time: 0.25 → 0.15" ],
+            Extras: [ "Damage: 10 → 20", "Patrol Range: 17.5 → 19.5",
+            "[Collapsible1:Upgraded Missiles]Explosion Damage: 45 → 60",
+            "[Collapsible1]Missile Cooldown: 5 → 3.5",
+            "[Collapsible1]Missile Amount: 6 → 8",
+            "[Collapsible1]Burst Time: 0.25 → 0.15" ],
             Attributes: {
               NoTable: true,
               SideLevel: '5B',

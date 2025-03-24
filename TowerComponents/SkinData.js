@@ -126,7 +126,7 @@ class SkinData {
             .filter((value) => value.original != value.new);
     }
 
-    getUpgradeChangeOutput(level, filter) {
+    getUpgradeChangeOutput(upgradeIndex, filter) {
         filter = filter ?? [
             'Damage',
             'Cooldown',
@@ -136,8 +136,8 @@ class SkinData {
             'Lead',
             'Income',
         ];
-    
-        const changes = this.getUpgradeChanges(level)
+
+        const changes = this.getUpgradeChanges(upgradeIndex)
             .filter((value) => filter.includes(value.key))
             .map((value) => {
                 let icon = '';
@@ -162,7 +162,7 @@ class SkinData {
                         break;
                     case 'Income':
                         icon = '<img src="htmlassets/IncomeIcon.png" width="16" class="align-text-bottom me-1">';
-                            break;
+                        break;
                 }
     
                 if (['Hidden', 'Flying', 'Lead'].includes(value.key)) {
@@ -174,8 +174,18 @@ class SkinData {
                 }
             });
     
-        const extras = this.data.Upgrades[level].Stats.Extras ?? [];
-        return [...changes, ...extras.map((extra) => `● ${extra}`)];
+        const extras = this.upgrades[upgradeIndex]?.upgradeData?.Stats?.Extras || [];
+        
+        const formattedExtras = extras.map(extra => {
+            // checks if the extra is a collapsible group tag
+            if (extra.match(/^\[Collapsible(\d*):?(.*?)\]/)) {
+                return extra;
+            } else {
+                return `● ${extra}`; // add bullet point to regular extras
+            }
+        });
+        
+        return [...changes, ...formattedExtras];
     }
 
     get attributes() {

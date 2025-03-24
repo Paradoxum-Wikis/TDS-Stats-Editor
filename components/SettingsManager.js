@@ -3,18 +3,21 @@ class SettingsManager {
         this.themeToggle = document.getElementById('themeToggle');
         this.showSecondsToggle = document.getElementById('showSecondsToggle');
         this.forceUSNumbersToggle = document.getElementById('forceUSNumbersToggle');
+        this.showCollapsibleCountsToggle = document.getElementById('showCollapsibleCountsToggle');
         this.body = document.body;
         
         // Initialize settings from localStorage
         this.currentTheme = localStorage.getItem('theme') || 'dark';
         this.showSeconds = localStorage.getItem('showSeconds') !== 'false'; // Default to true if not set
         this.forceUSNumbers = localStorage.getItem('forceUSNumbers') !== 'false'; // Default to true if not set
+        this.showCollapsibleCounts = localStorage.getItem('showCollapsibleCounts') !== 'false'; // Default to true if not set
         
         // Initialize state object if not already set
         window.state = window.state || {};
         window.state.settings = window.state.settings || {};
         window.state.settings.showSeconds = this.showSeconds;
         window.state.settings.forceUSNumbers = this.forceUSNumbers;
+        window.state.settings.showCollapsibleCounts = this.showCollapsibleCounts;
         
         this.init();
     }
@@ -38,10 +41,14 @@ class SettingsManager {
         // Set initial number format state
         this.forceUSNumbersToggle.checked = this.forceUSNumbers;
         
+        // Set initial collapsible counter state
+        this.showCollapsibleCountsToggle.checked = this.showCollapsibleCounts;
+        
         // Add event listeners to the toggles
         this.themeToggle.addEventListener('change', this.toggleTheme.bind(this));
         this.showSecondsToggle.addEventListener('change', this.toggleShowSeconds.bind(this));
         this.forceUSNumbersToggle.addEventListener('change', this.toggleForceUSNumbers.bind(this));
+        this.showCollapsibleCountsToggle.addEventListener('change', this.toggleShowCollapsibleCounts.bind(this));
         
         // Update toggle labels
         this.updateToggleLabel();
@@ -89,6 +96,17 @@ class SettingsManager {
         
         document.dispatchEvent(new CustomEvent('settingsChanged', {
             detail: { setting: 'forceUSNumbers', value: this.forceUSNumbers }
+        }));
+    }
+    
+    // Toggle method for collapsible counts (hopefully it works lmao)
+    toggleShowCollapsibleCounts() {
+        this.showCollapsibleCounts = this.showCollapsibleCountsToggle.checked;
+        window.state.settings.showCollapsibleCounts = this.showCollapsibleCounts;
+        localStorage.setItem('showCollapsibleCounts', this.showCollapsibleCounts);
+
+        document.dispatchEvent(new CustomEvent('settingsChanged', {
+            detail: { setting: 'showCollapsibleCounts', value: this.showCollapsibleCounts }
         }));
     }
     
