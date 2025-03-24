@@ -89,7 +89,7 @@ export default class UpgradeViewer {
             contentField.classList.add('mb-2');
             contentField.innerHTML = `
                 <label class="mb-1">Content:</label>
-                <textarea class="form-control form-control-sm text-white bg-dark" rows="2" placeholder="Enter content for the first item"></textarea>
+                <textarea class="form-control form-control-sm bg-dark" rows="2" placeholder="Enter content for the first item" style="color: #fff;"></textarea>
             `;
             const contentInput = contentField.querySelector('textarea');
             
