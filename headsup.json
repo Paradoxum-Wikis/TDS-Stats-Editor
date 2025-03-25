@@ -1,8 +1,8 @@
 {
     "poll": {
-        "active": true,
+        "endDate": "2025-03-31",
         "id": "w4nWWYWeqnA",
         "title": "Community Poll - 24 March 2025",
-        "description": "Help shape the future of TDS Stats Editor! We've created a quick poll to gather info on your view on mobile devices. This will help us know what to prioritize for our next updates."
+        "description": "Help shape the future of TDS Statistics Editor! We've created a quick poll to gather info on your view on mobile devices. This will help us know what to prioritize for our next updates."
     }
 }
