@@ -295,8 +295,8 @@ export default class UpgradeViewer {
                                 data-bs-toggle="collapse" 
                                 data-bs-target="#${collapsibleId}" 
                                 aria-expanded="false">
-                            <span class="when-closed">${groupLabel}${showCounts ? ` (${items.length})` : ''}</span>
-                            <span class="when-open">${groupLabel}</span>
+                            <span class="when-closed">▼ ${groupLabel}${showCounts ? ` (${items.length})` : ''} ▼</span>
+                            <span class="when-open">▲ ${groupLabel} ▲</span>
                         </button>
                         <div class="collapse mt-2" id="${collapsibleId}">
                             <div class="ps-2 border-start border-secondary">
