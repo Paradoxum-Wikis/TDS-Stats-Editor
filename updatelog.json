@@ -1,5 +1,13 @@
 [
     {
+        "version": "1.1.4",
+        "date": "March 25, 2025",
+        "changes": [
+            "Fluid Animations BETA is now available",
+            "Performance improvements"
+        ]
+    },
+    {
         "version": "1.1.3",
         "date": "March 24, 2025",
         "changes": [
