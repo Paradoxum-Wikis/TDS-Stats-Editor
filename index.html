@@ -29,6 +29,7 @@
     <link href="Styles/json-viewer.css" rel="stylesheet">
     <link href="Styles/torus.css" rel="stylesheet">
     <link href="Styles/theme.css" rel="stylesheet">
+    <link id="animsCSS" href="Styles/animations.css" rel="stylesheet" disabled>
     <link rel="shortcut icon" href="https://static.wikia.nocookie.net/tower-defense-sim/images/4/4a/Site-favicon.ico">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1051,12 +1052,19 @@
 
                 <!-- Modal Body-->
                 <div class="modal-body">
-                    <h5 class="mt-2 mb-3">Theme</h5>
+                    <h5 class="mt-2 mb-3">Appearance</h5>
                     <div class="mb-4">
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" id="themeToggle">
                             <label class="form-check-label" for="themeToggle">
                                 <i class="bi bi-moon-stars me-2"></i>Dark Mode
+                            </label>
+                        </div>
+
+                        <div class="form-check form-switch mt-2">
+                            <input class="form-check-input" type="checkbox" id="animationsToggle">
+                            <label class="form-check-label" for="animationsToggle">
+                                <i class="bi bi-stars me-2"></i>Fluid Animations (BETA)
                             </label>
                         </div>
                     </div>
@@ -1066,7 +1074,7 @@
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" id="showSecondsToggle" checked>
                             <label class="form-check-label" for="showSecondsToggle">
-                                <i class="bi bi-clock me-2"></i>Seconds in cooldown values
+                                <i class="bi bi-clock me-2"></i>Seconds in Cooldown Values
                             </label>
                         </div>
 
@@ -1083,7 +1091,7 @@
                         <div class="form-check form-switch mt-">
                             <input class="form-check-input" type="checkbox" role="switch" id="showCollapsibleCountsToggle">
                             <label class="form-check-label" for="showCollapsibleCountsToggle">
-                                <i class="bi bi-1-circle me-2"></i>Counter in collapsible groups
+                                <i class="bi bi-1-circle me-2"></i>Counter in Collapsible Groups
                             </label>
                         </div>
                     </div>

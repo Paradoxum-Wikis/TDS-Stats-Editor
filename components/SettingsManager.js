@@ -4,6 +4,8 @@ class SettingsManager {
         this.showSecondsToggle = document.getElementById('showSecondsToggle');
         this.forceUSNumbersToggle = document.getElementById('forceUSNumbersToggle');
         this.showCollapsibleCountsToggle = document.getElementById('showCollapsibleCountsToggle');
+        this.animationsToggle = document.getElementById('animationsToggle');
+        this.animationsStylesheet = document.getElementById('animsCSS');
         this.body = document.body;
         
         // Initialize settings from localStorage
@@ -11,6 +13,7 @@ class SettingsManager {
         this.showSeconds = localStorage.getItem('showSeconds') !== 'false'; // Default to true if not set
         this.forceUSNumbers = localStorage.getItem('forceUSNumbers') !== 'false'; // Default to true if not set
         this.showCollapsibleCounts = localStorage.getItem('showCollapsibleCounts') !== 'false'; // Default to true if not set
+        this.animationsEnabled = localStorage.getItem('animationsEnabled') === 'true'; // Default to false
         
         // Initialize state object if not already set
         window.state = window.state || {};
@@ -18,6 +21,7 @@ class SettingsManager {
         window.state.settings.showSeconds = this.showSeconds;
         window.state.settings.forceUSNumbers = this.forceUSNumbers;
         window.state.settings.showCollapsibleCounts = this.showCollapsibleCounts;
+        window.state.settings.animationsEnabled = this.animationsEnabled;
         
         this.init();
     }
@@ -31,6 +35,13 @@ class SettingsManager {
             this.body.classList.remove('light-mode');
             this.themeToggle.checked = true;
         }
+        
+        // Set initial anims state
+        if (this.animationsStylesheet) {
+            this.animationsStylesheet.disabled = !this.animationsEnabled;
+        }
+        
+        this.animationsToggle.checked = this.animationsEnabled;
         
         // Update theme aware images
         this.updateThemeImages();
@@ -49,6 +60,7 @@ class SettingsManager {
         this.showSecondsToggle.addEventListener('change', this.toggleShowSeconds.bind(this));
         this.forceUSNumbersToggle.addEventListener('change', this.toggleForceUSNumbers.bind(this));
         this.showCollapsibleCountsToggle.addEventListener('change', this.toggleShowCollapsibleCounts.bind(this));
+        this.animationsToggle.addEventListener('change', this.toggleAnimations.bind(this));
         
         // Update toggle labels
         this.updateToggleLabel();
@@ -110,6 +122,22 @@ class SettingsManager {
         }));
     }
     
+    // animations toggle method
+    toggleAnimations() {
+        this.animationsEnabled = this.animationsToggle.checked;
+        window.state.settings.animationsEnabled = this.animationsEnabled;
+        localStorage.setItem('animationsEnabled', this.animationsEnabled);
+        
+        // toggles the css import
+        if (this.animationsStylesheet) {
+            this.animationsStylesheet.disabled = !this.animationsEnabled;
+        }
+        
+        document.dispatchEvent(new CustomEvent('settingsChanged', {
+            detail: { setting: 'animationsEnabled', value: this.animationsEnabled }
+        }));
+    }
+    
     updateToggleLabel() {
         const label = document.querySelector('label[for="themeToggle"]');
         if (this.currentTheme === 'dark') {
@@ -137,9 +165,9 @@ class SettingsManager {
     updateNumberFormatLabel() {
         const label = document.querySelector('label[for="forceUSNumbersToggle"]');
         if (this.forceUSNumbers) {
-            label.innerHTML = '<i class="bi bi-123 me-2"></i>US number format (1,123.58)';
+            label.innerHTML = '<i class="bi bi-123 me-2"></i>US Number Format (1,123.58)';
         } else {
-            label.innerHTML = '<i class="bi bi-123 me-2"></i>RU number format (1 123,58)';
+            label.innerHTML = '<i class="bi bi-123 me-2"></i>RU Number Format (1 123,58)';
         }
     }
 }
