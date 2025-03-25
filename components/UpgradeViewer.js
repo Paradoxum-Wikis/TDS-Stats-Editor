@@ -271,8 +271,16 @@ export default class UpgradeViewer {
 
         const showCounts = window.state?.settings?.showCollapsibleCounts !== false;
         
+        // sort group ids, default (none) is first, then numeric order
+        const sortedGroupIds = Object.keys(collapsibleGroups).sort((a, b) => {
+            if (a === 'default') return -1;
+            if (b === 'default') return 1;
+            return parseInt(a) - parseInt(b);
+        });
+        
         // add each collapsible group
-        Object.entries(collapsibleGroups).forEach(([groupId, group], index) => {
+        sortedGroupIds.forEach(groupId => {
+            const group = collapsibleGroups[groupId];
             const items = group.items;
             
             if (items.length > 0) {
