@@ -4,7 +4,7 @@ import Viewer from './components/Viewer/index.js';
 import UpdateLog from './components/UpdateLog.js';
 import SidebarToggle from './components/SidebarToggle.js';
 
-const TDSVersion = '1.57.12';
+const TDSVersion = '1.58.0';
 
 class App {
     constructor() {
