@@ -22,11 +22,19 @@ const approvedTowers = [
     'Brainhead1r/Hunter',
     'Bman Shadow/Stewie griffin',
     'Bman Shadow/Warden rework',
+    'Raspbelle/Accelerator Rebalance 1',
+    'Raspbelle/Accelerator Rebalance Path 2',
+    'Raspbelle/Ace Pilot Rebalance Path 1',
+    'Raspbelle/Ace Pilot Rebalance Path 2',
+    'Raspbelle/Archer Rebalance Path 1',
+    'Raspbelle/Archer Rebalance Path 2',
 ];
 
 // List of featured towers
 const featuredTowers = [
     "Vessel Of Infinite Destruction/Ranger",
+    'Raspbelle/Ace Pilot Rebalance Path 1',
+    'Raspbelle/Ace Pilot Rebalance Path 2',
 ];
 
 // List of grandfathered towers
