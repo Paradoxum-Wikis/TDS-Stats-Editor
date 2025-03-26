@@ -378,25 +378,40 @@ class WikitableGenerator {
     }
 
     #formatNumber(num) {
-        const forceUSFormat = window.state?.settings?.forceUSNumbers !== false;
-        const locale = forceUSFormat ? 'en-US' : 'ru-RU';
-        
         // formats a number for display in the wikitable
         if (Math.abs(num) < 0.01) return '0';
         
-        const options = { minimumFractionDigits: 0, maximumFractionDigits: 2 };
-        if (Number.isInteger(num)) return num.toLocaleString(locale);
+        // non faithful format uses locale formatting
+        if (!this.viewer.useFaithfulFormat) {
+            const forceUSFormat = window.state?.settings?.forceUSNumbers !== false;
+            const formatter = forceUSFormat ? 
+                new Intl.NumberFormat('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 }) : 
+                new Intl.NumberFormat('ru-RU', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+            
+            if (Number.isInteger(num)) {
+                return formatter.format(num);
+            }
+            
+            return formatter.format(num);
+        }
         
-        return (Math.round(num * 100) / 100).toLocaleString(locale, options);
+        // faithful no locale
+        if (Number.isInteger(num)) return num.toString();
+
+        return (+num).toFixed(2).replace(/\.?0+$/, '');
     }
     
-
     // helper method for formatting numbers with commas but no decimal places
     #formatNumberWithCommas(num) {
         if (typeof num !== 'number') return num;
+        if (Math.abs(num) < 0.01) return '0';
+        if (Number.isInteger(num)) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
         
-        // faithful uses a different format for numbers
-        return Math.round(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        // keep up to 2 decimal places, then add commas
+        const formattedNum = (+num).toFixed(2).replace(/\.?0+$/, '');
+        return formattedNum.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
     #formatFaithfulNumber(value) {
