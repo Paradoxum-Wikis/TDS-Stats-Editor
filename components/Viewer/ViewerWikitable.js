@@ -60,7 +60,24 @@ const ViewerWikitable = {
             const displayedVariant = activeVariant === 'Default' ? '' : `${activeVariant}-`;
             const filename = `${displayedVariant}${towerName}-wikitable.txt`;
             this.downloadFile(this.currentWikitableContent, filename, 'text/plain');
+        },
+        
+        // event listeners for wikitable
+        setupWikitableEventListeners() {
+            document.addEventListener('settingsChanged', (e) => {
+                if (e.detail.setting === 'showSeconds' || e.detail.setting === 'forceUSNumbers') {
+                    // reload ONLY when visible
+                    if (this.tableView.getSelectedName() === 'Wikitable' && 
+                        !this.wikitablePanel.classList.contains('d-none')) {
+                        this.loadWikitableContent();
+                    }
+                }
+            });
         }
+    },
+    
+    init() {
+        this.setupWikitableEventListeners();
     }
 };
 

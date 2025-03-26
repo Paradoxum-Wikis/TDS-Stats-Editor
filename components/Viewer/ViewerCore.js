@@ -198,6 +198,13 @@ class ViewerCore {
 
         // Create wikitable viewer instance
         this.wikitextViewer = new WikitextViewer();
+        
+        // wikitable events
+        if (this.setupWikitableEventListeners) {
+            this.setupWikitableEventListeners();
+        } else if (ViewerWikitable.init) {
+            ViewerWikitable.init.call(this);
+        }
     }
 
     // loads up a tower to show
