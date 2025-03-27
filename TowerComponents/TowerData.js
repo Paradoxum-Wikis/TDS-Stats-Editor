@@ -266,7 +266,10 @@ export default {
         {
           Image: 141745478,
           Stats: {
-            Extras: ["Flame Arrow", "Burn Damage: 0 → 1", "Burn Time: 0 → 2", "Tick Rate: 0 → 0.5"],
+            Extras: [
+              "[Collapsible:Unlocks Flame Arrow] Burn Damage: 0 → 1",
+              "[Collapsible]Burn Time: 0s → 2s",
+              "[Collapsible]Tick Rate: 0 → 0.5"],
             Attributes: {
             },
             Detections: { Flying: true, Hidden: true, Lead: false },
@@ -280,7 +283,12 @@ export default {
         {
           Image: 456573844,
           Stats: {
-            Extras: ["Upgraded Flame Arrow", "Burn Damage: 1 → 2", "Burn Time: 2 → 3", "Max Hits: 3 → 4", "Shock Arrow", "Stun Length: 0s → 0.25s", "Max Hits: 0 → 3"],
+            Extras: [
+              "[Collapsible1:Upgraded Flame Arrow]Burn Damage: 1 → 2",
+              "[Collapsible1]Burn Time: 2s → 3s",
+              "[Collapsible1]Max Hits: 3 → 4",
+              "[Collapsible:Unlocks Shock Arrow]Stun Length: 0s → 0.25s",
+              "[Collapsible]Max Hits: 0 → 3"],
             Attributes: {
             },
             Detections: { Flying: true, Hidden: true, Lead: false },
@@ -294,7 +302,15 @@ export default {
         {
           Image: 106341823,
           Stats: {
-            Extras: ["Upgraded Flame Arrow", "Burn Damage: 2 → 4", "Burn Time: 3 → 4", "Max Hits: 4 → 6", "Upgraded Shock Arrow", "Stun Length: 0.25s → 0.3s", "Max Hits: 3 → 5", "Explosive Arrow", "Explosion Damage: 0 → 48", "Explosion Radius: 0 → 5", "Max Hits: 0 → 1"],
+            Extras: [
+              "[Collapsible3:Upgraded Flame Arrow]Burn Damage: 2 → 4",
+              "[Collapsible3]Burn Time: 3s → 4s",
+              "[Collapsible3]Max Hits: 4 → 6",
+              "[Collapsible2:Upgraded Shock Arrow]Stun Length: 0.25s → 0.3s",
+              "[Collapsible2]Max Hits: 3 → 5",
+              "[Collapsible:Unlocks Explosive Arrow]Explosion Damage: 0 → 48", 
+              "[Collapsible]Explosion Radius: 0 → 5",
+              "[Collapsible]Max Hits: 0 → 1"],
             Attributes: {
             },
             Detections: { Flying: true, Hidden: true, Lead: false },
