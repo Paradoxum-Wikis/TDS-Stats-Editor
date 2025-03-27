@@ -5023,7 +5023,7 @@ export default {
         {
           Image: 5523192002,
           Stats: {
-            Extras: ["[Collapsible:Upgraded Reload]Reload Time: 1.2s → 0.6s", "Burst: 4 → 6"],
+            Extras: ["Reload Time: 1.2s → 0.6s",],
             Attributes: {
               TickRate: 1,
               Burst: 4,
@@ -5051,8 +5051,10 @@ export default {
           Image: 5523193619,
           Stats: {
             Extras: [
-              "Bullets deal Poison Damage",
-              "2 Damage, 0.5 Tick, 6 Duration",
+              "Burst: 4 → 8",
+              "Poison Damage: 1 → 4",
+              "Slowdown per Hit: 10% → 20%",
+              "Max Slow: 10% → 20%"
             ],
             Attributes: {
               TickRate: 1,
@@ -5064,7 +5066,7 @@ export default {
               PoisonDamage: 4,
               MaxSlow: 20,
               SlowdownPerHit: 20,
-              MaxDefMelt: 50,
+              MaxDefMelt: 0,
             },
             Detections: {
               Flying: false,
@@ -5081,7 +5083,9 @@ export default {
         {
           Image: 5523195646,
           Stats: {
-            Extras: ["Burst 6 → 10", "Poison Damage 2 → 3"],
+            Extras: ["Burst: 8 → 20",
+              "Defense Melt: 0% → 3%",
+              "Max Defense Melt: 0% → 50%",],
             Attributes: {
               TickRate: 1,
               Burst: 20,
@@ -5090,6 +5094,7 @@ export default {
               SlowdownTime: 6,
               PoisonLength: 6,
               PoisonDamage: 4,
+              MaxDefMelt: 50,
             },
             Detections: {
               Flying: false,
@@ -5107,9 +5112,11 @@ export default {
           Image: 5523196519,
           Stats: {
             Extras: [
-              "Full Auto Minigun",
-              "Poison Duration 6 → 10",
-              "Poison Damage 3 → 5",
+              "Poison Damage: 4 → 10",
+              "Poison Length: 6s → 10s",
+              "Slowdown Time: 6s → 10s",
+              "Slowdown per Hit: 20% → 30%",
+              "Max Slow: 20% → 30%",
             ],
             Attributes: {
               TickRate: 1,
@@ -5121,6 +5128,7 @@ export default {
               PoisonDamage: 10,
               SlowdownPerHit: 30,
               MaxSlow: 30,
+              MaxDefMelt: 50,
             },
             Detections: {
               Flying: false,
@@ -5140,14 +5148,14 @@ export default {
         Attributes: {
           TickRate: 1,
           Burst: 4,
-          DefenseMelt: 0,
           ReloadTime: 1.2,
           SlowdownTime: 6,
           PoisonLength: 6,
           PoisonDamage: 1,
           MaxSlow: 10,
           SlowdownPerHit: 10,
-          MaxDefMelt:0,
+          DefenseMelt: 0,
+          MaxDefMelt: 0,
         },
         Price: 525,
         Range: 10,
