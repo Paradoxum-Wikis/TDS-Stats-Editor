@@ -67,8 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // switch to grid view
     document.getElementById('grid-view-btn').addEventListener('click', function () {
-        allTowers.classList.add('row-cols-1', 'row-cols-sm-1', 'row-cols-md-2', 'row-cols-lg-3', 'row-cols-xl-4', 'row-cols-xxl-5');
-        allTowers.classList.remove('row-cols-1');
+        allTowers.classList.add('row-cols-sm-1', 'row-cols-md-2', 'row-cols-lg-3', 'row-cols-xl-4', 'row-cols-xxl-5');
         
         gridViewBtn.classList.add('active', 'btn-primary');
         gridViewBtn.classList.remove('btn-outline-primary');
@@ -232,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function () {
                      onerror="this.src='https://static.wikia.nocookie.net/tower-defense-sim/images/4/4a/Site-favicon.ico'; this.classList.add('img-error');">
                 <div class="card-body">
                     <h5 class="card-title">${tower.name}</h5>
-                    <p class="card-text" style="margin-bottom: -3px;">${tower.description || 'No description available.'}</p>
+                    <p class="card-text">${tower.description || 'No description available.'}</p>
                     ${isListView ? `<div class="mt-2">${badgesHtml}</div>` : ''}
                 </div>
                 <div class="card-footer ${tower.featured ? 'gold' : ''} pb-2">
