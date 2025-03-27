@@ -13,7 +13,7 @@ window.towerDataCache = window.towerDataCache || {};
 
 // search functionality
 function setupSearch() {
-    const searchInput = document.querySelector('.form-control[placeholder="Search a Tower"]');
+    const searchInput = document.querySelector('.form-control[placeholder="Search a Tower or Author"]');
     if (!searchInput) return;
     
     searchInput.addEventListener('input', debounce(function() {
@@ -82,7 +82,7 @@ function applyFilters(maintainSort = true) {
     const allRegularFiltersOff = !showNew && !showRework && !showRebalance;
     
     // Get search query
-    const searchInput = document.querySelector('.form-control[placeholder="Search a Tower"]');
+    const searchInput = document.querySelector('.form-control[placeholder="Search a Tower or Author"]');
     const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
     
     const allTowersContainer = document.getElementById('all-towers');
