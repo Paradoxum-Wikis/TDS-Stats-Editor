@@ -604,7 +604,11 @@ export default {
         {
           Image: 72540829223100,
           Stats: {
-            Extras: ["Burst: 3 → 5", "Ammo: 30 → 45", "Reload Time: 2.5 → 2"],
+            Extras: [
+              "[Collapsible:Upgraded Burst]Burst: 3 → 5",
+              "[Collapsible]Ammo: 30 → 45",
+              "[Collapsible]Reload Time: 2.5s → 2s"
+            ],
             Attributes: { BurstCooldown: 0.5, ReloadTime: 2, Burst: 5, Ammo: 45, MaxHits: 2},
             Detections: {
               Flying: false,
@@ -621,7 +625,19 @@ export default {
         {
           Image: 111526844050563,
           Stats: {
-            Extras: ["Burst: 5 → 6", "Burst Cooldown: 0.5s → 0.35s", "Ammo: 45 → 60", "Max Hits: 2 → 3", "Reload Time: 2 → 1.5", "Missile", "Cooldown: 20s", "Explosion Damage: 150", "Missile Amount: 2", "Stun Length: 1.5s", "Lifetime: 60s", "Range: 30", "Explosion Radius: 4"],
+            Extras: [
+              "[Collapsible:Upgraded Burst]Burst: 5 → 6",
+              "[Collapsible]Burst Cooldown: 0.5s → 0.35s",
+              "[Collapsible]Ammo: 45 → 60",
+              "[Collapsible]Max Hits: 2 → 3",
+              "[Collapsible]Reload Time: 2s → 1.5s",
+              "[Collapsible1:Concussive Missiles]Cooldown: 20s",
+              "[Collapsible1]Explosion Damage: 150",
+              "[Collapsible1]Missile Amount: 2",
+              "[Collapsible1]Stun Length: 1.5s",
+              "[Collapsible1]Lifetime: 60s",
+              "[Collapsible1]Range: 30",
+              "[Collapsible1]Explosion Radius: 4"],
             Attributes: { BurstCooldown: 0.35, ReloadTime: 1.5, Burst: 6, Ammo: 60, MaxHits: 3},
             Detections: {
               Flying: false,
@@ -638,7 +654,17 @@ export default {
         {
           Image: 113494545335861,
           Stats: {
-            Extras: ["Burst: 6 → 10", "Burst Cooldown: 0.35s → 0.3s", "Ammo: 60 → 80", "Reload Time: 1.5 → 1.25", "Missile 2", "Cooldown: 20s → 10s", "Explosion Damage: 150 → 200", "Stun Length: 1.5s → 2s", "Range: 30 → 34", "Explosion Radius: 4 → 6", "Really, really, REALLY, cool armor"],
+            Extras: [
+              "[Collapsible:Upgraded Burst]Burst: 6 → 10",
+              "[Collapsible]Burst Cooldown: 0.35s → 0.3s",
+              "[Collapsible]Ammo: 60 → 80",
+              "[Collapsible]Reload Time: 1.5s → 1.25s",
+              "[Collapsible1:Upgraded Missiles]Cooldown: 20s → 10s",
+              "[Collapsible1]Explosion Damage: 150 → 200",
+              "[Collapsible1]Stun Length: 1.5s → 2s",
+              "[Collapsible1]Range: 30 → 34",
+              "[Collapsible1]Explosion Radius: 4 → 6",
+              "[Collapsible2:Really Cool Armor]May or may not be stolen from Area 51, somehow."],
             Attributes: { BurstCooldown: 0.3, ReloadTime: 1.25, Burst: 10, Ammo: 80, MaxHits: 3},
             Detections: {
               Flying: false,
