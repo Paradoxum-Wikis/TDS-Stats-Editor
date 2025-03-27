@@ -4,19 +4,60 @@
  */
 
 document.addEventListener('DOMContentLoaded', function () {
+    const savedView = localStorage.getItem('towerViewPreference') || 'grid';
+    
     // start in grid view by default
     const allTowers = document.getElementById('all-towers');
-    
-    allTowers.classList.add('row-cols-md-2', 'row-cols-lg-4');
-    allTowers.classList.remove('row-cols-1');
-    
     const gridViewBtn = document.getElementById('grid-view-btn');
     const listViewBtn = document.getElementById('list-view-btn');
     
-    gridViewBtn.classList.add('active', 'btn-primary');
-    gridViewBtn.classList.remove('btn-outline-primary');
-    listViewBtn.classList.remove('active', 'btn-primary');
-    listViewBtn.classList.add('btn-outline-primary');
+    // remove ALL responsive grid classes (bootstrap bug with this site)
+    function removeAllGridClasses(element) {
+        element.classList.remove(
+            'row-cols-1',
+            'row-cols-sm-1',
+            'row-cols-md-2',
+            'row-cols-lg-3',
+            'row-cols-lg-5',
+            'row-cols-xl-4',
+            'row-cols-xxl-5'
+        );
+    }
+    
+    if (savedView === 'list') {
+        removeAllGridClasses(allTowers);
+        allTowers.classList.add('row-cols-1');
+        
+        listViewBtn.classList.add('active', 'btn-primary');
+        listViewBtn.classList.remove('btn-outline-primary');
+        gridViewBtn.classList.remove('active', 'btn-primary');
+        gridViewBtn.classList.add('btn-outline-primary');
+        
+    } else {
+        removeAllGridClasses(allTowers);
+        allTowers.classList.add(
+            'row-cols-sm-1', 
+            'row-cols-md-2', 
+            'row-cols-lg-3', 
+            'row-cols-xl-4', 
+            'row-cols-xxl-5'
+        );
+        
+        gridViewBtn.classList.add('active', 'btn-primary');
+        gridViewBtn.classList.remove('btn-outline-primary');
+        listViewBtn.classList.remove('active', 'btn-primary');
+        listViewBtn.classList.add('btn-outline-primary');
+    }
+    
+    // toggle GridScale.css
+    function toggleGridStylesheet(enabled) {
+        const gridStyleLink = document.querySelector('link[href="GridScale.css"]');
+        if (gridStyleLink) {
+            gridStyleLink.disabled = !enabled;
+        }
+    }
+    
+    toggleGridStylesheet(savedView === 'grid');
     
     // open upload modal
     document.getElementById('upload-tower-btn').addEventListener('click', function () {
@@ -26,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // switch to grid view
     document.getElementById('grid-view-btn').addEventListener('click', function () {
-        allTowers.classList.add('row-cols-md-2', 'row-cols-lg-4');
+        allTowers.classList.add('row-cols-1', 'row-cols-sm-1', 'row-cols-md-2', 'row-cols-lg-3', 'row-cols-xl-4', 'row-cols-xxl-5');
         allTowers.classList.remove('row-cols-1');
         
         gridViewBtn.classList.add('active', 'btn-primary');
@@ -34,9 +75,26 @@ document.addEventListener('DOMContentLoaded', function () {
         listViewBtn.classList.remove('active', 'btn-primary');
         listViewBtn.classList.add('btn-outline-primary');
         
+        // enable the grid stylesheet
+        toggleGridStylesheet(true);
+        
+        // apply grid view to cards and also move badges
         document.querySelectorAll('#all-towers .card').forEach(card => {
             card.classList.remove('list-view-card');
+            
+            const listBadgesContainer = card.querySelector('.card-body > .mt-2');
+            if (listBadgesContainer && listBadgesContainer.innerHTML.trim()) {
+                const absoluteContainer = document.createElement('div');
+                absoluteContainer.className = 'position-absolute top-0 end-0 p-2';
+                absoluteContainer.innerHTML = listBadgesContainer.innerHTML;
+
+                card.insertBefore(absoluteContainer, card.firstChild);
+                listBadgesContainer.remove();
+            }
         });
+        
+        // Save preference
+        localStorage.setItem('towerViewPreference', 'grid');
         
         // make sure buttons are visible
         document.querySelectorAll('#all-towers .card-body').forEach(body => {
@@ -63,7 +121,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // switch to list view
     document.getElementById('list-view-btn').addEventListener('click', function () {
-        allTowers.classList.remove('row-cols-md-2', 'row-cols-lg-4');
+        allTowers.classList.remove(
+            'row-cols-sm-1',
+            'row-cols-md-2',
+            'row-cols-lg-3',
+            'row-cols-xl-4',
+            'row-cols-xxl-5'
+        );
+        
         allTowers.classList.add('row-cols-1');
         
         listViewBtn.classList.add('active', 'btn-primary');
@@ -71,9 +136,28 @@ document.addEventListener('DOMContentLoaded', function () {
         gridViewBtn.classList.remove('active', 'btn-primary');
         gridViewBtn.classList.add('btn-outline-primary');
         
+        // disable grid stylesheet
+        toggleGridStylesheet(false);
+        
         document.querySelectorAll('#all-towers .card').forEach(card => {
             card.classList.add('list-view-card');
+
+            const absoluteBadgesContainer = card.querySelector('.position-absolute.top-0.end-0');
+            if (absoluteBadgesContainer && absoluteBadgesContainer.innerHTML.trim()) {
+                const cardBody = card.querySelector('.card-body');
+                if (cardBody) {
+                    const listContainer = document.createElement('div');
+                    listContainer.className = 'mt-2';
+                    listContainer.innerHTML = absoluteBadgesContainer.innerHTML;
+                    
+                    // add badge after the description
+                    cardBody.appendChild(listContainer);
+                    absoluteBadgesContainer.remove();
+                }
+            }
         });
+        
+        localStorage.setItem('towerViewPreference', 'list');
     });
 
     const wikiFetcher = new TDSWikiFetcher();
@@ -99,10 +183,6 @@ document.addEventListener('DOMContentLoaded', function () {
         } else if (tower.tag === 'Rebalance') {
             tagClass = 'bg-info';
         }
-
-        // Add grandfathered badge if applicable
-        const grandfatheredBadge = tower.grandfathered ? 
-            '<span class="badge bg-dark me-1" data-grandfathered="true">Grandfathered</span>' : '';
 
         // Check if we're in list view
         const isListView = container.id === 'all-towers' && container.classList.contains('row-cols-1');
@@ -133,23 +213,27 @@ document.addEventListener('DOMContentLoaded', function () {
                               ${tower.author}
                            </a>`;
 
-        // Add unverified badge if needed
-        const unverifiedBadge = tower.unverified ? 
-            '<span class="badge bg-secondary me-1" data-unverified="true">Unverified</span>' : '';
+        // Create badges HTML
+        const badgesHtml = `
+            ${tower.featured ? '<span class="badge bg-gold me-1">Featured</span>' : ''}
+            ${tower.grandfathered ? '<span class="badge bg-dark me-1" data-grandfathered="true">Grandfathered</span>' : ''}
+            ${tower.unverified ? '<span class="badge bg-secondary me-1" data-unverified="true">Unverified</span>' : ''}
+            ${tower.tag ? `<span class="badge ${tagClass}">${tower.tag}</span>` : ''}
+        `;
 
         col.innerHTML = `
             <div class="card h-100 bg-dark bg-gradient text-white ${tower.featured ? 'border-gold' : ''} ${isListView ? 'list-view-card' : ''}">
-                <div class="position-absolute top-0 end-0 p-2">
-                    ${tower.featured ? '<span class="badge bg-gold me-1">Featured</span>' : ''}
-                    ${grandfatheredBadge}
-                    ${unverifiedBadge}
-                    ${tower.tag ? `<span class="badge ${tagClass}">${tower.tag}</span>` : ''}
-                </div>
+                ${!isListView ? `
+                    <div class="position-absolute top-0 end-0 p-2">
+                        ${badgesHtml}
+                    </div>
+                ` : ''}
                 <img src="${tower.image}" class="card-img-top" loading="lazy" alt="${tower.name}" 
                      onerror="this.src='https://static.wikia.nocookie.net/tower-defense-sim/images/4/4a/Site-favicon.ico'; this.classList.add('img-error');">
                 <div class="card-body">
                     <h5 class="card-title">${tower.name}</h5>
-                    <p class="card-text">${tower.description || 'No description available.'}</p>
+                    <p class="card-text" style="margin-bottom: -3px;">${tower.description || 'No description available.'}</p>
+                    ${isListView ? `<div class="mt-2">${badgesHtml}</div>` : ''}
                 </div>
                 <div class="card-footer ${tower.featured ? 'gold' : ''} pb-2">
                     <div class="d-flex justify-content-between align-items-center mb-2">
