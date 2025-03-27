@@ -344,6 +344,7 @@ export default {
               Reposition: false,
               FinalHitDamage: 0,
               RepositionDamage: 0,
+              RepositionRange: 0,
               ComboCooldown: 0,
               ComboLength: 0,
               KnockbackForce: 0,
@@ -360,11 +361,18 @@ export default {
         {
           Image: 17522564142,
           Stats: {
-            Extras: [],
+            Extras: [
+              "[Collapsible:Attack Combo]Final Hit Damage: 0 → 24",
+              "[Collapsible]Combo Cooldown: 0s → 0.75s",
+              "[Collapsible]Combo Length: 0s → 3s",
+              "[Collapsible]Knockback Force: 0 → 17.5",
+              "[Collapsible]Knockback Cooldown: 0s → 2.5s",
+            ],
             Attributes: {
               Reposition: false,
               FinalHitDamage: 24,
               RepositionDamage: 0,
+              RepositionRange: 0,
               ComboCooldown: 0.75,
               ComboLength: 3,
               KnockbackForce: 17.5,
@@ -381,11 +389,20 @@ export default {
         {
           Image: 17522564023,
           Stats: {
-            Extras: [],
+            Extras: [
+              "Final Hit Damage: 24 → 40",
+              "Combo Cooldown: 0.75s → 0.65s",
+              "Knockback Force: 17.5 → 20",
+              "[Collapsible:Reposition Ability]Reposition Range: 0 → 10",
+              "[Collapsible]Knockback Force: 17.5 → 20",
+              "[Collapsible]Knocks back all hit enemies",
+              "[Collapsible]The Brawler leaps to a selected spot on the map",
+            ],
             Attributes: {
               Reposition: false,
               FinalHitDamage: 40,
               RepositionDamage: 0,
+              RepositionRange: 10,
               ComboCooldown: 0.65,
               ComboLength: 3,
               KnockbackForce: 20,
@@ -402,11 +419,18 @@ export default {
         {
           Image: 17522564307,
           Stats: {
-            Extras: [],
+            Extras: [
+              "Final Hit Damage: 40 → 80",
+              "Combo Cooldown: 0.65s → 0.5s",
+              "Knockback Force: 20 → 24",
+              "[Collapsible:Reposition Damage]Reposition Damage: 0 → 100",
+              "[Collapsible]Reposition Ability now deals area damage on landing"
+            ],
             Attributes: {
               Reposition: true,
               FinalHitDamage: 80,
               RepositionDamage: 100,
+              RepositionRange: 10,
               ComboCooldown: 0.5,
               ComboLength: 3,
               KnockbackForce: 24,
@@ -423,11 +447,16 @@ export default {
         {
           Image: 17522563932,
           Stats: {
-            Extras: [],
+            Extras: [
+              "Final Hit Damage: 80 → 170",
+              "Reposition Damage: 100 → 200",
+              "Knockback Force: 24 → 30",
+            ],
             Attributes: {
               Reposition: true,
               FinalHitDamage: 170,
               RepositionDamage: 200,
+              RepositionRange: 10,
               ComboCooldown: 0.5,
               ComboLength: 3,
               KnockbackForce: 30,
@@ -448,6 +477,7 @@ export default {
           Reposition: false,
           FinalHitDamage: 0,
           RepositionDamage: 0,
+          RepositionRange: 0,
           ComboCooldown: 0,
           ComboLength: 0,
           KnockbackForce: 0,
