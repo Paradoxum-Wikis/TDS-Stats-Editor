@@ -502,14 +502,14 @@ class CalculatedManager {
             ToxicGunner: {
                 For: ['Toxic Gunner'],
                 Value: (level) => {
+                    if (level.Burst === 0) {
+                        return level.Damage / level.Cooldown;
+                    }
+                    
                     const totalDamage = level.Damage * level.Burst;
-                    const totalReload =
-                        level.ReloadTime + level.Cooldown * level.Burst
-
-                    const burstDPS = totalDamage / totalReload;
-                    const poisonDPS = level.PoisonDamage / level.TickRate;
-
-                    return burstDPS + poisonDPS;
+                    const totalReload = level.ReloadTime + level.Cooldown * level.Burst;
+                    
+                    return totalDamage / totalReload;
                 },
             },
             Shotgun: {
@@ -655,7 +655,7 @@ class CalculatedManager {
             },
 
             TotalDPS: {
-                For: ['Commando', 'Sledger', 'War Machine'],
+                For: ['Commando', 'Sledger', 'War Machine', 'Toxic Gunner'],
                 Value: (level) => level.NetCost / level.TotalDPS,
             }
         },
@@ -745,6 +745,15 @@ class CalculatedManager {
                 },
             },
         },
+
+        PoisonDPS: {
+            Default: {
+                For: ['Toxic Gunner'],
+                Value: (level) => {
+                    return level.PoisonDamage / level.TickRate;
+                },
+            },
+        },        
 
         MissileDPS: {
             Default: {
@@ -971,6 +980,11 @@ class CalculatedManager {
                     return unitDPS + missileDPS + level.RamDPS;
                 },
             },
+
+            ToxicGunner: {
+                For: ['Toxic Gunner'],
+                Value: (level) => level.DPS + level.PoisonDPS
+            },
         },
 
         // boosts
@@ -1136,6 +1150,7 @@ class CalculatedManager {
         this.#add('MissileDPS', skinData);
         this.#add('DPS', skinData);
         this.#add('BurnDPS', skinData);
+        this.#add('PoisonDPS', skinData);
         this.#add('ExplosionDPS', skinData);
         this.#add('TotalDPS', skinData);
         this.#add('ClusterDPS', skinData);
