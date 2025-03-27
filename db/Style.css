@@ -330,3 +330,7 @@ a.btn:hover {
 .zoomup:hover {
     transform: scale(1.2);
 }
+
+.card .btn-sm {
+    width: 50%;
+}
