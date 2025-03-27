@@ -64,7 +64,7 @@ class ViewerCore {
 
         // toggle button for delta view
         this.buttonDeltaButton = new ToggleButton(
-            document.querySelector('#button-delta button'),
+            document.querySelector('#button-delta'),
             { state: true }
         );
 

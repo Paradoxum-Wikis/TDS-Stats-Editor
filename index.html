@@ -252,6 +252,14 @@
                         <i class="bi bi-broadcast"></i>
                     </button>
 
+                    <button id="button-delta" class="btn btn-sm btn-outline-secondary me-1 mt-1" title="Visualize your statistic changes">
+                        <i class="bi bi-triangle"></i>
+                    </button>
+
+                    <button id="button-clone" class="btn btn-sm btn-outline-secondary me-1 mt-1" title="Create your own abomination" data-bs-toggle="modal" data-bs-target="#clone-tower">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+
                     <button id="settings-toggle" class="btn btn-sm btn-outline-secondary mt-1" title="Open settings" data-bs-toggle="modal" data-bs-target="#settings-modal">
                         <i class="bi bi-gear"></i>
                     </button>
@@ -294,18 +302,6 @@
                         <!-- JSON/Table Toggle -->
                         <div id="table-view" class="btn-group me-2">
 
-                        </div>
-
-                        <!-- Delta Toggle -->
-                        <div id="button-delta" class="btn-group me-2">
-                            <button class="btn btn-sm" title="Visualize your changes.">Show
-                                Deltas</button>
-                        </div>
-
-                        <!-- Clone Toggle -->
-                        <div id="button-clone" class="btn-group me-2">
-                            <button title="Create your own abomination." class="btn btn-sm btn-outline-secondary"
-                                data-bs-toggle="modal" data-bs-target="#clone-tower">Clone</button>
                         </div>
 
                         <div id="button-discord" class="btn-group me-2">
@@ -766,7 +762,7 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content bg-dark text-white">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="json-import-label"><img style="width: 25px; margin-right: 0.25rem; vertical-align: sub;" src="https://static.wikia.nocookie.net/tower-defense-sim/images/8/8f/Book-closed.svg">Import Stats</h5>
+                    <h5 class="modal-title" id="json-import-label"><i class="bi bi-file-earmark-arrow-down me-2"></i>Import Stats</h5>
                 </div>
                 <div class="modal-body">
                     <!-- Add option toggles -->
@@ -818,7 +814,7 @@
             <div class="modal-content bg-dark text-white">
                 <!-- Model Header-->
                 <div class="modal-header">
-                    <h5 class="modal-title" id="json-import-label"><img style="width: 25px; margin-right: 0.25rem; vertical-align: sub;" src="https://static.wikia.nocookie.net/tower-defense-sim/images/b/b0/Staffs.svg">Add Attribute</h5>
+                    <h5 class="modal-title" id="json-import-label"><i class="bi bi-patch-plus me-2"></i></i>Add Attribute</h5>
                 </div>
 
                 <!-- Model Body-->
@@ -907,7 +903,7 @@
             <div class="modal-content bg-dark text-white">
                 <!-- Model Header-->
                 <div class="modal-header">
-                    <h5 class="modal-title" id="json-import-label"><img style="width: 25px; margin-right: 0.25rem; vertical-align: sub;" src="https://static.wikia.nocookie.net/tower-defense-sim/images/b/b0/Staffs.svg">Remove Attribute</h5>
+                    <h5 class="modal-title" id="json-import-label"><i class="bi bi-patch-minus me-2"></i>Remove Attribute</h5>
                 </div>
 
                 <!-- Model Body-->
@@ -947,7 +943,7 @@
             <div class="modal-content bg-dark text-white">
                 <!-- Model Header-->
                 <div class="modal-header">
-                    <h5 class="modal-title" id="json-import-label"><img style="width: 25px; margin-right: 0.25rem; vertical-align: sub;" src="https://static.wikia.nocookie.net/tower-defense-sim/images/6/68/Pencil.svg">Clone Tower</h5>
+                    <h5 class="modal-title" id="json-import-label"><i class="bi bi-pencil me-2"></i>Clone Tower</h5>
                 </div>
 
                 <!-- Model Body-->
