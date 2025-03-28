@@ -16,7 +16,6 @@ const approvedTowers = [
     "Gabonnie/Accelerator",
     "ImAllOutOfNames/LIBERATOR TOWER CONCEPT",
     "Phidoductom1/Jesus the Navereth",
-    "Vessel Of Infinite Destruction/Golden Crook Boss",
     "Vessel Of Infinite Destruction/Ranger",
     "Vessel Of Infinite Destruction/Golden Cowboy",
     'Brainhead1r/Hunter',
@@ -44,7 +43,7 @@ const grandfatheredTowers = [
     "Gabonnie/Accelerator",
     "ImAllOutOfNames/LIBERATOR TOWER CONCEPT",
     "Phidoductom1/Jesus the Navereth",
-    "Vessel Of Infinite Destruction/Golden Crook Boss",
+    "Vessel Of Infinite Destruction/Golden Cowboy",
     "Vessel Of Infinite Destruction/Ranger",
 ];
 

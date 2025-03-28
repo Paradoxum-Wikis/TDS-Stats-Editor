@@ -67,7 +67,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // switch to grid view
     document.getElementById('grid-view-btn').addEventListener('click', function () {
-        allTowers.classList.add('row-cols-sm-1', 'row-cols-md-2', 'row-cols-lg-3', 'row-cols-xl-4', 'row-cols-xxl-5');
+        removeAllGridClasses(allTowers);
+        allTowers.classList.add(
+            'row-cols-sm-1', 
+            'row-cols-md-2', 
+            'row-cols-lg-3', 
+            'row-cols-xl-4', 
+            'row-cols-xxl-5'
+        );
         
         gridViewBtn.classList.add('active', 'btn-primary');
         gridViewBtn.classList.remove('btn-outline-primary');
@@ -120,14 +127,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // switch to list view
     document.getElementById('list-view-btn').addEventListener('click', function () {
-        allTowers.classList.remove(
-            'row-cols-sm-1',
-            'row-cols-md-2',
-            'row-cols-lg-3',
-            'row-cols-xl-4',
-            'row-cols-xxl-5'
-        );
-        
+        removeAllGridClasses(allTowers);
+        // add the single column class
         allTowers.classList.add('row-cols-1');
         
         listViewBtn.classList.add('active', 'btn-primary');
