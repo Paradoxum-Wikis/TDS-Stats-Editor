@@ -27,13 +27,15 @@ const approvedTowers = [
     'Raspbelle/Ace Pilot Rebalance Path 2',
     'Raspbelle/Archer Rebalance Path 1',
     'Raspbelle/Archer Rebalance Path 2',
+    'Raspbelle/Tsukasa Tower',
+    'Raspbelle/Crook Boss',
 ];
 
 // List of featured towers
 const featuredTowers = [
     "Vessel Of Infinite Destruction/Ranger",
-    'Raspbelle/Ace Pilot Rebalance Path 1',
-    'Raspbelle/Ace Pilot Rebalance Path 2',
+    'Raspbelle/Tsukasa Tower',
+    'Raspbelle/Crook Boss',
 ];
 
 // List of grandfathered towers
