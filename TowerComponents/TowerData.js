@@ -5130,7 +5130,7 @@ export default {
               Lead: true,
             },
             Cooldown: 0.1,
-            Range: 12,
+            Range: 14,
             Damage: 1,
           },
           Title: "Poisonous Bullets",
