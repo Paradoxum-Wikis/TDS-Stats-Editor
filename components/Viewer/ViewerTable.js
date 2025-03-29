@@ -1,5 +1,5 @@
 import UnitManager from '../../TowerComponents/UnitManager.js';
-import TowerManager from '../../TowerComponents/TowerManager.js'; // Add this import
+import TowerManager from '../../TowerComponents/TowerManager.js';
 
 const ViewerTable = {
     methods: {

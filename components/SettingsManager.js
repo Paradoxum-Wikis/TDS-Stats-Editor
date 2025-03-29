@@ -13,7 +13,8 @@ class SettingsManager {
         this.showSeconds = localStorage.getItem('showSeconds') !== 'false'; // Default to true if not set
         this.forceUSNumbers = localStorage.getItem('forceUSNumbers') !== 'false'; // Default to true if not set
         this.showCollapsibleCounts = localStorage.getItem('showCollapsibleCounts') !== 'false'; // Default to true if not set
-        this.animationsEnabled = localStorage.getItem('animationsEnabled') === 'true'; // Default to false
+        
+        this.animationsEnabled = localStorage.getItem('animationsEnabled') !== 'false';
         
         // Initialize state object if not already set
         window.state = window.state || {};
@@ -41,7 +42,7 @@ class SettingsManager {
             this.animationsStylesheet.disabled = !this.animationsEnabled;
         }
         
-        this.animationsToggle.checked = this.animationsEnabled;
+        this.animationsToggle.checked = !this.animationsEnabled;
         
         // Update theme aware images
         this.updateThemeImages();
@@ -122,9 +123,8 @@ class SettingsManager {
         }));
     }
     
-    // animations toggle method
     toggleAnimations() {
-        this.animationsEnabled = this.animationsToggle.checked;
+        this.animationsEnabled = !this.animationsToggle.checked;
         window.state.settings.animationsEnabled = this.animationsEnabled;
         localStorage.setItem('animationsEnabled', this.animationsEnabled);
         

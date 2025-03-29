@@ -1,5 +1,14 @@
 [
     {
+        "version": "1.1.5",
+        "date": "March 29, 2025",
+        "changes": [
+            "Fluid Animations is out of BETA",
+            "Fluid Animations is now the default animation system",
+            "Classic Animations is now Reduce Motion"
+        ]
+    },
+    {
         "version": "1.1.4",
         "date": "March 25, 2025",
         "changes": [
