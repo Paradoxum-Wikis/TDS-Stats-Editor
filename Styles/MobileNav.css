@@ -17,7 +17,7 @@
 		bottom: 0;
 		left: 0;
 		right: 0;
-		background-color: rgba(0, 0, 0, 0.9);
+		background-color: #212529;
 		border-top: 1px solid rgba(255, 255, 255, 0.1);
 		display: flex;
 		justify-content: space-around;
@@ -59,7 +59,7 @@
 		bottom: 60px;
 		left: 0;
 		right: 0;
-		background-color: rgba(0, 0, 0, 0.95);
+		background-color: #191C1F;
 		z-index: 1;
 		padding: 1rem;
 		transform: translateY(100%);
@@ -102,45 +102,70 @@
 		overflow-x: auto;
 	}
 
+	.mobile-sidebar-content {
+		max-width: 100vw;
+	}
+
+	.mobile-direct-container {
+		width: 100%;
+		max-width: 100%;
+	}
+
+	.mobile-view {
+		width: 100% !important;
+		max-width: 100% !important;
+		overflow-x: visible !important;
+	}
+
+	.mobile-view input,
+	.mobile-view select,
+	.mobile-view textarea {
+		max-width: 100% !important;
+	}
+
 	/* Fix boost form layout on mobile */
-	.mobile-mirror-container #side-boost-form {
+	.mobile-view #side-boost-form {
 		padding: 0.5rem !important;
 		max-width: 100%;
 		overflow-x: hidden;
 	}
 
-	.mobile-mirror-container #side-boost-form form {
+	.mobile-view #side-boost-form form {
 		display: flex;
 		flex-direction: column;
 		margin-bottom: 0.75rem;
 	}
 
-	.mobile-mirror-container #side-boost-form label {
+	.mobile-view #side-boost-form label {
 		width: 100%;
 		padding-bottom: 0.25rem;
 		font-size: 0.9rem !important;
 	}
 
-	.mobile-mirror-container #side-boost-form .col-sm-4,
-	.mobile-mirror-container #side-boost-form .col-sm-8 {
+	.mobile-view #side-boost-form .col-sm-4,
+	.mobile-view #side-boost-form .col-sm-8 {
 		width: 100%;
 		max-width: 100%;
 		flex: 0 0 100%;
 		padding: 0;
 	}
 
-	.mobile-mirror-container #side-boost-form input,
-	.mobile-mirror-container #side-boost-form select {
+	.mobile-view #side-boost-form input,
+	.mobile-view #side-boost-form select {
 		width: 100%;
 	}
 
-	.mobile-mirror-container #side-boosts-target {
-		padding-top: 0.5rem !important;
-		margin-bottom: 0.5rem;
+	/* direct elements workaround */
+	.mobile-view #level-view .input-group {
+		flex-wrap: wrap;
 	}
 
-	.mobile-sidebar-content {
-		max-width: 100vw;
-		padding: 0 0.5rem;
+	.mobile-view #level-view .input-group > * {
+		flex: 1 1 100%;
+		margin-bottom: 0.25rem;
+	}
+
+	.mobile-view .card {
+		max-width: 100%;
 	}
 }

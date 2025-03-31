@@ -10,17 +10,32 @@ export default class ExtrasManager {
 
     setupEventListeners() {
         this.addButton.addEventListener('click', () => {
-            const upgradeIndex = this.upgradeIndex;
+            if (!this.viewer || this.upgradeIndex === undefined) {
+                console.warn('Cannot add extra: viewer or upgrade index not set (I DONT KNOW HOW TO FIX THIS CRAP HELP ME PLEASE)');
+                return;
+            }
+            
             const skin = this.viewer.getActiveSkin();
-            const upgradeStats = skin.data.Upgrades[upgradeIndex].Stats;
+            if (!skin || !skin.data || !skin.data.Upgrades || !skin.data.Upgrades[this.upgradeIndex]) {
+                console.warn('Cannot add extra: skin data not available');
+                return;
+            }
+            
+            const upgradeStats = skin.data.Upgrades[this.upgradeIndex].Stats;
             if (upgradeStats.Extras === undefined) {
                 upgradeStats.Extras = [];
             }
+            
             upgradeStats.Extras.push('');
             this.viewer.reload();
         });
 
         this.addGroupButton.addEventListener('click', () => {
+            if (!this.viewer || this.upgradeIndex === undefined) {
+                console.warn('Cannot add group: viewer or upgrade index not set (RAAAAHHHHH)');
+                return;
+            }
+            
             this.showAddGroupForm();
         });
 
