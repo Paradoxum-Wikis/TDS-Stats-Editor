@@ -38,7 +38,10 @@ export default class BoostPanel {
         form.appendChild(inputDiv);
         inputDiv.appendChild(input);
 
-        form.addEventListener('submit', () => input.blur());
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            input.blur();
+        });
         form.addEventListener('mouseup', () => input.focus());
         input.addEventListener('focusin', () => (input.value = ''));
         input.addEventListener('focusout', () =>
@@ -77,7 +80,10 @@ export default class BoostPanel {
         form.appendChild(inputDiv);
         inputDiv.appendChild(select);
 
-        form.addEventListener('submit', () => select.blur());
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            select.blur();
+        });
         form.addEventListener('mouseup', () => select.focus());
         select.addEventListener('focusout', () =>
             this.onInputYesNo(labelText, select.value)

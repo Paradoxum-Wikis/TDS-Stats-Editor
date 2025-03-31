@@ -3,6 +3,7 @@ import Dropdown from './components/Dropdown.js';
 import Viewer from './components/Viewer/index.js';
 import UpdateLog from './components/UpdateLog.js';
 import SidebarToggle from './components/SidebarToggle.js';
+import MobileNav from './components/MobileNav.js';
 
 const TDSVersion = '1.58.1';
 
@@ -45,9 +46,9 @@ class App {
 
     addTowerOption(name) {
         this.dropdown.options.push(name);
-        
+
         this.dropdown.setOptions(this.dropdown.options);
-        
+
         if (window.setupSearch) {
             window.setupSearch();
         }
@@ -65,13 +66,13 @@ class App {
         // attach event listener
         this.dropdown.textForm.addEventListener('submit', (e) => {
             const towerName = e.detail || e.target?.value;
-            
+
             if (towerName) {
                 // update url with the selected tower for shareable links
                 const url = new URL(window.location);
                 url.searchParams.set('tower', towerName);
                 window.history.replaceState({}, '', url);
-                
+
                 loadTower(this.towerManager.towers[towerName], this.viewer);
             }
         });
@@ -79,9 +80,11 @@ class App {
         if (this.towerToSelect) {
             const towerName = this.findClosestTowerName(this.towerToSelect);
             if (towerName) {
-                const event = new CustomEvent('submit', { detail: towerName });
+                const event = new CustomEvent('submit', {
+                    detail: towerName
+                });
                 this.dropdown.textForm.dispatchEvent(event);
-                
+
                 // clear the search box after tower is selected
                 setTimeout(() => {
                     this.dropdown.textForm.value = '';
@@ -92,30 +95,30 @@ class App {
             loadTower(null, this.viewer);
         }
     }
-    
+
     // find closest tower name match (case insensitive)
     findClosestTowerName(searchName) {
         searchName = searchName.toLowerCase();
-        
+
         // try exact match
-        const exactMatch = this.towerManager.towerNames.find(name => 
+        const exactMatch = this.towerManager.towerNames.find(name =>
             name.toLowerCase() === searchName
         );
-        
+
         if (exactMatch) return exactMatch;
-        
+
         // try starts with
-        const startsWithMatch = this.towerManager.towerNames.find(name => 
+        const startsWithMatch = this.towerManager.towerNames.find(name =>
             name.toLowerCase().startsWith(searchName)
         );
-        
+
         if (startsWithMatch) return startsWithMatch;
-        
+
         // check if any tower contains the search term
-        const containsMatch = this.towerManager.towerNames.find(name => 
+        const containsMatch = this.towerManager.towerNames.find(name =>
             name.toLowerCase().includes(searchName)
         );
-        
+
         return containsMatch || null;
     }
 }
@@ -125,19 +128,19 @@ function loadTower(tower, viewer) {
     if (tower) {
         // hide landing page
         document.getElementById('landing-page').classList.add('d-none');
-        
+
         if (viewer) {
             viewer.load(tower);
         }
     } else {
         // show landing page
         document.getElementById('landing-page').classList.remove('d-none');
-        
+
         document.querySelector('.table-responsive').classList.add('d-none');
         document.getElementById('json-panel').classList.add('d-none');
         document.getElementById('wikitable-panel').classList.add('d-none');
         document.getElementById('lua-panel').classList.add('d-none');
-        
+
         const allSpinners = document.querySelectorAll('.spinner-border');
         allSpinners.forEach(spinner => {
             spinner.style.display = 'none';
@@ -150,7 +153,7 @@ function clearUrlAndShowLanding() {
     const url = new URL(window.location);
     url.search = '';
     window.history.replaceState({}, '', url);
-    
+
     loadTower(null);
 }
 
@@ -168,21 +171,21 @@ function loadUpdateLog() {
         .then(data => {
             const updateLogModal = document.getElementById('update-log-content');
             const updateLogLanding = document.getElementById('landing-update-log');
-            
+
             const updateHtml = generateUpdateLogHtml(data);
 
             if (updateLogModal) updateLogModal.innerHTML = updateHtml;
             if (updateLogLanding) {
                 updateLogLanding.innerHTML = generateUpdateLogHtml(data);
-            }            
+            }
         })
         .catch(error => {
             console.error('Error loading update log:', error);
             const errorHtml = '<div class="alert alert-danger">Failed to load update log.</div>';
-            
+
             const updateLogModal = document.getElementById('update-log-content');
             const updateLogLanding = document.getElementById('landing-update-log');
-            
+
             if (updateLogModal) updateLogModal.innerHTML = errorHtml;
             if (updateLogLanding) updateLogLanding.innerHTML = errorHtml;
         });
@@ -201,6 +204,11 @@ function generateUpdateLogHtml(updates) {
 }
 
 document.addEventListener('DOMContentLoaded', loadUpdateLog);
+
+window.addEventListener('DOMContentLoaded', () => {
+    const mobileNav = new MobileNav();
+    window.mobileNav = mobileNav;
+});
 
 window.clearUrlAndShowLanding = clearUrlAndShowLanding;
 

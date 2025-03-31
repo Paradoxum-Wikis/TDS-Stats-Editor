@@ -469,3 +469,50 @@
 .light-mode .lmwikitable {
     background-color: white;
 }
+
+.light-mode .fs-6,
+.light-mode label {
+	color: #212529;
+}
+
+/* mobile components */
+.light-mode .mobile-nav {
+	background-color: rgba(255, 255, 255, 0.95);
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+	box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.light-mode .mobile-nav-btn {
+	color: #6c757d;
+}
+
+.light-mode .mobile-nav-btn.active {
+	color: #00b2ee;
+}
+
+.light-mode .mobile-nav-btn:hover {
+	color: #00b2ee;
+}
+
+.light-mode .mobile-sidebar {
+	background-color: rgba(248, 249, 250, 0.98);
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.light-mode .mobile-sidebar-close {
+    background: rgba(0, 0, 0, 0.1);
+	color: #212529;
+}
+
+.light-mode .mobile-sidebar-content h5 {
+	color: #212529;
+}
+
+.light-mode .mobile-sidebar-content .btn-outline-secondary {
+	color: #6c757d;
+	border-color: #6c757d;
+}
+
+.light-mode .mobile-tools-section {
+	color: #212529;
+}

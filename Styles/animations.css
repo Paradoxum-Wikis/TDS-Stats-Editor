@@ -81,7 +81,7 @@
 /* Formcontrol */
 .form-control {
     transition: all 0.3s ease-in-out;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .form-control:focus {

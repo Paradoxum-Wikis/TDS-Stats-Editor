@@ -29,6 +29,7 @@
     <link href="Styles/json-viewer.css" rel="stylesheet">
     <link href="Styles/torus.css" rel="stylesheet">
     <link href="Styles/theme.css" rel="stylesheet">
+    <link href="Styles/MobileNav.css" rel="stylesheet">
     <link id="animsCSS" href="Styles/animations.css" rel="stylesheet" disabled>
     <link rel="shortcut icon" href="https://static.wikia.nocookie.net/tower-defense-sim/images/4/4a/Site-favicon.ico">
 
@@ -271,7 +272,7 @@
         <main role="main" class="d-flex flex-column">
             <!-- Body Header -->
             <header class="p-3">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
+                <div class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center">
                     <!-- Title -->
                     <h1 id="tower-name" class="h2 text-white" style="text-wrap: balance;">
                         <div class="spinner-border text-secondary m-auto" role="status">
@@ -279,16 +280,13 @@
                         </div>
                     </h1>
 
-                    <div class="btn-toolbar mb-2" style="margin: 0 auto; gap: 0.25rem; justify-content: center;">
+                    <div class="btn-toolbar mb-2 justify-content-center" style="gap: 0.25rem; margin: 0 auto;">
                         <!-- Search -->
                         <form id="Tower-Selector" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
                             <input type="search" class="form-control form-control-dark text-bg-dark"
-                                placeholder="Search a Tower" aria-label="Search">
+                                placeholder="Search Tower" aria-label="Search">
                             <div class="dropdown-menu bg-dark text-white">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Action</a>
+                                <!-- dropdown options here -->
                             </div>
                         </form>
 
@@ -300,11 +298,10 @@
                         </div>
 
                         <!-- JSON/Table Toggle -->
-                        <div id="table-view" class="btn-group me-2">
+                        <div id="table-view" class="btn-group me-2 d-md-block"></div>
 
-                        </div>
-
-                        <div id="button-discord" class="btn-group me-2">
+                        <!-- About button is hidden on mobile -->
+                        <div id="button-discord" class="btn-group d-none d-md-block">
                             <button title="Information about this website." class="btn btn-sm btn-outline-secondary"
                                 data-bs-toggle="modal" data-bs-target="#discord-modal">
                                 About
@@ -313,7 +310,6 @@
                     </div>
                 </div>
             </header>
-
 
             <!-- Body Table -->
             <div class="d-none table-responsive p-2">
@@ -761,6 +757,31 @@
         </main>
     </div>
     <!--- Models --->
+
+    <!-- Mobile Navigation Bar -->
+    <div class="mobile-nav d-md-none">
+      <a href="#" class="mobile-nav-btn" data-mobile-section="upgrades">
+        <i class="bi bi-stack"></i>
+        <span>Upgrades</span>
+      </a>
+      <a href="#" class="mobile-nav-btn" data-mobile-section="views">
+        <i class="bi bi-toggles"></i>
+        <span>Views</span>
+      </a>
+      <a href="#" class="mobile-nav-btn" data-mobile-section="boosts">
+        <i class="bi bi-lightning"></i>
+        <span>Boosts</span>
+      </a>
+      <a href="#" class="mobile-nav-btn" data-mobile-section="tools">
+        <i class="bi bi-tools"></i>
+        <span>Tools</span>
+      </a>
+    </div>
+
+    <!-- Mobile Sidebar Overlay -->
+    <div class="mobile-sidebar">
+      <div class="mobile-sidebar-content"></div>
+    </div>
 
     <!-- JSON Import Modal -->
     <div class="modal fade" id="json-import-modal" tabindex="-1" role="dialog" aria-labelledby="json-import-label"
