@@ -516,3 +516,38 @@
 .light-mode .mobile-tools-section {
 	color: #212529;
 }
+
+/* Luas */
+.light-mode #lua {
+    background-color: #fff;
+    color: #212529;
+}
+
+.light-mode .lua-viewer {
+    background-color: #fff;
+    color: #212529;
+}
+
+.light-mode .lua-string {
+    color: #198754;
+}
+
+.light-mode .lua-number {
+    color: #dc3545;
+}
+
+.light-mode .lua-boolean {
+    color: #0d6efd;
+}
+
+.light-mode .lua-nil {
+    color: #656a6f;
+}
+
+.light-mode .lua-key {
+    color: #0077cc;
+}
+
+.light-mode .lua-bracket {
+    color: #a71d5d;
+}

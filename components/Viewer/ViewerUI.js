@@ -37,6 +37,16 @@ const ViewerUI = {
                     this.loadWikitableContent();
                     document.querySelector('.btn-toolbar.mb-2.mb-md-0.mt-0').classList.add('d-none');
                     break;
+                case 'Lua':
+                    this.hideLua();
+                    this.hideTable();
+                    this.hideJSON();
+                    this.hideWikitable();
+                    
+                    this.clearLua();
+                    this.loadLua();
+                    this.showLua();
+                    break;
             }
         },
 
@@ -58,6 +68,11 @@ const ViewerUI = {
         // hides lua panel
         hideLua() {
             document.querySelector('#lua-panel').classList.add('d-none');
+        },
+
+        // shows lua panel
+        showLua() {
+            document.querySelector('#lua-panel').classList.remove('d-none');
         },
 
         // shows json panel

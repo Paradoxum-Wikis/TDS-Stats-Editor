@@ -5,16 +5,17 @@ class SettingsManager {
         this.forceUSNumbersToggle = document.getElementById('forceUSNumbersToggle');
         this.showCollapsibleCountsToggle = document.getElementById('showCollapsibleCountsToggle');
         this.animationsToggle = document.getElementById('animationsToggle');
+        this.enableLuaViewerToggle = document.getElementById('enableLuaViewerToggle');
         this.animationsStylesheet = document.getElementById('animsCSS');
         this.body = document.body;
         
         // Initialize settings from localStorage
         this.currentTheme = localStorage.getItem('theme') || 'dark';
-        this.showSeconds = localStorage.getItem('showSeconds') !== 'false'; // Default to true if not set
-        this.forceUSNumbers = localStorage.getItem('forceUSNumbers') !== 'false'; // Default to true if not set
-        this.showCollapsibleCounts = localStorage.getItem('showCollapsibleCounts') !== 'false'; // Default to true if not set
-        
+        this.showSeconds = localStorage.getItem('showSeconds') !== 'false';
+        this.forceUSNumbers = localStorage.getItem('forceUSNumbers') !== 'false';
+        this.showCollapsibleCounts = localStorage.getItem('showCollapsibleCounts') !== 'false';
         this.animationsEnabled = localStorage.getItem('animationsEnabled') !== 'false';
+        this.enableLuaViewer = localStorage.getItem('enableLuaViewer') === 'true'; 
         
         // Initialize state object if not already set
         window.state = window.state || {};
@@ -23,6 +24,7 @@ class SettingsManager {
         window.state.settings.forceUSNumbers = this.forceUSNumbers;
         window.state.settings.showCollapsibleCounts = this.showCollapsibleCounts;
         window.state.settings.animationsEnabled = this.animationsEnabled;
+        window.state.settings.enableLuaViewer = this.enableLuaViewer; // Add this
         
         this.init();
     }
@@ -56,12 +58,22 @@ class SettingsManager {
         // Set initial collapsible counter state
         this.showCollapsibleCountsToggle.checked = this.showCollapsibleCounts;
         
+        // Set initial lua viewer state
+        if (this.enableLuaViewerToggle) {
+            this.enableLuaViewerToggle.checked = this.enableLuaViewer;
+        }
+        
         // Add event listeners to the toggles
         this.themeToggle.addEventListener('change', this.toggleTheme.bind(this));
         this.showSecondsToggle.addEventListener('change', this.toggleShowSeconds.bind(this));
         this.forceUSNumbersToggle.addEventListener('change', this.toggleForceUSNumbers.bind(this));
         this.showCollapsibleCountsToggle.addEventListener('change', this.toggleShowCollapsibleCounts.bind(this));
         this.animationsToggle.addEventListener('change', this.toggleAnimations.bind(this));
+        
+        // Add event listener for Lua Viewer toggle
+        if (this.enableLuaViewerToggle) {
+            this.enableLuaViewerToggle.addEventListener('change', this.toggleEnableLuaViewer.bind(this));
+        }
         
         // Update toggle labels
         this.updateToggleLabel();
@@ -135,6 +147,16 @@ class SettingsManager {
         
         document.dispatchEvent(new CustomEvent('settingsChanged', {
             detail: { setting: 'animationsEnabled', value: this.animationsEnabled }
+        }));
+    }
+    
+    toggleEnableLuaViewer() {
+        this.enableLuaViewer = this.enableLuaViewerToggle.checked;
+        window.state.settings.enableLuaViewer = this.enableLuaViewer;
+        localStorage.setItem('enableLuaViewer', this.enableLuaViewer);
+        
+        document.dispatchEvent(new CustomEvent('settingsChanged', {
+            detail: { setting: 'enableLuaViewer', value: this.enableLuaViewer }
         }));
     }
     

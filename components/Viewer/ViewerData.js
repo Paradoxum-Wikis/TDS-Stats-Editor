@@ -130,7 +130,7 @@ const ViewerData = {
                     this.reload();
                     
                     if (enableAlert) {
-                        const alert = new Alert('JSON Imported!', {
+                        const alert = new Alert('Statistics imported!', {
                             alertStyle: 'alert-success',
                         });
                         alert.timeBeforeShow = 0.1;

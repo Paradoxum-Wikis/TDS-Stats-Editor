@@ -19,6 +19,7 @@ import ViewerData from './ViewerData.js';
 import ViewerTable from './ViewerTable.js';
 import ViewerWikitable from './ViewerWikitable.js';
 import ViewerUtils from './ViewerUtils.js';
+import Alert from '../Alert.js';
 
 class ViewerCore {
     constructor(app) {
@@ -36,8 +37,6 @@ class ViewerCore {
         Object.assign(this, ViewerTable.methods);
         Object.assign(this, ViewerWikitable.methods);
         Object.assign(this, ViewerUtils.methods);
-
-        // Now we can use the methods from these modules
         
         // hooking up the property viewer and side panel
         this.propertyViewer = new PropertyViewer(
@@ -52,15 +51,47 @@ class ViewerCore {
         // grabbing the tower name heading
         this.towerNameH1 = document.querySelector('#tower-name');
 
-        // setting up button selections for variants and views
+        // setting up buttons for variants and views
         this.towerVariants = new ButtonSelection(
             document.querySelector('#tower-variants')
         );
 
+        // check if lua viewer is enabled from settings or localStorage
+        const enableLuaViewer = window.settingsManager ? 
+            window.settingsManager.enableLuaViewer : 
+            (localStorage.getItem('enableLuaViewer') === 'true');
+        
+        const viewOptions = ['Table', 'Wikitable', 'JSON'];
+        if (enableLuaViewer) {
+            viewOptions.push('Lua');
+        }
+        
         this.tableView = new ButtonSelection(
             document.querySelector('#table-view')
-        ).setButtons(['Table', 'Wikitable', 'JSON']);
+        ).setButtons(viewOptions);
+        
         this.tableView.root.addEventListener('submit', () => this.loadBody());
+
+        document.addEventListener('settingsChanged', (e) => {
+            if (e.detail.setting === 'enableLuaViewer') {
+                const viewOptions = ['Table', 'Wikitable', 'JSON'];
+                if (e.detail.value) {
+                    viewOptions.push('Lua');
+                }
+                
+                // Store current view
+                const currentView = this.tableView.getSelectedName();
+                
+                // Update buttons
+                this.tableView.setButtons(viewOptions);
+                
+                // If Lua was selected but is now disabled, switch to JSON view
+                if (currentView === 'Lua' && !e.detail.value) {
+                    this.tableView.selectButton('JSON');
+                    this.loadBody();
+                }
+            }
+        });
 
         // toggle button for delta view
         this.buttonDeltaButton = new ToggleButton(
@@ -92,6 +123,11 @@ class ViewerCore {
         this.jsonCopy = document.querySelector('#json-copy');
         this.jsonCopy.addEventListener('click', this.onCopyJSON.bind(this));
         
+        this.luaCopy = document.querySelector('#lua-copy');
+        if (this.luaCopy) {
+            this.luaCopy.addEventListener('click', this.onCopyLua.bind(this));
+        }
+
         // toggle for showing combined json
         this.showCombinedJSON = document.querySelector('#show-combined-json');
         if (this.showCombinedJSON) {
@@ -117,7 +153,7 @@ class ViewerCore {
             });
         }
 
-        // Set up faithful format toggle
+        // setup faithful format toggle
         this.useFaithfulFormat = false;
         this.useFaithfulFormatButton = document.querySelector('#use-faithful-format');
         if (this.useFaithfulFormatButton) {
@@ -144,18 +180,10 @@ class ViewerCore {
             'click',
             (() => {
                 document.querySelector('#json-import-text').value = '';
-            }).bind(this)
-        );
-
-        // import submit button
-        this.importButtonSubmit = document.querySelector('#json-import-submit');
-        this.importButtonSubmit.addEventListener(
-            'click',
-            (() => {
-                this.import(
-                    document.querySelector('#json-import-text').value,
-                    true
-                );
+                const modalTitle = document.querySelector('#json-import-label');
+                if (modalTitle) {
+                    modalTitle.innerHTML = '<i class="bi bi-file-earmark-arrow-down me-2"></i>Import Statistics';
+                }
             }).bind(this)
         );
 
@@ -179,6 +207,17 @@ class ViewerCore {
                 'click',
                 this.exportTowerWithUnits.bind(this)
             );
+        }
+
+        this.luaExport = document.querySelector('#lua-export');
+        if (this.luaExport) {
+            this.luaExport.addEventListener('click', () => {
+                if (this.showCombinedJSON && this.showCombinedJSONActive) {
+                    this.exportLuaWithUnits();
+                } else {
+                    this.exportLua(this.tower.json);
+                }
+            });
         }
 
         // setting up more management stuff
@@ -205,6 +244,47 @@ class ViewerCore {
         } else if (ViewerWikitable.init) {
             ViewerWikitable.init.call(this);
         }
+
+        // add tower import event listener
+        document.addEventListener('towerDataImport', (event) => {
+            try {
+                const { data, type, error } = event.detail;
+                
+                // handle empty content
+                if (type === 'empty') {
+                    const alert = new Alert('No content to import.', {
+                        alertStyle: 'alert-warning',
+                    });
+                    alert.fire();
+                    return;
+                }
+                
+                // handle error case
+                if (type === 'error') {
+                    const alert = new Alert(`Failed to import: ${error}`, {
+                        alertStyle: 'alert-danger',
+                    });
+                    alert.fire();
+                    return;
+                }
+                
+                // process valid input
+                if (type === 'lua') {
+                    // Convert Lua to JSON first
+                    const jsonData = this.parseLuaToJSON(data);
+                    this.import(JSON.stringify(jsonData), true);
+                } else {
+                    // Process as JSON directly
+                    this.import(data, true);
+                }
+            } catch (error) {
+                console.error('Import error:', error);
+                const alert = new Alert(`Import Error: ${error.message}`, {
+                    alertStyle: 'alert-danger',
+                });
+                alert.fire();
+            }
+        });
     }
 
     // loads up a tower to show
@@ -230,6 +310,272 @@ class ViewerCore {
     // gets the current skin being viewed
     getActiveSkin() {
         return this.tower.skins[this.towerVariants.getSelectedName()];
+    }
+
+    convertToLuaString(obj, indent = 0) {
+        if (obj === null) return 'nil';
+        
+        const indentStr = '    '.repeat(indent);
+        const indentStrNext = '    '.repeat(indent + 1);
+        
+        if (typeof obj === 'string') {
+            const escaped = obj
+                .replace(/\\/g, '\\\\')
+                .replace(/"/g, '\\"')
+                .replace(/\n/g, '\\n');
+            return `"${escaped}"`;
+        }
+        
+        if (typeof obj === 'number' || typeof obj === 'boolean') {
+            return String(obj);
+        }
+        
+        if (Array.isArray(obj)) {
+            if (obj.length === 0) return '{}';
+            
+            let result = '{\n';
+            obj.forEach((item, index) => {
+                result += `${indentStrNext}${this.convertToLuaString(item, indent + 1)}`;
+                if (index < obj.length - 1) {
+                    result += ',';
+                }
+                result += '\n';
+            });
+            result += `${indentStr}}`;
+            return result;
+        }
+        
+        if (typeof obj === 'object') {
+            const keys = Object.keys(obj);
+            if (keys.length === 0) return '{}';
+            
+            let result = '{\n';
+            keys.forEach((key, index) => {
+                const luaKey = /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(key)
+                    ? key
+                    : `["${key}"]`;
+                
+                result += `${indentStrNext}${luaKey} = ${this.convertToLuaString(obj[key], indent + 1)}`;
+                if (index < keys.length - 1) {
+                    result += ',';
+                }
+                result += '\n';
+            });
+            result += `${indentStr}}`;
+            return result;
+        }
+        
+        return String(obj);
+    }
+
+    loadLua() {
+        document.querySelector('#lua').appendChild(this.luaViewer.getContainer());
+        if (this.showCombinedJSON && this.showCombinedJSONActive) {
+            this.luaViewer.showJSONAsLua(this._getCombinedData());
+        } else {
+            this.luaViewer.showJSONAsLua(this.tower.json);
+        }
+    }
+
+    clearLua() {
+        document.querySelector('#lua').innerHTML = '';
+    }
+
+    exportLua(data) {
+        const luaString = this.convertToLuaString(data);
+        this.downloadFile(luaString, `${this.tower.name}.lua`, 'lua');
+    }
+
+    exportLuaWithUnits() {
+        const combinedData = this._getCombinedData();
+        this.exportLua(combinedData);
+    }
+
+    isLuaTable(text) {
+        // detect lua syntaxes
+        text = text.trim();
+        
+        const startsWithReturn = text.startsWith('return');
+        const containsLuaAssignments = /\w+\s*=/.test(text);
+        const hasNil = /\bnil\b/.test(text);
+        
+        // if it's a valid json, it's probably not Lua
+        try {
+            JSON.parse(text);
+            return false;
+        } catch (e) {
+            // confirms to not be json, might be lua
+            return startsWithReturn || containsLuaAssignments || hasNil;
+        }
+    }
+
+    parseLuaToJSON(luaText) {
+        // in case some smartass puts a 'return' at the beginning
+        let text = luaText.trim();
+        if (text.startsWith('return')) {
+            text = text.substring(6).trim();
+        }
+        
+        // replace Lua's nil with null
+        text = text.replace(/\bnil\b/g, 'null');
+        
+        // handle Lua comments
+        text = text.replace(/--.*$/gm, '');
+        
+        // process nested Lua tables recursively
+        const parseNestedLua = (luaStr) => {
+            // basic sanity check for table structure
+            if (!luaStr.trim().startsWith('{') || !luaStr.trim().endsWith('}')) {
+                throw new Error('Invalid Lua table format');
+            }
+            
+            // remove outer braces
+            luaStr = luaStr.trim().slice(1, -1).trim();
+            
+            const result = {};
+            let arrayIndex = 0;
+            let currentKey = null;
+            let currentToken = '';
+            let inString = false;
+            let stringQuote = '';
+            let bracketDepth = 0;
+            let inKey = false;
+            
+            for (let i = 0; i < luaStr.length; i++) {
+                const char = luaStr[i];
+                
+                // handle strings
+                if ((char === '"' || char === "'") && (i === 0 || luaStr[i-1] !== '\\')) {
+                    if (!inString) {
+                        inString = true;
+                        stringQuote = char;
+                        continue;
+                    } else if (char === stringQuote) {
+                        inString = false;
+                        continue;
+                    }
+                }
+                
+                if (inString) {
+                    currentToken += char;
+                    continue;
+                }
+                
+                // track bracket depth for nested tables
+                if (char === '{') bracketDepth++;
+                if (char === '}') bracketDepth--;
+                
+                // if we're in a nested structure, just collect everything until we reach the matching closing bracket
+                if (bracketDepth > 0 || inString) {
+                    currentToken += char;
+                    continue;
+                }
+                
+                // handle key-value separators
+                if (char === '=' && !inKey) {
+                    inKey = true;
+                    currentKey = currentToken.trim();
+                    currentToken = '';
+                    continue;
+                }
+                
+                // handle entry separators
+                if (char === ',' || i === luaStr.length - 1) {
+                    // includes last character if we're at the end
+                    if (i === luaStr.length - 1 && char !== ',') {
+                        currentToken += char;
+                    }
+                    
+                    // process what was collected
+                    if (inKey) {
+                        // keys
+                        let value = currentToken.trim();
+                        
+                        if (currentKey.startsWith('[') && currentKey.endsWith(']')) {
+                            currentKey = currentKey.slice(1, -1).trim();
+                            if ((currentKey.startsWith('"') && currentKey.endsWith('"')) || 
+                                (currentKey.startsWith("'") && currentKey.endsWith("'"))) {
+                                currentKey = currentKey.slice(1, -1);
+                            }
+                        } else {
+                            // normal keys don't need quotes in Lua but need them in JSON soooo
+                            currentKey = currentKey;
+                        }
+                        
+                        // parse the value
+                        if (value === 'null' || value === 'nil') {
+                            result[currentKey] = null;
+                        } else if (value === 'true') {
+                            result[currentKey] = true;
+                        } else if (value === 'false') {
+                            result[currentKey] = false;
+                        } else if (!isNaN(Number(value))) {
+                            result[currentKey] = Number(value);
+                        } else if (value.startsWith('{') && value.endsWith('}')) {
+                            // recursively parse nested table
+                            result[currentKey] = parseNestedLua(value);
+                        } else if ((value.startsWith('"') && value.endsWith('"')) || 
+                                  (value.startsWith("'") && value.endsWith("'"))) {
+                            // handle string values
+                            result[currentKey] = value.slice(1, -1);
+                        } else {
+                            // default
+                            result[currentKey] = value;
+                        }
+                    } else {
+                        // no = sign, so it must be an array element
+                        let value = currentToken.trim();
+                        
+                        if (value === 'null' || value === 'nil') {
+                            result[arrayIndex++] = null;
+                        } else if (value === 'true') {
+                            result[arrayIndex++] = true;
+                        } else if (value === 'false') {
+                            result[arrayIndex++] = false;
+                        } else if (!isNaN(Number(value))) {
+                            result[arrayIndex++] = Number(value);
+                        } else if (value.startsWith('{') && value.endsWith('}')) {
+                            result[arrayIndex++] = parseNestedLua(value);
+                        } else if ((value.startsWith('"') && value.endsWith('"')) || 
+                                  (value.startsWith("'") && value.endsWith("'"))) {
+                            result[arrayIndex++] = value.slice(1, -1);
+                        } else {
+                            result[arrayIndex++] = value;
+                        }
+                    }
+                    
+                    // reset for the next entry
+                    currentToken = '';
+                    inKey = false;
+                    continue;
+                }
+                
+                currentToken += char;
+            }
+            
+            // convert to array if appropriate
+            const keys = Object.keys(result);
+            if (keys.length > 0 && keys.every(k => !isNaN(parseInt(k)))) {
+                const array = [];
+                keys.sort((a, b) => parseInt(a) - parseInt(b)).forEach(k => {
+                    array.push(result[k]);
+                });
+                return array;
+            }
+            
+            return result;
+        };
+        
+        try {
+            return JSON.parse(text);
+        } catch (e) {
+            try {
+                return parseNestedLua(text);
+            } catch (parserError) {
+                console.error("Lua parsing error:", parserError);
+                throw new Error(`Failed to parse Lua: ${e.message}`);
+            }
+        }
     }
 }
 

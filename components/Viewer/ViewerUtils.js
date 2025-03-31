@@ -35,6 +35,19 @@ const ViewerUtils = {
             alert.fire();
         },
 
+        onCopyLua() {
+            const data = (this.showCombinedJSON && this.showCombinedJSONActive)
+                ? this._getCombinedData()
+                : this.tower.json;
+            
+            const luaString = this.convertToLuaString(data);
+            navigator.clipboard.writeText(luaString);
+            const alert = new Alert('Lua Copied!', {
+                alertStyle: 'alert-success',
+            });
+            alert.fire();
+        },
+
         // reusable file download helper
         downloadFile(content, filename, type = 'json') {
             const file = new Blob([content], { type });

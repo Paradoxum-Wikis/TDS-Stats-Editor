@@ -305,3 +305,45 @@ input {
 .form-select {
     border-color: rgba(255, 255, 255, 0.3);
 }
+
+#lua-panel {
+    overflow: hidden;
+}
+
+#lua {
+    overflow-y: scroll;
+    padding: 10px;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    tab-size: 4;
+}
+
+.lua-viewer {
+    color: #afafaf;
+}
+
+.lua-string {
+    color: #a5c25c;
+}
+
+.lua-number {
+    color: #9790ce;
+}
+
+.lua-boolean {
+    color: #8076cf;
+    font-weight: bold;
+}
+
+.lua-nil {
+    color: #90a;
+}
+
+.lua-key {
+    color: #64a1f4;
+}
+
+.lua-bracket {
+    color: #cc7832;
+}

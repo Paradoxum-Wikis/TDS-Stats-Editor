@@ -572,7 +572,7 @@
                                         <li>Property Viewer - Toggle which stats will appear in the table</li>
                                         <li>Boost View - Add various buffs or debuffs to see their effects</li>
                                     </ul>
-                                    <h5 class="mt-2 mb-3">Sidebar Tools</h5>
+                                    <h5 class="mt-2 mb-3">Toolbar</h5>
                                     <ul class="ps-3">
                                         <li>Sidebar Toggle - Compresses the sidebar and hide it</li>
                                         <li>Community Poll - View the community poll that you might have missed</li>
@@ -733,12 +733,12 @@
                     <div class="btn-toolbar mb-2 mb-md-0 ">
                         <!-- Copy Button -->
                         <div class="btn-group me-2">
-                            <button id="json-copy" class="btn btn-sm btn-outline-secondary">Copy to
+                            <button id="lua-copy" class="btn btn-sm btn-outline-secondary">Copy to
                                 Clipboard</button>
                         </div>
                         <div class="btn-group me-2">
                             <!-- Import Button -->
-                            <button id="lua-import" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal"
+                            <button id="json-import" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal"
                                 data-bs-target="#json-import-modal"
                                 title="Imports tower data.">Import</button>
 
@@ -789,13 +789,13 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content bg-dark text-white">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="json-import-label"><i class="bi bi-file-earmark-arrow-down me-2"></i>Import Stats</h5>
+                    <h5 class="modal-title" id="json-import-label"><i class="bi bi-file-earmark-arrow-down me-2"></i>Import Statistics</h5>
                 </div>
                 <div class="modal-body">
                     <!-- Add option toggles -->
                     <div class="btn-group w-100 mb-3" role="group">
                         <input type="radio" class="btn-check" name="importInputType" id="importPasteOption" autocomplete="off" checked>
-                        <label class="btn btn-outline-primary" for="importPasteOption"><i class="bi bi-clipboard me-2"></i>Paste JSON</label>
+                        <label class="btn btn-outline-primary" for="importPasteOption"><i class="bi bi-clipboard me-2"></i>Paste JSON/Lua</label>
                         
                         <input type="radio" class="btn-check" name="importInputType" id="importFileOption" autocomplete="off">
                         <label class="btn btn-outline-primary" for="importFileOption"><i class="bi bi-upload me-2"></i>Upload File</label>
@@ -805,7 +805,7 @@
                     <div id="importPasteInput">
                         <div class="form-group bg-dark text-white">
                             <textarea class="form-control form-control-sm" style="color: #fff;" rows="22"
-                                id="json-import-text" placeholder="Paste your JSON here."></textarea>
+                                id="json-import-text" placeholder="Paste your JSON/Lua here."></textarea>
                         </div>
                     </div>
                     
@@ -813,13 +813,13 @@
                     <div id="importFileInput" class="d-none">
                         <div class="btn-group w-100 mb-3">
                             <label class="btn btn-outline-primary w-75" for="json-import-file">
-                                <i class="bi bi-upload"></i> Select JSON File
+                                <i class="bi bi-upload"></i> Select JSON/Lua File
                             </label>
                             <button type="button" class="btn btn-outline-danger" style="width: 1%;" id="clearImportFile" title="Clear file">
                                 <i class="bi bi-x-lg"></i>
                             </button>
                         </div>
-                        <input class="form-control d-none" type="file" id="json-import-file" accept="application/json,.json">
+                        <input class="form-control d-none" type="file" id="json-import-file" accept="application/json,.json,.lua">
                         <div class="form-text mt-2" id="selectedImportFileName">No file selected</div>
                         <div class="mt-4" id="json-file-preview">
                         </div>
@@ -1119,6 +1119,13 @@
                             <input class="form-check-input" type="checkbox" id="forceUSNumbersToggle" checked>
                             <label class="form-check-label" for="forceUSNumbersToggle">
                                 <i class="bi bi-123 me-2"></i>US number format (1,123.58)
+                            </label>
+                        </div>
+
+                        <div class="form-check form-switch mt-2">
+                            <input class="form-check-input" type="checkbox" id="enableLuaViewerToggle">
+                            <label class="form-check-label" for="enableLuaViewerToggle">
+                                <i class="bi bi-braces me-2"></i>Lua Viewer
                             </label>
                         </div>
                     </div>
