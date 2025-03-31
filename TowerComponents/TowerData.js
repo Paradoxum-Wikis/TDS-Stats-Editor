@@ -2765,7 +2765,7 @@ export default {
           {
             Name: "Cleansing",
             Level: 5,
-            Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/0/06/Medic_Ability.png/revision/latest?cb=20230531131231",
+            Icon: 231100685,
             Cooldown: 20,
           },
         ],
