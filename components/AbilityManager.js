@@ -62,13 +62,26 @@ export default class AbilityManager {
     addAbilityFields(ability, index) {
         const abilityDiv = document.createElement('div');
         abilityDiv.classList.add('ability-group', 'mb-3');
-    
+
         const imageElement = document.createElement('img');
         imageElement.src = '';
         imageElement.classList.add('p-3', 'border-dark', 'ability-image');
         this.loadAbilityImage(ability.Icon, imageElement);
         abilityDiv.appendChild(imageElement);
-    
+
+        const descriptionInput = this.createInputField(
+            `side-ability-description-${index}`, 
+            'Ability Description (what it does, what it is, etc.).', 
+            ability.Description || '', 
+            (value) => {
+                this.onAbilityDescriptionChanged(index, value);
+                this.viewer.reload();
+            }, 
+            'textarea',
+            'Description'
+        );
+        abilityDiv.appendChild(descriptionInput);
+
         const imageInput = this.createInputField(
             `side-ability-image-${index}`, 
             'Image URL / Roblox ID', 
@@ -82,7 +95,7 @@ export default class AbilityManager {
             'Icon'
         );
         abilityDiv.appendChild(imageInput);
-    
+
         const titleInput = this.createInputField(
             `side-ability-title-${index}`, 
             'Ability Name', 
@@ -95,7 +108,7 @@ export default class AbilityManager {
             'Title'
         );
         abilityDiv.appendChild(titleInput);
-    
+
         const unlockLevelInput = this.createInputField(
             `side-unlock-title-${index}`, 
             'Unlock Level', 
@@ -199,6 +212,13 @@ export default class AbilityManager {
         }
     }
 
+    onAbilityDescriptionChanged(abilityIndex, value) {
+        const abilities = this.getAbilities();
+        if (abilities?.[abilityIndex]) {
+            abilities[abilityIndex].Description = value;
+        }
+    }
+
     getAbilityCooldownValue(abilityIndex) {
         const abilityDiv = this.container.children[abilityIndex];
         if (abilityDiv && abilityDiv.cooldownInput) {
@@ -223,19 +243,35 @@ export default class AbilityManager {
         label.setAttribute('for', id);
         label.textContent = labelText || placeholder.split(' ')[0];
         formGroup.appendChild(label);
-    
-        const input = document.createElement('input');
-        input.type = type;
-        input.classList.add('form-control', 'form-control-sm', 'text-white', 'bg-dark');
-        input.id = id;
-        input.placeholder = placeholder;
-        input.value = value !== undefined && value !== null ? value : '';
-    
-        input.addEventListener('focusout', () => {
-            onChange(input.value.trim());
-        });
-    
-        formGroup.appendChild(input);
+        
+        if (type === 'textarea') {
+            const textarea = document.createElement('textarea');
+            textarea.classList.add('form-control', 'form-control-sm', 'bg-dark');
+            textarea.id = id;
+            textarea.placeholder = placeholder;
+            textarea.value = value !== undefined && value !== null ? value : '';
+            textarea.rows = 3;
+            
+            textarea.addEventListener('focusout', () => {
+                onChange(textarea.value.trim());
+            });
+            
+            formGroup.appendChild(textarea);
+        } else {
+            const input = document.createElement('input');
+            input.type = type;
+            input.classList.add('form-control', 'form-control-sm', 'text-white', 'bg-dark');
+            input.id = id;
+            input.placeholder = placeholder;
+            input.value = value !== undefined && value !== null ? value : '';
+        
+            input.addEventListener('focusout', () => {
+                onChange(input.value.trim());
+            });
+        
+            formGroup.appendChild(input);
+        }
+        
         return formGroup;
     }
 }

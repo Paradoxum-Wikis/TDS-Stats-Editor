@@ -210,6 +210,8 @@ export default {
             Level: 0,
             Icon: 17846960799,
             Cooldown: 8,
+            Price: 0,
+            Description: "Flies the opposite direction."
           },
         ],
         Attributes: {
@@ -489,6 +491,8 @@ export default {
             Level: 3,
             Icon: 17408583420,
             Cooldown: 20,
+            Cost: 0,
+            Description: "Leaps to the selected area on the map, changing its placement spot. Additionally, the Brawler will knockback to up to 20 enemies on its landing position with a knockback force of 25 within 10 reposition range, and will deal area damage in that range from Level 4+."
           },
         ],
         Limit: 6,
@@ -502,8 +506,8 @@ export default {
   Commander: {
     Default: {
       Abilities: [
-        { Icon: 4594880289, Level: 2, Name: "Call to Arms", Cooldown: 30 },
-        { Icon: 17512145719 , Level: 4, Name: "Support Caravan", Cooldown: 60, Cost: 2000 },
+        { Icon: 4594880289, Level: 2, Name: "Call to Arms", Cooldown: 30, Cost: 0, Description: "Boosts all towers' firerate in its range by a variable amount for 10 seconds. Additionally, the Commander will be able to attack enemies with its own weapon for 10 seconds." },
+        { Icon: 17512145719 , Level: 4, Name: "Support Caravan", Cooldown: 60, Cost: 2000, Description: "Summons two Gunner APCs and one Missile APC. Additionally, the Commander will be able to attack enemies with its own weapon for 10 seconds." },
       ],
       Upgrades: [
         {
@@ -683,8 +687,8 @@ export default {
         Detections: { Flying: false, Hidden: false, Lead: false },
         Attributes: { BurstCooldown: 0.5, ReloadTime: 2.5, Burst: 3, Ammo: 30, MaxHits: 2},
         Abilities: [
-          { Icon: 80456675021529, Level: 3, Name: "Missile", Cooldown: 20 },
-          { Icon: 80456675021529, Level: 4, Name: "Missile", Cooldown: 10 },
+          { Icon: 80456675021529, Level: 3, Name: "Missile", Cooldown: 20, Cost: 0, Description: "Fires out two missiles at selected area. Missile range is double of regular range. Reloads one missile per cooldown." },
+          { Icon: 80456675021529, Level: 4, Name: "Missile", Cooldown: 10, Cost: 0, Description: "Fires out four missiles at selected area. Missile range is double of regular range. Reloads one missile per cooldown." },
         ],
         Price: 2250,
         Range: 12,
@@ -1325,7 +1329,8 @@ export default {
           PulseCooldown: 0,
         },
         Abilities: [
-          { Icon: 132111474124053, Level: 3, Name: "Drop the Beat", Cooldown: 30, },
+          { Icon: 132111474124053, Level: 3, Cost: 0, Name: "Drop the Beat", Cooldown: 30,
+          Description: "Performs an ability based on the track.\n● Purple: Creates pulses that knockback enemies and apply slowness to enemies, with slowness increasing for each tower in its range.\n● Green: Generates Cash when used, with the amount increasing for each tower in its range.\n● Red: Creates pulses that damage and reduce defense of enemies, with defense drop stacking."},
         ],
         Cooldown: 1,
         Damage: 0,
@@ -2045,6 +2050,8 @@ export default {
             Level: 4,
             Icon: 14606405886,
             Cooldown: 15,
+            Description: "Throws a frost grenade that freezes up to five enemies for 6 seconds in an explosion radius of 6.",
+            Cost: 0,
           },
         ],
         Price: 425,
@@ -2145,9 +2152,10 @@ export default {
           {
             Name: "FPS",
             Cooldown: 0.5,
-            Price: 0,
+            Cost: 0,
             Level: 0,
             Icon: 94564306265259,
+            Description: "Upon use, player gains control of the tower. Tower now needs to be fired by the player, though it gains the ability to pierce through enemies, hidden detection (if not at Level 3), no longer affected by range and is now affected by spread, recoil and obstacles on the map. Using the ability while the player is in control will remove control from the player.",
           },
         ],
         Limit: 1,
@@ -2399,6 +2407,9 @@ export default {
           Price: 0,
           Level: 3,
           Icon: 4118882122,
+          Cooldown: 30,
+          Cost: 0,
+          Description: "Decreases swingrate by 35%. When the ability is activated, the Gladiator cannot attack enemies for a few seconds. Lasts for 15 seconds."
         }, ],
         Price: 300,
         Range: 5,
@@ -2556,7 +2567,8 @@ export default {
             Cooldown: 5,
             Price: 0,
             Level: 0,
-            Icon: 4594880289,
+            Icon: 14606405886,
+            Description: "Swaps out the current bomb type to the selected bomb type.",
           },
         ],
         Price: 500,
@@ -2767,6 +2779,8 @@ export default {
             Level: 5,
             Icon: 231100685,
             Cooldown: 20,
+            Cost: 0,
+            Description: "Instantly removes stuns from all towers within its range.",
           },
         ],
         Price: 450,
@@ -2787,6 +2801,7 @@ export default {
             Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/b/b9/AirDropAbility.png/revision/latest?cb=20240420124127",
             Cooldown: 75,
             Cost: 2500,
+            Description: "Drops the Mercenary Base's units on a selected area on the path.",
           },
         ],
         Attributes: {
@@ -3107,6 +3122,8 @@ export default {
             Level: 4,
             Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/1/10/Airstrike.png/revision/latest?cb=20240330110612",
             Cooldown: 45,
+            Cost: 500,
+            Description: "Drops bombs on a selected path location, damaging any enemies within the bombs' explosion radius. A red marker will appear on the location of the path selected, and bombs will drop when the marker is clicked."
           },
         ],
         Price: 400,
@@ -3484,6 +3501,7 @@ export default {
             Level: 0,
             Icon: 15229477810,
             Cooldown: 5,
+            Description: "Destroys all its graves, summoning units based on the gravestone level."
           },
         ],
         Limit: 3,
@@ -3746,6 +3764,8 @@ export default {
             Level: 0,
             Cooldown: 20,
             Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/4/4b/PatrolAbility.png/revision/latest?cb=20241128075124",
+            Cost: 0,
+            Description: "Changes the position of its patrol range to the one selected by the player."
           },
         ],
       },
@@ -5064,6 +5084,9 @@ export default {
             Name: "Beehive Grenade",
             Level: 4,
             Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/e/e7/Swarmer_Ability.png/revision/latest?cb=20240712150918",
+            Cost: 0,
+            Cooldown: 15,
+            Description: "Throws a grenade that deals 10 damage and inflicts the stinging effect on every enemy that is not already being stung. Explosion range is 10.",
           },
         ],
         Price: 300,
@@ -5778,6 +5801,9 @@ export default {
             Name: "Thorns",
             Level: 0,
             Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/2/2d/ThornsAbility.png/revision/latest?cb=20241101095523",
+            Cost: 0,
+            Description: "On use, the selected area will produce thorns that deal damage and slow enemies. All Farms that are both in the range of the Harvester and the track also generate thorns with halved statistics through its Nature's Bond.",
+            Cooldown: 40,
           },
         ],
       },
@@ -5861,6 +5887,8 @@ export default {
             Level: 2,
             Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/3/30/ElementalistFireAbility.png/revision/latest?cb=20241217163118",
             Cooldown: 40,
+            Cost: 0,
+            Description: "Creates a shockwave, which deals damage to enemies, knocks them back and sets them on fire.",
           },
         ],
       },
@@ -5941,6 +5969,8 @@ export default {
             Level: 2,
             Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/2/24/Ice_TurretElementalistAbility.png/revision/latest?cb=20241217163246",
             Cooldown: 50,
+            Cost: 0,
+            Description: "Creates an Ice Turret in the selected spot, which chills and freezes enemies.",
           },
         ],
       },

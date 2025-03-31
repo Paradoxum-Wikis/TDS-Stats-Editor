@@ -78,9 +78,13 @@
     transform: translateY(-2px) scale(1.02);
 }
 
-/* Formcontrol */
+/* i didn't use 'all' for this because it breaks textarea resize */
 .form-control {
-    transition: all 0.3s ease-in-out;
+    transition: border 0.3s ease-in-out,
+                box-shadow 0.3s ease-in-out,
+                transform 0.3s ease-in-out,
+                color 0.3s ease-in-out,
+                background-color 0.3s ease-in-out;
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 

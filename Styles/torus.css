@@ -347,3 +347,16 @@ input {
 .lua-bracket {
     color: #cc7832;
 }
+
+/* more clarity for textarea resizer */
+::-webkit-resizer {
+    background-color: #0484AE;
+    border: 2px solid #035D7C;
+    border-radius: 25px 0 25px 0;
+    box-shadow: inset 5px 0 5px #ffffff4d;
+}
+
+textarea.form-control:hover::-webkit-resizer {
+    background-color: #50c8f3;
+    border-color: #0484AE;
+}
