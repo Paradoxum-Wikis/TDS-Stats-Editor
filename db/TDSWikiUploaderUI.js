@@ -195,79 +195,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }, 500));
-    
-    // display manual copy dialog
-    function showManualCopyDialog(content) {
-        // Create modal elements
-        const modalDiv = document.createElement('div');
-        modalDiv.className = 'modal fade';
-        modalDiv.id = 'manualCopyModal';
-        modalDiv.tabIndex = -1;
-        
-        modalDiv.innerHTML = `
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content bg-dark text-white">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Copy Code Manually</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Automatic copy failed. Please copy this code manually:</p>
-                        <div class="form-group bg-dark text-white">
-                            <textarea class="form-control form-control-sm" style="color: #fff;" rows="10"
-                                id="manual-copy-text">${content.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button id="try-copy-again" type="button" class="btn btn-primary">Copy to Clipboard</button>
-                    </div>
-                </div>
-            </div>
-        `;
-        
-        document.body.appendChild(modalDiv);
-        
-        // Show the modal
-        const manualModal = new bootstrap.Modal(modalDiv);
-        manualModal.show();
-        
-        // Select all text when the textarea is clicked
-        document.getElementById('manual-copy-text').addEventListener('click', function() {
-            this.select();
-        });
-        
-        // Try copy again button
-        document.getElementById('try-copy-again').addEventListener('click', function() {
-            const textArea = document.getElementById('manual-copy-text');
-            textArea.select();
-            
-            try {
-                const success = document.execCommand('copy');
-                if (success) {
-                    this.textContent = 'Copied!';
-                    this.classList.remove('btn-primary');
-                    this.classList.add('btn-success');
-                    
-                    setTimeout(() => {
-                        manualModal.hide();
-                        window.openFandomEditPage?.();
-                    }, 1000);
-                }
-            } catch (error) {
-                console.error('Failed to copy text:', error);
-            }
-        });
-        
-        modalDiv.addEventListener('hidden.bs.modal', function() {
-            document.body.removeChild(modalDiv);
-        });
-    }
 
     // Export functions used by TDSWikiUploader.js
     window.showAlert = showAlert;
     window.showValidationError = showValidationError;
-    window.showManualCopyDialog = showManualCopyDialog;
     window.setupRadioButtonHandlers = setupRadioButtonHandlers;
 });
 
