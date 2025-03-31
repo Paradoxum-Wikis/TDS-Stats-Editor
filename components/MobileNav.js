@@ -51,16 +51,25 @@ export default class MobileNav {
   checkMobile() {
     const wasMobile = this.isMobile;
     this.isMobile = window.innerWidth <= 768;
-    document.body.classList.toggle('is-mobile', this.isMobile);
     
-    // handle transitions between mobile and desktop
+    // transitions between mobile and desktop fixes
     if (wasMobile && !this.isMobile) {
       // moving from mobile to desktop
       this.restoreAllSections();
       this.mobileSidebar.style.display = 'none';
+      document.body.classList.remove('is-mobile');
     } else if (!wasMobile && this.isMobile) {
       // moving from desktop to mobile
       this.mobileSidebar.style.display = '';
+      document.body.classList.add('is-mobile');
+      
+      // sidebar collapsed width issue fixes
+      const containerMain = document.querySelector('.container-main');
+      if (containerMain && containerMain.classList.contains('sidebar-collapsed')) {
+        document.querySelectorAll('.table-responsive').forEach(table => {
+          table.style.maxWidth = '100%';
+        });
+      }
     }
   }
   
@@ -213,8 +222,8 @@ export default class MobileNav {
         parent.appendChild(element);
       }
       
-      // restore original display state
-      element.style.display = container.originalDisplay;
+      // clear inline display style
+      element.style.display = '';
     }
   }
   

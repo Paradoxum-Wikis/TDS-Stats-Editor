@@ -121,7 +121,7 @@
 	.mobile-view select,
 	.mobile-view textarea {
 		max-width: 100% !important;
-	}
+			}
 
 	/* Fix boost form layout on mobile */
 	.mobile-view #side-boost-form {
@@ -167,5 +167,21 @@
 
 	.mobile-view .card {
 		max-width: 100%;
+	}
+
+	/* Prevent zoom on mobile */
+	input, select, textarea {
+		font-size: 16px !important; /* Prevents iOS zoom */
+	}
+
+	.mobile-view .form-control {
+		height: auto;
+		padding: 10px 15px 10px 15px;
+		margin-bottom: 8px;
+	}
+
+	.mobile-view .btn {
+		padding: 10px;
+		min-height: 44px;
 	}
 }
