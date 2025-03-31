@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^5.3.3",
-    "lua-json": "^1.0.1"
+    "bootstrap": "^5.3.3"
   }
 }
