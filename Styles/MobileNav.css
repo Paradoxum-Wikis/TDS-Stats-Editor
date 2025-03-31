@@ -184,4 +184,24 @@
 		padding: 10px;
 		min-height: 44px;
 	}
+
+    /* Make tables more compact on mobile */
+    .table-responsive table {
+        font-size: 0.8rem;
+    }
+
+    #tower-table th,
+    #tower-table td,
+    #unit-table th,
+    #unit-table td {
+        padding: 0.35rem;
+    }
+
+    #tower-table input,
+    #unit-table input,
+    #tower-table select,
+    #unit-table select {
+        padding: 0.25rem;
+        font-size: 0.8rem !important;
+    }
 }
