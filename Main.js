@@ -219,4 +219,12 @@ document.addEventListener('DOMContentLoaded', () => {
     new UpdateLog();
     setVersionNumber();
     new SidebarToggle();
+    
+    // Listen for calculation system changes
+    document.addEventListener('calculationSystemChanged', (e) => {
+        if (app.viewer && e.detail.tower) {
+            // Reload the tower to apply the new calculation system
+            app.viewer.reload();
+        }
+    });
 });

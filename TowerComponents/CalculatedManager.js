@@ -1064,7 +1064,17 @@ class CalculatedManager {
         },
     };
 
+    // Update the getValue method to check for custom calculation system first
     getValue(calculatedField, skinData) {
+        if (skinData.tower.calculationSystem) {
+            for (let [_, value] of Object.entries(calculatedField)) {
+                if (value?.For?.includes(skinData.tower.calculationSystem)) {
+                    return value;
+                }
+            }
+        }
+        
+        // otherwise use the default behavior
         for (let [_, value] of Object.entries(calculatedField)) {
             if (value?.For?.includes(skinData.tower.name)) {
                 // checks subtypes
@@ -1090,13 +1100,33 @@ class CalculatedManager {
         if (calculatedField.Exclude) {
             valid &= !calculatedField.Exclude.includes(skinData.tower.name);
         }
-        if (calculatedField.Requires) {
+        
+        // custom calculation systems
+        if (calculatedField.Requires && skinData.tower.calculationSystem) {
+            const basicAttributes = ['Damage', 'Cooldown'];
+            const criticalAttributes = calculatedField.Requires.filter(attr => !basicAttributes.includes(attr));
+            
+            // only validate critical attributes if they're referenced in the calculation
+            if (criticalAttributes.length > 0) {
+                const fnStr = calculatedField.Value.toString();
+                valid &= criticalAttributes.every(attr => 
+                    // only require attribute if it's actually used in calculation
+                    !fnStr.includes(`level.${attr}`) || skinData.levels.attributes.includes(attr)
+                );
+            }
+        } else if (calculatedField.Requires) {
             valid &= calculatedField.Requires.reduce((a, v) => {
                 return a && skinData.levels.attributes.includes(v);
             }, true);
         }
 
-        if (calculatedField.For) {
+        if (skinData.tower.calculationSystem) {
+            if (calculatedField.For) {
+                // If this is a custom calc system, check if it matches
+                valid &= calculatedField.For.includes(skinData.tower.calculationSystem);
+            }
+        } else if (calculatedField.For) {
+            // Otherwise use tower name
             valid &= calculatedField.For.includes(skinData.tower.name);
         }
 
@@ -1108,8 +1138,17 @@ class CalculatedManager {
      */
     #add(name, skinData) {
         const dpsValue = this.getValue(this.calculated[name], skinData);
-        if (this.validate(dpsValue, skinData))
+        
+        // debugs
+        if (name === 'DPS' && skinData.tower.calculationSystem) {
+            console.log(`Using ${skinData.tower.calculationSystem} calculation for ${skinData.tower.name}'s ${name}`);
+        }
+        
+        if (this.validate(dpsValue, skinData)) {
+            // don't evaluate the function here, just pass the function reference
+            // this lets the levels manager evaluate it later with the correct context
             skinData.levels.addCalculated(name, dpsValue.Value);
+        }
     }
 
     addCalculate(skinData) {
@@ -1119,8 +1158,15 @@ class CalculatedManager {
         this.#add('Damage', skinData);
         this.#add('Range', skinData);
         this.#add('Cost', skinData);
-        this.#add('ExplosionDamage', skinData);
-        this.#add('SpawnTime', skinData);
+
+        if (skinData.levels.attributes.includes('ExplosionDamage')) {
+            this.#add('ExplosionDamage', skinData);
+        }
+
+        if (skinData.levels.attributes.includes('SpawnTime')) {
+            this.#add('SpawnTime', skinData);
+        }
+        
         this.#add('LaserDPS', skinData);
         this.#add('TotalElapsedDamage', skinData);
         this.#add('CriticalDamage', skinData);

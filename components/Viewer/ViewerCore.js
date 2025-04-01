@@ -20,6 +20,7 @@ import ViewerTable from './ViewerTable.js';
 import ViewerWikitable from './ViewerWikitable.js';
 import ViewerUtils from './ViewerUtils.js';
 import Alert from '../Alert.js';
+import CalculationSystemManager from '../CalculationSystemManager.js';
 
 class ViewerCore {
     constructor(app) {
@@ -285,12 +286,19 @@ class ViewerCore {
                 alert.fire();
             }
         });
+
+        this.calculationSystemManager = new CalculationSystemManager();
     }
 
     // loads up a tower to show
     load(tower) {
         this.tower = tower;
         this.deltaTower = this.deltaTowerManager.towers[this.tower.name];
+
+        // dispatch event that tower was loaded
+        document.dispatchEvent(new CustomEvent('towerLoaded', {
+            detail: { tower: this.tower }
+        }));
 
         this.setVariantButtons();
         this.unitManager.load();

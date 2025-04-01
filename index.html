@@ -237,6 +237,23 @@
                 </div>
             </div>
 
+            <!-- Calculation System -->
+            <div class="card mb-3" id="calc-system-section">
+                <div class="card-header">
+                    <h6 class="mb-0">Calculation System</h6>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted small mb-2">Choose which tower's calculation logic to use:</p>
+                    <select class="form-select form-select-sm bg-dark text-white" id="calculation-system-select">
+                        <option value="default">Default</option>
+                        <!-- Options will be populated dynamically -->
+                    </select>
+                    <div class="form-text text-muted small mt-2">
+                        Different towers use specialized formulas for DPS, efficiency, etc.
+                    </div>
+                </div>
+            </div>
+
             <!-- Sidebar toggle button -->
             <div class="sidebar-toggle-container mt-auto">
                 <div class="flex-column-reverse">
@@ -642,16 +659,16 @@
                                 </ul>
                             </div>
 
-                            <div class="ms-3 mb-3 align-self-center"> <!-- might use justify center for code consistency -->
-                                <a href="https://tds.fandom.com/f" target="_blank" class="btn btn-outline-info me-1">
+                            <div class="ms-3 mb-3 d-flex justify-content-center gap-2">
+                                <a href="https://tds.fandom.com/f" target="_blank" class="btn btn-outline-info">
                                     <i class="bi bi-chat-left-dots me-2"></i>Wiki Discussions
                                 </a>
 
-                                <a href="https://discord.gg/fBgQzudY3h" target="_blank" class="btn btn-outline-info me-1">
+                                <a href="https://discord.gg/fBgQzudY3h" target="_blank" class="btn btn-outline-info">
                                     <i class="bi bi-discord me-2"></i>Wiki Discord
                                 </a>
 
-                                <a href="https://discord.gg/tds" target="_blank" class="btn btn-outline-info me-1">
+                                <a href="https://discord.gg/tds" target="_blank" class="btn btn-outline-info">
                                     <i class="bi bi-discord me-2"></i>TDS Discord
                                 </a>
                             </div>
