@@ -219,7 +219,29 @@
 		margin-bottom: 0.3rem;
 	}
 
+	#Tower-Selector input {
+		width: calc(100% - 50px);
+  		margin: 0 auto;
+	}
+
 	.dropdown-menu {
-		width: calc(100% - 8px) !important;
+		width: calc(100% - 50px) !important;
+		left: 1.55rem;
+	}
+
+	/* Mobile table view buttons */	
+	#mobile-table-view .btn {
+		display: flex;
+		flex-direction: column;
+	}
+	
+	#mobile-table-view .btn i {
+		font-size: 16px !important;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	#mobile-table-view .btn {
+		font-size: 0.8rem;
 	}
 }
