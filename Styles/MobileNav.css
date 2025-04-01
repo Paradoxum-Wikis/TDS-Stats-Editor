@@ -50,6 +50,7 @@
 
 	#tower-name {
 		font-size: 1.2rem !important;
+		margin-bottom: 0;
 	}
 
 	/* Mobile sidebar when open */
@@ -204,4 +205,21 @@
         padding: 0.25rem;
         font-size: 0.8rem !important;
     }
+
+	#topnavheader {
+		display: block;
+		text-align: center;
+	}
+
+	#tower-variants > button {
+		margin-bottom: 0;
+	}
+
+	#Tower-Selector {
+		margin-bottom: 0.3rem;
+	}
+
+	.dropdown-menu {
+		width: calc(100% - 8px) !important;
+	}
 }

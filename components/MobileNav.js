@@ -121,6 +121,28 @@ export default class MobileNav {
       content.className = 'mobile-tools-section';
       content.innerHTML = `
         <h5 class="text-white mb-3">Tools</h5>
+        
+        <!-- View Selection Buttons -->
+        <div>
+          <p class="text-muted small mb-2">View Mode</p>
+          <div class="btn-group w-100 mb-2" id="mobile-table-view">
+            <button class="btn btn-sm btn-outline-secondary" data-view="Table">
+              <i class="bi bi-table me-2"></i>Table
+            </button>
+            <button class="btn btn-sm btn-outline-secondary" data-view="Wikitable">
+              <i class="bi bi-layout-text-window me-2"></i>Wiki
+            </button>
+            <button class="btn btn-sm btn-outline-secondary" data-view="JSON">
+              <i class="bi bi-filetype-json me-2"></i>JSON
+            </button>
+            ${window.settingsManager && window.settingsManager.enableLuaViewer ? 
+              `<button class="btn btn-sm btn-outline-secondary" data-view="Lua">
+                <i class="bi bi-braces me-2"></i>Lua
+              </button>` : ''}
+          </div>
+        </div>
+        
+        <p class="text-muted small mb-2">Jibber-jabbers</p>
         <div class="d-flex flex-column gap-2">
           <button class="btn btn-outline-secondary" id="mobile-poll-btn">
             <i class="bi bi-broadcast me-2"></i>Community Poll
@@ -147,6 +169,7 @@ export default class MobileNav {
       `;
       this.sidebarContent.appendChild(content);
       
+      this.setupMobileViewButtons();
       this.connectToolButton('mobile-delta-btn', 'button-delta');
       this.connectToolButton('mobile-poll-btn', 'poll-toggle');
       
@@ -311,6 +334,94 @@ export default class MobileNav {
       mobileButton.classList.remove('btn-primary');
       mobileButton.classList.add('btn-outline-secondary');
     }
+  }
+
+  // make table viewer button shows that it's active
+  setupMobileViewButtons() {
+    const mobileViewContainer = document.getElementById('mobile-table-view');
+    if (!mobileViewContainer) return;
+    
+    const desktopTableView = document.querySelector('#table-view');
+    if (!desktopTableView) return;
+    
+    const activeDesktopButton = desktopTableView.querySelector('.active, .btn-primary');
+    const currentView = activeDesktopButton?.dataset.view || 
+                        activeDesktopButton?.textContent.trim() || 'Table';
+    
+    const buttons = mobileViewContainer.querySelectorAll('button');
+    buttons.forEach(btn => {
+      const viewMode = btn.dataset.view;
+      
+      btn.classList.remove('btn-primary');
+      btn.classList.add('btn-outline-secondary');
+      
+      // mark the active button based on the current desktop state
+      if (viewMode === currentView) {
+        btn.classList.remove('btn-outline-secondary');
+        btn.classList.add('btn-primary');
+      }
+      
+      btn.addEventListener('click', () => {
+        const desktopButton = Array.from(desktopTableView.querySelectorAll('button'))
+          .find(button => button.textContent.trim() === viewMode ||
+                          button.dataset.view === viewMode);
+        
+        if (desktopButton) {
+          desktopButton.click();
+          
+          // update the active button state
+          buttons.forEach(b => {
+            b.classList.remove('btn-primary');
+            b.classList.add('btn-outline-secondary');
+          });
+          btn.classList.remove('btn-outline-secondary');
+          btn.classList.add('btn-primary');
+          
+          // close menu after selecting a view mode
+          setTimeout(() => this.closeSidebar(), 100);
+        }
+      });
+    });
+    
+    // observer to update when desktop view changes
+    if (!this.viewButtonObserver) {
+      this.viewButtonObserver = new MutationObserver(() => {
+        if (this.activeSection === 'tools') {
+          this.updateMobileViewButtons();
+        }
+      });
+      
+      this.viewButtonObserver.observe(desktopTableView, { 
+        attributes: true,
+        attributeFilter: ['class'],
+        subtree: true
+      });
+    }
+  }
+
+  updateMobileViewButtons() {
+    const mobileViewContainer = document.getElementById('mobile-table-view');
+    if (!mobileViewContainer) return;
+    
+    const desktopTableView = document.querySelector('#table-view');
+    if (!desktopTableView) return;
+    
+    const activeDesktopButton = desktopTableView.querySelector('.active, .btn-primary');
+    const currentView = activeDesktopButton?.dataset.view || 
+                        activeDesktopButton?.textContent.trim() || 'Table';
+    
+    const buttons = mobileViewContainer.querySelectorAll('button');
+    buttons.forEach(btn => {
+      const viewMode = btn.dataset.view;
+      
+      if (viewMode === currentView) {
+        btn.classList.remove('btn-outline-secondary');
+        btn.classList.add('btn-primary');
+      } else {
+        btn.classList.remove('btn-primary');
+        btn.classList.add('btn-outline-secondary');
+      }
+    });
   }
 }
 // if you're reading this, please never use mutationobserver that shit killed me i had to rewrite this whole thing twice
