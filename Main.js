@@ -89,6 +89,9 @@ class App {
                 setTimeout(() => {
                     this.dropdown.textForm.value = '';
                 }, 10);
+            } else {
+                // clear URL parameters and show landing page
+                clearUrlAndShowLanding();
             }
         } else {
             // show landing page by default instead of loading first tower (accel)
