@@ -85,13 +85,20 @@ document.addEventListener('DOMContentLoaded', function() {
     // detect lua content patterns
     function isLuaContent(text) {
         text = text.trim();
-        // check for common lua patterns
-        const startsWithReturn = text.startsWith('return');
-        const containsLuaAssignments = /\w+\s*=/.test(text);
-        const hasNil = /\bnil\b/.test(text);
-        const hasCurlyBraces = text.startsWith('{') && text.includes('=');
         
-        return startsWithReturn || containsLuaAssignments || hasNil || hasCurlyBraces;
+        // always parse as json first
+        try {
+            JSON.parse(text);
+            return false;
+        } catch (e) {
+            // check for common lua patterns
+            const startsWithReturn = text.startsWith('return');
+            const containsLuaAssignments = /\w+\s*=/.test(text);
+            const hasNil = /\bnil\b/.test(text);
+            const hasCurlyBraces = text.startsWith('{') && text.includes('=');
+            
+            return startsWithReturn || containsLuaAssignments || hasNil || hasCurlyBraces;
+        }
     }
     
     // clear file input

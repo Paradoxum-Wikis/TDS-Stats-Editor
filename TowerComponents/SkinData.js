@@ -64,7 +64,7 @@ class SkinData {
 
     addAttribute(attributeName, defaultValue) {
         if (attributeName === '' || defaultValue === undefined) {
-            const alert = new Alert(`Malformed Data`, {
+            const alert = new Alert(`Empty data, reloaded table instead`, {
                 alertStyle: 'alert-warning',
             });
 
