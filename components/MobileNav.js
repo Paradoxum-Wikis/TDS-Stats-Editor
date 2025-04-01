@@ -124,7 +124,7 @@ export default class MobileNav {
         
         <!-- View Selection Buttons -->
         <div>
-          <p class="text-muted small mb-2">View Mode</p>
+          <p class="text-muted small mb-2 text-center">View Mode</p>
           <div class="btn-group w-100 mb-2" id="mobile-table-view">
             <button class="btn btn-sm btn-outline-secondary" data-view="Table">
               <i class="bi bi-table me-2"></i>Table
@@ -142,7 +142,7 @@ export default class MobileNav {
           </div>
         </div>
         
-        <p class="text-muted small mb-2">Jibber-jabbers</p>
+        <p class="text-muted small mb-2 text-center">Jibber-jabbers</p>
         <div class="d-flex flex-column gap-2">
           <button class="btn btn-outline-secondary" id="mobile-poll-btn">
             <i class="bi bi-broadcast me-2"></i>Community Poll

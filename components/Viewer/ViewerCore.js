@@ -12,7 +12,7 @@ import RemoveAttributeForm from '../RemoveAttributeForm.js';
 import UnitManager from '../../TowerComponents/UnitManager.js';
 import BoostPanel from '../BoostPanel.js';
 import CloneTowerForm from '../CloneTowerForm.js';
-import LuaViewer from '../LuaConverter/index.js';
+import LuaViewer from '../LuaConverter.js';
 import WikitextViewer from '../WikitextViewer.js';
 import ViewerUI from './ViewerUI.js';
 import ViewerData from './ViewerData.js';

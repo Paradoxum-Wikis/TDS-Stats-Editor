@@ -1,4 +1,14 @@
 [
+        {
+        "version": "1.2.0",
+        "date": "April 4, 2025",
+        "changes": [
+            "Support for mobile devices added",
+            "Lua viewer added",
+            "Improved abilities editor",
+            "Performance improvements"
+        ]
+    },
     {
         "version": "1.1.5",
         "date": "March 29, 2025",
