@@ -10,6 +10,7 @@ class TDSWikiFetcher {
         
         // backup proxies in case one fails
         this.corsProxies = [
+            'https://occulticnine.vercel.app/',
             'https://api.cors.lol/?url=',
             'https://api.codetabs.com/v1/proxy?quest=',
             'https://api.allorigins.win/raw?url=',
@@ -52,7 +53,26 @@ class TDSWikiFetcher {
                 const proxy = this.getCurrentProxy();
                 console.log(`trying proxy ${this.currentProxyIndex + 1}/${maxAttempts}: ${proxy}`);
                 
-                const response = await fetch(`${proxy}${encodeURIComponent(url)}`);
+                if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                    url = 'https://' + url;
+                }
+                
+                // Use different URL structures depending on the proxy
+                let requestUrl;
+                if (proxy === 'https://occulticnine.vercel.app/') {
+                    // For O;N, use the existing format
+                    requestUrl = `${proxy}api?url=${encodeURIComponent(url)}`;
+                } else {
+                    // For all other proxies, use encodeURIComponent
+                    requestUrl = `${proxy}${encodeURIComponent(url)}`;
+                }
+                
+                const response = await fetch(requestUrl, {
+                    headers: {
+                        'Origin': window.location.origin,
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
                 
                 if (!response.ok) {
                     throw new Error(`http error! status: ${response.status}`);
