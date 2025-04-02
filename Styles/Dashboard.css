@@ -82,7 +82,7 @@ main > header {
     border-color: hsl(210, 11%, 5%);
 }
 .btn-outline-dark {
-    border-color: rgba(255, 255, 255, 0.3) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 .table-cell-input {

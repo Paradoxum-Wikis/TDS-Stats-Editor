@@ -551,3 +551,7 @@
 .light-mode .lua-bracket {
     color: #a71d5d;
 }
+
+.light-mode .dropdown-item.keyboard-highlighted {
+    color: #0fb4d5 !important;
+}

@@ -255,14 +255,18 @@
             </div>
 
             <!-- Sidebar toggle button -->
-            <div class="sidebar-toggle-container mt-auto">
-                <div class="flex-column-reverse">
+            <div class="sidebar-toggle-container mx-auto">
+                <div>
                     <button id="sidebar-toggle" class="btn btn-sm btn-outline-secondary me-1 mt-1" title="Toggle sidebar">
                         <i class="bi bi-layout-sidebar-inset"></i>
                     </button>
 
                     <button id="poll-toggle" class="btn btn-sm btn-outline-secondary me-1 mt-1" title="View community poll">
                         <i class="bi bi-broadcast"></i>
+                    </button>
+
+                    <button id="keyboard-help" class="btn btn-sm btn-outline-secondary me-1 mt-1" title="Keyboard shortcuts (Alt+H)" data-bs-toggle="modal" data-bs-target="#keyboard-shortcuts-modal">
+                        <i class="bi bi-keyboard"></i>
                     </button>
 
                     <button id="button-delta" class="btn btn-sm btn-outline-secondary me-1 mt-1" title="Visualize your statistic changes">
@@ -300,7 +304,7 @@
                         <!-- Search -->
                         <form id="Tower-Selector" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
                             <input type="search" class="form-control form-control-dark text-bg-dark"
-                                placeholder="Search Tower" aria-label="Search">
+                                placeholder="Search Tower (Ctrl+K)" aria-label="Search">
                             <div class="dropdown-menu bg-dark text-white">
                                 <!-- dropdown options here -->
                             </div>
@@ -1162,6 +1166,86 @@
                             <i class="bi bi-trash me-2"></i>Reset All Data
                         </button>
                         <p class="text-muted small mt-2">Pressing the button below will DELETE EVERYTHING that this website has stored on your device.</p>
+                    </div>
+                </div>
+
+                <!-- Modal Footer-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Keyboard Shortcuts Help Modal -->
+    <div class="modal fade" id="keyboard-shortcuts-modal" tabindex="-1" role="dialog" aria-labelledby="keyboard-shortcuts-label"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content bg-dark text-white">
+                <!-- Modal Header-->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="keyboard-shortcuts-label">
+                        <i class="bi bi-keyboard me-2"></i>Keyboard Shortcuts
+                    </h5>
+                </div>
+
+                <!-- Modal Body-->
+                <div class="modal-body">
+                    <div class="table-responsive d-grid" id="keyboard-help-table">
+                        <table class="table table-dark table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Shortcut</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><kbd>Ctrl</kbd> + <kbd>K</kbd></td>
+                                    <td>Focus search box</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>Alt</kbd> + <kbd>1</kbd> - <kbd>4</kbd></td>
+                                    <td>Switch between view modes</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>Alt</kbd> + <kbd>D</kbd></td>
+                                    <td>Toggle delta view</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>Alt</kbd> + <kbd>C</kbd></td>
+                                    <td>Toggle calculation system</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>Alt</kbd> + <kbd>S</kbd></td>
+                                    <td>Open settings</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>Alt</kbd> + <kbd>L</kbd></td>
+                                    <td>Toggle sidebar</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>Alt</kbd> + <kbd>H</kbd> / <kbd>F1</kbd></td>
+                                    <td>Show this help dialog</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>Tab</kbd></td>
+                                    <td>Navigate between UI elements</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>Enter</kbd> / <kbd>Space</kbd></td>
+                                    <td>Activate focused element</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd></td>
+                                    <td>Navigate in table or dropdown</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>Escape</kbd></td>
+                                    <td>Close dropdown or dialog</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 

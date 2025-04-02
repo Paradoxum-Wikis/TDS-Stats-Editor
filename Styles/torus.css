@@ -247,7 +247,8 @@ input {
     padding: 0.25rem 0.5rem 0.5rem 0.5rem;
     border-top: 2px solid #0484AE40;
     background-color: rgba(0, 0, 0, 0.15);
-    margin-top: auto;
+    display: flex;
+    justify-content: center;
 }
 
 /* When sidebar is collapsed, position toggle button fixed at bottom left */
@@ -377,4 +378,33 @@ textarea.form-control:hover::-webkit-resizer {
 
 #floating-calc-system.dragging {
     opacity: 0.8 !important;
+}
+
+.dropdown-item.keyboard-highlighted {
+    background-color: #0dcaf033 !important;
+    color: #0fb4d5;
+    padding-left: 1.8rem;
+}
+
+.dropdown-item.keyboard-highlighted::before {
+    content: '';
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #0dcaf0cc;
+    transform: translateY(-50%);
+}
+
+#keyboard-help-table .table > :not(caption) > * > * {
+    padding: 6px;
+}
+
+/* tab switching highlights */
+.keyboard-focus-visible:focus {
+    outline: 2px solid #0dcaf0;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(13, 202, 240, 0.25);
 }
