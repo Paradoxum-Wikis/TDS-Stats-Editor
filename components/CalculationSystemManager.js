@@ -86,6 +86,7 @@ export default class CalculationSystemManager {
     }
     
     // sync dropdown with json
+    const previousValue = this.select.value;
     if (existingSystem && this.availableSystems.includes(existingSystem)) {
       this.select.value = existingSystem;
     } else {
@@ -94,6 +95,13 @@ export default class CalculationSystemManager {
     
     // update tower object
     this.currentTower.calculationSystem = existingSystem || null;
+    
+    // fix for calculatedsystem json data being ignored when loading
+    if (existingSystem && previousValue !== existingSystem) {
+      document.dispatchEvent(new CustomEvent('calculationSystemChanged', {
+        detail: { tower: this.currentTower }
+      }));
+    }
   }
   
   applySelectedSystem() {
@@ -112,8 +120,9 @@ export default class CalculationSystemManager {
       }
     }
     
-    // skip if no change
-    if (selectedSystem === currentSystem) return;
+    // skip if no change - ALLOW DEFAULT TO ALWAYS TRIGGER
+    // this was causing the bug that didn't allow default to be loaded
+    if (selectedSystem === currentSystem && selectedSystem !== 'default') return;
     
     // update tower object
     if (selectedSystem === 'default') {
@@ -146,5 +155,26 @@ export default class CalculationSystemManager {
     document.dispatchEvent(new CustomEvent('towerDataChanged', {
       detail: { tower: this.currentTower }
     }));
+    
+    // table force rebuild/reload
+    if (document.querySelector('#table-view .active')?.textContent.trim() === 'Table') {
+      let viewer = window.activeViewer || 
+                  (window.app && window.app.viewer) || 
+                  document.querySelector('.viewer')?.__vue__;
+      
+      if (viewer) {
+        if (typeof viewer.towerTable?.removeTable === 'function') {
+          viewer.towerTable.removeTable();
+        }
+        
+        setTimeout(() => {
+          if (typeof viewer.loadTable === 'function') {
+            viewer.loadTable();
+          } else if (typeof viewer.reload === 'function') {
+            viewer.reload();
+          }
+        }, 50); // delay just to make sure changes are made
+      }
+    }
   }
 }

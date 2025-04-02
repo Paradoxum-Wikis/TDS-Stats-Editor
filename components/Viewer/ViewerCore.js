@@ -287,6 +287,34 @@ class ViewerCore {
             }
         });
 
+        document.addEventListener('calculationSystemChanged', (e) => {
+            if (e.detail.tower === this.tower) {
+                // force a complete table reload if we're in table view
+                if (this.tableView && this.tableView.getSelectedName() === 'Table') {
+                    // get the active skin and recalculate it
+                    const activeSkin = this.getActiveSkin();
+                    if (activeSkin && typeof activeSkin.recalculate === 'function') {
+                        activeSkin.recalculate();
+                    }
+                    
+                    // reload using the CURRENT tower data
+                    // this way it preserves changes while forcing a table rebuild with new calculations
+                    this.import(JSON.stringify(this.tower.json), false);
+                    
+                    if (this.towerTable) {
+                        this.towerTable.removeTable();
+                        
+                        setTimeout(() => {
+                            this.loadTable();
+                            if (this.tableManagement && typeof this.tableManagement.renderButtonOutlines === 'function') {
+                                this.tableManagement.renderButtonOutlines();
+                            }
+                        }, 100);
+                    }
+                }
+            }
+        });
+
         this.calculationSystemManager = new CalculationSystemManager();
     }
 
