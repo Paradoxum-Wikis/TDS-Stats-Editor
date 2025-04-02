@@ -360,3 +360,21 @@ textarea.form-control:hover::-webkit-resizer {
     background-color: #50c8f3;
     border-color: #0484AE;
 }
+
+#floating-calc-system {
+    transition: opacity 0.3s ease;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+#floating-calc-system:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25) !important;
+}
+
+#floating-calc-system .card-header {
+    cursor: move;
+    user-select: none;
+}
+
+#floating-calc-system.dragging {
+    opacity: 0.8 !important;
+}
