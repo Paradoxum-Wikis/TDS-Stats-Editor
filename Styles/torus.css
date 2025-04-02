@@ -408,3 +408,8 @@ textarea.form-control:hover::-webkit-resizer {
     outline-offset: 2px;
     box-shadow: 0 0 0 4px rgba(13, 202, 240, 0.25);
 }
+
+.slides-container .keyboard-focus-visible {
+    box-shadow: none !important;
+    outline: none !important;
+  }

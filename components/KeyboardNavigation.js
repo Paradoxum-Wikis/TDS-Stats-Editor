@@ -171,6 +171,16 @@ export default class KeyboardNavigation {
                 const shortcutsModal = new bootstrap.Modal(document.getElementById('keyboard-shortcuts-modal'));
                 shortcutsModal.show();
             }
+
+            if (event.key === 'F2') {
+                event.preventDefault();
+                window.location.href = 'https://tds.fandom.com/wiki/';
+            }
+            
+            if (event.key === 'F3') {
+                event.preventDefault();
+                window.location.href = '/db';
+            }            
         });
         
         // search input shortcuts
