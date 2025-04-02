@@ -4,6 +4,7 @@ import SidebarToggle from './components/SidebarToggle.js';
 import MobileNav from './components/MobileNav.js';
 import CalcSystemUI from './components/CalcSystemUI.js';
 import StorageManager from './components/StorageManager.js';
+import KeyboardNavigation from './components/KeyboardNavigation.js';
 import { setVersionNumber, loadUpdateLog } from './components/UIHelpers.js';
 import { clearUrlAndShowLanding } from './components/TowerLoader.js';
 
@@ -29,6 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Load update log
     loadUpdateLog();
+
+    // Keyboard navigation
+    new KeyboardNavigation();
     
     // listens for calculation system changes
     document.addEventListener('calculationSystemChanged', (e) => {
