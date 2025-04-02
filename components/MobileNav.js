@@ -62,14 +62,6 @@ export default class MobileNav {
       // moving from desktop to mobile
       this.mobileSidebar.style.display = '';
       document.body.classList.add('is-mobile');
-      
-      // sidebar collapsed width issue fixes
-      const containerMain = document.querySelector('.container-main');
-      if (containerMain && containerMain.classList.contains('sidebar-collapsed')) {
-        document.querySelectorAll('.table-responsive').forEach(table => {
-          table.style.maxWidth = '100%';
-        });
-      }
     }
   }
   
