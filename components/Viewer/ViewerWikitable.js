@@ -1,5 +1,5 @@
 import Alert from '../Alert.js';
-import WikitableGenerator from '../WikitableGenerator.js';
+import WikitableGenerator from '../TableMode/WikitableGenerator.js';
 
 const ViewerWikitable = {
     methods: {

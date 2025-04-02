@@ -1,7 +1,7 @@
 import TowerManager from './TowerComponents/TowerManager.js';
 import Dropdown from './components/Dropdown.js';
 import Viewer from './components/Viewer/index.js';
-import { loadTower, clearUrlAndShowLanding } from './utils/TowerLoader.js';
+import { loadTower, clearUrlAndShowLanding } from './components/TowerLoader.js';
 
 class App {
     constructor() {

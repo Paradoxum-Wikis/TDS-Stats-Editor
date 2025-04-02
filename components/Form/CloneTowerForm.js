@@ -1,6 +1,6 @@
-import Dropdown from './Dropdown.js';
-import Alert from './Alert.js';
-import Viewer from './Viewer/index.js';
+import Dropdown from '../Dropdown.js';
+import Alert from '../Alert.js';
+import Viewer from '../Viewer/index.js';
 
 export default class CloneTowerForm {
     /**

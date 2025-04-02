@@ -1,5 +1,5 @@
-import Dropdown from './Dropdown.js';
-import Alert from './Alert.js';
+import Dropdown from '../Dropdown.js';
+import Alert from '../Alert.js';
 
 export default class AddAttributeForm {
     constructor(viewer) {
