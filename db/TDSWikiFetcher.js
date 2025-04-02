@@ -202,45 +202,54 @@ class TDSWikiFetcher {
                 }
             }
             
-            // get image
-            const contentText = contentElement.textContent;
-
-            // check for roblox ids
-            const robloxIdMatch = contentText.match(/RobloxID(\d+)/i);
-            if (robloxIdMatch) {
-                const robloxId = robloxIdMatch[1];
-                try {
-                    const roProxyUrl = `https://assetdelivery.RoProxy.com/v2/assetId/${robloxId}`;
-                    const response = await fetch(roProxyUrl, {
-                        method: 'GET',
-                        mode: 'cors',
-                    });
-                    const data = await response.json();
-                    if (data?.locations?.[0]?.location) {
-                        tower.image = data.locations[0].location;
-                    } else {
-                        tower.image = `https://static.wikia.nocookie.net/tower-defense-sim/images/${robloxId}`;
-                    }
-                } catch (error) {
-                    console.warn(`failed to get roblox image ${robloxId}:`, error);
-                }
-            } else {
-                // find image urls in text
-                const imgUrlRegex = /https?:\/\/[^\s"'<>()]+(\.png|\.jpg|\.jpeg|\.gif)(?:\?[^\s"'<>()]*)?/i;
-                const match = contentText.match(imgUrlRegex);
+            const images = Array.from(contentElement.querySelectorAll('img'))
+                .filter(img => !img.closest('pre')); // no pre tags allowed smh, yet
                 
-                if (match) {
-                    // use first matching url
-                    tower.image = match[0];
-                } else {
-                    // look for img tags
-                    const images = contentElement.querySelectorAll('img');
-                    for (let img of images) {
-                        const imgSrc = img.getAttribute('src') || '';
-                        if (imgSrc && !imgSrc.includes('favicon') && !imgSrc.includes('icon')) {
-                            tower.image = imgSrc;
-                            break;
+            if (images.length > 0) {
+                // Use the first image that isn't a favicon or icon
+                for (const img of images) {
+                    const imgSrc = img.getAttribute('src') || '';
+                    if (imgSrc && !imgSrc.includes('favicon') && !imgSrc.includes('icon')) {
+                        tower.image = imgSrc;
+                        break;
+                    }
+                }
+            }
+            
+            // check for RobloxID
+            if (!tower.image || tower.image.includes('Site-favicon.ico')) {
+                const contentText = contentElement.textContent;
+                const robloxIdMatch = contentText.match(/RobloxID(\d+)/i);
+                
+                if (robloxIdMatch) {
+                    const robloxId = robloxIdMatch[1];
+                    try {
+                        const roProxyUrl = `https://assetdelivery.RoProxy.com/v2/assetId/${robloxId}`;
+                        const response = await fetch(roProxyUrl, {
+                            method: 'GET',
+                            mode: 'cors',
+                        });
+                        const data = await response.json();
+                        if (data?.locations?.[0]?.location) {
+                            tower.image = data.locations[0].location;
+                        } else {
+                            tower.image = `https://static.wikia.nocookie.net/tower-defense-sim/images/${robloxId}`;
                         }
+                    } catch (error) {
+                        console.warn(`failed to get roblox image ${robloxId}:`, error);
+                    }
+                } else {
+                    // As a last resort, find image URLs in text OUTSIDE of pre tags
+                    const mainContent = Array.from(contentElement.childNodes)
+                        .filter(node => node.nodeName !== 'PRE')
+                        .map(node => node.textContent || '')
+                        .join(' ');
+                        
+                    const imgUrlRegex = /https?:\/\/[^\s"'<>()]+(\.png|\.jpg|\.jpeg|\.gif)(?:\?[^\s"'<>()]*)?/i;
+                    const match = mainContent.match(imgUrlRegex);
+                    
+                    if (match) {
+                        tower.image = match[0];
                     }
                 }
             }

@@ -346,3 +346,7 @@ a.btn:hover {
 .list-view-card .card-body .mt-2 {
     margin-top: -0.5rem !important;
 }
+
+.card-img-top {
+    aspect-ratio: 1 / 1;
+}
