@@ -4,6 +4,7 @@ import Viewer from './components/Viewer/index.js';
 import UpdateLog from './components/UpdateLog.js';
 import SidebarToggle from './components/SidebarToggle.js';
 import MobileNav from './components/MobileNav.js';
+import Alert from './components/Alert.js';
 
 const TDSVersion = '1.58.1';
 
@@ -232,10 +233,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// calc system toggle - consolidated implementation
+// calculation system toggle and draggable func
 document.addEventListener('DOMContentLoaded', function() {
     const calcSystemToggle = document.getElementById('toggle-calc-system');
     const calcSystemSection = document.getElementById('calc-system-section');
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const mainContainer = document.querySelector('.container-main');
     
     if (calcSystemToggle && calcSystemSection) {
         if (localStorage.getItem('showCalcSystem') === 'true') {
@@ -246,19 +249,189 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         calcSystemToggle.addEventListener('click', function() {
-            calcSystemSection.classList.toggle('d-none');
-
-            if (!calcSystemSection.classList.contains('d-none')) {
-                calcSystemSection.classList.add('animate-fade-in');
-            } else {
-                calcSystemSection.classList.remove('animate-fade-in');
-            }
+            const currentlyVisible = localStorage.getItem('showCalcSystem') === 'true';
+            const newVisibility = !currentlyVisible;
+            localStorage.setItem('showCalcSystem', newVisibility);
             
             calcSystemToggle.classList.toggle('btn-outline-secondary');
             calcSystemToggle.classList.toggle('btn-primary');
             
-            const isVisible = !calcSystemSection.classList.contains('d-none');
-            localStorage.setItem('showCalcSystem', isVisible);
+            // visibility on sidebar state
+            const isSidebarCollapsed = mainContainer.classList.contains('sidebar-collapsed');
+            
+            if (isSidebarCollapsed) {
+                if (newVisibility) {
+                    floatingCalcSystem.innerHTML = calcSystemSection.innerHTML;
+                    floatingCalcSystem.classList.remove('d-none');
+                    setTimeout(() => {
+                        floatingCalcSystem.style.opacity = '1';
+                    }, 50);
+                    
+                    // readd event listeners to the select in floating panel
+                    const newSelect = floatingCalcSystem.querySelector('select');
+                    if (newSelect) {
+                        const originalSelect = document.getElementById('calculation-system-select');
+                        if (originalSelect) {
+                            newSelect.value = originalSelect.value;
+                            newSelect.addEventListener('change', function() {
+                                originalSelect.value = this.value;
+                                originalSelect.dispatchEvent(new Event('change'));
+                            });
+                        }
+                    }
+                } else {
+                    // hide floating panel
+                    floatingCalcSystem.style.opacity = '0';
+                    setTimeout(() => {
+                        floatingCalcSystem.classList.add('d-none');
+                    }, 300);
+                }
+            } else {
+                // when sidebar is expanded, toggle sidebar panel
+                calcSystemSection.classList.toggle('d-none');
+                if (!calcSystemSection.classList.contains('d-none')) {
+                    calcSystemSection.classList.add('animate-fade-in');
+                } else {
+                    calcSystemSection.classList.remove('animate-fade-in');
+                }
+            }
+        });
+        
+        const floatingCalcSystem = document.createElement('div');
+        floatingCalcSystem.id = 'floating-calc-system';
+        floatingCalcSystem.className = 'd-none position-fixed bg-dark text-white border border-secondary rounded shadow-sm';
+        floatingCalcSystem.style.cssText = 'left: 65px; top: 10px; z-index: 1030; width: 280px; opacity: 0;';
+        document.body.appendChild(floatingCalcSystem);
+        
+        function updateFloatingPanel() {
+            const isCalcSystemVisible = localStorage.getItem('showCalcSystem') === 'true';
+            const isSidebarCollapsed = mainContainer.classList.contains('sidebar-collapsed');
+            const isMobileView = window.innerWidth <= 768; // Check for mobile view
+            
+            // don't show floating panel on mobile devices
+            if (isMobileView) {
+                floatingCalcSystem.style.opacity = '0';
+                setTimeout(() => {
+                    floatingCalcSystem.classList.add('d-none');
+                }, 50);
+                return;
+            }
+            
+            if (isSidebarCollapsed && isCalcSystemVisible) {
+                floatingCalcSystem.innerHTML = calcSystemSection.innerHTML;
+                floatingCalcSystem.classList.remove('d-none');
+                
+                setTimeout(() => {
+                    floatingCalcSystem.style.opacity = '1';
+                    floatingCalcSystem.style.transition = 'opacity 0.3s ease-in-out';
+                }, 50);
+                
+                const newSelect = floatingCalcSystem.querySelector('select');
+                if (newSelect) {
+                    const originalSelect = document.getElementById('calculation-system-select');
+                    if (originalSelect) {
+                        newSelect.value = originalSelect.value;
+                        
+                        newSelect.addEventListener('change', function() {
+                            originalSelect.value = this.value;
+                            originalSelect.dispatchEvent(new Event('change'));
+                        });
+                    }
+                }
+                
+                // fix duplicate panel bug
+                calcSystemSection.classList.add('d-none');
+            } else if (!isSidebarCollapsed && isCalcSystemVisible) {
+                calcSystemSection.classList.remove('d-none');
+                
+                floatingCalcSystem.style.opacity = '0';
+                setTimeout(() => {
+                    floatingCalcSystem.classList.add('d-none');
+                }, 300);
+            } else {
+                calcSystemSection.classList.add('d-none');
+                floatingCalcSystem.style.opacity = '0';
+                setTimeout(() => {
+                    floatingCalcSystem.classList.add('d-none');
+                }, 300);
+            }
+        }
+        
+        let isDragging = false;
+        let offsetX, offsetY;
+        
+        // dragging functionality
+        floatingCalcSystem.addEventListener('mousedown', function(e) {
+            // only allow dragging from the header
+            if (e.target.closest('.card-header')) {
+                isDragging = true;
+                
+                const rect = floatingCalcSystem.getBoundingClientRect();
+                offsetX = e.clientX - rect.left;
+                offsetY = e.clientY - rect.top;
+                
+                floatingCalcSystem.classList.add('dragging');
+                
+                e.preventDefault();
+            }
+        });
+        
+        document.addEventListener('mousemove', function(e) {
+            if (isDragging) {
+                const x = e.clientX - offsetX;
+                const y = e.clientY - offsetY;
+                
+                const maxX = window.innerWidth - floatingCalcSystem.offsetWidth;
+                const maxY = window.innerHeight - floatingCalcSystem.offsetHeight;
+                
+                const newX = Math.max(0, Math.min(x, maxX));
+                const newY = Math.max(0, Math.min(y, maxY));
+                
+                floatingCalcSystem.style.left = newX + 'px';
+                floatingCalcSystem.style.top = newY + 'px';
+            }
+        });
+        
+        document.addEventListener('mouseup', function() {
+            if (isDragging) {
+                isDragging = false;
+                floatingCalcSystem.classList.remove('dragging');
+            }
+        });
+        
+        sidebarToggle.addEventListener('click', updateFloatingPanel);
+        setTimeout(updateFloatingPanel, 100);
+    }
+});
+
+// localStorage reset functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const resetLocalStorageBtn = document.getElementById('reset-localstorage');
+    const settingsModal = document.getElementById('settings-modal');
+    
+    if (resetLocalStorageBtn) {
+        resetLocalStorageBtn.addEventListener('click', function() {
+            const confirmReset = confirm('This will delete ALL saved data and reset the website to its default state. This action cannot be undone. Are you sure you want to continue?');
+            
+            if (confirmReset) {
+                localStorage.clear();
+                
+                const alert = new Alert('All data cleared successfully. Reloading page...', {
+                    alertStyle: 'alert-success',
+                });
+                alert.fire();
+
+                if (settingsModal) {
+                    const modal = bootstrap.Modal.getInstance(settingsModal);
+                    if (modal) {
+                        modal.hide();
+                    }
+                }
+
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1690);
+            }
         });
     }
 });
