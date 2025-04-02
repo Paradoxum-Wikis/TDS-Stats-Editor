@@ -4,8 +4,21 @@ const ViewerUtils = {
     methods: {
         // sets up the variant buttons
         setVariantButtons() {
-            this.towerVariants.setButtons(this.tower.skinNames);
-            this.towerVariants.root.addEventListener('submit', () => this.loadBody());
+            const skinNames = this.tower.skinNames;
+            const variantContainer = this.towerVariants.root;
+
+            this.towerVariants.setButtons(skinNames);
+
+            // check if only the 'Default' variant exists
+            if (skinNames.length === 1 && skinNames[0] === 'Default') {
+                // hide the variant button container
+                variantContainer.classList.add('d-none');
+            } else {
+                // show the containers (it's likely already visible, but just in case y'know?)
+                variantContainer.classList.remove('d-none');
+            }
+
+            variantContainer.addEventListener('submit', () => this.loadBody());
         },
 
         // clears json display
