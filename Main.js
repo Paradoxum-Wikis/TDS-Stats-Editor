@@ -231,3 +231,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// calc system toggle - consolidated implementation
+document.addEventListener('DOMContentLoaded', function() {
+    const calcSystemToggle = document.getElementById('toggle-calc-system');
+    const calcSystemSection = document.getElementById('calc-system-section');
+    
+    if (calcSystemToggle && calcSystemSection) {
+        if (localStorage.getItem('showCalcSystem') === 'true') {
+            calcSystemSection.classList.remove('d-none');
+            calcSystemSection.classList.add('animate-fade-in');
+            calcSystemToggle.classList.remove('btn-outline-secondary');
+            calcSystemToggle.classList.add('btn-primary');
+        }
+        
+        calcSystemToggle.addEventListener('click', function() {
+            calcSystemSection.classList.toggle('d-none');
+
+            if (!calcSystemSection.classList.contains('d-none')) {
+                calcSystemSection.classList.add('animate-fade-in');
+            } else {
+                calcSystemSection.classList.remove('animate-fade-in');
+            }
+            
+            calcSystemToggle.classList.toggle('btn-outline-secondary');
+            calcSystemToggle.classList.toggle('btn-primary');
+            
+            const isVisible = !calcSystemSection.classList.contains('d-none');
+            localStorage.setItem('showCalcSystem', isVisible);
+        });
+    }
+});

@@ -177,7 +177,7 @@
                     <button id="property-extra" class="btn btn-sm btn-dark">Extra</button>
                     <button id="property-calc" class="btn btn-sm btn-dark">Calcs</button>
                 </div>
-                <ul id="property-viewer" class="nav nav-pills flex-column mb-auto me-2 ms-2">
+                <ul id="property-viewer" class="nav nav-pills flex-column mb-auto mx-2">
                     <div class="spinner-border text-secondary m-auto" role="status">
                         <span class="sr-only"></span>
                     </div>
@@ -238,18 +238,18 @@
             </div>
 
             <!-- Calculation System -->
-            <div class="card mb-3" id="calc-system-section">
-                <div class="card-header">
+            <div class="card mb-3 d-none bg-dark text-white border-secondary mx-2" id="calc-system-section">
+                <div class="card-header border-secondary">
                     <h6 class="mb-0">Calculation System (BETA)</h6>
                 </div>
                 <div class="card-body">
                     <p class="text-muted small mb-2">Choose which tower's calculation logic to use:</p>
                     <select class="form-select form-select-sm bg-dark text-white" id="calculation-system-select">
                         <option value="default">Default</option>
-                        <!-- Options will be populated dynamically -->
+                        <!-- Options will be populated 'dynamically' from js -->
                     </select>
                     <div class="form-text text-muted small mt-2">
-                        Different towers use specialized formulas for DPS, efficiency, etc.
+                        Different towers use specialized formulas for DPS, Cost Efficiency, etc.
                     </div>
                 </div>
             </div>
@@ -267,6 +267,10 @@
 
                     <button id="button-delta" class="btn btn-sm btn-outline-secondary me-1 mt-1" title="Visualize your statistic changes">
                         <i class="bi bi-triangle"></i>
+                    </button>
+
+                    <button id="toggle-calc-system" class="btn btn-sm btn-outline-secondary me-1 mt-1" title="Choose calculation formulas">
+                        <i class="bi bi-calculator"></i>
                     </button>
 
                     <button id="button-clone" class="btn btn-sm btn-outline-secondary me-1 mt-1" title="Create your own abomination" data-bs-toggle="modal" data-bs-target="#clone-tower">
@@ -659,7 +663,7 @@
                                 </ul>
                             </div>
 
-                            <div class="ms-3 mb-3 d-flex justify-content-center gap-2">
+                            <div class="mx-3 mb-3 d-flex justify-content-center gap-2">
                                 <a href="https://tds.fandom.com/f" target="_blank" class="btn btn-outline-info">
                                     <i class="bi bi-chat-left-dots me-2"></i>Wiki Discussions
                                 </a>

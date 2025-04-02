@@ -142,6 +142,22 @@ export default class MobileNav {
           </div>
         </div>
         
+        <!-- Calculation System -->
+        <div class="mt-4">
+          <p class="text-muted small mb-2 text-center">Calculation System (BETA)</p>
+          <div class="card bg-dark text-white border-secondary mb-3">
+            <div class="card-body p-3">
+              <select class="form-select form-select-sm bg-dark text-white mb-2" id="mobile-calculation-system-select">
+                <option value="default">Default</option>
+                <!-- Options will be populated dynamically -->
+              </select>
+              <div class="form-text text-muted small">
+                Choose calculation formulas for DPS, Cost Efficiency, etc.
+              </div>
+            </div>
+          </div>
+        </div>
+        
         <p class="text-muted small mb-2 text-center">Jibber-jabbers</p>
         <div class="d-flex flex-column gap-2">
           <button class="btn btn-outline-secondary" id="mobile-poll-btn">
@@ -170,6 +186,7 @@ export default class MobileNav {
       this.sidebarContent.appendChild(content);
       
       this.setupMobileViewButtons();
+      this.syncCalculationSystemDropdown();
       this.connectToolButton('mobile-delta-btn', 'button-delta');
       this.connectToolButton('mobile-poll-btn', 'poll-toggle');
       
@@ -421,6 +438,26 @@ export default class MobileNav {
         btn.classList.remove('btn-primary');
         btn.classList.add('btn-outline-secondary');
       }
+    });
+  }
+
+  // sync calc system with pc version
+  syncCalculationSystemDropdown() {
+    const desktopSelect = document.getElementById('calculation-system-select');
+    const mobileSelect = document.getElementById('mobile-calculation-system-select');
+    
+    if (!desktopSelect || !mobileSelect) return;
+    
+    // copy all options from desktop to mobile
+    mobileSelect.innerHTML = desktopSelect.innerHTML;
+    
+    // set the same selected value
+    mobileSelect.value = desktopSelect.value;
+    
+    // listens to update desktop select when mobile changes
+    mobileSelect.addEventListener('change', () => {
+      desktopSelect.value = mobileSelect.value;
+      desktopSelect.dispatchEvent(new Event('change'));
     });
   }
 }

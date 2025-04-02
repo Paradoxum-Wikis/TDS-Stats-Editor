@@ -244,4 +244,19 @@
 	#mobile-table-view .btn {
 		font-size: 0.8rem;
 	}
+
+	/* calculation system */
+	.mobile-tools-section .card {
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	#mobile-calculation-system-select {
+		min-height: 40px;
+		padding: 10px;
+	}
+
+	.mobile-tools-section > div {
+		margin-bottom: 1.5rem;
+	}
 }

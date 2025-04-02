@@ -48,25 +48,38 @@ export default class CalculationSystemManager {
   }
   
   setupSelectElement() {
-    if (!this.select) return;
+    this.select = document.getElementById('calculation-system-select');
     
-    // clear old options
-    this.select.innerHTML = '<option value="default">Default</option>';
-    
-    // add all systems
-    this.availableSystems.forEach(system => {
-      if (system === 'Default') return; // skip default, already there
+    if (this.select) {
+      // clear old options
+      this.select.innerHTML = '<option value="default">Default</option>';
       
-      const option = document.createElement('option');
-      option.value = system;
-      option.textContent = system;
-      this.select.appendChild(option);
-    });
-    
-    // update on change
-    this.select.addEventListener('change', () => {
-      this.applySelectedSystem();
-    });
+      // add all systems
+      this.availableSystems.forEach(system => {
+        if (system === 'Default') return; // skip default, already there
+        
+        const option = document.createElement('option');
+        option.value = system;
+        option.textContent = system;
+        this.select.appendChild(option);
+      });
+      
+      // update on change
+      this.select.addEventListener('change', () => {
+        this.applySelectedSystem();
+      });
+      
+      // mobile compatibility
+      const mobileSelect = document.getElementById('mobile-calculation-system-select');
+      if (mobileSelect) {
+        // when desktop changes - also update mobile (in case)
+        this.select.addEventListener('change', () => {
+          if (mobileSelect.value !== this.select.value) {
+            mobileSelect.value = this.select.value;
+          }
+        });
+      }
+    }
   }
   
   updateSelectForTower() {
