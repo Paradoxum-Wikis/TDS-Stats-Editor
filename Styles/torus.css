@@ -413,3 +413,11 @@ textarea.form-control:hover::-webkit-resizer {
     box-shadow: none !important;
     outline: none !important;
   }
+
+a {
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #43d0ff !important;
+}
