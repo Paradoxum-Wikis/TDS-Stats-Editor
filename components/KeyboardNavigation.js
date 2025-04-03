@@ -155,6 +155,11 @@ export default class KeyboardNavigation {
                 event.preventDefault();
                 document.getElementById('toggle-calc-system')?.click();
             }
+
+            if (event.altKey && event.key.toLowerCase() === 'v') {
+                event.preventDefault();
+                document.getElementById('button-clone')?.click();
+            }
             
             if (event.altKey && event.key.toLowerCase() === 's') {
                 event.preventDefault();
