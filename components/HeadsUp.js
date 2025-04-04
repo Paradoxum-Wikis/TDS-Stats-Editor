@@ -116,15 +116,24 @@ class HeadsUp {
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content bg-dark text-white">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="announcement-title">
-                            <i class="bi bi-broadcast me-2"></i>Community Poll
-                        </h5>
+                        <div class="d-flex align-items-center">
+                            <div class="toru-icon-container me-3">
+                                <i class="bi bi-broadcast fs-3"></i>
+                            </div>
+                            <div>
+                                <h5 class="modal-title mb-0" id="announcement-title">Community Poll</h5>
+                                <p class="text-muted small mb-0">To poll or not to poll...</p>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="text-center pt-4">
-                            <i class="bi bi-calendar-x fs-1 mb-3 text-secondary"></i>
-                            <h5>${statusMessage}</h5>
-                            <p class="text-muted">${detailMessage}</p>
+                        <div class="toru-section">
+                            <div class="toru-options text-center py-4">
+                                <i class="bi bi-calendar-x fs-1 mb-3 text-secondary"></i>
+                                <h5>${statusMessage}</h5>
+                                <p class="text-muted">${detailMessage}</p>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -169,14 +178,26 @@ class HeadsUp {
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content bg-dark text-white">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="announcement-title">
-                            <i class="bi bi-broadcast me-2"></i>${pollData.title || 'Community Poll'} 
-                            ${pollData.endDate ? `<span class="badge bg-warning ms-2">Closes in ${daysText}</span>` : ''}
-                        </h5>
+                        <div class="d-flex align-items-center">
+                            <div class="toru-icon-container me-3">
+                                <i class="bi bi-broadcast fs-3"></i>
+                            </div>
+                            <div>
+                                <h5 class="modal-title mb-0" id="announcement-title">${pollData.title || 'Community Poll'}</h5>
+                                <p class="text-muted small mb-0">
+                                    ${pollData.endDate ? `This poll closes in ${daysText}` : 'Share your opinion with the community'}
+                                </p>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p>${pollData.description || 'We value your input! Please take a moment to participate in our community poll.'}</p>
-                        ${embedCode}
+                        <div class="toru-section">
+                            <div class="toru-options">
+                                <p>${pollData.description || 'Placeholder. Yes Yes.'}</p>
+                                ${embedCode}
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" id="announcement-dismiss" class="btn btn-primary">Don't show this poll again</button>
