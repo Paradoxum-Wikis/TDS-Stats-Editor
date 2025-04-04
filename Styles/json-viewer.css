@@ -9,6 +9,7 @@
 .json-viewer {
     color: #afafaf;
     padding-left: 20px;
+    text-wrap: auto;
 }
 
 .json-viewer ul {

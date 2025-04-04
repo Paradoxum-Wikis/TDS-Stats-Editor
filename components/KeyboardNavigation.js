@@ -15,10 +15,30 @@ export default class KeyboardNavigation {
     }
     
     makeElementsKeyboardAccessible(selector) {
-        // add class to focusable elements
-        const elements = document.querySelectorAll(selector);
-        elements.forEach(el => {
-            el.classList.add('keyboard-focus-visible');
+        // track input method
+        let usingKeyboard = false;
+        
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Tab') {
+                usingKeyboard = true;
+            }
+        });
+        
+        document.addEventListener('mousedown', () => {
+            usingKeyboard = false;
+            // remove highlight from any currently focused element
+            document.activeElement?.classList.remove('keyboard-focus-visible');
+        });
+        
+        document.addEventListener('focusin', event => {
+            // only add class if focused through keyboard
+            if (usingKeyboard && event.target.matches(selector)) {
+                event.target.classList.add('keyboard-focus-visible');
+            }
+        });
+        
+        document.addEventListener('focusout', event => {
+            event.target.classList.remove('keyboard-focus-visible');
         });
         
         // watch for new elements
@@ -27,12 +47,8 @@ export default class KeyboardNavigation {
                 if (mutation.addedNodes.length) {
                     mutation.addedNodes.forEach(node => {
                         if (node.nodeType === 1) {
-                            const focusableElements = node.querySelectorAll(selector);
-                            focusableElements.forEach(el => {
-                                el.classList.add('keyboard-focus-visible');
-                            });
-                            if (node.matches(selector)) {
-                                node.classList.add('keyboard-focus-visible');
+                            if (node.matches(selector) && !node.hasAttribute('tabindex')) {
+                                node.setAttribute('tabindex', '0');
                             }
                         }
                     });

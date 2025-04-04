@@ -32,8 +32,8 @@ class CalcSystemUI {
     createFloatingPanel() {
         this.floatingCalcSystem = document.createElement('div');
         this.floatingCalcSystem.id = 'floating-calc-system';
-        this.floatingCalcSystem.className = 'd-none position-fixed bg-dark text-white border border-secondary rounded shadow-sm';
-        this.floatingCalcSystem.style.cssText = 'left: 65px; top: 10px; z-index: 1030; width: 280px; opacity: 0;';
+        this.floatingCalcSystem.className = 'd-none position-fixed bg-dark text-white border border25 border-secondary rounded shadow-sm';
+        this.floatingCalcSystem.style.cssText = 'left: 4rem; top: 1rem; z-index: 1111; width: 280px; opacity: 0;';
         document.body.appendChild(this.floatingCalcSystem);
     }
 

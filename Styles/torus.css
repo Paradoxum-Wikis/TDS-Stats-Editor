@@ -66,6 +66,7 @@ input {
     font-family: monospace;
     white-space: pre;
     color: #f8f9fa;
+    text-wrap: auto;
 }
 
 /* Syntax highlighting for wikitable elements */
@@ -409,11 +410,6 @@ textarea.form-control:hover::-webkit-resizer {
     box-shadow: 0 0 0 4px rgba(13, 202, 240, 0.25);
 }
 
-.slides-container .keyboard-focus-visible {
-    box-shadow: none !important;
-    outline: none !important;
-  }
-
 a {
     transition: color 0.2s ease;
 }
@@ -477,7 +473,7 @@ a:hover {
     padding: 12px 8px;
     border-radius: 25px 0 25px 0;
     transition: background-color 0.2s;
-    margin-bottom: 4px;
+    margin-bottom: 1%;
 }
 
 .toru-item:hover {
@@ -501,7 +497,7 @@ a:hover {
     font-weight: 500;
 }
 
-#toru-modal .form-check-input {
+.modal-content .form-check-input {
     width: 40px;
     height: 20px;
 }
