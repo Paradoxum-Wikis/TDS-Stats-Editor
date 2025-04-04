@@ -63,7 +63,7 @@ class UpdateLog {
             case 'docs': return { class: 'bg-info', label: 'Documentation' };
             case 'style': return { class: 'bg-primary', label: 'Style' };
             case 'refactor': return { class: 'bg-warning text-dark', label: 'Refactor' };
-            case 'perf': return { class: 'bg-primary', label: 'Performance' };
+            case 'perf': return { class: 'bg-purple', label: 'Performance' };
             case 'test': return { class: 'bg-dark', label: 'Test' };
             case 'chore': return { class: 'bg-secondary', label: 'Chore' };
             default: return { class: 'bg-secondary', label: type || 'Update' };
