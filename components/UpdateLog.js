@@ -1,5 +1,7 @@
 /**
- * Fetches and displays GitHub commit history as an update log
+ * Gets update logs from two different sources:
+ * - GitHub commits (for the About modal)
+ * - updatelog.json (for the landing page)
  */
 class UpdateLog {
     constructor() {
@@ -7,22 +9,38 @@ class UpdateLog {
         this.repoName = 'TDS-Stats-Editor';
         this.commitLimit = 20;
         
-        this.modal = null;
-        this.contentContainer = null;
+        this.modalContainer = null;  // For GitHub commits
+        this.landingContainer = null;  // For JSON updates
     }
     
+    async init() {
+        this.modalContainer = document.getElementById('update-log-content');
+        this.landingContainer = document.getElementById('landing-update-log');
+        
+        if (!this.modalContainer && !this.landingContainer) return;
+
+        if (this.modalContainer) this.fetchCommits();
+        if (this.landingContainer) this.fetchJsonUpdates();
+        
+        const modal = document.getElementById('discord-modal');
+        const updatesTab = document.getElementById('aboutSectionUpdates');
+        
+        if (modal && updatesTab) {
+            // refresh commits when showing modal or clicking updates tab
+            const refreshHandler = () => {
+                if (this.modalContainer) this.fetchCommits();
+            };
+            
+            modal.addEventListener('shown.bs.modal', refreshHandler);
+            updatesTab.addEventListener('click', refreshHandler);
+        }
+    }
+    
+    // fetch GitHub commits for the About modal
     async fetchCommits() {
-        if (!this.contentContainer) return;
+        if (!this.modalContainer) return;
         
         try {
-            this.contentContainer.innerHTML = `
-                <div class="d-flex justify-content-center">
-                    <div class="spinner-border text-secondary" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                </div>
-            `;
-            
             const response = await fetch(`https://api.github.com/repos/${this.repoOwner}/${this.repoName}/commits?per_page=${this.commitLimit}`);
             
             if (!response.ok) {
@@ -31,30 +49,71 @@ class UpdateLog {
             
             const commits = await response.json();
             this.displayCommits(commits);
+            
         } catch (error) {
             console.error("Failed to fetch commits:", error);
-            this.showError("Couldn't fetch updates. Please try again later.");
+            this.showError("Couldn't fetch GitHub updates. Please try again later.", this.modalContainer);
         }
     }
     
-    displayCommits(commits) {
-        if (!this.contentContainer) return;
+    async fetchJsonUpdates() {
+        if (!this.landingContainer) return;
         
-        if (!commits || commits.length === 0) {
-            this.contentContainer.innerHTML = '<p class="text-center">No updates available.</p>';
+        try {
+            const response = await fetch('/updatelog.json');
+            
+            if (!response.ok) {
+                throw new Error(`Failed to load updatelog.json: ${response.status}`);
+            }
+            
+            const updates = await response.json();
+            this.displayJsonUpdates(updates.slice(0, 5)); // Just show latest 5
+            
+        } catch (error) {
+            console.error("Failed to fetch JSON updates:", error);
+            this.showError("Couldn't load update information. Please try again later.", this.landingContainer);
+        }
+    }
+    
+    // badge styling for different commit types
+    getBadgeStyle(type) {
+        switch (type?.toLowerCase()) {
+            case 'feat': return { class: 'bg-success', label: 'Feature' };
+            case 'fix': return { class: 'bg-danger', label: 'Fix' };
+            case 'docs': return { class: 'bg-info', label: 'Documentation' };
+            case 'style': return { class: 'bg-primary', label: 'Style' };
+            case 'refactor': return { class: 'bg-warning text-dark', label: 'Refactor' };
+            case 'perf': return { class: 'bg-primary', label: 'Performance' };
+            case 'test': return { class: 'bg-dark', label: 'Test' };
+            case 'chore': return { class: 'bg-secondary', label: 'Chore' };
+            default: return { class: 'bg-secondary', label: type || 'Update' };
+        }
+    }
+    
+    formatDate(dateString) {
+        if (!dateString) return '';
+        
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+        });
+    }
+    
+    // displays GitHub commits
+    displayCommits(commits) {
+        if (!this.modalContainer || !commits?.length) {
+            this.modalContainer.innerHTML = '<p class="text-center">No commits available.</p>';
             return;
         }
         
         let html = '<div class="list-group">';
         
         commits.forEach(commit => {
-            const date = new Date(commit.commit.author.date);
-            const formattedDate = date.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
-            });
+            const dateDisplay = this.formatDate(commit.commit.author.date);
             
+            // parse commit message with conventional commit format
             let message = commit.commit.message;
             let type = '';
             let scope = '';
@@ -65,29 +124,16 @@ class UpdateLog {
             
             if (match) {
                 [, type, scope, description] = match;
-                
-                description = description.split('\n')[0];
+                description = description.split('\n')[0]; // First line only
             }
             
-            let badgeClass = 'bg-secondary';
-            if (type) {
-                switch (type.toLowerCase()) {
-                    case 'feat': badgeClass = 'bg-success'; type = 'Feature'; break;
-                    case 'fix': badgeClass = 'bg-danger'; type = 'Fix'; break;
-                    case 'docs': badgeClass = 'bg-info'; type = 'Documentation'; break;
-                    case 'style': badgeClass = 'bg-primary'; type = 'Style'; break;
-                    case 'refactor': badgeClass = 'bg-warning text-dark'; type = 'Refactor'; break;
-                    case 'perf': badgeClass = 'bg-purple'; type = 'Performance'; break;
-                    case 'test': badgeClass = 'bg-dark'; type = 'Test'; break;
-                    case 'chore': badgeClass = 'bg-secondary'; type = 'Chore'; break;
-                }
-            }
+            const badge = this.getBadgeStyle(type, true);
             
             html += `
                 <div class="list-group-item bg-dark text-white border-secondary">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">
-                            ${type ? `<span class="badge ${badgeClass} me-1">${type}</span>` : ''}
+                            <span class="badge ${badge.class} me-1">${badge.label}</span>
                             ${scope ? `<span class="text-muted">(${scope})</span> ` : ''}
                             ${description}
                         </h5>
@@ -96,64 +142,106 @@ class UpdateLog {
                     <div class="d-flex w-100 justify-content-between">
                         <small>
                             <a href="${commit.html_url}" target="_blank" class="text-info">
-                                View details on GitHub
+                                <i class="bi bi-github me-1"></i>View details
                             </a>
                         </small>
-                        <small class="text-muted">${formattedDate}</small>
+                        <small class="text-muted">${dateDisplay}</small>
                     </div>
-                </div>
-            `;
+                </div>`;
         });
         
         html += '</div>';
-        this.contentContainer.innerHTML = html;
+        this.modalContainer.innerHTML = html;
     }
     
-    showError(message) {
-        if (!this.contentContainer) return;
-        
-        this.contentContainer.innerHTML = `
-            <div class="alert alert-danger" role="alert">
-                ${message}
-            </div>
-        `;
+    showError(message, container) {
+        if (!container) return;
+        container.innerHTML = `
+            <div class="alert alert-danger" role="alert">${message}</div>`;
     }
-    
-    init() {
-        this.modal = document.getElementById('discord-modal');
-        this.contentContainer = document.getElementById('update-log-content');
-        
-        const aboutRadio = document.getElementById('aboutSectionAbout');
-        const updatesRadio = document.getElementById('aboutSectionUpdates');
-        
-        const aboutContent = document.getElementById('about-content');
-        const updateContent = document.getElementById('update-log-content');
-        
-        if (!aboutRadio || !updatesRadio || !aboutContent || !updateContent) {
-            console.warn("Required DOM elements for UpdateLog not found, skipping initialization. (If it's on /db it's fine.)");
-            return;
+}
+
+/**
+ * Displays version info with commit hash
+ */
+class VersionDisplay {
+    constructor() {
+        this.version = '';
+        this.commitHash = '';
+        this.repoOwner = 't7ru';
+        this.repoName = 'TDS-Stats-Editor';
+    }
+
+    async init() {
+        try {
+            await Promise.all([
+                this.loadVersionFromUpdateLog(),
+                this.fetchLatestCommit()
+            ]);
+            
+            this.updateVersionElements();
+        } catch (error) {
+            console.error('Failed to get version display:', error);
+            this.commitHash = 'dev';
         }
-        
-        aboutRadio.addEventListener('change', () => {
-            if (aboutRadio.checked) {
-                aboutContent.classList.remove('d-none');
-                updateContent.classList.add('d-none');
-            }
+    }
+
+    async loadVersionFromUpdateLog() {
+        try {
+            const response = await fetch('/updatelog.json');
+            if (!response.ok) throw new Error('Failed to load updatelog.json');
+            
+            const data = await response.json();
+            this.version = data[0]?.version || '';
+        } catch (error) {
+            console.warn('Failed to load version from updatelog:', error);
+            this.version = '';
+        }
+        return this.version;
+    }
+
+    async fetchLatestCommit() {
+        try {
+            const response = await fetch(`https://api.github.com/repos/${this.repoOwner}/${this.repoName}/commits?per_page=1`);
+            if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
+            
+            const commits = await response.json();
+            this.commitHash = commits[0]?.sha.substring(0, 7) || 'dev';
+        } catch (error) {
+            console.warn('Failed to fetch commit info:', error);
+            this.commitHash = 'dev';
+        }
+        return this.commitHash;
+    }
+
+    updateVersionElements() {
+        // stats editor ver
+        document.querySelectorAll('.version-full').forEach(el => {
+            el.textContent = `${this.version} (${this.commitHash})`;
         });
         
-        updatesRadio.addEventListener('change', () => {
-            if (updatesRadio.checked) {
-                aboutContent.classList.add('d-none');
-                updateContent.classList.remove('d-none');
-                this.fetchCommits();
-            }
-        });
+        // tds ver
+        if (window.TDSVersion) {
+            document.querySelectorAll('.tdsversion').forEach(el => {
+                el.textContent = window.TDSVersion;
+            });
+        }
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     const updateLog = new UpdateLog();
     updateLog.init();
+    
+    const versionDisplay = new VersionDisplay();
+    versionDisplay.init();
+    
+    const settingsModal = document.getElementById('settings-modal');
+    if (settingsModal) {
+        settingsModal.addEventListener('shown.bs.modal', () => {
+            versionDisplay.updateVersionElements();
+        });
+    }
 });
 
-export default UpdateLog;
+export { UpdateLog, VersionDisplay };

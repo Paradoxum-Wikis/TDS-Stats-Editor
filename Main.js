@@ -1,5 +1,5 @@
 import App from './App.js';
-import UpdateLog from './components/UpdateLog.js';
+import { UpdateLog } from './components/UpdateLog.js';
 import SidebarToggle from './components/SidebarToggle.js';
 import MobileNav from './components/MobileNav.js';
 import CalcSystemUI from './components/CalcSystemUI.js';
@@ -8,7 +8,7 @@ import KeyboardNavigation from './components/KeyboardNavigation.js';
 import { setVersionNumber, loadUpdateLog } from './components/UIHelpers.js';
 import { clearUrlAndShowLanding } from './components/TowerLoader.js';
 
-const TDSVersion = '1.59.4';
+const TDSVersion = '1.59.6';
 
 window.clearUrlAndShowLanding = clearUrlAndShowLanding;
 

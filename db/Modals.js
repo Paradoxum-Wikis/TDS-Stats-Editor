@@ -1,4 +1,4 @@
-import UpdateLog from '../components/UpdateLog.js';
+import { UpdateLog } from '../components/UpdateLog.js';
 
 // Help modal tab switching
 document.addEventListener('DOMContentLoaded', function() {
