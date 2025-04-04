@@ -20,7 +20,6 @@ class UpdateLog {
         if (!this.modalContainer && !this.landingContainer) return;
 
         if (this.modalContainer) this.fetchCommits();
-        if (this.landingContainer) this.fetchJsonUpdates();
         
         const modal = document.getElementById('discord-modal');
         const updatesTab = document.getElementById('aboutSectionUpdates');
@@ -53,25 +52,6 @@ class UpdateLog {
         } catch (error) {
             console.error("Failed to fetch commits:", error);
             this.showError("Couldn't fetch GitHub updates. Please try again later.", this.modalContainer);
-        }
-    }
-    
-    async fetchJsonUpdates() {
-        if (!this.landingContainer) return;
-        
-        try {
-            const response = await fetch('/updatelog.json');
-            
-            if (!response.ok) {
-                throw new Error(`Failed to load updatelog.json: ${response.status}`);
-            }
-            
-            const updates = await response.json();
-            this.displayJsonUpdates(updates.slice(0, 5)); // Just show latest 5
-            
-        } catch (error) {
-            console.error("Failed to fetch JSON updates:", error);
-            this.showError("Couldn't load update information. Please try again later.", this.landingContainer);
         }
     }
     

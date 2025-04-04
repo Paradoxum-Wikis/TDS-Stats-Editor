@@ -15,10 +15,12 @@ class Dropdown {
         this.dropdown = dropdown;
         this.options = options;
         this.setTextMode = config.setTextMode ?? false;
+        this.currentHighlightedIndex = -1; // highlight index
 
         this.textForm.addEventListener('focusin', this.#onFocusIn.bind(this));
         this.textForm.addEventListener('focusout', this.#onFocusOut.bind(this));
         this.textForm.addEventListener('input', this.#onInput.bind(this));
+        this.textForm.addEventListener('keydown', this.#onKeyDown.bind(this)); // keybind listener
         this.textForm.parentElement.addEventListener('submit', (e) => {
             e.preventDefault();
         });
@@ -109,6 +111,8 @@ class Dropdown {
 
     #onInput() {
         this.#filterOptions();
+        this.currentHighlightedIndex = -1;
+        this.#removeHighlightFromAll();
     }
 
     #onOptionSelect(option) {
@@ -118,6 +122,64 @@ class Dropdown {
         if (this.setTextMode) {
             this.textForm.value = option;
         }
+    }
+
+    #onKeyDown(event) {
+        if (!this.dropdown.classList.contains('d-block')) return; // act if dropdown is visible
+
+        const options = Array.from(this.dropdown.querySelectorAll('.dropdown-item:not(.d-none)'));
+        if (!options.length && event.key !== 'Escape') return;
+
+        switch(event.key) {
+            case 'ArrowDown':
+                event.preventDefault();
+                this.#navigateDropdown(1, options);
+                break;
+            case 'ArrowUp':
+                event.preventDefault();
+                this.#navigateDropdown(-1, options);
+                break;
+            case 'Enter':
+                if (this.currentHighlightedIndex >= 0 && this.currentHighlightedIndex < options.length) {
+                    event.preventDefault();
+                    // workaround with mousedown as the dropdown class listens for this event on items
+                    options[this.currentHighlightedIndex].dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+                    this.textForm.blur();
+                }
+                break;
+            case 'Escape':
+                event.preventDefault();
+                this.textForm.blur();
+                break;
+        }
+    }
+
+    #navigateDropdown(direction, options) {
+        this.#removeHighlightFromAll();
+
+        if (this.currentHighlightedIndex === -1 && direction === -1) {
+            // If starting navigation upwards, go to the last item
+            this.currentHighlightedIndex = options.length - 1;
+        } else {
+            this.currentHighlightedIndex += direction;
+            // Wrap around
+            if (this.currentHighlightedIndex < 0) {
+                this.currentHighlightedIndex = options.length - 1;
+            } else if (this.currentHighlightedIndex >= options.length) {
+                this.currentHighlightedIndex = 0;
+            }
+        }
+
+        if (this.currentHighlightedIndex >= 0 && this.currentHighlightedIndex < options.length) {
+            options[this.currentHighlightedIndex].classList.add('keyboard-highlighted');
+            
+            options[this.currentHighlightedIndex].scrollIntoView({ block: 'nearest' });
+        }
+    }
+
+    #removeHighlightFromAll() {
+        const highlightedItems = this.dropdown.querySelectorAll('.keyboard-highlighted');
+        highlightedItems.forEach(item => item.classList.remove('keyboard-highlighted'));
     }
 }
 

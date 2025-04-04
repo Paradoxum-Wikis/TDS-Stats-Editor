@@ -201,77 +201,7 @@ export default class KeyboardNavigation {
             if (event.key === 'F3') {
                 event.preventDefault();
                 window.location.href = '/db';
-            }            
-        });
-        
-        // search input shortcuts
-        const searchInput = document.querySelector('#Tower-Selector input[type="search"]');
-        if (searchInput) {
-            searchInput.addEventListener('keydown', (event) => {
-                const dropdown = document.querySelector('#Tower-Selector .dropdown-menu');
-                if (!dropdown || !dropdown.classList.contains('d-block')) return;
-                
-                const options = Array.from(dropdown.querySelectorAll('.dropdown-item:not(.d-none)'));
-                if (!options.length) return;
-                
-                switch(event.key) {
-                    case 'ArrowDown':
-                        event.preventDefault();
-                        this.navigateDropdown(1, options);
-                        break;
-                    
-                    case 'ArrowUp':
-                        event.preventDefault();
-                        this.navigateDropdown(-1, options);
-                        break;
-                        
-                    case 'Enter':
-                        if (this.currentHighlightedIndex >= 0 && this.currentHighlightedIndex < options.length) {
-                            event.preventDefault();
-                            options[this.currentHighlightedIndex].dispatchEvent(new MouseEvent('mousedown'));
-                        }
-                        break;
-                        
-                    case 'Escape':
-                        event.preventDefault();
-                        searchInput.blur();
-                        break;
-                }
-            });
-            
-            searchInput.addEventListener('focusout', () => {
-                this.currentHighlightedIndex = -1;
-            });
-            
-            searchInput.addEventListener('input', () => {
-                this.currentHighlightedIndex = -1;
-                this.removeHighlightFromAll();
-            });
-        }
-    }
-    
-    navigateDropdown(direction, options) {
-        this.removeHighlightFromAll();
-        
-        if (this.currentHighlightedIndex === -1 && direction === -1) {
-            this.currentHighlightedIndex = options.length - 1;
-        } else {
-            this.currentHighlightedIndex += direction;
-            if (this.currentHighlightedIndex < 0) {
-                this.currentHighlightedIndex = options.length - 1;
-            } else if (this.currentHighlightedIndex >= options.length) {
-                this.currentHighlightedIndex = 0;
             }
-        }
-        
-        if (this.currentHighlightedIndex >= 0 && this.currentHighlightedIndex < options.length) {
-            options[this.currentHighlightedIndex].classList.add('keyboard-highlighted');
-            options[this.currentHighlightedIndex].scrollIntoView({ block: 'nearest' });
-        }
-    }
-    
-    removeHighlightFromAll() {
-        const highlightedItems = document.querySelectorAll('#Tower-Selector .dropdown-menu .keyboard-highlighted');
-        highlightedItems.forEach(item => item.classList.remove('keyboard-highlighted'));
+        });
     }
 }
