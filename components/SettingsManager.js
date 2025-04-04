@@ -162,10 +162,18 @@ class SettingsManager {
     
     updateToggleLabel() {
         const label = document.querySelector('label[for="themeToggle"]');
+        const icon = label.querySelector('.bi');
+        const titleSpan = label.querySelector('.toru-title');
+        const descriptionSpan = label.querySelector('.d-block.small.text-muted');
+        
         if (this.currentTheme === 'dark') {
-            label.innerHTML = '<i class="bi bi-moon-stars me-2"></i>Dark Mode';
+            icon.className = 'bi bi-moon-stars me-2 toru-icon';
+            titleSpan.textContent = 'Dark Mode';
+            descriptionSpan.textContent = 'Enjoy the darker side of the web';
         } else {
-            label.innerHTML = '<i class="bi bi-sun me-2"></i>Light Mode';
+            icon.className = 'bi bi-sun me-2 toru-icon';
+            titleSpan.textContent = 'Light Mode';
+            descriptionSpan.textContent = 'Bathe in the light of the web';
         }
     }
     
@@ -186,10 +194,15 @@ class SettingsManager {
     
     updateNumberFormatLabel() {
         const label = document.querySelector('label[for="forceUSNumbersToggle"]');
+        const titleSpan = label.querySelector('.toru-title');
+        const descriptionSpan = label.querySelector('.d-block.small.text-muted');
+        
         if (this.forceUSNumbers) {
-            label.innerHTML = '<i class="bi bi-123 me-2"></i>US Number Format (1,123.58)';
+            titleSpan.textContent = 'US Number Format';
+            descriptionSpan.textContent = 'Format numbers as 1,234.56';
         } else {
-            label.innerHTML = '<i class="bi bi-123 me-2"></i>RU Number Format (1 123,58)';
+            titleSpan.textContent = 'RU Number Format';
+            descriptionSpan.textContent = 'Format numbers as 1 234,56';
         }
     }
 }

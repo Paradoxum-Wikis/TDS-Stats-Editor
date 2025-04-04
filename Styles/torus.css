@@ -421,3 +421,100 @@ a {
 a:hover {
     color: #43d0ff !important;
 }
+
+/* modals */
+.toru-icon-container {
+    background-color: rgb(4, 132, 174, 0.2);
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0484AE;
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    padding: 12px;
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.2s ease;
+    border-radius: 0;
+    border-bottom: 2px solid transparent;
+}
+
+.nav-tabs .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-tabs .nav-link.active {
+    color: #0dcaf0;
+    background-color: transparent;
+    border-bottom: 2px solid #0484AE;
+}
+
+.toru-section {
+    margin-bottom: 0.25rem;
+}
+
+.toru-heading {
+    font-weight: 600;
+    color: #0dcaf0;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.toru-options {
+    padding-left: 10px;
+}
+
+.toru-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 8px;
+    border-radius: 25px 0 25px 0;
+    transition: background-color 0.2s;
+    margin-bottom: 4px;
+}
+
+.toru-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.toru-info {
+    flex: 1;
+    padding-right: 15px;
+}
+
+.toru-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toru-title {
+    font-weight: 500;
+}
+
+#toru-modal .form-check-input {
+    width: 40px;
+    height: 20px;
+}
+
+.bg-darker {
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+.form-check-input:checked {
+    background-color: #0fb4d5;
+    border-color: #0fb4d5;
+}
+
+.modal-content {
+    border-radius: 25px 0 25px 0;
+}

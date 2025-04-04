@@ -135,6 +135,7 @@ main > header {
 
 .modal-footer {
     border: none;
+    z-index: -1;
 }
 
 .child-center {

@@ -181,10 +181,6 @@ class ViewerCore {
             'click',
             (() => {
                 document.querySelector('#json-import-text').value = '';
-                const modalTitle = document.querySelector('#json-import-label');
-                if (modalTitle) {
-                    modalTitle.innerHTML = '<i class="bi bi-file-earmark-arrow-down me-2"></i>Import Statistics';
-                }
             }).bind(this)
         );
 

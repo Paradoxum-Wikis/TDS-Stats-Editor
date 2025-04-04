@@ -385,7 +385,7 @@
 }
 
 .light-mode .btn-outline-info:hover {
-    color: white;
+    color: white !important;
     background-color: #0fb4d5;
 }
 
@@ -554,4 +554,26 @@
 
 .light-mode .dropdown-item.keyboard-highlighted {
     color: #0fb4d5 !important;
+}
+
+/* modal stuffs */
+.light-mode .nav-tabs .nav-link:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.light-mode .nav-tabs .nav-link.active {
+    color: #0484AE !important;
+}
+
+.light-mode .toru-heading {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    color: #0484AE;
+}
+
+.light-mode .toru-item:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.light-mode .bg-darker {
+    background-color: rgba(0, 0, 0, 0.05);
 }

@@ -801,11 +801,20 @@
         aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content bg-dark text-white">
+                <!-- Modal Header -->
                 <div class="modal-header">
-                    <h5 class="modal-title" id="json-import-label"><i class="bi bi-file-earmark-arrow-down me-2"></i>Import Statistics</h5>
+                    <div class="d-flex align-items-center">
+                        <div class="toru-icon-container me-3">
+                            <i class="bi bi-file-earmark-arrow-down-fill fs-3"></i>
+                        </div>
+                        <div>
+                            <h5 class="modal-title mb-0" id="json-import-label">Import Statistics</h5>
+                            <p class="text-muted small mb-0">Import tower data from JSON or Lua formats</p>
+                        </div>
+                    </div>
                 </div>
+                
                 <div class="modal-body">
-                    <!-- Add option toggles -->
                     <div class="btn-group w-100 mb-3" role="group">
                         <input type="radio" class="btn-check" name="importInputType" id="importPasteOption" autocomplete="off" checked>
                         <label class="btn btn-outline-primary" for="importPasteOption"><i class="bi bi-clipboard me-2"></i>Paste JSON/Lua</label>
@@ -826,10 +835,10 @@
                     <div id="importFileInput" class="d-none">
                         <div class="btn-group w-100 mb-3">
                             <label class="btn btn-outline-primary w-75" for="json-import-file">
-                                <i class="bi bi-upload"></i> Select JSON/Lua File
+                                <i class="bi bi-upload me-2"></i>Select JSON/Lua File
                             </label>
-                            <button type="button" class="btn btn-outline-danger" style="width: 1%;" id="clearImportFile" title="Clear file">
-                                <i class="bi bi-x-lg"></i>
+                            <button type="button" class="btn btn-outline-danger" id="clearImportFile" title="Clear file">
+                                <i class="bi bi-x-lg me-1"></i>Clear
                             </button>
                         </div>
                         <input class="form-control d-none" type="file" id="json-import-file" accept="application/json,.json,.lua">
@@ -847,326 +856,610 @@
         </div>
     </div>
 
-    <!-- Add Attribute Model-->
-    <div class="modal fade" id="tower-add-attribute" tabindex="-1" role="dialog" aria-labelledby="json-import-label"
-        aria-hidden="true">
-        <div class="modal-dialog modal-sm " role="document">
-            <div class="modal-content bg-dark text-white">
-                <!-- Model Header-->
-                <div class="modal-header">
-                    <h5 class="modal-title" id="json-import-label"><i class="bi bi-patch-plus me-2"></i></i>Add Attribute</h5>
-                </div>
-
-                <!-- Model Body-->
-                <div class="modal-body">
-
-                    <!-- Add Attribute Name -->
-                    <form class="d-flex mb-2">
-                        <label for="add-attribute-name"
-                            class="col-sm-4 col-form-label text-center fw-bold fs-6">Name</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control text-white" id="add-attribute-name"
-                                placeholder="Enter Name">
-                            <div id="add-attribute-name-options" class="dropdown-menu bg-dark text-white">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Action</a>
-                            </div>
-                        </div>
-                    </form>
-
-                    <!-- Add Attribute Type -->
-                    <form class="d-flex mb-2">
-                        <div id="add-attribute-type-dropdown" class="col-sm-4 ps-2 pe-2">
-                            <button type="button" class="btn btn-outline-secondary w-100 dropdown-toggle"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Type
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Number</a>
-                                <a class="dropdown-item" href="#">Boolean</a>
-                                <a class="dropdown-item" href="#">String</a>
-                            </div>
-                        </div>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control text-white" id="add-attribute-type"
-                                placeholder="Type" readonly>
-                        </div>
-                    </form>
-
-                    <!-- Add Attribute Value -->
-                    <form class="d-flex">
-                        <label for="add-attribute-value"
-                            class="col-sm-4 col-form-label text-center fw-bold fs-6">Default</label>
-
-                        <!-- Number -->
-                        <div class="col-sm-8 " id="add-attribute-number-form">
-                            <input id="add-attribute-number-value" type="text" class="form-control text-white"
-                                id="add-attribute-value" placeholder="Enter Number">
-                        </div>
-
-                        <!-- Boolean -->
-                        <div class="col-sm-8 d-none" style="position: relative;" id="add-attribute-boolean-form">
-                            <input id="add-attribute-boolean-value" type="checkbox"
-                                class="form-check-input child-center" style="padding: 0.6em;">
-                        </div>
-
-                        <!-- String -->
-                        <div class="col-sm-8 d-none" id="add-attribute-string-form">
-                            <input type="text" class="form-control text-white" id="add-attribute-string-value"
-                                placeholder="Enter Text">
-                            <div id="add-attribute-string-options" class="dropdown-menu bg-dark text-white">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Action</a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- Model Footer-->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button id="add-attribute-submit" type="button" class="btn btn-primary"
-                        data-bs-dismiss="modal">Add</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Remove Attribute Model-->
-    <div class="modal fade" id="tower-remove-attribute" tabindex="-1" role="dialog" aria-labelledby="json-import-label"
-        aria-hidden="true">
-        <div class="modal-dialog modal-sm " role="document">
-            <div class="modal-content bg-dark text-white">
-                <!-- Model Header-->
-                <div class="modal-header">
-                    <h5 class="modal-title" id="json-import-label"><i class="bi bi-patch-minus me-2"></i>Remove Attribute</h5>
-                </div>
-
-                <!-- Model Body-->
-                <div class="modal-body">
-
-                    <!-- Remove Attribute Name -->
-                    <form class="d-flex mb-2">
-                        <label for="remove-attribute-name"
-                            class="col-sm-4 col-form-label text-center fw-bold fs-6">Name</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control text-white" id="remove-attribute-name"
-                                placeholder="Enter Name">
-                            <div id="remove-attribute-name-options" class="dropdown-menu bg-dark text-white">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Action</a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- Model Footer-->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button id="remove-attribute-submit" type="button" class="btn btn-danger"
-                        data-bs-dismiss="modal">Remove</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Clone Model-->
-    <div class="modal fade" id="clone-tower" tabindex="-1" role="dialog" aria-labelledby="json-import-label"
-        aria-hidden="true">
-        <div class="modal-dialog modal-sm " role="document">
-            <div class="modal-content bg-dark text-white">
-                <!-- Model Header-->
-                <div class="modal-header">
-                    <h5 class="modal-title" id="json-import-label"><i class="bi bi-pencil me-2"></i>Clone Tower</h5>
-                </div>
-
-                <!-- Model Body-->
-                <div class="modal-body">
-
-                    <!-- New Tower Name -->
-                    <form class="d-flex mb-2">
-                        <label for="clone-tower-name" class="col-sm-5 col-form-label text-center fw-bold fs-6">New
-                            Name</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control text-white" id="clone-tower-name"
-                                placeholder="Enter Name">
-                        </div>
-                    </form>
-
-                    <!-- New Tower Name -->
-                    <form class="d-flex mb-2">
-                        <label for="clone-tower-reference" class="col-sm-5 col-form-label text-center fw-bold fs-6">From
-                            Tower</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control text-white" id="clone-tower-reference"
-                                placeholder="Enter Tower">
-                            <div id="clone-tower-options" class="dropdown-menu bg-dark text-white">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Action</a>
-                            </div>
-                        </div>
-                    </form>
-
-
-                </div>
-
-                <!-- Model Footer-->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button id="clone-submit" type="button" class="btn btn-primary" data-bs-dismiss="modal">Add</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- About Us Modal -->
-    <div class="modal fade" id="discord-modal" tabindex="-1" role="dialog" aria-labelledby="discord-modal-label"
+    <!-- Add Attribute Modal-->
+    <div class="modal fade" id="tower-add-attribute" tabindex="-1" role="dialog" aria-labelledby="add-attribute-label"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content bg-dark text-white">
                 <!-- Modal Header-->
                 <div class="modal-header">
-                    <h5 class="modal-title" id="discord-modal-label"><i class="bi bi-info-circle me-2"></i>About Us</h5>
-                </div>
-
-                <div class="btn-group w-100 px-3 pt-3" role="group">
-                    <input type="radio" class="btn-check" name="aboutSection" id="aboutSectionAbout" autocomplete="off" checked>
-                    <label class="btn btn-outline-primary" for="aboutSectionAbout"><i class="bi bi-info-circle me-2"></i>About</label>
-                    
-                    <input type="radio" class="btn-check" name="aboutSection" id="aboutSectionUpdates" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="aboutSectionUpdates"><i class="bi bi-journal-code me-2"></i>Update Log</label>
+                    <div class="d-flex align-items-center">
+                        <div class="toru-icon-container me-3">
+                            <i class="bi bi-patch-plus-fill fs-3"></i>
+                        </div>
+                        <div>
+                            <h5 class="modal-title mb-0" id="add-attribute-label">Add Attribute</h5>
+                            <p class="text-muted small mb-0">Create a new attribute for this tower</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <!-- Modal Body-->
                 <div class="modal-body">
+                    <div class="toru-section">
+                        <h6 class="toru-heading">
+                            <i class="bi bi-input-cursor-text me-2"></i>Attribute Details
+                        </h6>
+                        <div class="toru-options">
+                            <!-- Add Attribute Name -->
+                            <div class="toru-item">
+                                <div class="toru-info">
+                                    <label for="add-attribute-name" class="form-label mb-0 d-flex align-items-center">
+                                        <i class="bi bi-tag me-2 toru-icon"></i>
+                                        <div>
+                                            <span class="toru-title">Name</span>
+                                            <span class="d-block small text-muted">Attribute identifier</span>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control text-white" id="add-attribute-name"
+                                        placeholder="Enter Name">
+                                    <div id="add-attribute-name-options" class="dropdown-menu bg-dark text-white">
+                                        <!-- Dropdown items will be populated dynamically -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Add Attribute Type -->
+                            <div class="toru-item">
+                                <div class="toru-info">
+                                    <label class="form-label mb-0 d-flex align-items-center">
+                                        <i class="bi bi-code-slash me-2 toru-icon"></i>
+                                        <div>
+                                            <span class="toru-title">Type</span>
+                                            <span class="d-block small text-muted">Data type for this attribute</span>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="d-flex col-sm-7">
+                                    <div id="add-attribute-type-dropdown" class="w-100">
+                                        <button type="button" class="btn btn-outline-secondary w-100 dropdown-toggle"
+                                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Select Type
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#">Number</a>
+                                            <a class="dropdown-item" href="#">Boolean</a>
+                                            <a class="dropdown-item" href="#">String</a>
+                                        </div>
+                                        <input type="text" class="form-control text-white mt-2" id="add-attribute-type"
+                                            placeholder="Type" readonly>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Add Attribute Value -->
+                            <div class="toru-item">
+                                <div class="toru-info">
+                                    <label for="add-attribute-value" class="form-label mb-0 d-flex align-items-center">
+                                        <i class="bi bi-123 me-2 toru-icon"></i>
+                                        <div>
+                                            <span class="toru-title">Default Value</span>
+                                            <span class="d-block small text-muted">Value that it starts with</span>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-sm-7">
+                                    <!-- Number -->
+                                    <div id="add-attribute-number-form">
+                                        <input id="add-attribute-number-value" type="text" class="form-control text-white"
+                                            placeholder="Enter Number">
+                                    </div>
+
+                                    <!-- Boolean -->
+                                    <div class="d-none" id="add-attribute-boolean-form">
+                                        <div class="form-check form-switch">
+                                            <input id="add-attribute-boolean-value" type="checkbox" class="form-check-input">
+                                        </div>
+                                    </div>
+
+                                    <!-- String -->
+                                    <div class="d-none" id="add-attribute-string-form">
+                                        <input type="text" class="form-control text-white" id="add-attribute-string-value"
+                                            placeholder="Enter Text">
+                                        <div id="add-attribute-string-options" class="dropdown-menu bg-dark text-white">
+                                            <!-- javascript dynamically -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Footer-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button id="add-attribute-submit" type="button" class="btn btn-primary"
+                        data-bs-dismiss="modal">Add Attribute</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Remove Attribute Modal-->
+    <div class="modal fade" id="tower-remove-attribute" tabindex="-1" role="dialog" aria-labelledby="remove-attribute-label"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content bg-dark text-white">
+                <!-- Modal Header-->
+                <div class="modal-header">
+                    <div class="d-flex align-items-center">
+                        <div class="toru-icon-container me-3">
+                            <i class="bi bi-patch-minus-fill fs-3"></i>
+                        </div>
+                        <div>
+                            <h5 class="modal-title mb-0" id="remove-attribute-label">Remove Attribute</h5>
+                            <p class="text-muted small mb-0">Delete an attribute from this tower</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <!-- Modal Body-->
+                <div class="modal-body">
+                    <div class="toru-section">
+                        <h6 class="toru-heading">
+                            <i class="bi bi-eraser me-2"></i>"99.9% of science is boring."
+                        </h6>
+                        <div class="toru-options">
+                            <!-- Remove Attribute Name -->
+                            <div class="toru-item">
+                                <div class="toru-info">
+                                    <label for="remove-attribute-name" class="form-label mb-0 d-flex align-items-center">
+                                        <i class="bi bi-tag me-2 toru-icon"></i>
+                                        <div>
+                                            <span class="toru-title">Attribute Name</span>
+                                            <span class="d-block small text-muted">Select the attribute to delete</span>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control text-white" id="remove-attribute-name"
+                                        placeholder="Enter Name">
+                                    <div id="remove-attribute-name-options" class="dropdown-menu bg-dark text-white">
+                                        <!-- dropdown js go brr -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Footer-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button id="remove-attribute-submit" type="button" class="btn btn-danger"
+                        data-bs-dismiss="modal">Remove Attribute</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Clone Tower Modal-->
+    <div class="modal fade" id="clone-tower" tabindex="-1" role="dialog" aria-labelledby="clone-tower-label"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-dark text-white">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <div class="d-flex align-items-center">
+                    <div class="toru-icon-container me-3">
+                        <i class="bi bi-pencil fs-3"></i>
+                    </div>
+                    <div>
+                        <h5 class="modal-title mb-0" id="clone-tower-label">Clone Tower</h5>
+                        <p class="text-muted small mb-0">Create a custom tower based on an existing one</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Modal Body-->
+            <div class="modal-body">
+                <div class="toru-section">
+                    <h6 class="toru-heading">
+                        <i class="bi bi-copy me-2"></i>Tower Details
+                    </h6>
+                    <div class="toru-options">
+                        <!-- New Tower Name -->
+                        <div class="toru-item">
+                            <div class="toru-info">
+                                <label for="clone-tower-name" class="form-label mb-0 d-flex align-items-center">
+                                    <i class="bi bi-tag me-2 toru-icon"></i>
+                                    <div>
+                                        <span class="toru-title">New Tower Name</span>
+                                        <span class="d-block small text-muted">Enter a name for your lovely creation</span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control text-white" id="clone-tower-name"
+                                    placeholder="Enter Name">
+                            </div>
+                        </div>
+
+                        <!-- Source Tower -->
+                        <div class="toru-item">
+                            <div class="toru-info">
+                                <label for="clone-tower-reference" class="form-label mb-0 d-flex align-items-center">
+                                    <i class="bi bi-box-arrow-up-right me-2 toru-icon"></i>
+                                    <div>
+                                        <span class="toru-title">Source Tower</span>
+                                        <span class="d-block small text-muted">Select the tower to use as a base</span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control text-white" id="clone-tower-reference"
+                                    placeholder="Enter Tower">
+                                <div id="clone-tower-options" class="dropdown-menu bg-dark text-white">
+                                    <!-- js js js -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button id="clone-submit" type="button" class="btn btn-primary" data-bs-dismiss="modal">Create Clone</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <!-- About Us Modal -->
+    <div class="modal fade" id="discord-modal" tabindex="-1" role="dialog" aria-labelledby="discord-modal-label"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content bg-dark text-white">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <div class="d-flex align-items-center">
+                    <div class="toru-icon-container me-3">
+                        <i class="bi bi-info-circle-fill fs-3"></i>
+                    </div>
+                    <div>
+                        <h5 class="modal-title mb-0" id="settings-modal-label">About Us</h5>
+                        <p class="text-muted small mb-0">Information about the TDS Statistics Editor</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body p-0">
+                <!-- About Nav Tabs -->
+                <ul class="nav nav-tabs nav-fill bg-darker" id="aboutTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active text-white" id="aboutSectionAbout" data-bs-toggle="tab" data-bs-target="#about-content" type="button" role="tab" aria-controls="about-content" aria-selected="true">
+                            <i class="bi bi-info-circle me-2"></i>About
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link text-white" id="aboutSectionUpdates" data-bs-toggle="tab" data-bs-target="#update-log-content" type="button" role="tab" aria-controls="update-log-content" aria-selected="false">
+                            <i class="bi bi-journal-code me-2"></i>Update Log
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link text-white" id="aboutSectionTeam" data-bs-toggle="tab" data-bs-target="#team-content" type="button" role="tab" aria-controls="team-content" aria-selected="false">
+                            <i class="bi bi-people-fill me-2"></i>Credits
+                        </button>
+                    </li>
+                </ul>
+
+                <!-- Tab Content -->
+                <div class="tab-content p-4">
                     <!-- About content section -->
-                    <div id="about-content" class="text-center">
-                        <p>The Statistics Editor (and thereby, the Database) is a website and project owned by the community of Tower Defense Simulator Wiki.
-                        <br/><br/>
-                        The official Tower Defense Simulator Wiki is hosted by <img width="60px" 
-                        class="theme-image"
-                        src="https://static.wikia.nocookie.net/6a181c72-e8bf-419b-b4db-18fd56a0eb60" 
-                        data-light-src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Fandom.svg"
-                        data-dark-src="https://static.wikia.nocookie.net/6a181c72-e8bf-419b-b4db-18fd56a0eb60"
-                        style="vertical-align: text-top;" 
-                        alt="Fandom"> which manages and maintains the platform for the community.<br/>This website operates independently and is not directly affiliated with it.</p>
-                        
-                        <div class="d-flex align-items-center justify-content-center">
-                            <a href="https://discord.gg/fBgQzudY3h" target="_blank" class="mx-2">
-                                <img style="width: 42px;" class="zoomup type1" title="Join the Tower Defense Simulator Wiki Discord server!" src="https://static.wikia.nocookie.net/tower-defense-sim/images/4/4c/Discord-Symbol-Blurple.svg">
-                            </a>
-                            <a href="https://github.com/t7ru/TDS-Stats-Editor/" target="_blank" class="mx-2">
-                                <img style="width: 42px;" class="zoomup theme-image" title="Contribute to the website's source code!" src="htmlassets/github-mark-white.svg" data-light-src="htmlassets/github-mark.svg" data-dark-src="htmlassets/github-mark-white.svg">
-                            </a>
-                            <a href="https://tds.fandom.com/wiki/Help:StatisticsEditor" target="_blank" class="mx-2">
-                                <img style="width: 42px;" class="zoomup type1" title="Visit the dedicated help guide on the TDS Wiki!" src="htmlassets/wikisquaredsmall.png">
-                            </a>
+                    <div class="tab-pane fade show active" id="about-content" role="tabpanel" aria-labelledby="aboutSectionAbout">
+                        <div class="toru-section">
+                            <h6 class="toru-heading">
+                                <i class="bi bi-book me-2"></i>Overview
+                            </h6>
+                            <div class="toru-options">
+                                <p>The Statistics Editor (and thereby, the Database) is a website and project owned by the community of Tower Defense Simulator Wiki.</p>
+                                <p>The official Tower Defense Simulator Wiki is hosted by 
+                                    <img width="60px" class="theme-image" 
+                                    src="https://static.wikia.nocookie.net/6a181c72-e8bf-419b-b4db-18fd56a0eb60" 
+                                    data-light-src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Fandom.svg"
+                                    data-dark-src="https://static.wikia.nocookie.net/6a181c72-e8bf-419b-b4db-18fd56a0eb60"
+                                    style="vertical-align: text-top;" 
+                                    alt="Fandom"> which manages and maintains the platform for the community. This website operates independently and is not directly affiliated with it.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="toru-section">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <a href="https://discord.gg/fBgQzudY3h" target="_blank" class="mx-3 text-decoration-none d-flex flex-column align-items-center">
+                                    <img style="width: 48px;" class="zoomup type1" title="Join the Tower Defense Simulator Wiki Discord server!" src="https://static.wikia.nocookie.net/tower-defense-sim/images/4/4c/Discord-Symbol-Blurple.svg">
+                                </a>
+                                <a href="https://github.com/t7ru/TDS-Stats-Editor/" target="_blank" class="mx-3 text-decoration-none d-flex flex-column align-items-center">
+                                    <img style="width: 48px;" class="zoomup theme-image" title="Contribute to the website's source code!" src="htmlassets/github-mark-white.svg" data-light-src="htmlassets/github-mark.svg" data-dark-src="htmlassets/github-mark-white.svg">
+                                </a>
+                                <a href="https://tds.fandom.com/wiki/Help:StatisticsEditor" target="_blank" class="mx-3 text-decoration-none d-flex flex-column align-items-center">
+                                    <img style="width: 48px;" class="zoomup type1" title="Visit the dedicated help guide on the TDS Wiki!" src="htmlassets/wikisquaredsmall.png">
+                                </a>
+                            </div>
                         </div>
                     </div>
                     
                     <!-- Update Log content section -->
-                    <div id="update-log-content" class="d-none">
+                    <div class="tab-pane fade" id="update-log-content" role="tabpanel" aria-labelledby="aboutSectionUpdates">
                         <div class="d-flex justify-content-center">
                             <div class="spinner-border text-secondary" role="status">
                                 <span class="visually-hidden">Loading...</span>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Modal Footer-->
-                <div class="modal-footer">
-                    <span class="text-muted me-auto">Last updated to game version: <b class="tdsversion"></b></span>
-                    <button type="button" class="btn btn-primary me-2" onclick="clearUrlAndShowLanding()" data-bs-dismiss="modal">Home
-                    </button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <!-- content section -->
+                    <div class="tab-pane fade" id="team-content" role="tabpanel" aria-labelledby="aboutSectionTeam">
+                        <div class="toru-section">
+                            <h6 class="toru-heading">
+                                <i class="bi bi-code-slash me-2"></i>Developers
+                            </h6>
+                            <div class="toru-options">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card bg-dark border-secondary h-100">
+                                            <div class="card-body text-center">
+                                                <img src="https://avatars.githubusercontent.com/u/57356716" alt="Developer" class="rounded-circle mb-3 object-fit-cover" style="width: 5rem;">
+                                                <h6 class="card-title">t7ru</h6>
+                                                <p class="card-text small text-muted">Developer</p>
+                                                <a href="https://github.com/t7ru" target="_blank" class="btn btn-sm btn-outline-primary">
+                                                    <i class="bi bi-github me-1"></i>GitHub
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card bg-dark border-secondary h-100">
+                                            <div class="card-body text-center">
+                                                <img src="https://avatars.githubusercontent.com/u/64506745" alt="Developer" class="rounded-circle mb-3 object-fit-cover" style="width: 5rem;">
+                                                <h6 class="card-title">SneakyWolfy</h6>
+                                                <p class="card-text small text-muted">Original Developer</p>
+                                                <a href="https://github.com/SneakyWolfy" target="_blank" class="btn btn-sm btn-outline-primary">
+                                                    <i class="bi bi-github me-1"></i>GitHub
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="toru-section">
+                            <h6 class="toru-heading">
+                                <i class="bi bi-stars me-2"></i>Acknowledgements
+                            </h6>
+                            <div class="toru-options">
+                                <p>Special thanks to the Tower Defense Simulator Wiki community, all contributors to the project, and the TDS community for their support and feedback.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <!-- Modal Footer-->
+            <div class="modal-footer">
+                <span class="text-muted small me-auto">Last updated for game version: <b class="tdsversion"></b></span>
+                <button type="button" class="btn btn-primary me-2" onclick="clearUrlAndShowLanding()" data-bs-dismiss="modal">Home</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
         </div>
+    </div>
     </div>
 
     <!-- Settings Modal -->
     <div class="modal fade" id="settings-modal" tabindex="-1" role="dialog" aria-labelledby="settings-modal-label"
         aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content bg-dark text-white">
                 <!-- Modal Header-->
                 <div class="modal-header">
-                    <h5 class="modal-title" id="settings-modal-label"><i class="bi bi-gear me-2"></i>Settings</h5>
-                </div>
-
-                <!-- Modal Body-->
-                <div class="modal-body">
-                    <h5 class="mt-2 mb-3">Appearance</h5>
-                    <div class="mb-4">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="themeToggle">
-                            <label class="form-check-label" for="themeToggle">
-                                <i class="bi bi-moon-stars me-2"></i>Dark Mode
-                            </label>
+                    <div class="d-flex align-items-center">
+                        <div class="toru-icon-container me-3">
+                            <i class="bi bi-gear-fill fs-3"></i>
                         </div>
-
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="animationsToggle">
-                            <label class="form-check-label" for="animationsToggle">
-                                <i class="bi bi-activity me-2"></i>Reduce Motion
-                            </label>
+                        <div>
+                            <h5 class="modal-title mb-0" id="settings-modal-label">Settings</h5>
+                            <p class="text-muted small mb-0">Configure your preferences for the Statistics Editor</p>
                         </div>
-                    </div>
-
-                    <h5 class="mt-2 mb-3">Table</h5>
-                    <div class="mb-4">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="showSecondsToggle" checked>
-                            <label class="form-check-label" for="showSecondsToggle">
-                                <i class="bi bi-clock me-2"></i>Seconds in Cooldown Values
-                            </label>
-                        </div>
-
-                        <div class="form-check form-switch mt-2">
-                            <input class="form-check-input" type="checkbox" id="forceUSNumbersToggle" checked>
-                            <label class="form-check-label" for="forceUSNumbersToggle">
-                                <i class="bi bi-123 me-2"></i>US number format (1,123.58)
-                            </label>
-                        </div>
-
-                        <div class="form-check form-switch mt-2">
-                            <input class="form-check-input" type="checkbox" id="enableLuaViewerToggle">
-                            <label class="form-check-label" for="enableLuaViewerToggle">
-                                <i class="bi bi-braces me-2"></i>Lua Viewer
-                            </label>
-                        </div>
-                    </div>
-
-                    <h5 class="mt-2 mb-3">Sidebar</h5>
-                    <div class="mb-4">
-                        <div class="form-check form-switch mt-">
-                            <input class="form-check-input" type="checkbox" role="switch" id="showCollapsibleCountsToggle">
-                            <label class="form-check-label" for="showCollapsibleCountsToggle">
-                                <i class="bi bi-1-circle me-2"></i>Counter in Collapsible Groups
-                            </label>
-                        </div>
-                    </div>
-
-                    <h5 class="mt-2 mb-3">Data Management</h5>
-                    <div class="mb-4">
-                        <button id="reset-localstorage" class="btn btn-danger">
-                            <i class="bi bi-trash me-2"></i>Reset All Data
-                        </button>
-                        <p class="text-muted small mt-2">Pressing the button below will DELETE EVERYTHING that this website has stored on your device.</p>
                     </div>
                 </div>
 
-                <!-- Modal Footer-->
+                <!-- Modal Body -->
+                <div class="modal-body p-0">
+                    <!-- Settings Nav Tabs -->
+                    <ul class="nav nav-tabs nav-fill bg-darker" id="settingsTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active text-white" id="interface-tab" data-bs-toggle="tab" data-bs-target="#interface" type="button" role="tab" aria-controls="interface" aria-selected="true">
+                                <i class="bi bi-palette me-2"></i>Interface
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link text-white" id="editing-tab" data-bs-toggle="tab" data-bs-target="#editing" type="button" role="tab" aria-controls="editing" aria-selected="false">
+                                <i class="bi bi-table me-2"></i>Editing
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link text-white" id="advanced-tab" data-bs-toggle="tab" data-bs-target="#advanced" type="button" role="tab" aria-controls="advanced" aria-selected="false">
+                                <i class="bi bi-sliders me-2"></i>Advanced
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link text-white" id="data-tab" data-bs-toggle="tab" data-bs-target="#data" type="button" role="tab" aria-controls="data" aria-selected="false">
+                                <i class="bi bi-database me-2"></i>Data
+                            </button>
+                        </li>
+                    </ul>
+
+                    <!-- Tab Content -->
+                    <div class="tab-content p-4">
+                        <!-- Interface Tab -->
+                        <div class="tab-pane fade show active" id="interface" role="tabpanel" aria-labelledby="interface-tab">
+                            <div class="toru-section">
+                                <h6 class="toru-heading">
+                                    <i class="bi bi-brush me-2"></i>Appearance
+                                </h6>
+                                <div class="toru-options">
+                                    <div class="toru-item">
+                                        <div class="toru-info">
+                                            <label class="form-check-label d-flex align-items-center mb-0" for="themeToggle">
+                                                <i class="bi bi-moon-stars me-2 toru-icon"></i>
+                                                <div>
+                                                    <span class="toru-title">Dark Mode</span>
+                                                    <span class="d-block small text-muted">Loading Javascript inserts</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="themeToggle">
+                                        </div>
+                                    </div>
+
+                                    <div class="toru-item">
+                                        <div class="toru-info">
+                                            <label class="form-check-label d-flex align-items-center mb-0" for="animationsToggle">
+                                                <i class="bi bi-activity me-2 toru-icon"></i>
+                                                <div>
+                                                    <span class="toru-title">Reduce Motion</span>
+                                                    <span class="d-block small text-muted">Make animations less distracting</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="animationsToggle">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="toru-section">
+                                <h6 class="toru-heading">
+                                    <i class="bi bi-layout-sidebar me-2"></i>Sidebar
+                                </h6>
+                                <div class="toru-options">
+                                    <div class="toru-item">
+                                        <div class="toru-info">
+                                            <label class="form-check-label d-flex align-items-center mb-0" for="showCollapsibleCountsToggle">
+                                                <i class="bi bi-1-circle me-2 toru-icon"></i>
+                                                <div>
+                                                    <span class="toru-title">Group Counter</span>
+                                                    <span class="d-block small text-muted">Show item counts in collapsible groups</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="showCollapsibleCountsToggle">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Editing Tab -->
+                        <div class="tab-pane fade" id="editing" role="tabpanel" aria-labelledby="editing-tab">
+                            <div class="toru-section">
+                                <h6 class="toru-heading">
+                                    <i class="bi bi-table me-2"></i>Table Display
+                                </h6>
+                                <div class="toru-options">
+                                    <div class="toru-item">
+                                        <div class="toru-info">
+                                            <label class="form-check-label d-flex align-items-center mb-0" for="showSecondsToggle">
+                                                <i class="bi bi-clock me-2 toru-icon"></i>
+                                                <div>
+                                                    <span class="toru-title">Show Seconds</span>
+                                                    <span class="d-block small text-muted">Display cooldown values with seconds unit</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="showSecondsToggle" checked>
+                                        </div>
+                                    </div>
+
+                                    <div class="toru-item">
+                                        <div class="toru-info">
+                                            <label class="form-check-label d-flex align-items-center mb-0" for="forceUSNumbersToggle">
+                                                <i class="bi bi-123 me-2 toru-icon"></i>
+                                                <div>
+                                                    <span class="toru-title">US Number Format</span>
+                                                    <span class="d-block small text-muted">Loading Javascript inserts</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="forceUSNumbersToggle" checked>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Advanced Tab -->
+                        <div class="tab-pane fade" id="advanced" role="tabpanel" aria-labelledby="advanced-tab">
+                            <div class="toru-section">
+                                <h6 class="toru-heading">
+                                    <i class="bi bi-code-square me-2"></i>Developer Options
+                                </h6>
+                                <div class="toru-options">
+                                    <div class="toru-item">
+                                        <div class="toru-info">
+                                            <label class="form-check-label d-flex align-items-center mb-0" for="enableLuaViewerToggle">
+                                                <i class="bi bi-braces me-2 toru-icon"></i>
+                                                <div>
+                                                    <span class="toru-title">Lua Viewer</span>
+                                                    <span class="d-block small text-muted">Enable the Lua viewer mode</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="enableLuaViewerToggle">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Data Management Tab -->
+                        <div class="tab-pane fade" id="data" role="tabpanel" aria-labelledby="data-tab">
+                            <div class="toru-section">
+                                <h6 class="toru-heading">
+                                    <i class="bi bi-database me-2"></i>Storage
+                                </h6>
+                                <div class="toru-options">
+                                    <div class="toru-item">
+                                        <div class="toru-info">
+                                            <div>
+                                                <span class="toru-title">Reset All Data</span>
+                                                <span class="d-block small text-muted">Delete all locally stored data and reset to default settings</span>
+                                            </div>
+                                        </div>
+                                        <button id="reset-localstorage" class="btn btn-sm btn-danger">
+                                            <i class="bi bi-trash me-2"></i>Reset
+                                        </button>
+                                    </div>
+                                    <div class="alert alert-warning mt-3 mb-0">
+                                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                                        <strong>Warning:</strong> Resetting all data will delete all of your customized towers, settings, and preferences. This action cannot be undone at all.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Footer -->
                 <div class="modal-footer">
+                    <span class="text-muted small me-auto">TDS Statistics Editor <span class="version-full">loading ver...</span></span>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -1180,85 +1473,100 @@
             <div class="modal-content bg-dark text-white">
                 <!-- Modal Header-->
                 <div class="modal-header">
-                    <h5 class="modal-title" id="keyboard-shortcuts-label">
-                        <i class="bi bi-keyboard me-2"></i>Keyboard Shortcuts
-                    </h5>
+                    <div class="d-flex align-items-center">
+                        <div class="toru-icon-container me-3">
+                            <i class="bi bi-keyboard fs-3"></i>
+                        </div>
+                        <div>
+                            <h5 class="modal-title mb-0" id="keyboard-shortcuts-label">Keyboard Shortcuts</h5>
+                            <p class="text-muted small mb-0">Quick access commands for the cool kids</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <!-- Modal Body-->
                 <div class="modal-body">
-                    <div class="table-responsive d-grid" id="keyboard-help-table">
-                        <table class="table table-dark table-hover table-sm">
-                            <thead>
-                                <tr>
-                                    <th>Shortcut</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><kbd>Ctrl</kbd> + <kbd>K</kbd></td>
-                                    <td>Focus search box</td>
-                                </tr>
-                                <tr>
-                                    <td><kbd>Alt</kbd> + <kbd>1</kbd> - <kbd>4</kbd></td>
-                                    <td>Switch between view modes</td>
-                                </tr>
-                                <tr>
-                                    <td><kbd>Alt</kbd> + <kbd>D</kbd></td>
-                                    <td>Toggle delta view</td>
-                                </tr>
-                                <tr>
-                                    <td><kbd>Alt</kbd> + <kbd>C</kbd></td>
-                                    <td>Toggle calculation system</td>
-                                </tr>
-                                <tr>
-                                    <td><kbd>Alt</kbd> + <kbd>V</kbd></td>
-                                    <td>Open clone modal</td>
-                                </tr>
-                                <tr>
-                                    <td><kbd>Alt</kbd> + <kbd>S</kbd></td>
-                                    <td>Open settings</td>
-                                </tr>
-                                <tr>
-                                    <td><kbd>Alt</kbd> + <kbd>L</kbd></td>
-                                    <td>Toggle sidebar</td>
-                                </tr>
-                                <tr>
-                                    <td><kbd>Alt</kbd> + <kbd>H</kbd> / <kbd>F1</kbd></td>
-                                    <td>Show this help dialog</td>
-                                </tr>
-                                <tr>
-                                    <td><kbd>F2</kbd></td>
-                                    <td>Open the TDS Wiki</td>
-                                </tr>
-                                <tr>
-                                    <td><kbd>F3</kbd></td>
-                                    <td>Open the Database</td>
-                                </tr>
-                                <tr>
-                                    <td><kbd>Tab</kbd></td>
-                                    <td>Navigate between UI elements</td>
-                                </tr>
-                                <tr>
-                                    <td><kbd>Enter</kbd> / <kbd>Space</kbd></td>
-                                    <td>Activate focused element</td>
-                                </tr>
-                                <tr>
-                                    <td><kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd></td>
-                                    <td>Navigate in table or dropdown</td>
-                                </tr>
-                                <tr>
-                                    <td><kbd>Escape</kbd></td>
-                                    <td>Close dropdown or dialog</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="toru-section">
+                        <h6 class="toru-heading">
+                            <i class="bi bi-command me-2"></i>Available Shortcuts
+                        </h6>
+                        <div class="toru-options">
+                            <div class="table-responsive justify-content-center" id="keyboard-help-table">
+                                <table class="table table-dark table-hover table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Shortcut</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><kbd>Ctrl</kbd> + <kbd>K</kbd></td>
+                                            <td>Focus search box</td>
+                                        </tr>
+                                        <tr>
+                                            <td><kbd>Alt</kbd> + <kbd>1</kbd> - <kbd>4</kbd></td>
+                                            <td>Switch between view modes</td>
+                                        </tr>
+                                        <tr>
+                                            <td><kbd>Alt</kbd> + <kbd>D</kbd></td>
+                                            <td>Toggle delta view</td>
+                                        </tr>
+                                        <tr>
+                                            <td><kbd>Alt</kbd> + <kbd>C</kbd></td>
+                                            <td>Toggle calculation system</td>
+                                        </tr>
+                                        <tr>
+                                            <td><kbd>Alt</kbd> + <kbd>V</kbd></td>
+                                            <td>Open clone modal</td>
+                                        </tr>
+                                        <tr>
+                                            <td><kbd>Alt</kbd> + <kbd>S</kbd></td>
+                                            <td>Open settings</td>
+                                        </tr>
+                                        <tr>
+                                            <td><kbd>Alt</kbd> + <kbd>L</kbd></td>
+                                            <td>Toggle sidebar</td>
+                                        </tr>
+                                        <tr>
+                                            <td><kbd>Alt</kbd> + <kbd>H</kbd> / <kbd>F1</kbd></td>
+                                            <td>Show this help dialog</td>
+                                        </tr>
+                                        <tr>
+                                            <td><kbd>F2</kbd></td>
+                                            <td>Open the TDS Wiki</td>
+                                        </tr>
+                                        <tr>
+                                            <td><kbd>F3</kbd></td>
+                                            <td>Open the Database</td>
+                                        </tr>
+                                        <tr>
+                                            <td><kbd>Tab</kbd></td>
+                                            <td>Navigate between UI elements</td>
+                                        </tr>
+                                        <tr>
+                                            <td><kbd>Enter</kbd> / <kbd>Space</kbd></td>
+                                            <td>Activate focused element</td>
+                                        </tr>
+                                        <tr>
+                                            <td><kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd></td>
+                                            <td>Navigate in table or dropdown</td>
+                                        </tr>
+                                        <tr>
+                                            <td><kbd>Escape</kbd></td>
+                                            <td>Close dropdown or dialog</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Modal Footer-->
                 <div class="modal-footer">
+                    <span class="text-muted small me-auto">Press <kbd>Cmd</kbd> instead of <kbd>Ctrl</kdb> for Mac</span>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
