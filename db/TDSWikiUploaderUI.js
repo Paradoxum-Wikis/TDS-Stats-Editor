@@ -133,18 +133,22 @@ document.addEventListener('DOMContentLoaded', function() {
                     // format as robloxid for wiki
                     contentUrl = `RobloxID${imageIdStr}`;
                     
-                    // get actual image for preview
-                    const roProxyUrl = `https://assetdelivery.RoProxy.com/v2/assetId/${imageIdStr}`;
+                    // get actual image for preview using the o;n proxy
+                    const roProxyUrl = `https://assetdelivery.roproxy.com/v2/assetId/${imageIdStr}`;
                     try {
-                        const response = await fetch(roProxyUrl, {
+                        const response = await fetch(`https://occulticnine.vercel.app/?url=${encodeURIComponent(roProxyUrl)}`, {
                             method: 'GET',
-                            mode: 'cors',
+                            headers: {
+                                'Origin': window.location.origin,
+                                'X-Requested-With': 'XMLHttpRequest'
+                            }
                         });
+                        
                         const data = await response.json();
                         if (data?.locations?.[0]?.location) {
                             previewUrl = data.locations[0].location;
                         } else {
-                            previewUrl = `https://static.wikia.nocookie.net/tower-defense-sim/images/${imageIdStr}`;
+                            previewUrl = `./../htmlassets/Unavailable.png`;
                         }
                     } catch (error) {
                         console.error(`Failed to fetch Roblox asset ${imageIdStr}:`, error);

@@ -8,23 +8,27 @@ export default class ImageLoader {
     
         if (imageIdStr.startsWith('https')) { // check if its a url
             if (imageIdStr.includes('static.wikia.nocookie.net')) {
-                url = this.trimFandomUrl(imageIdStr); // Trim Fandom URL if needed
+                url = this.trimFandomUrl(imageIdStr);
             } else {
                 url = imageIdStr; // use the url as is
             }
         } else {
             // assume that it's a Roblox asset id
-            const roProxyUrl = `https://assetdelivery.RoProxy.com/v2/assetId/${imageIdStr}`;
+            const roProxyUrl = `https://assetdelivery.roproxy.com/v2/assetId/${imageIdStr}`;
             try {
-                const response = await fetch(roProxyUrl, {
+                const response = await fetch(`https://occulticnine.vercel.app/?url=${encodeURIComponent(roProxyUrl)}`, {
                     method: 'GET',
-                    mode: 'cors',
+                    headers: {
+                        'Origin': window.location.origin,
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
                 });
+                
                 const data = await response.json();
                 if (data?.locations?.[0]?.location) {
                     url = data.locations[0].location;
                 } else {
-                    url = `https://static.wikia.nocookie.net/tower-defense-sim/images/${imageIdStr}`;
+                    url = `./htmlassets/Unavailable.png`;
                 }
             } catch (error) {
                 console.error(`Failed to fetch image ${imageIdStr}:`, error);

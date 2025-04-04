@@ -1,3 +1,7 @@
+Please see: https://tds.fandom.com/wiki/Help:StatisticsEditor
+
+----------
+
 # Tower Defense Simulator Statistics Editor
 A forked version that aims to keep the editor up to date, featuring numerous quality of life improvements, primarily due to its support for the **TDS Wiki**. (Hopefully more to come in the future, lolol.)
 

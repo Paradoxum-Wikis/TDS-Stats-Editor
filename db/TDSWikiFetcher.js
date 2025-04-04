@@ -224,16 +224,20 @@ class TDSWikiFetcher {
                 if (robloxIdMatch) {
                     const robloxId = robloxIdMatch[1];
                     try {
-                        const roProxyUrl = `https://assetdelivery.RoProxy.com/v2/assetId/${robloxId}`;
-                        const response = await fetch(roProxyUrl, {
+                        const roProxyUrl = `https://assetdelivery.roproxy.com/v2/assetId/${robloxId}`;
+                        const response = await fetch(`https://occulticnine.vercel.app/?url=${encodeURIComponent(roProxyUrl)}`, {
                             method: 'GET',
-                            mode: 'cors',
+                            headers: {
+                                'Origin': window.location.origin,
+                                'X-Requested-With': 'XMLHttpRequest'
+                            }
                         });
+                        
                         const data = await response.json();
                         if (data?.locations?.[0]?.location) {
                             tower.image = data.locations[0].location;
                         } else {
-                            tower.image = `https://static.wikia.nocookie.net/tower-defense-sim/images/${robloxId}`;
+                            tower.image = `./../htmlassets/Unavailable.png`;
                         }
                     } catch (error) {
                         console.warn(`failed to get roblox image ${robloxId}:`, error);

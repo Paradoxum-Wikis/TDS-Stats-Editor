@@ -29,7 +29,7 @@ const approvedTowers = [
     'Raspbelle/Archer Rebalance Path 2',
     'Raspbelle/Tsukasa Tower',
     'Raspbelle/Crook Boss',
-    'Onett4smash/Tsukasa Tower (but JSON)'
+    'Onett4smash/Tsukasa Tower (but JSON)',
     'Vessel Of Infinite Destruction/Military Base'
 ];
 
