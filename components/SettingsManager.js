@@ -1,6 +1,8 @@
 class SettingsManager {
     constructor() {
+        this.themeModeControl = document.getElementById('themeModeControl');
         this.themeToggle = document.getElementById('themeToggle');
+        this.themeToggleLabel = document.querySelector('label[for="themeToggle"]');
         this.showSecondsToggle = document.getElementById('showSecondsToggle');
         this.forceUSNumbersToggle = document.getElementById('forceUSNumbersToggle');
         this.showCollapsibleCountsToggle = document.getElementById('showCollapsibleCountsToggle');
@@ -8,16 +10,20 @@ class SettingsManager {
         this.enableLuaViewerToggle = document.getElementById('enableLuaViewerToggle');
         this.animationsStylesheet = document.getElementById('animsCSS');
         this.body = document.body;
-        
-        // Initialize settings from localStorage
-        this.currentTheme = localStorage.getItem('theme') || 'dark';
+        this.systemThemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+        this.themeMode = localStorage.getItem('themeMode') || 'auto';
+        // get manual theme, if manual isn't set, use system theme
+        this.theme = localStorage.getItem('theme') || (this.systemThemeQuery.matches ? 'dark' : 'light');
+
+        this.updateCurrentTheme();
+
         this.showSeconds = localStorage.getItem('showSeconds') !== 'false';
         this.forceUSNumbers = localStorage.getItem('forceUSNumbers') !== 'false';
         this.showCollapsibleCounts = localStorage.getItem('showCollapsibleCounts') !== 'false';
         this.animationsEnabled = localStorage.getItem('animationsEnabled') !== 'false';
         this.enableLuaViewer = localStorage.getItem('enableLuaViewer') === 'true'; 
         
-        // Initialize state object if not already set
         window.state = window.state || {};
         window.state.settings = window.state.settings || {};
         window.state.settings.showSeconds = this.showSeconds;
@@ -28,17 +34,60 @@ class SettingsManager {
         
         this.init();
     }
+
+    // determines what theme it is
+    updateCurrentTheme() {
+        if (this.themeMode === 'auto') {
+            this.currentTheme = this.systemThemeQuery.matches ? 'dark' : 'light';
+        } else {
+            this.currentTheme = this.theme;
+        }
+    }
+
+    applyTheme() {
+        this.body.classList.toggle('light-mode', this.currentTheme === 'light');
+        this.updateThemeImages();
+        if (this.themeToggle) {
+            this.themeToggle.checked = (this.currentTheme === 'dark');
+            this.updateToggleLabel();
+        }
+        if (this.themeModeControl) {
+            this.themeModeControl.value = this.themeMode;
+        }
+
+        this.updateThemeToggleState();
+    }
+
+    updateThemeToggleState() {
+        const isDisabled = (this.themeMode === 'auto');
+        if (this.themeToggle) {
+            this.themeToggle.disabled = isDisabled;
+        }
+        if (this.themeToggleLabel) {
+            this.themeToggleLabel.closest('.toru-item')?.classList.toggle('disabled', isDisabled);
+        }
+    }
+
+
+    handleSystemThemeChange() {
+        if (this.themeMode === 'auto') {
+            this.updateCurrentTheme();
+            this.applyTheme();
+        }
+    }
     
     init() {
-        // Set initial theme state
-        if (this.currentTheme === 'light') {
-            this.body.classList.add('light-mode');
-            this.themeToggle.checked = false;
-        } else {
-            this.body.classList.remove('light-mode');
-            this.themeToggle.checked = true;
+        if (this.themeModeControl) {
+            this.themeModeControl.value = this.themeMode;
+            this.themeModeControl.addEventListener('change', this.setThemeMode.bind(this));
         }
-        
+
+        this.applyTheme(); // this now handles theme application and toggle states
+
+        if (this.themeMode === 'auto') {
+            this.systemThemeQuery.addEventListener('change', this.handleSystemThemeChange.bind(this));
+        }
+
         // Set initial anims state
         if (this.animationsStylesheet) {
             this.animationsStylesheet.disabled = !this.animationsEnabled;
@@ -63,44 +112,50 @@ class SettingsManager {
             this.enableLuaViewerToggle.checked = this.enableLuaViewer;
         }
         
-        // Add event listeners to the toggles
+        // toggles listener
         this.themeToggle.addEventListener('change', this.toggleTheme.bind(this));
         this.showSecondsToggle.addEventListener('change', this.toggleShowSeconds.bind(this));
         this.forceUSNumbersToggle.addEventListener('change', this.toggleForceUSNumbers.bind(this));
         this.showCollapsibleCountsToggle.addEventListener('change', this.toggleShowCollapsibleCounts.bind(this));
         this.animationsToggle.addEventListener('change', this.toggleAnimations.bind(this));
         
-        // Add event listener for Lua Viewer toggle
         if (this.enableLuaViewerToggle) {
             this.enableLuaViewerToggle.addEventListener('change', this.toggleEnableLuaViewer.bind(this));
         }
         
-        // Update toggle labels
-        this.updateToggleLabel();
         this.updateNumberFormatLabel();
     }
-    
-    toggleTheme() {
-        if (this.themeToggle.checked) {
-            // Switch to dark mode
-            this.body.classList.remove('light-mode');
-            this.currentTheme = 'dark';
+
+    // deal with theme mode selection
+    setThemeMode(event) {
+        const newMode = event.target.value;
+        if (this.themeMode === newMode) return;
+
+        // Remove/add system theme listener
+        if (newMode === 'auto') {
+            this.systemThemeQuery.addEventListener('change', this.handleSystemThemeChange.bind(this));
         } else {
-            // Switch to light mode
-            this.body.classList.add('light-mode');
-            this.currentTheme = 'light';
+            this.systemThemeQuery.removeEventListener('change', this.handleSystemThemeChange.bind(this));
         }
-        
-        // Update theme aware images
-        this.updateThemeImages();
-        
-        // Save the preference to localStorage
-        localStorage.setItem('theme', this.currentTheme);
-        
-        // Update the toggle label
-        this.updateToggleLabel();
+
+        this.themeMode = newMode;
+        localStorage.setItem('themeMode', this.themeMode);
+
+        this.updateCurrentTheme();
+        this.applyTheme(); // reapply theme
     }
-    
+
+    // manual selection
+    toggleTheme() {
+        // shouldddd only function when themeMode is manual
+        if (this.themeMode === 'manual') {
+            this.theme = this.themeToggle.checked ? 'dark' : 'light';
+            localStorage.setItem('theme', this.theme);
+            this.updateCurrentTheme();
+            this.applyTheme();
+        }
+    }
+
     toggleShowSeconds() {
         this.showSeconds = this.showSecondsToggle.checked;
         window.state.settings.showSeconds = this.showSeconds;
@@ -160,13 +215,16 @@ class SettingsManager {
         }));
     }
     
+    // updates the label for the manual theme toggle
     updateToggleLabel() {
-        const label = document.querySelector('label[for="themeToggle"]');
-        const icon = label.querySelector('.bi');
-        const titleSpan = label.querySelector('.toru-title');
-        const descriptionSpan = label.querySelector('.d-block.small.text-muted');
-        
-        if (this.currentTheme === 'dark') {
+        if (!this.themeToggleLabel) return;
+        const icon = this.themeToggleLabel.querySelector('.bi');
+        const titleSpan = this.themeToggleLabel.querySelector('.toru-title');
+        const descriptionSpan = this.themeToggleLabel.querySelector('.d-block.small.text-muted');
+
+        const displayTheme = this.currentTheme;
+
+        if (displayTheme === 'dark') {
             icon.className = 'bi bi-moon-stars me-2 toru-icon';
             titleSpan.textContent = 'Dark Mode';
             descriptionSpan.textContent = 'Enjoy the darker side of the web';
@@ -180,7 +238,8 @@ class SettingsManager {
     // handle all theme aware images
     updateThemeImages() {
         document.querySelectorAll('.theme-image').forEach(img => {
-            if (this.currentTheme === 'light') {
+            const themeToUse = this.currentTheme;
+            if (themeToUse === 'light') {
                 if (img.dataset.lightSrc) {
                     img.src = img.dataset.lightSrc;
                 }
@@ -194,6 +253,7 @@ class SettingsManager {
     
     updateNumberFormatLabel() {
         const label = document.querySelector('label[for="forceUSNumbersToggle"]');
+        if (!label) return;
         const titleSpan = label.querySelector('.toru-title');
         const descriptionSpan = label.querySelector('.d-block.small.text-muted');
         

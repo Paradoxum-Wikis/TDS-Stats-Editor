@@ -514,3 +514,7 @@ a:hover {
 .modal-content {
     border-radius: 25px 0 25px 0;
 }
+
+.toru-item.disabled {
+    opacity: 0.4;
+}
