@@ -107,16 +107,22 @@ export default class UpgradeViewer {
 
     async #loadImage() {
         const imageId = this.imageInput.value.trim();
+        const imgElement = document.getElementById('upgrade-image');
+
+        if (!imgElement) return;
+
+        imgElement.alt = "No Upgrade Image";
+
         if (!imageId) {
-            document.getElementById('upgrade-image').src = '';
+            imgElement.src = '';
             return;
         }
-        
+
         let imageLocation = ImageLoader.getFromCache(imageId);
         if (!imageLocation) {
             imageLocation = await ImageLoader.fetchImage(imageId);
         }
-        document.getElementById('upgrade-image').src = imageLocation || '';
+        imgElement.src = imageLocation || '';
     }
 
     #onTextChanged(property, value) {
