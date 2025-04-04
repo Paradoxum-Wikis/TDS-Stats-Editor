@@ -30,7 +30,9 @@ const approvedTowers = [
     'Raspbelle/Tsukasa Tower',
     'Raspbelle/Crook Boss',
     'Onett4smash/Tsukasa Tower (but JSON)',
-    'Vessel Of Infinite Destruction/Military Base'
+    'Vessel Of Infinite Destruction/Military Base',
+    'Onett4smash/Ranger Rework (V1)',
+    'Onett4smash/Slasher Rework',
 ];
 
 // List of featured towers
