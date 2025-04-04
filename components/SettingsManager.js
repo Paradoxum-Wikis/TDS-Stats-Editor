@@ -227,7 +227,7 @@ class SettingsManager {
         if (displayTheme === 'dark') {
             icon.className = 'bi bi-moon-stars me-2 toru-icon';
             titleSpan.textContent = 'Dark Mode';
-            descriptionSpan.textContent = 'Enjoy the darker side of the web';
+            descriptionSpan.textContent = 'Enjoy the dark side of the web';
         } else {
             icon.className = 'bi bi-sun me-2 toru-icon';
             titleSpan.textContent = 'Light Mode';

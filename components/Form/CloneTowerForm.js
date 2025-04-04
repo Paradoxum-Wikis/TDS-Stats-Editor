@@ -80,27 +80,39 @@ export default class CloneTowerForm {
     }
 
     #onSubmit() {
-        const towerName = this.towerName.value;
-        const towerReference = this.fromTowerName.value;
+        const newTowerName = this.towerName.value;
+        const referenceTowerName = this.fromTowerName.value;
 
-        if (!this.#isNameValue(towerName)) {
+        if (!this.#isNameValue(newTowerName)) {
             return;
         }
 
-        const towerData =
-            this.viewer.deltaTowerManager.towers[towerReference]?.json?.[
-                towerReference
-            ];
-
-        if (!towerData) {
+        // gets ref tower
+        const referenceTower = this.viewer.deltaTowerManager.towers[referenceTowerName];
+        if (!referenceTower) {
             return;
         }
 
-        this.viewer.addNewTower(towerName, towerData);
-        
+        const currentTower = this.viewer.tower;
+        this.viewer.load(referenceTower);
+        const combinedData = this.viewer._getCombinedData();
+
+        // create a new master tower with the custom name
+        const newMaster = {};
+        newMaster[newTowerName] = JSON.parse(JSON.stringify(combinedData.master[referenceTowerName]));
+
+        // combined data structure with the new master and slave
+        const newCombinedData = {
+            master: newMaster,
+            slave: JSON.parse(JSON.stringify(combinedData.slave))
+        };
+
+        this.viewer.load(currentTower);
+        this.viewer.import(JSON.stringify(newCombinedData), false, true);
+
         // success notification
         const alert = new Alert(
-            `Tower "${towerReference}" successfully cloned as "${towerName}"`,
+            `Tower "${referenceTowerName}" successfully cloned as "${newTowerName}"`,
             { alertStyle: 'alert-success' }
         );
         alert.alertTimeInSeconds = 2;
