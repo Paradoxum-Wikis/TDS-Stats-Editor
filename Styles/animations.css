@@ -284,3 +284,7 @@ main[role="main"] > div:not(.d-none) {
     display: block;
     animation: dropdownFadeIn 0.2s forwards;
 }
+
+.form-check-input {
+    transition: all 0.2s ease !important;
+}

@@ -113,8 +113,8 @@ main > header {
     background-color: rgba(182, 182, 182, 0.8);
 }
 .form-check-input:checked:hover {
-    background-color: hsl(208, 72%, 28%);
-    border-color: hsl(208, 72%, 28%);
+    background-color: #035D7C;
+    border-color: #035D7C;
 }
 
 .table-cell-input:focus-visible {

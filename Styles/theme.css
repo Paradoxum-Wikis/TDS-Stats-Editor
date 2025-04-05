@@ -266,7 +266,7 @@
 }
 
 .light-mode .modal-header {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, 0.05) !important;
 }
 
 .light-mode .container-fluid.bg-dark,
@@ -381,27 +381,13 @@
     border-color: #00b2ee;
 }
 
+.light-mode .form-check-input:checked:hover {
+    background-color: #035D7C;
+    border-color: #035D7C;
+}
+
 .light-mode .zero-value {
     color: #f64ca1 !important;
-}
-
-.light-mode .btn-outline-primary {
-    color: #00b2ee !important;
-    background-color: #ffffff08 !important;
-    border-color: #00b2ee !important;
-}
-
-.light-mode .btn-check:checked + .btn-outline-primary,
-.light-mode .btn-outline-primary:hover {
-    border-color: #00b2ee !important;
-    background-color: #00b2ee !important;
-    color: white !important;
-}
-
-.light-mode .btn-check:checked + .btn-outline-primary:hover {
-    border-color: #00a1d6 !important;
-    background-color: #00a1d6 !important;
-    color: white !important;
 }
 
 /* Fix for WikitextViewer in light mode */
@@ -455,11 +441,6 @@
 
 .light-mode .lmwikitable {
     background-color: white;
-}
-
-.light-mode .fs-6,
-.light-mode label {
-	color: #212529;
 }
 
 /* mobile components */
