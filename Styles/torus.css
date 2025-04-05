@@ -305,7 +305,7 @@ input {
 }
 
 .form-select {
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
 #lua-panel {
@@ -517,4 +517,17 @@ a:hover {
 
 .toru-item.disabled {
     opacity: 0.4;
+}
+
+/* rof bug styling box */
+.form-control.theme-select {
+    background-color: #101113;
+    color: white;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.form-control.theme-select:focus {
+    background-color: #1a1b1f;
+    border-color: rgba(255, 255, 255, 0.5);
+    color: white;
 }

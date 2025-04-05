@@ -358,19 +358,6 @@
     text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
 }
 
-/* rof bug styling for dark mode (default) */
-.form-control.theme-select {
-    background-color: #101113;
-    color: white;
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
-.form-control.theme-select:focus {
-    background-color: #1a1b1f;
-    border-color: rgba(255, 255, 255, 0.5);
-    color: white;
-}
-
 /* Light mode overrides for the above */
 .light-mode .form-control.theme-select {
     background-color: rgba(0, 0, 0, 0.05);
