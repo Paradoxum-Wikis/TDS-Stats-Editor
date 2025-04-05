@@ -166,133 +166,140 @@ class TDSWikiFetcher {
         try {
             console.log(`getting data for tower: ${tower.name}`);
             const url = `${this.wikiBaseUrl}${tower.url}`;
-            
+
             const response = await this.fetchWithFallback(url);
             const html = await response.text();
-            
+
             // parse html
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
-            
-            // try different selectors for content
-            const contentElement = 
-                doc.querySelector('.WikiaArticle') || 
-                doc.querySelector('.mw-parser-output') ||
-                doc.querySelector('.page-content') ||
-                doc.querySelector('.UserBlogArticle') ||
-                doc.querySelector('#mw-content-text') ||
-                doc.querySelector('.wds-tab__content');
-            
-            if (!contentElement) {
-                console.error(`content not found for ${tower.name}:`, doc.body.innerHTML.substring(0, 500) + '...');
-                throw new Error('no content found');
-            }
-            
-            // get description
-            const paragraphs = contentElement.querySelectorAll('p');
-            if (paragraphs.length > 0) {
-                tower.description = paragraphs[0].textContent.trim();
+
+            let contentElement = null;
+
+            // check for the desc id
+            const descElement = doc.querySelector('#desc');
+            if (descElement) {
+                tower.description = descElement.textContent.trim();
+                contentElement =
+                    doc.querySelector('.mw-parser-output') ||
+                    doc.querySelector('.page-content') ||
+                    doc.querySelector('#mw-content-text') ||
+                    doc.querySelector('.wds-tab__content');
             } else {
-                // try text nodes if no paragraphs
-                const textNodes = Array.from(contentElement.childNodes)
-                    .filter(node => node.nodeType === Node.TEXT_NODE && node.textContent.trim());
-                
-                if (textNodes.length > 0) {
-                    tower.description = textNodes[0].textContent.trim();
-                }
-            }
-            
-            const images = Array.from(contentElement.querySelectorAll('img'))
-                .filter(img => !img.closest('pre')); // no pre tags allowed smh, yet
-                
-            if (images.length > 0) {
-                // Use the first image that isn't a favicon or icon
-                for (const img of images) {
-                    const imgSrc = img.getAttribute('src') || '';
-                    if (imgSrc && !imgSrc.includes('favicon') && !imgSrc.includes('icon')) {
-                        tower.image = imgSrc;
-                        break;
+                // old method for backwards compatibility
+                contentElement =
+                    doc.querySelector('.mw-parser-output') ||
+                    doc.querySelector('.page-content') ||
+                    doc.querySelector('#mw-content-text') ||
+                    doc.querySelector('.wds-tab__content');
+
+                if (contentElement) {
+                    // get description with old method
+                    const paragraphs = contentElement.querySelectorAll('p');
+                    if (paragraphs.length > 0) {
+                        tower.description = paragraphs[0].textContent.trim();
+                    } else {
+                        // try text nodes if no paragraphs
+                        const textNodes = Array.from(contentElement.childNodes)
+                            .filter(node => node.nodeType === Node.TEXT_NODE && node.textContent.trim());
+
+                        if (textNodes.length > 0) {
+                            tower.description = textNodes[0].textContent.trim();
+                        }
                     }
                 }
             }
-            
-            // check for RobloxID
-            if (!tower.image || tower.image.includes('Site-favicon.ico')) {
-                const contentText = contentElement.textContent;
-                const robloxIdMatch = contentText.match(/RobloxID(\d+)/i);
-                
-                if (robloxIdMatch) {
-                    const robloxId = robloxIdMatch[1];
-                    try {
-                        const roProxyUrl = `https://assetdelivery.roproxy.com/v2/assetId/${robloxId}`;
-                        const response = await fetch(`https://occulticnine.vercel.app/?url=${encodeURIComponent(roProxyUrl)}`, {
-                            method: 'GET',
-                            headers: {
-                                'Origin': window.location.origin,
-                                'X-Requested-With': 'XMLHttpRequest'
+
+            if (contentElement) {
+                const images = Array.from(contentElement.querySelectorAll('img'))
+                    .filter(img => !img.closest('pre')); // no pre tags allowed smh, yet
+
+                if (images.length > 0) {
+                    // Use the first image that isn't a favicon or icon
+                    for (const img of images) {
+                        const imgSrc = img.getAttribute('src') || '';
+                        if (imgSrc && !imgSrc.includes('favicon') && !imgSrc.includes('icon')) {
+                            tower.image = imgSrc;
+                            break; // Found a suitable image, stop looking
+                        }
+                    }
+                }
+
+                // check for RobloxID
+                if (!tower.image || tower.image.includes('Site-favicon.ico')) {
+                    const contentText = contentElement.textContent;
+                    const robloxIdMatch = contentText.match(/RobloxID(\d+)/i);
+
+                    if (robloxIdMatch) {
+                        const robloxId = robloxIdMatch[1];
+                        try {
+                            const roProxyUrl = `https://assetdelivery.roproxy.com/v2/assetId/${robloxId}`;
+                            const robloxResponse = await fetch(`https://occulticnine.vercel.app/?url=${encodeURIComponent(roProxyUrl)}`, {
+                                method: 'GET',
+                                headers: {
+                                    'Origin': window.location.origin,
+                                    'X-Requested-With': 'XMLHttpRequest'
+                                }
+                            });
+
+                            const data = await robloxResponse.json();
+                            if (data?.locations?.[0]?.location) {
+                                tower.image = data.locations[0].location;
+                            } else {
+                                tower.image = `./../htmlassets/Unavailable.png`;
                             }
-                        });
-                        
-                        const data = await response.json();
-                        if (data?.locations?.[0]?.location) {
-                            tower.image = data.locations[0].location;
-                        } else {
-                            tower.image = `./../htmlassets/Unavailable.png`;
+                        } catch (error) {
+                            console.warn(`failed to get roblox image ${robloxId}:`, error);
                         }
-                    } catch (error) {
-                        console.warn(`failed to get roblox image ${robloxId}:`, error);
-                    }
-                } else {
-                    // As a last resort, find image URLs in text OUTSIDE of pre tags
-                    const mainContent = Array.from(contentElement.childNodes)
-                        .filter(node => node.nodeName !== 'PRE')
-                        .map(node => node.textContent || '')
-                        .join(' ');
-                        
-                    const imgUrlRegex = /https?:\/\/[^\s"'<>()]+(\.png|\.jpg|\.jpeg|\.gif)(?:\?[^\s"'<>()]*)?/i;
-                    const match = mainContent.match(imgUrlRegex);
-                    
-                    if (match) {
-                        tower.image = match[0];
+                    } else {
+                        // As a last resort, find image URLs in text OUTSIDE of pre tags
+                        const mainContent = Array.from(contentElement.childNodes)
+                            .filter(node => node.nodeName !== 'PRE')
+                            .map(node => node.textContent || '')
+                            .join(' ');
+
+                        const imgUrlRegex = /https?:\/\/[^\s"'<>()]+(\.png|\.jpg|\.jpeg|\.gif)(?:\?[^\s"'<>()]*)?/i;
+                        const match = mainContent.match(imgUrlRegex);
+
+                        if (match) {
+                            tower.image = match[0];
+                        }
                     }
                 }
-            }
-            
-            // get tower tag
-            const allTextContent = contentElement.textContent;
-            const tagMatch = allTextContent.match(/\b(New|Rework|Rebalance)\b/);
-            if (tagMatch) {
-                tower.tag = tagMatch[0];
-            }
-            
-            // get json data
-            const preElement = doc.querySelector('pre#towerdata') || 
-                              doc.querySelector('pre[id="towerdata"]') ||
-                              doc.querySelector('pre');
-            
-            if (preElement) {
-                const preContent = preElement.innerHTML.trim();
-                
-                // First check if the pre contains an anchor tag or a plain URL
-                const linkMatch = preContent.match(/<a\s+href="(https?:\/\/tds\.fandom\.com\/wiki\/User_blog:.+\/.+)".*?>.*?<\/a>/i) || 
-                                 preContent.match(/(https?:\/\/tds\.fandom\.com\/wiki\/User_blog:.+\/.+)/i);
-                
-                if (linkMatch) {
-                    // Extract just the URL from either the href attribute or direct text
-                    tower.linkedTower = linkMatch[1]; 
-                    tower.isLink = true;
-                } else {
-                    try {
-                        const jsonData = JSON.parse(preContent);
-                        tower.data = jsonData;
-                        
-                        // get tower name from json
-                        const firstKey = Object.keys(jsonData)[0];
-                        if (firstKey && typeof firstKey === 'string') {
-                            tower.jsonName = firstKey;
+
+                // get tower tag
+                const allTextContent = contentElement.textContent;
+                const tagMatch = allTextContent.match(/\b(New|Rework|Rebalance)\b/);
+                if (tagMatch) {
+                    tower.tag = tagMatch[0];
+                }
+
+                // get json data
+                const preElement = doc.querySelector('pre#towerdata') ||
+                                  doc.querySelector('pre[id="towerdata"]') ||
+                                  doc.querySelector('pre');
+
+                if (preElement) {
+                    const preContent = preElement.innerHTML.trim();
+                    const linkMatch = preContent.match(/<a\s+href="(https?:\/\/tds\.fandom\.com\/wiki\/User_blog:.+\/.+)".*?>.*?<\/a>/i) ||
+                                     preContent.match(/(https?:\/\/tds\.fandom\.com\/wiki\/User_blog:.+\/.+)/i);
+
+                    if (linkMatch) {
+                        tower.linkedTower = linkMatch[1];
+                        tower.isLink = true;
+                    } else {
+                        try {
+                            const jsonData = JSON.parse(preContent);
+                            tower.data = jsonData;
+
+                            // get tower name from json
+                            const firstKey = Object.keys(jsonData)[0];
+                            if (firstKey && typeof firstKey === 'string') {
+                                tower.jsonName = firstKey;
+                            }
+                        } catch (jsonError) {
+                            console.warn(`bad json for ${tower.name}:`, jsonError);
                         }
-                    } catch (jsonError) {
-                        console.warn(`bad json for ${tower.name}:`, jsonError);
                     }
                 }
             }
@@ -305,15 +312,13 @@ class TDSWikiFetcher {
                     .map(node => node.textContent.trim())
                     .filter(text => text && !text.includes('•'))
                     .shift();
-                    
+
                 if (dateText) {
                     tower.uploadDate = dateText;
                 }
             } else {
                 // look for date elsewhere
-                const timeElement = doc.querySelector('time') || 
-                                   doc.querySelector('.post-details time') ||
-                                   doc.querySelector('.WikiaArticleTime');
+                const timeElement = doc.querySelector('time');
                 if (timeElement) {
                     tower.uploadDate = timeElement.textContent.trim();
                 }
