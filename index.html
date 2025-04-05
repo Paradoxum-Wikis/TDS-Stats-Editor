@@ -248,7 +248,7 @@
             <!-- Calculation System -->
             <div class="card mb-2 d-none bg-dark text-white border-secondary mx-2" id="calc-system-section">
                 <div class="card-header border-secondary bg-dark bg-gradient">
-                    <h6 class="mb-0">Calculation System (BETA)</h6>
+                    <h6 class="mb-0">Calculation System Changer</h6>
                 </div>
                 <div class="card-body">
                     <p class="text-muted small mb-2">Choose which tower's calculation logic to use:</p>
@@ -482,8 +482,8 @@
                                 title="Reverts stats and references back to its original state.">Reset to
                                 Default</button>
                             <button id="table-clear-data" class="btn btn-sm btn-outline-secondary"
-                                title="Wipe everything, a factory reset.">Clear
-                                All Data</button>
+                                title="Wipe all towers, a factory reset to them.">Clear
+                                All Towers</button>
                         </div>
 
                         <!-- Level buttons-->
@@ -530,12 +530,19 @@
                             <button id="table-unit-reset" class="btn btn-sm btn-outline-secondary"
                                 title="Reverts stats and references back to its original state.">Reset to
                                 Default</button>
-                            <!-- <button id="table-unit-resetAll" class="btn btn-sm btn-outline-danger"
-                                title="Clears all unit changes">Clear
-                                All Unit Changes</button> -->
                         </div>
+                    </div>
+                </div>
 
-
+                <!-- Notes Section -->
+                <div id="notes-section" style="width: calc(100% - 1rem);">
+                    <div class="card bg-dark text-white border-secondary overflow-hidden">
+                        <div class="card-header bg-dark bg-gradient">
+                            <h6 class="mb-0"><i class="bi bi-sticky me-2"></i>Notes</h6>
+                        </div>
+                        <div class="card-body">
+                            <textarea id="tower-notes-textarea" class="form-control form-control-sm bg-dark text-white" rows="6" placeholder="Add notes for this tower here. Stuff like its passive or maybe quirks are a few examples."></textarea>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -561,7 +568,7 @@
                                     <li class="mb-2">Tinker with the statistic values!</li>
                                     <li class="mb-2">Export your changes as JSON or Wikitable</li>
                                     <li class="mb-2">Share it to everyone! On Discord, X, Reddit, or even our Database!</li>
-                                    <p class="text-info text-center">Pro Tip: Seeing an outdated table? Try resetting to default or clear all data! You might be on an older cache.</p>
+                                    <p class="text-info text-center">Pro Tip: Seeing an outdated table? Try resetting to default or clear all towers! You might be on an older cache.</p>
                                 </ol>
                             </div>
                         </div>

@@ -1098,7 +1098,10 @@ class CalculatedManager {
         let valid = true;
 
         if (calculatedField.Exclude) {
-            valid &= !calculatedField.Exclude.includes(skinData.tower.name);
+            // Check both tower name AND calculation system for exclusions
+            valid &= !(calculatedField.Exclude.includes(skinData.tower.name) || 
+                     (skinData.tower.calculationSystem && 
+                      calculatedField.Exclude.includes(skinData.tower.calculationSystem)));
         }
         
         // custom calculation systems
