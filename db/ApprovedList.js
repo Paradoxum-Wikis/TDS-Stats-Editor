@@ -33,6 +33,11 @@ const approvedTowers = [
     'Vessel Of Infinite Destruction/Military Base',
     'Onett4smash/Ranger Rework (V1)',
     'Onett4smash/Slasher Rework',
+    'Your nameless protagonist/Enforcer',
+    'Chilloutofpewp2nd/Mecha Base',
+    'Chilloutofpewp2nd/Gatling',
+    'Chilloutofpewp2nd/Turret',
+    'Chilloutofpewp2nd/War Machine',
 ];
 
 // List of featured towers
@@ -40,6 +45,7 @@ const featuredTowers = [
     "Vessel Of Infinite Destruction/Ranger",
     'Raspbelle/Tsukasa Tower',
     'Raspbelle/Crook Boss',
+    'Your nameless protagonist/Enforcer',
 ];
 
 // List of grandfathered towers
