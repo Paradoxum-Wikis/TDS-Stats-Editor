@@ -44,7 +44,7 @@ const approvedTowers = [
 const featuredTowers = [
     "Vessel Of Infinite Destruction/Ranger",
     'Raspbelle/Tsukasa Tower',
-    'Raspbelle/Crook Boss',
+    'Vessel Of Infinite Destruction/Military Base',
     'Your nameless protagonist/Enforcer',
 ];
 
