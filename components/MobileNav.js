@@ -136,7 +136,7 @@ export default class MobileNav {
         
         <!-- Calculation System -->
         <div class="mt-4">
-          <p class="text-muted small mb-2 text-center">Calculation System (BETA)</p>
+          <p class="text-muted small mb-2 text-center">Calculation System Changer</p>
           <div class="card bg-dark text-white border-secondary mb-3">
             <div class="card-body p-3">
               <select class="form-select form-select-sm bg-dark text-white mb-2" id="mobile-calculation-system-select">

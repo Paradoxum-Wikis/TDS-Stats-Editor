@@ -191,35 +191,50 @@ const ViewerData = {
         // resets tower to default
         reset() {
             // avoid creating new managers and reuse existing ones
-            const defaultTowerManager = window.cachedDefaultTowerManager || new TowerManager();
+            const defaultTowerManager = window.cachedDefaultTowerManager || new TowerManager('default');
             if (!window.cachedDefaultTowerManager) window.cachedDefaultTowerManager = defaultTowerManager;
-            
+
             const isCustomTower = !defaultTowerManager.towerData.hasOwnProperty(this.tower.name);
-            
+            const notesTextarea = document.getElementById('tower-notes-textarea');
+            const skinName = this.towerVariants.getSelectedName();
+
             if (isCustomTower) {
                 if (window.originalCustomTowers && window.originalCustomTowers[this.tower.name]) {
-                    const originalData = typeof structuredClone !== 'undefined' 
+                    const originalData = typeof structuredClone !== 'undefined'
                         ? structuredClone(window.originalCustomTowers[this.tower.name])
                         : JSON.parse(JSON.stringify(window.originalCustomTowers[this.tower.name]));
-                        
+
                     this.tower.importJSON(originalData);
                     this.deltaTower.importJSON(originalData);
-                    
                     this.reload();
                     return;
                 }
+                // If there's no note value - just clear notes
+                if (notesTextarea) notesTextarea.value = '';
+                this.reload();
                 return;
             }
-            
+
             // for non custom towers just reset to default
-            const towerData = defaultTowerManager.towers[this.tower.name].json;
-            
+            const defaultTower = defaultTowerManager.towers[this.tower.name];
+            if (!defaultTower) {
+                console.error(`Default tower data not found for ${this.tower.name}`);
+                if (notesTextarea) notesTextarea.value = ''; // Clear notes if default is missing
+                this.reload();
+                return;
+            }
+
             const towerDataCopy = typeof structuredClone !== 'undefined'
-                ? structuredClone(towerData) 
-                : JSON.parse(JSON.stringify(towerData));
-            
+                ? structuredClone(defaultTower.json)
+                : JSON.parse(JSON.stringify(defaultTower.json));
+
             this.deltaTower.importJSON(towerDataCopy);
             this.tower.importJSON(towerDataCopy);
+
+            // reset notes textarea to default value from the default tower data
+            const defaultNote = defaultTower?.json?.[this.tower.name]?.[skinName]?.Defaults?.Note || '';
+            if (notesTextarea) notesTextarea.value = defaultNote;
+
 
             this.reload();
         },

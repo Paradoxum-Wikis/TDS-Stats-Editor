@@ -48,6 +48,17 @@ const ViewerUI = {
                     this.showLua();
                     break;
             }
+
+            // load tower notes
+            const notesTextarea = document.getElementById('tower-notes-textarea');
+            if (notesTextarea && this.tower && this.deltaTower && this.towerVariants) {
+                const towerName = this.tower.name;
+                const skinName = this.towerVariants.getSelectedName();
+                const note = this.deltaTower?.json?.[towerName]?.[skinName]?.Defaults?.Note ?? this.tower?.json?.[towerName]?.[skinName]?.Defaults?.Note ?? '';
+                notesTextarea.value = note;
+            } else if (notesTextarea) {
+                notesTextarea.value = '';
+            }
         },
 
         // updates the tower name display

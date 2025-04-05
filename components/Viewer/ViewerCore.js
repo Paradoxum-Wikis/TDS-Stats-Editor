@@ -309,6 +309,55 @@ class ViewerCore {
         });
 
         this.calculationSystemManager = new CalculationSystemManager();
+
+        // setup notes saving
+        const notesTextarea = document.getElementById('tower-notes-textarea');
+        if (notesTextarea) {
+            notesTextarea.addEventListener('input', () => {
+                if (this.tower && this.deltaTower) {
+                    this.saveNotes(notesTextarea.value);
+                }
+            });
+        }
+    }
+
+    saveNotes(noteText) {
+        if (!this.tower || !this.deltaTower) return;
+        
+        const towerName = this.tower.name;
+        const skinName = this.towerVariants.getSelectedName();
+        
+        // checks for structure
+        if (!this.deltaTower.json[towerName]) {
+            this.deltaTower.json[towerName] = {};
+        }
+        
+        if (!this.deltaTower.json[towerName][skinName]) {
+            this.deltaTower.json[towerName][skinName] = {};
+        }
+
+        if (!this.deltaTower.json[towerName][skinName].Defaults) {
+            this.deltaTower.json[towerName][skinName].Defaults = {};
+        }
+        
+        // add/update the note
+        this.deltaTower.json[towerName][skinName].Defaults.Note = noteText;
+        
+        if (!this.tower.json[towerName]) {
+            this.tower.json[towerName] = {};
+        }
+        
+        if (!this.tower.json[towerName][skinName]) {
+            this.tower.json[towerName][skinName] = {};
+        }
+        
+        if (!this.tower.json[towerName][skinName].Defaults) {
+            this.tower.json[towerName][skinName].Defaults = {};
+        }
+        
+        this.tower.json[towerName][skinName].Defaults.Note = noteText;
+        this.deltaTowerManager.saveTower(this.deltaTower);
+        this.app.towerManager.saveTower(this.tower);
     }
 
     // loads up a tower to show
