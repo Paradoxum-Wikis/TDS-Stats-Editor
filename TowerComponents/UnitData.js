@@ -508,7 +508,7 @@ export default {
         BurstCooldown: 4,
         MissileAmount: 2,
         Range: 24,
-        Health: 120,
+        Health: 250,
         Lifetime: 60,
         Speed: 1.5,
         IgnoreCollisionDamage: true,
