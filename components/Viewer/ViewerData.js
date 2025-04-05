@@ -61,6 +61,8 @@ const ViewerData = {
                     let renamedTowerData = {};
                     renamedTowerData[originalName] = JSON.parse(JSON.stringify(newTowerData[originalName]));
                     
+                    // add the new tower. This calls load() internally
+                    // the load() method shoulddddd dispatch towerLoaded
                     this.addNewTower(originalName, renamedTowerData[originalName]);
                     
                     if (!window.originalCustomTowers) {
@@ -97,6 +99,7 @@ const ViewerData = {
                         this.unitDeltaManager.save();
                     }
                     
+                    // reload ui again
                     this.reload();
                     
                     this.deltaTower.importJSON(JSON.parse(JSON.stringify(this.tower.json)));
@@ -113,6 +116,7 @@ const ViewerData = {
                 } else {
                     // non custom towers
                     this.tower.importJSON(newTowerData);
+                    this.deltaTower.importJSON(newTowerData);
                     
                     if (importedData.slave || importedData.units) {
                         const slaveData = importedData.slave || importedData.units;
@@ -126,6 +130,11 @@ const ViewerData = {
                         
                         this.unitManager.save();
                     }
+                    
+                    // dispatch towerLoaded AFTER importing data
+                    document.dispatchEvent(new CustomEvent('towerLoaded', {
+                        detail: { tower: this.tower }
+                    }));
                     
                     this.reload();
                     
