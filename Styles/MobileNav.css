@@ -260,4 +260,8 @@
 	.mobile-tools-section > div {
 		margin-bottom: 1.5rem;
 	}
+
+	.landingimg {
+		max-width: 100% !important;
+	}
 }

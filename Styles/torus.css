@@ -531,3 +531,7 @@ a:hover {
     border-color: rgba(255, 255, 255, 0.5);
     color: white;
 }
+
+.landingimg {
+    max-width: 50%;
+}

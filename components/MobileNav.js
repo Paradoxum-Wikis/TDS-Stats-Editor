@@ -122,7 +122,7 @@ export default class MobileNav {
               <i class="bi bi-table me-2"></i>Table
             </button>
             <button class="btn btn-sm btn-outline-secondary" data-view="Wikitable">
-              <i class="bi bi-layout-text-window me-2"></i>Wiki
+              <i class="bi bi-layout-text-window me-2"></i>Wikitable
             </button>
             <button class="btn btn-sm btn-outline-secondary" data-view="JSON">
               <i class="bi bi-filetype-json me-2"></i>JSON
