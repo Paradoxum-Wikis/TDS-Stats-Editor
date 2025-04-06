@@ -98,7 +98,7 @@ export default class PropertyViewer {
         // tower button
         this.towerPropsBtn = document.createElement('button');
         this.towerPropsBtn.id = 'property-tower';
-        this.towerPropsBtn.className = 'btn btn-sm btn-primary';
+        this.towerPropsBtn.className = 'btn btn-sm btn-dark';
         this.towerPropsBtn.textContent = 'Tower';
         this.towerPropsBtn.addEventListener('click', this.showTowerProperties.bind(this));
         
@@ -438,8 +438,8 @@ export default class PropertyViewer {
     // methods to switch between tower and unit property views
     showTowerProperties() {
         this.towerPropsBtn.classList.remove('btn-outline-dark');
-        this.towerPropsBtn.classList.add('btn-primary');
-        this.unitPropsBtn.classList.remove('btn-primary');
+        this.towerPropsBtn.classList.add('btn-dark');
+        this.unitPropsBtn.classList.remove('btn-dark');
         this.unitPropsBtn.classList.add('btn-outline-dark');
         this.currentView = 'tower';
         this.loadCurrentProperties();
@@ -447,8 +447,8 @@ export default class PropertyViewer {
 
     showUnitProperties() {
         this.unitPropsBtn.classList.remove('btn-outline-dark');
-        this.unitPropsBtn.classList.add('btn-primary');
-        this.towerPropsBtn.classList.remove('btn-primary');
+        this.unitPropsBtn.classList.add('btn-dark');
+        this.towerPropsBtn.classList.remove('btn-dark');
         this.towerPropsBtn.classList.add('btn-outline-dark');
         this.currentView = 'unit';
         this.loadCurrentProperties();
