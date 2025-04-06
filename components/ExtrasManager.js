@@ -1,6 +1,11 @@
 import TextFormatter from './TextFormatter.js';
 
 const previewClass = 'small text-muted mt-1 formatted-preview ps-2 border-start border-secondary';
+const colorRegex = /\\c([a-zA-Z]+|#[0-9a-fA-F]{3,6})\\/;
+const formControlClass = ['form-control', 'form-control-sm', 'text-white', 'bg-dark'];
+const dangerClass = ['btn', 'btn-sm', 'btn-outline-danger'];
+const primaryClass = ['btn', 'btn-sm', 'btn-primary'];
+const secondaryClass = ['btn', 'btn-sm', 'btn-outline-secondary'];
 
 export default class ExtrasManager {
     constructor(viewer, container, addButton, addGroupButton) {
@@ -50,6 +55,23 @@ export default class ExtrasManager {
         });
     }
 
+    createPreviewElement(inputElement, parent) {
+        const previewElement = document.createElement('div');
+        previewElement.className = previewClass;
+        TextFormatter.initForElement(inputElement, previewElement);
+        
+        // Show/hide preview based on format tags usage
+        inputElement.addEventListener('input', () => {
+            const hasFormatting = colorRegex.test(inputElement.value);
+            previewElement.style.display = hasFormatting ? 'block' : 'none';
+        });
+        
+        parent.appendChild(previewElement);
+        previewElement.style.display = 'none';
+        
+        return previewElement;
+    }
+
     showAddGroupForm() {
         const upgradeIndex = this.upgradeIndex;
         const skin = this.viewer.getActiveSkin();
@@ -90,19 +112,8 @@ export default class ExtrasManager {
         `;
         const groupNameInput = groupNameField.querySelector('input');
 
-        // name field preview
-        const namePreviewElement = document.createElement('div');
-        namePreviewElement.className = previewClass;
-        TextFormatter.initForElement(groupNameInput, namePreviewElement);
-
-        groupNameInput.addEventListener('input', () => {
-            // Checks the color pattern start tag
-            const hasFormatting = /\\c([a-zA-Z]+|#[0-9a-fA-F]{3,6})\\/.test(groupNameInput.value); 
-            namePreviewElement.style.display = hasFormatting ? 'block' : 'none';
-        });
-
-        groupNameField.appendChild(namePreviewElement);
-        namePreviewElement.style.display = 'none';
+        // name preview
+        this.createPreviewElement(groupNameInput, groupNameField);
 
         const contentField = document.createElement('div');
         contentField.classList.add('mb-2');
@@ -112,31 +123,22 @@ export default class ExtrasManager {
         `;
         const contentInput = contentField.querySelector('textarea');
 
-        const contentPreviewElement = document.createElement('div');
-        contentPreviewElement.className = previewClass;
-        TextFormatter.initForElement(contentInput, contentPreviewElement);
-
-        contentInput.addEventListener('input', () => {
-            const hasFormatting = /\\c([a-zA-Z]+|#[0-9a-fA-F]{3,6})\\/.test(contentInput.value);
-            contentPreviewElement.style.display = hasFormatting ? 'block' : 'none';
-        });
-
-        contentField.appendChild(contentPreviewElement);
-        contentPreviewElement.style.display = 'none';
+        // content preview
+        this.createPreviewElement(contentInput, contentField);
 
         // Buttons
         const buttonGroup = document.createElement('div');
         buttonGroup.classList.add('d-flex', 'justify-content-end', 'gap-2');
         
         const cancelButton = document.createElement('button');
-        cancelButton.classList.add('btn', 'btn-sm', 'btn-outline-secondary');
+        secondaryClass.forEach(className => cancelButton.classList.add(className));
         cancelButton.textContent = 'Cancel';
         cancelButton.addEventListener('click', () => {
             this.container.removeChild(groupForm);
         });
         
         const saveButton = document.createElement('button');
-        saveButton.classList.add('btn', 'btn-sm', 'btn-primary');
+        primaryClass.forEach(className => saveButton.classList.add(className));
         saveButton.textContent = 'Create Group';
         saveButton.addEventListener('click', () => {
             const groupId = groupIdSelect.value;
@@ -187,26 +189,17 @@ export default class ExtrasManager {
     addExtra(extra, index) {
         const inputGroup = document.createElement('form');
         ['input-group', 'mb-2'].forEach(className => inputGroup.classList.add(className));
+        
         const inputText = document.createElement('input');
-        ['form-control', 'form-control-sm', 'text-white'].forEach(className => inputText.classList.add(className));
+        formControlClass.forEach(className => inputText.classList.add(className));
         inputText.type = 'text';
         inputText.value = extra;
         inputText.placeholder = 'Add something...';
-        
-        // preview element
-        const previewElement = document.createElement('div');
-        previewElement.className = previewClass;
-        TextFormatter.initForElement(inputText, previewElement);
-        
-        // Show/hide preview based on format tags usage
-        inputText.addEventListener('input', () => {
-            const hasFormatting = /\\c([a-zA-Z]+|#[0-9a-fA-F]{3,6})\\/.test(inputText.value);
-            previewElement.style.display = hasFormatting ? 'block' : 'none';
-        });
-        
+
+        const previewElement = this.createPreviewElement(inputText, this.container);        
         const inputButtonGroup = document.createElement('div');
         const removeButton = document.createElement('div');
-        ['btn', 'btn-sm', 'btn-outline-danger'].forEach(className => removeButton.classList.add(className));
+        dangerClass.forEach(className => removeButton.classList.add(className));
         removeButton.innerText = 'Remove';
         inputButtonGroup.appendChild(removeButton);
         inputGroup.appendChild(inputText);
