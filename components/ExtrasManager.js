@@ -1,3 +1,7 @@
+import TextFormatter from './TextFormatter.js';
+
+const previewClass = 'small text-muted mt-1 formatted-preview ps-2 border-start border-secondary';
+
 export default class ExtrasManager {
     constructor(viewer, container, addButton, addGroupButton) {
         this.viewer = viewer;
@@ -82,11 +86,24 @@ export default class ExtrasManager {
                 <label class="me-2">Name:</label>
                 <input type="text" class="form-control form-control-sm text-white bg-dark" placeholder="Custom group name">
             </div>
-            <small class="text-muted">If this group ID already has a name, you don't need to specify it again.</small>
+            <small class="text-muted d-block">If this group ID already has a name, you don't need to specify it again.</small> 
         `;
         const groupNameInput = groupNameField.querySelector('input');
-        
-        // Add item
+
+        // name field preview
+        const namePreviewElement = document.createElement('div');
+        namePreviewElement.className = previewClass;
+        TextFormatter.initForElement(groupNameInput, namePreviewElement);
+
+        groupNameInput.addEventListener('input', () => {
+            // Checks the color pattern start tag
+            const hasFormatting = /\\c([a-zA-Z]+|#[0-9a-fA-F]{3,6})\\/.test(groupNameInput.value); 
+            namePreviewElement.style.display = hasFormatting ? 'block' : 'none';
+        });
+
+        groupNameField.appendChild(namePreviewElement);
+        namePreviewElement.style.display = 'none';
+
         const contentField = document.createElement('div');
         contentField.classList.add('mb-2');
         contentField.innerHTML = `
@@ -94,7 +111,19 @@ export default class ExtrasManager {
             <textarea class="form-control form-control-sm bg-dark" rows="2" placeholder="Enter content for the first item"></textarea>
         `;
         const contentInput = contentField.querySelector('textarea');
-        
+
+        const contentPreviewElement = document.createElement('div');
+        contentPreviewElement.className = previewClass;
+        TextFormatter.initForElement(contentInput, contentPreviewElement);
+
+        contentInput.addEventListener('input', () => {
+            const hasFormatting = /\\c([a-zA-Z]+|#[0-9a-fA-F]{3,6})\\/.test(contentInput.value);
+            contentPreviewElement.style.display = hasFormatting ? 'block' : 'none';
+        });
+
+        contentField.appendChild(contentPreviewElement);
+        contentPreviewElement.style.display = 'none';
+
         // Buttons
         const buttonGroup = document.createElement('div');
         buttonGroup.classList.add('d-flex', 'justify-content-end', 'gap-2');
@@ -162,6 +191,19 @@ export default class ExtrasManager {
         ['form-control', 'form-control-sm', 'text-white'].forEach(className => inputText.classList.add(className));
         inputText.type = 'text';
         inputText.value = extra;
+        inputText.placeholder = 'Add something...';
+        
+        // preview element
+        const previewElement = document.createElement('div');
+        previewElement.className = previewClass;
+        TextFormatter.initForElement(inputText, previewElement);
+        
+        // Show/hide preview based on format tags usage
+        inputText.addEventListener('input', () => {
+            const hasFormatting = /\\c([a-zA-Z]+|#[0-9a-fA-F]{3,6})\\/.test(inputText.value);
+            previewElement.style.display = hasFormatting ? 'block' : 'none';
+        });
+        
         const inputButtonGroup = document.createElement('div');
         const removeButton = document.createElement('div');
         ['btn', 'btn-sm', 'btn-outline-danger'].forEach(className => removeButton.classList.add(className));
@@ -170,6 +212,7 @@ export default class ExtrasManager {
         inputGroup.appendChild(inputText);
         inputGroup.appendChild(inputButtonGroup);
         this.container.appendChild(inputGroup);
+        this.container.appendChild(previewElement);
 
         inputGroup.addEventListener(
             'submit',
@@ -258,8 +301,15 @@ export default class ExtrasManager {
         });
         
         let html = '';
-        regularExtras.forEach(extra => {
-            html += `<div>${extra}</div>`;
+        regularExtras.forEach(change => {
+            // if this is a user-entered extra (starts with ●) or an auto-generated change with icons
+            if (change.startsWith('●')) {
+                // User entered extra - DO escape HTML
+                html += `<div class="upgrade-change">${TextFormatter.format(change)}</div>`;
+            } else {
+                // Auto generated change with icons - DO NOT escape HTML
+                html += `<div class="upgrade-change">${TextFormatter.format(change, false)}</div>`;
+            }
         });
 
         const showCounts = window.state?.settings?.showCollapsibleCounts !== false;
@@ -289,6 +339,7 @@ export default class ExtrasManager {
                     }
                 }
                 
+                // format group label without escaping HTML (cuz customName might have color tags)
                 html += `
                     <div class="mt-2">
                         <button class="btn btn-sm btn-primary border25 w-100" 
@@ -296,12 +347,16 @@ export default class ExtrasManager {
                                 data-bs-toggle="collapse" 
                                 data-bs-target="#${collapsibleId}" 
                                 aria-expanded="false">
-                            <span class="when-closed">▼ ${groupLabel}${showCounts ? ` (${items.length})` : ''} ▼</span>
-                            <span class="when-open">▲ ${groupLabel} ▲</span>
+                            <span class="when-closed">▼ ${TextFormatter.format(groupLabel, false)}${showCounts ? ` (${items.length})` : ''} ▼</span>
+                            <span class="when-open">▲ ${TextFormatter.format(groupLabel, false)} ▲</span>
                         </button>
                         <div class="collapse mt-2" id="${collapsibleId}">
                             <div class="ps-2 border-start border-secondary">
-                                ${items.map(extra => `<div>${extra}</div>`).join('')}
+                                ${items.map(item => {
+                                    // again, check if it's a user entered extra
+                                    const escapeHtml = item.startsWith('●');
+                                    return `<div>${TextFormatter.format(item, !escapeHtml)}</div>`;
+                                }).join('')}
                             </div>
                         </div>
                     </div>
