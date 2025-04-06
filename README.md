@@ -1,4 +1,6 @@
-Please see: https://tds.fandom.com/wiki/Help:StatisticsEditor
+The website can be accessed from: https://tds-editor.live/
+
+Please see for new readme: https://tds.fandom.com/wiki/Help:StatisticsEditor
 
 ----------
 
