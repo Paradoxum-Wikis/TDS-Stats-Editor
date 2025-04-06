@@ -237,9 +237,7 @@ main[role="main"] > div:not(.d-none) {
 
 /* Dropdown items */
 .dropdown-item {
-    position: relative;
     transition: all 0.15s ease-out;
-    overflow: hidden;
 }
 
 .dropdown-item:hover {

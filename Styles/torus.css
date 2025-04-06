@@ -535,3 +535,8 @@ a:hover {
 .landingimg {
     max-width: 50%;
 }
+
+.dropdown-item {
+    position: relative;
+    overflow: hidden;
+}
