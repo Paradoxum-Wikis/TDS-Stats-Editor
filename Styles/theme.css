@@ -303,7 +303,7 @@
 }
 
 .light-mode ::-webkit-scrollbar-thumb:hover {
-    background-color: #00bfff;
+    background-color: #6adaff;
 }
 
 .light-mode .btn-toggle {
