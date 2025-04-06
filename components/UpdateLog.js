@@ -1,25 +1,23 @@
 /**
- * Gets update logs from two different sources:
- * - GitHub commits (for the About modal)
- * - updatelog.json (for the landing page)
+ * Gets update logs from GitHub commits (for the About modal)
+ * Uses UIHelpers for updatelog.json data
  */
+import { loadUpdateLog } from './UIHelpers.js';
+
 class UpdateLog {
     constructor() {
         this.repoOwner = 't7ru';
         this.repoName = 'TDS-Stats-Editor';
         this.commitLimit = 20;
-        
         this.modalContainer = null;  // For GitHub commits
-        this.landingContainer = null;  // For JSON updates
     }
     
     async init() {
         this.modalContainer = document.getElementById('update-log-content');
-        this.landingContainer = document.getElementById('landing-update-log');
-        
-        if (!this.modalContainer && !this.landingContainer) return;
-
         if (this.modalContainer) this.fetchCommits();
+        
+        // For JSON updates
+        loadUpdateLog();
         
         const modal = document.getElementById('discord-modal');
         const updatesTab = document.getElementById('aboutSectionUpdates');
