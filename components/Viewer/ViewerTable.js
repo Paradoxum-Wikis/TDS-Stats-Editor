@@ -28,7 +28,14 @@ const ViewerTable = {
                 ignore: this.propertyViewer.disabled
             });
 
-            this.unitTable.load(this.activeUnits);
+            // give property viewer its slave properties
+            this.propertyViewer.initializeUnitProperties();
+            
+            // load the slave table with property filtering
+            this.unitTable.load(this.activeUnits, {
+                ignore: this.propertyViewer.currentView === 'unit' ? 
+                    this.propertyViewer.unitDisabled : []
+            });
         },
 
         // updates unit table data

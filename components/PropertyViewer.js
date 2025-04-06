@@ -71,6 +71,49 @@ export default class PropertyViewer {
         this.baseBtn.addEventListener('click', this.toggleBase.bind(this));
         this.extraBtn.addEventListener('click', this.toggleExtra.bind(this));
         this.calcBtn.addEventListener('click', this.toggleCalc.bind(this));
+
+        // slave table's configs - all in one place
+        this.unitDisabled = [
+        ];
+        
+        this.unitHidden = [
+            '_towerName',
+            '_skinName',
+        ]; 
+        
+        this.unitBaseProperties = [
+            'Name',
+            'Damage',
+            'Health', 
+            'Speed',
+            'Cooldown',
+            'Range'
+        ];
+
+        this.viewSection = document.getElementById('property-viewer-section');
+        const existingBtnGroup = this.viewSection.querySelector('.btn-group');
+        const tabsGroup = document.createElement('div');
+        tabsGroup.className = 'btn-group w-100 p-2 pt-0';
+        
+        // tower button
+        this.towerPropsBtn = document.createElement('button');
+        this.towerPropsBtn.id = 'property-tower';
+        this.towerPropsBtn.className = 'btn btn-sm btn-primary';
+        this.towerPropsBtn.textContent = 'Tower';
+        this.towerPropsBtn.addEventListener('click', this.showTowerProperties.bind(this));
+        
+        // unit button
+        this.unitPropsBtn = document.createElement('button');
+        this.unitPropsBtn.id = 'property-unit';
+        this.unitPropsBtn.className = 'btn btn-sm btn-outline-dark';
+        this.unitPropsBtn.textContent = 'Unit';
+        this.unitPropsBtn.addEventListener('click', this.showUnitProperties.bind(this));
+
+        tabsGroup.appendChild(this.towerPropsBtn);
+        tabsGroup.appendChild(this.unitPropsBtn);
+
+        this.viewSection.insertBefore(tabsGroup, existingBtnGroup);
+        this.currentView = 'tower'; // track current view "tower" or "unit"
     }
 
     // tower checks
@@ -211,7 +254,9 @@ export default class PropertyViewer {
 
     // is this property off limits?
     isDisabled(property) {
-        return this.disabled.includes(property);
+        return this.currentView === 'tower' 
+            ? this.disabled.includes(property)
+            : this.unitDisabled.includes(property);
     }
 
     // should this property stay hidden?
@@ -387,6 +432,140 @@ export default class PropertyViewer {
         if (!this.isDisabled(property)) {
             this.disabled.push(property);
             this.towerSpecificDisabled.push(property);
+        }
+    }
+
+    // methods to switch between tower and unit property views
+    showTowerProperties() {
+        this.towerPropsBtn.classList.remove('btn-outline-dark');
+        this.towerPropsBtn.classList.add('btn-primary');
+        this.unitPropsBtn.classList.remove('btn-primary');
+        this.unitPropsBtn.classList.add('btn-outline-dark');
+        this.currentView = 'tower';
+        this.loadCurrentProperties();
+    }
+
+    showUnitProperties() {
+        this.unitPropsBtn.classList.remove('btn-outline-dark');
+        this.unitPropsBtn.classList.add('btn-primary');
+        this.towerPropsBtn.classList.remove('btn-primary');
+        this.towerPropsBtn.classList.add('btn-outline-dark');
+        this.currentView = 'unit';
+        this.loadCurrentProperties();
+    }
+    
+    // load appropriate properties based on current view
+    loadCurrentProperties() {
+        if (this.currentView === 'tower') {
+            const skinData = this.viewer.getActiveSkin();
+            if (skinData) {
+                this.createButtons([
+                    ...skinData.levels.attributes,
+                    ...skinData.levels.complexAttributes
+                ]);
+            }
+        } else {
+            this.createUnitButtons();
+        }
+    }
+
+    initializeUnitProperties() {
+        if (this.currentView === 'unit') {
+            this.createUnitButtons();
+        }
+    }
+
+    getUnitAttributes() {
+        if (!this.viewer.activeUnits) return [];
+        
+        const attributes = new Set();
+        this.unitBaseProperties.forEach(attr => attributes.add(attr));
+        
+        Object.values(this.viewer.activeUnits).forEach(unit => {
+            if (unit.attributeNames) {
+                unit.attributeNames.forEach(attr => attributes.add(attr));
+            }
+        });
+        
+        return Array.from(attributes);
+    }
+
+    createUnitButtons() {
+        this.root.innerHTML = '';
+        
+        // check if units exist
+        if (!this.viewer.activeUnits || Object.keys(this.viewer.activeUnits).length === 0) {
+            const noUnitsMessage = document.createElement('div');
+            noUnitsMessage.className = 'text-muted p-3 text-center';
+            noUnitsMessage.textContent = 'There is no slave table for this tower.';
+            this.root.appendChild(noUnitsMessage);
+            return;
+        }
+        
+        const unitAttributes = this.getUnitAttributes();
+        unitAttributes.forEach(attributeName => {
+            const button = this.createUnitPropertyButton(attributeName);
+            if (button) {
+                this.root.appendChild(button);
+            }
+        });
+    }
+
+    // toggle buttons for slave properties
+    createUnitPropertyButton(innerText) {
+        // skip hidden properties (check both common hidden and unit-specific hidden)
+        if (this.hidden.includes(innerText) || this.unitHidden.includes(innerText)) {
+            return null;
+        }
+
+        const listElement = document.createElement('li');
+        const button = document.createElement('button');
+        
+        this.buttonClasses.forEach(className =>
+            button.classList.add(className)
+        );
+        
+        const toggleButton = new ToggleButton(button, {
+            state: !this.unitDisabled.includes(innerText),
+            activeClass: this.activeButtonClass,
+            inactiveClass: this.inactiveButtonClass,
+        });
+
+        toggleButton.element.addEventListener(
+            'enabled',
+            ((e) => {
+                console.log(`Enabling unit property: ${innerText}`);
+                this.unitDisabled = this.unitDisabled.filter(v => v !== innerText);
+                this.refreshUnitTable();
+            }).bind(this)
+        );
+        
+        toggleButton.element.addEventListener(
+            'disabled', 
+            ((e) => {
+                console.log(`Disabling unit property: ${innerText}`);
+                if (!this.unitDisabled.includes(innerText)) {
+                    this.unitDisabled.push(innerText);
+                }
+                this.refreshUnitTable();
+            }).bind(this)
+        );
+
+        this.liClasses.forEach(className =>
+            listElement.classList.add(className)
+        );
+
+        button.innerText = innerText;
+        listElement.appendChild(button);
+        return listElement;
+    }
+
+    // refresh slave table when properties change
+    refreshUnitTable() {
+        if (this.viewer && this.viewer.unitTable) {
+            this.viewer.unitTable.load(this.viewer.activeUnits, {
+                ignore: this.unitDisabled
+            });
         }
     }
 }

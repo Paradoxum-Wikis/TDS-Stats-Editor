@@ -69,7 +69,18 @@ export default class UnitTable extends Table {
             []
         );
 
-        return ['Name', ...new Set(attributes.filter((v) => v !== 'Name'))];
+        const allAttributes = ['Name', ...new Set(attributes.filter((v) => v !== 'Name'))];
+        
+        // filter by both unitDisabled and unitHidden lists
+        if (this.viewer && this.viewer.propertyViewer) {
+            return allAttributes.filter(attr => {
+                // filter out if in unitDisabled OR unitHidden
+                return !this.viewer.propertyViewer.unitDisabled.includes(attr) && 
+                       !this.viewer.propertyViewer.unitHidden.includes(attr);
+            });
+        }
+        
+        return allAttributes;
     }
 
     refresh() {
