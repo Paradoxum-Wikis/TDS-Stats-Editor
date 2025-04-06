@@ -38,6 +38,7 @@ const approvedTowers = [
     'Chilloutofpewp2nd/Gatling',
     'Chilloutofpewp2nd/Turret',
     'Chilloutofpewp2nd/War Machine',
+    'Onett4smash/Paintballer Rework',
 ];
 
 // List of featured towers

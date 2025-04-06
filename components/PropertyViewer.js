@@ -49,6 +49,7 @@ export default class PropertyViewer {
             'SideLevel',
             'Abilities.0',
             'Abilities',
+            'Note',
         ];
         // the basic stats everyone cares about
         this.baseProperties = [
