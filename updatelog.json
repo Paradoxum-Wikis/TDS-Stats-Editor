@@ -1,5 +1,12 @@
 [
     {
+        "version": "1.2.2",
+        "date": "April 7, 2025",
+        "changes": [
+            "Game page resources added"
+        ]
+    },
+    {
         "version": "1.2.1",
         "date": "April 5, 2025",
         "changes": [
