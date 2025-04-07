@@ -5,6 +5,7 @@
  * approvedTowers: Towers that have passed verification and don't show the "unverified" tag
  * featuredTowers: Towers that are highlighted as featured content
  * grandfatheredTowers: Towers that are exempt from verification requirements (first 7 BETA submissions)
+ * highlights: Towers that appear in the highlights section at the top of the page
  * 
  * Add or remove entries as needed
  */
@@ -49,6 +50,7 @@ const featuredTowers = [
     'Raspbelle/Tsukasa Tower',
     'Vessel Of Infinite Destruction/Military Base',
     'Your nameless protagonist/Enforcer',
+    'Onett4smash/Medic Rework (V1)',
 ];
 
 // List of grandfathered towers
@@ -62,7 +64,16 @@ const grandfatheredTowers = [
     "Vessel Of Infinite Destruction/Ranger",
 ];
 
+// its own section the page
+const highlights = [
+    "Vessel Of Infinite Destruction/Ranger",
+    'Onett4smash/Medic Rework (V1)',
+    'Vessel Of Infinite Destruction/Military Base',
+    'Your nameless protagonist/Enforcer',
+];
+
 // Make these arrays available to other scripts
 window.approvedTowers = approvedTowers;
 window.featuredTowers = featuredTowers;
 window.grandfatheredTowers = grandfatheredTowers;
+window.highlights = highlights;

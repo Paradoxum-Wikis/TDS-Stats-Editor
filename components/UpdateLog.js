@@ -14,10 +14,18 @@ class UpdateLog {
     
     async init() {
         this.modalContainer = document.getElementById('update-log-content');
-        if (this.modalContainer) this.fetchCommits();
         
-        // For JSON updates
-        loadUpdateLog();
+        // db check
+        const isDbDirectory = window.location.pathname.includes('/db/');
+
+        if (this.modalContainer) {
+            this.fetchCommits();
+        }
+        
+        // load json for editor only
+        if (!isDbDirectory) {
+            loadUpdateLog();
+        }
         
         const modal = document.getElementById('discord-modal');
         const updatesTab = document.getElementById('aboutSectionUpdates');

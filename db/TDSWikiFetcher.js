@@ -133,7 +133,8 @@ class TDSWikiFetcher {
                         url: link?.getAttribute('href') || '#',
                         image: 'https://static.wikia.nocookie.net/tower-defense-sim/images/4/4a/Site-favicon.ico',
                         author: fullText.includes('/') ? fullText.split('/')[0] : 'Wiki Contributor',
-                        featured: this.featuredTowers.includes(fullText),
+                        featured: window.featuredTowers ? window.featuredTowers.includes(fullText) : false,
+                        highlighted: window.highlights ? window.highlights.includes(fullText) : false,
                         verified: window.approvedTowers ? window.approvedTowers.includes(fullText) : false,
                         unverified: window.approvedTowers ? !window.approvedTowers.includes(fullText) : true,
                         grandfathered: window.grandfatheredTowers ? window.grandfatheredTowers.includes(fullText) : false

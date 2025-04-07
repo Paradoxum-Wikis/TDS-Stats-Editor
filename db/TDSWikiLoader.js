@@ -319,13 +319,13 @@ document.addEventListener('DOMContentLoaded', function () {
         featuredContainer.innerHTML = '';
         allTowersContainer.innerHTML = '';
 
-        // show featured towers
-        const featuredTowers = towers.filter(tower => tower.featured);
+        // highlited towers cards
+        const highlightedTowers = towers.filter(tower => tower.highlighted);
         
-        if (featuredTowers.length === 0) {
+        if (highlightedTowers.length === 0) {
             featuredContainer.innerHTML = '<div class="col-12 text-center text-light p-3">No featured towers at this time.</div>';
         } else {
-            featuredTowers.forEach(tower => renderTowerCard(tower, featuredContainer));
+            highlightedTowers.forEach(tower => renderTowerCard(tower, featuredContainer));
         }
 
         // show all towers
