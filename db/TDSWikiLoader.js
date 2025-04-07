@@ -288,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function () {
             
             // show loading spinners
             document.getElementById('featured-towers').innerHTML = 
-                '<div class="col-12 text-center text-light p-5"><div class="spinner-border" role="status"></div><p class="mt-2">Getting featured data...</p></div>';
+                '<div class="col-12 text-center text-light p-5"><div class="spinner-border" role="status"></div><p class="mt-2">Commander get the highlights before I sell you to Lord Exo.</p></div>';
             
             document.getElementById('all-towers').innerHTML = 
                 '<div class="col-12 text-center text-light p-5"><div class="spinner-border" role="status"></div><p class="mt-2">Loading towers from the TDS Wiki...</p></div>';
@@ -323,7 +323,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const highlightedTowers = towers.filter(tower => tower.highlighted);
         
         if (highlightedTowers.length === 0) {
-            featuredContainer.innerHTML = '<div class="col-12 text-center text-light p-3">No featured towers at this time.</div>';
+            featuredContainer.innerHTML = '<div class="col-12 text-center text-light p-3">No highlights at this time.</div>';
         } else {
             highlightedTowers.forEach(tower => renderTowerCard(tower, featuredContainer));
         }

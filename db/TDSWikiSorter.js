@@ -38,13 +38,20 @@ window.setupFilters = function() {
     const filterTowerRework = document.getElementById('filterTowerRework');
     const filterTowerRebalance = document.getElementById('filterTowerRebalance');
     const filterUnverified = document.getElementById('filterUnverified');
+    const filterFeatured = document.getElementById('filterFeatured');
+    const filterGrandfathered = document.getElementById('filterGrandfathered');
     
+    // set all exclusive filters to unchecked by default
     if (filterUnverified) filterUnverified.checked = false;
+    if (filterFeatured) filterFeatured.checked = false;
+    if (filterGrandfathered) filterGrandfathered.checked = false;
     
     if (filterNewTower) filterNewTower.addEventListener('change', applyFilters);
     if (filterTowerRework) filterTowerRework.addEventListener('change', applyFilters);
     if (filterTowerRebalance) filterTowerRebalance.addEventListener('change', applyFilters);
     if (filterUnverified) filterUnverified.addEventListener('change', applyFilters);
+    if (filterFeatured) filterFeatured.addEventListener('change', applyFilters);
+    if (filterGrandfathered) filterGrandfathered.addEventListener('change', applyFilters);
     
     applyFilters();
 };
@@ -52,7 +59,9 @@ window.setupFilters = function() {
 // clear filter helper func
 function addClearFilterButton(container, icon, message) {
     const noResults = document.createElement('div');
-    noResults.id = icon === 'filter' ? 'no-filter-results' : 'no-unverified-results';
+    noResults.id = icon === 'filter' ? 'no-filter-results' : 
+                    icon === 'emoji-smile' ? 'no-unverified-results' :
+                    icon === 'award' ? 'no-featured-results' : 'no-grandfathered-results';
     noResults.className = 'col-12 text-center text-light p-5';
     noResults.innerHTML = `
         <i class="bi bi-${icon} fs-1"></i>
@@ -67,7 +76,9 @@ function addClearFilterButton(container, icon, message) {
         document.getElementById('filterNewTower').checked = true;
         document.getElementById('filterTowerRework').checked = true;
         document.getElementById('filterTowerRebalance').checked = true;
-        document.getElementById('filterUnverified').checked = false; // Reset to default
+        document.getElementById('filterUnverified').checked = false;
+        document.getElementById('filterFeatured').checked = false;
+        document.getElementById('filterGrandfathered').checked = false;
         applyFilters();
     });
 }
@@ -77,6 +88,11 @@ function applyFilters(maintainSort = true) {
     const showRework = document.getElementById('filterTowerRework')?.checked ?? true;
     const showRebalance = document.getElementById('filterTowerRebalance')?.checked ?? true;
     const showUnverified = document.getElementById('filterUnverified')?.checked ?? false;
+    const showFeatured = document.getElementById('filterFeatured')?.checked ?? false;
+    const showGrandfathered = document.getElementById('filterGrandfathered')?.checked ?? false;
+    
+    // check if any exclusive filter is active
+    const hasExclusiveFilter = showUnverified || showFeatured || showGrandfathered;
     
     // check if all regular filters are off
     const allRegularFiltersOff = !showNew && !showRework && !showRebalance;
@@ -91,13 +107,16 @@ function applyFilters(maintainSort = true) {
     const cards = allTowersContainer.querySelectorAll('.col');
     let matchCount = 0;
     
+    // Remove any existing filter messages
     document.getElementById('no-filter-results')?.remove();
     document.getElementById('no-search-results')?.remove();
     document.getElementById('no-unverified-results')?.remove();
+    document.getElementById('no-featured-results')?.remove();
+    document.getElementById('no-grandfathered-results')?.remove();
     
     // Show/hide featured section
-    if (query && featuredContainer) {
-        featuredContainer.classList.add('d-none');
+    if (query || hasExclusiveFilter) {
+        if (featuredContainer) featuredContainer.classList.add('d-none');
         headings.forEach(heading => heading.classList.add('d-none'));
     } else if (featuredContainer) {
         featuredContainer.classList.remove('d-none');
@@ -105,7 +124,7 @@ function applyFilters(maintainSort = true) {
     }
     
     // if all filters are off, show no results message
-    if (!showNew && !showRework && !showRebalance && !showUnverified) {
+    if (!showNew && !showRework && !showRebalance && !hasExclusiveFilter) {
         addClearFilterButton(
             allTowersContainer,
             'filter',
@@ -125,6 +144,10 @@ function applyFilters(maintainSort = true) {
         const tagBadge = card.querySelector('.badge:not(.bg-gold):not(.bg-dark):not([data-unverified="true"])');
         const towerTag = tagBadge?.textContent?.trim() || '';
         const tagText = towerTag.toLowerCase();
+        
+        // Check for exclusives: Featured, Grandfathered, Unverified
+        const isFeatured = card.querySelector('.badge.bg-gold') !== null;
+        const isGrandfathered = card.querySelector('.badge.bg-dark') !== null;
         const isUnverified = card.querySelector('.badge[data-unverified="true"]') !== null;
         
         const matchesSearch = !query || 
@@ -133,20 +156,27 @@ function applyFilters(maintainSort = true) {
             towerAuthor.includes(query) ||
             tagText.includes(query);
         
+        // exclusive filters - must match ALL checked filters
+        let matchesExclusiveFilter = true;
+        if (hasExclusiveFilter) {
+            if (showUnverified && !isUnverified) {
+                matchesExclusiveFilter = false;
+            }
+            
+            if (showFeatured && !isFeatured) {
+                matchesExclusiveFilter = false;
+            }
+            
+            if (showGrandfathered && !isGrandfathered) {
+                matchesExclusiveFilter = false;
+            }
+        }
+        
         // check category filters: New, Rework, Rebalance
         let matchesTypeFilter = false;
         
-        if (isUnverified) {
-            if (allRegularFiltersOff) {
-                matchesTypeFilter = true; // Show all unverified towers when only Unverified filter is on
-            } else {
-                if (!tagBadge || (towerTag === 'New' && showNew) || 
-                    (towerTag === 'Rework' && showRework) || 
-                    (towerTag === 'Rebalance' && showRebalance)) {
-                    matchesTypeFilter = true; // Show if no regular tags or if a regular tag filter matches
-                }
-            }
-        } else {
+        // check regular tag filters - ONLY if no exclusive filter is active or if tower MATCHES exclusive filter
+        if (!hasExclusiveFilter || matchesExclusiveFilter) {
             if (tagBadge) {
                 if ((towerTag === 'New' && showNew) || 
                     (towerTag === 'Rework' && showRework) || 
@@ -158,10 +188,10 @@ function applyFilters(maintainSort = true) {
             }
         }
         
-        const matchesVerificationFilter = isUnverified ? showUnverified : true; // Unverified towers require the filter
-        
-        // tower is shown only if it matches search AND type filter AND verification
-        if (matchesSearch && matchesTypeFilter && matchesVerificationFilter) {
+        // tower is shown only if it matches search, exclusive filter, and type filter (if applicable)
+        if (matchesSearch && 
+            (matchesExclusiveFilter || !hasExclusiveFilter) && 
+            (matchesTypeFilter || allRegularFiltersOff)) {
             card.classList.remove('d-none');
             matchCount++;
         } else {
@@ -190,13 +220,45 @@ function applyFilters(maintainSort = true) {
         });
     }
     
-    // message when only unverified filter is on but there are no towers to show
-    if (matchCount === 0 && !query && !showNew && !showRework && !showRebalance && showUnverified) {
-        addClearFilterButton(
-            allTowersContainer,
-            'emoji-smile',
-            'All towers are verified! There are no unverified towers to show.'
-        );
+    // generate appropriate messages for exclusive filters
+    if (matchCount === 0 && !query) {
+        // multiple filters:
+        if ((showFeatured && showGrandfathered) || 
+            (showFeatured && showUnverified) || 
+            (showGrandfathered && showUnverified) || 
+            (showFeatured && showGrandfathered && showUnverified)) {
+            
+            let filterNames = [];
+            if (showFeatured) filterNames.push("Featured");
+            if (showGrandfathered) filterNames.push("Grandfathered");
+            if (showUnverified) filterNames.push("Unverified");
+            
+            addClearFilterButton(
+                allTowersContainer,
+                'filter-circle',
+                `No towers match these selected filters: ${filterNames.join(' + ')}.`
+            );
+        }
+        // Single filter messages, probably will never be used but eh
+        else if (showUnverified) {
+            addClearFilterButton(
+                allTowersContainer,
+                'emoji-smile',
+                'All towers are verified! There are no unverified towers to show.'
+            );
+        } else if (showFeatured) {
+            addClearFilterButton(
+                allTowersContainer,
+                'award',
+                'There are no featured towers matching this filter.'
+            );
+        } else if (showGrandfathered) {
+            addClearFilterButton(
+                allTowersContainer,
+                'clock-history',
+                'There are no grandfathered towers matching this filter.'
+            );
+        }
     }
     
     if (maintainSort && window.sortState.criteria) {
