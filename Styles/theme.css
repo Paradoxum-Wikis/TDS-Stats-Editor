@@ -549,3 +549,7 @@
 .light-mode .btn-close-white {
     filter: inherit;
 }
+
+.light-mode .mobile-sidebar-content {
+    color: #212529;
+}
