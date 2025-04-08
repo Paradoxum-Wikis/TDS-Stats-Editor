@@ -170,6 +170,9 @@ export default class MobileNav {
           <a href="./db" class="btn btn-outline-secondary" id="mobile-database-btn">
             <i class="bi bi-database me-2"></i>TDS Database
           </a>
+          <a href="https://resources.tds-editor.live/" class="btn btn-outline-secondary" id="mobile-gpr-btn">
+            <i class="bi bi-file-image me-2"></i>GP Resources
+          </a>
           <button class="btn btn-outline-secondary" id="mobile-about-btn" data-bs-toggle="modal" data-bs-target="#discord-modal">
             <i class="bi bi-info-circle me-2"></i>About
           </button>
