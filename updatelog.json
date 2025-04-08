@@ -3,7 +3,8 @@
         "version": "1.2.2",
         "date": "April 7, 2025",
         "changes": [
-            "Game page resources added"
+            "Game page resources added",
+            "Wikitext-like formatting for extras added"
         ]
     },
     {

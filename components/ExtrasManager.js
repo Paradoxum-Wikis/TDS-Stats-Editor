@@ -6,6 +6,7 @@ const formControlClass = ['form-control', 'form-control-sm', 'text-white', 'bg-d
 const dangerClass = ['btn', 'btn-sm', 'btn-outline-danger'];
 const primaryClass = ['btn', 'btn-sm', 'btn-primary'];
 const secondaryClass = ['btn', 'btn-sm', 'btn-outline-secondary'];
+const formatRegex = /('''|''|\\u\\|\\c([a-zA-Z]+|#[0-9a-fA-F]{3,6})\\)/;
 
 export default class ExtrasManager {
     constructor(viewer, container, addButton, addGroupButton) {
@@ -62,7 +63,7 @@ export default class ExtrasManager {
         
         // Show/hide preview based on format tags usage
         inputElement.addEventListener('input', () => {
-            const hasFormatting = colorRegex.test(inputElement.value);
+            const hasFormatting = formatRegex.test(inputElement.value);
             previewElement.style.display = hasFormatting ? 'block' : 'none';
         });
         

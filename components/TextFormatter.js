@@ -7,6 +7,26 @@ class TextFormatter {
     constructor() {
         this.formatters = [
             {
+                // Bold and italic: '''''text''''' becomes <strong><em>text</em></strong>
+                pattern: /'''''(.*?)'''''/g,
+                replacement: '<strong><em>$1</em></strong>'
+            },
+            {
+                // Bold: '''text''' becomes <strong>text</strong>
+                pattern: /'''(.*?)'''/g,
+                replacement: '<strong>$1</strong>'
+            },
+            {
+                // Italic: ''text'' becomes <em>text</em>
+                pattern: /''(.*?)''/g,
+                replacement: '<em>$1</em>'
+            },
+            {
+                // Underline: \u\text\u\ becomes <u>text</u>
+                pattern: /\\u\\(.*?)\\u\\/g,
+                replacement: '<u>$1</u>'
+            },
+            {
                 // Generic color: \c<color_value>\text\c\ becomes <span style="color:<color_value>">text</span>
                 // <color_value> can be a name (red, blue) or hex (#fff, #ff0000), or etc.
                 pattern: /\\c([a-zA-Z]+|#[0-9a-fA-F]{3,6})\\(.*?)\\c\\/g,
