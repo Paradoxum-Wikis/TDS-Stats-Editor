@@ -122,6 +122,17 @@ class Dropdown {
         if (this.setTextMode) {
             this.textForm.value = option;
         }
+
+        const keepOpen = window.state?.settings?.keepDropdownOpen === true;
+        if (!keepOpen) {
+            // default behavior: Hide, blur, and reset highlight
+            this.#hide();
+            this.textForm.blur();
+            this.#removeHighlightFromAll(); // Clear visual highlight
+        } else {
+            // keep open setting: fefilter, but DO NOT reset highlight
+            this.#filterOptions();
+        }
     }
 
     #onKeyDown(event) {
@@ -142,14 +153,21 @@ class Dropdown {
             case 'Enter':
                 if (this.currentHighlightedIndex >= 0 && this.currentHighlightedIndex < options.length) {
                     event.preventDefault();
-                    // workaround with mousedown as the dropdown class listens for this event on items
                     options[this.currentHighlightedIndex].dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
-                    this.textForm.blur();
+
+                    // Check the setting AFTER the selection logic runs
+                    const keepOpen = window.state?.settings?.keepDropdownOpen === true;
+                    if (!keepOpen) {
+                        this.textForm.blur();
+                    }
                 }
                 break;
             case 'Escape':
                 event.preventDefault();
+                this.#hide();
                 this.textForm.blur();
+                this.currentHighlightedIndex = -1;
+                this.#removeHighlightFromAll();
                 break;
         }
     }

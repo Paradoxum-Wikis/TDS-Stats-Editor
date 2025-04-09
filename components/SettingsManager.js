@@ -8,6 +8,7 @@ class SettingsManager {
         this.showCollapsibleCountsToggle = document.getElementById('showCollapsibleCountsToggle');
         this.animationsToggle = document.getElementById('animationsToggle');
         this.enableLuaViewerToggle = document.getElementById('enableLuaViewerToggle');
+        this.keepDropdownOpenToggle = document.getElementById('keepDropdownOpenToggle');
         this.animationsStylesheet = document.getElementById('animsCSS');
         this.body = document.body;
         this.systemThemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -23,6 +24,7 @@ class SettingsManager {
         this.showCollapsibleCounts = localStorage.getItem('showCollapsibleCounts') !== 'false';
         this.animationsEnabled = localStorage.getItem('animationsEnabled') !== 'false';
         this.enableLuaViewer = localStorage.getItem('enableLuaViewer') === 'true'; 
+        this.keepDropdownOpen = localStorage.getItem('keepDropdownOpen') === 'true';
         
         window.state = window.state || {};
         window.state.settings = window.state.settings || {};
@@ -30,7 +32,8 @@ class SettingsManager {
         window.state.settings.forceUSNumbers = this.forceUSNumbers;
         window.state.settings.showCollapsibleCounts = this.showCollapsibleCounts;
         window.state.settings.animationsEnabled = this.animationsEnabled;
-        window.state.settings.enableLuaViewer = this.enableLuaViewer; // Add this
+        window.state.settings.enableLuaViewer = this.enableLuaViewer;
+        window.state.settings.keepDropdownOpen = this.keepDropdownOpen;
         
         this.init();
     }
@@ -98,18 +101,15 @@ class SettingsManager {
         // Update theme aware images
         this.updateThemeImages();
         
-        // Set initial seconds display state
+        // a bunch of initials to set
         this.showSecondsToggle.checked = this.showSeconds;
-        
-        // Set initial number format state
         this.forceUSNumbersToggle.checked = this.forceUSNumbers;
-        
-        // Set initial collapsible counter state
         this.showCollapsibleCountsToggle.checked = this.showCollapsibleCounts;
-        
-        // Set initial lua viewer state
         if (this.enableLuaViewerToggle) {
             this.enableLuaViewerToggle.checked = this.enableLuaViewer;
+        }
+        if (this.keepDropdownOpenToggle) {
+            this.keepDropdownOpenToggle.checked = this.keepDropdownOpen;
         }
         
         // toggles listener
@@ -121,6 +121,9 @@ class SettingsManager {
         
         if (this.enableLuaViewerToggle) {
             this.enableLuaViewerToggle.addEventListener('change', this.toggleEnableLuaViewer.bind(this));
+        }
+        if (this.keepDropdownOpenToggle) {
+            this.keepDropdownOpenToggle.addEventListener('change', this.toggleKeepDropdownOpen.bind(this));
         }
         
         this.updateNumberFormatLabel();
@@ -212,6 +215,16 @@ class SettingsManager {
         
         document.dispatchEvent(new CustomEvent('settingsChanged', {
             detail: { setting: 'enableLuaViewer', value: this.enableLuaViewer }
+        }));
+    }
+
+    toggleKeepDropdownOpen() {
+        this.keepDropdownOpen = this.keepDropdownOpenToggle.checked;
+        window.state.settings.keepDropdownOpen = this.keepDropdownOpen;
+        localStorage.setItem('keepDropdownOpen', this.keepDropdownOpen);
+
+        document.dispatchEvent(new CustomEvent('settingsChanged', {
+            detail: { setting: 'keepDropdownOpen', value: this.keepDropdownOpen }
         }));
     }
     
