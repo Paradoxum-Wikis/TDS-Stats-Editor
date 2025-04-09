@@ -33,12 +33,14 @@ export default class CalculationSystemManager {
     const uniqueSystems = new Set();
     
     const specializedSystems = [
-      'Default', 
-      'Accelerator', 'Ace Pilot', 'Archer', 'Brawler', 'Commander', 'Commando', 
-      'Cowboy', 'Crook Boss', 'Cryomancer', 'Elementalist', 'Engineer', 
-      'Freezer', 'Gatling Gun', 'Hallow Punk', 'Harvester', 'Mecha Base', 
-      'Military Base', 'Mortar', 'Paintballer', 'Pursuit', 'Pyromancer', 
-      'Ranger', 'Rocketeer', 'Shotgunner', 'Slasher', 'Sledger', 'Swarmer', 
+      'Default',
+      'Accelerator', 'Ace Pilot', 'Archer',
+      'Brawler', 'Commander', 'Commando',
+      'Cowboy', 'Crook Boss', 'Cryomancer', 'Elementalist', 'Engineer',
+      'Freezer', 'Gatling Gun', 'Hallow Punk', 'Harvester', 'Mecha Base',
+      'Military Base', 'Mortar', 'Paintballer', 'Pursuit', 'Pyromancer',
+      'Ranger', 'Rocketeer', 'Shotgunner', 'Slasher',
+      'Sledger', 'Soldier', 'Swarmer',
       'Toxic Gunner', 'Trapper', 'War Machine', 'Warden'
     ];
     
