@@ -1,6 +1,18 @@
 export default class ImageLoader {
     static imageCache = {};
 
+    // Load cache from localStorage when class is first accessed
+    static {
+        try {
+            const savedCache = localStorage.getItem('imageCache');
+            if (savedCache) {
+                this.imageCache = JSON.parse(savedCache);
+            }
+        } catch (e) {
+            console.warn('Failed to load image cache from localStorage:', e);
+        }
+    }
+
     static async fetchImage(imageId) {
         let url;
         // convert to imageid to string to safely use string methods
@@ -32,12 +44,19 @@ export default class ImageLoader {
                 }
             } catch (error) {
                 console.error(`Failed to fetch image ${imageIdStr}:`, error);
-                url = ''; // Fallback to empty string
+                url = '';
             }
         }
     
         if (url) {
             this.imageCache[imageId] = url; // cache using original imageid
+            
+            // Save to localStorage
+            try {
+                localStorage.setItem('imageCache', JSON.stringify(this.imageCache));
+            } catch (e) {
+                console.warn('Failed to save image cache to localStorage:', e);
+            }
         }
         return url;
     }

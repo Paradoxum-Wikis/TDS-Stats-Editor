@@ -271,7 +271,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // use cache if it exists
                 if (cachedData && cacheTimestamp) {
                     const cacheAge = Date.now() - parseInt(cacheTimestamp);
-                    const cacheMaxAge = 8 * 60 * 60 * 1000; // 8 hours (modify the first number only)
+                    const cacheMaxAge = 12 * 60 * 60 * 1000; // 12 hours (modify the first number only)
                     
                     if (cacheAge < cacheMaxAge) {
                         try {
