@@ -150,6 +150,11 @@ function applyFilters(maintainSort = true) {
         const isGrandfathered = card.querySelector('.badge.bg-dark') !== null;
         const isUnverified = card.querySelector('.badge[data-unverified="true"]') !== null;
         
+        if (isUnverified && !showUnverified) {
+            card.classList.add('d-none');
+            return;
+        }
+        
         const matchesSearch = !query || 
             towerName.includes(query) || 
             towerDescription.includes(query) || 
