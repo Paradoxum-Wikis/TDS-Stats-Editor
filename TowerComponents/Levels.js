@@ -73,26 +73,23 @@ class Levels {
         this.levels.push(new Level(this, data));
     }
 
-    getCell(level, property) {
-        if (level < 0 || level > this.levels.length) return null;
-
-        if (property.includes('.')) {
-            const props = property.split('.');
-
-            try {
-                let currentValue = this.skinData.get(level, props[0]);
-                for (let i = 1; i < props.length; i++) {
-                    let key = props[i];
-
-                    currentValue = currentValue?.[key];
-                }
-
-                return currentValue ?? this.getCell(level - 1, property);
-            } catch (error) {
-                return this.getCell(level - 1, property);
-            }
+    getCell(level, propertyId) {
+        // checks if the level index is valid for the current internal levels array
+        if (!this.levels || level < 0 || level >= this.levels.length) {
+            console.error(`getCell: Invalid level index ${level} requested. Available levels: ${this.levels?.length}`);
+            // returns a default value/structure expected by the caller to avoid crashing :sob:
+            return undefined;
         }
-        return this.levels[level][property];
+
+        const levelData = this.levels[level];
+
+        if (!levelData) {
+             console.error(`getCell: Level data at index ${level} is null or undefined.`);
+             return undefined;
+        }
+
+        return levelData[propertyId];
+
     }
 
     set(level, attribute, newValue) {

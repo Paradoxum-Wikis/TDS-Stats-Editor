@@ -139,15 +139,12 @@ export default class TableDataManagement {
             towerVariant.Upgrades[towerVariant.Upgrades.length - 1];
 
         if (lastUpgrade) {
-            towerVariant.Upgrades.push(lastUpgrade);
-            this.viewer.deltaTower.json[towerName][variant].Upgrades.push(
-                lastUpgrade
-            );
+            // create a deeeeeep copy of lastUpgrade
+            const newUpgrade = JSON.parse(JSON.stringify(lastUpgrade));
+            towerVariant.Upgrades.push(newUpgrade);
         }
 
         this.viewer.tower.importJSON(this.viewer.tower.json);
-        this.viewer.deltaTower.importJSON(this.viewer.deltaTower.json);
-
         this.viewer.reload();
     }
 
@@ -158,12 +155,9 @@ export default class TableDataManagement {
 
         if (towerVariant.Upgrades.length > 0) {
             towerVariant.Upgrades.pop();
-            this.viewer.deltaTower.json[towerName][variant].Upgrades.pop();
         }
 
         this.viewer.tower.importJSON(this.viewer.tower.json);
-        this.viewer.deltaTower.importJSON(this.viewer.deltaTower.json);
-
         this.viewer.reload();
     }
 }

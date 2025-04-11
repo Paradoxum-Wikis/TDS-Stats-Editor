@@ -3397,7 +3397,7 @@ export default {
         Attributes: {
           CanCluster: false,
           ClusterRadius: 0,
-          ExplosionRadius: 5,
+          ExplosionRadius: 6,
           ClusterCount: 0,
           ClusterDamage: 0,
         },
