@@ -4462,7 +4462,7 @@ export default {
     Default: {
       Upgrades: [
         {
-          Image: "https://i.namu.wiki/i/FG6XdXV9tZHh4Lo10HECt7BjhWxHX6mXm4ye6Q91blaFHeMkP8BzKMoS_2vGPfNfBRLAPYZFEFm-e2o_g-L1IkKplyojDdnvPdJsjEXn9dICPSFAG7gWEfXYBjwYRTP-gJh0Oq2NCLvWzjVqgDpJ0Q.webp",
+          Image: 92740435796975,
           Stats: {
             Extras: ["Critical Multiplier: 250% → 300%"],
             Attributes: {
@@ -4486,7 +4486,7 @@ export default {
           Cost: 800,
         },
         {
-          Image: "https://i.namu.wiki/i/CQG6eK_K_Ft6F7lU7hulbX6J7-4X0qN0nNgGKmkq_PJw5Yt56YU13ZAve95_C1a5G8ufwnpjHGTNXeJhf7Sl1S4DAaN7fUzxjeFeLy6XpWhddkBK1LMg7Qj29LPAZPr6RkPoYeAjLIlQH6JLf1C08g.webp",
+          Image: 93224058728799,
           Stats: {
             Extras: ["Bleed Damage: 0 → 2", "Bleed Stack: 0 → 1", "Max Stack: 0 → 30", "Exponential Value: 0 → 0.31"],
             Attributes: {
@@ -4510,7 +4510,7 @@ export default {
           Cost: 3000,
         },
         {
-          Image: "https://i.namu.wiki/i/5Q1yBX6oVKZY3D6VMVaITBnpbeEz-CiS6Aemui4u9VzkGAsvwHlJW2Imvjt6n3AJXHq8uzFHqNLfbQaISRsh2bgDTJABhBD06CCmf1ELfu1Lx-GFKQia-SCpgMiHnP8d4vpLuFlbE0oVtOzjxqUL9w.webp",
+          Image: 102669883500047,
           Stats: {
             Extras: [
               "Critical Multiplier: 300% → 350%",
@@ -4536,7 +4536,7 @@ export default {
           Cost: 6500,
         },
         {
-          Image: "https://i.namu.wiki/i/URdOLabZrjMKNG9y_IiFYiHwnuk1vSHxnVAR-ohECcZdquMtlcw8kV5HGdoCF5i3rKtwHS8E9rRDq1P6RkB3CBLjr2Qtl5muHa81r6DXVr8Zk8XqHWjeLUsUHtPqLmKaGY7289nlEudbMEfWp1TZ5Q.webp",
+          Image: 102686099141752,
           Stats: {
             Extras: ["Critical Multiplier: 350% → 400%", "Bleed Stack: 1 → 2"],
             Attributes: {
@@ -5560,7 +5560,7 @@ export default {
     Default: {
       Upgrades: [
         {
-          Image: "https://i.namu.wiki/i/LafNOxAJC07ZZ716qJEfnW9AFrMup4XORq_HMxppYgUSp826YSrF-d8TS40ORqaGGYETFpr-04Ph_boGRW0WuQFIH2XAzfj7fstbY8czKCoQWmJJBiaRrugKpQ1EK4XMTI33U0q9MyKoDcGQZ3PpQA.webp",
+          Image: 87280920444213,
           Stats: {
             Extras: [],
             Attributes: { RocketSpeed: 20, ExplosionRadius: 3.5, Knockback: 10 },
@@ -5577,7 +5577,7 @@ export default {
           Cost: 450,
         },
         {
-          Image: "https://i.namu.wiki/i/Hcg9TaeVBoSkY3O8O9i5yLY-JYc8WbY3pVcUAmf8xujLzMUnP2w36VQ89aTU2lRWk0TcmOtEbbmnLxW2zafGgm9q9lesW6UOQ_RMkISi6coUH2xFGAt1E-yHvQ_q0QHds69ze-KRqe1k_E6nWmxT_g.webp",
+          Image: 103271630916907,
           Stats: {
             Extras: ["Explosion Radius: 3.5 → 5", "Rocket Speed: 20 → 25", "Knockback: 10 → 12.5"],
             Attributes: { RocketSpeed: 25, ExplosionRadius: 5, Knockback: 12.5 },
@@ -5589,7 +5589,7 @@ export default {
           Cost: 2750,
         },
         {
-          Image: "https://i.namu.wiki/i/WQhrbk0ijbru3E-WkWf6ZacMQ2FY5LIWMptUE6rUPTRTB8H3whb18Kyrl8DeSTZCey68kRFei98B-kavxxLXQYT1MYUe6rPchueR_IJClCMNBt03N3i1fvPFRE9BPklzyaVL55Y7FaBV06rZJYbtBw.webp",
+          Image: 98952678277583,
           Stats: {
             Extras: ["Explosion Radius: 5 → 5.5", "Deadzone: 12 → 10", "Knockback: 12.5 → 17.5", "Burn Damage 0 → 3", "Burn Time 0 → 16", "Burn Tick 0 → 0.25"],
             Attributes: { Knockback: 17.5, ExplosionRadius: 5.5, BurnDamage: 3, BurnTime: 16, TickRate: 0.25 },
