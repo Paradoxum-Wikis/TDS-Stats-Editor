@@ -67,6 +67,18 @@ export default class ImageLoader {
         return match ? match[0] : fullUrl;
     }
 
+    static clearCacheEntry(imageId) {
+        const imageIdStr = String(imageId);
+        if (this.imageCache[imageIdStr]) {
+            delete this.imageCache[imageIdStr];
+            try {
+                localStorage.setItem('imageCache', JSON.stringify(this.imageCache));
+            } catch (e) {
+                console.warn('Failed to update image cache in localStorage after clearing entry:', e);
+            }
+        }
+    }
+
     static getFromCache(imageId) {
         return this.imageCache[imageId];
     }

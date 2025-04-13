@@ -112,17 +112,51 @@ export default class UpgradeViewer {
         if (!imgElement) return;
 
         imgElement.alt = "No Upgrade Image";
+        // Clear previous error handler and state
+        imgElement.onerror = null;
+        imgElement.removeAttribute('data-load-attempted');
 
         if (!imageId) {
             imgElement.src = '';
             return;
         }
 
+        const tryLoadImage = async (src, isFromCache) => {
+            if (!src) {
+                imgElement.src = '';
+                return;
+            }
+
+            imgElement.onerror = async () => {
+                // attempt refetch
+                if (imgElement.getAttribute('data-load-attempted')) {
+                    console.error(`Failed to load image even after re-fetch: ${imageId}`);
+                    imgElement.src = '';
+                    imgElement.onerror = null;
+                    return;
+                }
+
+                console.warn(`Image failed to load${isFromCache ? ' from cache' : ''}: ${src}. Clearing cache and re-fetching for ID: ${imageId}`);
+                ImageLoader.clearCacheEntry(imageId);
+                imgElement.setAttribute('data-load-attempted', 'true'); // mark as attempted
+
+                const freshImageLocation = await ImageLoader.fetchImage(imageId);
+                tryLoadImage(freshImageLocation, false);
+            };
+
+            imgElement.src = src;
+        };
+
         let imageLocation = ImageLoader.getFromCache(imageId);
-        if (!imageLocation) {
+
+        if (imageLocation) {
+            // attempt to load from cache
+            tryLoadImage(imageLocation, true);
+        } else {
+            // not in cache so fetch it
             imageLocation = await ImageLoader.fetchImage(imageId);
+            tryLoadImage(imageLocation, false);
         }
-        imgElement.src = imageLocation || '';
     }
 
     #onTextChanged(property, value) {
