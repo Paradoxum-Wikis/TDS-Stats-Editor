@@ -1783,53 +1783,51 @@ export default {
         Speed: 3,
     },
 
-    // Biologist Units
-    Sunflower: {
-        Health: 800, // From Lvl 4 tooltip
-        Damage: 55, // From Lvl 4 tooltip
-        Range: 22.5, // From Lvl 4 tooltip
-        Detections: {
-            Hidden: true, // From Lvl 2 tooltip onwards
-            Flying: false, // Assuming false, not specified
-            Lead: false, // Assuming false, not specified
-        },
-        Cooldown: 0.8, // From Lvl 4 tooltip
-        // Other stats like Speed, Defense etc. not specified in tooltips
+    // Biologist
+    'Sunflower 1': {
+        Health: 100, Damage: 10, Range: 15, Cooldown: 1.1,
+        Detections: { Hidden: false, Flying: false, Lead: false },
     },
-    Ivy: {
-        Health: 800, // From Lvl 4 tooltip
-        Damage: 45, // From Lvl 4 tooltip (direct damage)
-        Range: 18.5, // From Lvl 4 tooltip
-        Detections: {
-            Hidden: false, // Assuming false, not specified
-            Flying: false, // Assuming false, not specified
-            Lead: true, // From Lvl 1 tooltip onwards
-        },
-        Cooldown: 1.5, // From Lvl 4 tooltip
-        ExplosionRadius: 4.5, // From Lvl 4 tooltip (radius)
-        Attributes: { // Adding poison/slow stats here
-            PoisonDamage: 5, // From Lvl 4 tooltip (psnDamage)
-            PoisonLength: 5.2, // From Lvl 4 tooltip (psnLen)
-            PoisonTickRate: 0.65, // From Lvl 4 tooltip (psnTick)
-            SlowdownPercentage: 12.5, // From Lvl 4 tooltip (slowPerc)
-            // SlowdownTime not specified
-        },
-        // Other stats like Speed, Defense etc. not specified in tooltips
+    'Sunflower 2': {
+        Health: 200, Damage: 12, Range: 17, Cooldown: 1.1,
+        Detections: { Hidden: true, Flying: false, Lead: false },
     },
-    Nightshade: {
-        Health: 800, // From Lvl 4 tooltip
-        Damage: 135, // From Lvl 4 tooltip
-        Range: 35, // From Lvl 4 tooltip
-        Detections: {
-            Hidden: false, // Assuming false, not specified
-            Flying: true, // From Lvl 3 tooltip onwards
-            Lead: false, // Assuming false, not specified
-        },
-        Cooldown: 2.75, // From Lvl 4 tooltip
-        Attributes: { // Adding confusion stats here
-            ConfusionDuration: 1.25, // From Lvl 4 tooltip (confDur)
-            // ConfusionCooldown not specified for the unit itself
-        },
-        // Other stats like Speed, Defense etc. not specified in tooltips
+    'Sunflower 3': {
+        Health: 400, Damage: 28, Range: 19.5, Cooldown: 1,
+        Detections: { Hidden: true, Flying: false, Lead: false },
+    },
+    'Sunflower 4': {
+        Health: 800, Damage: 55, Range: 22.5, Cooldown: 0.8,
+        Detections: { Hidden: true, Flying: false, Lead: false },
+    },
+    'Ivy 1': {
+        Health: 100, Damage: 8, Range: 14, Cooldown: 2, ExplosionRadius: 3,
+        Detections: { Hidden: false, Flying: false, Lead: true },
+        Attributes: { PoisonDamage: 1, PoisonLength: 4.5, PoisonTickRate: 0.75, SlowdownPercentage: 5 },
+    },
+    'Ivy 2': {
+        Health: 200, Damage: 12, Range: 15.5, Cooldown: 1.8, ExplosionRadius: 4,
+        Detections: { Hidden: false, Flying: false, Lead: true },
+        Attributes: { PoisonDamage: 2, PoisonLength: 4.5, PoisonTickRate: 0.75, SlowdownPercentage: 7.5 },
+    },
+    'Ivy 3': {
+        Health: 400, Damage: 25, Range: 17, Cooldown: 1.8, ExplosionRadius: 4.5,
+        Detections: { Hidden: false, Flying: false, Lead: true },
+        Attributes: { PoisonDamage: 4, PoisonLength: 4.5, PoisonTickRate: 0.6, SlowdownPercentage: 7.5 },
+    },
+    'Ivy 4': {
+        Health: 800, Damage: 45, Range: 18.5, Cooldown: 1.5, ExplosionRadius: 4.5,
+        Detections: { Hidden: false, Flying: false, Lead: true },
+        Attributes: { PoisonDamage: 5, PoisonLength: 5.2, PoisonTickRate: 0.65, SlowdownPercentage: 12.5 },
+    },
+    'Nightshade 3': {
+        Health: 400, Damage: 50, Range: 30, Cooldown: 3,
+        Detections: { Hidden: false, Flying: true, Lead: false },
+        Attributes: { ConfusionDuration: 1 },
+    },
+    'Nightshade 4': {
+        Health: 800, Damage: 135, Range: 35, Cooldown: 2.75,
+        Detections: { Hidden: false, Flying: true, Lead: false },
+        Attributes: { ConfusionDuration: 1.25 },
     },
 };
