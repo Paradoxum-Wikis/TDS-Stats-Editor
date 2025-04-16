@@ -9,6 +9,7 @@ class SettingsManager {
         this.animationsToggle = document.getElementById('animationsToggle');
         this.enableLuaViewerToggle = document.getElementById('enableLuaViewerToggle');
         this.keepDropdownOpenToggle = document.getElementById('keepDropdownOpenToggle');
+        this.classicTableSizeToggle = document.getElementById('classicTableSizeToggle');
         this.animationsStylesheet = document.getElementById('animsCSS');
         this.body = document.body;
         this.systemThemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -25,6 +26,7 @@ class SettingsManager {
         this.animationsEnabled = localStorage.getItem('animationsEnabled') !== 'false';
         this.enableLuaViewer = localStorage.getItem('enableLuaViewer') === 'true'; 
         this.keepDropdownOpen = localStorage.getItem('keepDropdownOpen') === 'true';
+        this.classicTableSize = localStorage.getItem('classicTableSize') === 'true';
         
         window.state = window.state || {};
         window.state.settings = window.state.settings || {};
@@ -34,6 +36,7 @@ class SettingsManager {
         window.state.settings.animationsEnabled = this.animationsEnabled;
         window.state.settings.enableLuaViewer = this.enableLuaViewer;
         window.state.settings.keepDropdownOpen = this.keepDropdownOpen;
+        window.state.settings.classicTableSize = this.classicTableSize;
         
         this.init();
     }
@@ -111,6 +114,10 @@ class SettingsManager {
         if (this.keepDropdownOpenToggle) {
             this.keepDropdownOpenToggle.checked = this.keepDropdownOpen;
         }
+        if (this.classicTableSizeToggle) {
+            this.classicTableSizeToggle.checked = this.classicTableSize;
+            this.applyClassicTableSize();
+        }
         
         // toggles listener
         this.themeToggle.addEventListener('change', this.toggleTheme.bind(this));
@@ -124,6 +131,9 @@ class SettingsManager {
         }
         if (this.keepDropdownOpenToggle) {
             this.keepDropdownOpenToggle.addEventListener('change', this.toggleKeepDropdownOpen.bind(this));
+        }
+        if (this.classicTableSizeToggle) {
+            this.classicTableSizeToggle.addEventListener('change', this.toggleClassicTableSize.bind(this));
         }
         
         this.updateNumberFormatLabel();
@@ -226,6 +236,31 @@ class SettingsManager {
         document.dispatchEvent(new CustomEvent('settingsChanged', {
             detail: { setting: 'keepDropdownOpen', value: this.keepDropdownOpen }
         }));
+    }
+    
+    toggleClassicTableSize() {
+        this.classicTableSize = this.classicTableSizeToggle.checked;
+        window.state.settings.classicTableSize = this.classicTableSize;
+        localStorage.setItem('classicTableSize', this.classicTableSize);
+        
+        this.applyClassicTableSize();
+        
+        document.dispatchEvent(new CustomEvent('settingsChanged', {
+            detail: { setting: 'classicTableSize', value: this.classicTableSize }
+        }));
+    }
+    
+    applyClassicTableSize() {
+        const towerTable = document.getElementById('tower-table');
+        const unitTable = document.getElementById('unit-table');
+        
+        if (this.classicTableSize) {
+            if (towerTable) towerTable.style.fontSize = '0.825rem';
+            if (unitTable) unitTable.style.fontSize = '0.825rem';
+        } else {
+            if (towerTable) towerTable.style.fontSize = '';
+            if (unitTable) unitTable.style.fontSize = '';
+        }
     }
     
     // updates the label for the manual theme toggle

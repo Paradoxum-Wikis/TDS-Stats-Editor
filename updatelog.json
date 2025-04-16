@@ -1,5 +1,13 @@
 [
     {
+        "version": "1.2.3",
+        "date": "April 16, 2025",
+        "changes": [
+            "Classic table font size added",
+            "Optimizations for the upgrade viewer"
+        ]
+    },
+    {
         "version": "1.2.2",
         "date": "April 7, 2025",
         "changes": [
