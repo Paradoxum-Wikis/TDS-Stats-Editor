@@ -1785,49 +1785,193 @@ export default {
 
     // Biologist
     'Sunflower 1': {
-        Health: 100, Damage: 10, Range: 15, Cooldown: 1.1,
-        Detections: { Hidden: false, Flying: false, Lead: false },
+        Health: 100,
+        Damage: 10,
+        Range: 15,
+        Cooldown: 1.1,
+        Detections: {
+            Hidden: false,
+            Flying: false,
+            Lead: false
+        },
+        ExplosionRadius: 0,
+        Attributes: {
+            PoisonDamage: 0,
+            PoisonLength: 0,
+            TickRate: 0,
+            MaxSlow: 0,
+            ConfusionTime: 0
+        },
     },
     'Sunflower 2': {
-        Health: 200, Damage: 12, Range: 17, Cooldown: 1.1,
-        Detections: { Hidden: true, Flying: false, Lead: false },
+        Health: 200,
+        Damage: 12,
+        Range: 17,
+        Cooldown: 1.1,
+        Detections: {
+            Hidden: true,
+            Flying: false,
+            Lead: false
+        },
+        ExplosionRadius: 0,
+        Attributes: {
+            PoisonDamage: 0,
+            PoisonLength: 0,
+            TickRate: 0,
+            MaxSlow: 0,
+            ConfusionTime: 0
+        },
     },
     'Sunflower 3': {
-        Health: 400, Damage: 28, Range: 19.5, Cooldown: 1,
-        Detections: { Hidden: true, Flying: false, Lead: false },
+        Health: 400,
+        Damage: 28,
+        Range: 19.5,
+        Cooldown: 1,
+        Detections: {
+            Hidden: true,
+            Flying: false,
+            Lead: false
+        },
+        ExplosionRadius: 0,
+        Attributes: {
+            PoisonDamage: 0,
+            PoisonLength: 0,
+            TickRate: 0,
+            MaxSlow: 0,
+            ConfusionTime: 0
+        },
     },
     'Sunflower 4': {
-        Health: 800, Damage: 55, Range: 22.5, Cooldown: 0.8,
-        Detections: { Hidden: true, Flying: false, Lead: false },
+        Health: 800,
+        Damage: 55,
+        Range: 22.5,
+        Cooldown: 0.8,
+        Detections: {
+            Hidden: true,
+            Flying: false,
+            Lead: false
+        },
+        ExplosionRadius: 0,
+        Attributes: {
+            PoisonDamage: 0,
+            PoisonLength: 0,
+            TickRate: 0,
+            MaxSlow: 0,
+            ConfusionTime: 0
+        },
     },
     'Ivy 1': {
-        Health: 100, Damage: 8, Range: 14, Cooldown: 2, ExplosionRadius: 3,
-        Detections: { Hidden: false, Flying: false, Lead: true },
-        Attributes: { PoisonDamage: 1, PoisonLength: 4.5, PoisonTickRate: 0.75, SlowdownPercentage: 5 },
+        Health: 100,
+        Damage: 8,
+        Range: 14,
+        Cooldown: 2,
+        Detections: {
+            Hidden: false,
+            Flying: false,
+            Lead: true
+        },
+        ExplosionRadius: 3,
+        Attributes: {
+            PoisonDamage: 1,
+            PoisonLength: 4.5,
+            TickRate: 0.75,
+            MaxSlow: 5,
+            ConfusionTime: 0
+        },
     },
     'Ivy 2': {
-        Health: 200, Damage: 12, Range: 15.5, Cooldown: 1.8, ExplosionRadius: 4,
-        Detections: { Hidden: false, Flying: false, Lead: true },
-        Attributes: { PoisonDamage: 2, PoisonLength: 4.5, PoisonTickRate: 0.75, SlowdownPercentage: 7.5 },
+        Health: 200,
+        Damage: 12,
+        Range: 15.5,
+        Cooldown: 1.8,
+        Detections: {
+            Hidden: false,
+            Flying: false,
+            Lead: true
+        },
+        ExplosionRadius: 4,
+        Attributes: {
+            PoisonDamage: 2,
+            PoisonLength: 4.5,
+            TickRate: 0.75,
+            MaxSlow: 7.5,
+            ConfusionTime: 0
+        },
     },
     'Ivy 3': {
-        Health: 400, Damage: 25, Range: 17, Cooldown: 1.8, ExplosionRadius: 4.5,
-        Detections: { Hidden: false, Flying: false, Lead: true },
-        Attributes: { PoisonDamage: 4, PoisonLength: 4.5, PoisonTickRate: 0.6, SlowdownPercentage: 7.5 },
+        Health: 400,
+        Damage: 25,
+        Range: 17,
+        Cooldown: 1.8,
+        Detections: {
+            Hidden: false,
+            Flying: false,
+            Lead: true
+        },
+        ExplosionRadius: 4.5,
+        Attributes: {
+            PoisonDamage: 4,
+            PoisonLength: 4.5,
+            TickRate: 0.6,
+            MaxSlow: 7.5,
+            ConfusionTime: 0
+        },
     },
     'Ivy 4': {
-        Health: 800, Damage: 45, Range: 18.5, Cooldown: 1.5, ExplosionRadius: 4.5,
-        Detections: { Hidden: false, Flying: false, Lead: true },
-        Attributes: { PoisonDamage: 5, PoisonLength: 5.2, PoisonTickRate: 0.65, SlowdownPercentage: 12.5 },
+        Health: 800,
+        Damage: 45,
+        Range: 18.5,
+        Cooldown: 1.5,
+        Detections: {
+            Hidden: false,
+            Flying: false,
+            Lead: true
+        },
+        ExplosionRadius: 4.5,
+        Attributes: {
+            PoisonDamage: 5,
+            PoisonLength: 5.2,
+            TickRate: 0.65,
+            MaxSlow: 12.5,
+            ConfusionTime: 0
+        },
     },
     'Nightshade 3': {
-        Health: 400, Damage: 50, Range: 30, Cooldown: 3,
-        Detections: { Hidden: false, Flying: true, Lead: false },
-        Attributes: { ConfusionDuration: 1 },
+        Health: 400,
+        Damage: 50,
+        Range: 30,
+        Cooldown: 3,
+        Detections: {
+            Hidden: false,
+            Flying: true,
+            Lead: false
+        },
+        ExplosionRadius: 0,
+        Attributes: {
+            PoisonDamage: 0,
+            PoisonLength: 0,
+            TickRate: 0,
+            MaxSlow: 0,
+            ConfusionTime: 1
+        },
     },
     'Nightshade 4': {
-        Health: 800, Damage: 135, Range: 35, Cooldown: 2.75,
-        Detections: { Hidden: false, Flying: true, Lead: false },
-        Attributes: { ConfusionDuration: 1.25 },
+        Health: 800,
+        Damage: 135,
+        Range: 35,
+        Cooldown: 2.75,
+        Detections: {
+            Hidden: false,
+            Flying: true,
+            Lead: false
+        },
+        ExplosionRadius: 0,
+        Attributes: {
+            PoisonDamage: 0,
+            PoisonLength: 0,
+            TickRate: 0,
+            MaxSlow: 0,
+            ConfusionTime: 1.25
+        },
     },
 };

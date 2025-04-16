@@ -6104,7 +6104,6 @@ export default {
                 SunflowerCD: 20,
                 IvyCD: 20,
                 NightshadeCD: 20,
-                TreeCD: 30,
             },
             Detections: {
                 Hidden: false,
