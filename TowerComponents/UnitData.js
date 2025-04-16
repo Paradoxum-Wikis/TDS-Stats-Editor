@@ -1782,4 +1782,54 @@ export default {
         Spawnrate: 80,
         Speed: 3,
     },
+
+    // Biologist Units
+    Sunflower: {
+        Health: 800, // From Lvl 4 tooltip
+        Damage: 55, // From Lvl 4 tooltip
+        Range: 22.5, // From Lvl 4 tooltip
+        Detections: {
+            Hidden: true, // From Lvl 2 tooltip onwards
+            Flying: false, // Assuming false, not specified
+            Lead: false, // Assuming false, not specified
+        },
+        Cooldown: 0.8, // From Lvl 4 tooltip
+        // Other stats like Speed, Defense etc. not specified in tooltips
+    },
+    Ivy: {
+        Health: 800, // From Lvl 4 tooltip
+        Damage: 45, // From Lvl 4 tooltip (direct damage)
+        Range: 18.5, // From Lvl 4 tooltip
+        Detections: {
+            Hidden: false, // Assuming false, not specified
+            Flying: false, // Assuming false, not specified
+            Lead: true, // From Lvl 1 tooltip onwards
+        },
+        Cooldown: 1.5, // From Lvl 4 tooltip
+        ExplosionRadius: 4.5, // From Lvl 4 tooltip (radius)
+        Attributes: { // Adding poison/slow stats here
+            PoisonDamage: 5, // From Lvl 4 tooltip (psnDamage)
+            PoisonLength: 5.2, // From Lvl 4 tooltip (psnLen)
+            PoisonTickRate: 0.65, // From Lvl 4 tooltip (psnTick)
+            SlowdownPercentage: 12.5, // From Lvl 4 tooltip (slowPerc)
+            // SlowdownTime not specified
+        },
+        // Other stats like Speed, Defense etc. not specified in tooltips
+    },
+    Nightshade: {
+        Health: 800, // From Lvl 4 tooltip
+        Damage: 135, // From Lvl 4 tooltip
+        Range: 35, // From Lvl 4 tooltip
+        Detections: {
+            Hidden: false, // Assuming false, not specified
+            Flying: true, // From Lvl 3 tooltip onwards
+            Lead: false, // Assuming false, not specified
+        },
+        Cooldown: 2.75, // From Lvl 4 tooltip
+        Attributes: { // Adding confusion stats here
+            ConfusionDuration: 1.25, // From Lvl 4 tooltip (confDur)
+            // ConfusionCooldown not specified for the unit itself
+        },
+        // Other stats like Speed, Defense etc. not specified in tooltips
+    },
 };

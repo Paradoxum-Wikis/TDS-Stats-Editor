@@ -221,6 +221,15 @@ const register = {
             'Railgun Tank',
             ],
     },
+
+    "Biologist": {
+        Default: [
+            'Sunflower',
+            'Ivy',
+            'Nightshade',
+            // 'Tree' unit is mentioned in attributes but not defined in tooltips
+        ],
+    },
 };
 
 export default class UnitManager {

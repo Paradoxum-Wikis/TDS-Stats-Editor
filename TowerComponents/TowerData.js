@@ -6088,4 +6088,92 @@ export default {
       },
     },
   },
+  Biologist: {
+    Default: { // Assuming 'Default' skin based on Lua structure
+        Defaults: {
+            Price: 750,
+            Limit: 8,
+            Damage: 0, // Base tower doesn't attack directly
+            Range: 4, // Base placement range?
+            Cooldown: 1, // Base cooldown? Might relate to planting
+            Attributes: {
+                ProjSpeed: 5, // Projectile speed for plants?
+                Deadzone: 1.5,
+                SecondQueue: false,
+                ThirdQueue: false,
+                SunflowerLvl: 0,
+                SunflowerCD: 20, // Cooldown to plant Sunflower
+                IvyLvl: 0,
+                IvyCD: 20, // Cooldown to plant Ivy
+                NightshadeLvl: 0,
+                NightshadeCD: 20, // Cooldown to plant Nightshade
+                TreeLvl: 0, // Tree unit not defined in provided tooltips
+                TreeCD: 30,
+            },
+            Detections: { // Base tower likely has no detections
+                Hidden: false,
+                Flying: false,
+                Lead: false,
+            },
+        },
+        Upgrades: [
+            { // Level 1
+                Title: "Bio Chemestry",
+                Image: 95317340543936,
+                Cost: 600,
+                Stats: {
+                    Attributes: {
+                        SecondQueue: false, // Explicitly set, though same as default
+                        SunflowerLvl: 1,
+                        IvyLvl: 1, // Unlocks Ivy planting
+                        NightshadeLvl: 0,
+                        TreeLvl: 0,
+                    },
+                },
+            },
+            { // Level 2
+                Title: "Scientific Breakthrough",
+                Image: 91087216328467,
+                Cost: 1850,
+                Stats: {
+                    Attributes: {
+                        SecondQueue: true, // Unlocks second queue
+                        SunflowerLvl: 2,
+                        IvyLvl: 1, // Ivy level doesn't change here? Tooltip shows upgrade.
+                        NightshadeLvl: 0,
+                        TreeLvl: 0,
+                    },
+                },
+            },
+            { // Level 3
+                Title: "Flower Power",
+                Image: 101480107243808,
+                Cost: 4500,
+                Stats: {
+                    Attributes: {
+                        SecondQueue: true,
+                        SunflowerLvl: 3,
+                        IvyLvl: 2,
+                        NightshadeLvl: 1, // Unlocks Nightshade planting
+                        // TreeLvl still 0
+                    },
+                },
+            },
+            { // Level 4
+                Title: "Botanical Berserker!",
+                Image: 121014188542772,
+                Cost: 20000,
+                Stats: {
+                    Attributes: {
+                        ThirdQueue: true, // Unlocks third queue
+                        SunflowerLvl: 4,
+                        IvyLvl: 3,
+                        NightshadeLvl: 1, // Nightshade level doesn't change here? Tooltip shows upgrade.
+                        TreeLvl: 0, // Tree still not mentioned in tooltips
+                    },
+                },
+            },
+        ],
+    },
+},
 };
