@@ -126,6 +126,18 @@ class UnitCalculations {
                 For: ['Fire Bomb 0' , 'Fire Bomb 1', 'Fire Bomb 2', 'Fire Bomb 3', 'Fire Bomb 4'],
                 Value: (level) => level.Damage / level.Cooldown + level.BurnDamage / level.TickRate,
             },
+
+            Ivy: {
+                For: ['Ivy 1', 'Ivy 2', 'Ivy 3', 'Ivy 4'],
+                Requires: ['Damage', 'Cooldown', 'PoisonDamage'],
+                Value: (level) => {
+                    const directDPS = level.Damage / level.Cooldown;
+                    const poisonDPS = (level.Attributes?.PoisonDamage && level.Attributes?.TickRate > 0)
+                                      ? level.Attributes.PoisonDamage / level.Attributes.TickRate
+                                      : 0;
+                    return directDPS + poisonDPS;
+                },
+            },
         },
 
         TotalElapsedDamage: {

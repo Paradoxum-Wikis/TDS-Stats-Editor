@@ -6099,8 +6099,12 @@ export default {
             Attributes: {
                 ProjectileSpeed: 5,
                 Deadzone: 1.5,
-                Queue2: false,
-                Queue3: false,
+                Sunflower: true,
+                Ivy: true,
+                Nightshade: false,
+                Queue1: "Sunflower",
+                Queue2: "N/A",
+                Queue3: "N/A",
                 SunflowerCD: 20,
                 IvyCD: 20,
                 NightshadeCD: 20,
@@ -6118,6 +6122,12 @@ export default {
                 Cost: 600,
                 Stats: {
                     Attributes: {
+                      Sunflower: true,
+                      Ivy: true,
+                      Nightshade: false,
+                      Queue1: "Sunflower",
+                      Queue2: "N/A",
+                      Queue3: "N/A",
                     },
                 },
             },
@@ -6127,7 +6137,12 @@ export default {
                 Cost: 1850,
                 Stats: {
                     Attributes: {
-                        Queue2: true,
+                      Sunflower: true,
+                      Ivy: true,
+                      Nightshade: false,
+                      Queue1: "Sunflower",
+                      Queue2: "Ivy",
+                      Queue3: "N/A",
                     },
                 },
             },
@@ -6137,7 +6152,12 @@ export default {
                 Cost: 4500,
                 Stats: {
                     Attributes: {
-                        Queue2: true,
+                      Sunflower: true,
+                      Ivy: true,
+                      Nightshade: true,
+                      Queue1: "Sunflower",
+                      Queue2: "Ivy",
+                      Queue3: "N/A",
                     },
                 },
             },
@@ -6147,7 +6167,12 @@ export default {
                 Cost: 20000,
                 Stats: {
                     Attributes: {
-                        Queue3: true,
+                      Sunflower: true,
+                      Ivy: true,
+                      Nightshade: true,
+                      Queue1: "Sunflower",
+                      Queue2: "Ivy",
+                      Queue3: "Nightshade",
                     },
                 },
             },

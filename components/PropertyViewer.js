@@ -141,6 +141,12 @@ export default class PropertyViewer {
         return activeSkin.tower.name === 'Trapper';
     }
 
+    isBiologistTower() {
+        const activeSkin = this.viewer.getActiveSkin();
+        if (!activeSkin) return false;
+        return activeSkin.tower.name === 'Biologist';
+    }
+
     isMercenaryBaseTower() {
         const activeSkin = this.viewer.getActiveSkin();
         if (!activeSkin) return false;
@@ -269,7 +275,7 @@ export default class PropertyViewer {
             return true;
         }
         
-        if ((this.isTrapperTower() || this.isSwarmerTower()) && property === 'Damage') {
+        if ((this.isTrapperTower() || this.isBiologistTower() || this.isSwarmerTower()) && property === 'Damage') {
             return true;
         }
         
