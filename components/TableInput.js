@@ -273,7 +273,19 @@ export default class TableInput {
         'BurstCooldown',
         'ReloadSpeed',
         'TickRate',
-    ];
+        'BuildTime',
+        'RevTime',
+        'ReloadTime',
+        'ComboCooldown',
+        'KnockbackCooldown',
+        'Spawnrate',
+        'SlowdownTime',
+        'AftershockCooldown',
+        'PoisonLength',
+        'AimTime',
+        'EquipTime',
+        'BuildDelay',
+    ];    
 
     #getDelta(cellData, deltaData, input) {
         const difference = cellData - deltaData;
