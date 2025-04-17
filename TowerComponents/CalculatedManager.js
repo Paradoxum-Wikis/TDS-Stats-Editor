@@ -329,6 +329,7 @@ class CalculatedManager {
                     'Commander',
                     'Trapper',
                     'Mercenary Base',
+                    'Biologist',
                 ],
                 Value: (level) => {
                     const DPS = level.Damage / level.Cooldown;
@@ -632,7 +633,7 @@ class CalculatedManager {
         CostEfficiency: {
             Default: {
                 Requires: ['NetCost', 'DPS'],
-                Exclude: ['Mercenary Base'],
+                Exclude: ['Mercenary Base', 'Biologist'],
                 Value: (level) => {
                     const efficiency = level.NetCost / level.DPS;
                     return isFinite(efficiency) ? efficiency : NaN;

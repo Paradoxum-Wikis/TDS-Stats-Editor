@@ -275,11 +275,11 @@ export default class PropertyViewer {
             return true;
         }
         
-        if ((this.isTrapperTower() || this.isBiologistTower() || this.isSwarmerTower()) && property === 'Damage') {
+        if ((this.isTrapperTower() || this.isSwarmerTower()) && property === 'Damage') {
             return true;
         }
         
-        if (this.isMercenaryBaseTower() && (property === 'Damage' || property === 'Cooldown' || property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
+        if (this.isMercenaryBaseTower() || this.isBiologistTower() && (property === 'Damage' || property === 'Cooldown' || property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
             return true;
         }
 
