@@ -6105,9 +6105,6 @@ export default {
                 Queue1: "Sunflower",
                 Queue2: "N/A",
                 Queue3: "N/A",
-                SunflowerCD: 20,
-                IvyCD: 20,
-                NightshadeCD: 20,
             },
             Detections: {
                 Hidden: false,

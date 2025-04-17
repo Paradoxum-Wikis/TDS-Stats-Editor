@@ -1789,6 +1789,7 @@ export default {
         Damage: 6,
         Range: 15,
         Cooldown: 1.1,
+        Lifetime: 20,
         Detections: {
             Hidden: false,
             Flying: false,
@@ -1808,6 +1809,7 @@ export default {
         Damage: 10,
         Range: 15,
         Cooldown: 1.1,
+        Lifetime: 20,
         Detections: {
             Hidden: false,
             Flying: false,
@@ -1827,6 +1829,7 @@ export default {
         Damage: 12,
         Range: 17,
         Cooldown: 1.1,
+        Lifetime: 20,
         Detections: {
             Hidden: true,
             Flying: false,
@@ -1846,6 +1849,7 @@ export default {
         Damage: 28,
         Range: 19.5,
         Cooldown: 1,
+        Lifetime: 20,
         Detections: {
             Hidden: true,
             Flying: false,
@@ -1865,6 +1869,7 @@ export default {
         Damage: 55,
         Range: 22.5,
         Cooldown: 0.8,
+        Lifetime: 20,
         Detections: {
             Hidden: true,
             Flying: false,
@@ -1884,6 +1889,7 @@ export default {
         Damage: 8,
         Range: 14,
         Cooldown: 2,
+        Lifetime: 20,
         Detections: {
             Hidden: false,
             Flying: false,
@@ -1903,6 +1909,7 @@ export default {
         Damage: 12,
         Range: 15.5,
         Cooldown: 1.8,
+        Lifetime: 20,
         Detections: {
             Hidden: false,
             Flying: false,
@@ -1922,6 +1929,7 @@ export default {
         Damage: 25,
         Range: 17,
         Cooldown: 1.8,
+        Lifetime: 20,
         Detections: {
             Hidden: false,
             Flying: false,
@@ -1941,6 +1949,7 @@ export default {
         Damage: 45,
         Range: 18.5,
         Cooldown: 1.5,
+        Lifetime: 20,
         Detections: {
             Hidden: false,
             Flying: false,
@@ -1960,6 +1969,7 @@ export default {
         Damage: 50,
         Range: 30,
         Cooldown: 3,
+        Lifetime: 20,
         Detections: {
             Hidden: false,
             Flying: true,
@@ -1979,6 +1989,7 @@ export default {
         Damage: 135,
         Range: 35,
         Cooldown: 2.75,
+        Lifetime: 20,
         Detections: {
             Hidden: false,
             Flying: true,

@@ -254,9 +254,6 @@ export default class TableInput {
             case 'EquipTime':
             case 'BuildDelay':
             case 'BombTime':
-            case 'NightshadeCD':
-            case 'IvyCD':
-            case 'SunflowerCD':
                 return formatter.format(value) + (showSeconds ? 's' : '');
         }
     
