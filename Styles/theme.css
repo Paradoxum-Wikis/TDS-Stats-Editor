@@ -553,3 +553,7 @@
 .light-mode .mobile-sidebar-content {
     color: #212529;
 }
+
+.light-mode .linvert {
+    filter: invert(1);
+}

@@ -152,13 +152,13 @@ class SkinData {
                         icon = '<img src="htmlassets/RangeIcon.png" width="16" class="align-text-bottom me-1">';
                         break;
                     case 'Hidden':
-                        icon = '<img src="htmlassets/HiddenIcon.png" width="16" class="align-text-bottom me-1">';
+                        icon = '<img src="htmlassets/HiddenIcon.png" width="16" class="align-text-bottom me-1 linvert">';
                         break;
                     case 'Flying':
-                        icon = '<img src="htmlassets/FlyingIcon.png" width="16" class="align-text-bottom me-1">';
+                        icon = '<img src="htmlassets/FlyingIcon.png" width="16" class="align-text-bottom me-1 linvert">';
                         break;
                     case 'Lead':
-                        icon = '<img src="htmlassets/LeadIcon.png" width="16" class="align-text-bottom me-1">';
+                        icon = '<img src="htmlassets/LeadIcon.png" width="16" class="align-text-bottom me-1 linvert">';
                         break;
                     case 'Income':
                         icon = '<img src="htmlassets/IncomeIcon.png" width="16" class="align-text-bottom me-1">';
