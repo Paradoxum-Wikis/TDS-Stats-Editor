@@ -224,6 +224,7 @@ const register = {
 
     "Biologist": {
         Default: [
+            'Sunflower 0',
             'Sunflower 1',
             'Sunflower 2',
             'Sunflower 3',

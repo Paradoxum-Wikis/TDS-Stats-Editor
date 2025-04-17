@@ -1784,6 +1784,25 @@ export default {
     },
 
     // Biologist
+    'Sunflower 0': {
+        Health: 50,
+        Damage: 5,
+        Range: 15,
+        Cooldown: 1.1,
+        Detections: {
+            Hidden: false,
+            Flying: false,
+            Lead: false
+        },
+        ExplosionRadius: 0,
+        Attributes: {
+            PoisonDamage: 0,
+            PoisonLength: 0,
+            TickRate: 0,
+            MaxSlow: 0,
+            ConfusionTime: 0
+        },
+    },
     'Sunflower 1': {
         Health: 100,
         Damage: 10,
