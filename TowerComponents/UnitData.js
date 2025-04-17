@@ -1786,7 +1786,7 @@ export default {
     // Biologist
     'Sunflower 0': {
         Health: 50,
-        Damage: 5,
+        Damage: 6,
         Range: 15,
         Cooldown: 1.1,
         Detections: {
