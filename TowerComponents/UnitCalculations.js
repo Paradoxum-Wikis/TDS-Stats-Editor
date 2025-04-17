@@ -129,11 +129,11 @@ class UnitCalculations {
 
             Ivy: {
                 For: ['Ivy 1', 'Ivy 2', 'Ivy 3', 'Ivy 4'],
-                Requires: ['Damage', 'Cooldown', 'PoisonDamage'],
+                Requires: ['Damage', 'Cooldown', 'PoisonDamage', 'TickRate'],
                 Value: (level) => {
                     const directDPS = level.Damage / level.Cooldown;
-                    const poisonDPS = (level.Attributes?.PoisonDamage && level.Attributes?.TickRate > 0)
-                                      ? level.Attributes.PoisonDamage / level.Attributes.TickRate
+                    const poisonDPS = (level.PoisonDamage && level.TickRate > 0)
+                                      ? level.PoisonDamage / level.TickRate
                                       : 0;
                     return directDPS + poisonDPS;
                 },
