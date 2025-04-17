@@ -279,7 +279,6 @@ export default class TableInput {
         'ComboCooldown',
         'KnockbackCooldown',
         'Spawnrate',
-        'SlowdownTime',
         'AftershockCooldown',
         'PoisonLength',
         'AimTime',
