@@ -42,7 +42,6 @@ export default class PropertyViewer {
             'BookDebounce',
         ];
         this.disabled = [...this.defaultDisabled];
-        this.towerSpecificDisabled = []; // this keeps track of tower specific disables
         // stuffs we never show
         this.hidden = [
             'NoTable',
@@ -75,16 +74,16 @@ export default class PropertyViewer {
         // slave table's configs - all in one place
         this.unitDisabled = [
         ];
-        
+
         this.unitHidden = [
             '_towerName',
             '_skinName',
-        ]; 
-        
+        ];
+
         this.unitBaseProperties = [
             'Name',
             'Damage',
-            'Health', 
+            'Health',
             'Speed',
             'Cooldown',
             'Range'
@@ -94,14 +93,14 @@ export default class PropertyViewer {
         const existingBtnGroup = this.viewSection.querySelector('.btn-group');
         const tabsGroup = document.createElement('div');
         tabsGroup.className = 'btn-group w-100 p-2 pt-0';
-        
+
         // tower button
         this.towerPropsBtn = document.createElement('button');
         this.towerPropsBtn.id = 'property-tower';
         this.towerPropsBtn.className = 'btn btn-sm btn-dark';
         this.towerPropsBtn.textContent = 'Tower';
         this.towerPropsBtn.addEventListener('click', this.showTowerProperties.bind(this));
-        
+
         // unit button
         this.unitPropsBtn = document.createElement('button');
         this.unitPropsBtn.id = 'property-unit';
@@ -158,7 +157,7 @@ export default class PropertyViewer {
         if (!activeSkin) return false;
         return activeSkin.tower.name === 'Swarmer';
     }
-    
+
     isDJTower() {
         const activeSkin = this.viewer.getActiveSkin();
         if (!activeSkin) return false;
@@ -260,66 +259,68 @@ export default class PropertyViewer {
 
     // is this property off limits?
     isDisabled(property) {
-        return this.currentView === 'tower' 
+        return this.currentView === 'tower'
             ? this.disabled.includes(property)
             : this.unitDisabled.includes(property);
     }
 
     // should this property stay hidden?
     isHidden(property) {
-        if (this.isFarmTower() && (property === 'Damage' || property === 'Cooldown' || property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
-            return true;
-        }
-        
-        if ((this.isMilitaryBaseTower() || this.isMechaBaseTower() || this.isElfCampTower()) && (property === 'Damage' || property === 'Cooldown' || property === 'Range' || property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
-            return true;
-        }
-        
-        if ((this.isTrapperTower() || this.isSwarmerTower()) && property === 'Damage') {
-            return true;
-        }
-        
-        if (this.isMercenaryBaseTower() || this.isBiologistTower() && (property === 'Damage' || property === 'Cooldown' || property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
+        // Universal hidden properties
+        if (this.hidden.includes(property)) {
             return true;
         }
 
-        if (this.isDJTower() && (property === 'Damage' || property === 'Cooldown')) {
-            return true;
-        }
-
-        if (this.isArcherTower() && (property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
-            return true;
-        }
-        
-        return this.hidden.includes(property);
-    }
-
-    // hide said property
-    hide(property) {
-        if (!this.isDisabled(property)) {
-            this.disabled.push(property);
-        }
-    }
-
-    // show this property and let users override em
-    show(property, userAction = false) {
-        if (!userAction) {
-            // Tower-specific rules kick in if not a user click
+        // Tower specific rules (prevent button creation)
+        if (this.currentView === 'tower') { // Only apply tower rules in tower view
             if (this.isFarmTower() && (property === 'Damage' || property === 'Cooldown' || property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
-                this.hide(property);
-                return;
+                return true;
             }
-        } else {
-            // user clicked it, so clear it from tower specific disables
-            const index = this.towerSpecificDisabled.indexOf(property);
-            if (index !== -1) {
-                this.towerSpecificDisabled.splice(index, 1);
+
+            if ((this.isMilitaryBaseTower() || this.isMechaBaseTower() || this.isElfCampTower()) && (property === 'Damage' || property === 'Cooldown' || property === 'Range' || property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
+                return true;
+            }
+
+            if ((this.isTrapperTower() || this.isSwarmerTower()) && property === 'Damage') {
+                return true;
+            }
+
+            if ((this.isMercenaryBaseTower() || this.isBiologistTower()) && (property === 'Damage' || property === 'Cooldown' || property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
+                return true;
+            }
+
+            if (this.isDJTower() && (property === 'Damage' || property === 'Cooldown')) {
+                return true;
+            }
+
+            if (this.isArcherTower() && (property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
+                return true;
             }
         }
-        
-        if (this.isDisabled(property)) {
+
+        // Unit specific hidden properties
+        if (this.currentView === 'unit' && this.unitHidden.includes(property)) {
+             return true;
+        }
+
+        return false;
+    }
+
+    // hide said property (add to disabled list)
+    hide(property) {
+        const targetList = this.currentView === 'tower' ? this.disabled : this.unitDisabled;
+        if (!targetList.includes(property)) {
+            targetList.push(property);
+        }
+    }
+
+    // show this property (remove from disabled list)
+    show(property, userAction = false) { // userAction is kept for potential future use in case i wanted to add it back in again
+        const targetList = this.currentView === 'tower' ? this.disabled : this.unitDisabled;
+        const index = targetList.indexOf(property);
+        if (index !== -1) {
             console.log(`Removing ${property} from disabled list`);
-            this.disabled = this.disabled.filter(v => v !== property);
+            targetList.splice(index, 1);
         }
     }
 
@@ -332,12 +333,13 @@ export default class PropertyViewer {
 
         const listElement = document.createElement('li');
         const button = document.createElement('button');
-        
+
         this.buttonClasses.forEach(className =>
             button.classList.add(className)
         );
-        
+
         const toggleButton = new ToggleButton(button, {
+            // Initial state depends on whether it's in the disabled list
             state: !this.isDisabled(innerText),
             activeClass: this.activeButtonClass,
             inactiveClass: this.inactiveButtonClass,
@@ -352,9 +354,9 @@ export default class PropertyViewer {
                 console.log(`Property ${innerText} state after show: ${this.isDisabled(innerText) ? 'disabled' : 'enabled'}`);
             }).bind(this)
         );
-        
+
         toggleButton.element.addEventListener(
-            'disabled', 
+            'disabled',
             ((e) => {
                 console.log(`Disabling property: ${innerText}`);
                 this.hide(innerText);
@@ -374,18 +376,13 @@ export default class PropertyViewer {
 
     // make buttons for all the attributes
     createButtons(attributes) {
+        // Reset disabled list to defaults only if not previously modified by user
         if (!this.userModified) {
             this.disabled = [...this.defaultDisabled];
-            this.userModified = true;
-        } else {
-            // clear out old tower speicfic disables when switching towers
-            this.disabled = this.disabled.filter(prop => !this.towerSpecificDisabled.includes(prop));
-            this.towerSpecificDisabled = [];
+            this.userModified = true; // Mark as modified after first load
         }
-        
-        // apply the tower specific rules
-        this.applyTowerSpecificRules();
-        
+        // No need to clear towerSpecificDisabled or call applyTowerSpecificRules anymore
+
         this.root.innerHTML = '';
 
         attributes.forEach(attributeName => {
@@ -394,51 +391,6 @@ export default class PropertyViewer {
                 this.root.appendChild(button);
             }
         });
-    }
-
-    // set up tower specific hiding rules
-    applyTowerSpecificRules() {
-        if (this.isFarmTower()) {
-            ['Damage', 'Cooldown', 'Hidden', 'Flying', 'Lead'].forEach(prop => {
-                this.hideForTowerType(prop);
-            });
-        }
-        
-        if (this.isMilitaryBaseTower() || this.isMechaBaseTower() || this.isElfCampTower()) {
-            ['Damage', 'Cooldown', 'Range', 'Hidden', 'Flying', 'Lead'].forEach(prop => {
-                this.hideForTowerType(prop);
-            });
-        }
-        
-        if (this.isTrapperTower() || this.isSwarmerTower()) {
-            this.hideForTowerType('Damage');
-        }
-        
-        if (this.isMercenaryBaseTower()) {
-            ['Damage', 'Cooldown', 'Hidden', 'Flying', 'Lead'].forEach(prop => {
-                this.hideForTowerType(prop);
-            });
-        }
-        
-        if (this.isDJTower()) {
-            ['Damage', 'Cooldown'].forEach(prop => {
-                this.hideForTowerType(prop);
-            });
-        }
-        
-        if (this.isArcherTower()) {
-            ['Hidden', 'Flying', 'Lead'].forEach(prop => {
-                this.hideForTowerType(prop);
-            });
-        }
-    }
-
-    // hide properties and mark it as tower-specific
-    hideForTowerType(property) {
-        if (!this.isDisabled(property)) {
-            this.disabled.push(property);
-            this.towerSpecificDisabled.push(property);
-        }
     }
 
     // methods to switch between tower and unit property views
@@ -459,7 +411,7 @@ export default class PropertyViewer {
         this.currentView = 'unit';
         this.loadCurrentProperties();
     }
-    
+
     // load appropriate properties based on current view
     loadCurrentProperties() {
         if (this.currentView === 'tower') {
@@ -483,22 +435,22 @@ export default class PropertyViewer {
 
     getUnitAttributes() {
         if (!this.viewer.activeUnits) return [];
-        
+
         const attributes = new Set();
         this.unitBaseProperties.forEach(attr => attributes.add(attr));
-        
+
         Object.values(this.viewer.activeUnits).forEach(unit => {
             if (unit.attributeNames) {
                 unit.attributeNames.forEach(attr => attributes.add(attr));
             }
         });
-        
+
         return Array.from(attributes);
     }
 
     createUnitButtons() {
         this.root.innerHTML = '';
-        
+
         // check if units exist
         if (!this.viewer.activeUnits || Object.keys(this.viewer.activeUnits).length === 0) {
             const noUnitsMessage = document.createElement('div');
@@ -507,7 +459,7 @@ export default class PropertyViewer {
             this.root.appendChild(noUnitsMessage);
             return;
         }
-        
+
         const unitAttributes = this.getUnitAttributes();
         unitAttributes.forEach(attributeName => {
             const button = this.createUnitPropertyButton(attributeName);
@@ -519,19 +471,20 @@ export default class PropertyViewer {
 
     // toggle buttons for slave properties
     createUnitPropertyButton(innerText) {
-        // skip hidden properties (check both common hidden and unit-specific hidden)
-        if (this.hidden.includes(innerText) || this.unitHidden.includes(innerText)) {
+        if (this.isHidden(innerText)) {
+             this.hide(innerText);
             return null;
         }
 
         const listElement = document.createElement('li');
         const button = document.createElement('button');
-        
+
         this.buttonClasses.forEach(className =>
             button.classList.add(className)
         );
-        
+
         const toggleButton = new ToggleButton(button, {
+            // Check unitDisabled list for initial state
             state: !this.unitDisabled.includes(innerText),
             activeClass: this.activeButtonClass,
             inactiveClass: this.inactiveButtonClass,
@@ -541,18 +494,16 @@ export default class PropertyViewer {
             'enabled',
             ((e) => {
                 console.log(`Enabling unit property: ${innerText}`);
-                this.unitDisabled = this.unitDisabled.filter(v => v !== innerText);
+                this.show(innerText); // Use show which handles currentView
                 this.refreshUnitTable();
             }).bind(this)
         );
-        
+
         toggleButton.element.addEventListener(
-            'disabled', 
+            'disabled',
             ((e) => {
                 console.log(`Disabling unit property: ${innerText}`);
-                if (!this.unitDisabled.includes(innerText)) {
-                    this.unitDisabled.push(innerText);
-                }
+                this.hide(innerText); // Use hide which handles currentView
                 this.refreshUnitTable();
             }).bind(this)
         );
@@ -570,7 +521,7 @@ export default class PropertyViewer {
     refreshUnitTable() {
         if (this.viewer && this.viewer.unitTable) {
             this.viewer.unitTable.load(this.viewer.activeUnits, {
-                ignore: this.unitDisabled
+                ignore: this.unitDisabled // Pass the correct disabled list
             });
         }
     }
