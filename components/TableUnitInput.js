@@ -254,6 +254,7 @@ export default class TableUnitInput {
             case 'ConfusionCooldown':
             case 'PoisonLength':
             case 'SlowdownTime':
+            case 'Spawnrate':
                 return formatter.format(number) + (showSeconds ? 's' : '');
         }
         
@@ -278,6 +279,7 @@ export default class TableUnitInput {
         'ReloadTime',
         'SendTime',
         'ConfusionCooldown',
+        'Spawnrate',
     ];    
 
     #getDelta(cellData, deltaData, input) {
