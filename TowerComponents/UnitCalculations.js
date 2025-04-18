@@ -170,6 +170,7 @@ class UnitCalculations {
         },
         RamDPS: {
             Default: {
+                Exclude: ['Sunflower 0', 'Sunflower 1', 'Sunflower 2', 'Sunflower 3', 'Sunflower 4', 'Ivy 1', 'Ivy 2', 'Ivy 3', 'Ivy 4', 'Nightshade 3', 'Nightshade 4'],
                 Requires: ['Health', 'Spawnrate'],
                 Value: (level) => {
                     return level.Health / level.Spawnrate;

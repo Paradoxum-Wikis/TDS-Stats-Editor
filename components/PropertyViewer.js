@@ -285,7 +285,11 @@ export default class PropertyViewer {
                 return true;
             }
 
-            if ((this.isMercenaryBaseTower() || this.isBiologistTower()) && (property === 'Damage' || property === 'Cooldown' || property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
+            if ((this.isMercenaryBaseTower()) && (property === 'Damage' || property === 'Cooldown' || property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
+                return true;
+            }
+
+            if ((this.isBiologistTower()) && (property === 'Damage' || property === 'Hidden' || property === 'Flying' || property === 'Lead')) {
                 return true;
             }
 

@@ -1790,6 +1790,7 @@ export default {
         Range: 15,
         Cooldown: 1.1,
         Lifetime: 20,
+        Spawnrate: 20,
         Detections: {
             Hidden: false,
             Flying: false,
@@ -1810,6 +1811,7 @@ export default {
         Range: 15,
         Cooldown: 1.1,
         Lifetime: 20,
+        Spawnrate: 20,
         Detections: {
             Hidden: false,
             Flying: false,
@@ -1830,6 +1832,7 @@ export default {
         Range: 17,
         Cooldown: 1.1,
         Lifetime: 20,
+        Spawnrate: 20,
         Detections: {
             Hidden: true,
             Flying: false,
@@ -1850,6 +1853,7 @@ export default {
         Range: 19.5,
         Cooldown: 1,
         Lifetime: 20,
+        Spawnrate: 20,
         Detections: {
             Hidden: true,
             Flying: false,
@@ -1870,6 +1874,7 @@ export default {
         Range: 22.5,
         Cooldown: 0.8,
         Lifetime: 20,
+        Spawnrate: 20,
         Detections: {
             Hidden: true,
             Flying: false,
@@ -1890,6 +1895,7 @@ export default {
         Range: 14,
         Cooldown: 2,
         Lifetime: 20,
+        Spawnrate: 20,
         Detections: {
             Hidden: false,
             Flying: false,
@@ -1910,6 +1916,7 @@ export default {
         Range: 15.5,
         Cooldown: 1.8,
         Lifetime: 20,
+        Spawnrate: 20,
         Detections: {
             Hidden: false,
             Flying: false,
@@ -1930,6 +1937,7 @@ export default {
         Range: 17,
         Cooldown: 1.8,
         Lifetime: 20,
+        Spawnrate: 20,
         Detections: {
             Hidden: false,
             Flying: false,
@@ -1950,6 +1958,7 @@ export default {
         Range: 18.5,
         Cooldown: 1.5,
         Lifetime: 20,
+        Spawnrate: 20,
         Detections: {
             Hidden: false,
             Flying: false,
@@ -1970,6 +1979,7 @@ export default {
         Range: 30,
         Cooldown: 3,
         Lifetime: 20,
+        Spawnrate: 20,
         Detections: {
             Hidden: false,
             Flying: true,
@@ -1990,6 +2000,7 @@ export default {
         Range: 35,
         Cooldown: 2.75,
         Lifetime: 20,
+        Spawnrate: 20,
         Detections: {
             Hidden: false,
             Flying: true,
