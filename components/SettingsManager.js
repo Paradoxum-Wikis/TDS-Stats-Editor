@@ -10,6 +10,7 @@ class SettingsManager {
         this.enableLuaViewerToggle = document.getElementById('enableLuaViewerToggle');
         this.keepDropdownOpenToggle = document.getElementById('keepDropdownOpenToggle');
         this.classicTableSizeToggle = document.getElementById('classicTableSizeToggle');
+        this.imageCacheDebugToggle = document.getElementById('imageCacheDebugToggle');
         this.animationsStylesheet = document.getElementById('animsCSS');
         this.body = document.body;
         this.systemThemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -27,6 +28,7 @@ class SettingsManager {
         this.enableLuaViewer = localStorage.getItem('enableLuaViewer') === 'true'; 
         this.keepDropdownOpen = localStorage.getItem('keepDropdownOpen') === 'true';
         this.classicTableSize = localStorage.getItem('classicTableSize') === 'true';
+        this.imageCacheDebug = localStorage.getItem('imageCacheDebug') === 'true';
         
         window.state = window.state || {};
         window.state.settings = window.state.settings || {};
@@ -37,6 +39,7 @@ class SettingsManager {
         window.state.settings.enableLuaViewer = this.enableLuaViewer;
         window.state.settings.keepDropdownOpen = this.keepDropdownOpen;
         window.state.settings.classicTableSize = this.classicTableSize;
+        window.state.settings.imageCacheDebug = this.imageCacheDebug;
         
         this.init();
     }
@@ -110,9 +113,17 @@ class SettingsManager {
         this.showCollapsibleCountsToggle.checked = this.showCollapsibleCounts;
         if (this.enableLuaViewerToggle) {
             this.enableLuaViewerToggle.checked = this.enableLuaViewer;
+            this.enableLuaViewerToggle.addEventListener('change', this.toggleEnableLuaViewer.bind(this));
         }
         if (this.keepDropdownOpenToggle) {
-            this.keepDropdownOpenToggle.checked = this.keepDropdownOpen;
+            this.keepDropdownOpenToggle.addEventListener('change', this.toggleKeepDropdownOpen.bind(this));
+        }
+        if (this.classicTableSizeToggle) {
+            this.classicTableSizeToggle.addEventListener('change', this.toggleClassicTableSize.bind(this));
+        }
+        if (this.imageCacheDebugToggle) {
+            this.imageCacheDebugToggle.checked = this.imageCacheDebug;
+            this.imageCacheDebugToggle.addEventListener('change', this.toggleImageCacheDebug.bind(this));
         }
         if (this.classicTableSizeToggle) {
             this.classicTableSizeToggle.checked = this.classicTableSize;
@@ -125,16 +136,6 @@ class SettingsManager {
         this.forceUSNumbersToggle.addEventListener('change', this.toggleForceUSNumbers.bind(this));
         this.showCollapsibleCountsToggle.addEventListener('change', this.toggleShowCollapsibleCounts.bind(this));
         this.animationsToggle.addEventListener('change', this.toggleAnimations.bind(this));
-        
-        if (this.enableLuaViewerToggle) {
-            this.enableLuaViewerToggle.addEventListener('change', this.toggleEnableLuaViewer.bind(this));
-        }
-        if (this.keepDropdownOpenToggle) {
-            this.keepDropdownOpenToggle.addEventListener('change', this.toggleKeepDropdownOpen.bind(this));
-        }
-        if (this.classicTableSizeToggle) {
-            this.classicTableSizeToggle.addEventListener('change', this.toggleClassicTableSize.bind(this));
-        }
         
         this.updateNumberFormatLabel();
     }
@@ -263,6 +264,16 @@ class SettingsManager {
         }
     }
     
+    toggleImageCacheDebug() {
+        this.imageCacheDebug = this.imageCacheDebugToggle.checked;
+        window.state.settings.imageCacheDebug = this.imageCacheDebug;
+        localStorage.setItem('imageCacheDebug', this.imageCacheDebug);
+        
+        document.dispatchEvent(new CustomEvent('settingsChanged', {
+            detail: { setting: 'imageCacheDebug', value: this.imageCacheDebug }
+        }));
+    }
+
     // updates the label for the manual theme toggle
     updateToggleLabel() {
         if (!this.themeToggleLabel) return;
