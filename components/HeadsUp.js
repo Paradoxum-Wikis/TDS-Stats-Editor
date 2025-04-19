@@ -121,7 +121,7 @@ class HeadsUp {
                                 <i class="bi bi-broadcast fs-3"></i>
                             </div>
                             <div>
-                                <h5 class="modal-title mb-0" id="announcement-title">Community Poll</h5>
+                                <h5 class="modal-title unisans mb-0" id="announcement-title">Community Poll</h5>
                                 <p class="text-muted small mb-0">To poll or not to poll...</p>
                             </div>
                         </div>
@@ -183,7 +183,7 @@ class HeadsUp {
                                 <i class="bi bi-broadcast fs-3"></i>
                             </div>
                             <div>
-                                <h5 class="modal-title mb-0" id="announcement-title">${pollData.title || 'Community Poll'}</h5>
+                                <h5 class="modal-title unisans mb-0" id="announcement-title">${pollData.title || 'Community Poll'}</h5>
                                 <p class="text-muted small mb-0">
                                     ${pollData.endDate ? `This poll closes in ${daysText}` : 'Share your opinion with the community'}
                                 </p>
