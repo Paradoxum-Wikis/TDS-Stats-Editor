@@ -260,6 +260,12 @@ class CalculatedManager {
                 Value: (level) => level.DPS * level.MaxHits,
             },
 
+            Executioner: {
+                For: ['Executioner'],
+                Requires: ['DPS', 'MaxHits', 'MaxBounce'],
+                Value: (level) => level.DPS * level.MaxHits * level.MaxBounce,
+            },
+
             Trapper: {
                 For: ['Trapper'],
                 Value: (level) => {
