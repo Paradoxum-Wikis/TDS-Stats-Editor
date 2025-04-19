@@ -10,11 +10,13 @@ export default class UpgradeViewer {
         this.levelButtons = new ButtonSelection(this.levelPanel);
         this.levelButtons.activeClass = 'btn-dark';
         this.levelButtons.inactiveClass = 'btn-outline-dark';
+        this.dataReady = false;
 
         this.imageInput = document.getElementById('side-upgrade-image');
         this.imageInput.addEventListener(
             'focusout',
             (() => {
+                if (!this.dataReady) return;
                 this.#onTextChanged('Image', this.imageInput.value);
                 this.#loadImage();
                 this.viewer.reload();
@@ -25,6 +27,7 @@ export default class UpgradeViewer {
         this.titleInput.addEventListener(
             'focusout',
             (() => {
+                if (!this.dataReady) return;
                 this.#onTextChanged('Title', this.titleInput.value);
                 this.viewer.reload();
             }).bind(this)
@@ -58,6 +61,7 @@ export default class UpgradeViewer {
             this.loadUpgrade(this.levelButtons.getSelectedName() - 1);
         } else {
             this.skinData = skinData;
+            this.dataReady = true; // Mark data as ready
             this.#loadLevelHeader(skinData);
         }
     }
@@ -160,6 +164,10 @@ export default class UpgradeViewer {
     }
 
     #onTextChanged(property, value) {
+        if (!this.skinData) {
+            console.warn('Cannot update property, skinData is not initialized yet');
+            return;
+        }
         this.skinData.set(this.index + 1, property, value);
     }
 
