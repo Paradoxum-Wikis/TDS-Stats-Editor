@@ -95,7 +95,13 @@ export default class ImageLoader {
     static async resolveImageUrl(imageIdStr) {
         let url;
         
-        if (imageIdStr.startsWith('https')) { // URL handling
+        // "File:"" syntax for tdsw images
+        if (imageIdStr.startsWith('File:')) {
+            const filename = imageIdStr.substring(5); // Remove "File:" prefix
+            url = this.convertFileToFandomUrl(filename);
+            this.log(`Converted File: syntax to URL: ${url}`);
+        } else if (imageIdStr.startsWith('https')) {
+            // url handling
             if (imageIdStr.includes('static.wikia.nocookie.net')) {
                 url = this.trimFandomUrl(imageIdStr);
             } else {
@@ -126,6 +132,18 @@ export default class ImageLoader {
         }
         
         return url;
+    }
+
+    // file: syntax to fandom url converter
+    static convertFileToFandomUrl(filename) {
+        const md5Hash = CryptoJS.MD5(filename).toString();
+        
+        // get first character and first two characters for the path
+        const firstChar = md5Hash.charAt(0);
+        const firstTwoChars = md5Hash.substring(0, 2);
+        
+        // construct the tdsw image url
+        return `https://static.wikia.nocookie.net/tower-defense-sim/images/${firstChar}/${firstTwoChars}/${encodeURIComponent(filename)}`;
     }
 
     static trimFandomUrl(fullUrl) {

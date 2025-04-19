@@ -4,7 +4,8 @@
         "date": "April 16, 2025",
         "changes": [
             "Classic table font size added",
-            "Optimizations for the upgrade viewer"
+            "Optimizations for the upgrade viewer",
+            "'File:' syntax to use images from the TDS wiki added"
         ]
     },
     {
