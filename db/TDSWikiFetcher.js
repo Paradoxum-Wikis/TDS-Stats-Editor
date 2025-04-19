@@ -151,6 +151,25 @@ class TDSWikiFetcher {
         }
     }
     
+    convertFileToFandomUrl(filename) {
+        try {
+            if (!window.CryptoJS || !window.CryptoJS.MD5) {
+                console.error('CryptoJS or CryptoJS.MD5 is not available');
+                return `./../htmlassets/Unavailable.png`;
+            }
+            
+            const md5Hash = CryptoJS.MD5(filename).toString();
+            const firstChar = md5Hash.charAt(0);
+            const firstTwoChars = md5Hash.substring(0, 2);
+            const fandomUrl = `https://static.wikia.nocookie.net/tower-defense-sim/images/${firstChar}/${firstTwoChars}/${encodeURIComponent(filename)}`;
+            
+            return fandomUrl;
+        } catch (error) {
+            console.error(`Error converting File: syntax: ${error.message}`);
+            return `./../htmlassets/Unavailable.png`;
+        }
+    }
+
     /**
      * gets more info for a tower
      */
@@ -220,41 +239,49 @@ class TDSWikiFetcher {
                 // check for RobloxID
                 if (!tower.image || tower.image.includes('Site-favicon.ico')) {
                     const contentText = contentElement.textContent;
-                    const robloxIdMatch = contentText.match(/RobloxID(\d+)/i);
-
-                    if (robloxIdMatch) {
-                        const robloxId = robloxIdMatch[1];
-                        try {
-                            const roProxyUrl = `https://assetdelivery.roproxy.com/v2/assetId/${robloxId}`;
-                            const robloxResponse = await fetch(`https://occulticnine.vercel.app/?url=${encodeURIComponent(roProxyUrl)}`, {
-                                method: 'GET',
-                                headers: {
-                                    'Origin': window.location.origin,
-                                    'X-Requested-With': 'XMLHttpRequest'
-                                }
-                            });
-
-                            const data = await robloxResponse.json();
-                            if (data?.locations?.[0]?.location) {
-                                tower.image = data.locations[0].location;
-                            } else {
-                                tower.image = `./../htmlassets/Unavailable.png`;
-                            }
-                        } catch (error) {
-                            console.warn(`failed to get roblox image ${robloxId}:`, error);
-                        }
+                    
+                    // Look for File: syntax first
+                    const fileMatch = contentText.match(/File:([^\s"'<>()]+\.(?:png|jpg|jpeg|gif))/i);
+                    if (fileMatch) {
+                        const filename = fileMatch[1];
+                        tower.image = this.convertFileToFandomUrl(filename);
                     } else {
-                        // As a last resort, find image URLs in text OUTSIDE of pre tags
-                        const mainContent = Array.from(contentElement.childNodes)
-                            .filter(node => node.nodeName !== 'PRE')
-                            .map(node => node.textContent || '')
-                            .join(' ');
+                        // Continue with existing RobloxID check
+                        const robloxIdMatch = contentText.match(/RobloxID(\d+)/i);
+                        if (robloxIdMatch) {
+                            const robloxId = robloxIdMatch[1];
+                            try {
+                                const roProxyUrl = `https://assetdelivery.roproxy.com/v2/assetId/${robloxId}`;
+                                const robloxResponse = await fetch(`https://occulticnine.vercel.app/?url=${encodeURIComponent(roProxyUrl)}`, {
+                                    method: 'GET',
+                                    headers: {
+                                        'Origin': window.location.origin,
+                                        'X-Requested-With': 'XMLHttpRequest'
+                                    }
+                                });
 
-                        const imgUrlRegex = /https?:\/\/[^\s"'<>()]+(\.png|\.jpg|\.jpeg|\.gif)(?:\?[^\s"'<>()]*)?/i;
-                        const match = mainContent.match(imgUrlRegex);
+                                const data = await robloxResponse.json();
+                                if (data?.locations?.[0]?.location) {
+                                    tower.image = data.locations[0].location;
+                                } else {
+                                    tower.image = `./../htmlassets/Unavailable.png`;
+                                }
+                            } catch (error) {
+                                console.warn(`failed to get roblox image ${robloxId}:`, error);
+                            }
+                        } else {
+                            // As a last resort, find image URLs in text OUTSIDE of pre tags
+                            const mainContent = Array.from(contentElement.childNodes)
+                                .filter(node => node.nodeName !== 'PRE')
+                                .map(node => node.textContent || '')
+                                .join(' ');
 
-                        if (match) {
-                            tower.image = match[0];
+                            const imgUrlRegex = /https?:\/\/[^\s"'<>()]+(\.png|\.jpg|\.jpeg|\.gif)(?:\?[^\s"'<>()]*)?/i;
+                            const match = mainContent.match(imgUrlRegex);
+
+                            if (match) {
+                                tower.image = match[0];
+                            }
                         }
                     }
                 }
@@ -294,6 +321,11 @@ class TDSWikiFetcher {
                         }
                     }
                 }
+            }
+
+            // One more check: if tower.image starts with File:, convert it
+            if (tower.image && typeof tower.image === 'string' && tower.image.startsWith('File:')) {
+                tower.image = this.convertFileToFandomUrl(tower.image.substring(5));
             }
 
             // get date posted

@@ -119,7 +119,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.imageCache[imageIdStr]) {
             previewUrl = window.imageCache[imageIdStr];
         } else {
-            if (imageIdStr.startsWith('https')) { // handle urls
+            // syntax for Fandom images
+            if (imageIdStr.startsWith('File:')) {
+                const filename = imageIdStr.substring(5); // Remove "File:" prefix
+                previewUrl = convertFileToFandomUrl(filename);
+                contentUrl = previewUrl; // Use same URL for content
+                console.log(`Converted File: syntax to URL: ${previewUrl}`);
+            } else if (imageIdStr.startsWith('https')) { // handle urls
                 if (imageIdStr.includes('static.wikia.nocookie.net')) {
                     previewUrl = trimFandomUrl(imageIdStr); // clean up fandom urls
                     contentUrl = previewUrl; // use same url for content
@@ -181,6 +187,15 @@ document.addEventListener('DOMContentLoaded', function() {
         // extract the basic url without parameters
         const match = fullUrl.match(/https:\/\/static\.wikia\.nocookie\.net\/.*?\.(png|jpg|jpeg|gif)/i);
         return match ? match[0] : fullUrl;
+    }
+    
+    function convertFileToFandomUrl(filename) {
+        const md5Hash = CryptoJS.MD5(filename).toString();
+        
+        const firstChar = md5Hash.charAt(0);
+        const firstTwoChars = md5Hash.substring(0, 2);
+        
+        return `https://static.wikia.nocookie.net/tower-defense-sim/images/${firstChar}/${firstTwoChars}/${encodeURIComponent(filename)}`;
     }
 
     // process url if already filled in
