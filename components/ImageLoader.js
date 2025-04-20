@@ -20,11 +20,14 @@ export default class ImageLoader {
             return '';
         }
         
+        const isRobloxId = this.isRobloxAssetId(imageIdStr);
+        const canUseCache = 'caches' in window && isRobloxId;
+        const cacheKey = `image-${imageIdStr}`;
+        
         // only check cache for Roblox asset IDs (not URLs basically)
-        if ('caches' in window && this.isRobloxAssetId(imageIdStr)) {
+        if (canUseCache) {
             try {
                 const cache = await caches.open(this.cacheName);
-                const cacheKey = `image-${imageIdStr}`;
                 const cachedResponse = await cache.match(cacheKey);
                 
                 if (cachedResponse && cachedResponse.ok) {
@@ -34,53 +37,42 @@ export default class ImageLoader {
                 }
             } catch (error) {
                 console.warn('Cache API error:', error);
+                // continue to fetch if cache fails
             }
         }
 
-        // not in Cache API = resolve the image URL
+        // get the url for the image
         const imageUrl = await this.resolveImageUrl(imageIdStr);
-
         if (!imageUrl) {
             return '';
         }
 
-        // Only cache Roblox asset IDs, not URLs
-        if ('caches' in window && this.isRobloxAssetId(imageIdStr)) {
-            try {
-                const imageResponse = await fetch(imageUrl, { mode: 'cors' });
-                
-                if (!imageResponse.ok) {
-                    throw new Error(`Image fetch failed: ${imageResponse.status}`);
-                }
-                
-                // store in Cache API
-                const cache = await caches.open(this.cacheName);
-                const cacheKey = `image-${imageIdStr}`;
-                
-                // clone the response since we'll use it below
-                await cache.put(cacheKey, imageResponse.clone());
-                this.log(`Image ${imageIdStr} stored in Cache API`);
-                
-                // return as object URL
-                const blob = await imageResponse.blob();
-                return URL.createObjectURL(blob);
-            } catch (error) {
-                console.error(`Failed to cache image ${imageIdStr}:`, error);
-                return imageUrl;
+        // fetch the image
+        try {
+            const imageResponse = await fetch(imageUrl, { mode: 'cors' });
+            
+            if (!imageResponse.ok) {
+                throw new Error(`Image fetch failed: ${imageResponse.status}`);
             }
-        } else {
-            // For URLs, just fetch and return without caching
-            try {
-                const imageResponse = await fetch(imageUrl, { mode: 'cors' });
-                if (!imageResponse.ok) {
-                    throw new Error(`Image fetch failed: ${imageResponse.status}`);
+            
+            // cache the response if it's a Roblox ID
+            if (canUseCache) {
+                try {
+                    const cache = await caches.open(this.cacheName);
+                    await cache.put(cacheKey, imageResponse.clone());
+                    this.log(`Image ${imageIdStr} stored in Cache API`);
+                } catch (cacheError) {
+                    console.error(`Failed to cache image ${imageIdStr}:`, cacheError);
+                    // continue even if caching fails
                 }
-                const blob = await imageResponse.blob();
-                return URL.createObjectURL(blob);
-            } catch (error) {
-                console.error(`Failed to fetch image ${imageIdStr}:`, error);
-                return imageUrl;
             }
+            
+            // return as object URL
+            const blob = await imageResponse.blob();
+            return URL.createObjectURL(blob);
+        } catch (error) {
+            console.error(`Failed to fetch image ${imageIdStr}:`, error);
+            return imageUrl;
         }
     }
 
@@ -95,7 +87,7 @@ export default class ImageLoader {
     static async resolveImageUrl(imageIdStr) {
         let url;
         
-        // "File:"" syntax for tdsw images
+        // "File:" syntax for tdsw images
         if (imageIdStr.startsWith('File:')) {
             const filename = imageIdStr.substring(5); // Remove "File:" prefix
             url = this.convertFileToFandomUrl(filename);
@@ -171,30 +163,6 @@ export default class ImageLoader {
                 console.error(`Failed to delete cached image ${imageIdStr}:`, error);
             }
         }
-    }
-
-    // check if an image exists in the Cache API
-    static async checkCacheStatus(imageId) {
-        const imageIdStr = String(imageId);
-        const status = {
-            inCacheAPI: false
-        };
-        
-        if (!this.isRobloxAssetId(imageIdStr)) {
-            return status;
-        }
-        
-        if ('caches' in window) {
-            try {
-                const cache = await caches.open(this.cacheName);
-                const cachedResponse = await cache.match(`image-${imageIdStr}`);
-                status.inCacheAPI = !!cachedResponse;
-            } catch (error) {
-                console.warn('Failed to check Cache API status:', error);
-            }
-        }
-        
-        return status;
     }
 
     // method to clear all cached images
