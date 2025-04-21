@@ -282,6 +282,7 @@ export default class TableUnitInput {
         'SendTime',
         'ConfusionCooldown',
         'Spawnrate',
+        'ScrapCost',
     ];    
 
     #getDelta(cellData, deltaData, input) {
