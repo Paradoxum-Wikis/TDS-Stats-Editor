@@ -222,6 +222,7 @@ export default class TableUnitInput {
             case 'NetCost':
             case 'Income':
             case 'CostEfficiency':
+            case 'MaxCostEfficiency':
             case 'BaseIncome':
             case 'IncomePerTower':
             case 'MaxIncome':
@@ -265,6 +266,7 @@ export default class TableUnitInput {
         'Cooldown',
         'Cost',
         'CostEfficiency',
+        'MaxCostEfficiency',
         'NetCost',
         'ChargeTime',
         'LaserCooldown',

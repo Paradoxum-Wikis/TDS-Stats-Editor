@@ -370,6 +370,26 @@ class UnitCalculations {
                 },
             },
 
+            Biologist: {
+                For: ['Sunflower 0', 'Sunflower 1', 'Sunflower 2', 'Sunflower 3', 'Sunflower 4', 'Ivy 1', 'Ivy 2', 'Ivy 3', 'Ivy 4', 'Nightshade 3', 'Nightshade 4'],
+                Requires: ['DPS'],
+                Value: (level) => {
+                    const match = level.Name.match(/(\d+)$/);
+                    const towerLevelNum = match ? parseInt(match[1]) : 0;
+                    TowerRegistry.log(`Calculating CostEfficiency for Biologist unit ${level.Name}`);
+                    
+                    const biologistNetCost = this.getTowerCostForLevel('Biologist', towerLevelNum);
+                    if (biologistNetCost === null) {
+                        console.error(`Could not determine NetCost for ${level.Name}`);
+                        return NaN;
+                    }
+                    
+                    const efficiency = biologistNetCost / level.DPS;
+                    TowerRegistry.log(`Calculated efficiency: ${efficiency} for ${level.Name}`);
+                    return isFinite(efficiency) ? efficiency : NaN;
+                },
+            },
+
             Trapper: {
                 For: ['Spike 0', 'Spike 1', 'Spike 2', 'Spike 3', 'Spike 4', 'Spike 5', 
                       'Landmine 2', 'Landmine 3', 'Landmine 4', 'Landmine 5',
@@ -385,6 +405,46 @@ class UnitCalculations {
                     const efficiency = trapperNetCost / level.DPS;
                     return isFinite(efficiency) ? efficiency : NaN;
                 },
+            },
+        },
+
+        MaxCostEfficiency: {
+            Biologist: {
+                For: ['Sunflower 0', 'Sunflower 1', 'Sunflower 2', 'Sunflower 3', 'Sunflower 4', 'Ivy 1', 'Ivy 2', 'Ivy 3', 'Ivy 4', 'Nightshade 3', 'Nightshade 4'],
+                Requires: ['CostEfficiency'],
+                Value: (level) => {
+                    if (isNaN(level.CostEfficiency)) return NaN;
+                    
+                    const match = level.Name.match(/(\d+)$/);
+                    const towerLevelNum = match ? parseInt(match[1]) : 0;
+                    const biologistData = towerRegistry.getTower('Biologist') || TowerData.Biologist;
+                    if (!biologistData?.Biologist?.Default) return level.CostEfficiency;
+                    
+                    let source = null;
+                    
+                    // for levels 1-5, check the specific upgrade attributes
+                    if (towerLevelNum > 0) {
+                        const upgrade = biologistData.Biologist.Default.Upgrades?.[towerLevelNum - 1];
+                        if (upgrade?.Stats?.Attributes) {
+                            source = upgrade.Stats.Attributes;
+                        }
+                    }
+                    
+                    // count queues
+                    let queueCount = 0;
+                    if (source) {
+                        if (source.Queue1 && source.Queue1 !== 'N/A') queueCount++;
+                        if (source.Queue2 && source.Queue2 !== 'N/A') queueCount++;
+                        if (source.Queue3 && source.Queue3 !== 'N/A') queueCount++;
+                    }
+                    
+                    if (queueCount > 0) {
+                        TowerRegistry.log(`${level.Name}: ${queueCount} queues found, efficiency divided by ${queueCount}`);
+                        return level.CostEfficiency / queueCount;
+                    }
+                    
+                    return level.CostEfficiency;
+                }
             },
         },
 
@@ -472,6 +532,7 @@ class UnitCalculations {
         
         this.#add('NetCost', unitData);
         this.#add('CostEfficiency', unitData);
+        this.#add('MaxCostEfficiency', unitData);
     }
 }
 
