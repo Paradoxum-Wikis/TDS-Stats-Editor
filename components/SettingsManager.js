@@ -29,6 +29,14 @@ class SettingsManager {
         this.keepDropdownOpen = localStorage.getItem('keepDropdownOpen') === 'true';
         this.classicTableSize = localStorage.getItem('classicTableSize') === 'true';
         this.imageCacheDebug = localStorage.getItem('imageCacheDebug') === 'true';
+
+        this.towerRegistryDebugToggle = document.getElementById('towerRegistryDebugToggle');
+        this.towerRegistryDebug = localStorage.getItem('towerRegistryDebug') === 'true';
+        
+        if (this.towerRegistryDebugToggle) {
+            this.towerRegistryDebugToggle.checked = this.towerRegistryDebug;
+            this.towerRegistryDebugToggle.addEventListener('change', this.toggleTowerRegistryDebug.bind(this));
+        }
         
         window.state = window.state || {};
         window.state.settings = window.state.settings || {};
@@ -40,6 +48,7 @@ class SettingsManager {
         window.state.settings.keepDropdownOpen = this.keepDropdownOpen;
         window.state.settings.classicTableSize = this.classicTableSize;
         window.state.settings.imageCacheDebug = this.imageCacheDebug;
+        window.state.settings.towerRegistryDebug = this.towerRegistryDebug;
         
         this.init();
     }
@@ -271,6 +280,16 @@ class SettingsManager {
         
         document.dispatchEvent(new CustomEvent('settingsChanged', {
             detail: { setting: 'imageCacheDebug', value: this.imageCacheDebug }
+        }));
+    }
+
+    toggleTowerRegistryDebug() {
+        this.towerRegistryDebug = this.towerRegistryDebugToggle.checked;
+        window.state.settings.towerRegistryDebug = this.towerRegistryDebug;
+        localStorage.setItem('towerRegistryDebug', this.towerRegistryDebug);
+        
+        document.dispatchEvent(new CustomEvent('settingsChanged', {
+            detail: { setting: 'towerRegistryDebug', value: this.towerRegistryDebug }
         }));
     }
 
