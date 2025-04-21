@@ -1,11 +1,19 @@
 [
     {
+        "version": "1.2.4",
+        "date": "April 21, 2025",
+        "changes": [
+            "Debug settings added",
+            "Tables now properly sync together"
+        ]
+    },
+    {
         "version": "1.2.3",
         "date": "April 16, 2025",
         "changes": [
             "Classic table font size added",
-            "Optimizations for the upgrade viewer",
-            "'File:' syntax to use images from the TDS wiki added"
+            "'File:' syntax to use images from the TDS wiki added",
+            "Optimizations for the upgrade viewer"
         ]
     },
     {

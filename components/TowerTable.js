@@ -1,5 +1,6 @@
 import Table from './Table.js';
 import SkinData from '../TowerComponents/SkinData.js';
+import { towerRegistry, TowerRegistry } from '../TowerComponents/TowerRegistry.js';
 
 import TableInput from './TableInput.js';
 
@@ -7,6 +8,7 @@ export default class TowerTable extends Table {
     constructor(root, viewer) {
         super(root);
         this.viewer = viewer;
+        this.tower = viewer.tower;
         
         // listen for settings changes
         document.addEventListener('settingsChanged', (e) => {
@@ -75,6 +77,7 @@ export default class TowerTable extends Table {
                         useDelta: this.viewer.buttonDeltaButton.state,
                         viewer: this.viewer,
                         isComplex: false,
+                        tower: this.tower
                     });
                     tableInput.createInput();
                     tr.appendChild(tableInput.base);
@@ -91,6 +94,7 @@ export default class TowerTable extends Table {
                         useDelta: this.viewer.buttonDeltaButton.state,
                         viewer: this.viewer,
                         isComplex: true,
+                        tower: this.tower
                     });
                     tableInput.createInput();
                     tr.appendChild(tableInput.base);
@@ -118,6 +122,9 @@ export default class TowerTable extends Table {
         options = options ?? {};
         this.ignore = options.ignore ?? [];
         this.loadedData = data; // store data for refresh ops
+        
+        // update tower reference when loading data
+        this.tower = this.viewer.tower;
 
         this.removeTable();
         this.#createBaseTable();
@@ -129,7 +136,15 @@ export default class TowerTable extends Table {
         );
 
         this.#addBody(data.levels);
-        
         this.isLoaded = true;
+
+        this.updateTowerRegistry();
+    }
+
+    updateTowerRegistry() {
+        if (this.tower) {
+            TowerRegistry.log(`Updating tower registry for ${this.tower.name}`);
+            towerRegistry.updateTower(this.tower.name, this.tower.json);
+        }
     }
 }

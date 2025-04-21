@@ -1,5 +1,6 @@
 import Levels from '../TowerComponents/Levels.js';
 import Viewer from './Viewer/index.js';
+import { towerRegistry, TowerRegistry } from '../TowerComponents/TowerRegistry.js';
 
 export default class TableInput {
     /**
@@ -170,27 +171,33 @@ export default class TableInput {
 
     #onBooleanSubmit() {
         const newValue = this.input.checked;
-
         this.towerLevels.set(this.level, this.attribute, newValue);
-        this.viewer.reload();
+        this.#handleSubmission();
     }
 
     #onNumberSubmit() {
         const newValue = this.input.value;
-
-        if (newValue !== '' && Number.isFinite(+newValue))
+        if (newValue !== '' && Number.isFinite(+newValue)) {
             this.towerLevels.set(this.level, this.attribute, +newValue);
-
-        this.viewer.reload();
+        }
+        this.#handleSubmission();
     }
 
     #onTextSubmit() {
         const newValue = this.input.value;
-
-        if (newValue != '')
+        if (newValue != '') {
             this.towerLevels.set(this.level, this.attribute, newValue);
+        }
+        this.#handleSubmission();
+    }
 
+    #handleSubmission() {
         this.viewer.reload();
+        
+        if (this.tower && this.tower.name) {
+            TowerRegistry.log(`TableInput updating registry for ${this.tower.name} after value change`);
+            towerRegistry.updateTower(this.tower.name, this.tower.json);
+        }
     }
 
     #formatNumber(value) {

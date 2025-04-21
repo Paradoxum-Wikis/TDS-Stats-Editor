@@ -1,20 +1,54 @@
 import Unit from './Unit.js';
 import TowerData from './TowerData.js';
 import UpgradeViewer from '../components/UpgradeViewer.js';
-
-// probably will rework most of these "dynamic" calculations
-let storedNetCosts = {
-    base: TowerData.Pursuit.Default.Defaults.Price + 
-          TowerData.Pursuit.Default.Upgrades.slice(0, 3).reduce((sum, upgrade) => sum + upgrade.Cost, 0),
-    'Top 4': 0,
-    'Top 5': 0,
-    'Bottom 4': 0,
-    'Bottom 5': 0,
-};
+import UnitData from './UnitData.js'; 
+import { towerRegistry, TowerRegistry } from './TowerRegistry.js';
 
 class UnitCalculations {
     constructor(upgradeViewer) {
-        this.upgradeViewer = upgradeViewer;
+        this.upgradeViewer = upgradeViewer; 
+        document.addEventListener('towerDataChanged', () => {
+            this.refreshCalculations();
+        });
+    }
+
+    refreshCalculations() {
+        // this will be called when tower data changes
+        TowerRegistry.log('Refreshing unit calculations due to tower data change');
+        
+        // if there's a viewerInstance with a unitTable, reload it
+        if (window.viewerInstance && window.viewerInstance.unitTable) {
+            TowerRegistry.log('Reloading unit table');
+            window.viewerInstance.unitTable.loadTable();
+        }
+    }
+
+    getTowerCostForLevel(towerName, level) {
+        TowerRegistry.log(`getTowerCostForLevel called for ${towerName}, level ${level}`);
+        
+        // get data from the registry
+        const registryPrice = towerRegistry.getTowerCostForLevel(towerName, level);
+        if (registryPrice !== null) {
+            TowerRegistry.log(`Found tower in registry, price: ${registryPrice}`);
+            return registryPrice;
+        }
+
+        const towerData = TowerData[towerName];
+        if (!towerData) {
+            TowerRegistry.log(`No tower data found for ${towerName}`);
+            return null;
+        }
+        
+        let price = towerData.Default.Defaults.Price;
+        TowerRegistry.log(`Using ${towerName} base price: ${price}`);
+        
+        // add costs for upgrades up to the level
+        for (let i = 0; i < level && i < towerData.Default.Upgrades.length; i++) {
+            price += towerData.Default.Upgrades[i].Cost;
+            TowerRegistry.log(`After adding ${towerName} level ${i+1} cost: ${price}`);
+        }
+        
+        return price;
     }
 
     calculated = {
@@ -243,44 +277,49 @@ class UnitCalculations {
         NetCost: {
             Pursuit: {
                 For: ['Top 4', 'Top 5', 'Bottom 4', 'Bottom 5'],
-                Value: (level) => {
-                    let pursuitNetCost = TowerData.Pursuit.Default.Defaults.Price;
-
-                    if (level === undefined) {
-                        return pursuitNetCost + TowerData.Pursuit.Default.Upgrades.reduce((sum, upgrade) => sum + upgrade.Cost, 0);
-                    }
-
-                    const levelNum = parseInt(level.Name.split(' ')[1]) - 1;
+                Value: (level) => { // 'level' here is the Unit object for 'Top 4', 'Top 5', etc.
+                    TowerRegistry.log(`Calculating NetCost for Pursuit ${level.Name}`);
                     
-                    for (let i = 0; i < levelNum && i < TowerData.Pursuit.Default.Upgrades.length; i++) {
-                        pursuitNetCost += TowerData.Pursuit.Default.Upgrades[i].Cost;
+                    // parse the path and level from the Unit name
+                    const [path, levelStr] = level.Name.split(' ');
+                    const pathLevel = parseInt(levelStr);
+                    TowerRegistry.log(`Path: ${path}, Level: ${pathLevel}`);
+                    
+                    // get cumulative cost for base tower (up to level 3)
+                    const baseCost = this.getTowerCostForLevel('Pursuit', 3);
+                    if (baseCost === null) {
+                        console.error(`Could not determine base cost for Pursuit up to level 3.`);
+                        return NaN;
+                    }
+                    TowerRegistry.log(`Using base cost (level 3): ${baseCost}`);
+                    let totalCost = baseCost;
+                    
+                    // get the cost of the current path level upgrade (e.g., Cost of 'Top 4' unit)
+                    const currentPathLevelCost = level.Cost || 0; 
+                    TowerRegistry.log(`Cost of current path level (${level.Name}): ${currentPathLevelCost}`);
+
+                    if (pathLevel === 4) {
+                        // for level 4, add its own cost to the base cost
+                        totalCost += currentPathLevelCost;
+                        TowerRegistry.log(`Added level 4 path cost: ${currentPathLevelCost}`);
+                    } else if (pathLevel === 5) {
+                        // for level 5, we need the cost of level 4 path + cost of level 5 path
+                        const level4PathName = `${path} 4`; 
+                        
+                        // get the cost of the level 4 path upgrade from UnitData
+                        const level4PathCost = UnitData[level4PathName]?.Cost || 0;
+                        if (level4PathCost === 0) {
+                             console.warn(`[WARN] Could not find cost for prerequisite path level: ${level4PathName}`);
+                        }
+                        TowerRegistry.log(`Cost of prerequisite path level (${level4PathName}): ${level4PathCost}`);
+
+                        // add both level 4 and level 5 path costs to the base cost
+                        totalCost += level4PathCost + currentPathLevelCost;
+                        TowerRegistry.log(`Added level 4 path cost (${level4PathCost}) and level 5 path cost (${currentPathLevelCost})`);
                     }
                     
-                    switch (level.Name) {
-                      case 'Top 4': {
-                        storedNetCosts['Top 4'] = storedNetCosts.base + level.Cost;
-                        return storedNetCosts['Top 4'];
-                      }
-                
-                      case 'Top 5': {
-                        storedNetCosts['Top 5'] = storedNetCosts['Top 4'] + level.Cost;
-                        return storedNetCosts['Top 5'];
-                      }
-                
-                      case 'Bottom 4': {
-                        storedNetCosts['Bottom 4'] = storedNetCosts.base + level.Cost;
-                        return storedNetCosts['Bottom 4'];
-                      }
-                
-                      case 'Bottom 5': {
-                        storedNetCosts['Bottom 5'] = storedNetCosts['Bottom 4'] + level.Cost;
-                        return storedNetCosts['Bottom 5'];
-                      }
-                
-                      default: {
-                        return storedNetCosts.base + level.Cost;
-                      }
-                    }
+                    TowerRegistry.log(`Final NetCost for ${level.Name}: ${totalCost}`);
+                    return totalCost;
                 },
             },
         },
@@ -319,18 +358,14 @@ class UnitCalculations {
             Harvester: {
                 For: ['Thorns 0', 'Thorns 1', 'Thorns 2', 'Thorns 3', 'Thorns 4', 'Thorns 5'],
                 Value: (level) => {
-                    // Extract the level number from the string
                     const levelNum = parseInt(level.Name.split(' ')[1]);
-                    
-                    // Base cost for level 0
-                    let harvesterNetCost = TowerData.Harvester.Default.Defaults.Price;
-                    
-                    // Add costs for each upgrade up to the current level
-                    for (let i = 0; i < levelNum; i++) {
-                        harvesterNetCost += TowerData.Harvester.Default.Upgrades[i].Cost;
-                    }
+                    TowerRegistry.log(`Calculating CostEfficiency for Harvester level ${levelNum}`);
+
+                    const harvesterNetCost = this.getTowerCostForLevel('Harvester', levelNum);
+                    TowerRegistry.log(`Harvester cost: ${harvesterNetCost}`);
                     
                     const efficiency = harvesterNetCost / level.DPS;
+                    TowerRegistry.log(`Calculated efficiency: ${efficiency} (Cost: ${harvesterNetCost}, DPS: ${level.DPS})`);
                     return isFinite(efficiency) ? efficiency : NaN;
                 },
             },
@@ -344,11 +379,8 @@ class UnitCalculations {
                     const match = level.Name.match(/(\d+)$/);
                     const trapperLevel = match ? parseInt(match[1]) : 0;
                     
-                    let trapperNetCost = TowerData.Trapper.Default.Defaults.Price;
-                    
-                    for (let i = 0; i < trapperLevel && i < TowerData.Trapper.Default.Upgrades.length; i++) {
-                        trapperNetCost += TowerData.Trapper.Default.Upgrades[i].Cost;
-                    }
+                    // Get trapper cost
+                    const trapperNetCost = this.getTowerCostForLevel('Trapper', trapperLevel);
                     
                     const efficiency = trapperNetCost / level.DPS;
                     return isFinite(efficiency) ? efficiency : NaN;
@@ -443,4 +475,5 @@ class UnitCalculations {
     }
 }
 
-export default new UnitCalculations(new UpgradeViewer());
+const unitCalculations = new UnitCalculations(new UpgradeViewer());
+export default unitCalculations;
