@@ -9,6 +9,9 @@ class MobileNavigation {
         this.controlsSection = document.getElementById('tier-list-controls');
         this.filtersSection = document.getElementById('tower-filters');
         
+        // store the currently selected tier
+        this.selectedTier = 'S';
+        
         this.init();
     }
     
@@ -115,6 +118,13 @@ class MobileNavigation {
         switch (sectionName) {
             case 'controls':
                 contentElement = this.controlsSection?.cloneNode(true);
+                // set the dropdown to the saved tier value
+                if (contentElement) {
+                    const tierSelect = contentElement.querySelector('#tier-select');
+                    if (tierSelect) {
+                        tierSelect.value = this.selectedTier;
+                    }
+                }
                 break;
                 
             case 'filters':
@@ -206,9 +216,24 @@ class MobileNavigation {
                 const exportBtn = this.mobileSidebarContent.querySelector('#export-image');
                 const copyBtn = this.mobileSidebarContent.querySelector('#copy-tierlist');
                 
+                if (tierSelect) {
+                    tierSelect.addEventListener('change', () => {
+                        this.selectedTier = tierSelect.value;
+                        
+                        // update desktop ui from mobile
+                        const mainTierSelect = document.getElementById('tier-select');
+                        if (mainTierSelect && mainTierSelect !== tierSelect) {
+                            mainTierSelect.value = this.selectedTier;
+                        }
+                    });
+                }
+                
                 if (addTowerBtn) {
                     addTowerBtn.addEventListener('click', () => {
-                        const selectedTier = tierSelect?.value || 'S';
+                        if (tierSelect) {
+                            this.selectedTier = tierSelect.value; // Save the selected tier
+                        }
+                        const selectedTier = this.selectedTier;
                         if (towerInput && towerInput.value) {
                             const towers = towerInput.value.split(',');
                             towers.forEach(tower => {
