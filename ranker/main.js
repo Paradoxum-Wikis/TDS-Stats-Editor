@@ -138,6 +138,7 @@ function renderTierList() {
 
 function populateTowerGallery() {
     const gallery = document.getElementById('tower-gallery');
+    const scrollPosition = gallery.scrollTop;
     gallery.innerHTML = '';
 
     const sections = {
@@ -164,25 +165,32 @@ function populateTowerGallery() {
                       : towerInfo.category === "tower" || (towerInfo.category && towerInfo.category.includes("tower"));
                       
         const isGolden = towerInfo.category === "golden";
-        
+        const isInTier = Object.values(tierListData).some(tierArr =>
+            tierArr.some(t => t.toLowerCase() === name.toLowerCase())
+        );
+
         const tower = document.createElement('div');
         tower.className = `tower-item tier-item m-1 p-1 bg-dark border border-secondary category-${towerInfo.category || ''}`;
-        tower.style.width = '70px';
-        tower.style.height = '70px';
         tower.setAttribute('data-tower', name);
         tower.setAttribute('data-tooltip', name);
-        
+
+        if (isInTier) {
+            tower.classList.add('added');
+        } else {
+            tower.addEventListener('click', () => {
+                const selectedTier = document.getElementById('tier-select').value;
+
+                addTowerToTier(name, selectedTier);
+                showAddedIndicator(tower, selectedTier);
+            });
+        }
+
         const img = document.createElement('img');
         img.src = getImageUrl(towerInfo.file);
         img.className = 'img-fluid';
         img.alt = name;
         
         tower.appendChild(img);
-        tower.addEventListener('click', () => {
-            const selectedTier = document.getElementById('tier-select').value;
-            addTowerToTier(name, selectedTier);
-            showAddedIndicator(tower, selectedTier);
-        });
         
         if (isTower) {
             sections.towers.items.push(tower);
@@ -211,63 +219,41 @@ function populateTowerGallery() {
             gallery.appendChild(container);
         }
     }
+
+    gallery.scrollTop = scrollPosition;
 }
 
 // show animation when tower is added to tier list
 function showAddedIndicator(element, tierName) {
+    // prevent adding indicator if already greyed out (already added)
+    if (element.classList.contains('added')) return;
+
     const indicator = document.createElement('div');
     indicator.className = 'added-indicator';
     indicator.innerHTML = '<i class="bi bi-check-circle-fill"></i>';
-    
-    // style the indicator
-    Object.assign(indicator.style, {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        color: getTierColor(tierName),
-        fontSize: '2rem',
-        opacity: '0',
-        pointerEvents: 'none',
-        zIndex: '100',
-        transition: 'all 0.5s ease'
-    });
-    
-    // add to element
-    element.style.position = 'relative';
+    indicator.style.color = getTierColor(tierName);
+
     element.appendChild(indicator);
     setTimeout(() => { indicator.style.opacity = '1'; }, 10);
-    
+
     // add tier letter
     const tierIndicator = document.createElement('div');
     tierIndicator.className = 'tier-indicator';
     tierIndicator.textContent = tierName;
-    Object.assign(tierIndicator.style, {
-        position: 'absolute',
-        top: '70%',
-        left: '50%',
-        transform: 'translate(-50%, 0)',
-        color: getTierColor(tierName),
-        background: 'rgba(0,0,0,0.7)',
-        borderRadius: '3px',
-        padding: '0 4px',
-        fontSize: '0.8rem',
-        fontWeight: 'bold',
-        opacity: '0',
-        pointerEvents: 'none',
-        zIndex: '100',
-        transition: 'all 0.5s ease'
-    });
+    tierIndicator.style.color = getTierColor(tierName);
+
     element.appendChild(tierIndicator);
     setTimeout(() => { tierIndicator.style.opacity = '1'; }, 10);
-    
-    // remove after anim
+
+    // remove after anim and THEN update gallery
     setTimeout(() => {
         indicator.style.opacity = '0';
         tierIndicator.style.opacity = '0';
         setTimeout(() => {
             if (element.contains(indicator)) element.removeChild(indicator);
             if (element.contains(tierIndicator)) element.removeChild(tierIndicator);
+            // Update the gallery AFTER the animation finishes and indicators are removed
+            populateTowerGallery();
         }, 500);
     }, 1000);
 }
@@ -334,10 +320,18 @@ function addTowerToTier(towerName, tier) {
         console.warn(`Adding unknown tower: ${towerName}`);
     }
     const finalTowerName = towerData[correctCaseTowerName] ? correctCaseTowerName : normalizedName;
-    // check if already in this tier
-    const alreadyInTier = tierListData[tier].some(t => t.toLowerCase() === finalTowerName.toLowerCase());
-    if (!alreadyInTier) {
-        // remove from any other tier
+
+    // check if already in ANY tier
+    const alreadyInAnyTier = Object.values(tierListData).some(tierArr =>
+        tierArr.some(t => t.toLowerCase() === finalTowerName.toLowerCase())
+    );
+
+    if (!alreadyInAnyTier) {
+        tierListData[tier].push(finalTowerName);
+        renderTierList();
+    } else {
+        console.log(`Tower ${finalTowerName} is already in a tier. Moving to ${tier}.`);
+        // remove from existing tier first
         Object.keys(tierListData).forEach(t => {
             const index = tierListData[t].findIndex(name => name.toLowerCase() === finalTowerName.toLowerCase());
             if (index !== -1) {
@@ -346,14 +340,16 @@ function addTowerToTier(towerName, tier) {
         });
         tierListData[tier].push(finalTowerName);
         renderTierList();
+        populateTowerGallery();
     }
 }
 
 function removeTowerFromTier(towerName, tier) {
-    const index = tierListData[tier].indexOf(towerName);
+    const index = tierListData[tier].findIndex(t => t.toLowerCase() === towerName.toLowerCase());
     if (index !== -1) {
         tierListData[tier].splice(index, 1);
         renderTierList();
+        populateTowerGallery();
     }
 }
 
@@ -516,13 +512,17 @@ function filterTowerGallery() {
 }
 
 function addTierItemListeners() {
-    // click to remove tower from tier
-    document.querySelectorAll('.tier-item[data-tier]').forEach(item => {
-        item.addEventListener('click', function() {
-            const tower = this.getAttribute('data-tower');
-            const tier = this.getAttribute('data-tier');
-            removeTowerFromTier(tower, tier);
-        });
+    const preview = document.getElementById('tierlist-preview');
+    preview.addEventListener('click', function(event) {
+        // finds the closest ancestor that is a tier item with a tier attribute
+        const item = event.target.closest('.tier-item[data-tier]');
+        if (item) {
+            const tower = item.getAttribute('data-tower');
+            const tier = item.getAttribute('data-tier');
+            if (tower && tier) {
+                removeTowerFromTier(tower, tier);
+            }
+        }
     });
 }
 
