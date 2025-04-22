@@ -46,14 +46,25 @@ async function loadTierlistData() {
 function parseTowerData(luaContent) {
     // grab tower info from lua
     const towerDataRegex = /keywordMap\s*=\s*{\s*([\s\S]*?)(?=}\s*(?:local|return|\n\n))/;
-    const towerEntryRegex = /\["([^"]+)"\]\s*=\s*{\s*file\s*=\s*"([^"]+)",\s*category\s*=\s*"([^"]+)"[^}]*}/g;
+    const towerEntryRegex = /\["([^"]+)"\]\s*=\s*{\s*file\s*=\s*"([^"]+)",\s*category\s*=\s*"([^"]+)"([^}]*)}/g;
     const dataMatch = luaContent.match(towerDataRegex);
     if (dataMatch && dataMatch[1]) {
         const towerSection = dataMatch[1];
         let match;
         while ((match = towerEntryRegex.exec(towerSection)) !== null) {
-            const [_, name, file, category] = match;
+            const [_, name, file, category, extraData] = match;
             towerData[name] = { file, category };
+            
+            const categories = [category];
+            const additionalCategoriesMatch = extraData.match(/"([^"]+)"/g);
+            if (additionalCategoriesMatch) {
+                additionalCategoriesMatch.forEach(catMatch => {
+                    const cat = catMatch.replace(/"/g, '');
+                    categories.push(cat);
+                });
+            }
+            
+            towerData[name].categories = categories;
         }
     } else {
         console.error('Failed to find tower data section in the Lua file');
@@ -128,26 +139,78 @@ function renderTierList() {
 function populateTowerGallery() {
     const gallery = document.getElementById('tower-gallery');
     gallery.innerHTML = '';
+
+    const sections = {
+        'towers': {
+            title: 'Towers',
+            items: []
+        },
+        'golden': {
+            title: 'Golden Towers',
+            items: []
+        },
+        'skins': {
+            title: 'Skins',
+            items: []
+        }
+    };
+
+    // sort towers into appropriate sections
     const towerNames = Object.keys(towerData).sort();
     towerNames.forEach(name => {
+        const towerInfo = towerData[name];
+        const isTower = Array.isArray(towerInfo.categories) 
+                      ? towerInfo.categories.includes("tower") 
+                      : towerInfo.category === "tower" || (towerInfo.category && towerInfo.category.includes("tower"));
+                      
+        const isGolden = towerInfo.category === "golden";
+        
         const tower = document.createElement('div');
-        tower.className = `tower-item tier-item m-1 p-1 bg-dark border border-secondary category-${towerData[name].category || ''}`;
+        tower.className = `tower-item tier-item m-1 p-1 bg-dark border border-secondary category-${towerInfo.category || ''}`;
         tower.style.width = '70px';
         tower.style.height = '70px';
         tower.setAttribute('data-tower', name);
         tower.setAttribute('data-tooltip', name);
+        
         const img = document.createElement('img');
-        img.src = getImageUrl(towerData[name].file);
+        img.src = getImageUrl(towerInfo.file);
         img.className = 'img-fluid';
         img.alt = name;
+        
         tower.appendChild(img);
-        gallery.appendChild(tower);
         tower.addEventListener('click', () => {
             const selectedTier = document.getElementById('tier-select').value;
             addTowerToTier(name, selectedTier);
             showAddedIndicator(tower, selectedTier);
         });
+        
+        if (isTower) {
+            sections.towers.items.push(tower);
+        } else if (isGolden) {
+            sections.golden.items.push(tower);
+        } else {
+            sections.skins.items.push(tower);
+        }
     });
+    
+    for (const [key, section] of Object.entries(sections)) {
+        if (section.items.length > 0) {
+            const header = document.createElement('h5');
+            header.className = 'text-white text-center my-2';
+            header.textContent = section.title;
+            gallery.appendChild(header);
+            
+            const container = document.createElement('div');
+            container.className = 'd-flex flex-wrap justify-content-center w-100';
+            container.setAttribute('data-section', key);
+            
+            section.items.forEach(tower => {
+                container.appendChild(tower);
+            });
+            
+            gallery.appendChild(container);
+        }
+    }
 }
 
 // show animation when tower is added to tier list
