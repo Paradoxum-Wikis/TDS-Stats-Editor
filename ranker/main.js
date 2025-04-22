@@ -212,13 +212,13 @@ function showAddedIndicator(element, tierName) {
 // get color for tier indicator
 function getTierColor(tier) {
     const tierColors = {
-        'S': '#FF5252',
-        'A': '#FF9800',
-        'B': '#FFEB3B',
-        'C': '#8BC34A',
-        'D': '#03A9F4',
-        'E': '#9C27B0',
-        'F': '#757575'
+        'S': '#d33b3b',
+        'A': '#d58639',
+        'B': '#d7c73f',
+        'C': '#3ad54f',
+        'D': '#5197dd',
+        'E': '#885dcb',
+        'F': '#b55bb5',
     };
     return tierColors[tier] || '#FFFFFF';
 }

@@ -91,7 +91,7 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s ease;
-    z-index: 1000;
+    z-index: 1337;
 }
 
 .tier-item:hover::after{
@@ -144,10 +144,10 @@
 }
 
 .added-indicator {
-    animation: pulse 0.5s ease-in-out;
+    animation: pulse2 0.5s ease-in-out;
 }
 
-@keyframes pulse {
+@keyframes pulse2 {
     0% { transform: translate(-50%, -50%) scale(0.5); }
     50% { transform: translate(-50%, -50%) scale(1.2); }
     100% { transform: translate(-50%, -50%) scale(1); }
