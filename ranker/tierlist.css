@@ -133,6 +133,8 @@
 .f-tier {background-color: #b55bb5;} /* pinky */
 
 .tower-item {
+    width: 70px;
+    height: 70px;
     transition: 0.05s ease;
     position: relative;
     overflow: visible;
@@ -141,6 +143,40 @@
 .tower-item:hover{
     transform: scale(1.15);
     box-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
+}
+
+.added-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 100;
+    transition: opacity 0.5s ease;
+    animation: pulse2 0.5s ease-in-out;
+}
+
+.tier-indicator {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background: rgba(0,0,0,0.7);
+    border-radius: 3px;
+    padding: 0 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 100;
+    transition: opacity 0.5s ease;
+}
+
+.tower-item.added {
+    opacity: 0.4;
+    pointer-events: none;
 }
 
 .added-indicator {
