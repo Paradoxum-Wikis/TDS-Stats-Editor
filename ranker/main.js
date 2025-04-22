@@ -462,3 +462,9 @@ function addTierItemListeners() {
         });
     });
 }
+
+window.addTowerToTier = addTowerToTier;
+window.resetTierList = resetTierList;
+window.exportTierListImage = exportTierListImage;
+window.copyTierListCode = copyTierListCode;
+window.filterTowerGallery = filterTowerGallery;
