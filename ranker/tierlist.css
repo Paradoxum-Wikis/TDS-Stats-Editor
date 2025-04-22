@@ -73,6 +73,7 @@
 .tier-item{ 
     position: relative;
     display: inline-block;
+    cursor: pointer;
 }
 
 .tier-item::after{
@@ -140,7 +141,6 @@
 .tower-item:hover{
     transform: scale(1.15);
     box-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
-    cursor: pointer;
 }
 
 .added-indicator {

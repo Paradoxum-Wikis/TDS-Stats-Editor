@@ -315,8 +315,33 @@ function exportTierListImage() {
     };
     exportBtn.innerHTML = 'Exporting...';
     exportBtn.disabled = true;
+    
+    const wrapper = document.createElement('div');
+    wrapper.style.position = 'relative';
+    wrapper.style.width = tierlist.offsetWidth + 'px';
+    wrapper.style.height = tierlist.offsetHeight + 'px';
+    
+    // clone the tierlist to avoid modifying the original
+    const tierlistClone = tierlist.cloneNode(true);
+    wrapper.appendChild(tierlistClone);
+    
+    const logo = document.createElement('img');
+    logo.src = '../htmlassets/tdsrankerlogo.png';
+    logo.style.position = 'absolute';
+    logo.style.right = '10px';
+    logo.style.bottom = '10px';
+    logo.style.height = '50px';
+    logo.style.opacity = '0.55';
+    logo.style.zIndex = '100';
+    wrapper.appendChild(logo);
+    
+    wrapper.style.position = 'absolute';
+    wrapper.style.top = '-9999px';
+    wrapper.style.left = '-9999px';
+    document.body.appendChild(wrapper);
+    
     // wait for all images to load
-    const allImages = tierlist.querySelectorAll('img');
+    const allImages = wrapper.querySelectorAll('img');
     const imagePromises = Array.from(allImages).map(img => {
         if (img.complete) {
             return Promise.resolve();
@@ -327,9 +352,10 @@ function exportTierListImage() {
             });
         }
     });
+    
     Promise.all(imagePromises)
         .then(() => {
-            return html2canvas(tierlist, {
+            return html2canvas(wrapper, {
                 useCORS: true,
                 allowTaint: true,
                 backgroundColor: 'null',
@@ -339,13 +365,20 @@ function exportTierListImage() {
         })
         .then(canvas => {
             const link = document.createElement('a');
-            link.download = 'tds-tierlist.png';
+            link.download = 'adachi-tds-tierlist.png';
             link.href = canvas.toDataURL('image/png');
             link.click();
+            
+            document.body.removeChild(wrapper);
         })
         .catch(error => {
             console.error('Error exporting tier list:', error);
             alert('Failed to export tier list image. Check console for details.');
+            
+            // clean up even when there's an error
+            if (document.body.contains(wrapper)) {
+                document.body.removeChild(wrapper);
+            }
         })
         .finally(() => {
             resetButtonState();
