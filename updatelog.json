@@ -3,6 +3,7 @@
         "version": "1.2.4",
         "date": "April 21, 2025",
         "changes": [
+            "Adachi's tower ranker added",
             "Debug settings added",
             "Tables now properly sync together"
         ]

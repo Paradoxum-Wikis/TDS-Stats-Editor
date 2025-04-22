@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Create tier lists for the Roblox game Tower Defense Simulator">
+
+    <meta property="og:title" content="Adachi's TDS Ranker">
+    <meta property="og:description" content="Create and share tower tier lists for the Roblox game Tower Defense Simulator">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tds-editor.live/ranker">
+    <meta property="og:image" content="https://tds-editor.live/htmlassets/thumbnail.png?v=3">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="Tower Defense Simulator Tower Ranker">
+    <meta name="twitter:title" content="Adachi's TDS Ranker">
+    <meta name="twitter:description" content="Create and share tower tier lists for the Roblox game Tower Defense Simulator">
+    <meta name="twitter:image:src" content="https://tds-editor.live/htmlassets/thumbnail.png?v=3">
+    <meta name="theme-color" content="#035D7C">
+    <meta name="apple-mobile-web-app-title" content="TDS:TR" />
+
+    <link href="../Styles/bootstrap.css" rel="stylesheet">
+    <link href="../Styles/Dashboard.css" rel="stylesheet">
+    <link href="../Styles/Sidebars.css" rel="stylesheet">
+    <link href="../Styles/torus.css" rel="stylesheet">
+    <link href="../Styles/theme.css" rel="stylesheet">
+    <link href="../Styles/MobileNav.css" rel="stylesheet">
+    <link href="../Styles/animations.css" rel="stylesheet">
+    
+    <link rel="icon" type="image/png" href="/htmlassets/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/htmlassets/favicon.svg" />
+    <link rel="shortcut icon" href="/htmlassets/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/htmlassets/apple-touch-icon.png" />
+    <link rel="manifest" href="/htmlassets/site.webmanifest" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js" integrity="sha256-ORBCb//WwUWwNh+EjsvO97snO3mAJ1+jhMzrlPBTYSQ=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" integrity="sha256-9kPW/n5nn53j4WMRYAxe9c1rCY96Oogo/MKSVdKzPmI=" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js" integrity="sha512-a+SUDuwNzXDvz4XrIcXHuCf089/iJAoN4lmrXJg18XnduKK6YlDHNRalv4yd1N40OKI80tFidF+rqTFKGPoWFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="tierlist.css" rel="stylesheet">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D48H2PL948"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-D48H2PL948');
+    </script>
+    
+    <script type="module" src="main.js"></script>
+    <script type="module" src="../components/Slides.js"></script>
+    <title>Adachi's TDS Ranker</title>
+</head>
+
+<body class="bg-dark">
+    <div id="alert-container" class="position-absolute w-100 p-4 text-center d-flex flex-column">
+    </div>
+
+    <div class="container-main">
+        <!-- Side Panel -->
+        <div class="aside d-flex flex-column flex-shrink-0 text-white p-2" style="min-width: 240px; width: 19%; height: 100vh; overflow-y: auto;">
+            <!-- Title -->
+            <div class="logo-slideshow">
+                <div class="slide-nav slide-prev">&#10094;</div>
+
+                <div class="slides-container">
+                    <div class="slide active">
+                        <a href="https://tds.fandom.com/wiki/">
+                            <br/><img class="zoomup" src='/htmlassets/wikilogo.png' style="width: 200px" alt="Tower Defense Simulator Wiki">
+                        </a>
+                    </div>
+                    <div class="slide">
+                        <a href="../">
+                            <br/><img class="zoomup" src='/htmlassets/landinglogo.webp' style="width: 200px; height: 62.1167px; object-fit: cover;" alt="TDS Statistics Editor">
+                        </a>
+                    </div>
+                    <div class="slide">
+                        <a href="../db">
+                            <br/><img class="zoomup" src='/htmlassets/databaselogo.png' style="width: 200px" alt="Tower Defense Simulator Database">
+                        </a>
+                    </div>
+                    <div class="slide">
+                        <a href="https://resources.tds-editor.live/">
+                            <br/><img class="zoomup" src='https://raw.githubusercontent.com/t7ru/TDS-Page-Resources/refs/heads/main/logo.png' style="width: 200px" alt="Tower Defense Simulator Database">
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="slide-nav slide-next">&#10095;</div>
+            </div>
+            <hr>
+
+            <!-- Controls -->
+            <div id="tier-list-controls" class="p-2">
+                <h5 class="text-white mb-3">Controls</h5>
+                
+                <div class="mb-3">
+                    <label for="tier-select" class="form-label text-white">Select Tier</label>
+                    <select id="tier-select" class="form-select bg-dark text-white border-secondary">
+                        <option value="S">S Tier</option>
+                        <option value="A">A Tier</option>
+                        <option value="B">B Tier</option>
+                        <option value="C">C Tier</option>
+                        <option value="D">D Tier</option>
+                        <option value="E">E Tier</option>
+                        <option value="F">F Tier</option>
+                    </select>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="tower-input" class="form-label text-white">Enter Tower Names</label>
+                    <div class="input-group mb-2">
+                        <input type="text" id="tower-input" class="form-control bg-dark text-white border-secondary" 
+                               placeholder="Tower name...">
+                        <button id="add-tower-btn" class="btn btn-outline-primary">Add</button>
+                    </div>
+                    <small class="text-muted">Separate multiple towers with commas</small>
+                </div>
+                
+                <div class="d-grid gap-2">
+                    <button id="reset-tierlist" class="btn btn-outline-danger">
+                        <i class="bi bi-trash me-2"></i>Clear Tier List
+                    </button>
+                    <button id="export-image" class="btn btn-outline-secondary">
+                        <i class="bi bi-download me-2"></i>Export Image
+                    </button>
+                    <button id="copy-tierlist" class="btn btn-outline-success">
+                        <i class="bi bi-share me-2"></i>Copy Tier List Code
+                    </button>
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- Tower Categories Filter -->
+            <div id="tower-filters" class="p-2">
+                <h5 class="text-white mb-3">Filter by Category</h5>
+                <div class="form-check mb-2">
+                    <input class="form-check-input filter-category" type="checkbox" id="show-starter" value="starter" checked>
+                    <label class="form-check-label text-light" for="show-starter">
+                        Starter Towers
+                    </label>
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input filter-category" type="checkbox" id="show-intermediate" value="intermediate" checked>
+                    <label class="form-check-label text-light" for="show-intermediate">
+                        Intermediate Towers
+                    </label>
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input filter-category" type="checkbox" id="show-advanced" value="advanced" checked>
+                    <label class="form-check-label text-light" for="show-advanced">
+                        Advanced Towers
+                    </label>
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input filter-category" type="checkbox" id="show-golden" value="golden" checked>
+                    <label class="form-check-label text-light" for="show-golden">
+                        Golden Variants
+                    </label>
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input filter-category" type="checkbox" id="show-hardcore" value="hardcore" checked>
+                    <label class="form-check-label text-light" for="show-hardcore">
+                        Hardcore Towers
+                    </label>
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input filter-category" type="checkbox" id="show-exclusive" value="exclusive" checked>
+                    <label class="form-check-label text-light" for="show-exclusive">
+                        Exclusive Towers
+                    </label>
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input filter-category" type="checkbox" id="show-TEST" value="TEST" checked>
+                    <label class="form-check-label text-light" for="show-TEST">
+                        Placeholders
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Body -->
+        <main role="main" class="d-flex flex-column">
+            <!-- Body Header -->
+            <header class="p-3">
+                <div class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center" id="topnavheader">
+                    <!-- Title -->
+                    <h1 class="h2 text-white unisans" style="text-wrap: balance;">
+                        Adachi's Tier List Maker
+                    </h1>
+
+                    <div class="btn-toolbar mb-2 justify-content-center" style="gap: 0.25rem; margin: 0 auto;">
+                        <!-- Search -->
+                        <form id="Tower-Search" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                            <input type="search" class="form-control form-control-dark text-bg-dark"
+                                placeholder="Search Gallery" aria-label="Search">
+                        </form>
+
+                        <!-- About button is hidden on mobile -->
+                        <div id="button-discord" class="btn-group d-none d-md-block">
+                            <button title="Information about this website." class="btn btn-sm btn-outline-secondary"
+                                data-bs-toggle="modal" data-bs-target="#discord-modal">
+                                About
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Tier List Container -->
+            <div class="d-flex flex-column p-3">
+                <!-- Tier List Preview -->
+                <div id="tierlist-preview" class="mb-3">
+                    <!-- This will be populated by our js so dw -->
+                </div>
+
+                <!-- Gallery -->
+                <div class="available-towers mb-3">
+                    <h4 class="text-white mb-3">Gallery</h4>
+                    <div class="bg-darker p-3 border border-secondary border25">
+                        <div class="d-flex flex-wrap justify-content-start" id="tower-gallery">
+                            <!-- js js js js -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Import Tierlist -->
+                <div class="mb-3">
+                    <h4 class="text-white mb-3">Import Tier List</h4>
+                    <div class="bg-darker p-3 border border-secondary border25">
+                        <div class="mb-3">
+                            <label for="import-code" class="form-label text-white">Paste Tier List Code</label>
+                            <textarea id="import-code" class="form-control bg-dark text-white border-secondary" 
+                                      rows="3" placeholder="{{Tierlist | S = ... | A = ... | B = ...}}"></textarea>
+                        </div>
+                        <button id="import-btn" class="btn btn-outline-primary">Import</button>
+                    </div>
+                </div>
+                
+                <!-- seo boost section lmaooo -->
+                <div class="mb-3">
+                    <h4 class="text-white mb-3">About Adachi's TDS Ranker</h4>
+                    <div class="bg-darker p-3 border border-secondary border25">
+                        <p>
+                            Adachi's TDS Ranker, also known as the TDS Tier List Maker, is the best free tool for creating, sharing, and exporting custom tower tier lists for the Roblox game Tower Defense Simulator. Easily rank all towers, filter by category, and export your tier list as an image or wiki code for the TDS Wiki. Whether you're a new player or a TDS veteran, our tier list editor helps you organize and showcase your favorite towers.
+                        </p>
+                        <p>
+                            This tier list creator supports all current towers, including starter, intermediate, advanced, golden, hardcore, and exclusive towers. Use the gallery to browse every tower, put them into your preferred tier, and share your rankings with friends or the TDS community. Stay up to date with the latest meta and balance changes by revisiting and updating your tier lists anytime.
+                        </p>
+                        <p>
+                            Looking for the most accurate and up-to-date TDS tier list? Our tool is trusted by thousands of players and is regularly updated with new towers and features. Bookmark this page and join the Tower Defense Simulator Wiki community for more guides, strategies, and resources!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center w-100">
+                <p class="text-muted">This tool is an unofficial creation and is not an official product of Paradoxum Games</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile Navigation Bar -->
+    <div class="mobile-nav d-md-none">
+        <a href="#" class="mobile-nav-btn" data-mobile-section="controls">
+            <i class="bi bi-sliders"></i>
+            <span>Controls</span>
+        </a>
+        <a href="#" class="mobile-nav-btn" data-mobile-section="filters">
+            <i class="bi bi-funnel-fill"></i>
+            <span>Filters</span>
+        </a>
+        <a href="#" class="mobile-nav-btn" data-mobile-section="settings">
+            <i class="bi bi-gear-fill"></i>
+            <span>Settings</span>
+        </a>
+        <a href="#" class="mobile-nav-btn" data-mobile-section="about">
+            <i class="bi bi-info-circle-fill"></i>
+            <span>About</span>
+        </a>
+    </div>
+
+    <!-- Mobile Sidebar Overlay -->
+    <div class="mobile-sidebar">
+        <div class="mobile-sidebar-content"></div>
+    </div>
+    
+    <!-- About Us Modal -->
+    <div class="modal fade" id="discord-modal" tabindex="-1" role="dialog" aria-labelledby="discord-modal-label"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content bg-dark text-white">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <div class="d-flex align-items-center">
+                    <div class="toru-icon-container me-3">
+                        <i class="bi bi-info-circle-fill fs-3"></i>
+                    </div>
+                    <div>
+                        <h5 class="modal-title unisans mb-0" id="settings-modal-label">About Us</h5>
+                        <p class="text-muted small mb-0">Information about the Tier List Maker</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body p-0">
+                <!-- About Nav Tabs -->
+                <ul class="nav nav-tabs nav-fill bg-darker" id="aboutTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active text-white" id="aboutSectionAbout" data-bs-toggle="tab" data-bs-target="#about-content" type="button" role="tab" aria-controls="about-content" aria-selected="true">
+                            <i class="bi bi-info-circle me-2"></i>About
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link text-white" id="aboutSectionTeam" data-bs-toggle="tab" data-bs-target="#team-content" type="button" role="tab" aria-controls="team-content" aria-selected="false">
+                            <i class="bi bi-people-fill me-2"></i>Credits
+                        </button>
+                    </li>
+                </ul>
+
+                <!-- Tab Content -->
+                <div class="tab-content p-3">
+                    <!-- About content section -->
+                    <div class="tab-pane fade show active" id="about-content" role="tabpanel" aria-labelledby="aboutSectionAbout">
+                        <div class="toru-section">
+                            <h6 class="toru-heading">
+                                <i class="bi bi-book me-2"></i>Overview
+                            </h6>
+                            <div class="toru-options">
+                                <p>Adachi's TDS Ranker is a part of the TDS Statistics Editor, a project owned by the community of Tower Defense Simulator Wiki.</p>
+                                <p>The official Tower Defense Simulator Wiki is hosted by 
+                                    <img width="60px" class="theme-image" 
+                                    src="https://static.wikia.nocookie.net/6a181c72-e8bf-419b-b4db-18fd56a0eb60" 
+                                    data-light-src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Fandom.svg"
+                                    data-dark-src="https://static.wikia.nocookie.net/6a181c72-e8bf-419b-b4db-18fd56a0eb60"
+                                    style="vertical-align: text-top;" 
+                                    alt="Fandom"> which manages and maintains the platform for the community. This website operates independently and is not directly affiliated with it.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="toru-section">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <a href="https://discord.gg/fBgQzudY3h" target="_blank" class="mx-3 text-decoration-none d-flex flex-column align-items-center">
+                                    <img style="width: 48px;" class="zoomup type1" title="Join the Tower Defense Simulator Wiki Discord server!" src="https://static.wikia.nocookie.net/tower-defense-sim/images/4/4c/Discord-Symbol-Blurple.svg">
+                                </a>
+                                <a href="https://github.com/t7ru/TDS-Stats-Editor/" target="_blank" class="mx-3 text-decoration-none d-flex flex-column align-items-center">
+                                    <img style="width: 48px;" class="zoomup theme-image" title="Contribute to the website's source code!" src="../htmlassets/github-mark-white.svg" data-light-src="htmlassets/github-mark.svg" data-dark-src="htmlassets/github-mark-white.svg">
+                                </a>
+                                <a href="https://tds.fandom.com/wiki/Help:StatisticsEditor" target="_blank" class="mx-3 text-decoration-none d-flex flex-column align-items-center">
+                                    <img style="width: 48px;" class="zoomup type1" title="Visit the dedicated help guide on the TDS Wiki!" src="../htmlassets/wikisquaredsmall.png">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- content section -->
+                    <div class="tab-pane fade" id="team-content" role="tabpanel" aria-labelledby="aboutSectionTeam">
+                        <div class="toru-section">
+                            <h6 class="toru-heading">
+                                <i class="bi bi-code-slash me-2"></i>Developers
+                            </h6>
+                            <div class="toru-options">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card bg-dark border-secondary h-100">
+                                            <div class="card-body text-center">
+                                                <img src="https://avatars.githubusercontent.com/u/85133189" alt="Developer" class="rounded-circle mb-3 object-fit-cover" style="width: 5rem;">
+                                                <h6 class="card-title">megu-dev</h6>
+                                                <p class="card-text small text-muted">Developer<br/>(Tier Maker)</p>
+                                                <a href="https://github.com/megu-dev" target="_blank" class="btn btn-sm btn-outline-primary">
+                                                    <i class="bi bi-github me-1"></i>GitHub
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card bg-dark border-secondary h-100">
+                                            <div class="card-body text-center">
+                                                <img src="https://avatars.githubusercontent.com/u/57356716" alt="Developer" class="rounded-circle mb-3 object-fit-cover" style="width: 5rem;">
+                                                <h6 class="card-title">t7ru</h6>
+                                                <p class="card-text small text-muted">Developer<br/>(Entirety)</p>
+                                                <a href="https://github.com/t7ru" target="_blank" class="btn btn-sm btn-outline-primary">
+                                                    <i class="bi bi-github me-1"></i>GitHub
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card bg-dark border-secondary h-100">
+                                            <div class="card-body text-center">
+                                                <img src="https://avatars.githubusercontent.com/u/64506745" alt="Developer" class="rounded-circle mb-3 object-fit-cover" style="width: 5rem;">
+                                                <h6 class="card-title">SneakyWolfy</h6>
+                                                <p class="card-text small text-muted">Original Developer<br/>(Statistics Editor)</p>
+                                                <a href="https://github.com/SneakyWolfy" target="_blank" class="btn btn-sm btn-outline-primary">
+                                                    <i class="bi bi-github me-1"></i>GitHub
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="toru-section">
+                            <h6 class="toru-heading">
+                                <i class="bi bi-stars me-2"></i>Acknowledgements
+                            </h6>
+                            <div class="toru-options">
+                                <p>Special thanks to all contributors to the project, the Tower Defense Simulator Wiki community, and the Tower Defense Simulator community for their support and feedback.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer-->
+            <div class="modal-footer">
+                <button type="button" class="w-100 btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
