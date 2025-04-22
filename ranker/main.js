@@ -145,8 +145,82 @@ function populateTowerGallery() {
         tower.addEventListener('click', () => {
             const selectedTier = document.getElementById('tier-select').value;
             addTowerToTier(name, selectedTier);
+            showAddedIndicator(tower, selectedTier);
         });
     });
+}
+
+// show animation when tower is added to tier list
+function showAddedIndicator(element, tierName) {
+    const indicator = document.createElement('div');
+    indicator.className = 'added-indicator';
+    indicator.innerHTML = '<i class="bi bi-check-circle-fill"></i>';
+    
+    // style the indicator
+    Object.assign(indicator.style, {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        color: getTierColor(tierName),
+        fontSize: '2rem',
+        opacity: '0',
+        pointerEvents: 'none',
+        zIndex: '100',
+        transition: 'all 0.5s ease'
+    });
+    
+    // add to element
+    element.style.position = 'relative';
+    element.appendChild(indicator);
+    setTimeout(() => { indicator.style.opacity = '1'; }, 10);
+    
+    // add tier letter
+    const tierIndicator = document.createElement('div');
+    tierIndicator.className = 'tier-indicator';
+    tierIndicator.textContent = tierName;
+    Object.assign(tierIndicator.style, {
+        position: 'absolute',
+        top: '70%',
+        left: '50%',
+        transform: 'translate(-50%, 0)',
+        color: getTierColor(tierName),
+        background: 'rgba(0,0,0,0.7)',
+        borderRadius: '3px',
+        padding: '0 4px',
+        fontSize: '0.8rem',
+        fontWeight: 'bold',
+        opacity: '0',
+        pointerEvents: 'none',
+        zIndex: '100',
+        transition: 'all 0.5s ease'
+    });
+    element.appendChild(tierIndicator);
+    setTimeout(() => { tierIndicator.style.opacity = '1'; }, 10);
+    
+    // remove after anim
+    setTimeout(() => {
+        indicator.style.opacity = '0';
+        tierIndicator.style.opacity = '0';
+        setTimeout(() => {
+            if (element.contains(indicator)) element.removeChild(indicator);
+            if (element.contains(tierIndicator)) element.removeChild(tierIndicator);
+        }, 500);
+    }, 1000);
+}
+
+// get color for tier indicator
+function getTierColor(tier) {
+    const tierColors = {
+        'S': '#FF5252',
+        'A': '#FF9800',
+        'B': '#FFEB3B',
+        'C': '#8BC34A',
+        'D': '#03A9F4',
+        'E': '#9C27B0',
+        'F': '#757575'
+    };
+    return tierColors[tier] || '#FFFFFF';
 }
 
 function setupEventListeners() {
