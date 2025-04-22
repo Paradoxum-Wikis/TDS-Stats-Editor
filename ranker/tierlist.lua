@@ -69,6 +69,7 @@ local keywordMap = {
     ["Snowballer"] = { file = "SnowballerIcon.png", category = "exclusive", "tower" },
     ["Elementalist"] = { file = "ElementalistIcon.png", category = "exclusive", "tower" },
     ["Firework Technician"] = { file = "FireworkTechnicianIcon.png", category = "exclusive", "tower" },
+    ["Biologist"] = { file = "Biologisticon.png", category = "exclusive", "tower" },
     ["War Machine"] = { file = "WarMachineIcon.png", category = "exclusive", "tower" },
     ["Mecha Base"] = { file = "OUMechaBaseIcon.png", category = "exclusive", "tower" },
     ["Sentry"] = { file = "Sentry.png", category = "exclusive", "tower" },
@@ -132,6 +133,7 @@ local keywordMap = {
     ["Fortress Demoman"] = { file = "FortressDemomanIcon.png", category = "intermediate" },
     ["Pirate Demoman"] = { file = "PirateDemomanIcon.png", category = "starter" },
     ["Pumpkin Demoman"] = { file = "PumpkinDemoman.png", category = "exclusive" },
+    ["Ducky Demoman"] = { file = "DuckyDemomanIconIG.png", category = "intermediate" },
     
     -- hunter skins --
     ["Halloween Hunter"] = { file = "DHHalloweenHunterIcon.png", category = "exclusive" },
@@ -158,6 +160,7 @@ local keywordMap = {
     ["Aerobics Soldier"] = { file = "AerobicsSoldierIcon.png", category = "starter" },
     ["Dark Frost Soldier"] = { file = "DarkFrostSoldierIcon.png", category = "intermediate" },
     ["Korblox Soldier"] = { file = "KorbloxSoldierIconIG.png", category = "exclusive" },
+    ["Bunny Soldier"] = { file = "BunnySoldierIconIG.png", category = "intermediate" },
     
     -- militant skins --
     ["Ace Pilot Militant"] = { file = "ESAcePilotMilitantIcon.png", category = "advanced" },
@@ -173,6 +176,7 @@ local keywordMap = {
     ["Fallen Militant"] = { file = "FallenMilitantIconIG.png", category = "advanced" },
     ["Star Spartan Militant"] = { file = "StarSpartanMilitantIcon.png", category = "advanced" },
     ["Wasteland Militant"] = { file = "WastelandMilitantIconIG.png", category = "advanced" },
+    ["Easter Militant"] = { file = "EasterMilitantIconIG.png", category = "advanced" },
     
     -- medic skins --
     ["Witch Medic"] = { file = "DHWitchMedicIcon.png", category = "exclusive" },
@@ -216,6 +220,7 @@ local keywordMap = {
     ["Vigilante Shotgunner"] = { file = "VigilanteShotgunnerIcon.png", category = "advanced" },
     ["Phantom Shotgunner"] = { file = "PhantomShotgunner.PNG", category = "intermediate" },
     ["Dance Fever Shotgunner"] = { file = "DanceFeverShotgunnerIconIG.png", category = "intermediate" },
+    ["Gardener Shotgunner"] = { file = "GardenerShotgunnerIconIG.png", category = "advanced" },
     
     -- rocketeer skins --
     ["Dark Matter Rocketeer"] = { file = "DarkmatterRocketeerIcon2025.png", category = "advanced" },
@@ -227,10 +232,12 @@ local keywordMap = {
     ["Lunar Rocketeer"] = { file = "LunarRocketeerIcon.png", category = "advanced" },
     ["Fortress Rocketeer"] = { file = "FortressRocketeerIconIG.png", category = "advanced" },
     ["Lovestriker Rocketeer"] = { file = "LovestrikerRocketeerIconIG.png", category = "hardcore" },
+    ["Ducky Rocketeer"] = { file = "DuckyRocketeerIconIG.png", category = "hardcore" },
     
     -- trapper skins --
     ["Plushie Trapper"] = { file = "PlushieTrapperIcon.png", category = "exclusive" },
     ["Dark Frost Trapper"] = { file = "DarkFrostTrapperIconIG.png", category = "advanced" },
+    ["Mallard Duck Trapper"] = { file = "MallardDuckTrapperIconIG.png", category = "advanced" },
     
     -- ace pilot skins --
     ["Green Ace Pilot"] = { file = "GreenAcePilotIconIGJ24.png", category = "starter" },
@@ -240,6 +247,7 @@ local keywordMap = {
     ["Purple Ace Pilot"] = { file = "PurpleAcePilotIconIGJ24.png", category = "starter" },
     ["Navy Ace Pilot"] = { file = "BlueAcePilotIconIGJ24.png", category = "advanced" },
     ["Pumpkin Ace Pilot"] = { file = "PumpkinAcePilotIconIGJ24.png", category = "exclusive" },
+    ["Easter Ace Pilot"] = { file = "EasterAcePilotIconIG.png", category = "hardcore" },
     
     -- pyromancer skins --
     ["Hazmat Pyromancer"] = { file = "DHHazmatPyroIcon.png", category = "starter" },
@@ -280,6 +288,7 @@ local keywordMap = {
     ["Dark Frost Crook Boss"] = { file = "DarkFrostCrookBossIconIG.png", category = "starter" },
     ["Game Master Crook Boss"] = { file = "GameMasterCrookBossIconIG.png", category = "exclusive" }, -- ultimate skin
     ["Alien Focus Crook Boss"] = { file = "AlienFocusCrookBossIconIG.png", category = "advanced" },
+    ["Easter Crook Boss"] = { file = "EasterCrookBossIconIG.png", category = "advanced" },
     
     -- electroshocker skins --
     ["Valentines Electroshocker"] = { file = "ValentinesElectroshockerIcon2.png", category = "exclusive" },
@@ -359,6 +368,8 @@ local keywordMap = {
     ["Plushie Cowboy"] = { file = "PlushieCowboyIconIG.png", category = "exclusive" },
     ["Megalodon Cowboy"] = { file = "MegalodonCowboy.png", category = "advanced" },
     ["Dark Frost Cowboy"] = { file = "DarkFrostCowboyIconIG.png", category = "advanced" },
+    ["Spring Time Cowboy"] = { file = "SpringTimeCowboyIconIG.png", category = "hardcore" },
+    ["Mecha Bunny Cowboy"] = { file = "MechaBunnyCowboyIconIG.png", category = "exclusive" },
     
     -- dj booth skins --
     ["Neon Rave DJ Booth"] = { file = "NeonRaveDJBoothIconAug2024.png", category = "advanced" },
@@ -400,6 +411,7 @@ local keywordMap = {
     ["Fallen Minigunner"] = { file = "FallenMinigunnerIcon.png", category = "advanced" },
     ["Roadrage Minigunner"] = { file = "RoadRageMinigunnerIconIG.png", category = "advanced" },
     ["Nutcracker Minigunner"] = { file = "NutcrackerMinigunnerIconIG.png", category = "intermediate" },
+    ["Gardener Minigunner"] = { file = "GardenerMinigunnerIconIG.png", category = "intermediate" },
     
     -- ranger skins --
     ["Railgunner Ranger"] = { file = "RailgunnerRangerMissionIcon.png", category = "hardcore" },
@@ -423,6 +435,13 @@ local keywordMap = {
     ["Steampunk Ranger"] = { file = "SteampunkRangerIcon.png", category = "intermediate" },
     ["5ouls Ranger"] = { file = "5oulsRangerIconIG.png", category = "advanced" },
     ["Frankenstein Ranger"] = { file = "FrankensteinRangerIconIG.png", category = "intermediate" },
+    ["Mecha Ducky Ranger"] = { file = "MechaDuckyRangerIconIG.png", category = "advanced" },
+    
+    -- pursuit skins --
+    ["Eggy Pursuit"] = { file = "EggyPursuitIconIG.png", category = "intermediate" },
+    
+    -- gatling gun skins --
+    ["Easter Gatling Gun"] = { file = "EasterGatlingGunnerIconIG.png", category = "intermediate" },
     
     -- turret skins --
     ["XR500 Turret"] = { file = "XR500TurretIcon.png", category = "hardcore" },
@@ -440,6 +459,7 @@ local keywordMap = {
     ["Fallen Mortar"] = { file = "FallenMortarIconIG.png", category = "hardcore" },
     ["Dark Frost Mortar"] = { file = "DarkFrostMortarIconIG.png", category = "advanced" },
     ["Frost Mortar"] = { file = "FrostMortarIconIG.png", category = "hardcore" },
+    ["Mecha Ducky Mortar"] = { file = "MechaDuckyMortarIconIG.png", category = "hardcore" },
     
     -- mercenary base skins --
     ["Liberator Mercenary Base"] = { file = "LiberatorMercenaryBase.png", category = "hardcore" },
@@ -456,6 +476,7 @@ local keywordMap = {
     -- necromancer skins --
     ["Mage Necromancer"] = { file = "Magenecromancer.png", category = "hardcore" },
     ["Fallen Necromancer"] = { file = "FallenNecromancerIconIG.png", category = "hardcore" },
+    ["Duck Necromancer"] = { file = "DuckNecromancerIconIG.png", category = "hardcore" },
     
     -- accelerator skins --
     ["Mage Accelerator"] = { file = "MageAcceleratorIcon2.png", category = "advanced" },
@@ -545,6 +566,9 @@ local keywordMap = {
     -- harvester skins --
     ["Wasteland Harvester"] = { file = "WastelandHarvesterIconIG.png", category = "exclusive" },
     ["Lunar Harvester"] = { file = "LunarHarvesterIconIG.png", category = "hardcore" },
+    
+    -- biologist skins --
+    ["Grim Biologist"] = { file = "GrimmBiologist.png", category = "hardcore" },
 }
 
 local keywordAlias = {
@@ -586,6 +610,7 @@ local keywordAlias = {
     ["Hallow"] = "Hallow Punk",
     ["Snow"] = "Snowballer",
     ["Elem"] = "Elementalist",
+    ["Bio"] = "Biologist",
     ["Ft"] = "Firework Technician",
     ["Wm"] = "War Machine",
     ["Mecha"] = "Mecha Base",
