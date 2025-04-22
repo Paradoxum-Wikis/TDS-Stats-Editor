@@ -684,6 +684,12 @@ class CalculatedManager {
                 },
             },
         },
+        MaxCostEfficiency: {
+            Default: {
+                Requires: ['MaxDPS', 'NetCost'],
+                Value: (level) => level.NetCost / level.MaxDPS,
+            },
+        },
         BossPotential: {
             Default: {
                 Requires: ['Coverage', 'DPS'],
@@ -1217,6 +1223,7 @@ class CalculatedManager {
         this.#add('NetCost', skinData);
         this.#add('LimitNetCost', skinData);
         this.#add('CostEfficiency', skinData);
+        this.#add('MaxCostEfficiency', skinData);
         this.#add('Coverage', skinData);
         this.#add('BossPotential', skinData);
         this.#add('LimitBossPotential', skinData);

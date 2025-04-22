@@ -217,6 +217,7 @@ export default class TableInput {
             case 'Income':
             case 'LimitNetCost':
             case 'CostEfficiency':
+            case 'MaxCostEfficiency':
             case 'IncomeEfficiency':
             case 'IncomePerSecond':
             case 'TotalIncomePerSecond':
@@ -271,6 +272,7 @@ export default class TableInput {
         'Cooldown',
         'Cost',
         'CostEfficiency',
+        'MaxCostEfficiency',
         'NetCost',
         'ChargeTime',
         'LaserCooldown',
