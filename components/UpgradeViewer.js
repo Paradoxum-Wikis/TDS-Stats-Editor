@@ -11,6 +11,7 @@ export default class UpgradeViewer {
         this.levelButtons.activeClass = 'btn-dark';
         this.levelButtons.inactiveClass = 'btn-outline-dark';
         this.dataReady = false;
+        this.isLoading = false;
 
         this.imageInput = document.getElementById('side-upgrade-image');
         this.imageInput.addEventListener(
@@ -105,15 +106,22 @@ export default class UpgradeViewer {
         this.extrasManager.loadExtras(this.upgrade);
         this.extrasManager.renderUpgradeChanges();
         
+        // load image will disable buttons during loading
         this.#loadImage();
         this.abilityManager.loadAbilities();
     }    
 
     async #loadImage() {
+        // don't start another load if one is in progress
+        if (this.isLoading) return;
+        
         const imageId = this.imageInput.value.trim();
         const imgElement = document.getElementById('upgrade-image');
 
         if (!imgElement) return;
+
+        this.isLoading = true;
+        this.#disableLevelButtons();
 
         imgElement.alt = "No Upgrade Image";
         // Clear previous error handler and state
@@ -122,14 +130,25 @@ export default class UpgradeViewer {
 
         if (!imageId) {
             imgElement.src = '';
+            setTimeout(() => {
+                this.isLoading = false;
+                this.#enableLevelButtons();
+            }, 100);
             return;
         }
 
         const tryLoadImage = async (src, isFromCache) => {
             if (!src) {
                 imgElement.src = '';
+                this.isLoading = false;
+                this.#enableLevelButtons();
                 return;
             }
+
+            imgElement.onload = () => {
+                this.isLoading = false;
+                this.#enableLevelButtons();
+            };
 
             imgElement.onerror = async () => {
                 // attempt refetch
@@ -137,9 +156,11 @@ export default class UpgradeViewer {
                     console.error(`Failed to load image even after re-fetch: ${imageId}`);
                     imgElement.src = '';
                     imgElement.onerror = null;
+                    this.isLoading = false;
+                    this.#enableLevelButtons();
                     return;
                 }
-
+                
                 console.warn(`Image failed to load${isFromCache ? ' from cache' : ''}: ${src}. Clearing cache and re-fetching for ID: ${imageId}`);
                 ImageLoader.clearCacheEntry(imageId);
                 imgElement.setAttribute('data-load-attempted', 'true'); // mark as attempted
@@ -161,6 +182,29 @@ export default class UpgradeViewer {
             imageLocation = await ImageLoader.fetchImage(imageId);
             tryLoadImage(imageLocation, false);
         }
+    }
+
+    #disableLevelButtons() {
+        if (!this.levelPanel) return;
+        
+        // disable all buttons in the level panel when loading
+        const buttons = this.levelPanel.querySelectorAll('button, label.btn');
+        buttons.forEach(button => {
+            button.classList.add('disabled');
+            button.style.opacity = '0.6';
+            button.style.pointerEvents = 'none';
+        });
+    }
+
+    #enableLevelButtons() {
+        if (!this.levelPanel) return;
+        
+        const buttons = this.levelPanel.querySelectorAll('button, label.btn');
+        buttons.forEach(button => {
+            button.classList.remove('disabled');
+            button.style.opacity = '';
+            button.style.pointerEvents = '';
+        });
     }
 
     #onTextChanged(property, value) {
