@@ -309,6 +309,14 @@ function setupEventListeners() {
     });
 
     document.querySelector('#Tower-Search input').addEventListener('input', filterTowerGallery);
+
+    // Prevent form submission on Enter in search bar
+    const searchForm = document.getElementById('Tower-Search');
+    if (searchForm) {
+        searchForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+        });
+    }
 }
 
 function addTowerToTier(towerName, tier) {
