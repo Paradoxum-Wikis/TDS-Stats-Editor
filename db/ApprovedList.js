@@ -43,6 +43,7 @@ const approvedTowers = [
     'Chilloutofpewp2nd/Medic',
     'Onett4smash/Medic Rework (V1)',
     'Chilloutofpewp2nd/Militant',
+    'Chilloutofpewp2nd/Gatling (Rework',
 ];
 
 // List of featured towers
