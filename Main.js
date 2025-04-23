@@ -8,7 +8,7 @@ import KeyboardNavigation from './components/KeyboardNavigation.js';
 import { setVersionNumber, loadUpdateLog } from './components/UIHelpers.js';
 import { clearUrlAndShowLanding } from './components/TowerLoader.js';
 
-const TDSVersion = '1.61.6'; // change GAME version number here
+const TDSVersion = '1.62.1'; // change GAME version number here
 
 window.clearUrlAndShowLanding = clearUrlAndShowLanding;
 
