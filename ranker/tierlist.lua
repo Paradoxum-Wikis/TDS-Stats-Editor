@@ -379,6 +379,7 @@ local keywordMap = {
     ["Masquerade DJ Booth"] = { file = "MasqueradeDJBooth.png", category = "exclusive" },
     ["Mako DJ Booth"] = { file = "MakoDJBoothIcon.png", category = "exclusive" }, -- ultimate skin
     ["Garage Band DJ Booth"] = { file = "GarageBandDJBoothIconIG.png", category = "hardcore" },
+    ["Ducky DJ Booth"] = { file = "DuckyDJIconIG.png", category = "hardcore" },
     
     -- minigunner skins --
     ["Blue Minigunner"] = { file = "BlueMinigunner.png", category = "starter" },
