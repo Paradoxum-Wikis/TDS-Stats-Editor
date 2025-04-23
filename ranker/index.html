@@ -30,6 +30,7 @@
     <link href="../Styles/theme.css" rel="stylesheet">
     <link href="../Styles/MobileNav.css" rel="stylesheet">
     <link href="../Styles/animations.css" rel="stylesheet">
+    <link href="tierlist.css" rel="stylesheet">
     
     <link rel="icon" type="image/png" href="/htmlassets/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/htmlassets/favicon.svg" />
@@ -47,7 +48,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js" integrity="sha512-a+SUDuwNzXDvz4XrIcXHuCf089/iJAoN4lmrXJg18XnduKK6YlDHNRalv4yd1N40OKI80tFidF+rqTFKGPoWFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link href="tierlist.css" rel="stylesheet">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D48H2PL948"></script>
@@ -62,6 +62,7 @@
     <script type="module" src="main.js"></script>
     <script src="MobileNav.js"></script>
     <script type="module" src="../components/Slides.js"></script>
+    <script type="module" src="../components/UpdateLog.js"></script>
     <title>Adachi's TDS Ranker</title>
 </head>
 
@@ -328,6 +329,11 @@
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
+                        <button class="nav-link text-white" id="aboutSectionUpdates" data-bs-toggle="tab" data-bs-target="#update-log-content" type="button" role="tab" aria-controls="update-log-content" aria-selected="false">
+                            <i class="bi bi-journal-code me-2"></i>Update Log
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
                         <button class="nav-link text-white" id="aboutSectionTeam" data-bs-toggle="tab" data-bs-target="#team-content" type="button" role="tab" aria-controls="team-content" aria-selected="false">
                             <i class="bi bi-people-fill me-2"></i>Credits
                         </button>
@@ -366,6 +372,15 @@
                                 <a href="https://tds.fandom.com/wiki/Help:StatisticsEditor" target="_blank" class="mx-3 text-decoration-none d-flex flex-column align-items-center">
                                     <img style="width: 48px;" class="zoomup type1" title="Visit the dedicated help guide on the TDS Wiki!" src="../htmlassets/wikisquaredsmall.png">
                                 </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Update Log content section -->
+                    <div class="tab-pane fade overflow-auto" id="update-log-content" role="tabpanel" aria-labelledby="aboutSectionUpdates" style="max-height: 25rem">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border text-secondary" role="status">
+                                <span class="visually-hidden">Loading...</span>
                             </div>
                         </div>
                     </div>
