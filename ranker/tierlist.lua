@@ -568,7 +568,7 @@ local keywordMap = {
     ["Lunar Harvester"] = { file = "LunarHarvesterIconIG.png", category = "hardcore" },
     
     -- biologist skins --
-    ["Grim Biologist"] = { file = "GrimmBiologist.png", category = "hardcore" },
+    ["Grim Biologist"] = { file = "GrimmBiologist.png", category = "advanced" },
 }
 
 local keywordAlias = {
