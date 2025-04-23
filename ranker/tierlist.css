@@ -138,6 +138,7 @@
     transition: 0.05s ease;
     position: relative;
     overflow: visible;
+    border-radius: 5px;
 }
 
 .tower-item:hover{
