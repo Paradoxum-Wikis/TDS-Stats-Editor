@@ -29,7 +29,7 @@
     <link href="../Styles/torus.css" rel="stylesheet">
     <link href="../Styles/theme.css" rel="stylesheet">
     <link href="../Styles/MobileNav.css" rel="stylesheet">
-    <link href="../Styles/animations.css" rel="stylesheet">
+    <link id="anims" href="../Styles/animations.css" rel="stylesheet">
     <link href="tierlist.css" rel="stylesheet">
     
     <link rel="icon" type="image/png" href="/htmlassets/favicon-96x96.png" sizes="96x96" />
@@ -61,6 +61,7 @@
     
     <script type="module" src="main.js"></script>
     <script defer src="MobileNav.js"></script>
+    <script defer src="SettingsSync.js"></script>
     <script type="module" src="../components/Slides.js"></script>
     <script type="module" src="../components/UpdateLog.js"></script>
     <title>Adachi's TDS Ranker</title>
@@ -211,11 +212,18 @@
                                 placeholder="Search Gallery" aria-label="Search">
                         </form>
 
-                        <!-- About button is hidden on mobile -->
-                        <div id="button-discord" class="btn-group d-none d-md-block">
+                        <!-- These buttons are hidden on mobile -->
+                        <div id="button-discord" class="btn-group d-none d-md-block me-2">
                             <button title="Information about this website." class="btn btn-sm btn-outline-secondary"
                                 data-bs-toggle="modal" data-bs-target="#discord-modal">
                                 About
+                            </button>
+                        </div>
+
+                        <div id="button-settings" class="btn-group d-none d-md-block">
+                            <button title="The totally real settings." class="btn btn-sm btn-outline-secondary"
+                                data-bs-toggle="modal" data-bs-target="#settings-modal">
+                                Settings
                             </button>
                         </div>
                     </div>
@@ -299,13 +307,13 @@
                 <div class="mb-3">
                     <h4 class="text-white mb-3">What is Adachi's TDS Ranker?</h4>
                     <div class="bg-darker p-3 border border-secondary border25">
-                        <p>
+                        <p class="text-white">
                             Adachi's TDS Ranker, also known as the TDS Tier List Maker, is the best free tool for creating, sharing, and exporting custom tower tier lists for the Roblox game Tower Defense Simulator. Easily rank all towers, filter by category, and export your tier list as an image or wiki code for the TDS Wiki. Whether you're a new player or a TDS veteran, our tier list editor helps you organize and showcase your favorite towers.
                         </p>
-                        <p>
+                        <p class="text-white">
                             This tier list creator supports all current towers, including starter, intermediate, advanced, golden, hardcore, and exclusive towers. Use the gallery to browse every tower, put them into your preferred tier, and share your rankings with friends or the TDS community. Stay up to date with the latest meta and balance changes by revisiting and updating your tier lists anytime.
                         </p>
-                        <p>
+                        <p class="text-white">
                             Looking for the most accurate and up-to-date TDS tier list? Our tool is trusted by thousands of players and is regularly updated with new towers and features. Bookmark this page and join the Tower Defense Simulator Wiki community for more guides, strategies, and resources!
                         </p>
                     </div>
@@ -343,157 +351,187 @@
         <div class="mobile-sidebar-content"></div>
     </div>
     
-    <!-- About Us Modal -->
-    <div class="modal fade" id="discord-modal" tabindex="-1" role="dialog" aria-labelledby="discord-modal-label"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content bg-dark text-white">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <div class="d-flex align-items-center">
-                    <div class="toru-icon-container me-3">
-                        <i class="bi bi-info-circle-fill fs-3"></i>
+        <!-- About Us Modal -->
+        <div class="modal fade" id="discord-modal" tabindex="-1" role="dialog" aria-labelledby="discord-modal-label"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content bg-dark text-white">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <div class="d-flex align-items-center">
+                        <div class="toru-icon-container me-3">
+                            <i class="bi bi-info-circle-fill fs-3"></i>
+                        </div>
+                        <div>
+                            <h5 class="modal-title unisans mb-0" id="settings-modal-label">About Us</h5>
+                            <p class="text-muted small mb-0">Information about the Tier List Maker</p>
+                        </div>
                     </div>
-                    <div>
-                        <h5 class="modal-title unisans mb-0" id="settings-modal-label">About Us</h5>
-                        <p class="text-muted small mb-0">Information about the Tier List Maker</p>
-                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
 
-            <!-- Modal Body -->
-            <div class="modal-body p-0">
-                <!-- About Nav Tabs -->
-                <ul class="nav nav-tabs nav-fill bg-darker" id="aboutTabs" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active text-white" id="aboutSectionAbout" data-bs-toggle="tab" data-bs-target="#about-content" type="button" role="tab" aria-controls="about-content" aria-selected="true">
-                            <i class="bi bi-info-circle me-2"></i>About
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link text-white" id="aboutSectionUpdates" data-bs-toggle="tab" data-bs-target="#update-log-content" type="button" role="tab" aria-controls="update-log-content" aria-selected="false">
-                            <i class="bi bi-journal-code me-2"></i>Update Log
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link text-white" id="aboutSectionTeam" data-bs-toggle="tab" data-bs-target="#team-content" type="button" role="tab" aria-controls="team-content" aria-selected="false">
-                            <i class="bi bi-people-fill me-2"></i>Credits
-                        </button>
-                    </li>
-                </ul>
+                <!-- Modal Body -->
+                <div class="modal-body p-0">
+                    <!-- About Nav Tabs -->
+                    <ul class="nav nav-tabs nav-fill bg-darker" id="aboutTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active text-white" id="aboutSectionAbout" data-bs-toggle="tab" data-bs-target="#about-content" type="button" role="tab" aria-controls="about-content" aria-selected="true">
+                                <i class="bi bi-info-circle me-2"></i>About
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link text-white" id="aboutSectionUpdates" data-bs-toggle="tab" data-bs-target="#update-log-content" type="button" role="tab" aria-controls="update-log-content" aria-selected="false">
+                                <i class="bi bi-journal-code me-2"></i>Update Log
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link text-white" id="aboutSectionTeam" data-bs-toggle="tab" data-bs-target="#team-content" type="button" role="tab" aria-controls="team-content" aria-selected="false">
+                                <i class="bi bi-people-fill me-2"></i>Credits
+                            </button>
+                        </li>
+                    </ul>
 
-                <!-- Tab Content -->
-                <div class="tab-content p-3">
-                    <!-- About content section -->
-                    <div class="tab-pane fade show active" id="about-content" role="tabpanel" aria-labelledby="aboutSectionAbout">
-                        <div class="toru-section">
-                            <h6 class="toru-heading">
-                                <i class="bi bi-book me-2"></i>Overview
-                            </h6>
-                            <div class="toru-options">
-                                <p>Adachi's TDS Ranker is a part of the TDS Statistics Editor, a project owned by the community of Tower Defense Simulator Wiki.</p>
-                                <p>The official Tower Defense Simulator Wiki is hosted by 
-                                    <img width="60px" class="theme-image" 
-                                    src="https://static.wikia.nocookie.net/6a181c72-e8bf-419b-b4db-18fd56a0eb60" 
-                                    data-light-src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Fandom.svg"
-                                    data-dark-src="https://static.wikia.nocookie.net/6a181c72-e8bf-419b-b4db-18fd56a0eb60"
-                                    style="vertical-align: text-top;" 
-                                    alt="Fandom"> which manages and maintains the platform for the community. This website operates independently and is not directly affiliated with it.
-                                </p>
+                    <!-- Tab Content -->
+                    <div class="tab-content p-3">
+                        <!-- About content section -->
+                        <div class="tab-pane fade show active" id="about-content" role="tabpanel" aria-labelledby="aboutSectionAbout">
+                            <div class="toru-section">
+                                <h6 class="toru-heading">
+                                    <i class="bi bi-book me-2"></i>Overview
+                                </h6>
+                                <div class="toru-options">
+                                    <p>Adachi's TDS Ranker is a part of the TDS Statistics Editor, a project owned by the community of Tower Defense Simulator Wiki.</p>
+                                    <p>The official Tower Defense Simulator Wiki is hosted by 
+                                        <img width="60px" class="theme-image" 
+                                        src="https://static.wikia.nocookie.net/6a181c72-e8bf-419b-b4db-18fd56a0eb60" 
+                                        data-light-src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Fandom.svg"
+                                        data-dark-src="https://static.wikia.nocookie.net/6a181c72-e8bf-419b-b4db-18fd56a0eb60"
+                                        style="vertical-align: text-top;" 
+                                        alt="Fandom"> which manages and maintains the platform for the community. This website operates independently and is not directly affiliated with it.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="toru-section">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <a href="https://discord.gg/fBgQzudY3h" target="_blank" class="mx-3 text-decoration-none d-flex flex-column align-items-center">
+                                        <img style="width: 48px;" class="zoomup type1" title="Join the Tower Defense Simulator Wiki Discord server!" src="https://static.wikia.nocookie.net/tower-defense-sim/images/4/4c/Discord-Symbol-Blurple.svg" alt="Discord Logo">
+                                    </a>
+                                    <a href="https://github.com/t7ru/TDS-Stats-Editor/" target="_blank" class="mx-3 text-decoration-none d-flex flex-column align-items-center">
+                                        <img style="width: 48px;" class="zoomup theme-image" title="Contribute to the website's source code!" src="../htmlassets/github-mark-white.svg" data-light-src="htmlassets/github-mark.svg" data-dark-src="htmlassets/github-mark-white.svg" alt="GitHub Logo">
+                                    </a>
+                                    <a href="https://tds.fandom.com/wiki/Help:StatisticsEditor" target="_blank" class="mx-3 text-decoration-none d-flex flex-column align-items-center">
+                                        <img style="width: 48px;" class="zoomup type1" title="Visit the dedicated help guide on the TDS Wiki!" src="../htmlassets/wikisquaredsmall.png" alt="TDS Wiki Logo">
+                                    </a>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="toru-section">
-                            <div class="d-flex align-items-center justify-content-center">
-                                <a href="https://discord.gg/fBgQzudY3h" target="_blank" class="mx-3 text-decoration-none d-flex flex-column align-items-center">
-                                    <img style="width: 48px;" class="zoomup type1" title="Join the Tower Defense Simulator Wiki Discord server!" src="https://static.wikia.nocookie.net/tower-defense-sim/images/4/4c/Discord-Symbol-Blurple.svg" alt="Discord Logo">
-                                </a>
-                                <a href="https://github.com/t7ru/TDS-Stats-Editor/" target="_blank" class="mx-3 text-decoration-none d-flex flex-column align-items-center">
-                                    <img style="width: 48px;" class="zoomup theme-image" title="Contribute to the website's source code!" src="../htmlassets/github-mark-white.svg" data-light-src="htmlassets/github-mark.svg" data-dark-src="htmlassets/github-mark-white.svg" alt="GitHub Logo">
-                                </a>
-                                <a href="https://tds.fandom.com/wiki/Help:StatisticsEditor" target="_blank" class="mx-3 text-decoration-none d-flex flex-column align-items-center">
-                                    <img style="width: 48px;" class="zoomup type1" title="Visit the dedicated help guide on the TDS Wiki!" src="../htmlassets/wikisquaredsmall.png" alt="TDS Wiki Logo">
-                                </a>
+                        <!-- Update Log content section -->
+                        <div class="tab-pane fade overflow-auto" id="update-log-content" role="tabpanel" aria-labelledby="aboutSectionUpdates" style="max-height: 25rem">
+                            <div class="d-flex justify-content-center">
+                                <div class="spinner-border text-secondary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Update Log content section -->
-                    <div class="tab-pane fade overflow-auto" id="update-log-content" role="tabpanel" aria-labelledby="aboutSectionUpdates" style="max-height: 25rem">
-                        <div class="d-flex justify-content-center">
-                            <div class="spinner-border text-secondary" role="status">
-                                <span class="visually-hidden">Loading...</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- content section -->
-                    <div class="tab-pane fade" id="team-content" role="tabpanel" aria-labelledby="aboutSectionTeam">
-                        <div class="toru-section">
-                            <h6 class="toru-heading">
-                                <i class="bi bi-code-slash me-2"></i>Developers
-                            </h6>
-                            <div class="toru-options">
-                                <div class="row justify-content-center">
-                                    <div class="col-md-4 mb-3">
-                                        <div class="card bg-dark border-secondary h-100">
-                                            <div class="card-body text-center">
-                                                <img src="https://avatars.githubusercontent.com/u/85133189" alt="Developer" class="rounded-circle mb-3 object-fit-cover" style="width: 5rem;">
-                                                <h6 class="card-title">megu-dev</h6>
-                                                <p class="card-text small text-muted">Developer<br/>(Tier Maker)</p>
-                                                <a href="https://github.com/megu-dev" target="_blank" class="btn btn-sm btn-outline-primary">
-                                                    <i class="bi bi-github me-1"></i>GitHub
-                                                </a>
+                        <!-- content section -->
+                        <div class="tab-pane fade" id="team-content" role="tabpanel" aria-labelledby="aboutSectionTeam">
+                            <div class="toru-section">
+                                <h6 class="toru-heading">
+                                    <i class="bi bi-code-slash me-2"></i>Developers
+                                </h6>
+                                <div class="toru-options">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-4 mb-3">
+                                            <div class="card bg-dark border-secondary h-100">
+                                                <div class="card-body text-center">
+                                                    <img src="https://avatars.githubusercontent.com/u/85133189" alt="Developer" class="rounded-circle mb-3 object-fit-cover" style="width: 5rem;">
+                                                    <h6 class="card-title">megu-dev</h6>
+                                                    <p class="card-text small text-muted">Developer<br/>(Tier Maker)</p>
+                                                    <a href="https://github.com/megu-dev" target="_blank" class="btn btn-sm btn-outline-primary">
+                                                        <i class="bi bi-github me-1"></i>GitHub
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <div class="card bg-dark border-secondary h-100">
-                                            <div class="card-body text-center">
-                                                <img src="https://avatars.githubusercontent.com/u/57356716" alt="Developer" class="rounded-circle mb-3 object-fit-cover" style="width: 5rem;">
-                                                <h6 class="card-title">t7ru</h6>
-                                                <p class="card-text small text-muted">Core Developer<br/>(Entirety)</p>
-                                                <a href="https://github.com/t7ru" target="_blank" class="btn btn-sm btn-outline-primary">
-                                                    <i class="bi bi-github me-1"></i>GitHub
-                                                </a>
+                                        <div class="col-md-4 mb-3">
+                                            <div class="card bg-dark border-secondary h-100">
+                                                <div class="card-body text-center">
+                                                    <img src="https://avatars.githubusercontent.com/u/57356716" alt="Developer" class="rounded-circle mb-3 object-fit-cover" style="width: 5rem;">
+                                                    <h6 class="card-title">t7ru</h6>
+                                                    <p class="card-text small text-muted">Core Developer<br/>(Entirety)</p>
+                                                    <a href="https://github.com/t7ru" target="_blank" class="btn btn-sm btn-outline-primary">
+                                                        <i class="bi bi-github me-1"></i>GitHub
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <div class="card bg-dark border-secondary h-100">
-                                            <div class="card-body text-center">
-                                                <img src="https://avatars.githubusercontent.com/u/64506745" alt="Developer" class="rounded-circle mb-3 object-fit-cover" style="width: 5rem;">
-                                                <h6 class="card-title">SneakyWolfy</h6>
-                                                <p class="card-text small text-muted">Original Developer<br/>(Statistics Editor)</p>
-                                                <a href="https://github.com/SneakyWolfy" target="_blank" class="btn btn-sm btn-outline-primary">
-                                                    <i class="bi bi-github me-1"></i>GitHub
-                                                </a>
+                                        <div class="col-md-4 mb-3">
+                                            <div class="card bg-dark border-secondary h-100">
+                                                <div class="card-body text-center">
+                                                    <img src="https://avatars.githubusercontent.com/u/64506745" alt="Developer" class="rounded-circle mb-3 object-fit-cover" style="width: 5rem;">
+                                                    <h6 class="card-title">SneakyWolfy</h6>
+                                                    <p class="card-text small text-muted">Original Developer<br/>(Statistics Editor)</p>
+                                                    <a href="https://github.com/SneakyWolfy" target="_blank" class="btn btn-sm btn-outline-primary">
+                                                        <i class="bi bi-github me-1"></i>GitHub
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="toru-section">
-                            <h6 class="toru-heading">
-                                <i class="bi bi-stars me-2"></i>Acknowledgements
-                            </h6>
-                            <div class="toru-options">
-                                <p>Special thanks to all contributors to the project, the Tower Defense Simulator Wiki community, and the Tower Defense Simulator community for their support and feedback.</p>
+                            <div class="toru-section">
+                                <h6 class="toru-heading">
+                                    <i class="bi bi-stars me-2"></i>Acknowledgements
+                                </h6>
+                                <div class="toru-options">
+                                    <p>Special thanks to all contributors to the project, the Tower Defense Simulator Wiki community, and the Tower Defense Simulator community for their support and feedback.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Modal Footer-->
-            <div class="modal-footer">
-                <button type="button" class="w-100 btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <!-- Modal Footer-->
+                <div class="modal-footer">
+                    <button type="button" class="w-100 btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
-    </div>
-    </div>
+        </div>
+
+        <!-- Settings Modal -->
+        <div class="modal fade" id="settings-modal" tabindex="-1" role="dialog" aria-labelledby="settings-modal-label"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header">
+                    <div class="d-flex align-items-center">
+                        <div class="toru-icon-container me-3">
+                            <i class="bi bi-gear-fill fs-3"></i>
+                        </div>
+                        <div>
+                            <h5 class="modal-title unisans mb-0" id="settings-modal-label">Settings</h5>
+                            <p class="text-muted small mb-0">Totally available to change</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="alert alert-info mb-0 text-center">
+                        Apologies, but settings for appearance currently can only be changed in the <a href="../">Statistics Editor</a>.<br>
+                        Please head over there to adjust your preferences, sorry!
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="w-100 btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+        </div>
 </body>
 </html>
