@@ -137,31 +137,48 @@ function getImageUrl(filename) {
 }
 
 function renderTierList() {
-    const preview = document.getElementById('tierlist-preview');
-    let html = '<div class="tier-list">';
+    // Clear existing towers from all tiers
+    document.querySelectorAll('.tier-content').forEach(tierContent => {
+        tierContent.innerHTML = '';
+    });
+    
+    // Add towers to each tier
     const tiers = ["S", "A", "B", "C", "D", "E", "F"];
     tiers.forEach(tier => {
-        html += `<div class="tier-row ${tier.toLowerCase()}-tier">`;
-        html += `<div class="tier-label">${tier}</div>`;
-        html += '<div class="tier-content">';
+        const tierContent = document.querySelector(`.tier-content[data-tier="${tier}"]`);
+        if (!tierContent) return;
+        
         tierListData[tier].forEach(towerName => {
             const normalizedName = towerAliases[towerName] || towerName;
             const towerInfo = towerData[normalizedName];
+            
+            const towerElement = document.createElement('span');
+            towerElement.className = "tier-item";
+            towerElement.setAttribute('data-tower', normalizedName);
+            towerElement.setAttribute('data-tier', tier);
+            
             if (towerInfo) {
                 const imageUrl = getImageUrl(towerInfo.file);
-                html += `<span class="tier-item category-${towerInfo.category}" data-tooltip="${normalizedName}" data-tower="${normalizedName}" data-tier="${tier}">`;
-                html += `<img src="${imageUrl}" alt="${normalizedName}">`;
-                html += '</span>';
+                towerElement.classList.add(`category-${towerInfo.category}`);
+                towerElement.setAttribute('data-tooltip', normalizedName);
+                
+                const img = document.createElement('img');
+                img.src = imageUrl;
+                img.alt = normalizedName;
+                towerElement.appendChild(img);
             } else {
-                html += `<span class="tier-item" data-tooltip="Unknown tower: ${towerName}" data-tower="${normalizedName}" data-tier="${tier}">`;
-                html += `<div class="bg-danger text-white d-flex align-items-center justify-content-center w-100 h-100">${towerName.charAt(0)}</div>`;
-                html += '</span>';
+                towerElement.setAttribute('data-tooltip', `Unknown tower: ${towerName}`);
+                
+                const placeholder = document.createElement('div');
+                placeholder.className = 'bg-danger text-white d-flex align-items-center justify-content-center w-100 h-100';
+                placeholder.textContent = towerName.charAt(0);
+                towerElement.appendChild(placeholder);
             }
+            
+            tierContent.appendChild(towerElement);
         });
-        html += '</div></div>';
     });
-    html += '</div>';
-    preview.innerHTML = html;
+    
     addTierItemListeners();
 }
 
