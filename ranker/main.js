@@ -1,5 +1,17 @@
 import ImageLoader from '../components/ImageLoader.js';
 
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+};
+
 // main tier list data
 const tierListData = {
     S: [],
@@ -15,33 +27,50 @@ const tierListData = {
 let towerData = {};
 let towerAliases = {};
 
-document.addEventListener('DOMContentLoaded', async function() {
-    await loadTierlistData();
-    renderTierList();
-    populateTowerGallery();
-    setupEventListeners();
-});
-
-async function loadTierlistData() {
+async function initializeTierlistData() {
     try {
         const response = await fetch('tierlist.lua');
         if (!response.ok) {
             throw new Error(`Failed to load tierlist.lua: ${response.status}`);
         }
         const luaContent = await response.text();
+        // call the actual parsing functions which update the global variables
         parseTowerData(luaContent);
         parseTowerAliases(luaContent);
+
         console.log('Tower data loaded:', Object.keys(towerData).length, 'towers');
         console.log('Tower aliases loaded:', Object.keys(towerAliases).length, 'aliases');
         if (Object.keys(towerData).length === 0) {
-            throw new Error('No tower data was extracted from tierlist.lua');
+             console.error('No tower data was extracted from tierlist.lua');
         }
         console.log('Successfully loaded data from tierlist.lua');
     } catch (error) {
-        console.error('Error loading tierlist data:', error);
-        alert('Failed to load tower data. Check console for details.');
+        console.error('Error initializing tierlist data:', error);
+        alert('Failed to load essential tower data. The application might not work correctly. Check console for details.');
+        throw error;
     }
 }
+
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        await initializeTierlistData();
+        await new Promise(resolve => setTimeout(resolve, 0));
+
+        renderTierList();
+
+        await new Promise(resolve => setTimeout(resolve, 0));
+
+        populateTowerGallery();
+        setupEventListeners();
+        loadTierListFromURL(); // Or load default
+    } catch (error) {
+        console.error("Initialization failed:", error);
+        const alertContainer = document.getElementById('alert-container');
+         if (alertContainer) {
+             alertContainer.innerHTML = `<div class="alert alert-danger" role="alert">Failed to initialize application. Please try refreshing the page if the issue still persists. Best to check the console for details.</div>`;
+         }
+    }
+});
 
 function parseTowerData(luaContent) {
     // grab tower info from lua
@@ -141,6 +170,8 @@ function populateTowerGallery() {
     const scrollPosition = gallery.scrollTop;
     gallery.innerHTML = '';
 
+    const fragment = document.createDocumentFragment(); // Create a fragment
+
     const sections = {
         'towers': {
             title: 'Towers',
@@ -179,8 +210,8 @@ function populateTowerGallery() {
         } else {
             tower.addEventListener('click', () => {
                 const selectedTier = document.getElementById('tier-select').value;
-
                 addTowerToTier(name, selectedTier);
+                // showAddedIndicator itself also calls populateTowerGallery again after animation, might wanna do something about this in the future
                 showAddedIndicator(tower, selectedTier);
             });
         }
@@ -189,9 +220,10 @@ function populateTowerGallery() {
         img.src = getImageUrl(towerInfo.file);
         img.className = 'img-fluid';
         img.alt = name;
-        
+
         tower.appendChild(img);
-        
+
+        // ads tower element to the items array
         if (isTower) {
             sections.towers.items.push(tower);
         } else if (isGolden) {
@@ -200,26 +232,27 @@ function populateTowerGallery() {
             sections.skins.items.push(tower);
         }
     });
-    
+
     for (const [key, section] of Object.entries(sections)) {
         if (section.items.length > 0) {
             const header = document.createElement('h5');
             header.className = 'text-white text-center my-2';
             header.textContent = section.title;
-            gallery.appendChild(header);
-            
+            fragment.appendChild(header);
+
             const container = document.createElement('div');
             container.className = 'd-flex flex-wrap justify-content-center w-100';
             container.setAttribute('data-section', key);
-            
-            section.items.forEach(tower => {
-                container.appendChild(tower);
+
+            section.items.forEach(towerElement => {
+                container.appendChild(towerElement);
             });
-            
-            gallery.appendChild(container);
+
+            fragment.appendChild(container);
         }
     }
 
+    gallery.appendChild(fragment);
     gallery.scrollTop = scrollPosition;
 }
 
@@ -308,7 +341,12 @@ function setupEventListeners() {
         checkbox.addEventListener('change', filterTowerGallery);
     });
 
-    document.querySelector('#Tower-Search input').addEventListener('input', filterTowerGallery);
+    // debounce the search input listener
+    const searchInput = document.querySelector('#Tower-Search input');
+    if (searchInput) {
+         searchInput.addEventListener('input', debounce(filterTowerGallery, 300));
+    }
+
 
     // Prevent form submission on Enter in search bar
     const searchForm = document.getElementById('Tower-Search');
@@ -317,6 +355,12 @@ function setupEventListeners() {
             event.preventDefault();
         });
     }
+
+    // hash change listener for url updates without page reload
+    window.addEventListener('hashchange', function() {
+        // This function will be called whenever the hash part of the url changes
+        loadTierListFromURL();
+    });
 }
 
 function addTowerToTier(towerName, tier) {
@@ -334,9 +378,10 @@ function addTowerToTier(towerName, tier) {
         tierArr.some(t => t.toLowerCase() === finalTowerName.toLowerCase())
     );
 
+    let towerMoved = false;
+    
     if (!alreadyInAnyTier) {
         tierListData[tier].push(finalTowerName);
-        renderTierList();
     } else {
         console.log(`Tower ${finalTowerName} is already in a tier. Moving to ${tier}.`);
         // remove from existing tier first
@@ -344,12 +389,20 @@ function addTowerToTier(towerName, tier) {
             const index = tierListData[t].findIndex(name => name.toLowerCase() === finalTowerName.toLowerCase());
             if (index !== -1) {
                 tierListData[t].splice(index, 1);
+                towerMoved = true;
             }
         });
         tierListData[tier].push(finalTowerName);
-        renderTierList();
+    }
+    
+    renderTierList();
+    
+    // Only update gallery if the tower was moved between tiers
+    if (towerMoved) {
         populateTowerGallery();
     }
+    
+    updateURLHash();
 }
 
 function removeTowerFromTier(towerName, tier) {
@@ -358,6 +411,7 @@ function removeTowerFromTier(towerName, tier) {
         tierListData[tier].splice(index, 1);
         renderTierList();
         populateTowerGallery();
+        updateURLHash();
     }
 }
 
@@ -366,6 +420,8 @@ function resetTierList() {
         tierListData[tier] = [];
     });
     renderTierList();
+    populateTowerGallery();
+    updateURLHash();
 }
 
 function exportTierListImage() {
@@ -489,19 +545,41 @@ function importTierList() {
         alert('Invalid tier list code format. It should look like:\n{{Tierlist | S = Tower1, Tower2 | A = Tower3}}');
         return;
     }
+    
     resetTierList();
+    
     // grab tier data from code
     const tierRegex = /\|\s*([A-Z])\s*=\s*([^|]+)(?=\||}})/g;
     let match;
+    let updatedTiers = false;
+    
     while ((match = tierRegex.exec(importCode)) !== null) {
         const tier = match[1];
         const towers = match[2].split(',').map(t => t.trim()).filter(t => t !== '');
+        
         if (tierListData[tier]) {
             towers.forEach(tower => {
-                addTowerToTier(tower, tier);
+                const lowerTowerName = tower.toLowerCase();
+                const normalizedName = towerAliases[lowerTowerName] || tower;
+                const correctCaseTowerName = findTowerCaseInsensitive(normalizedName);
+                const finalTowerName = towerData[correctCaseTowerName] ? correctCaseTowerName : normalizedName;
+                
+                // Direct addition to avoid multiple renders
+                if (!Object.values(tierListData).flat().some(t => t.toLowerCase() === finalTowerName.toLowerCase())) {
+                    tierListData[tier].push(finalTowerName);
+                    updatedTiers = true;
+                }
             });
         }
     }
+    
+    // Only update UI once, after all changes are processed
+    if (updatedTiers) {
+        renderTierList();
+        populateTowerGallery();
+        updateURLHash();
+    }
+    
     document.getElementById('import-code').value = '';
 }
 
@@ -532,6 +610,87 @@ function addTierItemListeners() {
             }
         }
     });
+}
+
+function loadTierListFromURL() {
+    const hash = window.location.hash.substring(1);
+    if (!hash) {
+        console.log("No tier list data found in the URL hash.");
+        return;
+    }
+
+    try {
+        resetTierList();  // this will clear the hash via updateURLHash()
+
+        const params = new URLSearchParams(hash);
+        let loadedSomething = false;
+
+        params.forEach((towerString, tier) => {
+            const upperTier = tier.toUpperCase();
+            if (tierListData.hasOwnProperty(upperTier)) {
+                const towers = towerString.split(',')
+                                        .map(t => t.trim())
+                                        .filter(t => t !== ''); // Split, trim, remove empty
+
+                towers.forEach(towerName => {
+                    const lowerTowerName = towerName.toLowerCase();
+                    const normalizedName = towerAliases[lowerTowerName] || towerName;
+                    const correctCaseTowerName = findTowerCaseInsensitive(normalizedName);
+                    const finalTowerName = towerData[correctCaseTowerName] ? correctCaseTowerName : normalizedName;
+
+                    // directly add to tierListData to avoid multiple renders inside the loop
+                    if (!Object.values(tierListData).flat().some(t => t.toLowerCase() === finalTowerName.toLowerCase())) {
+                         tierListData[upperTier].push(finalTowerName);
+                         loadedSomething = true;
+                    } else {
+                         console.warn(`Tower "${finalTowerName}" found multiple times in URL or already present, skipping duplicate.`);
+                    }
+                });
+            } else {
+                console.warn(`Invalid tier "${tier}" found in URL hash.`);
+            }
+        });
+
+        if (loadedSomething) {
+            console.log("Tier list loaded from URL hash.");
+            renderTierList();
+            populateTowerGallery();
+            
+            // ALWAYS RESTORE HASH AFTER LOADING
+            updateURLHash();
+        } else {
+            if (hash) {
+                console.log("A URL hash was found, but no valid tier data was loaded.");
+                history.replaceState(null, '', window.location.pathname + window.location.search);
+            }
+        }
+
+    } catch (error) {
+        console.error("Error parsing tier list from URL hash:", error);
+        alert("Could not load tier list from URL. The format might be invalid.");
+        resetTierList();
+    }
+}
+
+function updateURLHash() {
+    const params = new URLSearchParams();
+    let hashIsEmpty = true;
+    Object.keys(tierListData).forEach(tier => {
+        if (tierListData[tier].length > 0) {
+            // join the raw tower names with commas
+            const towerNamesString = tierListData[tier].join(',');
+            // let URLSearchParams handle the encoding when toString() is called
+            params.set(tier, towerNamesString);
+            hashIsEmpty = false;
+        }
+    });
+
+    if (!hashIsEmpty) {
+        // params.toString() will correctly encode spaces and other necessary characters
+        history.replaceState(null, '', '#' + params.toString());
+    } else {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
 }
 
 window.addTowerToTier = addTowerToTier;
