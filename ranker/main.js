@@ -1,4 +1,5 @@
 import ImageLoader from '../components/ImageLoader.js';
+import { renderTowerShorthands } from './Shorthand.js';
 
 function debounce(func, wait) {
     let timeout;
@@ -57,6 +58,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         await new Promise(resolve => setTimeout(resolve, 0));
 
         renderTierList();
+        renderTowerShorthands(towerAliases);
 
         await new Promise(resolve => setTimeout(resolve, 0));
 
