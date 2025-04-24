@@ -1,6 +1,7 @@
 import ImageLoader from '../components/ImageLoader.js';
 import { renderTowerShorthands } from './Shorthand.js';
 
+// if you have the time, please split this main.js file into smaller files, it's getting a bit too much tbh
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
