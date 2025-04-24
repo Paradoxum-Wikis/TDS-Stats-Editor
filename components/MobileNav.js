@@ -173,6 +173,9 @@ export default class MobileNav {
           <a href="https://resources.tds-editor.live/" class="btn btn-outline-secondary" id="mobile-gpr-btn">
             <i class="bi bi-file-image me-2"></i>GP Resources
           </a>
+          <a href="./ranker" class="btn btn-outline-secondary" id="mobile-gpr-btn">
+            <i class="bi bi-bar-chart-steps me-2"></i>TDS Ranker
+          </a>
           <button class="btn btn-outline-secondary" id="mobile-about-btn" data-bs-toggle="modal" data-bs-target="#discord-modal">
             <i class="bi bi-info-circle me-2"></i>About
           </button>
