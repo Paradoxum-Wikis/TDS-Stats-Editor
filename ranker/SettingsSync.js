@@ -30,7 +30,7 @@ const ThemeSync = {
             themeModeControl.value = themeMode;
         }
 
-        const animsCSS = document.getElementById('anims');
+        const animsCSS = document.getElementById('animsCSS');
         if (animsCSS) {
             animsCSS.disabled = (animationsEnabled === 'false');
         }
