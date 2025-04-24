@@ -361,6 +361,14 @@ function setupEventListeners() {
         // This function will be called whenever the hash part of the url changes
         loadTierListFromURL();
     });
+
+    const towerInput = document.getElementById('tower-input');
+    towerInput.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            document.getElementById('add-tower-btn').click();
+        }
+    });
 }
 
 function addTowerToTier(towerName, tier) {
