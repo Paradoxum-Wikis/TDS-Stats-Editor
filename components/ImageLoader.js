@@ -94,7 +94,7 @@ export default class ImageLoader {
             this.log(`Converted File: syntax to URL: ${url}`);
         } else if (imageIdStr.startsWith('https')) {
             // url handling
-            if (imageIdStr.includes('static.wikia.nocookie.net')) {
+            if (imageIdStr.startsWith('https://static.wikia.nocookie.net/')) {
                 url = this.trimFandomUrl(imageIdStr);
             } else {
                 url = imageIdStr;

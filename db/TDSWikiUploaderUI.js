@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 contentUrl = previewUrl; // Use same URL for content
                 console.log(`Converted File: syntax to URL: ${previewUrl}`);
             } else if (imageIdStr.startsWith('https')) { // handle urls
-                if (imageIdStr.includes('static.wikia.nocookie.net')) {
+                if (imageIdStr.startsWith('https://static.wikia.nocookie.net/')) {
                     previewUrl = trimFandomUrl(imageIdStr); // clean up fandom urls
                     contentUrl = previewUrl; // use same url for content
                 } else {
