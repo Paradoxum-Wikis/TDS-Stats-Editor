@@ -2806,7 +2806,7 @@ export default {
         ],
         Attributes: {
           UnitQueues: 1,
-          Queue1: "Rifleman1",
+          Queue1: "Rifleman 0",
           Queue2: "N/A",
           Queue3: "N/A",
           Queue4: "N/A",
@@ -2826,8 +2826,8 @@ export default {
             Damage: 0,
             Attributes: {
               UnitQueues: 1,
-              Queue1: "Rifleman1",
-              Queue2: "Grenadier1",
+              Queue1: "Rifleman 0",
+              Queue2: "Grenadier 0",
               Queue3: "N/A",
               Queue4: "N/A",
               DamageBuff: 0,
@@ -2842,8 +2842,8 @@ export default {
           Stats: {
             Attributes: {
               UnitQueues: 2,
-              Queue1: "Rifleman1",
-              Queue2: "Grenadier1",
+              Queue1: "Rifleman 0",
+              Queue2: "Grenadier 0",
               Queue3: "N/A",
               Queue4: "N/A",
               DamageBuff: 0,
@@ -2862,8 +2862,8 @@ export default {
             Cooldown: 0,
             Attributes: {
               UnitQueues: 2,
-              Queue1: "Rifleman2",
-              Queue2: "Grenadier2",
+              Queue1: "Rifleman 1",
+              Queue2: "Grenadier 1",
               Queue3: "N/A",
               Queue4: "N/A",
               DamageBuff: 10,
@@ -2881,9 +2881,9 @@ export default {
           Stats: {
             Attributes: {
               UnitQueues: 3,
-              Queue1: "Rifleman2",
-              Queue2: "Grenadier2",
-              Queue3: "RiotGuard1",
+              Queue1: "Rifleman 1",
+              Queue2: "Grenadier 1",
+              Queue3: "Riot Guard 0",
               Queue4: "N/A",
               DamageBuff: 10,
               MaxUnits: 9,
@@ -2901,10 +2901,10 @@ export default {
           Stats: {
             Attributes: {
               UnitQueues: 3,
-              Queue1: "Rifleman2",
-              Queue2: "Grenadier2",
-              Queue3: "RiotGuard1",
-              Queue4: "FieldMedic1",
+              Queue1: "Rifleman 1",
+              Queue2: "Grenadier 1",
+              Queue3: "Riot Guard 0",
+              Queue4: "Field Medic 0",
               DamageBuff: 10,
               MaxUnits: 9,
             },
@@ -2921,10 +2921,10 @@ export default {
           Stats: {
             Attributes: {
               UnitQueues: 3,
-              Queue1: "Rifleman3",
-              Queue2: "Grenadier3",
-              Queue3: "RiotGuard2",
-              Queue4: "FieldMedic2",
+              Queue1: "Rifleman 2",
+              Queue2: "Grenadier 2",
+              Queue3: "Riot Guard 1",
+              Queue4: "Field Medic 1",
               DamageBuff: 20,
               MaxUnits: 9,
             },

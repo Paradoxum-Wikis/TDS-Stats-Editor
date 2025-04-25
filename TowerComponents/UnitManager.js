@@ -14,9 +14,9 @@ const calculated = {
     Range: (range) => range * (window.state.boosts.unit.rangeBuff + 1),
     DPS: (unit) => {
         switch (unit.Name) {
-            case 'Rifleman1':
-            case 'Rifleman2':
-            case 'Rifleman3':
+            case 'Rifleman 0':
+            case 'Rifleman 1':
+            case 'Rifleman 2':
                 return (() => {
                     const damage = unit.Damage;
                     const burstAmount = unit.BurstAmount;
@@ -66,16 +66,16 @@ const register = {
     },
     'Mercenary Base': {
         Default: [
-            'Rifleman1',
-            'Rifleman2',
-            'Rifleman3',
-            'Grenadier1',
-            'Grenadier2',
-            'Grenadier3',
-            'RiotGuard1',
-            'RiotGuard2',
-            'FieldMedic1',
-            'FieldMedic2',
+            'Rifleman 0',
+            'Rifleman 1',
+            'Rifleman 2',
+            'Grenadier 0',
+            'Grenadier 1',
+            'Grenadier 2',
+            'Riot Guard 0',
+            'Riot Guard 1',
+            'Field Medic 0',
+            'Field Medic 1',
         ],
     },
     Harvester: {

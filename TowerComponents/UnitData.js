@@ -186,7 +186,7 @@ export default {
     },
 
     // Mercenary base
-    Rifleman1: {
+    'Rifleman 0': {
         Health: 40,
         Damage: 5,
         Range: 18,
@@ -211,7 +211,7 @@ export default {
         Spawnrate: 45,
         Speed: 3.5,
     },
-    Rifleman2: {
+    'Rifleman 1': {
         Health: 70,
         Damage: 12,
         Range: 23,
@@ -236,7 +236,7 @@ export default {
         Spawnrate: 40,
         Speed: 3.5,
     },
-    Rifleman3: {
+    'Rifleman 2': {
         Health: 250,
         Damage: 18,
         Range: 28,
@@ -261,7 +261,7 @@ export default {
         Spawnrate: 35,
         Speed: 3.5,
     },
-    Grenadier1: {
+    'Grenadier 0': {
         Health: 50,
         Damage: 35,
         Range: 18,
@@ -286,7 +286,7 @@ export default {
         Spawnrate: 40,
         Speed: 2.5,
     },
-    Grenadier2: {
+    'Grenadier 1': {
         Health: 125,
         Damage: 65,
         Range: 19,
@@ -311,7 +311,7 @@ export default {
         Spawnrate: 40,
         Speed: 2.5,
     },
-    Grenadier3: {
+    'Grenadier 2': {
         Health: 300,
         Damage: 100,
         Range: 18,
@@ -337,7 +337,7 @@ export default {
         Speed: 2.5,
     },
 
-    RiotGuard1: {
+    'Riot Guard 0': {
         Health: 1200,
         Damage: 50,
         Range: 4,
@@ -362,7 +362,7 @@ export default {
         Spawnrate: 50,
         Speed: 2.5,
     },
-    RiotGuard2: {
+    'Riot Guard 1': {
         Health: 2500,
         Damage: 50,
         Range: 4,
@@ -388,7 +388,7 @@ export default {
         Speed: 2.5,
     },
 
-    FieldMedic1: {
+    'Field Medic 0': {
         Health: 300,
         Damage: 0,
         Range: 30,
@@ -413,7 +413,7 @@ export default {
         Spawnrate: 35,
         Speed: 2.5,
     },
-    FieldMedic2: {
+    'Field Medic 1': {
         Health: 600,
         Damage: 0,
         Range: 30,

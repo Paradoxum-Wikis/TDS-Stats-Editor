@@ -140,7 +140,7 @@ class UnitCalculations {
             },
 
             Burst: {
-                For: ['Rifleman1', 'Rifleman2', 'Rifleman3', 'Gunner Elf'],
+                For: ['Rifleman 0', 'Rifleman 1', 'Rifleman 2', 'Gunner Elf'],
                 Requires: ['Damage', 'Cooldown', 'Burst', 'BurstCooldown'],
                 Value: (level) => {
                     const totalDamage = level.Damage * level.Burst;
