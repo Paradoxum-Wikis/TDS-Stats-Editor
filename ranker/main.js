@@ -568,7 +568,7 @@ function copyTierListCode() {
 function importTierList() {
     const importCode = document.getElementById('import-code').value.trim();
     // check if code looks right
-    const tierlistRegex = /{{Tierlist\s*(\|[^}]+)*}}/i;
+    const tierlistRegex = /{{Tierlist(?:\s*\|[^=|}]+=\s*[^\s|}][^|}]*)+\s*}}/i;
     if (!tierlistRegex.test(importCode)) {
         alert('Invalid tier list code format. It should look like:\n{{Tierlist | S = Tower1, Tower2 | A = Tower3}}');
         return;
