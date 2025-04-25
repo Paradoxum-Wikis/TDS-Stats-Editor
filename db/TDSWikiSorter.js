@@ -211,9 +211,10 @@ function applyFilters(maintainSort = true) {
         noResults.className = 'col-12 text-center text-light p-5';
         noResults.innerHTML = `
             <i class="bi bi-search fs-1"></i>
-            <p class="mt-2">No towers found matching "${query}"</p>
+            <p class="mt-2"></p>
             <button class="btn btn-outline-secondary mt-2" id="clear-search">Clear Search</button>
         `;
+        noResults.querySelector('p').textContent = `No towers found matching "${query}"`;
         allTowersContainer.appendChild(noResults);
         
         document.getElementById('clear-search').addEventListener('click', () => {
