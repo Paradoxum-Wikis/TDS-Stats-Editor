@@ -171,7 +171,11 @@ class BaseStats {
                 currentValue = currentValue[key];
             }
 
-            currentValue[propertyChain[propertyChain.length - 1]] = value;
+            let lastKey = propertyChain[propertyChain.length - 1];
+            if (["__proto__", "prototype", "constructor"].includes(lastKey)) {
+                throw new Error("Invalid attribute name: prototype pollution attempt");
+            }
+            currentValue[lastKey] = value;
         }
     }
 
