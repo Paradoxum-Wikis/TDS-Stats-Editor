@@ -21,16 +21,11 @@ class TDSWikiFetcher {
         this.featuredTowers = window.featuredTowers || [];
     }
 
-    /**
-     * gets current proxy
-     */
     getCurrentProxy() {
         return this.corsProxies[this.currentProxyIndex];
     }
 
-    /**
-     * tries next proxy if current one fails
-     */
+    // tries next proxy if current one fails
     switchToNextProxy() {
         if (this.currentProxyIndex < this.corsProxies.length - 1) {
             this.currentProxyIndex++;
@@ -41,9 +36,7 @@ class TDSWikiFetcher {
         return false;
     }
 
-    /**
-     * tries to fetch with fallbacks
-     */
+    // tries to fetch with fallbacks
     async fetchWithFallback(url) {
         let attempts = 0;
         const maxAttempts = this.corsProxies.length;
@@ -83,9 +76,7 @@ class TDSWikiFetcher {
         throw new Error("all proxies failed after max attempts");
     }
 
-    /**
-     * gets towers from wiki
-     */
+    // gets towers from wiki
     async fetchTowers() {
         try {
             console.log("fetching towers from wiki...");
@@ -170,9 +161,7 @@ class TDSWikiFetcher {
         }
     }
 
-    /**
-     * gets more info for a tower
-     */
+    // gets more info for a tower
     async enrichTowerData(tower) {
         try {
             console.log(`getting data for tower: ${tower.name}`);
@@ -357,9 +346,7 @@ class TDSWikiFetcher {
         }
     }
     
-    /**
-     * fallback towers if wiki fails (placeholder data for testing mostly tbh)
-     */
+    // fallback towers if wiki fails (placeholder data for testing mostly tbh)
     getFallbackTowers() {
         console.log("using fallback towers");
         return [

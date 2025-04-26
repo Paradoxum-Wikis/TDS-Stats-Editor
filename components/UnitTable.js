@@ -94,6 +94,9 @@ export default class UnitTable extends Table {
     }
 
     /**
+     * Loads unit data into the slave table and renders it
+     * @param {Object} data - The unit data to display in the table
+     * @param {Object} [options] - Optional? settings for loading the table
      */
     load(data, options) {
         options = options ?? {};

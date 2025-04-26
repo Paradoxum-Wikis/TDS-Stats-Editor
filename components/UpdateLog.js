@@ -147,9 +147,7 @@ class UpdateLog {
     }
 }
 
-/**
- * Displays version info with commit hash
- */
+// Displays version info with commit hash
 class VersionDisplay {
     constructor() {
         this.version = '';
