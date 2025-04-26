@@ -19,13 +19,24 @@ const ViewerTable = {
             }
 
             const skinData = this.getActiveSkin();
-            this.propertyViewer.createButtons([
+
+            // Filter out hidden properties for the table
+            const allProps = [
                 ...skinData.levels.attributes,
                 ...skinData.levels.complexAttributes,
-            ]);
+            ];
+            const visibleProps = allProps.filter(
+                prop => !this.propertyViewer.isHidden(prop)
+            );
+
+            this.propertyViewer.createButtons(visibleProps);
 
             this.towerTable.load(skinData, {
-                ignore: this.propertyViewer.disabled
+                ignore: [
+                    ...this.propertyViewer.disabled,
+                    // Also ignore all hidden properties
+                    ...allProps.filter(prop => this.propertyViewer.isHidden(prop))
+                ]
             });
 
             // give property viewer its slave properties

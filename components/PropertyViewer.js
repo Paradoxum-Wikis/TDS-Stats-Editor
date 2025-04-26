@@ -331,7 +331,6 @@ export default class PropertyViewer {
     // fancy button lololol
     createButton(innerText) {
         if (this.isHidden(innerText)) {
-            this.hide(innerText);
             return null;
         }
 
@@ -351,22 +350,24 @@ export default class PropertyViewer {
 
         toggleButton.element.addEventListener(
             'enabled',
-            ((e) => {
+            () => {
+                this.userModified = true;
                 console.log(`Enabling property: ${innerText}`);
                 this.show(innerText, true); // user clicked it
                 this.viewer.reload();
                 console.log(`Property ${innerText} state after show: ${this.isDisabled(innerText) ? 'disabled' : 'enabled'}`);
-            }).bind(this)
+            }
         );
 
         toggleButton.element.addEventListener(
             'disabled',
-            ((e) => {
+            () => {
+                this.userModified = true;
                 console.log(`Disabling property: ${innerText}`);
                 this.hide(innerText);
                 this.viewer.reload();
                 console.log(`Property ${innerText} state after hide: ${this.isDisabled(innerText) ? 'disabled' : 'enabled'}`);
-            }).bind(this)
+            }
         );
 
         this.liClasses.forEach(className =>
@@ -380,12 +381,11 @@ export default class PropertyViewer {
 
     // make buttons for all the attributes
     createButtons(attributes) {
-        // Reset disabled list to defaults only if not previously modified by user
+        // reset disabled list to defaults when switching towers,
+        // unless the user has manually changed it for this tower
         if (!this.userModified) {
             this.disabled = [...this.defaultDisabled];
-            this.userModified = true; // Mark as modified after first load
         }
-        // No need to clear towerSpecificDisabled or call applyTowerSpecificRules anymore
 
         this.root.innerHTML = '';
 
@@ -476,7 +476,8 @@ export default class PropertyViewer {
     // toggle buttons for slave properties
     createUnitPropertyButton(innerText) {
         if (this.isHidden(innerText)) {
-             this.hide(innerText);
+            // moved to viewerable.js
+            // Do NOT call this.hide(innerText) here
             return null;
         }
 
@@ -496,20 +497,20 @@ export default class PropertyViewer {
 
         toggleButton.element.addEventListener(
             'enabled',
-            ((e) => {
+            () => {
                 console.log(`Enabling unit property: ${innerText}`);
                 this.show(innerText); // Use show which handles currentView
                 this.refreshUnitTable();
-            }).bind(this)
+            }
         );
 
         toggleButton.element.addEventListener(
             'disabled',
-            ((e) => {
+            () => {
                 console.log(`Disabling unit property: ${innerText}`);
                 this.hide(innerText); // Use hide which handles currentView
                 this.refreshUnitTable();
-            }).bind(this)
+            }
         );
 
         this.liClasses.forEach(className =>
