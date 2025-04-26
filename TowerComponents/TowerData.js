@@ -4203,7 +4203,7 @@ export default {
           Image: 133610100963797,
           Stats: {
             Extras: ["Explosion Radius: 4 → 5", "Deadzone: 12 → 10", "Missle Amount: 1 → 2", "Accuracy: 1 → 0.5"],
-            Attributes: { Deadzone: 10, ExplosionRadius: 5 },
+            Attributes: { Deadzone: 10, ExplosionRadius: 5, Accuracy: 0.5 },
             Detections: { Flying: false, Hidden: true, Lead: true },
             Cooldown: 3,
             Range: 30,
@@ -4217,7 +4217,7 @@ export default {
         },
       ],
       Defaults: {
-        Attributes: { Deadzone: 10, ExplosionRadius: 3 },
+        Attributes: { Deadzone: 10, ExplosionRadius: 3, MissileAmount: 1, SpreadAngle: 'N/A', Accuracy: 1, ProjectileSpeed: 25 },
         Detections: { Flying: false, Hidden: false, Lead: true },
         Range: 22,
         Price: 1500,
