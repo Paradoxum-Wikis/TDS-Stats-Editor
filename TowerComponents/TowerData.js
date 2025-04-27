@@ -126,9 +126,7 @@ export default {
         {
           Image: 17847640366,
           Stats: {
-            Extras: [
-              "[Collapsible:Upgraded Bombs]Explosion Damage: 10 → 20",
-              ],
+            Extras: ["[Collapsible:Upgraded Bombs]Explosion Damage: 10 → 20"],
             Attributes: {
               BombTime: 4,
               BombDropping: true,
@@ -149,7 +147,8 @@ export default {
         {
           Image: 17847640366,
           Stats: {
-            Extras: ["Grants Hidden Detection to nearby towers",
+            Extras: [
+              "Grants Hidden Detection to nearby towers",
               "[Collapsible:Upgraded Bombs]Explosion Damage: 20 → 30",
               "[Collapsible]Bomb Time: 4s → 2s",
               "[Collapsible]Explosion Radius: 2.5 → 2.75",
@@ -175,7 +174,8 @@ export default {
         {
           Image: 17847640211,
           Stats: {
-            Extras: ["Speed: 100% → 135%",
+            Extras: [
+              "Speed: 100% → 135%",
               "[Collapsible:Upgraded Bombs]Explosion Damage: 30 → 40",
               "[Collapsible]Bomb Time: 2s → 1.5s",
               "[Collapsible]Explosion Radius: 2.75 → 3",
@@ -211,7 +211,7 @@ export default {
             Icon: 17846960799,
             Cooldown: 8,
             Price: 0,
-            Description: "Flies the opposite direction."
+            Description: "Flies the opposite direction.",
           },
         ],
         Attributes: {
@@ -237,8 +237,7 @@ export default {
           Image: 3280081327,
           Stats: {
             Extras: [],
-            Attributes: {
-            },
+            Attributes: {},
             Detections: {
               Flying: true,
               Hidden: false,
@@ -255,8 +254,7 @@ export default {
           Image: 524302408,
           Stats: {
             Extras: ["Max Hits: 2 → 3"],
-            Attributes: {
-            },
+            Attributes: {},
             Detections: { Flying: true, Hidden: true, Lead: false },
             Cooldown: 1.6,
             Range: 19,
@@ -271,9 +269,9 @@ export default {
             Extras: [
               "[Collapsible:Unlocks Flame Arrow] Burn Damage: 0 → 1",
               "[Collapsible]Burn Time: 0s → 2s",
-              "[Collapsible]Tick Rate: 0 → 0.5"],
-            Attributes: {
-            },
+              "[Collapsible]Tick Rate: 0 → 0.5",
+            ],
+            Attributes: {},
             Detections: { Flying: true, Hidden: true, Lead: false },
             Cooldown: 1.5,
             Range: 22,
@@ -290,9 +288,9 @@ export default {
               "[Collapsible1]Burn Time: 2s → 3s",
               "[Collapsible1]Max Hits: 3 → 4",
               "[Collapsible:Unlocks Shock Arrow]Stun Length: 0s → 0.25s",
-              "[Collapsible]Max Hits: 0 → 3"],
-            Attributes: {
-            },
+              "[Collapsible]Max Hits: 0 → 3",
+            ],
+            Attributes: {},
             Detections: { Flying: true, Hidden: true, Lead: false },
             Cooldown: 1.5,
             Range: 23,
@@ -310,11 +308,11 @@ export default {
               "[Collapsible3]Max Hits: 4 → 6",
               "[Collapsible2:Upgraded Shock Arrow]Stun Length: 0.25s → 0.3s",
               "[Collapsible2]Max Hits: 3 → 5",
-              "[Collapsible:Unlocks Explosive Arrow]Explosion Damage: 0 → 48", 
+              "[Collapsible:Unlocks Explosive Arrow]Explosion Damage: 0 → 48",
               "[Collapsible]Explosion Radius: 0 → 5",
-              "[Collapsible]Max Hits: 0 → 1"],
-            Attributes: {
-            },
+              "[Collapsible]Max Hits: 0 → 1",
+            ],
+            Attributes: {},
             Detections: { Flying: true, Hidden: true, Lead: false },
             Cooldown: 1.25,
             Range: 24,
@@ -326,8 +324,7 @@ export default {
       ],
       Defaults: {
         Detections: { Flying: true, Hidden: false, Lead: false },
-        Attributes: {
-        },
+        Attributes: {},
         Price: 400,
         Range: 18,
         Cooldown: 1.7,
@@ -426,7 +423,7 @@ export default {
               "Combo Cooldown: 0.65s → 0.5s",
               "Knockback Force: 20 → 24",
               "[Collapsible:Reposition Damage]Reposition Damage: 0 → 100",
-              "[Collapsible]Reposition Ability now deals area damage on landing"
+              "[Collapsible]Reposition Ability now deals area damage on landing",
             ],
             Attributes: {
               Reposition: true,
@@ -492,7 +489,8 @@ export default {
             Icon: 17408583420,
             Cooldown: 20,
             Cost: 0,
-            Description: "Leaps to the selected area on the map, changing its placement spot. Additionally, the Brawler will knockback to up to 20 enemies on its landing position with a knockback force of 25 within 10 reposition range, and will deal area damage in that range from Level 4+."
+            Description:
+              "Leaps to the selected area on the map, changing its placement spot. Additionally, the Brawler will knockback to up to 20 enemies on its landing position with a knockback force of 25 within 10 reposition range, and will deal area damage in that range from Level 4+.",
           },
         ],
         Limit: 6,
@@ -506,8 +504,24 @@ export default {
   Commander: {
     Default: {
       Abilities: [
-        { Icon: 4594880289, Level: 2, Name: "Call to Arms", Cooldown: 30, Cost: 0, Description: "Boosts all towers' firerate in its range by a variable amount for 10 seconds. Additionally, the Commander will be able to attack enemies with its own weapon for 10 seconds." },
-        { Icon: 17512145719 , Level: 4, Name: "Support Caravan", Cooldown: 60, Cost: 2000, Description: "Summons two Gunner APCs and one Missile APC. Additionally, the Commander will be able to attack enemies with its own weapon for 10 seconds." },
+        {
+          Icon: 4594880289,
+          Level: 2,
+          Name: "Call to Arms",
+          Cooldown: 30,
+          Cost: 0,
+          Description:
+            "Boosts all towers' firerate in its range by a variable amount for 10 seconds. Additionally, the Commander will be able to attack enemies with its own weapon for 10 seconds.",
+        },
+        {
+          Icon: 17512145719,
+          Level: 4,
+          Name: "Support Caravan",
+          Cooldown: 60,
+          Cost: 2000,
+          Description:
+            "Summons two Gunner APCs and one Missile APC. Additionally, the Commander will be able to attack enemies with its own weapon for 10 seconds.",
+        },
       ],
       Upgrades: [
         {
@@ -525,10 +539,8 @@ export default {
         {
           Image: 4594880289,
           Stats: {
-            Extras: [
-              "Call to Arms Buff: 0% → 15%",
-            ],
-            Attributes: { FirerateBuff: 15, CallToArmsBuff: 15, },
+            Extras: ["Call to Arms Buff: 0% → 15%"],
+            Attributes: { FirerateBuff: 15, CallToArmsBuff: 15 },
             Detections: { Flying: true, Hidden: true, Lead: true },
             Cooldown: 0.6,
             Range: 11,
@@ -544,7 +556,7 @@ export default {
               "Firerate Buff: 15% → 17.5%",
               "Call to Arms Buff: 15% → 22.5%",
             ],
-            Attributes: { FirerateBuff: 17.5, CallToArmsBuff: 22.5, },
+            Attributes: { FirerateBuff: 17.5, CallToArmsBuff: 22.5 },
             Detections: {
               Flying: false,
               Hidden: false,
@@ -565,7 +577,7 @@ export default {
               "Call to Arms: 22.5% → 30%",
               "Support Caravan (60 Seconds)",
             ],
-            Attributes: { FirerateBuff: 20, CallToArmsBuff: 30, },
+            Attributes: { FirerateBuff: 20, CallToArmsBuff: 30 },
             Detections: { Flying: false, Hidden: false },
             Cooldown: 0.6,
             Range: 14,
@@ -577,7 +589,7 @@ export default {
       ],
       Defaults: {
         Detections: { Flying: true, Hidden: true, Lead: false },
-        Attributes: { FirerateBuff: 12.5, CallToArmsBuff: 0, AttackTime: 10, },
+        Attributes: { FirerateBuff: 12.5, CallToArmsBuff: 0, AttackTime: 10 },
         Price: 850,
         Range: 9,
         Cooldown: 0,
@@ -592,7 +604,13 @@ export default {
           Image: 119448063654848,
           Stats: {
             Extras: [],
-            Attributes: { BurstCooldown: 0.5, ReloadTime: 2.5, Burst: 3, Ammo: 30, MaxHits: 2},
+            Attributes: {
+              BurstCooldown: 0.5,
+              ReloadTime: 2.5,
+              Burst: 3,
+              Ammo: 30,
+              MaxHits: 2,
+            },
             Detections: {
               Flying: false,
               Hidden: false,
@@ -611,9 +629,15 @@ export default {
             Extras: [
               "[Collapsible:Upgraded Burst]Burst: 3 → 5",
               "[Collapsible]Ammo: 30 → 45",
-              "[Collapsible]Reload Time: 2.5s → 2s"
+              "[Collapsible]Reload Time: 2.5s → 2s",
             ],
-            Attributes: { BurstCooldown: 0.5, ReloadTime: 2, Burst: 5, Ammo: 45, MaxHits: 2},
+            Attributes: {
+              BurstCooldown: 0.5,
+              ReloadTime: 2,
+              Burst: 5,
+              Ammo: 45,
+              MaxHits: 2,
+            },
             Detections: {
               Flying: false,
               Hidden: true,
@@ -641,8 +665,15 @@ export default {
               "[Collapsible1]Stun Length: 1.5s",
               "[Collapsible1]Lifetime: 60s",
               "[Collapsible1]Range: 30",
-              "[Collapsible1]Explosion Radius: 4"],
-            Attributes: { BurstCooldown: 0.35, ReloadTime: 1.5, Burst: 6, Ammo: 60, MaxHits: 3},
+              "[Collapsible1]Explosion Radius: 4",
+            ],
+            Attributes: {
+              BurstCooldown: 0.35,
+              ReloadTime: 1.5,
+              Burst: 6,
+              Ammo: 60,
+              MaxHits: 3,
+            },
             Detections: {
               Flying: false,
               Hidden: true,
@@ -668,8 +699,15 @@ export default {
               "[Collapsible1]Stun Length: 1.5s → 2s",
               "[Collapsible1]Range: 30 → 34",
               "[Collapsible1]Explosion Radius: 4 → 6",
-              "[Collapsible2:Really Cool Armor]May or may not be stolen from Area 51, somehow."],
-            Attributes: { BurstCooldown: 0.3, ReloadTime: 1.25, Burst: 10, Ammo: 80, MaxHits: 3},
+              "[Collapsible2:Really Cool Armor]May or may not be stolen from Area 51, somehow.",
+            ],
+            Attributes: {
+              BurstCooldown: 0.3,
+              ReloadTime: 1.25,
+              Burst: 10,
+              Ammo: 80,
+              MaxHits: 3,
+            },
             Detections: {
               Flying: false,
               Hidden: true,
@@ -685,10 +723,32 @@ export default {
       ],
       Defaults: {
         Detections: { Flying: false, Hidden: false, Lead: false },
-        Attributes: { BurstCooldown: 0.5, ReloadTime: 2.5, Burst: 3, Ammo: 30, MaxHits: 2},
+        Attributes: {
+          BurstCooldown: 0.5,
+          ReloadTime: 2.5,
+          Burst: 3,
+          Ammo: 30,
+          MaxHits: 2,
+        },
         Abilities: [
-          { Icon: 80456675021529, Level: 3, Name: "Missile", Cooldown: 20, Cost: 0, Description: "Fires out two missiles at selected area. Missile range is double of regular range. Reloads one missile per cooldown." },
-          { Icon: 80456675021529, Level: 4, Name: "Missile", Cooldown: 10, Cost: 0, Description: "Fires out four missiles at selected area. Missile range is double of regular range. Reloads one missile per cooldown." },
+          {
+            Icon: 80456675021529,
+            Level: 3,
+            Name: "Missile",
+            Cooldown: 20,
+            Cost: 0,
+            Description:
+              "Fires out two missiles at selected area. Missile range is double of regular range. Reloads one missile per cooldown.",
+          },
+          {
+            Icon: 80456675021529,
+            Level: 4,
+            Name: "Missile",
+            Cooldown: 10,
+            Cost: 0,
+            Description:
+              "Fires out four missiles at selected area. Missile range is double of regular range. Reloads one missile per cooldown.",
+          },
         ],
         Price: 2250,
         Range: 12,
@@ -943,9 +1003,7 @@ export default {
           Stats: {
             Attributes: {},
             Range: 15,
-            Extras: [
-              "Tommy Goon (50s Spawn Time)",
-            ],
+            Extras: ["Tommy Goon (50s Spawn Time)"],
             Cooldown: 0.2,
             Damage: 6,
           },
@@ -955,12 +1013,9 @@ export default {
         },
         {
           Stats: {
-            Attributes: {
-            },
+            Attributes: {},
             Range: 16.5,
-            Extras: [
-              "Upgraded Tommy Goon",
-            ],
+            Extras: ["Upgraded Tommy Goon"],
             Cooldown: 0.12,
             Damage: 18,
           },
@@ -1010,9 +1065,7 @@ export default {
           Stats: {
             Attributes: {},
             Range: 16,
-            Extras: [
-              "Golden Tommy Goon (50s Spawn Time)",
-            ],
+            Extras: ["Golden Tommy Goon (50s Spawn Time)"],
             Cooldown: 0.18,
             Damage: 10,
           },
@@ -1022,12 +1075,9 @@ export default {
         },
         {
           Stats: {
-            Attributes: {
-            },
+            Attributes: {},
             Range: 17.5,
-            Extras: [
-              "Upgraded Gold Tommy Goon",
-            ],
+            Extras: ["Upgraded Gold Tommy Goon"],
             Cooldown: 0.1,
             Damage: 20,
           },
@@ -1226,11 +1276,11 @@ export default {
         {
           Stats: {
             Extras: [
-            "[Collapsible:Purple Track]Range Buff: 12.5% → 15%",
-            "[Collapsible1:Green Track]Discount Buff: 5% → 7.5%",
-            "[Collapsible2:Unlocks Red Track]Damage Buff: 0% → 10%"],
-            Attributes: {
-            },
+              "[Collapsible:Purple Track]Range Buff: 12.5% → 15%",
+              "[Collapsible1:Green Track]Discount Buff: 5% → 7.5%",
+              "[Collapsible2:Unlocks Red Track]Damage Buff: 0% → 10%",
+            ],
+            Attributes: {},
           },
           Image: 113548130163293,
           Title: "Party Mode",
@@ -1238,30 +1288,33 @@ export default {
         },
         {
           Stats: {
-            Detections: { Lead: true},
+            Detections: { Lead: true },
             Attributes: {
               PulseCooldown: 1.5,
             },
             Range: 15,
-            Extras: ["Drop the Beat", "Pulse Cooldown: 0s → 1.5s",
-            "[Collapsible:Purple Track]Range Buff: 15% → 17.5%",
-            "[Collapsible]Pulse: 0 → 3",
-            "[Collapsible]Knockback Force: 0 → 20",
-            "[Collapsible]Max Hits: 0 → 8",
-            "[Collapsible]Slowdown Time: 0s → 6s",
-            "[Collapsible]Base Slowdown: 0% → 20%",
-            "[Collapsible]Slowdown per Tower: 0% → 1%",
-            "[Collapsible]Max Slow: 0% → 40%",
-            "[Collapsible1:Green Track]Discount Buff: 7.5% → 10%",
-            "[Collapsible1]Base Income: $0 → $250",
-            "[Collapsible1]Income Per Tower: $0 → $35",
-            "[Collapsible1]Max Income: $0 → $600",
-            "[Collapsible2:Red Track]Damage Buff: 10% → 12.5%",
-            "[Collapsible2]Damage: 0 → 15",
-            "[Collapsible2]Pulse: 0 → 3",
-            "[Collapsible2]Base Defense Melt: 0% → 5%",
-            "[Collapsible2]Defense Melt per Tower: 0% → 1%",
-            "[Collapsible2]Max Defense Melt: 0% → 25%"],
+            Extras: [
+              "Drop the Beat",
+              "Pulse Cooldown: 0s → 1.5s",
+              "[Collapsible:Purple Track]Range Buff: 15% → 17.5%",
+              "[Collapsible]Pulse: 0 → 3",
+              "[Collapsible]Knockback Force: 0 → 20",
+              "[Collapsible]Max Hits: 0 → 8",
+              "[Collapsible]Slowdown Time: 0s → 6s",
+              "[Collapsible]Base Slowdown: 0% → 20%",
+              "[Collapsible]Slowdown per Tower: 0% → 1%",
+              "[Collapsible]Max Slow: 0% → 40%",
+              "[Collapsible1:Green Track]Discount Buff: 7.5% → 10%",
+              "[Collapsible1]Base Income: $0 → $250",
+              "[Collapsible1]Income Per Tower: $0 → $35",
+              "[Collapsible1]Max Income: $0 → $600",
+              "[Collapsible2:Red Track]Damage Buff: 10% → 12.5%",
+              "[Collapsible2]Damage: 0 → 15",
+              "[Collapsible2]Pulse: 0 → 3",
+              "[Collapsible2]Base Defense Melt: 0% → 5%",
+              "[Collapsible2]Defense Melt per Tower: 0% → 1%",
+              "[Collapsible2]Max Defense Melt: 0% → 25%",
+            ],
           },
           Image: 101877307760287,
           Title: "Thrifty Music",
@@ -1273,17 +1326,19 @@ export default {
               PulseCooldown: 1.5,
             },
             Range: 16.5,
-            Extras: ["[Collapsible:Purple Track]Range Buff: 17.5% → 22.5%",
-            "[Collapsible]Knockback Force: 20 → 22.5",
-            "[Collapsible]Max Hits: 8 → 9",
-            "[Collapsible]Slowdown Time: 6 → 8",
-            "[Collapsible1:Green Track]Discount Buff: 10% → 12.5%",
-            "[Collapsible1]Base Income: $250 → $500",
-            "[Collapsible1]Income per Tower: $35 → $50",
-            "[Collapsible1]Max Income: $600 → $1250",
-            "[Collapsible2:Red Track]Damage Buff: 12.5% → 15%",
-            "[Collapsible2]Damage: 15 → 25",
-            "[Collapsible2]Base Defense Melt: 5% → 7%",],
+            Extras: [
+              "[Collapsible:Purple Track]Range Buff: 17.5% → 22.5%",
+              "[Collapsible]Knockback Force: 20 → 22.5",
+              "[Collapsible]Max Hits: 8 → 9",
+              "[Collapsible]Slowdown Time: 6 → 8",
+              "[Collapsible1:Green Track]Discount Buff: 10% → 12.5%",
+              "[Collapsible1]Base Income: $250 → $500",
+              "[Collapsible1]Income per Tower: $35 → $50",
+              "[Collapsible1]Max Income: $600 → $1250",
+              "[Collapsible2:Red Track]Damage Buff: 12.5% → 15%",
+              "[Collapsible2]Damage: 15 → 25",
+              "[Collapsible2]Base Defense Melt: 5% → 7%",
+            ],
           },
           Image: 123117801948681,
           Title: "Audio Visualizer",
@@ -1313,7 +1368,8 @@ export default {
               "[Collapsible3:Red Track]Damage Buff: 15% → 20%",
               "[Collapsible3]Damage: 25 → 50",
               "[Collapsible3]Pulse 3 → 4",
-              "[Collapsible3]Base Defense Melt: 7% → 10%"],
+              "[Collapsible3]Base Defense Melt: 7% → 10%",
+            ],
           },
           Image: 113854542319656,
           Title: "Apocalypse Rave",
@@ -1329,8 +1385,15 @@ export default {
           PulseCooldown: 0,
         },
         Abilities: [
-          { Icon: 132111474124053, Level: 3, Cost: 0, Name: "Drop the Beat", Cooldown: 30,
-          Description: "Performs an ability based on the track.\n● Purple: Creates pulses that knockback enemies and apply slowness to enemies, with slowness increasing for each tower in its range.\n● Green: Generates Cash when used, with the amount increasing for each tower in its range.\n● Red: Creates pulses that damage and reduce defense of enemies, with defense drop stacking."},
+          {
+            Icon: 132111474124053,
+            Level: 3,
+            Cost: 0,
+            Name: "Drop the Beat",
+            Cooldown: 30,
+            Description:
+              "Performs an ability based on the track.\n● Purple: Creates pulses that knockback enemies and apply slowness to enemies, with slowness increasing for each tower in its range.\n● Green: Generates Cash when used, with the amount increasing for each tower in its range.\n● Red: Creates pulses that damage and reduce defense of enemies, with defense drop stacking.",
+          },
         ],
         Cooldown: 1,
         Damage: 0,
@@ -1468,9 +1531,8 @@ export default {
         {
           Image: 11756694085,
           Stats: {
-            Extras: ["Upgraded Elf", "Spawnrate: 15 → 12" ],
-            Attributes: {
-            },
+            Extras: ["Upgraded Elf", "Spawnrate: 15 → 12"],
+            Attributes: {},
             Detections: {
               Flying: false,
               Hidden: false,
@@ -1487,8 +1549,7 @@ export default {
           Image: 11866247025,
           Stats: {
             Extras: ["Snowball Elf"],
-            Attributes: {
-            },
+            Attributes: {},
             Detections: {
               Flying: false,
               Hidden: false,
@@ -1505,8 +1566,7 @@ export default {
           Image: 11866247585,
           Stats: {
             Extras: ["Bomber Elf"],
-            Attributes: {
-            },
+            Attributes: {},
             Detections: {
               Flying: false,
               Hidden: false,
@@ -1522,9 +1582,13 @@ export default {
         {
           Image: 11866248209,
           Stats: {
-            Extras: ["Guardian Elf", "Elf Disabled", "Cannoneer Elf: 0 → 2", "Snowball Elf Disabled"],
-            Attributes: {
-            },
+            Extras: [
+              "Guardian Elf",
+              "Elf Disabled",
+              "Cannoneer Elf: 0 → 2",
+              "Snowball Elf Disabled",
+            ],
+            Attributes: {},
             Detections: {
               Flying: false,
               Hidden: false,
@@ -1540,9 +1604,14 @@ export default {
         {
           Image: 11866248664,
           Stats: {
-            Extras: ["Ripped Elf", "Gift Bomber", "Bomber Elf Disabled", "Gunner Elf 0 → 2", "Cannoneer Elf Disabled"],
-            Attributes: {
-            },
+            Extras: [
+              "Ripped Elf",
+              "Gift Bomber",
+              "Bomber Elf Disabled",
+              "Gunner Elf 0 → 2",
+              "Cannoneer Elf Disabled",
+            ],
+            Attributes: {},
             Detections: {
               Flying: false,
               Hidden: false,
@@ -1561,8 +1630,7 @@ export default {
         Detections: { Flying: false, Hidden: false, Lead: false },
         Range: 0,
         Price: 300,
-        Attributes: {
-        },
+        Attributes: {},
         Cooldown: 0,
         Damage: 0,
       },
@@ -1951,7 +2019,7 @@ export default {
           Image: 15686418975,
           Stats: {
             Extras: ["Max Slowdown: 50% → 60%", "Slowdown per Hit: 10% → 15%"],
-            Attributes: { 
+            Attributes: {
               SlowdownPerHit: 15,
               MaxSlow: 60,
             },
@@ -1960,7 +2028,7 @@ export default {
               Hidden: false,
               Lead: false,
             },
-            Damage: 2 ,
+            Damage: 2,
           },
           Title: "Expedition Gear",
           Cost: 225,
@@ -1987,7 +2055,11 @@ export default {
           Image: 15686418748,
           Stats: {
             Extras: [
-              "Max Slowdown: 60% → 75%", "Slowdown per Hit: 20% → 25%", "Defense Melt: 0% → 10%", "Burst: 1 → 4", "Burst Cooldown: 1s → 0.75s",
+              "Max Slowdown: 60% → 75%",
+              "Slowdown per Hit: 20% → 25%",
+              "Defense Melt: 0% → 10%",
+              "Burst: 1 → 4",
+              "Burst Cooldown: 1s → 0.75s",
               "Freeze Time: 2s → 2.5s",
             ],
             Attributes: {
@@ -2012,11 +2084,7 @@ export default {
         {
           Image: 15686418571,
           Stats: {
-            Extras: [
-              "Frost Grenade",
-              "Burst: 4 → 7",
-              "Freeze Time: 2.5s → 3s",
-            ],
+            Extras: ["Frost Grenade", "Burst: 4 → 7", "Freeze Time: 2.5s → 3s"],
             Attributes: {
               FreezeTime: 3,
               Burst: 7,
@@ -2050,7 +2118,8 @@ export default {
             Level: 4,
             Icon: 14606405886,
             Cooldown: 15,
-            Description: "Throws a frost grenade that freezes up to five enemies for 6 seconds in an explosion radius of 6.",
+            Description:
+              "Throws a frost grenade that freezes up to five enemies for 6 seconds in an explosion radius of 6.",
             Cost: 0,
           },
         ],
@@ -2069,7 +2138,12 @@ export default {
           Stats: {
             Extras: [],
             Detections: { Flying: false, Hidden: false, Lead: true },
-            Attributes: { FreezeTime: 0.5, MaxHits: 3, DefenseMelt: 0, ProjectileSpeed: 60, },
+            Attributes: {
+              FreezeTime: 0.5,
+              MaxHits: 3,
+              DefenseMelt: 0,
+              ProjectileSpeed: 60,
+            },
             Detections: { Flying: false, Hidden: true },
             Cooldown: 0.75,
             Range: 12,
@@ -2082,7 +2156,12 @@ export default {
           Image: 15686412501,
           Stats: {
             Extras: ["Max Hits: 3 → 4"],
-            Attributes: { FreezeTime: 0.5, MaxHits: 4, DefenseMelt: 10, ProjectileSpeed: 60, },
+            Attributes: {
+              FreezeTime: 0.5,
+              MaxHits: 4,
+              DefenseMelt: 10,
+              ProjectileSpeed: 60,
+            },
             Detections: { Flying: false, Hidden: true },
             Cooldown: 0.75,
             Range: 14,
@@ -2095,7 +2174,7 @@ export default {
           Image: 15686412400,
           Stats: {
             Extras: ["🧊Freeze Time: 0.5 → 0.75", "Max Hits: 4 → 5"],
-            Attributes: { FreezeTime: 0.75, MaxHits: 5, ProjectileSpeed: 60, },
+            Attributes: { FreezeTime: 0.75, MaxHits: 5, ProjectileSpeed: 60 },
             Detections: { Flying: false, Hidden: true },
             Cooldown: 0.75,
             Range: 16,
@@ -2105,14 +2184,15 @@ export default {
           Cost: 3500,
         },
         {
-          Image: 'https://static.wikia.nocookie.net/0091553a-cf86-42a1-94e3-730515d3fca8',
+          Image:
+            "https://static.wikia.nocookie.net/0091553a-cf86-42a1-94e3-730515d3fca8",
           Stats: {
             Extras: [
               "🧊Freeze Time: 0.75 → 1.25",
               "Max Hits: 5 → 7",
               "Faster projectile speed",
             ],
-            Attributes: { FreezeTime: 1.25, MaxHits: 7, ProjectileSpeed: 90, },
+            Attributes: { FreezeTime: 1.25, MaxHits: 7, ProjectileSpeed: 90 },
             Detections: { Flying: false, Hidden: true },
             Cooldown: 1.5,
             Range: 22,
@@ -2124,7 +2204,15 @@ export default {
       ],
       Defaults: {
         Detections: { Flying: false, Hidden: false, Lead: true },
-        Attributes: { SlowdownPerHit: 30, MaxSlow: 30, SlowdownTime: 2, FreezeTime: 0.5, MaxHits: 3, DefenseMelt: 0, ProjectileSpeed: 60, },
+        Attributes: {
+          SlowdownPerHit: 30,
+          MaxSlow: 30,
+          SlowdownTime: 2,
+          FreezeTime: 0.5,
+          MaxHits: 3,
+          DefenseMelt: 0,
+          ProjectileSpeed: 60,
+        },
         Price: 850,
         Range: 12,
         Cooldown: 0.85,
@@ -2155,7 +2243,8 @@ export default {
             Cost: 0,
             Level: 0,
             Icon: 94564306265259,
-            Description: "Upon use, player gains control of the tower. Tower now needs to be fired by the player, though it gains the ability to pierce through enemies, hidden detection (if not at Level 3), no longer affected by range and is now affected by spread, recoil and obstacles on the map. Using the ability while the player is in control will remove control from the player.",
+            Description:
+              "Upon use, player gains control of the tower. Tower now needs to be fired by the player, though it gains the ability to pierce through enemies, hidden detection (if not at Level 3), no longer affected by range and is now affected by spread, recoil and obstacles on the map. Using the ability while the player is in control will remove control from the player.",
           },
         ],
         Limit: 1,
@@ -2212,7 +2301,11 @@ export default {
             Ammo: 200,
             Cooldown: 0.12,
             Damage: 15,
-            Extras: ["Angle (35 -> 40)", "Improved Spread", "Increased Ammo Size (100 -> 200)"],
+            Extras: [
+              "Angle (35 -> 40)",
+              "Improved Spread",
+              "Increased Ammo Size (100 -> 200)",
+            ],
             Detections: { Hidden: true },
           },
           Image: 71764582498505,
@@ -2256,7 +2349,13 @@ export default {
             Ammo: 400,
             Range: 50,
             Damage: 45,
-            Extras: ["Increased Ammo Size (200 -> 400)", "Increased Reload Time (2 -> 6)", "Increased Firing Angle (45 -> 50)", "Improved Recoil", "Improved Spread"],
+            Extras: [
+              "Increased Ammo Size (200 -> 400)",
+              "Increased Reload Time (2 -> 6)",
+              "Increased Firing Angle (45 -> 50)",
+              "Improved Recoil",
+              "Improved Spread",
+            ],
           },
           Image: 125372339735512,
           Title: "Impenetrable Fortress",
@@ -2277,7 +2376,12 @@ export default {
             Range: 50,
             Damage: 75,
             Detections: { Hidden: true },
-            Extras: ["Increased Ammo Size (400 -> 600)", "Increased Reload Time (2 -> 6)", "Improved Recoil", "Improved Spread"],
+            Extras: [
+              "Increased Ammo Size (400 -> 600)",
+              "Increased Reload Time (2 -> 6)",
+              "Improved Recoil",
+              "Improved Spread",
+            ],
           },
           Image: 139181863986914,
           Title: "Destruction-Oriented Output Machine",
@@ -2399,18 +2503,20 @@ export default {
         Detections: { Flying: false, Hidden: false, Lead: false },
         Attributes: { ParryCooldown: 5, MaxHits: 3, ParryLength: 1.25 },
         Abilities: [
-        {
-          Name: "Warrior's Call",
-          ParryCooldown: 5,
-          MaxHits: 3,
-          ParryLength: 1.25,
-          Price: 0,
-          Level: 3,
-          Icon: 4118882122,
-          Cooldown: 30,
-          Cost: 0,
-          Description: "Decreases swingrate by 35%. When the ability is activated, the Gladiator cannot attack enemies for a few seconds. Lasts for 15 seconds."
-        }, ],
+          {
+            Name: "Warrior's Call",
+            ParryCooldown: 5,
+            MaxHits: 3,
+            ParryLength: 1.25,
+            Price: 0,
+            Level: 3,
+            Icon: 4118882122,
+            Cooldown: 30,
+            Cost: 0,
+            Description:
+              "Decreases swingrate by 35%. When the ability is activated, the Gladiator cannot attack enemies for a few seconds. Lasts for 15 seconds.",
+          },
+        ],
         Price: 300,
         Range: 5,
         Cooldown: 1,
@@ -2508,7 +2614,7 @@ export default {
               "Ice Bomb",
               "1/2 Base Damage, 30% Chill, 60% Max Chill",
             ],
-            Attributes: { },
+            Attributes: {},
             Damage: 4,
           },
           Image: 15332518503,
@@ -2522,7 +2628,7 @@ export default {
               "Acid Puddle Bomb",
               "3/10 Base Damage, 0.5 Tick, 10s Duration, Defense Melt",
             ],
-            Attributes: { },
+            Attributes: {},
             Detections: { Hidden: true },
             Damage: 12,
           },
@@ -2532,8 +2638,7 @@ export default {
         },
         {
           Stats: {
-            Attributes: {
-            },
+            Attributes: {},
             Extras: [
               "Double Bombs",
               "Confusion Bomb",
@@ -2568,7 +2673,8 @@ export default {
             Price: 0,
             Level: 0,
             Icon: 14606405886,
-            Description: "Swaps out the current bomb type to the selected bomb type.",
+            Description:
+              "Swaps out the current bomb type to the selected bomb type.",
           },
         ],
         Price: 500,
@@ -2780,7 +2886,8 @@ export default {
             Icon: 231100685,
             Cooldown: 20,
             Cost: 0,
-            Description: "Instantly removes stuns from all towers within its range.",
+            Description:
+              "Instantly removes stuns from all towers within its range.",
           },
         ],
         Price: 450,
@@ -2794,14 +2901,15 @@ export default {
     Default: {
       Defaults: {
         Detections: { Flying: false, Hidden: false },
-        Abilities : [
+        Abilities: [
           {
             Name: "Air-Drop",
             Level: 5,
             Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/b/b9/AirDropAbility.png/revision/latest?cb=20240420124127",
             Cooldown: 75,
             Cost: 2500,
-            Description: "Drops the Mercenary Base's units on a selected area on the path.",
+            Description:
+              "Drops the Mercenary Base's units on a selected area on the path.",
           },
         ],
         Attributes: {
@@ -3051,7 +3159,13 @@ export default {
         {
           Image: 3877873543,
           Stats: {
-            Extras: ["Humvee 3", "Health: 60 → 90", "Damage: 0 → 3", "Cooldown: 0 → 0.2", "Range: 0 → 30"],
+            Extras: [
+              "Humvee 3",
+              "Health: 60 → 90",
+              "Damage: 0 → 3",
+              "Cooldown: 0 → 0.2",
+              "Range: 0 → 30",
+            ],
             Attributes: { Spawnrate: 35, UnitToSend: "Humvee 3" },
             Detections: {
               Flying: false,
@@ -3076,7 +3190,13 @@ export default {
               "Missile Amount: 6",
               "Airstrike Radius: 0 → 8",
             ],
-            Attributes: { Spawnrate: 35, UnitToSend: "Tank", AirstrikeDamage: 75, MissileAmount: 6, AirstrikeRadius: 8, },
+            Attributes: {
+              Spawnrate: 35,
+              UnitToSend: "Tank",
+              AirstrikeDamage: 75,
+              MissileAmount: 6,
+              AirstrikeRadius: 8,
+            },
             Detections: {
               Flying: false,
               Hidden: false,
@@ -3101,7 +3221,9 @@ export default {
             Attributes: {
               Spawnrate: 35,
               UnitToSend: "Railgun Tank",
-              AirstrikeDamage: 125, MissileAmount: 6, AirstrikeRadius: 12,
+              AirstrikeDamage: 125,
+              MissileAmount: 6,
+              AirstrikeRadius: 12,
             },
             Detections: {
               Flying: false,
@@ -3114,7 +3236,13 @@ export default {
         },
       ],
       Defaults: {
-        Attributes: { Spawnrate: 50, UnitToSend: "Humvee", AirstrikeDamage: 0, MissileAmount: 1, AirstrikeRadius: 0 },
+        Attributes: {
+          Spawnrate: 50,
+          UnitToSend: "Humvee",
+          AirstrikeDamage: 0,
+          MissileAmount: 1,
+          AirstrikeRadius: 0,
+        },
         Detections: { Flying: false, Hidden: false, Lead: false },
         Abilities: [
           {
@@ -3123,7 +3251,8 @@ export default {
             Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/1/10/Airstrike.png/revision/latest?cb=20240330110612",
             Cooldown: 45,
             Cost: 500,
-            Description: "Drops bombs on a selected path location, damaging any enemies within the bombs' explosion radius. A red marker will appear on the location of the path selected, and bombs will drop when the marker is clicked."
+            Description:
+              "Drops bombs on a selected path location, damaging any enemies within the bombs' explosion radius. A red marker will appear on the location of the path selected, and bombs will drop when the marker is clicked.",
           },
         ],
         Price: 400,
@@ -3260,9 +3389,7 @@ export default {
         {
           Image: 15184752970,
           Stats: {
-            Extras: [
-              "Fires 24K cartridges at 10,000 RPM",
-            ],
+            Extras: ["Fires 24K cartridges at 10,000 RPM"],
             Attributes: { RevTime: 1 },
             Detections: {
               Flying: false,
@@ -3359,7 +3486,12 @@ export default {
               ExplosionRadius: 8.5,
             },
             Range: 27,
-            Extras: ["Cluster Bombs", "Cluster Damage: 0 → 30", "Cluster Count: 0 → 2", "Cluster Radius: 0 → 5"],
+            Extras: [
+              "Cluster Bombs",
+              "Cluster Damage: 0 → 30",
+              "Cluster Count: 0 → 2",
+              "Cluster Radius: 0 → 5",
+            ],
             Detections: { Flying: true, Hidden: false, Lead: true },
             Cooldown: 3,
             Damage: 120,
@@ -3414,8 +3546,19 @@ export default {
       Upgrades: [
         {
           Stats: {
-            Extras: ["Max Graves: 2 → 4", "Max Hits: 1 → 2", "Max Ammo: 50 → 60", "Build Time: 1.5 → 1" ],
-            Attributes: { SpawnCount: 2, MaxHits: 2, MaxAmmo: 60, BuildTime: 1, MaxGraves: 4 },
+            Extras: [
+              "Max Graves: 2 → 4",
+              "Max Hits: 1 → 2",
+              "Max Ammo: 50 → 60",
+              "Build Time: 1.5 → 1",
+            ],
+            Attributes: {
+              SpawnCount: 2,
+              MaxHits: 2,
+              MaxAmmo: 60,
+              BuildTime: 1,
+              MaxGraves: 4,
+            },
             Cooldown: 1.2,
             Damage: 12,
           },
@@ -3480,7 +3623,15 @@ export default {
               "Spawns Executioner Skeleton",
               "Spawns Hallow Guards",
             ],
-            Attributes: { MaxGraves: 9, MaxHits: 3, ExplosionDamage: 500, ExplosionRadius: 4, ProjectileSpeed: 0, MaxAmmo: 1440, MaxGraveLevel: 3 },
+            Attributes: {
+              MaxGraves: 9,
+              MaxHits: 3,
+              ExplosionDamage: 500,
+              ExplosionRadius: 4,
+              ProjectileSpeed: 0,
+              MaxAmmo: 1440,
+              MaxGraveLevel: 3,
+            },
             Damage: 20,
             Cooldown: 0.4,
             Range: 32,
@@ -3501,7 +3652,8 @@ export default {
             Level: 0,
             Icon: 15229477810,
             Cooldown: 5,
-            Description: "Destroys all its graves, summoning units based on the gravestone level."
+            Description:
+              "Destroys all its graves, summoning units based on the gravestone level.",
           },
         ],
         Limit: 3,
@@ -3616,7 +3768,7 @@ export default {
         {
           Image: 117186100008439,
           Stats: {
-            Extras: [ "Speed: 25 → 16" ],
+            Extras: ["Speed: 25 → 16"],
             Attributes: {
               Speed: 16,
             },
@@ -3629,7 +3781,7 @@ export default {
         {
           Image: 117186100008439,
           Stats: {
-            Extras: [ "Speed: 16 → 25", "Patrol Range: 14 → 16" ],
+            Extras: ["Speed: 16 → 25", "Patrol Range: 14 → 16"],
             Attributes: {
               PatrolRange: 16,
               Speed: 25,
@@ -3652,7 +3804,7 @@ export default {
               "[Collapsible1]Missile Cooldown: 0 → 7",
               "[Collapsible1]Missile Count: 0 → 2",
               "[Collapsible1]Burst Time: 0 → 0.5",
-              "[Collapsible1]Missile Speed: 20"
+              "[Collapsible1]Missile Speed: 20",
             ],
             Attributes: {
               Ammo: 75,
@@ -3675,17 +3827,18 @@ export default {
           Image: 110652411715254,
           Stats: {
             Extras: [
-            "Damage: 10 → 12",
-            "Cooldown: 0.2 → 0.1",
-            "Patrol Range: 16 → 18.5",
-            "[Collapsible:Upgraded Ammo]Ammo: 75 → 150",
-            "[Collapsible]Reload Time: 3.5 → 3",
-            "[Collapsible]Rev Time: 0s → 1.5s",
-            "[Collapsible1:Upgraded Missiles]Missile Cooldown: 7 → 6",
-            "[Collapsible1]Missile Amount: 2 → 4" ],
+              "Damage: 10 → 12",
+              "Cooldown: 0.2 → 0.1",
+              "Patrol Range: 16 → 18.5",
+              "[Collapsible:Upgraded Ammo]Ammo: 75 → 150",
+              "[Collapsible]Reload Time: 3.5 → 3",
+              "[Collapsible]Rev Time: 0s → 1.5s",
+              "[Collapsible1:Upgraded Missiles]Missile Cooldown: 7 → 6",
+              "[Collapsible1]Missile Amount: 2 → 4",
+            ],
             Attributes: {
               NoTable: true,
-              SideLevel: '4T',
+              SideLevel: "4T",
             },
           },
           Title: "Tri-Barrel Minigun",
@@ -3693,15 +3846,17 @@ export default {
         {
           Image: 138033956206562,
           Stats: {
-            Extras: [ "Patrol Range: 16 → 17.5",
-            "[Collapsible:Upgraded Ammo]Reload Time: 3.5 → 2.25",
-            "[Collapsible1:Upgraded Missiles]Explosion Damage: 35 → 45",
-            "[Collapsible1]Missile Cooldown: 7 → 5",
-            "[Collapsible1]Missile Amount: 2 → 6",
-            "[Collapsible1]Burst Time: 0.5 → 0.25" ],
+            Extras: [
+              "Patrol Range: 16 → 17.5",
+              "[Collapsible:Upgraded Ammo]Reload Time: 3.5 → 2.25",
+              "[Collapsible1:Upgraded Missiles]Explosion Damage: 35 → 45",
+              "[Collapsible1]Missile Cooldown: 7 → 5",
+              "[Collapsible1]Missile Amount: 2 → 6",
+              "[Collapsible1]Burst Time: 0.5 → 0.25",
+            ],
             Attributes: {
               NoTable: true,
-              SideLevel: '4B',
+              SideLevel: "4B",
             },
           },
           Title: "Upgraded Payload",
@@ -3709,15 +3864,20 @@ export default {
         {
           Image: 110652411715254,
           Stats: {
-            Extras: [ "Damage: 12 → 18", "Cooldown: 0.1 → 0.85", "Range: 10.5 → 12", "Patrol Range: 18.5 → 21",
-            "[Collapsible:Upgraded Ammo]Ammo: 150 → 200",
-            "[Collapsible]Reload Time: 3 → 2.5",
-            "[Collapsible1:Upgraded Missiles]Explosion Radius: 3 → 4",
-            "[Collapsible1]Time Between Missiles: 0.5 → 0,25", ],
+            Extras: [
+              "Damage: 12 → 18",
+              "Cooldown: 0.1 → 0.85",
+              "Range: 10.5 → 12",
+              "Patrol Range: 18.5 → 21",
+              "[Collapsible:Upgraded Ammo]Ammo: 150 → 200",
+              "[Collapsible]Reload Time: 3 → 2.5",
+              "[Collapsible1:Upgraded Missiles]Explosion Radius: 3 → 4",
+              "[Collapsible1]Time Between Missiles: 0.5 → 0,25",
+            ],
             Detections: { Flying: true, Hidden: true, Lead: false },
             Attributes: {
               NoTable: true,
-              SideLevel: '5T',
+              SideLevel: "5T",
             },
           },
           Title: "Sky Shredder",
@@ -3725,14 +3885,17 @@ export default {
         {
           Image: 138033956206562,
           Stats: {
-            Extras: [ "Damage: 10 → 20", "Patrol Range: 17.5 → 19.5",
-            "[Collapsible1:Upgraded Missiles]Explosion Damage: 45 → 60",
-            "[Collapsible1]Missile Cooldown: 5 → 3.5",
-            "[Collapsible1]Missile Amount: 6 → 8",
-            "[Collapsible1]Burst Time: 0.25 → 0.15" ],
+            Extras: [
+              "Damage: 10 → 20",
+              "Patrol Range: 17.5 → 19.5",
+              "[Collapsible1:Upgraded Missiles]Explosion Damage: 45 → 60",
+              "[Collapsible1]Missile Cooldown: 5 → 3.5",
+              "[Collapsible1]Missile Amount: 6 → 8",
+              "[Collapsible1]Burst Time: 0.25 → 0.15",
+            ],
             Attributes: {
               NoTable: true,
-              SideLevel: '5B',
+              SideLevel: "5B",
             },
           },
           Title: "Demolition Sunship",
@@ -3765,7 +3928,8 @@ export default {
             Cooldown: 20,
             Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/4/4b/PatrolAbility.png/revision/latest?cb=20241128075124",
             Cost: 0,
-            Description: "Changes the position of its patrol range to the one selected by the player."
+            Description:
+              "Changes the position of its patrol range to the one selected by the player.",
           },
         ],
       },
@@ -4202,7 +4366,12 @@ export default {
         {
           Image: 133610100963797,
           Stats: {
-            Extras: ["Explosion Radius: 4 → 5", "Deadzone: 12 → 10", "Missle Amount: 1 → 2", "Accuracy: 1 → 0.5"],
+            Extras: [
+              "Explosion Radius: 4 → 5",
+              "Deadzone: 12 → 10",
+              "Missle Amount: 1 → 2",
+              "Accuracy: 1 → 0.5",
+            ],
             Attributes: { Deadzone: 10, ExplosionRadius: 5, Accuracy: 0.5 },
             Detections: { Flying: false, Hidden: true, Lead: true },
             Cooldown: 3,
@@ -4217,7 +4386,14 @@ export default {
         },
       ],
       Defaults: {
-        Attributes: { Deadzone: 10, ExplosionRadius: 3, MissileAmount: 1, SpreadAngle: 'N/A', Accuracy: 1, ProjectileSpeed: 25 },
+        Attributes: {
+          Deadzone: 10,
+          ExplosionRadius: 3,
+          MissileAmount: 1,
+          SpreadAngle: "N/A",
+          Accuracy: 1,
+          ProjectileSpeed: 25,
+        },
         Detections: { Flying: false, Hidden: false, Lead: true },
         Range: 22,
         Price: 1500,
@@ -4488,7 +4664,12 @@ export default {
         {
           Image: 93224058728799,
           Stats: {
-            Extras: ["Bleed Damage: 0 → 2", "Bleed Stack: 0 → 1", "Max Stack: 0 → 30", "Exponential Value: 0 → 0.31"],
+            Extras: [
+              "Bleed Damage: 0 → 2",
+              "Bleed Stack: 0 → 1",
+              "Max Stack: 0 → 30",
+              "Exponential Value: 0 → 0.31",
+            ],
             Attributes: {
               BleedDamage: 2,
               BleedStack: 1,
@@ -4512,9 +4693,7 @@ export default {
         {
           Image: 102669883500047,
           Stats: {
-            Extras: [
-              "Critical Multiplier: 300% → 350%",
-            ],
+            Extras: ["Critical Multiplier: 300% → 350%"],
             Attributes: {
               BleedDamage: 2,
               BleedStack: 1,
@@ -4664,7 +4843,12 @@ export default {
         {
           Image: 87639607914634,
           Stats: {
-            Extras: ["Slowdown per Hit: 30% → 45%", "Max Slow: 60% → 65%", "Slowdown Time: 4s → 5s", "Critical Multiplier: 0% → 100%"],
+            Extras: [
+              "Slowdown per Hit: 30% → 45%",
+              "Max Slow: 60% → 65%",
+              "Slowdown Time: 4s → 5s",
+              "Critical Multiplier: 0% → 100%",
+            ],
             Attributes: {
               SlowdownPerHit: 45,
               MaxSlow: 65,
@@ -4689,7 +4873,16 @@ export default {
         {
           Image: 92990655062231,
           Stats: {
-            Extras: [" Slowdown per Hit: 45% → 80%", "Max Slow: 65% → 80%", "Slowdown Time: 5s → 6s", "Freeze Time: 1.5s → 1.75s", "Max Hits: 5 → 7", "Critical Multiplier: 100% → 100%", "Aftershock Multiplier: 0% → 20%", "Aftershock Cooldown: 0s → 0.4s"],
+            Extras: [
+              " Slowdown per Hit: 45% → 80%",
+              "Max Slow: 65% → 80%",
+              "Slowdown Time: 5s → 6s",
+              "Freeze Time: 1.5s → 1.75s",
+              "Max Hits: 5 → 7",
+              "Critical Multiplier: 100% → 100%",
+              "Aftershock Multiplier: 0% → 20%",
+              "Aftershock Cooldown: 0s → 0.4s",
+            ],
             Attributes: {
               SlowdownPerHit: 80,
               MaxSlow: 80,
@@ -5086,7 +5279,8 @@ export default {
             Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/e/e7/Swarmer_Ability.png/revision/latest?cb=20240712150918",
             Cost: 0,
             Cooldown: 15,
-            Description: "Throws a grenade that deals 10 damage and inflicts the stinging effect on every enemy that is not already being stung. Explosion range is 10.",
+            Description:
+              "Throws a grenade that deals 10 damage and inflicts the stinging effect on every enemy that is not already being stung. Explosion range is 10.",
           },
         ],
         Price: 300,
@@ -5102,7 +5296,7 @@ export default {
         {
           Image: 5523192002,
           Stats: {
-            Extras: ["Reload Time: 1.2s → 0.6s",],
+            Extras: ["Reload Time: 1.2s → 0.6s"],
             Attributes: {
               TickRate: 1,
               Burst: 4,
@@ -5133,7 +5327,7 @@ export default {
               "Burst: 4 → 8",
               "Poison Damage: 1 → 4",
               "Slowdown per Hit: 10% → 20%",
-              "Max Slow: 10% → 20%"
+              "Max Slow: 10% → 20%",
             ],
             Attributes: {
               TickRate: 1,
@@ -5162,9 +5356,11 @@ export default {
         {
           Image: 5523195646,
           Stats: {
-            Extras: ["Burst: 8 → 20",
+            Extras: [
+              "Burst: 8 → 20",
               "Defense Melt: 0% → 3%",
-              "Max Defense Melt: 0% → 50%",],
+              "Max Defense Melt: 0% → 50%",
+            ],
             Attributes: {
               TickRate: 1,
               Burst: 20,
@@ -5286,7 +5482,7 @@ export default {
               "Bear Trap": false,
             },
             Range: 10,
-            Extras: ["Upgraded Spike", "Upgraded Landmine", "Max Traps: 6 → 8" ],
+            Extras: ["Upgraded Spike", "Upgraded Landmine", "Max Traps: 6 → 8"],
           },
           Image: 16493202350,
           Title: "Better Traps",
@@ -5445,7 +5641,11 @@ export default {
         {
           Image: 4989372568,
           Stats: {
-            Extras: ["Explosion Damage: 0 → 20", "Explosion Radius: 0 → 5", "Reload Time: 0s → 5s"],
+            Extras: [
+              "Explosion Damage: 0 → 20",
+              "Explosion Radius: 0 → 5",
+              "Reload Time: 0s → 5s",
+            ],
             Attributes: {
               ExplosionDamage: 20,
               ExplosionRadius: 5,
@@ -5491,7 +5691,11 @@ export default {
         {
           Image: 4989373124,
           Stats: {
-            Extras: ["Explosion Damage: 20 → 40", "Explosion Radius: 5 → 6", "Missile Amount: 1 → 4"],
+            Extras: [
+              "Explosion Damage: 20 → 40",
+              "Explosion Radius: 5 → 6",
+              "Missile Amount: 1 → 4",
+            ],
             Attributes: {
               ExplosionDamage: 40,
               ExplosionRadius: 6,
@@ -5516,7 +5720,11 @@ export default {
           Image: 4989373460,
           Stats: {
             Extras: [
-              "Damage Buff: 10% → 20%", "Explosion Damage: 40 → 80", "Explosion Radius: 6 → 7", "Missile Amount: 4 → 8", "Reload Time: 5s → 4s",
+              "Damage Buff: 10% → 20%",
+              "Explosion Damage: 40 → 80",
+              "Explosion Radius: 6 → 7",
+              "Missile Amount: 4 → 8",
+              "Reload Time: 5s → 4s",
             ],
             Attributes: {
               ExplosionDamage: 80,
@@ -5563,7 +5771,11 @@ export default {
           Image: 87280920444213,
           Stats: {
             Extras: [],
-            Attributes: { RocketSpeed: 20, ExplosionRadius: 3.5, Knockback: 10 },
+            Attributes: {
+              RocketSpeed: 20,
+              ExplosionRadius: 3.5,
+              Knockback: 10,
+            },
             Detections: {
               Flying: false,
               Hidden: false,
@@ -5579,8 +5791,16 @@ export default {
         {
           Image: 103271630916907,
           Stats: {
-            Extras: ["Explosion Radius: 3.5 → 5", "Rocket Speed: 20 → 25", "Knockback: 10 → 12.5"],
-            Attributes: { RocketSpeed: 25, ExplosionRadius: 5, Knockback: 12.5 },
+            Extras: [
+              "Explosion Radius: 3.5 → 5",
+              "Rocket Speed: 20 → 25",
+              "Knockback: 10 → 12.5",
+            ],
+            Attributes: {
+              RocketSpeed: 25,
+              ExplosionRadius: 5,
+              Knockback: 12.5,
+            },
             Detections: { Flying: false, Lead: true },
             Range: 22.5,
             Damage: 25,
@@ -5591,8 +5811,21 @@ export default {
         {
           Image: 98952678277583,
           Stats: {
-            Extras: ["Explosion Radius: 5 → 5.5", "Deadzone: 12 → 10", "Knockback: 12.5 → 17.5", "Burn Damage 0 → 3", "Burn Time 0 → 16", "Burn Tick 0 → 0.25"],
-            Attributes: { Knockback: 17.5, ExplosionRadius: 5.5, BurnDamage: 3, BurnTime: 16, TickRate: 0.25 },
+            Extras: [
+              "Explosion Radius: 5 → 5.5",
+              "Deadzone: 12 → 10",
+              "Knockback: 12.5 → 17.5",
+              "Burn Damage 0 → 3",
+              "Burn Time 0 → 16",
+              "Burn Tick 0 → 0.25",
+            ],
+            Attributes: {
+              Knockback: 17.5,
+              ExplosionRadius: 5.5,
+              BurnDamage: 3,
+              BurnTime: 16,
+              TickRate: 0.25,
+            },
             Detections: { Flying: true, Hidden: false, Lead: true },
             Range: 26,
             Damage: 60,
@@ -5602,7 +5835,14 @@ export default {
         },
       ],
       Defaults: {
-        Attributes: { Knockback: 10, ExplosionRadius: 3.5, RocketSpeed: 20, BurnDamage: 0, BurnTime: 0, TickRate: 0 },
+        Attributes: {
+          Knockback: 10,
+          ExplosionRadius: 3.5,
+          RocketSpeed: 20,
+          BurnDamage: 0,
+          BurnTime: 0,
+          TickRate: 0,
+        },
         Detections: { Flying: false, Hidden: false, Lead: true },
         Range: 18,
         Price: 300,
@@ -5618,8 +5858,13 @@ export default {
         {
           Image: 15686418975,
           Stats: {
-            Extras: [ "Max Slowdown: 30% → 40%", "Slowdown per Hit: 15% → 20%" ],
-            Attributes: { MaxSlow: 40, ExplosionRadius: 2, FreezeTime: 0, SlowdownPerHit: 20 },
+            Extras: ["Max Slowdown: 30% → 40%", "Slowdown per Hit: 15% → 20%"],
+            Attributes: {
+              MaxSlow: 40,
+              ExplosionRadius: 2,
+              FreezeTime: 0,
+              SlowdownPerHit: 20,
+            },
             Detections: {
               Flying: false,
               Hidden: false,
@@ -5634,8 +5879,18 @@ export default {
         {
           Image: 15686418835,
           Stats: {
-            Extras: [ "Max Slowdown: 40% → 60%", "Slowdown per Hit: 20% → 30%", "Slowdown Time: 3 → 4" ],
-            Attributes: { MaxSlow: 60, ExplosionRadius: 2, FreezeTime: 0, SlowdownPerHit: 30, SlowdownTime: 4 },
+            Extras: [
+              "Max Slowdown: 40% → 60%",
+              "Slowdown per Hit: 20% → 30%",
+              "Slowdown Time: 3 → 4",
+            ],
+            Attributes: {
+              MaxSlow: 60,
+              ExplosionRadius: 2,
+              FreezeTime: 0,
+              SlowdownPerHit: 30,
+              SlowdownTime: 4,
+            },
             Detections: { Flying: false, Lead: false },
             Range: 14,
             Damage: 8,
@@ -5646,8 +5901,18 @@ export default {
         {
           Image: 15686418748,
           Stats: {
-            Extras: ["Freeze Time: 0 → 2", "Explosion Radius: 2 → 4", "Max Hits: 1 → 4"],
-            Attributes: { ExplosionRadius: 4, FreezeTime: 2, SlowdownPerHit: 30, SlowdownTime: 4, MaxHits: 4 },
+            Extras: [
+              "Freeze Time: 0 → 2",
+              "Explosion Radius: 2 → 4",
+              "Max Hits: 1 → 4",
+            ],
+            Attributes: {
+              ExplosionRadius: 4,
+              FreezeTime: 2,
+              SlowdownPerHit: 30,
+              SlowdownTime: 4,
+              MaxHits: 4,
+            },
             Detections: { Flying: false, Hidden: false, Lead: true },
             Range: 18,
             Damage: 20,
@@ -5658,7 +5923,15 @@ export default {
         },
       ],
       Defaults: {
-        Attributes: { MaxSlow: 30, ExplosionRadius: 2, ProjectileSpeed: 20, FreezeTime: 0, SlowdownPerHit: 15, SlowdownTime: 3, MaxHits: 1 },
+        Attributes: {
+          MaxSlow: 30,
+          ExplosionRadius: 2,
+          ProjectileSpeed: 20,
+          FreezeTime: 0,
+          SlowdownPerHit: 15,
+          SlowdownTime: 3,
+          MaxHits: 1,
+        },
         Detections: { Flying: false, Hidden: false, Lead: false },
         Range: 9.5,
         Price: 300,
@@ -5667,14 +5940,23 @@ export default {
       },
     },
   },
-  'Firework Technician': {
+  "Firework Technician": {
     Default: {
       Upgrades: [
         {
           Image: 113918271734207,
           Stats: {
-            Extras: [ "Detection Buff Time: 15 → 20", "Firework Chance Cap: 50% → 60%", "Burn Damage: 1 → 2" ],
-            Attributes: { DetectionBuffLength: 20, FireworkChanceCap: '60%', BurnDamage: 2, TickRate: 0.5, },
+            Extras: [
+              "Detection Buff Time: 15 → 20",
+              "Firework Chance Cap: 50% → 60%",
+              "Burn Damage: 1 → 2",
+            ],
+            Attributes: {
+              DetectionBuffLength: 20,
+              FireworkChanceCap: "60%",
+              BurnDamage: 2,
+              TickRate: 0.5,
+            },
             Detections: { Flying: false, Hidden: false, Lead: true },
             Range: 9,
             Damage: 10,
@@ -5685,8 +5967,18 @@ export default {
         {
           Image: 102159060729309,
           Stats: {
-            Extras: [ "Detection Buff Time: 20 → 25", "Explosion Radius: 1 → 2", "Firework Chance Cap: 60% → 70%", "Burn Tick: 0.5 → 0.25" ],
-            Attributes: { DetectionBuffLength: 25, ExplosionRadius: 2, FireworkChanceCap: '70%', TickRate: 0.25, },
+            Extras: [
+              "Detection Buff Time: 20 → 25",
+              "Explosion Radius: 1 → 2",
+              "Firework Chance Cap: 60% → 70%",
+              "Burn Tick: 0.5 → 0.25",
+            ],
+            Attributes: {
+              DetectionBuffLength: 25,
+              ExplosionRadius: 2,
+              FireworkChanceCap: "70%",
+              TickRate: 0.25,
+            },
             Damage: 20,
           },
           Title: "Bigger Boom",
@@ -5695,8 +5987,16 @@ export default {
         {
           Image: 76789690706169,
           Stats: {
-            Extras: ["Detection Buff Time: 25 → 30", "FireworkChanceCap: 70% → 85%" ],
-            Attributes: { DetectionBuffLength: 30, FireworkChanceCap: '85%', BurnDamage: 4, TickRate: 0.25, },
+            Extras: [
+              "Detection Buff Time: 25 → 30",
+              "FireworkChanceCap: 70% → 85%",
+            ],
+            Attributes: {
+              DetectionBuffLength: 30,
+              FireworkChanceCap: "85%",
+              BurnDamage: 4,
+              TickRate: 0.25,
+            },
             Damage: 30,
           },
           Title: "Light the Sky",
@@ -5705,8 +6005,19 @@ export default {
         {
           Image: 83889465749773,
           Stats: {
-            Extras: [ "Detection Buff Time: 30 → 40", "Firework Chance Cap: 85% → 100%", "Burn Damage: 4 → 7", "Explosion Radius: 2 → 3" ],
-            Attributes: { DetectionBuffLength: 40, FireworkChanceCap: '100%', BurnDamage: 7, TickRate: 0.25, ExplosionRadius: 3, },
+            Extras: [
+              "Detection Buff Time: 30 → 40",
+              "Firework Chance Cap: 85% → 100%",
+              "Burn Damage: 4 → 7",
+              "Explosion Radius: 2 → 3",
+            ],
+            Attributes: {
+              DetectionBuffLength: 40,
+              FireworkChanceCap: "100%",
+              BurnDamage: 7,
+              TickRate: 0.25,
+              ExplosionRadius: 3,
+            },
             Damage: 45,
             Range: 10,
           },
@@ -5715,7 +6026,14 @@ export default {
         },
       ],
       Defaults: {
-        Attributes: { DetectionBuffLength: 15, ExplosionRadius: 1, FireworkChanceCap: '50%', BurnDamage: 1, TickRate: 0.5, BurnTime: 5, },
+        Attributes: {
+          DetectionBuffLength: 15,
+          ExplosionRadius: 1,
+          FireworkChanceCap: "50%",
+          BurnDamage: 1,
+          TickRate: 0.5,
+          BurnTime: 5,
+        },
         Detections: { Flying: false, Hidden: false, Lead: true },
         Range: 8,
         Price: 1500,
@@ -5802,7 +6120,8 @@ export default {
             Level: 0,
             Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/2/2d/ThornsAbility.png/revision/latest?cb=20241101095523",
             Cost: 0,
-            Description: "On use, the selected area will produce thorns that deal damage and slow enemies. All Farms that are both in the range of the Harvester and the track also generate thorns with halved statistics through its Nature's Bond.",
+            Description:
+              "On use, the selected area will produce thorns that deal damage and slow enemies. All Farms that are both in the range of the Harvester and the track also generate thorns with halved statistics through its Nature's Bond.",
             Cooldown: 40,
           },
         ],
@@ -5816,7 +6135,11 @@ export default {
           Image: 136223791844063,
           Stats: {
             Attributes: {},
-            Extras: [ "Burn Damage: 8 → 10", "Burn Time: 2 → 3", "Burst Size: 3 → 4" ],
+            Extras: [
+              "Burn Damage: 8 → 10",
+              "Burn Time: 2 → 3",
+              "Burst Size: 3 → 4",
+            ],
             Range: 15,
             BurnDamage: 8,
             Damage: 5,
@@ -5830,7 +6153,7 @@ export default {
           Image: 124219033045691,
           Stats: {
             Attributes: { Hidden: true },
-            Extras: [ "Burn Time: 3 → 4", "Heatwave" ],
+            Extras: ["Burn Time: 3 → 4", "Heatwave"],
             Damage: 10,
             BurnTime: 4,
             Range: 17,
@@ -5842,7 +6165,13 @@ export default {
           Image: 77890912829468,
           Stats: {
             Attributes: {},
-            Extras: [ "Burn Damage: 8 → 10", "Burst Size: 4 → 5", "Burst Cooldown: 0.6 → 0.5", "Tick Rate: 0.5 → 0.25", "Burn Time: 4 → 2" ],
+            Extras: [
+              "Burn Damage: 8 → 10",
+              "Burst Size: 4 → 5",
+              "Burst Cooldown: 0.6 → 0.5",
+              "Tick Rate: 0.5 → 0.25",
+              "Burn Time: 4 → 2",
+            ],
             Damage: 13,
             BurnDamage: 10,
             Burst: 5,
@@ -5857,7 +6186,11 @@ export default {
           Image: 90889171304008,
           Stats: {
             Attributes: {},
-            Extras: [ "Burst Size: 5 → 7", "Burst Cooldown: 0.5 → 0.4", "Burn Time: 2 → 4" ],
+            Extras: [
+              "Burst Size: 5 → 7",
+              "Burst Cooldown: 0.5 → 0.4",
+              "Burn Time: 2 → 4",
+            ],
             Cooldown: 0.125,
             Range: 17,
             Damage: 18,
@@ -5888,7 +6221,8 @@ export default {
             Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/3/30/ElementalistFireAbility.png/revision/latest?cb=20241217163118",
             Cooldown: 40,
             Cost: 0,
-            Description: "Creates a shockwave, which deals damage to enemies, knocks them back and sets them on fire.",
+            Description:
+              "Creates a shockwave, which deals damage to enemies, knocks them back and sets them on fire.",
           },
         ],
       },
@@ -5899,7 +6233,7 @@ export default {
           Image: 136223791844063,
           Stats: {
             Attributes: {},
-            Extras: [ "Slowdown per Hit: 5% → 7.5%" ],
+            Extras: ["Slowdown per Hit: 5% → 7.5%"],
             Range: 15,
             Damage: 5,
             Burst: 4,
@@ -5912,7 +6246,7 @@ export default {
           Image: 124219033045691,
           Stats: {
             Attributes: { Hidden: true },
-            Extras: [ "Max Slow: 45% → 50%" ],
+            Extras: ["Max Slow: 45% → 50%"],
             Damage: 10,
             Range: 17,
             MaxSlow: 50,
@@ -5924,7 +6258,7 @@ export default {
           Image: 77890912829468,
           Stats: {
             Attributes: {},
-            Extras: [ "Slowdown per Hit: 7.5% → 10%" ],
+            Extras: ["Slowdown per Hit: 7.5% → 10%"],
             Damage: 13,
             SlowdownPerHit: 10,
             Burst: 5,
@@ -5938,7 +6272,7 @@ export default {
           Image: 90889171304008,
           Stats: {
             Attributes: {},
-            Extras: [ "Slowdown per Hit: 10% → 12.5%", "Max Slow: 50% → 60%" ],
+            Extras: ["Slowdown per Hit: 10% → 12.5%", "Max Slow: 50% → 60%"],
             Cooldown: 0.125,
             Range: 17,
             Damage: 18,
@@ -5970,7 +6304,8 @@ export default {
             Icon: "https://static.wikia.nocookie.net/tower-defense-sim/images/2/24/Ice_TurretElementalistAbility.png/revision/latest?cb=20241217163246",
             Cooldown: 50,
             Cost: 0,
-            Description: "Creates an Ice Turret in the selected spot, which chills and freezes enemies.",
+            Description:
+              "Creates an Ice Turret in the selected spot, which chills and freezes enemies.",
           },
         ],
       },
@@ -6090,154 +6425,154 @@ export default {
   },
   Biologist: {
     Default: {
-        Defaults: {
-            Price: 750,
-            Limit: 8,
-            Damage: 0,
-            Range: 4,
-            Cooldown: 1,
-            Attributes: {
-                ProjectileSpeed: 5,
-                Deadzone: 1.5,
-                Sunflower: true,
-                Ivy: false,
-                Nightshade: false,
-                Queue1: "Sunflower",
-                Queue2: "N/A",
-                Queue3: "N/A",
-            },
-            Detections: {
-                Hidden: false,
-                Flying: false,
-                Lead: false,
-            },
+      Defaults: {
+        Price: 750,
+        Limit: 8,
+        Damage: 0,
+        Range: 4,
+        Cooldown: 1,
+        Attributes: {
+          ProjectileSpeed: 5,
+          Deadzone: 1.5,
+          Sunflower: true,
+          Ivy: false,
+          Nightshade: false,
+          Queue1: "Sunflower",
+          Queue2: "N/A",
+          Queue3: "N/A",
         },
-        Upgrades: [
-            {
-                Title: "Bio Chemestry",
-                Image: 95317340543936,
-                Cost: 600,
-                Stats: {
-                    Attributes: {
-                      Sunflower: true,
-                      Ivy: true,
-                      Nightshade: false,
-                      Queue1: "Sunflower",
-                      Queue2: "N/A",
-                      Queue3: "N/A",
-                    },
-                    Extras: [
-                      "[Collapsible:Upgraded Sunflower]Health: 50 → 100",
-                      "[Collapsible]Damage: 5 → 10",
-                      "[Collapsible1:Unlocks Ivy]Health: 100",
-                      "[Collapsible1]Damage: 8",
-                      "[Collapsible1]Range: 14",
-                      "[Collapsible1]Cooldown: 2s",
-                      "[Collapsible1]Explosion Radius: 3",
-                      "[Collapsible1]Poison Damage: 1",
-                      "[Collapsible1]Max Slow: 5%",
-                      "[Collapsible1]Lead",
-                    ],
-                },
+        Detections: {
+          Hidden: false,
+          Flying: false,
+          Lead: false,
+        },
+      },
+      Upgrades: [
+        {
+          Title: "Bio Chemestry",
+          Image: 95317340543936,
+          Cost: 600,
+          Stats: {
+            Attributes: {
+              Sunflower: true,
+              Ivy: true,
+              Nightshade: false,
+              Queue1: "Sunflower",
+              Queue2: "N/A",
+              Queue3: "N/A",
             },
-            {
-                Title: "Scientific Breakthrough",
-                Image: 91087216328467,
-                Cost: 1850,
-                Stats: {
-                    Attributes: {
-                      Sunflower: true,
-                      Ivy: true,
-                      Nightshade: false,
-                      Queue1: "Sunflower",
-                      Queue2: "Ivy",
-                      Queue3: "N/A",
-                    },
-                  Extras: [
-                    "Queue slots: 1 → 2",
-                    "[Collapsible:Upgraded Sunflower]Health: 100 → 200",
-                    "[Collapsible]Damage: 10 → 12",
-                    "[Collapsible]Range: 15 → 17",
-                    "[Collapsible]Hidden",
-                    "[Collapsible1:Upgraded Ivy]Health: 100 → 200",
-                    "[Collapsible1]Damage: 8 → 12",
-                    "[Collapsible1]Range: 14 → 15.5",
-                    "[Collapsible1]Cooldown: 2s → 1.8s",
-                    "[Collapsible1]Explosion Radius: 3 → 4",
-                    "[Collapsible1]Poison Damage: 1 → 2",
-                    "[Collapsible1]Max Slow: 5% → 7.5%",
-                  ],
-                },
-            },
-            {
-                Title: "Flower Power",
-                Image: 101480107243808,
-                Cost: 4500,
-                Stats: {
-                    Attributes: {
-                      Sunflower: true,
-                      Ivy: true,
-                      Nightshade: true,
-                      Queue1: "Sunflower",
-                      Queue2: "Ivy",
-                      Queue3: "N/A",
-                    },
-                Extras: [
-                  "[Collapsible:Upgraded Sunflower]Health: 200 → 400",
-                  "[Collapsible]Damage: 12 → 28",
-                  "[Collapsible]Range: 17 → 19.5",
-                  "[Collapsible]Cooldown: 1.1s → 1s",
-                  "[Collapsible1:Upgraded Ivy]Health: 200 → 400",
-                  "[Collapsible1]Damage: 12 → 25",
-                  "[Collapsible1]Range: 15.5 → 17",
-                  "[Collapsible1]Explosion Radius: 4 → 4.5",
-                  "[Collapsible1]Poison Damage: 2 → 4",
-                  "[Collapsible1]Poison Tick Rate: 0.75 → 0.6",
-                  "[Collapsible2:Unlocks Nightshade]Health: 400",
-                  "[Collapsible2]Damage: 50",
-                  "[Collapsible2]Range: 30",
-                  "[Collapsible2]Cooldown: 3s",
-                  "[Collapsible2]Confusion Time: 1s",
-                  "[Collapsible2]Flying",
-                ],
-              },
-            },
-            {
-                Title: "Botanical Berserker!",
-                Image: 121014188542772,
-                Cost: 20000,
-                Stats: {
-                    Attributes: {
-                      Sunflower: true,
-                      Ivy: true,
-                      Nightshade: true,
-                      Queue1: "Sunflower",
-                      Queue2: "Ivy",
-                      Queue3: "Nightshade",
-                    },
-                Extras: [
-                  "Queue slots: 2 → 3",
-                  "[Collapsible:Upgraded Sunflower]Health: 400 → 800",
-                  "[Collapsible]Damage: 28 → 55",
-                  "[Collapsible]Range: 19.5 → 22.5",
-                  "[Collapsible]Cooldown: 1s → 0.8s",
-                  "[Collapsible1:Upgraded Ivy]Health: 400 → 800",
-                  "[Collapsible1]Damage: 25 → 45",
-                  "[Collapsible1]Range: 17 → 18.5",
-                  "[Collapsible1]Cooldown: 1.8s → 1.5s",
-                  "[Collapsible1]Poison Damage: 4 → 5",
-                  "[Collapsible1]Poison Length: 4.5s → 5.2s",
-                  "[Collapsible1]Poison Tick Rate: 0.6 → 0.65",
-                  "[Collapsible1]Max Slow: 7.5% → 12.5%",
-                  "[Collapsible2:Upgraded Nightshade]Health: 400 → 800",
-                  "[Collapsible2]Damage: 50 → 135",
-                  "[Collapsible2]Range: 30 → 35",
-                  "[Collapsible2]Cooldown: 3s → 2.75s",
-                  "[Collapsible2]Confusion Time: 1s → 1.25s",
-              ],
-            },
+            Extras: [
+              "[Collapsible:Upgraded Sunflower]Health: 50 → 100",
+              "[Collapsible]Damage: 5 → 10",
+              "[Collapsible1:Unlocks Ivy]Health: 100",
+              "[Collapsible1]Damage: 8",
+              "[Collapsible1]Range: 14",
+              "[Collapsible1]Cooldown: 2s",
+              "[Collapsible1]Explosion Radius: 3",
+              "[Collapsible1]Poison Damage: 1",
+              "[Collapsible1]Max Slow: 5%",
+              "[Collapsible1]Lead",
+            ],
           },
-        ],
+        },
+        {
+          Title: "Scientific Breakthrough",
+          Image: 91087216328467,
+          Cost: 1850,
+          Stats: {
+            Attributes: {
+              Sunflower: true,
+              Ivy: true,
+              Nightshade: false,
+              Queue1: "Sunflower",
+              Queue2: "Ivy",
+              Queue3: "N/A",
+            },
+            Extras: [
+              "Queue slots: 1 → 2",
+              "[Collapsible:Upgraded Sunflower]Health: 100 → 200",
+              "[Collapsible]Damage: 10 → 12",
+              "[Collapsible]Range: 15 → 17",
+              "[Collapsible]Hidden",
+              "[Collapsible1:Upgraded Ivy]Health: 100 → 200",
+              "[Collapsible1]Damage: 8 → 12",
+              "[Collapsible1]Range: 14 → 15.5",
+              "[Collapsible1]Cooldown: 2s → 1.8s",
+              "[Collapsible1]Explosion Radius: 3 → 4",
+              "[Collapsible1]Poison Damage: 1 → 2",
+              "[Collapsible1]Max Slow: 5% → 7.5%",
+            ],
+          },
+        },
+        {
+          Title: "Flower Power",
+          Image: 101480107243808,
+          Cost: 4500,
+          Stats: {
+            Attributes: {
+              Sunflower: true,
+              Ivy: true,
+              Nightshade: true,
+              Queue1: "Sunflower",
+              Queue2: "Ivy",
+              Queue3: "N/A",
+            },
+            Extras: [
+              "[Collapsible:Upgraded Sunflower]Health: 200 → 400",
+              "[Collapsible]Damage: 12 → 28",
+              "[Collapsible]Range: 17 → 19.5",
+              "[Collapsible]Cooldown: 1.1s → 1s",
+              "[Collapsible1:Upgraded Ivy]Health: 200 → 400",
+              "[Collapsible1]Damage: 12 → 25",
+              "[Collapsible1]Range: 15.5 → 17",
+              "[Collapsible1]Explosion Radius: 4 → 4.5",
+              "[Collapsible1]Poison Damage: 2 → 4",
+              "[Collapsible1]Poison Tick Rate: 0.75 → 0.6",
+              "[Collapsible2:Unlocks Nightshade]Health: 400",
+              "[Collapsible2]Damage: 50",
+              "[Collapsible2]Range: 30",
+              "[Collapsible2]Cooldown: 3s",
+              "[Collapsible2]Confusion Time: 1s",
+              "[Collapsible2]Flying",
+            ],
+          },
+        },
+        {
+          Title: "Botanical Berserker!",
+          Image: 121014188542772,
+          Cost: 20000,
+          Stats: {
+            Attributes: {
+              Sunflower: true,
+              Ivy: true,
+              Nightshade: true,
+              Queue1: "Sunflower",
+              Queue2: "Ivy",
+              Queue3: "Nightshade",
+            },
+            Extras: [
+              "Queue slots: 2 → 3",
+              "[Collapsible:Upgraded Sunflower]Health: 400 → 800",
+              "[Collapsible]Damage: 28 → 55",
+              "[Collapsible]Range: 19.5 → 22.5",
+              "[Collapsible]Cooldown: 1s → 0.8s",
+              "[Collapsible1:Upgraded Ivy]Health: 400 → 800",
+              "[Collapsible1]Damage: 25 → 45",
+              "[Collapsible1]Range: 17 → 18.5",
+              "[Collapsible1]Cooldown: 1.8s → 1.5s",
+              "[Collapsible1]Poison Damage: 4 → 5",
+              "[Collapsible1]Poison Length: 4.5s → 5.2s",
+              "[Collapsible1]Poison Tick Rate: 0.6 → 0.65",
+              "[Collapsible1]Max Slow: 7.5% → 12.5%",
+              "[Collapsible2:Upgraded Nightshade]Health: 400 → 800",
+              "[Collapsible2]Damage: 50 → 135",
+              "[Collapsible2]Range: 30 → 35",
+              "[Collapsible2]Cooldown: 3s → 2.75s",
+              "[Collapsible2]Confusion Time: 1s → 1.25s",
+            ],
+          },
+        },
+      ],
     },
   },
 };

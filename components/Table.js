@@ -1,92 +1,92 @@
 export default class Table {
-    /**
-     * @param {HTMLTableElement} root
-     */
-    constructor(root) {
-        this.root = root;
+  /**
+   * @param {HTMLTableElement} root
+   */
+  constructor(root) {
+    this.root = root;
+  }
+
+  /**
+   * @param {String} value
+   * @returns {HTMLTableCellElement}
+   */
+  createHeaderCell(value) {
+    const th = document.createElement("th");
+
+    const headerText = this.#formatHeader(value);
+
+    th.innerText = headerText;
+
+    th.classList.add("table-header-cell");
+
+    return th;
+  }
+
+  #formatHeader(value) {
+    const camelRegex = /([a-z])([A-Z])/g.exec(value);
+
+    if (camelRegex) {
+      value =
+        value.slice(0, camelRegex.index + 1) +
+        " " +
+        value.slice(camelRegex.index + 1);
+
+      return this.#formatHeader(value);
     }
 
-    /**
-     * @param {String} value
-     * @returns {HTMLTableCellElement}
-     */
-    createHeaderCell(value) {
-        const th = document.createElement('th');
+    return value;
+  }
 
-        const headerText = this.#formatHeader(value);
+  /**
+   * @param {String} value
+   * @returns {HTMLTableCellElement}
+   */
+  createCell(value) {
+    const td = document.createElement("td");
+    td.classList.add("table-cell");
 
-        th.innerText = headerText;
-
-        th.classList.add('table-header-cell');
-
-        return th;
+    const input = document.createElement("input");
+    input.classList.add("table-cell-input");
+    if (value.length > 10) {
+      input.classList.add("table-cell-input-lg");
+    } else if (value.length > 5) {
+      input.classList.add("table-cell-input-md");
     }
 
-    #formatHeader(value) {
-        const camelRegex = /([a-z])([A-Z])/g.exec(value);
+    input.value = value;
 
-        if (camelRegex) {
-            value =
-                value.slice(0, camelRegex.index + 1) +
-                ' ' +
-                value.slice(camelRegex.index + 1);
+    td.appendChild(input);
+    return td;
+  }
 
-            return this.#formatHeader(value);
-        }
+  /**
+   * @returns {HTMLTableRowElement}
+   */
+  createRow() {
+    const tr = document.createElement("tr");
 
-        return value;
-    }
+    return tr;
+  }
 
-    /**
-     * @param {String} value
-     * @returns {HTMLTableCellElement}
-     */
-    createCell(value) {
-        const td = document.createElement('td');
-        td.classList.add('table-cell');
+  /**
+   * @returns {HTMLTableSectionElement}
+   */
+  createHeader() {
+    const thead = document.createElement("thead");
 
-        const input = document.createElement('input');
-        input.classList.add('table-cell-input');
-        if (value.length > 10) {
-            input.classList.add('table-cell-input-lg');
-        } else if (value.length > 5) {
-            input.classList.add('table-cell-input-md');
-        }
+    return thead;
+  }
 
-        input.value = value;
+  /**
+   * @returns {HTMLTableSectionElement}
+   */
+  createBody() {
+    const tbody = document.createElement("tbody");
 
-        td.appendChild(input);
-        return td;
-    }
+    return tbody;
+  }
 
-    /**
-     * @returns {HTMLTableRowElement}
-     */
-    createRow() {
-        const tr = document.createElement('tr');
-
-        return tr;
-    }
-
-    /**
-     * @returns {HTMLTableSectionElement}
-     */
-    createHeader() {
-        const thead = document.createElement('thead');
-
-        return thead;
-    }
-
-    /**
-     * @returns {HTMLTableSectionElement}
-     */
-    createBody() {
-        const tbody = document.createElement('tbody');
-
-        return tbody;
-    }
-
-    removeTable() {
-        this.root.innerHTML = '';
-    }
+  removeTable() {
+    this.root.innerHTML = "";
+  }
 }

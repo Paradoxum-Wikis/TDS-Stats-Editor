@@ -4,74 +4,73 @@
  */
 
 export const allowedAttributes = [
-    'Level',
-    'NetCost',
-    'Damage',
-    
-    'ExplosionDamage',
-    'BombTime',
-    'ExplosionRadius',
-    'FinalHitDamage',
-    'RepositionDamage',
-    'ComboLength',
+  "Level",
+  "NetCost",
+  "Damage",
 
-    'Cooldown',
-    'KnockbackCooldown',
+  "ExplosionDamage",
+  "BombTime",
+  "ExplosionRadius",
+  "FinalHitDamage",
+  "RepositionDamage",
+  "ComboLength",
 
-    'KnockbackForce',
-    'RevTime',
-    'ChargeTime',
-    'LaserCooldown',
-    'MaxAmmo',
+  "Cooldown",
+  "KnockbackCooldown",
 
-    'Range',
-    'AssistRange',
-    'SpeedMultiplier',
+  "KnockbackForce",
+  "RevTime",
+  "ChargeTime",
+  "LaserCooldown",
+  "MaxAmmo",
 
-    'DPS',
-    'CostEfficiency',
+  "Range",
+  "AssistRange",
+  "SpeedMultiplier",
 
-    'Tick',
-    'ChargeUp',
-    'Overcharge',
-    'BurnDamage',
-    'BurnTime',
-    'SlowdownPerHit',
-    'MaxSlow',
-    'SlowdownTime',
-    'TotalDPS',
+  "DPS",
+  "CostEfficiency",
 
-    'MissileDPS',
-    'TotalPrice',
-    'Defense',
-    'MaxDefMelt',
-    'AttackSpeed',
-    'MissileAmount',
-    'Health',
-    'Income',
-    'MaxIncome',
-    'DetectionRange',
-    'DetectionDuration',
-    'FirerateBuff',
-    'DamageBuff',
-    'RangeBuff',
-    'BuffLength',
-    
+  "Tick",
+  "ChargeUp",
+  "Overcharge",
+  "BurnDamage",
+  "BurnTime",
+  "SlowdownPerHit",
+  "MaxSlow",
+  "SlowdownTime",
+  "TotalDPS",
+
+  "MissileDPS",
+  "TotalPrice",
+  "Defense",
+  "MaxDefMelt",
+  "AttackSpeed",
+  "MissileAmount",
+  "Health",
+  "Income",
+  "MaxIncome",
+  "DetectionRange",
+  "DetectionDuration",
+  "FirerateBuff",
+  "DamageBuff",
+  "RangeBuff",
+  "BuffLength",
 ];
 
 // special case handlers cuz some attributes need different labels in faithful format
 export const attributeLabels = {
-    'NetCost': 'Total Price',
-    'Cooldown': 'Firerate',
-    'ChargeTime': 'Charge-Up',
-    'LaserCooldown': 'Cooldown',
-    'ExplosionDamage': '[[Splash Damage]]',
-    'ExplosionRadius': 'Explosion Range',
-    'BombTime': 'Bomb Firerate',
-    'AssistRange': 'Hidden Det. Range',
-    'ComboLength': 'Hit Count',
-    'KnockbackCooldown': 'Cooldown',
-    'RevTime': 'Rev-Up Time',
+  NetCost: "Total Price",
+  Cooldown: "Firerate",
+  ChargeTime: "Charge-Up",
+  LaserCooldown: "Cooldown",
+  ExplosionDamage: "[[Splash Damage]]",
+  ExplosionRadius: "Explosion Range",
+  BombTime: "Bomb Firerate",
+  AssistRange: "Hidden Det. Range",
+  ComboLength: "Hit Count",
+  KnockbackCooldown: "Cooldown",
+  RevTime: "Rev-Up Time",
 };
 
 /**
@@ -81,22 +80,22 @@ export const attributeLabels = {
  * @returns {string|null} - The custom label
  */
 export function getTowerSpecificLabel(attribute, towerName) {
-    const towerNameLower = towerName.toLowerCase();
-    
-    // MaxAmmo special cases
-    if (attribute === 'MaxAmmo') {
-        if (towerNameLower.includes('accelerator')) {
-            return 'Overcharge';
-        } else if (towerNameLower.includes('cowboy')) {
-            return 'Cash Shot';
-        }
+  const towerNameLower = towerName.toLowerCase();
+
+  // MaxAmmo special cases
+  if (attribute === "MaxAmmo") {
+    if (towerNameLower.includes("accelerator")) {
+      return "Overcharge";
+    } else if (towerNameLower.includes("cowboy")) {
+      return "Cash Shot";
     }
-    
-    // Add more tower specific attribute mappings here
-    // Example:
-    // if (attribute === 'SomeAttribute' && towerNameLower.includes('specificTower')) {
-    //     return 'Custom Label';
-    // }
-    
-    return null; // No custom label for this tower+attribute combination
+  }
+
+  // Add more tower specific attribute mappings here
+  // Example:
+  // if (attribute === 'SomeAttribute' && towerNameLower.includes('specificTower')) {
+  //     return 'Custom Label';
+  // }
+
+  return null; // No custom label for this tower+attribute combination
 }

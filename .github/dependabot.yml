@@ -14,7 +14,7 @@ updates:
     commit-message:
       prefix: "npm"
       include: "scope"
-  
+
   # github actions
   #- package-ecosystem: "github-actions"
   #  directory: "/"

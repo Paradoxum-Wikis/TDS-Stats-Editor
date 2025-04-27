@@ -1,123 +1,130 @@
-import Table from './Table.js';
-import TableUnitInput from './TableUnitInput.js';
+import Table from "./Table.js";
+import TableUnitInput from "./TableUnitInput.js";
 
 export default class UnitTable extends Table {
-    constructor(root, viewer) {
-        super(root);
-        this.viewer = viewer;
-        
-        document.addEventListener('settingsChanged', (e) => {
-            if (this.isLoaded && (e.detail.setting === 'showSeconds' || e.detail.setting === 'forceUSNumbers')) {
-                this.refresh();
-            }
+  constructor(root, viewer) {
+    super(root);
+    this.viewer = viewer;
+
+    document.addEventListener("settingsChanged", (e) => {
+      if (
+        this.isLoaded &&
+        (e.detail.setting === "showSeconds" ||
+          e.detail.setting === "forceUSNumbers")
+      ) {
+        this.refresh();
+      }
+    });
+
+    this.isLoaded = false;
+  }
+
+  removeTable() {
+    document.getElementById("unit-table-buttons").classList.add("d-none");
+    super.removeTable();
+  }
+
+  #createBaseTable() {
+    this.header = this.createHeader();
+    this.body = this.createBody();
+
+    this.root.appendChild(this.header);
+    this.root.appendChild(this.body);
+  }
+
+  #addHeader(elements) {
+    const headerRow = this.createRow();
+    elements.forEach((element) => {
+      const headerCell = this.createHeaderCell(element);
+      headerRow.appendChild(headerCell);
+    });
+    this.header.appendChild(headerRow);
+  }
+
+  #addBody(data) {
+    Object.entries(data).forEach(([unitName, unitData]) => {
+      unitData.attributes.Name = unitName;
+
+      const deltaUnit = this.viewer.unitDeltaManager.unitData[unitName];
+      deltaUnit.attributes.Name = unitName;
+      const tr = this.createRow();
+
+      this.attributes.forEach((attribute) => {
+        const tableInput = new TableUnitInput({
+          unitName: unitName,
+          attribute: attribute,
+          unitData: unitData,
+          deltaData: deltaUnit,
+          viewer: this.viewer,
         });
-        
-        this.isLoaded = false;
-    }
 
-    removeTable() {
-        document.getElementById('unit-table-buttons').classList.add('d-none');
-        super.removeTable();
-    }
+        tableInput.createInput();
 
-    #createBaseTable() {
-        this.header = this.createHeader();
-        this.body = this.createBody();
+        tr.appendChild(tableInput.base);
+      });
 
-        this.root.appendChild(this.header);
-        this.root.appendChild(this.body);
-    }
+      this.body.appendChild(tr);
+    });
+  }
 
-    #addHeader(elements) {
-        const headerRow = this.createRow();
-        elements.forEach((element) => {
-            const headerCell = this.createHeaderCell(element);
-            headerRow.appendChild(headerCell);
-        });
-        this.header.appendChild(headerRow);
-    }
+  #getAttributes(data) {
+    const attributes = Object.values(data).reduce(
+      (a, unitData) => [...a, ...unitData.attributeNames],
+      [],
+    );
 
-    #addBody(data) {
-        Object.entries(data).forEach(([unitName, unitData]) => {
-            unitData.attributes.Name = unitName;
+    const allAttributes = [
+      "Name",
+      ...new Set(attributes.filter((v) => v !== "Name")),
+    ];
 
-            const deltaUnit = this.viewer.unitDeltaManager.unitData[unitName];
-            deltaUnit.attributes.Name = unitName;
-            const tr = this.createRow();
-
-            this.attributes.forEach((attribute) => {
-                const tableInput = new TableUnitInput({
-                    unitName: unitName,
-                    attribute: attribute,
-                    unitData: unitData,
-                    deltaData: deltaUnit,
-                    viewer: this.viewer,
-                });
-
-                tableInput.createInput();
-
-                tr.appendChild(tableInput.base);
-            });
-
-            this.body.appendChild(tr);
-        });
-    }
-
-    #getAttributes(data) {
-        const attributes = Object.values(data).reduce(
-            (a, unitData) => [...a, ...unitData.attributeNames],
-            []
+    // filter by both unitDisabled and unitHidden lists
+    if (this.viewer && this.viewer.propertyViewer) {
+      return allAttributes.filter((attr) => {
+        // filter out if in unitDisabled OR unitHidden
+        return (
+          !this.viewer.propertyViewer.unitDisabled.includes(attr) &&
+          !this.viewer.propertyViewer.unitHidden.includes(attr)
         );
-
-        const allAttributes = ['Name', ...new Set(attributes.filter((v) => v !== 'Name'))];
-        
-        // filter by both unitDisabled and unitHidden lists
-        if (this.viewer && this.viewer.propertyViewer) {
-            return allAttributes.filter(attr => {
-                // filter out if in unitDisabled OR unitHidden
-                return !this.viewer.propertyViewer.unitDisabled.includes(attr) && 
-                       !this.viewer.propertyViewer.unitHidden.includes(attr);
-            });
-        }
-        
-        return allAttributes;
+      });
     }
 
-    refresh() {
-        if (!this.isLoaded || !this.data) return;
-        
-        while (this.body.firstChild) {
-            this.body.removeChild(this.body.firstChild);
-        }
-        
-        this.#addBody(this.data);
+    return allAttributes;
+  }
+
+  refresh() {
+    if (!this.isLoaded || !this.data) return;
+
+    while (this.body.firstChild) {
+      this.body.removeChild(this.body.firstChild);
     }
 
-    /**
-     * Loads unit data into the slave table and renders it
-     * @param {Object} data - The unit data to display in the table
-     * @param {Object} [options] - Optional? settings for loading the table
-     */
-    load(data, options) {
-        options = options ?? {};
-        this.data = data;
-        
-        this.removeTable();
-        if (Object.keys(data).length === 0) {
-            this.isLoaded = false;
-            return;
-        }
+    this.#addBody(this.data);
+  }
 
-        document
-            .getElementById('unit-table-buttons')
-            .classList.remove('d-none');
+  /**
+   * Loads unit data into the slave table and renders it
+   * @param {Object} data - The unit data to display in the table
+   * @param {Object} [options] - Optional? settings for loading the table
+   */
+  load(data, options) {
+    options = options ?? {};
+    this.data = data;
 
-        this.attributes = this.#getAttributes(data);
-        this.#createBaseTable();
-
-        this.#addHeader(this.attributes);
-        this.#addBody(data);
-        
-        this.isLoaded = true;
+    this.removeTable();
+    if (Object.keys(data).length === 0) {
+      this.isLoaded = false;
+      return;
     }
+
+    document.getElementById("unit-table-buttons").classList.remove("d-none");
+
+    this.attributes = this.#getAttributes(data);
+    this.#createBaseTable();
+
+    this.#addHeader(this.attributes);
+    this.#addBody(data);
+
+    this.isLoaded = true;
+  }
 }

@@ -1,187 +1,187 @@
 body {
-    font-size: 0.875rem;
+  font-size: 0.875rem;
 }
 
 main {
-    display: flex;
-    flex-grow: 1;
+  display: flex;
+  flex-grow: 1;
 }
 
 main > header {
-    background-color: rgba(0, 0, 0, 0.15);
+  background-color: rgba(0, 0, 0, 0.15);
 }
 
 #alert-container {
-    pointer-events: none;
+  pointer-events: none;
 }
 
 #propertyViewer {
-    display: block;
-    overflow-x: none;
-    overflow-y: auto;
+  display: block;
+  overflow-x: none;
+  overflow-y: auto;
 }
 
 .upgrade-image {
-    width: 100%;
+  width: 100%;
 }
 
 .table-responsive {
-    max-width: 100%;
-    transition: max-width 0.3s ease;
+  max-width: 100%;
+  transition: max-width 0.3s ease;
 }
 
 /* keep the table from expanding too much when sidebar is collapsed */
 .container-main.sidebar-collapsed .table-responsive {
-    max-width: calc(100vw - 60px); /* mini sidebar width */
+  max-width: calc(100vw - 60px); /* mini sidebar width */
 }
 
 /* Current table width for expanded sidebar */
 .container-main:not(.sidebar-collapsed) .table-responsive {
-    max-width: calc(100vw - 265px);
+  max-width: calc(100vw - 265px);
 }
 
 .table {
-    width: initial;
+  width: initial;
 }
 
 .table > :not(caption) > * > * {
-    padding: 0em;
+  padding: 0em;
 }
 .table-cell {
-    padding: 0em;
+  padding: 0em;
 }
 
 .table-header-cell {
-    padding: 0.25em 0.75em !important;
-    white-space: nowrap;
+  padding: 0.25em 0.75em !important;
+  white-space: nowrap;
 }
 
 .form-check-input-delta {
-    border-color: hsla(296, 63%, 42%, 0.839) !important;
-    border-width: 2px;
+  border-color: hsla(296, 63%, 42%, 0.839) !important;
+  border-width: 2px;
 }
 
 .table-cell-input-delta {
-    color: hsl(216, 60%, 75%) !important;
+  color: hsl(216, 60%, 75%) !important;
 }
 
 .table-cell-input-delta-positive {
-    color: hsl(137, 60%, 75%) !important;
+  color: hsl(137, 60%, 75%) !important;
 }
 
 .table-cell-input-delta-negative {
-    color: hsl(0, 61%, 75%) !important;
+  color: hsl(0, 61%, 75%) !important;
 }
 
 .btn-dark {
-    background-color: hsl(210, 11%, 4%);
-    border-color: hsl(210, 11%, 4%);
+  background-color: hsl(210, 11%, 4%);
+  border-color: hsl(210, 11%, 4%);
 }
 .btn-dark:focus {
-    background-color: hsl(210, 11%, 5%);
-    border-color: hsl(210, 11%, 5%);
+  background-color: hsl(210, 11%, 5%);
+  border-color: hsl(210, 11%, 5%);
 }
 .btn-outline-dark {
-    border-color: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 .table-cell-input {
-    background-color: rgba(0, 0, 0, 0);
-    border: none;
-    color: #fff;
-    padding: 0.5em;
-    min-width: 4em;
-    width: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: #fff;
+  padding: 0.5em;
+  min-width: 4em;
+  width: 100%;
 }
 
 .table-cell-input-md {
-    min-width: 8em;
+  min-width: 8em;
 }
 
 .table-cell-input-lg {
-    min-width: 12em;
+  min-width: 12em;
 }
 
 .table-cell-input:hover {
-    background-color: rgba(1, 0, 20, 0.2);
+  background-color: rgba(1, 0, 20, 0.2);
 }
 
 .form-check-input {
-    cursor: pointer;
+  cursor: pointer;
 }
 .form-check-input:hover {
-    background-color: rgba(182, 182, 182, 0.8);
+  background-color: rgba(182, 182, 182, 0.8);
 }
 .form-check-input:checked:hover {
-    background-color: #035D7C;
-    border-color: #035D7C;
+  background-color: #035d7c;
+  border-color: #035d7c;
 }
 
 .table-cell-input:focus-visible {
-    border: none;
-    outline: none;
-    background-color: rgba(1, 0, 6, 0.3);
+  border: none;
+  outline: none;
+  background-color: rgba(1, 0, 6, 0.3);
 }
 
 .dropdown-menu {
-    max-height: 400px;
-    overflow-y: auto;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 .modal-header {
-    background-color: rgba(0, 0, 0, 0.25);
-    border: none;
+  background-color: rgba(0, 0, 0, 0.25);
+  border: none;
 }
 
 .modal-footer {
-    border: none;
+  border: none;
 }
 
 .child-center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: 0;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  transform: translate(-50%, -50%);
 }
 .child-right {
-    position: absolute;
-    top: 50%;
-    left: 100%;
-    margin: 0;
-    transform: translate(calc(-100% - 0.5em), -50%);
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin: 0;
+  transform: translate(calc(-100% - 0.5em), -50%);
 }
 
 .form-control {
-    background-color: rgba(0, 0, 2, 0.2);
-    border-color: rgba(255, 255, 255, 0.1);
-    border-radius: 25px 0 25px 0;
-    padding-left: 16px;
+  background-color: rgba(0, 0, 2, 0.2);
+  border-color: rgba(255, 255, 255, 0.1);
+  border-radius: 25px 0 25px 0;
+  padding-left: 16px;
 }
 
 .form-control:focus {
-    background-color: rgba(0, 0, 2, 0.3);
-    border: none;
+  background-color: rgba(0, 0, 2, 0.3);
+  border: none;
 }
 .dropdown-item:hover {
-    background-color: rgba(0, 0, 0, 0.2);
-    color: #059acc;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #059acc;
 }
 
 .container-main {
-    display: flex;
-    flex-wrap: nowrap;
-    height: 100vh;
-    max-height: 100vh;
-    width: 100vw;
-    overflow-x: hidden;
-    background-color: rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100vh;
+  max-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .feather {
-    width: 16px;
-    height: 16px;
-    vertical-align: text-bottom;
+  width: 16px;
+  height: 16px;
+  vertical-align: text-bottom;
 }
 
 /*
@@ -189,48 +189,48 @@ main > header {
    */
 
 .sidebar {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 100; /* Behind the navbar */
-    padding: 0;
-    box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
-    background-color: rgba(0, 0, 0, 0.35);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100; /* Behind the navbar */
+  padding: 0;
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.35);
 }
 
 .sidebar-sticky {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 48px; /* Height of navbar */
-    height: calc(100vh - 48px);
-    padding-top: 0.5rem;
-    overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  position: -webkit-sticky;
+  position: sticky;
+  top: 48px; /* Height of navbar */
+  height: calc(100vh - 48px);
+  padding-top: 0.5rem;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }
 
 .sidebar .nav-link {
-    font-weight: 500;
-    color: #d2d2d2;
+  font-weight: 500;
+  color: #d2d2d2;
 }
 
 .sidebar .nav-link .feather {
-    margin-right: 4px;
-    color: #1a1a1a;
+  margin-right: 4px;
+  color: #1a1a1a;
 }
 
 .sidebar .nav-link.active {
-    color: #007bff;
+  color: #007bff;
 }
 
 .sidebar .nav-link:hover .feather,
 .sidebar .nav-link.active .feather {
-    color: inherit;
+  color: inherit;
 }
 
 .sidebar-heading {
-    font-size: 0.75rem;
-    text-transform: uppercase;
+  font-size: 0.75rem;
+  text-transform: uppercase;
 }
 
 /*
@@ -238,28 +238,28 @@ main > header {
    */
 
 .navbar-brand {
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-    font-size: 1rem;
-    background-color: rgba(0, 0, 0, 0.45);
-    box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 1rem;
+  background-color: rgba(0, 0, 0, 0.45);
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
 }
 
 .navbar .form-control {
-    padding: 0.75rem 1rem;
-    border-width: 0;
-    border-radius: 0;
+  padding: 0.75rem 1rem;
+  border-width: 0;
+  border-radius: 0;
 }
 
 .form-control-dark {
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.3);
-    border-color: rgba(255, 255, 255, 0);
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0);
 }
 
 .form-control-dark:focus {
-    border-color: transparent;
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.108);
+  border-color: transparent;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.108);
 }
 
 /*
@@ -267,8 +267,8 @@ main > header {
    */
 
 .border-top {
-    border-top: 1px solid #e5e5e5;
+  border-top: 1px solid #e5e5e5;
 }
 .border-bottom {
-    border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
 }
