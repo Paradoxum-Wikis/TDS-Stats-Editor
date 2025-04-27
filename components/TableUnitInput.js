@@ -87,7 +87,7 @@ export default class TableUnitInput {
     input.style.padding = "0.6em";
     this.base.style.position = "relative";
 
-    input.addEventListener('change', this.#onBooleanSubmit.bind(this)); // prettier-ignore
+    input.addEventListener("change", this.#onBooleanSubmit.bind(this));
     this.base.appendChild(input);
 
     return input;
@@ -105,7 +105,7 @@ export default class TableUnitInput {
       input.classList.add("zero-value");
     }
 
-    input.addEventListener('focusin', (() => input.value = '').bind(this)); // prettier-ignore
+    input.addEventListener("focusin", (() => (input.value = "")).bind(this));
     input.addEventListener("focusout", this.#onNumberSubmit.bind(this));
     form.addEventListener(
       "submit",
@@ -140,9 +140,12 @@ export default class TableUnitInput {
     input.size = 1;
     input.classList.add("table-cell-input");
 
-    input.addEventListener('focusin', (() => {
-			input.value = ''
-		}).bind(this)); // prettier-ignore
+    input.addEventListener(
+      "focusin",
+      (() => {
+        input.value = "";
+      }).bind(this),
+    );
     input.addEventListener("focusout", this.#onTextSubmit.bind(this));
     input.addEventListener("mouseup", () => {
       input.focus();

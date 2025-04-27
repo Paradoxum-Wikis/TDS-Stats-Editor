@@ -256,7 +256,8 @@ class UnitCalculations {
       Default: {
         Requires: ["Cooldown"],
         Value: (cooldown) => {
-          const { extraCooldown, firerateBuff, RateOfFireBug } = window.state.boosts.unit; // prettier-ignore
+          const { extraCooldown, firerateBuff, RateOfFireBug } =
+            window.state.boosts.unit;
 
           return cooldown / (firerateBuff + 1) + extraCooldown + RateOfFireBug;
         },
@@ -268,7 +269,7 @@ class UnitCalculations {
       Default: {
         Requires: ["Damage"],
         Value: (damage) => {
-          const { damageBuff } = window?.state?.boosts?.unit ?? 0; // prettier-ignore
+          const { damageBuff } = window?.state?.boosts?.unit ?? 0;
 
           return damage * (damageBuff + 1);
         },
@@ -280,7 +281,7 @@ class UnitCalculations {
       Default: {
         Requires: ["ExplosionDamage"],
         Value: (explosionDamage) => {
-          const { damageBuff } = window.state.boosts.unit; // prettier-ignore
+          const { damageBuff } = window.state.boosts.unit;
 
           return explosionDamage * (damageBuff + 1);
         },
@@ -292,7 +293,7 @@ class UnitCalculations {
       Default: {
         Requires: ["Range"],
         Value: (range) => {
-          const { rangeBuff } = window?.state?.boosts?.unit ?? 0; // prettier-ignore
+          const { rangeBuff } = window?.state?.boosts?.unit ?? 0;
 
           return range * (rangeBuff + 1);
         },
@@ -304,7 +305,7 @@ class UnitCalculations {
       Default: {
         Requires: ["Health"],
         Value: (health) => {
-          const { healthBuff } = window?.state?.boosts?.unit ?? 0 // prettier-ignore
+          const { healthBuff } = window?.state?.boosts?.unit ?? 0;
 
           return health / (healthBuff + 1);
         },

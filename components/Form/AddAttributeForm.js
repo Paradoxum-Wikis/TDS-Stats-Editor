@@ -5,23 +5,25 @@ export default class AddAttributeForm {
   constructor(viewer) {
     this.viewer = viewer;
 
-    this.typeDropdown = document.getElementById('add-attribute-type-dropdown'); // prettier-ignore
+    this.typeDropdown = document.getElementById("add-attribute-type-dropdown");
     this.typeInput = document.getElementById("add-attribute-type");
 
     this.nameInput = document.getElementById("add-attribute-name");
-    this.nameOptions = document.getElementById('add-attribute-name-options'); // prettier-ignore
+    this.nameOptions = document.getElementById("add-attribute-name-options");
 
     this.numberForm = document.getElementById("add-attribute-number-form");
-    this.numberValue = document.getElementById('add-attribute-number-value'); // prettier-ignore
+    this.numberValue = document.getElementById("add-attribute-number-value");
 
-    this.booleanForm = document.getElementById('add-attribute-boolean-form'); // prettier-ignore
-    this.booleanValue = document.getElementById('add-attribute-boolean-value'); // prettier-ignore
+    this.booleanForm = document.getElementById("add-attribute-boolean-form");
+    this.booleanValue = document.getElementById("add-attribute-boolean-value");
 
     this.stringForm = document.getElementById("add-attribute-string-form");
-    this.stringValue = document.getElementById('add-attribute-string-value'); // prettier-ignore
-    this.stringOptions = document.getElementById('add-attribute-string-options') // prettier-ignore
+    this.stringValue = document.getElementById("add-attribute-string-value");
+    this.stringOptions = document.getElementById(
+      "add-attribute-string-options",
+    );
 
-    this.addAttributeSubmit = document.getElementById('add-attribute-submit') // prettier-ignore
+    this.addAttributeSubmit = document.getElementById("add-attribute-submit");
 
     this.attributes = this.viewer.deltaTowerManager
       .getAllAttributes()
@@ -93,7 +95,8 @@ export default class AddAttributeForm {
 
   #onNameInput(attributeName) {
     this.nameInput.value = attributeName;
-    const attributeType = this.viewer.deltaTowerManager.getTypeForAttribute(attributeName); // prettier-ignore
+    const attributeType =
+      this.viewer.deltaTowerManager.getTypeForAttribute(attributeName);
     if (attributeType === undefined) return;
 
     this.typeInput.value = attributeType;

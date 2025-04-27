@@ -6,8 +6,10 @@ export default class RemoveAttributeForm {
     this.viewer = viewer;
 
     this.nameInput = document.getElementById("remove-attribute-name");
-    this.nameOptions = document.getElementById('remove-attribute-name-options'); // prettier-ignore
-    this.removeAttributeSubmit = document.getElementById('remove-attribute-submit') // prettier-ignore
+    this.nameOptions = document.getElementById("remove-attribute-name-options");
+    this.removeAttributeSubmit = document.getElementById(
+      "remove-attribute-submit",
+    );
 
     this.removeAttributeSubmit.addEventListener(
       "click",

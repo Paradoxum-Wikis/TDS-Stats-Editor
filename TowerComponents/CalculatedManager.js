@@ -347,7 +347,9 @@ class CalculatedManager {
       },
       Cowboy: {
         For: ["Cowboy"],
-        Value: (level) => (level.Damage * level.MaxAmmo) / (level.SpinDuration + (level.Cooldown * (level.MaxAmmo -1))), // prettier-ignore
+        Value: (level) =>
+          (level.Damage * level.MaxAmmo) /
+          (level.SpinDuration + level.Cooldown * (level.MaxAmmo - 1)),
       },
       Rocketeer: {
         For: ["Rocketeer"],
@@ -647,8 +649,12 @@ class CalculatedManager {
 
     NetCost: {
       Default: {
-        Value: (level) => (level.levels.levels.reduce(
-					(total, nextLevel) => nextLevel.Level > level.Level ? total : total + nextLevel.Cost, 0)), // prettier-ignore
+        Value: (level) =>
+          level.levels.levels.reduce(
+            (total, nextLevel) =>
+              nextLevel.Level > level.Level ? total : total + nextLevel.Cost,
+            0,
+          ),
       },
     },
     LimitNetCost: {
@@ -1066,7 +1072,8 @@ class CalculatedManager {
       Default: {
         Requires: ["Cooldown"],
         Value: (cooldown) => {
-          const { extraCooldown, firerateBuff, RateOfFireBug } = window.state.boosts.tower; // prettier-ignore
+          const { extraCooldown, firerateBuff, RateOfFireBug } =
+            window.state.boosts.tower;
 
           return cooldown / (firerateBuff + 1) + extraCooldown + RateOfFireBug;
         },
@@ -1078,7 +1085,7 @@ class CalculatedManager {
       Default: {
         Requires: ["Damage"],
         Value: (damage) => {
-          const { damageBuff } = window.state.boosts.tower; // prettier-ignore
+          const { damageBuff } = window.state.boosts.tower;
 
           return damage * (damageBuff + 1);
         },
@@ -1090,7 +1097,7 @@ class CalculatedManager {
       Default: {
         Requires: ["ExplosionDamage"],
         Value: (explosionDamage) => {
-          const { damageBuff } = window.state.boosts.tower; // prettier-ignore
+          const { damageBuff } = window.state.boosts.tower;
 
           return explosionDamage * (damageBuff + 1);
         },
@@ -1102,7 +1109,7 @@ class CalculatedManager {
       Default: {
         Requires: ["Range"],
         Value: (range) => {
-          const { rangeBuff } = window.state.boosts.tower; // prettier-ignore
+          const { rangeBuff } = window.state.boosts.tower;
 
           return range * (rangeBuff + 1);
         },
@@ -1114,7 +1121,7 @@ class CalculatedManager {
       Default: {
         Requires: ["Cost"],
         Value: (cost, level) => {
-          const { discount } = window.state.boosts.tower; // prettier-ignore
+          const { discount } = window.state.boosts.tower;
 
           return level.Level == 0 && discount > 0
             ? cost
@@ -1128,7 +1135,7 @@ class CalculatedManager {
       Default: {
         Requires: ["SpawnTime"],
         Value: (spawnTime) => {
-          const { spawnrateBuff } = window.state.boosts.unit; // prettier-ignore
+          const { spawnrateBuff } = window.state.boosts.unit;
 
           return spawnTime / (spawnrateBuff + 1);
         },

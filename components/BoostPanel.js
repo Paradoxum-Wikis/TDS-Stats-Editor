@@ -5,7 +5,9 @@ export default class BoostPanel {
     this.viewer = viewer;
     this.boostForm = document.getElementById("side-boost-form");
 
-    this.targetBoosts = new ButtonSelection(document.getElementById('side-boosts-target')); // prettier-ignore
+    this.targetBoosts = new ButtonSelection(
+      document.getElementById("side-boosts-target"),
+    );
     this.targetBoosts.activeClass = "btn-dark";
     this.targetBoosts.inactiveClass = "btn-outline-dark";
     this.targetBoosts.setButtons(["Tower", "Unit"]);

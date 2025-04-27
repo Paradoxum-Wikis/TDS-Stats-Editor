@@ -7,7 +7,8 @@ const calculated = {
   Health: (health) => health * (window.state.boosts.unit.healthBuff + 1),
   Damage: (damage) => damage * (window.state.boosts.unit.damageBuff + 1),
   Cooldown: (cooldown) => {
-    const { extraCooldown, firerateBuff, RateOfFireBug } = window.state.boosts.unit; // prettier-ignore
+    const { extraCooldown, firerateBuff, RateOfFireBug } =
+      window.state.boosts.unit;
 
     return cooldown / (firerateBuff + 1) + extraCooldown + RateOfFireBug;
   },
