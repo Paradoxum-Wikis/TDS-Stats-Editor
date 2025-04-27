@@ -188,7 +188,7 @@ const register = {
   },
 
   "Mecha Base": {
-    Default: ["Mark1", "Mark1Rocket", "Mark2", "Mark3", "Mark4", "Mark5"],
+    Default: ["Mark I", "Mark I Rocket", "Mark II", "Mark III", "Mark IV", "Mark V"],
   },
 
   "Military Base": {

@@ -2693,7 +2693,7 @@ export default {
             Extras: [],
             Attributes: {
               Spawnrate: 40,
-              UnitToSend: "Mark1Rocket",
+              UnitToSend: "Mark I Rocket",
             },
             Detections: {
               Flying: false,
@@ -2711,7 +2711,7 @@ export default {
           Image: 4119547593,
           Stats: {
             Extras: [],
-            Attributes: { Spawnrate: 40, UnitToSend: "Mark2" },
+            Attributes: { Spawnrate: 40, UnitToSend: "Mark II" },
             Detections: {
               Flying: false,
               Hidden: false,
@@ -2728,7 +2728,7 @@ export default {
           Image: 4119548000,
           Stats: {
             Extras: [],
-            Attributes: { Spawnrate: 40, UnitToSend: "Mark3" },
+            Attributes: { Spawnrate: 40, UnitToSend: "Mark III" },
             Detections: {
               Flying: false,
               Hidden: false,
@@ -2745,7 +2745,7 @@ export default {
           Image: 4119548431,
           Stats: {
             Extras: [],
-            Attributes: { Spawnrate: 40, UnitToSend: "Mark4" },
+            Attributes: { Spawnrate: 40, UnitToSend: "Mark IV" },
             Detections: {
               Flying: false,
               Hidden: false,
@@ -2762,7 +2762,7 @@ export default {
           Image: 4119548907,
           Stats: {
             Extras: [],
-            Attributes: { Spawnrate: 40, UnitToSend: "Mark5" },
+            Attributes: { Spawnrate: 40, UnitToSend: "Mark V" },
             Detections: {
               Flying: false,
               Hidden: false,
@@ -2781,7 +2781,7 @@ export default {
         Detections: { Flying: false, Hidden: false, Lead: false },
         Range: 3,
         Price: 5000,
-        Attributes: { Spawnrate: 60, UnitToSend: "Mark1" },
+        Attributes: { Spawnrate: 60, UnitToSend: "Mark I" },
         Cooldown: 0.5,
         Damage: 0,
       },

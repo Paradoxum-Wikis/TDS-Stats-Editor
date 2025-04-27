@@ -611,7 +611,7 @@ export default {
   },
 
   // Mecha Base
-  Mark1: {
+  "Mark I": {
     Health: 400,
     Damage: 8,
     Range: 30,
@@ -626,7 +626,7 @@ export default {
     Speed: 3,
     TimeBetweenMissiles: 0,
   },
-  Mark1Rocket: {
+  "Mark I Rocket": {
     Health: 400,
     Damage: 8,
     Range: 30,
@@ -641,7 +641,7 @@ export default {
     Speed: 3,
     TimeBetweenMissiles: 5,
   },
-  Mark2: {
+  "Mark II": {
     Health: 750,
     Damage: 12,
     Range: 25,
@@ -656,7 +656,7 @@ export default {
     Speed: 3,
     TimeBetweenMissiles: 5,
   },
-  Mark3: {
+  "Mark III": {
     Health: 1200,
     Damage: 10,
     Range: 25,
@@ -671,7 +671,7 @@ export default {
     Speed: 3,
     TimeBetweenMissiles: 3,
   },
-  Mark4: {
+  "Mark IV": {
     Health: 2000,
     Damage: 10,
     Range: 100,
@@ -686,7 +686,7 @@ export default {
     Speed: 3,
     TimeBetweenMissiles: 3,
   },
-  Mark5: {
+  "Mark V": {
     Health: 5000,
     Damage: 20,
     Range: 100,
