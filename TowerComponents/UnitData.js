@@ -1,6 +1,7 @@
 export default {
   // Necromancer
   Skeleton: {
+    GravestoneLevel: "1",
     Health: 60,
     Damage: 0,
     Range: 2,
@@ -16,6 +17,7 @@ export default {
     TickRate: 0,
   },
   "Sword Skeleton": {
+    GravestoneLevel: "1-2",
     Health: 90,
     Damage: 15,
     Range: 7.5,
@@ -31,6 +33,7 @@ export default {
     TickRate: 0,
   },
   "Giant Skeleton": {
+    GravestoneLevel: "2",
     Health: 600,
     Damage: 0,
     Range: 2,
@@ -46,6 +49,7 @@ export default {
     TickRate: 0,
   },
   "Skeleton Knight": {
+    GravestoneLevel: "2-3",
     Health: 250,
     Damage: 90,
     Range: 7.5,
@@ -61,6 +65,7 @@ export default {
     TickRate: 0,
   },
   "Hallow Guard": {
+    GravestoneLevel: "3",
     Health: 1500,
     Damage: 0,
     Range: 2,
@@ -76,6 +81,7 @@ export default {
     TickRate: 0,
   },
   "Executioner Skeleton": {
+    GravestoneLevel: "3",
     Health: 3500,
     Damage: 50,
     Range: 30,
