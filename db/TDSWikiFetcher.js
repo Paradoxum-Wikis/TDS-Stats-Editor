@@ -6,11 +6,11 @@
 class TDSWikiFetcher {
   constructor() {
     this.wikiBaseUrl = "https://tds.fandom.com";
-    this.categoryUrl = "https://occulticnine.vercel.app/dbtree";
+    this.categoryUrl = "/wiki/Special:CategoryTree?target=Category%3ATDSDatabase&mode=pages&namespaces=500";
+    this.dbtreeEndpoint = "https://occulticnine.vercel.app/dbtree";
 
     // backup proxies in case one fails
     this.corsProxies = [
-      "https://occulticnine.vercel.app/?url=",
       "https://api.cors.lol/?url=",
       "https://api.codetabs.com/v1/proxy?quest=",
       "https://api.allorigins.win/raw?url=",
@@ -82,13 +82,27 @@ class TDSWikiFetcher {
   async fetchTowers() {
     try {
       console.log("fetching towers from wiki...");
-      const response = await fetch(this.categoryUrl);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+      
+      let html;
+      try {
+        const response = await fetch(this.dbtreeEndpoint);
+        
+        if (!response.ok) {
+          throw new Error(`API endpoint failed with status: ${response.status}`);
+        }
+        
+        html = await response.text();
+        console.log("Successfully fetched data from API endpoint");
+      } catch (apiError) {
+        // If API endpoint fails, try the wiki URL with proxies
+        console.warn("API endpoint failed, trying proxy fallback:", apiError);
+        this.currentProxyIndex = 0;
+        
+        const wikiUrl = `${this.wikiBaseUrl}${this.categoryUrl}`;
+        const fallbackResponse = await this.fetchWithFallback(wikiUrl);
+        html = await fallbackResponse.text();
+        console.log("Successfully fetched data via proxy fallback");
       }
-
-      const html = await response.text();
 
       // check if content is correct
       if (
