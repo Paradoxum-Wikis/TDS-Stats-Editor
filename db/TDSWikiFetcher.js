@@ -6,8 +6,7 @@
 class TDSWikiFetcher {
   constructor() {
     this.wikiBaseUrl = "https://tds.fandom.com";
-    this.categoryUrl =
-      "/wiki/Special:CategoryTree?target=Category%3ATDSDatabase&mode=pages&namespaces=500";
+    this.categoryUrl = "https://occulticnine.vercel.app/dbtree";
 
     // backup proxies in case one fails
     this.corsProxies = [
@@ -83,10 +82,23 @@ class TDSWikiFetcher {
   async fetchTowers() {
     try {
       console.log("fetching towers from wiki...");
+      const response = await fetch(this.categoryUrl);
 
-      const url = `${this.wikiBaseUrl}${this.categoryUrl}`;
-      const response = await this.fetchWithFallback(url);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
       const html = await response.text();
+
+      // check if content is correct
+      if (
+        !html ||
+        html.trim().length === 0 ||
+        !html.includes("CategoryTreeItem")
+      ) {
+        console.warn("Invalid or empty response from API");
+        return this.getFallbackTowers();
+      }
 
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, "text/html");
