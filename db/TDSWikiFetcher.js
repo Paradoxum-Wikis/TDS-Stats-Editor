@@ -11,6 +11,7 @@ class TDSWikiFetcher {
 
     // backup proxies in case one fails
     this.corsProxies = [
+      "https://occulticnine.vercel.app/?url=",
       "https://api.cors.lol/?url=",
       "https://api.codetabs.com/v1/proxy?quest=",
       "https://api.allorigins.win/raw?url=",
