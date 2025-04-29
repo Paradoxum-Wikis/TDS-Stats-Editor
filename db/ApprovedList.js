@@ -44,6 +44,10 @@ const approvedTowers = [
   "Onett4smash/Medic Rework (V1)",
   "Chilloutofpewp2nd/Militant",
   "Chilloutofpewp2nd/Gatling (Rework",
+  "Onett4smash/Commander Rework (V1)",
+  "Onett4smash/Brawler Rework (V1)",
+  "Chilloutofpewp2nd/DJ Booth Rebalance",
+  "ArtZthecoolguy/Scrambler Tower",
 ];
 
 // List of featured towers
