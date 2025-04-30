@@ -44,9 +44,13 @@ class HeadsUp {
 
         const isActive = this.isPollActive(this.pollData);
 
-        // Only automatically show and create when active
-        if (isActive && this.pollData.id) {
-          this.createModal(this.pollData);
+        // Show modal if active, even if id is "NULL"
+        if (isActive) {
+          if (this.pollData.id && this.pollData.id !== "NULL") {
+            this.createModal(this.pollData);
+          } else {
+            this.createModalNoPoll(this.pollData);
+          }
 
           const announcementKey = `dismissed_announcement_${this.pollData.id}`;
           if (!localStorage.getItem(announcementKey)) {
@@ -206,6 +210,68 @@ class HeadsUp {
                     </div>
                     <div class="modal-footer">
                         <button type="button" id="announcement-dismiss" class="btn btn-primary">Don't show this poll again</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+    document.body.appendChild(modal);
+  }
+
+  createModalNoPoll(pollData) {
+    // Remove existing modal if any
+    const existingModal = document.getElementById(this.modalId);
+    if (existingModal) {
+      existingModal.remove();
+    }
+
+    // Calculate days remaining
+    let daysText = "";
+    if (pollData.endDate) {
+      const endDate = new Date(pollData.endDate);
+      endDate.setHours(23, 59, 59, 999);
+      const currentDate = new Date();
+      const daysRemaining = Math.ceil(
+        (endDate - currentDate) / (1000 * 60 * 60 * 24),
+      );
+      daysText =
+        daysRemaining > 1 ? `${daysRemaining} days` : `${daysRemaining} day`;
+    }
+
+    const modal = document.createElement("div");
+    modal.id = this.modalId;
+    modal.className = "modal fade";
+    modal.tabIndex = "-1";
+    modal.setAttribute("aria-labelledby", "announcement-title");
+    modal.setAttribute("aria-hidden", "true");
+
+    modal.innerHTML = `
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content bg-dark text-white">
+                    <div class="modal-header">
+                        <div class="d-flex align-items-center">
+                            <div class="toru-icon-container me-3">
+                                <i class="bi bi-broadcast fs-3"></i>
+                            </div>
+                            <div>
+                                <h5 class="modal-title unisans mb-0" id="announcement-title">${pollData.title || "Announcement"}</h5>
+                                <p class="text-muted small mb-0">
+                                    ${pollData.endDate ? `This message closes in ${daysText}` : ""}
+                                </p>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="toru-section">
+                            <div class="toru-options">
+                                <p>${pollData.description || ""}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="announcement-dismiss" class="btn btn-primary">Don't show this again</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
