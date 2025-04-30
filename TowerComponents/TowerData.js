@@ -5172,7 +5172,7 @@ export default {
         {
           Image: 119703739718324,
           Stats: {
-            Extras: ["Bee Duration: 4s → 4.5s", "Bee Tick Rate: 1s → 0.75s"],
+            Extras: ["Bee Duration: 4s → 4.5s", "Tick Rate: 1s → 0.75s"],
             Attributes: {
               BeeDamage: 2,
               TickRate: 0.75,
@@ -5195,9 +5195,9 @@ export default {
           Stats: {
             Extras: [
               "Bee Duration: 4.5s → 5.25s",
-              "Unlocks Swarm ability",
-              "Swarm Damage: 10",
-              "Swarm Range: 6",
+              "[Collapsible:Unlocks Swarm]Swarm Damage: 10",
+              "[Collapsible]Swarm Range: 6",
+              "[Collapsible:]Cooldown: 15s",
             ],
             Attributes: {
               BeeDamage: 2,
@@ -5224,8 +5224,8 @@ export default {
             Extras: [
               "Bee Damage: 2 → 3",
               "Bee Duration: 5.25s → 5.5s",
-              "Swarm Damage: 10 → 30",
-              "Swarm Range: 6 → 7",
+              "[Collapsible:Swarm]Swarm Damage: 10 → 30",
+              "[Collapsible]Swarm Range: 6 → 7",
             ],
             Attributes: {
               BeeDamage: 3,
@@ -5251,10 +5251,10 @@ export default {
           Stats: {
             Extras: [
               "Bee Damage: 3 → 4",
-              "Bee Tick Rate: 0.75s → 0.5s",
+              "Tick Rate: 0.75s → 0.5s",
               "Bee Duration: 5.5s → 8s",
-              "Swarm Damage: 30 → 50",
-              "Swarm Range: 7 → 8",
+              "[Collapsible:Swarm]Swarm Damage: 30 → 50",
+              "[Collapsible]Swarm Range: 7 → 8",
             ],
             Attributes: {
               BeeDamage: 4,

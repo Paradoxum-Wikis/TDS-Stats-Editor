@@ -267,6 +267,7 @@ export default class TableInput {
       case "EquipTime":
       case "BuildDelay":
       case "BombTime":
+      case "BeeDuration":
         return formatter.format(value) + (showSeconds ? "s" : "");
     }
 
