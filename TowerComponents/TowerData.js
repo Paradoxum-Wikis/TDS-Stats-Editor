@@ -5292,7 +5292,7 @@ export default {
             Icon: 4865025806,
             Cooldown: 15,
             Cost: 0,
-            Description: "Throws a bee swarm grenade that deals area damage and inflicts the bee sting effect on enemies that aren't already being stung.",
+            Description: "Throws a bee swarm grenade that deals area damage and inflict bees on enemies that were hit by it which deals damage over time. There is no limit to how many bees can be on a target.",
           },
         ],
         Price: 450,
