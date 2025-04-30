@@ -5154,7 +5154,7 @@ export default {
             Extras: ["Bee Damage: 1 → 2"],
             Attributes: {
               BeeDamage: 2,
-              BeeTickRate: 1,
+              TickRate: 1,
               BeeDuration: 4,
             },
             Detections: {
@@ -5175,7 +5175,7 @@ export default {
             Extras: ["Bee Duration: 4s → 4.5s", "Bee Tick Rate: 1s → 0.75s"],
             Attributes: {
               BeeDamage: 2,
-              BeeTickRate: 0.75,
+              TickRate: 0.75,
               BeeDuration: 4.5,
             },
             Detections: {
@@ -5201,7 +5201,7 @@ export default {
             ],
             Attributes: {
               BeeDamage: 2,
-              BeeTickRate: 0.75,
+              TickRate: 0.75,
               BeeDuration: 5.25,
               BeeGrenadeDamage: 10,
               BeeGrenadeRange: 6,
@@ -5229,7 +5229,7 @@ export default {
             ],
             Attributes: {
               BeeDamage: 3,
-              BeeTickRate: 0.75,
+              TickRate: 0.75,
               BeeDuration: 5.5,
               BeeGrenadeDamage: 30,
               BeeGrenadeRange: 7,
@@ -5258,7 +5258,7 @@ export default {
             ],
             Attributes: {
               BeeDamage: 4,
-              BeeTickRate: 0.5,
+              TickRate: 0.5,
               BeeDuration: 8,
               BeeGrenadeDamage: 50,
               BeeGrenadeRange: 8,
@@ -5280,8 +5280,10 @@ export default {
         Detections: { Flying: false, Hidden: false, Lead: false },
         Attributes: {
           BeeDamage: 1,
-          BeeTickRate: 1,
+          TickRate: 1,
           BeeDuration: 4,
+          BeeGrenadeDamage: 0,
+          BeeGrenadeRange: 0,
         },
         Abilities: [
           {
