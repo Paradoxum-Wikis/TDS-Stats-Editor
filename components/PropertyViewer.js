@@ -148,11 +148,11 @@ export default class PropertyViewer {
     return activeSkin.tower.name === "Mercenary Base";
   }
 
-  isSwarmerTower() {
-    const activeSkin = this.viewer.getActiveSkin();
-    if (!activeSkin) return false;
-    return activeSkin.tower.name === "Swarmer";
-  }
+//  isSwarmerTower() {
+//    const activeSkin = this.viewer.getActiveSkin();
+//    if (!activeSkin) return false;
+//    return activeSkin.tower.name === "Swarmer";
+//  }
 
   isDJTower() {
     const activeSkin = this.viewer.getActiveSkin();
@@ -295,12 +295,12 @@ export default class PropertyViewer {
         return true;
       }
 
-      if (
-        (this.isTrapperTower() || this.isSwarmerTower()) &&
-        property === "Damage"
-      ) {
-        return true;
-      }
+//      if (
+//        (this.isTrapperTower() || this.isSwarmerTower()) &&
+//        property === "Damage"
+//      ) {
+//        return true;
+//      }
 
       if (
         this.isMercenaryBaseTower() &&

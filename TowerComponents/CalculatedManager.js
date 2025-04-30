@@ -485,8 +485,8 @@ class CalculatedManager {
 
       Swarmer: {
         For: ["Swarmer"],
-        Requires: ["BeeDamage", "TickRate"],
-        Value: (level) => level.BeeDamage / level.TickRate,
+        Requires: ["Damage", "Cooldown", "BeeDamage", "TickRate"],
+        Value: (level) => level.Damage / level.Cooldown + level.BeeDamage / level.TickRate,
       },
 
       Burst: {
