@@ -310,8 +310,8 @@ class CalculatedManager {
       Swarmer: {
         For: ["Swarmer"],
         Requires: ["BeeDuration", "BeeDamage", "TickRate"],
-        Value: (level) => level.BeeDamage * (level.BeeDuration / level.TickRate),
-      },
+        Value: (level) => level.BeeDamage * Math.floor(level.BeeDuration / level.TickRate),
+      },      
       ToxicGunner: {
         For: ["Toxic Gunner"],
         Requires: ["PoisonDamage", "SlowdownTime", "TickRate"],
