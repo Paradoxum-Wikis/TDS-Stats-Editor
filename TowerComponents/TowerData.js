@@ -227,6 +227,7 @@ export default {
         },
         Cooldown: 0.2,
         Damage: 2,
+        Note: "Lead can be damaged by splash damage thanks to its bombs."
       },
     },
   },
@@ -329,6 +330,7 @@ export default {
         Range: 18,
         Cooldown: 1.7,
         Damage: 4,
+        Note: "Lead can be damaged by splash damage and fire damage."
       },
     },
   },
@@ -677,7 +679,7 @@ export default {
             Detections: {
               Flying: false,
               Hidden: true,
-              Lead: true,
+              Lead: false,
             },
             Cooldown: 0.15,
             Range: 15,
@@ -711,7 +713,7 @@ export default {
             Detections: {
               Flying: false,
               Hidden: true,
-              Lead: true,
+              Lead: false,
             },
             Cooldown: 0.125,
             Range: 17,
@@ -754,6 +756,7 @@ export default {
         Range: 12,
         Cooldown: 0.2,
         Damage: 6,
+        Note: "Lead can be damaged by splash damage thanks to its ability."
       },
     },
   },
@@ -1633,6 +1636,7 @@ export default {
         Attributes: {},
         Cooldown: 0,
         Damage: 0,
+        Note: "Lead can be damaged by splash damage and collision."
       },
     },
   },
@@ -1786,6 +1790,7 @@ export default {
         },
         Cooldown: 1.2,
         Damage: 4,
+        Note: "Sentries can damage lead by splash damage only."
       },
     },
   },
@@ -2681,6 +2686,7 @@ export default {
         Limit: 8,
         Cooldown: 1.5,
         Damage: 2,
+        Note: "Lead can be damaged by splash damage and fire damage."
       },
     },
   },
@@ -2784,6 +2790,7 @@ export default {
         Attributes: { Spawnrate: 60, UnitToSend: "Mark I" },
         Cooldown: 0.5,
         Damage: 0,
+        Note: "Lead can be damaged by splash damage and collision."
       },
     },
   },
@@ -2925,6 +2932,7 @@ export default {
         Cooldown: 0,
         Range: 6,
         Damage: 0,
+        Note: "Lead can be damaged by splash damage and collision."
       },
       Upgrades: [
         {
@@ -3257,6 +3265,7 @@ export default {
         ],
         Price: 400,
         Limit: 5,
+        Note: "Lead can be damaged by splash damage and collision."
       },
     },
   },
@@ -3680,6 +3689,7 @@ export default {
         },
         Cooldown: 1.5,
         Damage: 10,
+        Note: "Lead can be damaged by splash damage and collision."
       },
     },
   },
@@ -5534,6 +5544,7 @@ export default {
         Limit: 7,
         Price: 500,
         Range: 7,
+        Note: "All traps can damage hidden enemies, but this tower can never directly target hidden enemies.\n\nThrough splash damage, flying enemies may be hit indirectly if another detectable enemy is nearby, but this tower can never directly target flying enemies."
       },
     },
   },
@@ -5774,6 +5785,7 @@ export default {
         Limit: 10,
         Cooldown: 0.1,
         Damage: 2,
+        Note: "Lead can be damaged by splash damage until level 5, where it gains true lead detection."
       },
     },
   },
