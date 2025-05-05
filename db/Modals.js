@@ -7,19 +7,15 @@ document.addEventListener("DOMContentLoaded", function () {
   const browserContent = document.getElementById("browserHelpContent");
   const uploadContent = document.getElementById("uploadHelpContent");
 
-  helpBrowser.addEventListener("change", function () {
-    if (this.checked) {
-      browserContent.classList.remove("d-none");
-      uploadContent.classList.add("d-none");
-    }
-  });
+  const toggleContent = (e) => {
+    const isBrowser = e.target === helpBrowser;
 
-  helpUpload.addEventListener("change", function () {
-    if (this.checked) {
-      uploadContent.classList.remove("d-none");
-      browserContent.classList.add("d-none");
-    }
-  });
+    browserContent.classList.toggle("d-none", !isBrowser);
+    uploadContent.classList.toggle("d-none", isBrowser);
+  };
+
+  helpBrowser.addEventListener("change", toggleContent);
+  helpUpload.addEventListener("change", toggleContent);
 });
 
 document.addEventListener("DOMContentLoaded", () => {

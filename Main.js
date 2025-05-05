@@ -19,20 +19,17 @@ app.start();
 document.addEventListener("DOMContentLoaded", () => {
   // Initialize UI components
   new UpdateLog();
-  setVersionNumber(TDSVersion);
   new SidebarToggle();
   new CalcSystemUI();
   new StorageManager();
+  new KeyboardNavigation();
 
   // Load mobile navigation
   const mobileNav = new MobileNav();
   window.mobileNav = mobileNav;
 
-  // Load update log
   loadUpdateLog();
-
-  // Keyboard navigation
-  new KeyboardNavigation();
+  setVersionNumber(TDSVersion);
 
   // listens for calculation system changes
   document.addEventListener("calculationSystemChanged", (e) => {

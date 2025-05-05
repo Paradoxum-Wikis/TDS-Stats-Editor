@@ -239,94 +239,69 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // improved setupRadioButtonHandlers function to fix all radio button groups
 function setupRadioButtonHandlers() {
-  const imageUrlOption = document.getElementById("imageUrlOption");
-  const imageUploadOption = document.getElementById("imageUploadOption");
-  const imageUrlInput = document.getElementById("imageUrlInput");
-  const imageUploadInput = document.getElementById("imageUploadInput");
-
-  // add click handlers to the labels for more reliable response
-  document
-    .querySelector('label[for="imageUrlOption"]')
-    .addEventListener("click", function () {
-      imageUrlOption.checked = true;
-      imageUrlInput.classList.remove("d-none");
-      imageUploadInput.classList.add("d-none");
+  const toggleVisibility = (options, inputs) => {
+    options.forEach((option, i) => {
+      inputs[i].classList.toggle("d-none", !option.checked);
     });
+  };
 
-  document
-    .querySelector('label[for="imageUploadOption"]')
-    .addEventListener("click", function () {
-      imageUploadOption.checked = true;
-      imageUrlInput.classList.add("d-none");
-      imageUploadInput.classList.remove("d-none");
-    });
+  // Image source toggle
+  const imageOptions = [
+    document.getElementById("imageUrlOption"),
+    document.getElementById("imageUploadOption"),
+  ];
+  const imageInputs = [
+    document.getElementById("imageUrlInput"),
+    document.getElementById("imageUploadInput"),
+  ];
 
-  const jsonFileOption = document.getElementById("jsonFileOption");
-  const jsonPasteOption = document.getElementById("jsonPasteOption");
-  const jsonLinkOption = document.getElementById("jsonLinkOption");
-  const jsonFileInput = document.getElementById("jsonFileInput");
-  const jsonPasteInput = document.getElementById("jsonPasteInput");
-  const jsonLinkInput = document.getElementById("jsonLinkInput");
+  imageOptions.forEach((option, i) => {
+    document
+      .querySelector(`label[for="${option.id}"]`)
+      ?.addEventListener("click", () => {
+        option.checked = true;
+        toggleVisibility(imageOptions, imageInputs);
+      });
+  });
 
-  document
-    .querySelector('label[for="jsonPasteOption"]')
-    ?.addEventListener("click", function () {
-      jsonPasteOption.checked = true;
-      jsonFileInput.classList.add("d-none");
-      jsonPasteInput.classList.remove("d-none");
-      jsonLinkInput.classList.add("d-none");
-    });
+  // JSON source toggle
+  const jsonOptions = [
+    document.getElementById("jsonPasteOption"),
+    document.getElementById("jsonFileOption"),
+    document.getElementById("jsonLinkOption"),
+  ];
+  const jsonInputs = [
+    document.getElementById("jsonPasteInput"),
+    document.getElementById("jsonFileInput"),
+    document.getElementById("jsonLinkInput"),
+  ];
 
-  document
-    .querySelector('label[for="jsonFileOption"]')
-    ?.addEventListener("click", function () {
-      jsonFileOption.checked = true;
-      jsonFileInput.classList.remove("d-none");
-      jsonPasteInput.classList.add("d-none");
-      jsonLinkInput.classList.add("d-none");
-    });
+  jsonOptions.forEach((option, i) => {
+    document
+      .querySelector(`label[for="${option.id}"]`)
+      ?.addEventListener("click", () => {
+        option.checked = true;
+        toggleVisibility(jsonOptions, jsonInputs);
+      });
+  });
 
-  document
-    .querySelector('label[for="jsonLinkOption"]')
-    ?.addEventListener("click", function () {
-      jsonLinkOption.checked = true;
-      jsonFileInput.classList.add("d-none");
-      jsonPasteInput.classList.add("d-none");
-      jsonLinkInput.classList.remove("d-none");
-    });
+  // Type toggle (only sets checked)
+  ["typeNew", "typeRework", "typeRebalance"].forEach((id) => {
+    document
+      .querySelector(`label[for="${id}"]`)
+      ?.addEventListener("click", () => {
+        document.getElementById(id).checked = true;
+      });
+  });
 
-  const typeNew = document.getElementById("typeNew");
-  const typeRework = document.getElementById("typeRework");
-  const typeRebalance = document.getElementById("typeRebalance");
-
-  document
-    .querySelector('label[for="typeNew"]')
-    ?.addEventListener("click", function () {
-      typeNew.checked = true;
-    });
-
-  document
-    .querySelector('label[for="typeRework"]')
-    ?.addEventListener("click", function () {
-      typeRework.checked = true;
-    });
-
-  document
-    .querySelector('label[for="typeRebalance"]')
-    ?.addEventListener("click", function () {
-      typeRebalance.checked = true;
-    });
-
+  // btn check only triggers change events
   document.querySelectorAll(".btn-check").forEach((radio) => {
     const label = document.querySelector(`label[for="${radio.id}"]`);
-    if (label) {
-      label.addEventListener("click", function () {
-        setTimeout(() => {
-          radio.checked = true;
-          const event = new Event("change", { bubbles: true });
-          radio.dispatchEvent(event);
-        }, 0);
-      });
-    }
+    label?.addEventListener("click", () => {
+      setTimeout(() => {
+        radio.checked = true;
+        radio.dispatchEvent(new Event("change", { bubbles: true }));
+      }, 0);
+    });
   });
 }
