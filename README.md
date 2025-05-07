@@ -22,7 +22,7 @@ I can make no guarantees that it'd be forever updated, although I do expect it t
 
 Direct messages on Discord are preferred (my user is t7ru), though there are multiple ways you can contact me and any of them are fine.
 
-There are also discussions and updates about this editor on #general's thread of the Tower Defense Simulator Wiki [server](https://discord.com/invite/eSKUNqJ). Unfortunately, you will need a FANDOM account to access it, so make one if you're interested.
+There are also discussions and updates about this editor on #general's thread of the Tower Defense Simulator Wiki [server](https://discord.com/invite/fBgQzudY3h). Unfortunately, you will need a FANDOM account to access it, so make one if you're interested.
 
 ### Is this official?
 
