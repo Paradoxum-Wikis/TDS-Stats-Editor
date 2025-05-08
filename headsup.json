@@ -1,8 +1,8 @@
 {
   "poll": {
-    "endDate": "2025-05-05",
+    "endDate": "2025-05-10",
     "id": "NULL",
-    "title": "Loud as hell message - 30 April 2025",
-    "description": "Are you here for the Swarmer rework? Make sure to click on 'Clear All Towers' or 'Reset to Default' if you are seeing old stats."
+    "title": "Notice - 08 May 2025",
+    "description": "Are some buttons not working for you? One of our CDNs was down and unfortunately you might have that version cached. Please hold shift and click on the reload button in your browser to tell it to fetch the latest version. Sorry for the inconvenience!"
   }
 }
