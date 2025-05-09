@@ -1,8 +1,8 @@
 {
   "poll": {
-    "endDate": "2025-05-10",
-    "id": "NULL",
+    "endDate": "2025-05-11",
+    "id": "NULL2",
     "title": "Notice - 08 May 2025",
-    "description": "Are some buttons not working for you? One of our CDNs was down and unfortunately you might have that version cached. Please hold shift and click on the reload button in your browser to tell it to fetch the latest version. Sorry for the inconvenience!"
+    "description": "Are some buttons not working for you? One of our CDNs was down and unfortunately you might have that version cached. Please hold ctrl or shift and click on the reload button in your browser to tell it to fetch the latest version. Sorry for the inconvenience!"
   }
 }

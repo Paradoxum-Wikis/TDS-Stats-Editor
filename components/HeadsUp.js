@@ -46,7 +46,7 @@ class HeadsUp {
 
         // Show modal if active, even if id is "NULL"
         if (isActive) {
-          if (this.pollData.id && this.pollData.id !== "NULL") {
+          if (this.pollData.id && !this.pollData.id.startsWith("NULL")) {
             this.createModal(this.pollData);
           } else {
             this.createModalNoPoll(this.pollData);
