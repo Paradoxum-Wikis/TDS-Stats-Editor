@@ -4,10 +4,15 @@
  */
 import { loadUpdateLog } from "./UIHelpers.js";
 
+const repoConfig = {
+  owner: "Paradoxum-Wikis",
+  name: "TDS-Stats-Editor",
+};
+
 class UpdateLog {
   constructor() {
-    this.repoOwner = "t7ru";
-    this.repoName = "TDS-Stats-Editor";
+    this.repoOwner = repoConfig.owner;
+    this.repoName = repoConfig.name;
     this.commitLimit = 20;
     this.modalContainer = null; // For GitHub commits
   }
@@ -46,8 +51,14 @@ class UpdateLog {
     if (!this.modalContainer) return;
 
     try {
+      const token = process.env.GITHUB_PAT;
       const response = await fetch(
         `https://api.github.com/repos/${this.repoOwner}/${this.repoName}/commits?per_page=${this.commitLimit}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
       if (!response.ok) {
@@ -166,8 +177,8 @@ class VersionDisplay {
   constructor() {
     this.version = "";
     this.commitHash = "";
-    this.repoOwner = "t7ru";
-    this.repoName = "TDS-Stats-Editor";
+    this.repoOwner = repoConfig.owner;
+    this.repoName = repoConfig.name;
   }
 
   async init() {
