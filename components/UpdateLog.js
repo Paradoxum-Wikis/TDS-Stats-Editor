@@ -51,12 +51,12 @@ class UpdateLog {
     if (!this.modalContainer) return;
 
     try {
-      const token = process.env.PAT;
+//      const token = process.env.GITHUB_PAT;
       const response = await fetch(
         `https://api.github.com/repos/${this.repoOwner}/${this.repoName}/commits?per_page=${this.commitLimit}`,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+//            Authorization: `Bearer ${token}`,
           },
         }
       );
