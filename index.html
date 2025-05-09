@@ -477,7 +477,8 @@
             <button
               id="sidebar-toggle"
               class="btn btn-sm btn-outline-secondary me-1 mt-1"
-              title="Toggle sidebar"
+              title="Toggle sidebar (Alt+L)"
+              data-bs-tooltip="true"
             >
               <i class="bi bi-layout-sidebar-inset"></i>
             </button>
@@ -486,6 +487,7 @@
               id="poll-toggle"
               class="btn btn-sm btn-outline-secondary me-1 mt-1"
               title="View community poll"
+              data-bs-tooltip="true"
             >
               <i class="bi bi-broadcast"></i>
             </button>
@@ -494,6 +496,7 @@
               id="keyboard-help"
               class="btn btn-sm btn-outline-secondary me-1 mt-1"
               title="Keyboard shortcuts (Alt+H)"
+              data-bs-tooltip="true"
               data-bs-toggle="modal"
               data-bs-target="#keyboard-shortcuts-modal"
             >
@@ -503,7 +506,8 @@
             <button
               id="button-delta"
               class="btn btn-sm btn-outline-secondary me-1 mt-1"
-              title="Visualize your statistic changes"
+              title="Visualize your statistic changes (Alt+D)"
+              data-bs-tooltip="true"
             >
               <i class="bi bi-triangle"></i>
             </button>
@@ -511,7 +515,8 @@
             <button
               id="toggle-calc-system"
               class="btn btn-sm btn-outline-secondary me-1 mt-1"
-              title="Choose calculation formulas"
+              title="Choose a calculation formula (Alt+C)"
+              data-bs-tooltip="true"
             >
               <i class="bi bi-calculator"></i>
             </button>
@@ -519,8 +524,9 @@
             <button
               id="button-clone"
               class="btn btn-sm btn-outline-secondary me-1 mt-1"
-              title="Create a custom tower based on an existing one"
+              title="Create a custom tower based on an existing one (Alt+V)"
               data-bs-toggle="modal"
+              data-bs-tooltip="true"
               data-bs-target="#clone-tower"
             >
               <i class="bi bi-pencil"></i>
@@ -529,8 +535,9 @@
             <button
               id="settings-toggle"
               class="btn btn-sm btn-outline-secondary mt-1"
-              title="Open settings"
+              title="Configure your stuff (Alt+S)"
               data-bs-toggle="modal"
+              data-bs-tooltip="true"
               data-bs-target="#settings-modal"
             >
               <i class="bi bi-gear"></i>
@@ -595,9 +602,11 @@
               <!-- About button is hidden on mobile -->
               <div id="button-discord" class="btn-group d-none d-md-block">
                 <button
-                  title="Information about this website."
+                  title="Information about this website"
                   class="btn btn-sm btn-outline-secondary"
                   data-bs-toggle="modal"
+                  data-bs-tooltip="true"
+                  data-bs-placement="bottom"
                   data-bs-target="#discord-modal"
                 >
                   About
@@ -748,28 +757,36 @@
                 <button
                   id="table-clear"
                   class="btn btn-sm btn-outline-secondary"
-                  title="Removes all changes you've made to this tower."
+                  title="Removes all changes you've made to the master table"
+                  data-bs-tooltip="true"
+                  data-bs-placement="bottom"
                 >
                   Clear Changes
                 </button>
                 <button
                   id="table-apply"
                   class="btn btn-sm btn-outline-secondary"
-                  title="Stats will be cleared and compared to the current stats."
+                  title="Current stats changes will be saved to the master table, which would also remove delta comparison as well"
+                  data-bs-tooltip="true"
+                  data-bs-placement="bottom"
                 >
                   Apply Changes
                 </button>
                 <button
                   id="table-reset"
                   class="btn btn-sm btn-outline-secondary"
-                  title="Reverts stats and references back to its original state."
+                  title="Reverts stats and references back to its original state"
+                  data-bs-tooltip="true"
+                  data-bs-placement="bottom"
                 >
                   Reset to Default
                 </button>
                 <button
                   id="table-clear-data"
                   class="btn btn-sm btn-outline-secondary"
-                  title="Wipe all towers, a factory reset to them."
+                  title="Wipe all towers, a factory reset to them—this is a quick way to receive the latest tower changes as well"
+                  data-bs-tooltip="true"
+                  data-bs-placement="bottom"
                 >
                   Clear All Towers
                 </button>
@@ -780,7 +797,9 @@
                 <button
                   id="table-add-level"
                   class="btn btn-sm btn-outline-secondary"
-                  title="More levels."
+                  title="More levels"
+                  data-bs-tooltip="true"
+                  data-bs-placement="bottom"
                 >
                   Add Level
                 </button>
@@ -788,7 +807,9 @@
                 <button
                   id="table-remove-level"
                   class="btn btn-sm btn-outline-secondary"
-                  title="Please don't remove all the levels, you'll regret it."
+                  title="Please don't remove all the levels, you'll regret it"
+                  data-bs-tooltip="true"
+                  data-bs-placement="bottom"
                 >
                   Remove Level
                 </button>
@@ -801,7 +822,9 @@
                   class="btn btn-sm btn-outline-secondary"
                   data-bs-toggle="modal"
                   data-bs-target="#tower-add-attribute"
-                  title="Self-explanatory."
+                  title="Self-explanatory"
+                  data-bs-tooltip="true"
+                  data-bs-placement="bottom"
                 >
                   Add Attribute
                 </button>
@@ -811,7 +834,9 @@
                   class="btn btn-sm btn-outline-secondary"
                   data-bs-toggle="modal"
                   data-bs-target="#tower-remove-attribute"
-                  title="Self-explanatory."
+                  title="Self-explanatory"
+                  data-bs-tooltip="true"
+                  data-bs-placement="bottom"
                 >
                   Remove Attribute
                 </button>
@@ -835,21 +860,27 @@
                 <button
                   id="table-unit-clear"
                   class="btn btn-sm btn-outline-secondary"
-                  title="Removes all changes you've made to this tower"
+                  title="Removes all changes you've made to the slave table"
+                  data-bs-tooltip="true"
+                  data-bs-placement="bottom"
                 >
                   Clear Changes
                 </button>
                 <button
                   id="table-unit-apply"
                   class="btn btn-sm btn-outline-secondary"
-                  title="Stats will be cleared and compared to the current stats."
+                  title="Current stats changes will be saved to the slave table, which would also remove delta comparison as well"
+                  data-bs-tooltip="true"
+                  data-bs-placement="bottom"
                 >
                   Apply Changes
                 </button>
                 <button
                   id="table-unit-reset"
                   class="btn btn-sm btn-outline-secondary"
-                  title="Reverts stats and references back to its original state."
+                  title="Reverts stats and references back to its original state"
+                  data-bs-tooltip="true"
+                  data-bs-placement="bottom"
                 >
                   Reset to Default
                 </button>
@@ -1216,7 +1247,9 @@
                   class="btn btn-sm btn-outline-secondary"
                   data-bs-toggle="modal"
                   data-bs-target="#json-import-modal"
-                  title="Imports tower data."
+                  title="Imports tower data, obviously"
+                  data-bs-tooltip="true"
+                  data-bs-placement="bottom"
                 >
                   Import
                 </button>
@@ -1225,7 +1258,9 @@
                 <button
                   id="json-export"
                   class="btn btn-sm btn-outline-secondary"
-                  title="Saves json as a file. You can also access all your data by typing localStorage.getItem('New') in the f12 console."
+                  title="Saves the current tower's JSON as a file."
+                  data-bs-tooltip="true"
+                  data-bs-placement="bottom"
                 >
                   Export
                 </button>
@@ -1237,6 +1272,8 @@
                   id="show-combined-json"
                   class="btn btn-sm btn-outline-secondary"
                   title="The new format has support for towers with 2 tables. The legacy format is kept for backwards compatibility."
+                  data-bs-tooltip="true"
+                  data-bs-placement="bottom"
                 >
                   Use New Format
                 </button>
@@ -1269,7 +1306,9 @@
                 <button
                   id="wikitable-export"
                   class="btn btn-sm btn-outline-secondary"
-                  title="Saves wikitable code as a file."
+                  title="Saves wikitable code as a file"
+                  data-bs-tooltip="true"
+                  data-bs-placement="bottom"
                 >
                   Export
                 </button>
@@ -1279,7 +1318,9 @@
                 <button
                   id="use-faithful-format"
                   class="btn btn-sm btn-outline-secondary"
-                  title="Generates a wikitable that is more in line with the one found on wiki articles."
+                  title="Generates a wikitable that is more in line with the one found on wiki articles"
+                  data-bs-tooltip="true"
+                  data-bs-placement="bottom"
                 >
                   Use Faithful Format
                 </button>
@@ -1311,7 +1352,9 @@
                   class="btn btn-sm btn-outline-secondary"
                   data-bs-toggle="modal"
                   data-bs-target="#json-import-modal"
-                  title="Imports tower data."
+                  title="Imports tower data, again, very self-explanatory"
+                  data-bs-tooltip="true"
+                  data-bs-placement="bottom"
                 >
                   Import
                 </button>
@@ -1320,7 +1363,9 @@
                 <button
                   id="lua-export"
                   class="btn btn-sm btn-outline-secondary"
-                  title="Saves json as a file. You can also access all your data by typing localStorage.getItem('New') in the f12 console"
+                  title="Saves the Lua as a file"
+                  data-bs-tooltip="true"
+                  data-bs-placement="bottom"
                 >
                   Export
                 </button>
@@ -1439,7 +1484,9 @@
                   type="button"
                   class="btn btn-outline-danger"
                   id="clearImportFile"
-                  title="Clear file"
+                  title="Clear the file that was uploaded"
+                  data-bs-tooltip="true"
+                  data-bs-placement="bottom"
                 >
                   <i class="bi bi-x-lg me-1"></i>Clear
                 </button>
@@ -2028,6 +2075,8 @@
                         style="width: 48px"
                         class="zoomup type1"
                         title="Join the Tower Defense Simulator Wiki Discord server!"
+                        data-bs-tooltip="true"
+                        data-bs-placement="bottom"
                         src="https://static.wikia.nocookie.net/tower-defense-sim/images/4/4c/Discord-Symbol-Blurple.svg"
                         alt="Discord Logo"
                       />
@@ -2041,6 +2090,8 @@
                         style="width: 48px"
                         class="zoomup theme-image"
                         title="Contribute to the website's source code!"
+                        data-bs-tooltip="true"
+                        data-bs-placement="bottom"
                         src="htmlassets/github-mark-white.svg"
                         data-light-src="htmlassets/github-mark.svg"
                         data-dark-src="htmlassets/github-mark-white.svg"
@@ -2056,6 +2107,8 @@
                         style="width: 48px"
                         class="zoomup type1"
                         title="Visit the dedicated help guide on the TDS Wiki!"
+                        data-bs-tooltip="true"
+                        data-bs-placement="bottom"
                         src="htmlassets/wikisquaredsmall.png"
                         alt="TDS Wiki Logo"
                       />
