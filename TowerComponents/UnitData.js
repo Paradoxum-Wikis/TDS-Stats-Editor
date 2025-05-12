@@ -19,7 +19,7 @@ export default {
   "Sword Skeleton": {
     GravestoneLevel: "1-2",
     Health: 90,
-    Damage: 15,
+    Damage: 20,
     Range: 7.5,
     Detections: {
       Hidden: true,
