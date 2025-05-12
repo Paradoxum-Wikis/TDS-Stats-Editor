@@ -74,7 +74,7 @@ class SettingsManager {
     document.addEventListener("analyticsConsentChanged", (e) => {
       this.analyticsConsent = e.detail.consent;
       window.state.settings.analyticsConsent = this.analyticsConsent;
-      
+
       // Update the toggle UI if it exists
       if (this.analyticsConsentToggle) {
         this.analyticsConsentToggle.checked = this.analyticsConsent;
@@ -403,22 +403,22 @@ class SettingsManager {
 
     document.dispatchEvent(
       new CustomEvent("settingsChanged", {
-        detail: { 
-          setting: "analyticsConsent", 
-          value: this.analyticsConsent 
-        },
-      }),
-    );
-    
-    document.dispatchEvent(
-      new CustomEvent("analyticsConsentChanged", {
-        detail: { 
-          consent: this.analyticsConsent 
+        detail: {
+          setting: "analyticsConsent",
+          value: this.analyticsConsent,
         },
       }),
     );
 
-    if (this.analyticsConsent && typeof gtag === 'undefined') {
+    document.dispatchEvent(
+      new CustomEvent("analyticsConsentChanged", {
+        detail: {
+          consent: this.analyticsConsent,
+        },
+      }),
+    );
+
+    if (this.analyticsConsent && typeof gtag === "undefined") {
       window.location.reload();
     }
   }

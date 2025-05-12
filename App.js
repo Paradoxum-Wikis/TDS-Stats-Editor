@@ -73,8 +73,8 @@ class App {
 
         document.dispatchEvent(
           new CustomEvent("towerSelected", {
-            detail: { towerName }
-          })
+            detail: { towerName },
+          }),
         );
       }
     });
