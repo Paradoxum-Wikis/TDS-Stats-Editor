@@ -104,7 +104,7 @@ export default class ImageLoader {
       const roProxyUrl = `https://assetdelivery.roproxy.com/v2/assetId/${imageIdStr}`;
       try {
         const response = await fetch(
-          `https://occulticnine.vercel.app/?url=${encodeURIComponent(roProxyUrl)}`,
+          `https://api.tds-editor.com/?url=${encodeURIComponent(roProxyUrl)}`,
           {
             method: "GET",
             headers: {

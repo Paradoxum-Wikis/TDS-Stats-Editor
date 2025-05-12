@@ -8,11 +8,11 @@ class TDSWikiFetcher {
     this.wikiBaseUrl = "https://tds.fandom.com";
     this.categoryUrl =
       "/wiki/Special:CategoryTree?target=Category%3ATDSDatabase&mode=pages&namespaces=500";
-    this.dbtreeEndpoint = "https://occulticnine.vercel.app/dbtree";
+    this.dbtreeEndpoint = "https://api.tds-editor.com/dbtree";
 
     // backup proxies in case one fails
     this.corsProxies = [
-      "https://occulticnine.vercel.app/?url=",
+      "https://api.tds-editor.com/?url=",
       "https://api.cors.lol/?url=",
       "https://api.codetabs.com/v1/proxy?quest=",
       "https://api.allorigins.win/raw?url=",
@@ -302,7 +302,7 @@ class TDSWikiFetcher {
               try {
                 const roProxyUrl = `https://assetdelivery.roproxy.com/v2/assetId/${robloxId}`;
                 const robloxResponse = await fetch(
-                  `https://occulticnine.vercel.app/?url=${encodeURIComponent(roProxyUrl)}`,
+                  `https://api.tds-editor.com/?url=${encodeURIComponent(roProxyUrl)}`,
                   {
                     method: "GET",
                     headers: {
