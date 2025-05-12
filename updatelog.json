@@ -1,4 +1,12 @@
 [
+    {
+    "version": "1.2.5",
+    "date": "May 12, 2025",
+    "changes": [
+      "Domain migration",
+      "Performance improvements"
+    ]
+  },
   {
     "version": "1.2.4",
     "date": "April 21, 2025",
