@@ -1,4 +1,4 @@
-The website can be found at: https://tds-editor.live/
+The website can be found at: https://tds-editor.com/
 
 For the updated README, please see: https://tds.fandom.com/wiki/Help:StatisticsEditor/Information
 

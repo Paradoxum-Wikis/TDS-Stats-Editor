@@ -189,7 +189,7 @@ export default class MobileNav {
           <a href="./db" class="btn btn-outline-secondary" id="mobile-database-btn">
             <i class="bi bi-database me-2"></i>TDS Database
           </a>
-          <a href="https://resources.tds-editor.live/" class="btn btn-outline-secondary" id="mobile-gpr-btn">
+          <a href="https://resources.tds-editor.com/" class="btn btn-outline-secondary" id="mobile-gpr-btn">
             <i class="bi bi-file-image me-2"></i>GP Resources
           </a>
           <a href="./ranker" class="btn btn-outline-secondary" id="mobile-gpr-btn">

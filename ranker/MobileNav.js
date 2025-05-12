@@ -181,7 +181,7 @@ class MobileNavigation {
       },
       {
         name: "Paradoxum Game Resources",
-        url: "https://resources.tds-editor.live/",
+        url: "https://resources.tds-editor.com/",
         icon: "bi-file-image-fill",
         description: "Resources of ALTER EGO and TDS game pages",
       },
