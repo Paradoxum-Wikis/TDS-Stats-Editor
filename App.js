@@ -70,6 +70,12 @@ class App {
         window.history.replaceState({}, "", url);
 
         loadTower(this.towerManager.towers[towerName], this.viewer);
+
+        document.dispatchEvent(
+          new CustomEvent("towerSelected", {
+            detail: { towerName }
+          })
+        );
       }
     });
 

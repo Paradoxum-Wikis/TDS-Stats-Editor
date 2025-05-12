@@ -21,6 +21,9 @@ class SettingsManager {
     this.imageCacheDebugToggle = document.getElementById(
       "imageCacheDebugToggle",
     );
+    this.analyticsConsentToggle = document.getElementById(
+      "analyticsConsentToggle",
+    );
     this.animationsStylesheet = document.getElementById("animsCSS");
     this.body = document.body;
     this.systemThemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
@@ -43,6 +46,7 @@ class SettingsManager {
     this.keepDropdownOpen = localStorage.getItem("keepDropdownOpen") === "true";
     this.classicTableSize = localStorage.getItem("classicTableSize") === "true";
     this.imageCacheDebug = localStorage.getItem("imageCacheDebug") === "true";
+    this.analyticsConsent = localStorage.getItem("analyticsConsent") === "true";
 
     this.towerRegistryDebugToggle = document.getElementById(
       "towerRegistryDebugToggle",
@@ -58,6 +62,25 @@ class SettingsManager {
       );
     }
 
+    if (this.analyticsConsentToggle) {
+      this.analyticsConsentToggle.checked = this.analyticsConsent;
+      this.analyticsConsentToggle.addEventListener(
+        "change",
+        this.toggleAnalyticsConsent.bind(this),
+      );
+    }
+
+    // Add event listener for analytics consent changes from the Consent banner
+    document.addEventListener("analyticsConsentChanged", (e) => {
+      this.analyticsConsent = e.detail.consent;
+      window.state.settings.analyticsConsent = this.analyticsConsent;
+      
+      // Update the toggle UI if it exists
+      if (this.analyticsConsentToggle) {
+        this.analyticsConsentToggle.checked = this.analyticsConsent;
+      }
+    });
+
     window.state = window.state || {};
     window.state.settings = window.state.settings || {};
     window.state.settings.showSeconds = this.showSeconds;
@@ -69,6 +92,7 @@ class SettingsManager {
     window.state.settings.classicTableSize = this.classicTableSize;
     window.state.settings.imageCacheDebug = this.imageCacheDebug;
     window.state.settings.towerRegistryDebug = this.towerRegistryDebug;
+    window.state.settings.analyticsConsent = this.analyticsConsent;
 
     this.init();
   }
@@ -161,10 +185,12 @@ class SettingsManager {
       );
     }
     if (this.classicTableSizeToggle) {
+      this.classicTableSizeToggle.checked = this.classicTableSize;
       this.classicTableSizeToggle.addEventListener(
         "change",
         this.toggleClassicTableSize.bind(this),
       );
+      this.applyClassicTableSize();
     }
     if (this.imageCacheDebugToggle) {
       this.imageCacheDebugToggle.checked = this.imageCacheDebug;
@@ -172,10 +198,6 @@ class SettingsManager {
         "change",
         this.toggleImageCacheDebug.bind(this),
       );
-    }
-    if (this.classicTableSizeToggle) {
-      this.classicTableSizeToggle.checked = this.classicTableSize;
-      this.applyClassicTableSize();
     }
 
     // toggles listener
@@ -372,6 +394,33 @@ class SettingsManager {
         },
       }),
     );
+  }
+
+  toggleAnalyticsConsent() {
+    this.analyticsConsent = this.analyticsConsentToggle.checked;
+    window.state.settings.analyticsConsent = this.analyticsConsent;
+    localStorage.setItem("analyticsConsent", this.analyticsConsent);
+
+    document.dispatchEvent(
+      new CustomEvent("settingsChanged", {
+        detail: { 
+          setting: "analyticsConsent", 
+          value: this.analyticsConsent 
+        },
+      }),
+    );
+    
+    document.dispatchEvent(
+      new CustomEvent("analyticsConsentChanged", {
+        detail: { 
+          consent: this.analyticsConsent 
+        },
+      }),
+    );
+
+    if (this.analyticsConsent && typeof gtag === 'undefined') {
+      window.location.reload();
+    }
   }
 
   // updates the label for the manual theme toggle

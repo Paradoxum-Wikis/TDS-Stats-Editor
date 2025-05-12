@@ -52,6 +52,7 @@
     <link href="Styles/torus.css" rel="stylesheet" />
     <link href="Styles/theme.css" rel="stylesheet" />
     <link href="Styles/MobileNav.css" rel="stylesheet" />
+    <link href="Styles/Consent.css" rel="stylesheet" />
     <link
       id="animsCSS"
       href="Styles/animations.css"
@@ -105,25 +106,11 @@
     <!-- jsdelivr doesn't have hash for this one -->
     <link rel="canonical" href="https://tds-editor.live/" />
 
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-D48H2PL948"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-D48H2PL948");
-    </script>
-
     <script defer src="components/TableMode/json-viewer.js"></script>
     <script defer type="module" src="Main.js"></script>
     <script defer src="components/TableMode/JSONUploader.js"></script>
     <script defer src="components/SettingsManager.js"></script>
+    <script defer type="module" src="components/Consent.js"></script>
 
     <script type="module" src="components/Slides.js"></script>
     <script type="module" src="components/UpdateLog.js"></script>
@@ -2700,6 +2687,41 @@
                 role="tabpanel"
                 aria-labelledby="data-tab"
               >
+                <div class="toru-section">
+                  <h6 class="toru-heading">
+                    <i class="bi bi-shield-lock me-2"></i>Privacy
+                  </h6>
+                  <div class="toru-options">
+                    <div class="toru-item">
+                      <div class="toru-info">
+                        <label
+                          class="form-check-label d-flex align-items-center mb-0"
+                          for="analyticsConsentToggle"
+                        >
+                          <i class="bi bi-graph-up me-2 toru-icon"></i>
+                          <div>
+                            <span class="toru-title">Analytics</span>
+                            <span class="d-block small text-muted"
+                              >Allow anonymous usage data collection to improve the site</span
+                            >
+                          </div>
+                        </label>
+                      </div>
+                      <div class="form-check form-switch">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="analyticsConsentToggle"
+                        />
+                      </div>
+                    </div>
+                    <div class="alert alert-info mt-3 mb-3">
+                      <i class="bi bi-info-circle-fill me-2"></i>
+                      We use Google Analytics to collect anonymous usage data that helps us understand how people use this site. You can disable this at any time.
+                    </div>
+                  </div>
+                </div>
+
                 <div class="toru-section">
                   <h6 class="toru-heading">
                     <i class="bi bi-floppy2-fill me-2"></i>Storage
