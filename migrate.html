@@ -39,7 +39,7 @@
         console.log('Parsed Data:', data);
 
         if (Object.keys(data).length === 0) {
-          alert('⚠️ The data is empty. Please provide valid data to import.');
+          alert('⚠️ The data is empty. Your data might have been lost, sorry.');
         } else {
           for (const [key, value] of Object.entries(data)) {
             console.log(`Storing: ${key} = ${value}`);
