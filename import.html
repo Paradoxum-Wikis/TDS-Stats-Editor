@@ -7,8 +7,11 @@
     <link rel="stylesheet" href="../Styles/bootstrap.css" />
     <link rel="stylesheet" href="../Styles/theme.css" />
     <link rel="stylesheet" href="../Styles/torus.css" />
-    <link rel="stylesheet" href="../Styles/animations.css" />
-    <link rel="stylesheet" href="Styles/Dashboard.css" />
+    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body class="bg-dark text-light d-flex flex-column align-items-center justify-content-center vh-100">
     <div class="text-center">
@@ -24,39 +27,32 @@
 
     <script>
     window.addEventListener('DOMContentLoaded', () => {
-      const hash = location.hash;
-      if (hash.startsWith('#data=')) {
-        try {
-          const json = decodeURIComponent(hash.slice(6));
-          const data = JSON.parse(json);
+    const hash = location.hash;
+    if (hash.startsWith('#data=')) {
+      try {
+        const json = decodeURIComponent(hash.substring(6));
+        const data = JSON.parse(json);
 
-          if (Object.keys(data).length === 0) {
-            alert('Empty data, it might be gone, sorry.');
-            setTimeout(() => {
-              location.href = '/';
-            }, 2000);
-            return;
-          }
-
+        if (Object.keys(data).length === 0) {
+          alert('Empty data, it might be gone, sorry.');
+        } else {
           for (const [key, value] of Object.entries(data)) {
             localStorage.setItem(key, value);
           }
           alert('Your data has been successfully imported! Hopefully.');
-        } catch (e) {
-          alert('Failed to import data. Please try again.');
-          console.error(e);
-        } finally {
-          setTimeout(() => {
-            location.href = '/';
-          }, 2000);
         }
-      } else {
-        alert('No data found to import.');
-        setTimeout(() => {
-          location.href = '/';
-        }, 2000);
+      } catch (e) {
+        alert('Failed to import data. Please try again.');
+        console.error(e);
+      } finally {
+        location.hash = '';
+        setTimeout(() => location.href = '/', 2000);
       }
-    });
+    } else {
+      alert('No data found to import.');
+      setTimeout(() => location.href = '/', 2000);
+    }
+  });
   </script>
   </body>
 </html>
