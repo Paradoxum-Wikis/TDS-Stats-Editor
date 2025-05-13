@@ -3,6 +3,7 @@
     "version": "1.2.5",
     "date": "May 12, 2025",
     "changes": [
+      "Data migration tool added",
       "Domain migration",
       "Performance improvements"
     ]
