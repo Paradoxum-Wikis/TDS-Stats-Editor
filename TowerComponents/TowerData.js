@@ -5198,7 +5198,7 @@ export default {
             Damage: 4,
           },
           Title: "Agressive Bees",
-          Cost: 500,
+          Cost: 600,
         },
         {
           Image: 111277904554322,
@@ -5226,7 +5226,7 @@ export default {
             Damage: 10,
           },
           Title: "Bee Certified Weapons",
-          Cost: 1500,
+          Cost: 2000,
         },
         {
           Image: 115125540733937,
@@ -5254,7 +5254,7 @@ export default {
             Damage: 15,
           },
           Title: "Beehive of Madness",
-          Cost: 3000,
+          Cost: 5000,
         },
         {
           Image: 115125540733937,
@@ -5267,7 +5267,7 @@ export default {
               "[Collapsible]Swarm Range: 7 → 8",
             ],
             Attributes: {
-              BeeDamage: 4,
+              BeeDamage: 3,
               TickRate: 0.5,
               BeeDuration: 8,
               GrenadeDamage: 50,
@@ -5278,12 +5278,12 @@ export default {
               Hidden: false,
               Lead: false,
             },
-            Cooldown: 0.75,
+            Cooldown: 0.5,
             Range: 20,
             Damage: 25,
           },
           Title: "Beekeeper of Death",
-          Cost: 6000,
+          Cost: 9500,
         },
       ],
       Defaults: {
