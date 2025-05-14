@@ -53,10 +53,13 @@
             );
           } else {
             const hasExistingData = Object.keys(localStorage).length > 0;
-            
-            const shouldImport = !hasExistingData || 
-                confirm("⚠️ Importing your old data will replace your current data on the new site. Do you wish to continue?");
-            
+
+            const shouldImport =
+              !hasExistingData ||
+              confirm(
+                "⚠️ Importing your old data will replace your current data on the new site. Do you wish to continue?",
+              );
+
             if (shouldImport) {
               for (const [key, value] of Object.entries(data)) {
                 console.log(`Storing: ${key} = ${value}`);
@@ -64,7 +67,9 @@
               }
               alert("✅ Your data has been successfully imported!");
             } else {
-              alert("🥶 Import canceled. Your current data has been preserved.");
+              alert(
+                "🥶 Import canceled. Your current data has been preserved.",
+              );
             }
           }
         } catch (e) {
