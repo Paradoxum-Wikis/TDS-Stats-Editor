@@ -49,14 +49,23 @@
 
           if (Object.keys(data).length === 0) {
             alert(
-              "⚠️ The data is empty. Your data might have been lost, sorry.",
+              "⚠️ The data is empty. Your data might have been lost (sorry), that or there was no data to begin with.",
             );
           } else {
-            for (const [key, value] of Object.entries(data)) {
-              console.log(`Storing: ${key} = ${value}`);
-              localStorage.setItem(key, value);
+            const hasExistingData = Object.keys(localStorage).length > 0;
+            
+            const shouldImport = !hasExistingData || 
+                confirm("⚠️ Importing your old data will replace your current data on the new site. Do you wish to continue?");
+            
+            if (shouldImport) {
+              for (const [key, value] of Object.entries(data)) {
+                console.log(`Storing: ${key} = ${value}`);
+                localStorage.setItem(key, value);
+              }
+              alert("✅ Your data has been successfully imported!");
+            } else {
+              alert("🥶 Import canceled. Your current data has been preserved.");
             }
-            alert("✅ Your data has been successfully imported!");
           }
         } catch (e) {
           alert("❌ Failed to import data. Please try again.");
