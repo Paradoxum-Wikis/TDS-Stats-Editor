@@ -1,3 +1,6 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/06056f1c-9674-40df-b8d1-8b3fb464cc8d/deploy-status)](https://app.netlify.com/projects/chaoshead/deploys)
+[![CodeQL](https://github.com/Paradoxum-Wikis/TDS-Stats-Editor/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Paradoxum-Wikis/TDS-Stats-Editor/actions/workflows/github-code-scanning/codeql)
+
 The website can be found at: https://tds-editor.com/
 
 For the updated README, please see: https://tds.fandom.com/wiki/Help:StatisticsEditor/Information
