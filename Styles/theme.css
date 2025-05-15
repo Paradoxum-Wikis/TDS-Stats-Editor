@@ -31,6 +31,10 @@
   color: black !important;
 }
 
+.light-mode .text-white-50 {
+  color: rgba(0, 0, 0, 0.5) !important;
+}
+
 .light-mode .text-light {
   color: #343a40 !important;
 }

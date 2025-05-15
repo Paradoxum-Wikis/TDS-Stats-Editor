@@ -242,5 +242,9 @@ hr {
 }
 
 .mobile-sidebar.active {
+  z-index: 2;
+}
+
+.mobile-nav {
   z-index: 3;
 }
