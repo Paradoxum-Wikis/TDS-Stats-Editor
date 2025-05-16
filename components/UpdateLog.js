@@ -95,6 +95,8 @@ class UpdateLog {
         return { class: "bg-dark", label: "Test" };
       case "chore":
         return { class: "bg-secondary", label: "Chore" };
+      case "build":
+        return { class: "bg-crimson", label: "Build" };
       default:
         return { class: "bg-secondary", label: type || "Update" };
     }

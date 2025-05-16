@@ -211,6 +211,10 @@ input {
   background-color: #6f42c1;
 }
 
+.bg-crimson {
+  background-color: #9a1919;
+}
+
 .btn-outline-primary.active:hover,
 .btn-outline-primary:hover,
 .btn-check:checked + .btn-outline-primary:hover,
