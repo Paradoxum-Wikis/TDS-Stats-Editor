@@ -8,7 +8,8 @@ class DBSettingsManager {
     this.systemThemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
     this.currentTheme = localStorage.getItem(this.THEME_KEY) || "dark";
     this.themeMode = localStorage.getItem(this.THEME_MODE_KEY) || "auto";
-    this.animationsEnabled = localStorage.getItem(this.ANIMATIONS_KEY) !== "false";
+    this.animationsEnabled =
+      localStorage.getItem(this.ANIMATIONS_KEY) !== "false";
 
     this.init();
   }
@@ -18,13 +19,13 @@ class DBSettingsManager {
     this.setupEventListeners();
     this.updateSystemThemeListener();
   }
-  
+
   applyTheme() {
     let effectiveTheme = this.currentTheme;
     if (this.themeMode === "auto") {
       effectiveTheme = this.systemThemeQuery.matches ? "dark" : "light";
     }
-    
+
     if (effectiveTheme === "light") {
       this.body.classList.add("light-mode");
       this.themeToggle.checked = false;
@@ -58,16 +59,16 @@ class DBSettingsManager {
     if (this._systemThemeListener) {
       this.systemThemeQuery.removeEventListener(
         "change",
-        this._systemThemeListener
+        this._systemThemeListener,
       );
       this._systemThemeListener = null;
     }
-    
+
     if (this.themeMode === "auto") {
       this._systemThemeListener = () => this.applyTheme();
       this.systemThemeQuery.addEventListener(
         "change",
-        this._systemThemeListener
+        this._systemThemeListener,
       );
     }
   }
@@ -83,15 +84,17 @@ class DBSettingsManager {
 
     localStorage.setItem(this.THEME_KEY, this.currentTheme);
     localStorage.setItem(this.THEME_MODE_KEY, this.themeMode);
-    
+
     this.applyTheme();
     this.updateSystemThemeListener();
   }
 
   updateToggleLabel() {
     const label = document.querySelector('label[for="themeToggle"]');
-    if (this.currentTheme === "dark" || 
-       (this.themeMode === "auto" && this.systemThemeQuery.matches)) {
+    if (
+      this.currentTheme === "dark" ||
+      (this.themeMode === "auto" && this.systemThemeQuery.matches)
+    ) {
       label.innerHTML = '<i class="bi bi-moon-stars me-2"></i>Dark Mode';
     } else {
       label.innerHTML = '<i class="bi bi-sun me-2"></i>Light Mode';
@@ -100,10 +103,13 @@ class DBSettingsManager {
 
   updateThemeImages() {
     document.querySelectorAll(".theme-image").forEach((img) => {
-      const effectiveTheme = (this.themeMode === "auto")
-        ? (this.systemThemeQuery.matches ? "dark" : "light")
-        : this.currentTheme;
-        
+      const effectiveTheme =
+        this.themeMode === "auto"
+          ? this.systemThemeQuery.matches
+            ? "dark"
+            : "light"
+          : this.currentTheme;
+
       if (effectiveTheme === "light") {
         if (img.dataset.lightSrc) {
           img.src = img.dataset.lightSrc;
