@@ -2,14 +2,30 @@ class DBSettingsManager {
   constructor() {
     this.themeToggle = document.getElementById("themeToggle");
     this.body = document.body;
-
-    this.currentTheme = localStorage.getItem("theme") || "dark";
+    this.THEME_KEY = "theme";
+    this.THEME_MODE_KEY = "themeMode";
+    this.ANIMATIONS_KEY = "animationsEnabled";
+    this.systemThemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    this.currentTheme = localStorage.getItem(this.THEME_KEY) || "dark";
+    this.themeMode = localStorage.getItem(this.THEME_MODE_KEY) || "auto";
+    this.animationsEnabled = localStorage.getItem(this.ANIMATIONS_KEY) !== "false";
 
     this.init();
   }
 
   init() {
-    if (this.currentTheme === "light") {
+    this.applyTheme();
+    this.setupEventListeners();
+    this.updateSystemThemeListener();
+  }
+  
+  applyTheme() {
+    let effectiveTheme = this.currentTheme;
+    if (this.themeMode === "auto") {
+      effectiveTheme = this.systemThemeQuery.matches ? "dark" : "light";
+    }
+    
+    if (effectiveTheme === "light") {
       this.body.classList.add("light-mode");
       this.themeToggle.checked = false;
     } else {
@@ -17,31 +33,65 @@ class DBSettingsManager {
       this.themeToggle.checked = true;
     }
 
-    this.themeToggle.addEventListener("change", this.toggleTheme.bind(this));
-
     this.updateToggleLabel();
     this.updateThemeImages();
+  }
+
+  setupEventListeners() {
+    this.themeToggle.addEventListener("change", this.toggleTheme.bind(this));
+
+    window.addEventListener("storage", (event) => {
+      if (
+        event.key === this.THEME_KEY ||
+        event.key === this.THEME_MODE_KEY ||
+        event.key === this.ANIMATIONS_KEY
+      ) {
+        this.currentTheme = localStorage.getItem(this.THEME_KEY) || "dark";
+        this.themeMode = localStorage.getItem(this.THEME_MODE_KEY) || "auto";
+        this.applyTheme();
+        this.updateSystemThemeListener();
+      }
+    });
+  }
+
+  updateSystemThemeListener() {
+    if (this._systemThemeListener) {
+      this.systemThemeQuery.removeEventListener(
+        "change",
+        this._systemThemeListener
+      );
+      this._systemThemeListener = null;
+    }
+    
+    if (this.themeMode === "auto") {
+      this._systemThemeListener = () => this.applyTheme();
+      this.systemThemeQuery.addEventListener(
+        "change",
+        this._systemThemeListener
+      );
+    }
   }
 
   toggleTheme() {
     if (this.themeToggle.checked) {
-      this.body.classList.remove("light-mode");
       this.currentTheme = "dark";
     } else {
-      this.body.classList.add("light-mode");
       this.currentTheme = "light";
     }
 
-    // save the preference to localStorage
-    localStorage.setItem("theme", this.currentTheme);
+    this.themeMode = "manual"; // Override auto mode when manually toggling
 
-    this.updateToggleLabel();
-    this.updateThemeImages();
+    localStorage.setItem(this.THEME_KEY, this.currentTheme);
+    localStorage.setItem(this.THEME_MODE_KEY, this.themeMode);
+    
+    this.applyTheme();
+    this.updateSystemThemeListener();
   }
 
   updateToggleLabel() {
     const label = document.querySelector('label[for="themeToggle"]');
-    if (this.currentTheme === "dark") {
+    if (this.currentTheme === "dark" || 
+       (this.themeMode === "auto" && this.systemThemeQuery.matches)) {
       label.innerHTML = '<i class="bi bi-moon-stars me-2"></i>Dark Mode';
     } else {
       label.innerHTML = '<i class="bi bi-sun me-2"></i>Light Mode';
@@ -50,7 +100,11 @@ class DBSettingsManager {
 
   updateThemeImages() {
     document.querySelectorAll(".theme-image").forEach((img) => {
-      if (this.currentTheme === "light") {
+      const effectiveTheme = (this.themeMode === "auto")
+        ? (this.systemThemeQuery.matches ? "dark" : "light")
+        : this.currentTheme;
+        
+      if (effectiveTheme === "light") {
         if (img.dataset.lightSrc) {
           img.src = img.dataset.lightSrc;
         }
