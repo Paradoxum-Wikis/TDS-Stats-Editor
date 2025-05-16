@@ -49,6 +49,8 @@ const approvedTowers = [
   "Chilloutofpewp2nd/DJ Booth Rebalance",
   "ArtZthecoolguy/Scrambler Tower",
   "Onett4smash/Sniper Rework",
+  "Hellscream2008/Paint Baller Rework",
+  "Hellscream2008/John Tower!",
 ];
 
 // List of featured towers
@@ -58,6 +60,7 @@ const featuredTowers = [
   "Vessel Of Infinite Destruction/Military Base",
   "Your nameless protagonist/Enforcer",
   "Onett4smash/Medic Rework (V1)",
+  "Hellscream2008/John Tower!",
 ];
 
 // List of grandfathered towers
@@ -76,7 +79,7 @@ const highlights = [
   "Vessel Of Infinite Destruction/Ranger",
   "Onett4smash/Medic Rework (V1)",
   "Vessel Of Infinite Destruction/Military Base",
-  "Your nameless protagonist/Enforcer",
+  "Hellscream2008/John Tower!",
 ];
 
 // Make these arrays available to other scripts
