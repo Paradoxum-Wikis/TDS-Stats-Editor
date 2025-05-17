@@ -1,6 +1,6 @@
 {
   "poll": {
-    "endDate": "2025-05-19",
+    "endDate": "2025-05-18",
     "id": "NULL2",
     "title": "Notice - 19 May 2025",
     "description": "If the site is stuck on loading forever, try clearing the site's cache, or use this site on incognito mode for now. We recently migrated some old JQuery code into vanilla JavaScript, and you might be on an old cache. This should be automatically resolved in a few hours."
