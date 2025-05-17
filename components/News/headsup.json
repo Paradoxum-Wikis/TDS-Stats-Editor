@@ -1,8 +1,8 @@
 {
   "poll": {
-    "endDate": "2025-05-11",
+    "endDate": "2025-05-19",
     "id": "NULL2",
-    "title": "Notice - 08 May 2025",
-    "description": "Are some buttons not working for you? One of our CDNs was down and unfortunately you might have that version cached. Please hold ctrl or shift and click on the reload button in your browser to tell it to fetch the latest version. Sorry for the inconvenience!"
+    "title": "Notice - 19 May 2025",
+    "description": "If the site is stuck on loading forever, try clearing the site's cache, or use this site on incognito mode for now. We recently migrated some old JQuery code into vanilla JavaScript, and you might be on an old cache. This should be automatically resolved in a few hours."
   }
 }
