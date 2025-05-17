@@ -14,8 +14,7 @@
     "bootstrap": "^5.3.6",
     "bootstrap-icons": "^1.13.1",
     "crypto-js": "^4.2.0",
-    "html2canvas": "^1.4.1",
-    "jquery": "^3.7.1"
+    "html2canvas": "^1.4.1"
   },
   "devDependencies": {
     "prettier": "3.5.3"

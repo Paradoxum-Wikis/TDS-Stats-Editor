@@ -45,17 +45,15 @@ export default class AddAttributeForm {
       }).bind(this),
     );
 
-    $("#add-attribute-type-dropdown").on(
-      "hidden.bs.dropdown",
-      ((e) => {
-        const targetValue = e.clickEvent?.target?.text;
+    const typeDropdownElement = document.getElementById("add-attribute-type-dropdown");
+    typeDropdownElement.addEventListener("hidden.bs.dropdown", (e) => {
+      const targetValue = e.target.querySelector(".dropdown-item:focus")?.textContent;
+      
+      if (targetValue === undefined) return;
 
-        if (targetValue === undefined) return;
-
-        this.typeInput.value = targetValue;
-        this.#onTypeChange();
-      }).bind(this),
-    );
+      this.typeInput.value = targetValue;
+      this.#onTypeChange();
+    });
 
     this.addAttributeSubmit.addEventListener(
       "click",

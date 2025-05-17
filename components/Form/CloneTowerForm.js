@@ -24,17 +24,15 @@ export default class CloneTowerForm {
       setTextMode: true,
     });
 
-    $("#clone-tower-options").on(
-      "hidden.bs.dropdown",
-      ((e) => {
-        const targetValue = e.clickEvent?.target?.text;
+    const cloneTowerOptions = document.getElementById("clone-tower-options");
+    cloneTowerOptions.addEventListener("hidden.bs.dropdown", ((e) => {
+      const targetValue = e.target.querySelector(".dropdown-item:focus")?.textContent;
+      
+      if (targetValue === undefined) return;
 
-        if (targetValue === undefined) return;
-
-        this.fromTowerName.value = targetValue;
-        this.#onTowerChange();
-      }).bind(this),
-    );
+      this.fromTowerName.value = targetValue;
+      this.#onTowerChange();
+    }).bind(this));
 
     this.addCloneSubmit.addEventListener(
       "click",
