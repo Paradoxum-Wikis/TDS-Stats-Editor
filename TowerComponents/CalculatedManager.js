@@ -261,6 +261,12 @@ class CalculatedManager {
         Value: (level) => level.DPS * level.MaxHits * level.MaxBounce,
       },
 
+      Swarmer: {
+        For: ["Swarmer"],
+        Requires: ["Damage", "Cooldown", "BeeDamage", "TickRate", "MaxStacks"],
+        Value: (level) => level.Damage / level.Cooldown + level.BeeDamage / level.TickRate * level.MaxStacks,
+      },
+
       Trapper: {
         For: ["Trapper"],
         Value: (level) => {
@@ -296,6 +302,13 @@ class CalculatedManager {
       },
     },
 
+    'DPS Rate': {
+      Default: {
+        Requires: ["BeeDamage", "TickRate", "Cooldown"],
+        Value: (level) => (level.BeeDamage / level.TickRate) * (1 / level.Cooldown),
+      },
+    },
+    
     TotalElapsedDamage: {
       Default: {
         Requires: ["BurnDamage", "BurnTime", "TickRate"],
@@ -879,7 +892,7 @@ class CalculatedManager {
         For: ["Slasher"],
         Value: (level) =>
           level.BleedDamage *
-          level.MaxStack ** level.ExponentialValue *
+          level.MaxStacks ** level.ExponentialValue *
           100 ** level.ExponentialValue,
       },
     },
@@ -897,7 +910,7 @@ class CalculatedManager {
         For: ["Slasher"],
         Value: (level) =>
           level.BleedDamage *
-          level.MaxStack ** level.ExponentialValue *
+          level.MaxStacks ** level.ExponentialValue *
           10 ** level.ExponentialValue,
       },
     },
@@ -915,7 +928,7 @@ class CalculatedManager {
         For: ["Slasher"],
         Value: (level) =>
           level.BleedDamage *
-          level.MaxStack ** level.ExponentialValue *
+          level.MaxStacks ** level.ExponentialValue *
           1000 ** level.ExponentialValue,
       },
     },
@@ -933,7 +946,7 @@ class CalculatedManager {
         For: ["Slasher"],
         Value: (level) =>
           level.BleedDamage *
-          level.MaxStack ** level.ExponentialValue *
+          level.MaxStacks ** level.ExponentialValue *
           10000 ** level.ExponentialValue,
       },
     },
@@ -951,7 +964,7 @@ class CalculatedManager {
         For: ["Slasher"],
         Value: (level) =>
           level.BleedDamage *
-          level.MaxStack ** level.ExponentialValue *
+          level.MaxStacks ** level.ExponentialValue *
           100000 ** level.ExponentialValue,
       },
     },
@@ -969,7 +982,7 @@ class CalculatedManager {
         For: ["Slasher"],
         Value: (level) =>
           level.BleedDamage *
-          level.MaxStack ** level.ExponentialValue *
+          level.MaxStacks ** level.ExponentialValue *
           1000000 ** level.ExponentialValue,
       },
     },
@@ -1294,6 +1307,7 @@ class CalculatedManager {
     this.#add("CallToArmsDPS", skinData);
     this.#add("CaravanDPS", skinData);
     this.#add("LimitDPS", skinData);
+    this.#add("DPS Rate", skinData);
     this.#add("MaxDPS", skinData);
     this.#add("NetCost", skinData);
     this.#add("LimitNetCost", skinData);

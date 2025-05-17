@@ -4654,7 +4654,7 @@ export default {
             Attributes: {
               BleedDamage: 0,
               BleedStack: 0,
-              MaxStack: 0,
+              MaxStacks: 0,
               CriticalSwing: 3,
               CriticalMultiplier: 300,
               ExponentialValue: 0,
@@ -4683,7 +4683,7 @@ export default {
             Attributes: {
               BleedDamage: 2,
               BleedStack: 1,
-              MaxStack: 30,
+              MaxStacks: 30,
               CriticalSwing: 3,
               CriticalMultiplier: 300,
               ExponentialValue: 0.31,
@@ -4707,7 +4707,7 @@ export default {
             Attributes: {
               BleedDamage: 2,
               BleedStack: 1,
-              MaxStack: 30,
+              MaxStacks: 30,
               CriticalSwing: 3,
               CriticalMultiplier: 350,
               ExponentialValue: 0.31,
@@ -4731,7 +4731,7 @@ export default {
             Attributes: {
               BleedDamage: 2,
               BleedStack: 2,
-              MaxStack: 30,
+              MaxStacks: 30,
               CriticalSwing: 3,
               CriticalMultiplier: 400,
               ExponentialValue: 0.31,
@@ -4754,7 +4754,7 @@ export default {
         Attributes: {
           BleedDamage: 0,
           BleedStack: 0,
-          MaxStack: 0,
+          MaxStacks: 0,
           CriticalSwing: 3,
           CriticalMultiplier: 250,
           ExponentialValue: 0,
@@ -5166,6 +5166,7 @@ export default {
               BeeDamage: 2,
               TickRate: 1,
               BeeDuration: 4,
+              MaxStacks: 10,
             },
             Detections: {
               Flying: false,
@@ -5187,6 +5188,7 @@ export default {
               BeeDamage: 2,
               TickRate: 0.75,
               BeeDuration: 4.5,
+              MaxStacks: 15,
             },
             Detections: {
               Flying: false,
@@ -5213,6 +5215,7 @@ export default {
               BeeDamage: 2,
               TickRate: 0.75,
               BeeDuration: 5.25,
+              MaxStacks: 20,
               GrenadeDamage: 10,
               GrenadeRange: 6,
             },
@@ -5241,6 +5244,7 @@ export default {
               BeeDamage: 3,
               TickRate: 0.75,
               BeeDuration: 5.5,
+              MaxStacks: 25,
               GrenadeDamage: 30,
               GrenadeRange: 7,
             },
@@ -5270,6 +5274,7 @@ export default {
               BeeDamage: 3,
               TickRate: 0.5,
               BeeDuration: 8,
+              MaxStacks: 30,
               GrenadeDamage: 50,
               GrenadeRange: 8,
             },
@@ -5292,6 +5297,8 @@ export default {
           BeeDamage: 1,
           TickRate: 1,
           BeeDuration: 4,
+          MaxStacks: 5,
+          GlobalMaxStacks: 1500,
           GrenadeDamage: 0,
           GrenadeRange: 0,
         },
