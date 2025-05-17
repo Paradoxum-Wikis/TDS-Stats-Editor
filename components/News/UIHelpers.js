@@ -22,7 +22,7 @@ function generateUpdateLogHtml(updates) {
 }
 
 function loadUpdateLog() {
-  fetch("/updatelog.json")
+  fetch("./updatelog.json")
     .then((response) => response.json())
     .then((data) => {
       const updateLogModal = document.getElementById("update-log-content");

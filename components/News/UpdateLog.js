@@ -199,7 +199,7 @@ class VersionDisplay {
 
   async loadVersionFromUpdateLog() {
     try {
-      const response = await fetch("/updatelog.json");
+      const response = await fetch("./updatelog.json");
       if (!response.ok) throw new Error("Failed to load updatelog.json");
 
       const data = await response.json();
