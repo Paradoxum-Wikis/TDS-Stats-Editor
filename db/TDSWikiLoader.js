@@ -180,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function () {
     col.className = "col";
 
     // Create unique id
-    const towerId = `tower-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`;
+    const towerId = `tower-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
 
     // Save tower data in cache
     if (!window.towerDataCache) window.towerDataCache = {};
