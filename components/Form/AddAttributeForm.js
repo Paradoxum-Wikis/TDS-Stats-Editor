@@ -45,10 +45,14 @@ export default class AddAttributeForm {
       }).bind(this),
     );
 
-    const typeDropdownElement = document.getElementById("add-attribute-type-dropdown");
+    const typeDropdownElement = document.getElementById(
+      "add-attribute-type-dropdown",
+    );
     typeDropdownElement.addEventListener("hidden.bs.dropdown", (e) => {
-      const targetValue = e.target.querySelector(".dropdown-item:focus")?.textContent;
-      
+      const targetValue = e.target.querySelector(
+        ".dropdown-item:focus",
+      )?.textContent;
+
       if (targetValue === undefined) return;
 
       this.typeInput.value = targetValue;

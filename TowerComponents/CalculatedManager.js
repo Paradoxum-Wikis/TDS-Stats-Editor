@@ -264,7 +264,9 @@ class CalculatedManager {
       Swarmer: {
         For: ["Swarmer"],
         Requires: ["Damage", "Cooldown", "BeeDamage", "TickRate", "MaxStacks"],
-        Value: (level) => level.Damage / level.Cooldown + level.BeeDamage / level.TickRate * level.MaxStacks,
+        Value: (level) =>
+          level.Damage / level.Cooldown +
+          (level.BeeDamage / level.TickRate) * level.MaxStacks,
       },
 
       Trapper: {
@@ -302,13 +304,14 @@ class CalculatedManager {
       },
     },
 
-    'DPS Rate': {
+    "DPS Rate": {
       Default: {
         Requires: ["BeeDamage", "TickRate", "Cooldown"],
-        Value: (level) => (level.BeeDamage / level.TickRate) * (1 / level.Cooldown),
+        Value: (level) =>
+          (level.BeeDamage / level.TickRate) * (1 / level.Cooldown),
       },
     },
-    
+
     TotalElapsedDamage: {
       Default: {
         Requires: ["BurnDamage", "BurnTime", "TickRate"],
