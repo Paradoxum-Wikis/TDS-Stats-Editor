@@ -14,16 +14,3 @@ updates:
     commit-message:
       prefix: "npm"
       include: "scope"
-
-  # github actions
-  #- package-ecosystem: "github-actions"
-  #  directory: "/"
-  #  schedule:
-  #    interval: "weekly"
-  #    day: "monday"
-  #  labels:
-  #    - "dependencies"
-  #    - "github-actions"
-  #  commit-message:
-  #    prefix: "ci"
-  #    include: "scope"
