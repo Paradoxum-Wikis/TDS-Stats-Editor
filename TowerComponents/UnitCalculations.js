@@ -408,9 +408,9 @@ class UnitCalculations {
     CostEfficiency: {
       Pursuit: {
         For: ["Top 4", "Top 5", "Bottom 4", "Bottom 5"],
-        Requires: ["NetCost", "DPS"],
+        Requires: ["NetCost", "TotalDPS"],
         Value: (level) => {
-          const efficiency = level.NetCost / level.DPS;
+          const efficiency = level.NetCost / level.TotalDPS;
           return isFinite(efficiency) ? efficiency : NaN;
         },
       },
