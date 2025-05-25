@@ -4339,20 +4339,20 @@ export default {
               ExplosionRadius: 3,
               MissileAmount: 1,
               SpreadAngle: "NaN",
-              Accuracy: 1
+              Accuracy: 1,
             },
             Detections: {
               Flying: false,
               Hidden: false,
-              Lead: true
+              Lead: true,
             },
             Cooldown: 3,
             Range: 22,
             Damage: 30,
-            Accuracy: 1
+            Accuracy: 1,
           },
           Title: "Faster Reloading",
-          Cost: 250
+          Cost: 250,
         },
         {
           Image: 76900038470572,
@@ -4363,20 +4363,20 @@ export default {
               ExplosionRadius: 3,
               MissileAmount: 1,
               SpreadAngle: "NaN",
-              Accuracy: 1
+              Accuracy: 1,
             },
             Detections: {
               Flying: false,
               Hidden: true,
-              Lead: true
+              Lead: true,
             },
             Cooldown: 3,
             Range: 25,
             Damage: 60,
-            Accuracy: 1
+            Accuracy: 1,
           },
           Title: "Heavier Payload",
-          Cost: 1600
+          Cost: 1600,
         },
         {
           Image: 103303357353083,
@@ -4387,20 +4387,20 @@ export default {
               ExplosionRadius: 4,
               MissileAmount: 1,
               SpreadAngle: "NaN",
-              Accuracy: 1
+              Accuracy: 1,
             },
             Detections: {
               Flying: false,
               Hidden: true,
-              Lead: true
+              Lead: true,
             },
             Cooldown: 3,
             Range: 25,
             Damage: 150,
-            Accuracy: 1
+            Accuracy: 1,
           },
           Title: "Explosive Risks",
-          Cost: 7500
+          Cost: 7500,
         },
         {
           Image: 133610100963797,
@@ -4409,28 +4409,28 @@ export default {
               "Explosion Radius: 4 → 5",
               "Deadzone: 12 → 10",
               "Missle Amount: 1 → 2",
-              "Accuracy: 1 → 0.5"
+              "Accuracy: 1 → 0.5",
             ],
             Attributes: {
               Deadzone: 10,
               ExplosionRadius: 5,
               MissileAmount: 4,
               SpreadAngle: 60,
-              Accuracy: 0.5
+              Accuracy: 0.5,
             },
             Detections: {
               Flying: false,
               Hidden: true,
-              Lead: true
+              Lead: true,
             },
             Cooldown: 3,
             Range: 30,
             Damage: 90,
-            Accuracy: 0.5
+            Accuracy: 0.5,
           },
           Title: "Missle Maelstorm",
-          Cost: 18500
-        }
+          Cost: 18500,
+        },
       ],
       Defaults: {
         Attributes: {
@@ -4439,19 +4439,19 @@ export default {
           MissileAmount: 1,
           SpreadAngle: "NaN",
           Accuracy: 1,
-          ProjectileSpeed: 25
+          ProjectileSpeed: 25,
         },
         Detections: {
           Flying: false,
           Hidden: false,
-          Lead: true
+          Lead: true,
         },
         Range: 22,
         Price: 1500,
         Limit: 8,
         Cooldown: 3.5,
         Damage: 30,
-        Accuracy: 1
+        Accuracy: 1,
       },
     },
   },
@@ -4804,7 +4804,7 @@ export default {
         Range: 5,
         Cooldown: 0.4,
         Damage: 5,
-        Note: "Bleed Damage Tick and Bleed Collapse Damage has various health options in the 'Views' tab."
+        Note: "Bleed Damage Tick and Bleed Collapse Damage has various health options in the 'Views' tab.",
       },
     },
   },

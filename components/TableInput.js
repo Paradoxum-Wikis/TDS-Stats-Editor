@@ -79,11 +79,7 @@ export default class TableInput {
     input.type = "checkbox";
     input.checked = value;
 
-    if (
-      value !== deltaData ||
-      Number.isNaN(value) ||
-      Number.isNaN(deltaData)
-    ) {
+    if (value !== deltaData || Number.isNaN(value) || Number.isNaN(deltaData)) {
       input.classList.add("form-check-input-delta");
     }
 
@@ -116,11 +112,7 @@ export default class TableInput {
 
     let outputValue = this.#formatNumber(value);
 
-    if (
-      value !== deltaData ||
-      isValueNaN ||
-      isDeltaNaN
-    ) {
+    if (value !== deltaData || isValueNaN || isDeltaNaN) {
       input.classList.add("table-cell-input-delta");
       outputValue =
         String(outputValue) + String(this.#getDelta(value, deltaData, input));
@@ -153,7 +145,10 @@ export default class TableInput {
 
   #onNumberSubmit() {
     let newValue = this.input.value;
-    if (typeof newValue === "string" && newValue.trim().toLowerCase() === "nan") {
+    if (
+      typeof newValue === "string" &&
+      newValue.trim().toLowerCase() === "nan"
+    ) {
       newValue = NaN;
     } else if (newValue !== "" && Number.isFinite(+newValue)) {
       newValue = +newValue;
@@ -177,11 +172,7 @@ export default class TableInput {
     const isValueNaN = value === "NaN";
     const isDeltaNaN = deltaData === "NaN";
 
-    if (
-      value !== deltaData ||
-      isValueNaN ||
-      isDeltaNaN
-    ) {
+    if (value !== deltaData || isValueNaN || isDeltaNaN) {
       input.classList.add("table-cell-input-delta");
     }
 

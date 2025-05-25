@@ -51,13 +51,8 @@ const calculated = {
 };
 
 const register = {
-    Engineer: {
-    Default: [
-      "Sentry",
-      "Rifle Sentry",
-      "Minigun Sentry",
-      "War Machine Sentry",
-    ],
+  Engineer: {
+    Default: ["Sentry", "Rifle Sentry", "Minigun Sentry", "War Machine Sentry"],
   },
   Necromancer: {
     Default: [

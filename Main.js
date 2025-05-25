@@ -5,7 +5,10 @@ import MobileNav from "./components/MobileNav.js";
 import CalcSystemUI from "./components/CalcSystemUI.js";
 import StorageManager from "./components/StorageManager.js";
 import KeyboardNavigation from "./components/KeyboardNavigation.js";
-import { setVersionNumber, loadUpdateLog } from "./components/News/UIHelpers.js";
+import {
+  setVersionNumber,
+  loadUpdateLog,
+} from "./components/News/UIHelpers.js";
 import { clearUrlAndShowLanding } from "./components/TowerLoader.js";
 import Consent from "./components/Consent.js";
 
