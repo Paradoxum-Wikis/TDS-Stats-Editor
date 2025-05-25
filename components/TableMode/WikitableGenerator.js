@@ -146,18 +146,13 @@ class WikitableGenerator {
       return "";
     }
 
-    let attributes = Object.keys(firstUnit.data).filter(
-      (attr) =>
-        !["id", "uuid", "type", "parent", "hidden"].includes(
-          attr.toLowerCase(),
-        ),
-    );
-
-    const detectionsIndex = attributes.indexOf("Detections");
-    if (detectionsIndex !== -1) {
-      attributes.splice(detectionsIndex, 1);
-      attributes.push("Hidden", "Flying", "Lead");
-    }
+    let attributes = firstUnit.attributeNames.filter((attr) => {
+      return (
+        !this.propertyViewer.isDisabled(attr) &&
+        !this.propertyViewer.isHidden(attr) &&
+        !["NoTable", "SideLevel", "Level"].includes(attr)
+      );
+    });
 
     if (this.viewer.useFaithfulFormat) {
       attributes = attributes.filter((attr) =>
@@ -207,7 +202,9 @@ class WikitableGenerator {
 
     // Row formatting
     Object.entries(this.activeUnits).forEach(([unitName, unitData]) => {
-      if (!unitData.data) return;
+      if (!unitData.data) {
+        return;
+      }
 
       wikitable += `|-\n`;
 
@@ -226,13 +223,8 @@ class WikitableGenerator {
 
           if (attr === "Name") {
             value = unitName;
-          } else if (
-            ["Hidden", "Flying", "Lead"].includes(attr) &&
-            unitData.data.Detections
-          ) {
-            value = unitData.data.Detections[attr] || false;
           } else {
-            value = unitData.data[attr];
+            value = unitData.attributes[attr];
           }
 
           if (isFirst) {
@@ -246,17 +238,7 @@ class WikitableGenerator {
         wikitable += `| ${unitName}`;
 
         attributes.forEach((attr) => {
-          let value;
-
-          if (
-            ["Hidden", "Flying", "Lead"].includes(attr) &&
-            unitData.data.Detections
-          ) {
-            value = unitData.data.Detections[attr] || false;
-          } else {
-            value = unitData.data[attr];
-          }
-
+          const value = unitData.attributes[attr];
           wikitable += ` || ${this.#formatWikitableCell(value, attr)}`;
         });
       }
