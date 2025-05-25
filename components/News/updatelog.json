@@ -1,4 +1,12 @@
 [
+    {
+    "version": "1.2.6",
+    "date": "May 25, 2025",
+    "changes": [
+      "New options for the settings added",
+      "Table improvements"
+    ]
+  },
   {
     "version": "1.2.5",
     "date": "May 12, 2025",

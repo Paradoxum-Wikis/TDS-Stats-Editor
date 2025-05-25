@@ -21,6 +21,7 @@ class SettingsManager {
     this.imageCacheDebugToggle = document.getElementById(
       "imageCacheDebugToggle",
     );
+    this.autoSlideToggle = document.getElementById("autoSlideToggle");
     this.analyticsConsentToggle = document.getElementById(
       "analyticsConsentToggle",
     );
@@ -46,6 +47,7 @@ class SettingsManager {
     this.keepDropdownOpen = localStorage.getItem("keepDropdownOpen") === "true";
     this.classicTableSize = localStorage.getItem("classicTableSize") === "true";
     this.imageCacheDebug = localStorage.getItem("imageCacheDebug") === "true";
+    this.autoSlideEnabled = localStorage.getItem("autoSlideEnabled") !== "false";
     this.analyticsConsent = localStorage.getItem("analyticsConsent") === "true";
 
     this.towerRegistryDebugToggle = document.getElementById(
@@ -70,7 +72,6 @@ class SettingsManager {
       );
     }
 
-    // Add event listener for analytics consent changes from the Consent banner
     document.addEventListener("analyticsConsentChanged", (e) => {
       this.analyticsConsent = e.detail.consent;
       window.state.settings.analyticsConsent = this.analyticsConsent;
@@ -91,6 +92,7 @@ class SettingsManager {
     window.state.settings.keepDropdownOpen = this.keepDropdownOpen;
     window.state.settings.classicTableSize = this.classicTableSize;
     window.state.settings.imageCacheDebug = this.imageCacheDebug;
+    window.state.settings.autoSlideEnabled = this.autoSlideEnabled;
     window.state.settings.towerRegistryDebug = this.towerRegistryDebug;
     window.state.settings.analyticsConsent = this.analyticsConsent;
 
@@ -157,20 +159,24 @@ class SettingsManager {
       );
     }
 
-    // Set initial anims state
     if (this.animationsStylesheet) {
       this.animationsStylesheet.disabled = !this.animationsEnabled;
     }
 
     this.animationsToggle.checked = !this.animationsEnabled;
-
-    // Update theme aware images
     this.updateThemeImages();
 
     // a bunch of initials to set
     this.showSecondsToggle.checked = this.showSeconds;
     this.forceUSNumbersToggle.checked = this.forceUSNumbers;
     this.showCollapsibleCountsToggle.checked = this.showCollapsibleCounts;
+    if (this.autoSlideToggle) {
+      this.autoSlideToggle.checked = this.autoSlideEnabled;
+      this.autoSlideToggle.addEventListener(
+        "change",
+        this.toggleAutoSlide.bind(this),
+      );
+    }
     if (this.enableLuaViewerToggle) {
       this.enableLuaViewerToggle.checked = this.enableLuaViewer;
       this.enableLuaViewerToggle.addEventListener(
@@ -222,6 +228,18 @@ class SettingsManager {
     this.updateNumberFormatLabel();
   }
 
+  toggleAutoSlide() {
+    this.autoSlideEnabled = this.autoSlideToggle.checked;
+    window.state.settings.autoSlideEnabled = this.autoSlideEnabled;
+    localStorage.setItem("autoSlideEnabled", this.autoSlideEnabled);
+
+    document.dispatchEvent(
+      new CustomEvent("settingsChanged", {
+        detail: { setting: "autoSlideEnabled", value: this.autoSlideEnabled },
+      }),
+    );
+  }
+
   // deal with theme mode selection
   setThemeMode(event) {
     const newMode = event.target.value;
@@ -244,7 +262,7 @@ class SettingsManager {
     localStorage.setItem("themeMode", this.themeMode);
 
     this.updateCurrentTheme();
-    this.applyTheme(); // reapply theme
+    this.applyTheme();
   }
 
   // manual selection
