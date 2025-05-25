@@ -29,6 +29,7 @@ export default class TableUnitInput {
     this.sizeModifier = 0;
   }
 
+  // a lot of things in this file are the same as TableInput, check it for reference and comments
   createInput() {
     const cellData = this.unitData.attributes[this.attribute];
     const deltaData = this.deltaData.attributes[this.attribute];
@@ -78,7 +79,11 @@ export default class TableUnitInput {
     input.type = "checkbox";
     input.checked = value;
 
-    if (this.useDelta && value != deltaData) {
+    if (
+      value !== deltaData ||
+      value === "NaN" ||
+      deltaData === "NaN"
+    ) {
       input.classList.add("form-check-input-delta");
     }
 
@@ -100,10 +105,30 @@ export default class TableUnitInput {
     input.classList.add("table-cell-input");
     input.size = 1;
 
-    // zero color style
     if (value === 0) {
       input.classList.add("zero-value");
     }
+
+    const isValueNaN = value === "NaN";
+    const isDeltaNaN = deltaData === "NaN";
+
+    let outputValue = this.#formatNumber(value);
+
+    if (
+      value !== deltaData ||
+      isValueNaN ||
+      isDeltaNaN
+    ) {
+      input.classList.add("table-cell-input-delta");
+      outputValue =
+        String(outputValue) + String(this.#getDelta(value, deltaData, input));
+    }
+
+    const computedSize =
+      String(outputValue).length / this.sizeFactor + this.sizeModifier;
+
+    input.style.minWidth = `${computedSize}em`;
+    input.value = outputValue;
 
     input.addEventListener("focusin", (() => (input.value = "")).bind(this));
     input.addEventListener("focusout", this.#onNumberSubmit.bind(this));
@@ -118,27 +143,45 @@ export default class TableUnitInput {
       input.focus();
     });
 
-    let outputValue = this.#formatNumber(value);
-    if (this.useDelta)
-      outputValue =
-        String(outputValue) + String(this.#getDelta(value, deltaData, input));
-
-    const computedSize =
-      String(outputValue).length / this.sizeFactor + this.sizeModifier;
-
-    input.style.minWidth = `${computedSize}em`;
-    input.value = outputValue;
-
     form.appendChild(input);
     this.base.appendChild(form);
 
     return input;
   }
 
+  #onNumberSubmit() {
+    let newValue = this.input.value;
+
+    try {
+      if (typeof newValue === "string" && newValue.trim().toLowerCase() === "nan") {
+        this.unitData.set(this.attribute, "NaN");
+        this.viewer.unitManager.save();
+      } else if (newValue !== "" && Number.isFinite(+newValue)) {
+        this.unitData.set(this.attribute, +newValue);
+        this.viewer.unitManager.save();
+      }
+    } catch (error) {
+      console.warn(error);
+    }
+
+    this.viewer.reload();
+  }
+
   #createTextInput(value, deltaData) {
     const input = document.createElement("input");
     input.size = 1;
     input.classList.add("table-cell-input");
+
+    const isValueNaN = value === "NaN";
+    const isDeltaNaN = deltaData === "NaN";
+
+    if (
+      value !== deltaData ||
+      isValueNaN ||
+      isDeltaNaN
+    ) {
+      input.classList.add("table-cell-input-delta");
+    }
 
     input.addEventListener(
       "focusin",
@@ -151,9 +194,6 @@ export default class TableUnitInput {
       input.focus();
     });
 
-    if (this.useDelta && value != deltaData) {
-      input.classList.add("table-cell-input-delta");
-    }
     const computedSize =
       String(value).length / this.sizeFactor + this.sizeModifier;
 
@@ -171,21 +211,6 @@ export default class TableUnitInput {
     try {
       this.unitData.set(this.attribute, newValue);
       this.viewer.unitManager.save();
-    } catch (error) {
-      console.warn(error);
-    }
-
-    this.viewer.reload();
-  }
-
-  #onNumberSubmit() {
-    const newValue = this.input.value;
-
-    try {
-      if (newValue !== "" && Number.isFinite(+newValue)) {
-        this.unitData.set(this.attribute, +newValue);
-        this.viewer.unitManager.save();
-      }
     } catch (error) {
       console.warn(error);
     }
@@ -215,7 +240,6 @@ export default class TableUnitInput {
       : Intl.NumberFormat("ru-RU");
     const showSeconds = window.state?.settings?.showSeconds !== false;
 
-    // allows cooldown to have 3 decimal places
     if (this.attribute === "Cooldown") {
       const formatted = formatter.format(+(+number).toFixed(3));
       return formatted + (showSeconds ? "s" : "");

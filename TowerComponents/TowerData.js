@@ -2922,9 +2922,9 @@ export default {
         Attributes: {
           UnitQueues: 1,
           Queue1: "Rifleman 0",
-          Queue2: "N/A",
-          Queue3: "N/A",
-          Queue4: "N/A",
+          Queue2: "NaN",
+          Queue3: "NaN",
+          Queue4: "NaN",
           DamageBuff: 0,
           MaxUnits: 3,
         },
@@ -2944,8 +2944,8 @@ export default {
               UnitQueues: 1,
               Queue1: "Rifleman 0",
               Queue2: "Grenadier 0",
-              Queue3: "N/A",
-              Queue4: "N/A",
+              Queue3: "NaN",
+              Queue4: "NaN",
               DamageBuff: 0,
               MaxUnits: 6,
             },
@@ -2960,8 +2960,8 @@ export default {
               UnitQueues: 2,
               Queue1: "Rifleman 0",
               Queue2: "Grenadier 0",
-              Queue3: "N/A",
-              Queue4: "N/A",
+              Queue3: "NaN",
+              Queue4: "NaN",
               DamageBuff: 0,
               MaxUnits: 6,
             },
@@ -2980,8 +2980,8 @@ export default {
               UnitQueues: 2,
               Queue1: "Rifleman 1",
               Queue2: "Grenadier 1",
-              Queue3: "N/A",
-              Queue4: "N/A",
+              Queue3: "NaN",
+              Queue4: "NaN",
               DamageBuff: 10,
               MaxUnits: 6,
             },
@@ -3000,7 +3000,7 @@ export default {
               Queue1: "Rifleman 1",
               Queue2: "Grenadier 1",
               Queue3: "Riot Guard 0",
-              Queue4: "N/A",
+              Queue4: "NaN",
               DamageBuff: 10,
               MaxUnits: 9,
             },
@@ -3689,7 +3689,7 @@ export default {
         },
         Cooldown: 1.5,
         Damage: 10,
-        Note: "Lead can be damaged by splash damage and collision.\n\nAt level 0, Raise the Dead: Max Units - 2x Skeleton; Combined Total Health - 120; Combined DPS - N/A\nAt level 1, Raise the Dead: Max Units - 4x Skeleton; Combined Total Health - 240; Combined DPS - N/A\nAt level 2, Raise the Dead: Max Units - 3x Skeleton, 3x Sword Skeleton; Combined Total Health - 450; Combined DPS - 74.25\nAt level 3, Raise the Dead: Max Units - 1x Giant Skeleton, 4x Sword Skeleton, 1x Skeleton Knight; Combined Total Health - 1210; Combined DPS - 235.78\nAt level 4, Raise the Dead: Max Units - 1x Executioner Skeleton, 6 Skeleton Knight, 2x Hallow Guard; Combined Total Health - 8600; Combined DPS - 986.89",
+        Note: "Lead can be damaged by splash damage and collision.\n\nAt level 0, Raise the Dead: Max Units - 2x Skeleton; Combined Total Health - 120; Combined DPS - NaN\nAt level 1, Raise the Dead: Max Units - 4x Skeleton; Combined Total Health - 240; Combined DPS - NaN\nAt level 2, Raise the Dead: Max Units - 3x Skeleton, 3x Sword Skeleton; Combined Total Health - 450; Combined DPS - 74.25\nAt level 3, Raise the Dead: Max Units - 1x Giant Skeleton, 4x Sword Skeleton, 1x Skeleton Knight; Combined Total Health - 1210; Combined DPS - 235.78\nAt level 4, Raise the Dead: Max Units - 1x Executioner Skeleton, 6 Skeleton Knight, 2x Hallow Guard; Combined Total Health - 8600; Combined DPS - 986.89",
       },
     },
   },
@@ -4334,44 +4334,73 @@ export default {
           Image: 84475876520565,
           Stats: {
             Extras: [],
-            Attributes: { Deadzone: 10, ExplosionRadius: 3 },
+            Attributes: {
+              Deadzone: 10,
+              ExplosionRadius: 3,
+              MissileAmount: 1,
+              SpreadAngle: "NaN",
+              Accuracy: 1
+            },
             Detections: {
               Flying: false,
               Hidden: false,
-              Lead: true,
+              Lead: true
             },
             Cooldown: 3,
             Range: 22,
             Damage: 30,
+            Accuracy: 1
           },
           Title: "Faster Reloading",
-          Cost: 250,
+          Cost: 250
         },
         {
           Image: 76900038470572,
           Stats: {
             Extras: [],
-            Attributes: { Deadzone: 10, ExplosionRadius: 3 },
-            Detections: { Flying: false, Hidden: true, Lead: true },
+            Attributes: {
+              Deadzone: 10,
+              ExplosionRadius: 3,
+              MissileAmount: 1,
+              SpreadAngle: "NaN",
+              Accuracy: 1
+            },
+            Detections: {
+              Flying: false,
+              Hidden: true,
+              Lead: true
+            },
             Cooldown: 3,
             Range: 25,
             Damage: 60,
+            Accuracy: 1
           },
           Title: "Heavier Payload",
-          Cost: 1600,
+          Cost: 1600
         },
         {
           Image: 103303357353083,
           Stats: {
             Extras: ["Explosion Radius: 3 → 4", "Deadzone: 12 → 10"],
-            Attributes: { Deadzone: 10, ExplosionRadius: 4 },
-            Detections: { Flying: false, Hidden: true, Lead: true },
+            Attributes: {
+              Deadzone: 10,
+              ExplosionRadius: 4,
+              MissileAmount: 1,
+              SpreadAngle: "NaN",
+              Accuracy: 1
+            },
+            Detections: {
+              Flying: false,
+              Hidden: true,
+              Lead: true
+            },
             Cooldown: 3,
             Range: 25,
             Damage: 150,
+            Accuracy: 1
           },
           Title: "Explosive Risks",
-          Cost: 7500,
+          Cost: 7500
         },
         {
           Image: 133610100963797,
@@ -4380,37 +4409,49 @@ export default {
               "Explosion Radius: 4 → 5",
               "Deadzone: 12 → 10",
               "Missle Amount: 1 → 2",
-              "Accuracy: 1 → 0.5",
+              "Accuracy: 1 → 0.5"
             ],
-            Attributes: { Deadzone: 10, ExplosionRadius: 5, Accuracy: 0.5 },
-            Detections: { Flying: false, Hidden: true, Lead: true },
+            Attributes: {
+              Deadzone: 10,
+              ExplosionRadius: 5,
+              MissileAmount: 4,
+              SpreadAngle: 60,
+              Accuracy: 0.5
+            },
+            Detections: {
+              Flying: false,
+              Hidden: true,
+              Lead: true
+            },
             Cooldown: 3,
             Range: 30,
             Damage: 90,
-            MissileAmount: 4,
-            SpreadAngle: 60,
-            Accuracy: 0.5,
+            Accuracy: 0.5
           },
           Title: "Missle Maelstorm",
-          Cost: 18500,
-        },
+          Cost: 18500
+        }
       ],
       Defaults: {
         Attributes: {
           Deadzone: 10,
           ExplosionRadius: 3,
           MissileAmount: 1,
-          SpreadAngle: "N/A",
+          SpreadAngle: "NaN",
           Accuracy: 1,
-          ProjectileSpeed: 25,
+          ProjectileSpeed: 25
         },
-        Detections: { Flying: false, Hidden: false, Lead: true },
+        Detections: {
+          Flying: false,
+          Hidden: false,
+          Lead: true
+        },
         Range: 22,
         Price: 1500,
         Limit: 8,
         Cooldown: 3.5,
         Damage: 30,
-        Accuracy: 1,
+        Accuracy: 1
       },
     },
   },
@@ -6472,8 +6513,8 @@ export default {
           Ivy: false,
           Nightshade: false,
           Queue1: "Sunflower",
-          Queue2: "N/A",
-          Queue3: "N/A",
+          Queue2: "NaN",
+          Queue3: "NaN",
         },
         Detections: {
           Hidden: false,
@@ -6492,8 +6533,8 @@ export default {
               Ivy: true,
               Nightshade: false,
               Queue1: "Sunflower",
-              Queue2: "N/A",
-              Queue3: "N/A",
+              Queue2: "NaN",
+              Queue3: "NaN",
             },
             Extras: [
               "[Collapsible:Upgraded Sunflower]Health: 50 → 100",
@@ -6520,7 +6561,7 @@ export default {
               Nightshade: false,
               Queue1: "Sunflower",
               Queue2: "Ivy",
-              Queue3: "N/A",
+              Queue3: "NaN",
             },
             Extras: [
               "Queue slots: 1 → 2",
@@ -6549,7 +6590,7 @@ export default {
               Nightshade: true,
               Queue1: "Sunflower",
               Queue2: "Ivy",
-              Queue3: "N/A",
+              Queue3: "NaN",
             },
             Extras: [
               "[Collapsible:Upgraded Sunflower]Health: 200 → 400",

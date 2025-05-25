@@ -79,7 +79,11 @@ export default class TableInput {
     input.type = "checkbox";
     input.checked = value;
 
-    if (this.useDelta && value != deltaData) {
+    if (
+      value !== deltaData ||
+      Number.isNaN(value) ||
+      Number.isNaN(deltaData)
+    ) {
       input.classList.add("form-check-input-delta");
     }
 
@@ -106,6 +110,28 @@ export default class TableInput {
       input.classList.add("zero-value");
     }
 
+    // Treat string "NaN" as NaN for coloring
+    const isValueNaN = value === "NaN";
+    const isDeltaNaN = deltaData === "NaN";
+
+    let outputValue = this.#formatNumber(value);
+
+    if (
+      value !== deltaData ||
+      isValueNaN ||
+      isDeltaNaN
+    ) {
+      input.classList.add("table-cell-input-delta");
+      outputValue =
+        String(outputValue) + String(this.#getDelta(value, deltaData, input));
+    }
+
+    const computedSize =
+      String(outputValue).length / this.sizeFactor + this.sizeModifier;
+
+    input.style.minWidth = `${computedSize}em`;
+    input.value = outputValue;
+
     input.addEventListener("focusin", (() => (input.value = "")).bind(this));
     input.addEventListener("focusout", this.#onNumberSubmit.bind(this));
     form.addEventListener(
@@ -119,21 +145,24 @@ export default class TableInput {
       input.focus();
     });
 
-    let outputValue = this.#formatNumber(value);
-    if (this.useDelta)
-      outputValue =
-        String(outputValue) + String(this.#getDelta(value, deltaData, input));
-
-    const computedSize =
-      String(outputValue).length / this.sizeFactor + this.sizeModifier;
-
-    input.style.minWidth = `${computedSize}em`;
-    input.value = outputValue;
-
     form.appendChild(input);
     this.base.appendChild(form);
 
     return input;
+  }
+
+  #onNumberSubmit() {
+    let newValue = this.input.value;
+    if (typeof newValue === "string" && newValue.trim().toLowerCase() === "nan") {
+      newValue = NaN;
+    } else if (newValue !== "" && Number.isFinite(+newValue)) {
+      newValue = +newValue;
+    } else {
+      this.#handleSubmission();
+      return;
+    }
+    this.towerLevels.set(this.level, this.attribute, newValue);
+    this.#handleSubmission();
   }
 
   #createTextInput(value, deltaData) {
@@ -144,6 +173,22 @@ export default class TableInput {
     input.size = 1;
 
     input.classList.add("table-cell-input");
+
+    const isValueNaN = value === "NaN";
+    const isDeltaNaN = deltaData === "NaN";
+
+    if (
+      value !== deltaData ||
+      isValueNaN ||
+      isDeltaNaN
+    ) {
+      input.classList.add("table-cell-input-delta");
+    }
+
+    const computedSize = String(value).length / this.sizeFactor;
+
+    input.style.minWidth = `${computedSize}em`;
+    input.value = value;
 
     input.addEventListener(
       "focusin",
@@ -156,15 +201,6 @@ export default class TableInput {
       input.focus();
     });
 
-    if (this.useDelta && value != deltaData) {
-      input.classList.add("table-cell-input-delta");
-    }
-
-    const computedSize = String(value).length / this.sizeFactor;
-
-    input.style.minWidth = `${computedSize}em`;
-    input.value = value;
-
     this.base.appendChild(input);
 
     return input;
@@ -173,14 +209,6 @@ export default class TableInput {
   #onBooleanSubmit() {
     const newValue = this.input.checked;
     this.towerLevels.set(this.level, this.attribute, newValue);
-    this.#handleSubmission();
-  }
-
-  #onNumberSubmit() {
-    const newValue = this.input.value;
-    if (newValue !== "" && Number.isFinite(+newValue)) {
-      this.towerLevels.set(this.level, this.attribute, +newValue);
-    }
     this.#handleSubmission();
   }
 
