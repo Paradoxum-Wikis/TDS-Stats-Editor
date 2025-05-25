@@ -2,37 +2,158 @@ class Consent {
   constructor() {
     this.consentKey = "analyticsConsent";
     this.banner = null;
+    this.requiresConsent = null;
 
+    this.initializeGtagWithConsentMode();
     this.init();
 
-    // settings check
     document.addEventListener("analyticsConsentChanged", (e) => {
-      if (e.detail.consent === true) {
-        this.enableAnalytics();
-      }
+      this.updateConsentMode(e.detail.consent);
     });
 
     this.setupTrackingFunction();
     this.setupEventListeners();
   }
 
-  init() {
-    // Check if consent has been set already
+  initializeGtagWithConsentMode() {
+    if (typeof gtag === "undefined") {
+      const gtagScript = document.createElement("script");
+      gtagScript.async = true;
+      gtagScript.src =
+        "https://www.googletagmanager.com/gtag/js?id=G-D48H2PL948";
+      document.head.appendChild(gtagScript);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      window.gtag = gtag;
+
+      gtag("consent", "default", {
+        analytics_storage: "denied",
+        ad_storage: "denied",
+        wait_for_update: 500,
+      });
+
+      gtag("js", new Date());
+      gtag("config", "G-D48H2PL948", {
+        anonymize_ip: true,
+        allow_google_signals: false,
+        allow_ad_personalization_signals: false,
+      });
+    }
+  }
+
+  updateConsentMode(hasConsent) {
+    if (typeof gtag !== "undefined") {
+      gtag("consent", "update", {
+        analytics_storage: hasConsent ? "granted" : "denied",
+      });
+    }
+  }
+
+  async init() {
+    await this.determineConsentRequirement();
     const consent = localStorage.getItem(this.consentKey);
 
-    // Only show banner if consent hasn't been set
-    if (consent === null) {
-      this.createBanner();
-      this.attachEventListeners();
-    } else if (consent === "true") {
-      // Enable analytics if previously consented
-      this.enableAnalytics();
+    if (this.requiresConsent) {
+      if (consent === null) {
+        this.createBanner();
+        this.attachEventListeners();
+      } else if (consent === "true") {
+        this.updateConsentMode(true);
+      } else if (consent === "false") {
+        this.updateConsentMode(false);
+      }
+    } else {
+      if (consent === null || consent === "true") {
+        localStorage.setItem(this.consentKey, "true");
+        this.updateConsentMode(true);
+
+        document.dispatchEvent(
+          new CustomEvent("analyticsConsentChanged", {
+            detail: { consent: true },
+          }),
+        );
+      } else if (consent === "false") {
+        this.updateConsentMode(false);
+      }
     }
+  }
+
+  async determineConsentRequirement() {
+    try {
+      const geoData = await this.getGeoLocation();
+
+      if (geoData && geoData.country) {
+        this.requiresConsent = this.isConsentRequiredForCountry(
+          geoData.country,
+        );
+      } else {
+        this.requiresConsent = true;
+      }
+    } catch (error) {
+      console.warn(
+        "Geo detection failed, defaulting to requiring consent:",
+        error,
+      );
+      this.requiresConsent = true;
+    }
+  }
+
+  async getGeoLocation() {
+    const services = [
+      "https://ipapi.co/json/",
+      "https://api.ipify.org?format=json",
+    ];
+
+    for (const service of services) {
+      try {
+        const response = await fetch(service, {
+          timeout: 5000,
+          headers: {
+            Accept: "application/json",
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+
+          if (service.includes("ipapi.co")) {
+            return {
+              country: data.country_code || data.country,
+              region: data.region_code || data.region,
+            };
+          }
+        }
+      } catch (error) {
+        console.warn(`Geo service ${service} failed:`, error);
+        continue;
+      }
+    }
+
+    throw new Error("All geo services failed");
+  }
+
+  isConsentRequiredForCountry(countryCode) {
+    // prettier-ignore
+    const consentRequiredRegions = [
+    'AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 
+    'GR', 'HU', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 
+    'RO', 'SK', 'SI', 'ES', 'SE', // EU (27)
+    'IS', 'LI', 'NO', // EEA (3)
+    'GB', // UK
+    'CH', // Switzerland
+    'TR' // Turkey
+  ];
+
+    return consentRequiredRegions.includes(countryCode?.toUpperCase());
   }
 
   createBanner() {
     this.banner = document.createElement("div");
     this.banner.className = "cookie-consent-banner";
+
     this.banner.innerHTML = `
       <div class="cookie-content">
         <div class="cookie-text">
@@ -53,23 +174,24 @@ class Consent {
     }, 100);
   }
 
+  // settings check
   attachEventListeners() {
     document.getElementById("cookie-accept").addEventListener("click", () => {
       localStorage.setItem(this.consentKey, "true");
+      this.updateConsentMode(true);
 
-      // for SettingsManager to listen
       document.dispatchEvent(
         new CustomEvent("analyticsConsentChanged", {
           detail: { consent: true },
         }),
       );
 
-      this.enableAnalytics();
       this.removeBanner();
     });
 
     document.getElementById("cookie-decline").addEventListener("click", () => {
       localStorage.setItem(this.consentKey, "false");
+      this.updateConsentMode(false);
 
       document.dispatchEvent(
         new CustomEvent("analyticsConsentChanged", {
@@ -90,32 +212,13 @@ class Consent {
     }
   }
 
-  enableAnalytics() {
-    if (typeof gtag === "undefined") {
-      const gtagScript = document.createElement("script");
-      gtagScript.async = true;
-      gtagScript.src =
-        "https://www.googletagmanager.com/gtag/js?id=G-D48H2PL948";
-      document.head.appendChild(gtagScript);
-
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        window.dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-D48H2PL948");
-
-      window.gtag = gtag;
-    }
-  }
-
   isAnalyticsEnabled() {
     return localStorage.getItem(this.consentKey) === "true";
   }
 
   setupTrackingFunction() {
     window.trackEvent = (category, action, label) => {
-      if (this.isAnalyticsEnabled() && typeof gtag !== "undefined") {
+      if (typeof gtag !== "undefined") {
         gtag("event", action, {
           event_category: category,
           event_label: label,
