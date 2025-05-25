@@ -455,11 +455,9 @@ export default {
       Flying: false,
       Lead: false,
     },
-    Attributes: {
       SendTime: 1.25,
       ScrapCost: 16,
       Lifetime: 20,
-    },
     BurstCooldown: 0,
     Cooldown: 0.45,
     ExplosionDamage: 0,
@@ -478,11 +476,9 @@ export default {
       Flying: false,
       Lead: false,
     },
-    Attributes: {
       SendTime: 1.5,
       ScrapCost: 36,
       Lifetime: 30,
-    },
     BurstCooldown: 0,
     Cooldown: 0.3,
     ExplosionDamage: 0,
@@ -501,11 +497,9 @@ export default {
       Flying: false,
       Lead: false,
     },
-    Attributes: {
       SendTime: 1.75,
       ScrapCost: 120,
       Lifetime: 45,
-    },
     BurstCooldown: 0,
     Cooldown: 0.16,
     ExplosionDamage: 0,
@@ -524,11 +518,9 @@ export default {
       Flying: false,
       Lead: false,
     },
-    Attributes: {
       SendTime: 1.75,
       ScrapCost: 250,
       Lifetime: 60,
-    },
     BurstCooldown: 4,
     Cooldown: 0.12,
     ExplosionDamage: 35,
@@ -1803,13 +1795,11 @@ export default {
       Lead: false,
     },
     ExplosionRadius: 0,
-    Attributes: {
       PoisonDamage: 0,
       PoisonLength: 0,
       TickRate: 0,
       MaxSlow: 0,
       ConfusionTime: 0,
-    },
   },
   "Sunflower 1": {
     Health: 100,
@@ -1824,13 +1814,11 @@ export default {
       Lead: false,
     },
     ExplosionRadius: 0,
-    Attributes: {
       PoisonDamage: 0,
       PoisonLength: 0,
       TickRate: 0,
       MaxSlow: 0,
       ConfusionTime: 0,
-    },
   },
   "Sunflower 2": {
     Health: 200,
@@ -1845,13 +1833,11 @@ export default {
       Lead: false,
     },
     ExplosionRadius: 0,
-    Attributes: {
       PoisonDamage: 0,
       PoisonLength: 0,
       TickRate: 0,
       MaxSlow: 0,
       ConfusionTime: 0,
-    },
   },
   "Sunflower 3": {
     Health: 400,
@@ -1866,13 +1852,11 @@ export default {
       Lead: false,
     },
     ExplosionRadius: 0,
-    Attributes: {
       PoisonDamage: 0,
       PoisonLength: 0,
       TickRate: 0,
       MaxSlow: 0,
       ConfusionTime: 0,
-    },
   },
   "Sunflower 4": {
     Health: 800,
@@ -1887,13 +1871,11 @@ export default {
       Lead: false,
     },
     ExplosionRadius: 0,
-    Attributes: {
       PoisonDamage: 0,
       PoisonLength: 0,
       TickRate: 0,
       MaxSlow: 0,
       ConfusionTime: 0,
-    },
   },
   "Ivy 1": {
     Health: 100,
@@ -1908,13 +1890,11 @@ export default {
       Lead: true,
     },
     ExplosionRadius: 3,
-    Attributes: {
       PoisonDamage: 1,
       PoisonLength: 4.5,
       TickRate: 0.75,
       MaxSlow: 5,
       ConfusionTime: 0,
-    },
   },
   "Ivy 2": {
     Health: 200,
@@ -1929,13 +1909,11 @@ export default {
       Lead: true,
     },
     ExplosionRadius: 4,
-    Attributes: {
       PoisonDamage: 2,
       PoisonLength: 4.5,
       TickRate: 0.75,
       MaxSlow: 7.5,
       ConfusionTime: 0,
-    },
   },
   "Ivy 3": {
     Health: 400,
@@ -1950,13 +1928,11 @@ export default {
       Lead: true,
     },
     ExplosionRadius: 4.5,
-    Attributes: {
       PoisonDamage: 4,
       PoisonLength: 4.5,
       TickRate: 0.6,
       MaxSlow: 7.5,
       ConfusionTime: 0,
-    },
   },
   "Ivy 4": {
     Health: 800,
@@ -1971,13 +1947,11 @@ export default {
       Lead: true,
     },
     ExplosionRadius: 4.5,
-    Attributes: {
       PoisonDamage: 5,
       PoisonLength: 5.2,
       TickRate: 0.65,
       MaxSlow: 12.5,
       ConfusionTime: 0,
-    },
   },
   "Nightshade 3": {
     Health: 400,
@@ -1992,13 +1966,11 @@ export default {
       Lead: false,
     },
     ExplosionRadius: 0,
-    Attributes: {
       PoisonDamage: 0,
       PoisonLength: 0,
       TickRate: 0,
       MaxSlow: 0,
       ConfusionTime: 1,
-    },
   },
   "Nightshade 4": {
     Health: 800,
@@ -2013,12 +1985,10 @@ export default {
       Lead: false,
     },
     ExplosionRadius: 0,
-    Attributes: {
       PoisonDamage: 0,
       PoisonLength: 0,
       TickRate: 0,
       MaxSlow: 0,
       ConfusionTime: 1.25,
-    },
   },
 };

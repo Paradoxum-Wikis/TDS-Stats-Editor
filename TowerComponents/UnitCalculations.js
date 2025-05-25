@@ -554,9 +554,9 @@ class UnitCalculations {
           // count queues
           let queueCount = 0;
           if (source) {
-            if (source.Queue1 && source.Queue1 !== "N/A") queueCount++;
-            if (source.Queue2 && source.Queue2 !== "N/A") queueCount++;
-            if (source.Queue3 && source.Queue3 !== "N/A") queueCount++;
+            if (source.Queue1 && source.Queue1 !== "NaN") queueCount++;
+            if (source.Queue2 && source.Queue2 !== "NaN") queueCount++;
+            if (source.Queue3 && source.Queue3 !== "NaN") queueCount++;
           }
 
           if (queueCount > 0) {
