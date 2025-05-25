@@ -5371,7 +5371,7 @@ export default {
               PoisonDamage: 4,
               MaxSlow: 20,
               SlowdownPerHit: 20,
-              MaxDefMelt: 0,
+              MaxDefenseMelt: 0,
             },
             Detections: {
               Flying: false,
@@ -5401,7 +5401,7 @@ export default {
               SlowdownTime: 6,
               PoisonLength: 6,
               PoisonDamage: 4,
-              MaxDefMelt: 50,
+              MaxDefenseMelt: 50,
             },
             Detections: {
               Flying: false,
@@ -5435,7 +5435,7 @@ export default {
               PoisonDamage: 10,
               SlowdownPerHit: 30,
               MaxSlow: 30,
-              MaxDefMelt: 50,
+              MaxDefenseMelt: 50,
             },
             Detections: {
               Flying: false,
@@ -5462,7 +5462,7 @@ export default {
           MaxSlow: 10,
           SlowdownPerHit: 10,
           DefenseMelt: 0,
-          MaxDefMelt: 0,
+          MaxDefenseMelt: 0,
         },
         Price: 525,
         Range: 10,

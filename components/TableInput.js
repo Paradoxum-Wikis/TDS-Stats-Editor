@@ -228,7 +228,7 @@ export default class TableInput {
       case "TotalIncomePerSecond":
         return `$${formatter.format(+(+value).toFixed(2))}`;
 
-      case "MaxDefMelt":
+      case "MaxDefenseMelt":
       case "DefenseMelt":
       case "SlowdownPerHit":
       case "MaxSlow":

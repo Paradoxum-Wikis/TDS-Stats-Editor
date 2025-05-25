@@ -44,7 +44,8 @@ export const allowedAttributes = [
   "MissileDPS",
   "TotalPrice",
   "Defense",
-  "MaxDefMelt",
+  "DefenseMelt",
+  "MaxDefenseMelt",
   "AttackSpeed",
   "MissileAmount",
   "Health",
@@ -71,6 +72,8 @@ export const attributeLabels = {
   ComboLength: "Hit Count",
   KnockbackCooldown: "Cooldown",
   RevTime: "Rev-Up Time",
+  DefenseMelt: "Defense Dropping",
+  MaxDefenseMelt: "Max Defense Dropping",
 };
 
 /**

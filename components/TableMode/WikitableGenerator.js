@@ -380,7 +380,7 @@ class WikitableGenerator {
         "DamageBuff",
         "FirerateBuff",
         "DefenseMelt",
-        "MaxDefMelt",
+        "MaxDefenseMelt",
         "CallToArmsBuff",
         "ThornPower",
         "CriticalMultiplier",
