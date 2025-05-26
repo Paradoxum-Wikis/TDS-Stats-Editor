@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "https://chaoshead.netlify.app/*"
+  to = "https://tds-editor.com/:splat"
+  status = 301
+  force = true
