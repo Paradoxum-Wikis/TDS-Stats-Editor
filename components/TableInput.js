@@ -287,6 +287,8 @@ export default class TableInput {
       case "BuildDelay":
       case "BombTime":
       case "BeeDuration":
+      case "ParryCooldown":
+      case "ParryLength":
         return formatter.format(value) + (showSeconds ? "s" : "");
     }
 
@@ -318,6 +320,8 @@ export default class TableInput {
     "AimTime",
     "EquipTime",
     "BuildDelay",
+    "ParryCooldown",
+    "TrapPlacementTime",
   ];
 
   #getDelta(cellData, deltaData, input) {
