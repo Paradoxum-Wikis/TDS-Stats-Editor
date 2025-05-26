@@ -7,7 +7,7 @@ class TDSWikiFetcher {
   constructor() {
     this.wikiBaseUrl = "https://tds.fandom.com";
     this.categoryUrl =
-      "/wiki/Special:CategoryTree?target=Category%3ATDSDatabase&mode=pages&namespaces=500";
+      "/wiki/User:Gabonnie/DBT?action=render"; // currently used as 2nd step and potential fallback
     this.dbtreeEndpoint = "https://api.tds-editor.com/dbtree";
 
     // backup proxies in case one fails
@@ -216,7 +216,7 @@ class TDSWikiFetcher {
   async enrichTowerData(tower) {
     try {
       console.log(`getting data for tower: ${tower.name}`);
-      const url = `${this.wikiBaseUrl}${tower.url}`;
+      const url = tower.url.startsWith('http') ? tower.url : `${this.wikiBaseUrl}${tower.url}`;
 
       const response = await this.fetchWithFallback(url);
       const html = await response.text();
