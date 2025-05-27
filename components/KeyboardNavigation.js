@@ -220,7 +220,7 @@ export default class KeyboardNavigation {
 
       if (event.key === "F3") {
         event.preventDefault();
-        window.location.href = "/db";
+        window.location.href = "./db/";
       }
     });
   }

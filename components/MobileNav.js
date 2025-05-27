@@ -186,13 +186,13 @@ export default class MobileNav {
           <a href="https://tds.fandom.com/wiki/" class="btn btn-outline-secondary" id="mobile-wiki-btn" target="_blank">
             <i class="bi bi-journal-text me-2"></i>TDS Wiki
           </a>
-          <a href="./db" class="btn btn-outline-secondary" id="mobile-database-btn">
+          <a href="/db/" class="btn btn-outline-secondary" id="mobile-database-btn">
             <i class="bi bi-database me-2"></i>TDS Database
           </a>
           <a href="https://resources.tds-editor.com/" class="btn btn-outline-secondary" id="mobile-gpr-btn">
             <i class="bi bi-file-image me-2"></i>GP Resources
           </a>
-          <a href="./ranker" class="btn btn-outline-secondary" id="mobile-gpr-btn">
+          <a href="./ranker/" class="btn btn-outline-secondary" id="mobile-gpr-btn">
             <i class="bi bi-bar-chart-steps me-2"></i>TDS Ranker
           </a>
           <button class="btn btn-outline-secondary" id="mobile-about-btn" data-bs-toggle="modal" data-bs-target="#discord-modal">

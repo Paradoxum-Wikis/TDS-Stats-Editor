@@ -174,7 +174,7 @@ class MobileNavigation {
       },
       {
         name: "TDS Database",
-        url: "../db",
+        url: "./db/",
         icon: "bi-database-fill",
         description:
           "The Database housing custom towers made by people like you!",
