@@ -1,4 +1,4 @@
-import App from "./App.js";
+import App from "./components/App.js";
 import { UpdateLog } from "./components/News/UpdateLog.js";
 import SidebarToggle from "./components/SidebarToggle.js";
 import MobileNav from "./components/MobileNav.js";

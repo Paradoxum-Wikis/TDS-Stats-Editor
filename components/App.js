@@ -1,7 +1,7 @@
-import TowerManager from "./TowerComponents/TowerManager.js";
-import Dropdown from "./components/Dropdown.js";
-import Viewer from "./components/Viewer/index.js";
-import { loadTower, clearUrlAndShowLanding } from "./components/TowerLoader.js";
+import TowerManager from "../TowerComponents/TowerManager.js";
+import Dropdown from "./Dropdown.js";
+import Viewer from "./Viewer/index.js";
+import { loadTower, clearUrlAndShowLanding } from "./TowerLoader.js";
 
 class App {
   constructor() {
@@ -92,7 +92,6 @@ class App {
           this.dropdown.textForm.value = "";
         }, 10);
       } else {
-        // clear URL parameters and show landing page
         clearUrlAndShowLanding();
       }
     } else {
