@@ -115,7 +115,7 @@ export default class AbilityManager {
     abilityDiv.appendChild(titleInput);
 
     const unlockLevelInput = this.createInputField(
-      `side-unlock-title-${index}`,
+      `side-unlock-level-${index}`,  // possible future use
       "Unlock Level",
       ability.Level,
       (value) => {
@@ -141,7 +141,7 @@ export default class AbilityManager {
     abilityDiv.appendChild(cooldownInput);
 
     const abilityCostInput = this.createInputField(
-      `side-unlock-title-${index}`,
+      `side-ability-cost-${index}`,
       "Ability Price",
       ability.Cost,
       (value) => {
