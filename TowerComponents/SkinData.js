@@ -138,31 +138,31 @@ class SkinData {
         switch (value.key) {
           case "Damage":
             icon =
-              '<img src="htmlassets/DamageIcon.png" width="16" class="align-text-bottom me-1">';
+              '<img src="/htmlassets/DamageIcon.png" width="16" class="align-text-bottom me-1">';
             break;
           case "Cooldown":
             icon =
-              '<img src="htmlassets/CooldownIcon.png" width="16" class="align-text-bottom me-1">';
+              '<img src="/htmlassets/CooldownIcon.png" width="16" class="align-text-bottom me-1">';
             break;
           case "Range":
             icon =
-              '<img src="htmlassets/RangeIcon.png" width="16" class="align-text-bottom me-1">';
+              '<img src="/htmlassets/RangeIcon.png" width="16" class="align-text-bottom me-1">';
             break;
           case "Hidden":
             icon =
-              '<img src="htmlassets/HiddenIcon.png" width="16" class="align-text-bottom me-1 linvert">';
+              '<img src="/htmlassets/HiddenIcon.png" width="16" class="align-text-bottom me-1 linvert">';
             break;
           case "Flying":
             icon =
-              '<img src="htmlassets/FlyingIcon.png" width="16" class="align-text-bottom me-1 linvert">';
+              '<img src="/htmlassets/FlyingIcon.png" width="16" class="align-text-bottom me-1 linvert">';
             break;
           case "Lead":
             icon =
-              '<img src="htmlassets/LeadIcon.png" width="16" class="align-text-bottom me-1 linvert">';
+              '<img src="/htmlassets/LeadIcon.png" width="16" class="align-text-bottom me-1 linvert">';
             break;
           case "Income":
             icon =
-              '<img src="htmlassets/IncomeIcon.png" width="16" class="align-text-bottom me-1">';
+              '<img src="/htmlassets/IncomeIcon.png" width="16" class="align-text-bottom me-1">';
             break;
         }
 

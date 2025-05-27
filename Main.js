@@ -11,10 +11,22 @@ import {
 } from "./components/News/UIHelpers.js";
 import { clearUrlAndShowLanding } from "./components/TowerLoader.js";
 import Consent from "./components/Consent.js";
+import "./components/TableMode/JSONUploader.js";
+import "./components/SettingsManager.js";
+import "./components/TableMode/json-viewer.js";
+
+// node modules
+import * as bootstrap from "bootstrap";
+import CryptoJS from "crypto-js";
 
 const TDSVersion = "1.64.0"; // change GAME version number here
 
 window.clearUrlAndShowLanding = clearUrlAndShowLanding;
+window.bootstrap = bootstrap;
+window.CryptoJS = CryptoJS;
+
+import JSONViewerModule from "./components/TableMode/json-viewer.js";
+window.JSONViewer = JSONViewerModule;
 
 const app = new App();
 app.start();

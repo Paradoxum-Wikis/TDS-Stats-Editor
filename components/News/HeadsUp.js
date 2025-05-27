@@ -30,7 +30,7 @@ class HeadsUp {
 
     try {
       // Load the headsup.json file
-      const response = await fetch("./components/News/headsup.json");
+      const response = await fetch("/headsup.json");
       if (!response.ok) {
         console.warn("Failed to load headsup.json");
         return;

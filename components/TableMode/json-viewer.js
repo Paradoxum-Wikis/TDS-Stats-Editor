@@ -286,3 +286,5 @@ var JSONViewer = (function (document) {
 
   return JSONViewer;
 })(document);
+
+export default JSONViewer;

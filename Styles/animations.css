@@ -143,28 +143,46 @@
 
 /* Modal */
 .modal.fade .modal-dialog {
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.modal.fade .modal-dialog {
-  transform: scale(0.95);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  transform: scale(0.95) !important;
 }
 
 .modal.show .modal-dialog {
-  transform: scale(1);
+  transform: scale(1) !important;
 }
 
 .modal-content {
-  animation: fadeIn 0.3s forwards;
+  animation: fadeIn 0.3s forwards !important;
 }
 
 .modal-header,
 .modal-footer {
-  animation: slideIn 0.3s forwards;
+  animation: slideIn 0.3s forwards !important;
 }
 
 .modal-footer {
   z-index: -1;
+}
+
+.modal.fade:not(.show) .modal-dialog {
+  transform: scale(0.95) !important;
+}
+
+.modal.fade.show .modal-dialog {
+  transform: scale(1) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal.fade .modal-dialog {
+    transition: none !important;
+    transform: none !important;
+  }
+  
+  .modal-content,
+  .modal-header,
+  .modal-footer {
+    animation: none !important;
+  }
 }
 
 /* Sidebar */
