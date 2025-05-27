@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     '<img id="image-preview" class="img-fluid border border-secondary rounded" style="max-height: 150px; display: none;">';
   imageUrlInput.parentNode.appendChild(previewContainer);
   const imagePreview = document.getElementById("image-preview");
-
+  
   // handle json file selection
   document.getElementById("towerJSON").addEventListener("change", function () {
     const selectedText = document.getElementById("selectedJSONName");
@@ -189,7 +189,6 @@ document.addEventListener("DOMContentLoaded", function () {
       window.imageCache[`content_${imageIdStr}`] = contentUrl;
     }
 
-    // return url for preview
     return previewUrl;
   }
 
@@ -245,63 +244,48 @@ function setupRadioButtonHandlers() {
     });
   };
 
-  // Image source toggle
-  const imageOptions = [
-    document.getElementById("imageUrlOption"),
-    document.getElementById("imageUploadOption"),
-  ];
+  const imageUrlOption = document.getElementById("imageUrlOption");
+  const imageUploadOption = document.getElementById("imageUploadOption");
+  const imageOptions = [imageUrlOption, imageUploadOption];
   const imageInputs = [
     document.getElementById("imageUrlInput"),
     document.getElementById("imageUploadInput"),
   ];
 
-  imageOptions.forEach((option, i) => {
-    document
-      .querySelector(`label[for="${option.id}"]`)
-      ?.addEventListener("click", () => {
-        option.checked = true;
-        toggleVisibility(imageOptions, imageInputs);
-      });
-  });
+  imageUrlOption.addEventListener("change", () =>
+    toggleVisibility(imageOptions, imageInputs),
+  );
+  imageUploadOption.addEventListener("change", () =>
+    toggleVisibility(imageOptions, imageInputs),
+  );
 
-  // JSON source toggle
-  const jsonOptions = [
-    document.getElementById("jsonPasteOption"),
-    document.getElementById("jsonFileOption"),
-    document.getElementById("jsonLinkOption"),
-  ];
+  const jsonPasteOption = document.getElementById("jsonPasteOption");
+  const jsonFileOption = document.getElementById("jsonFileOption");
+  const jsonLinkOption = document.getElementById("jsonLinkOption");
+  const jsonOptions = [jsonPasteOption, jsonFileOption, jsonLinkOption];
   const jsonInputs = [
     document.getElementById("jsonPasteInput"),
     document.getElementById("jsonFileInput"),
     document.getElementById("jsonLinkInput"),
   ];
 
-  jsonOptions.forEach((option, i) => {
-    document
-      .querySelector(`label[for="${option.id}"]`)
-      ?.addEventListener("click", () => {
-        option.checked = true;
-        toggleVisibility(jsonOptions, jsonInputs);
-      });
+  jsonOptions.forEach((option) => {
+    option.addEventListener("change", () =>
+      toggleVisibility(jsonOptions, jsonInputs),
+    );
   });
 
-  // Type toggle (only sets checked)
-  ["typeNew", "typeRework", "typeRebalance"].forEach((id) => {
-    document
-      .querySelector(`label[for="${id}"]`)
-      ?.addEventListener("click", () => {
-        document.getElementById(id).checked = true;
-      });
-  });
-
-  // btn check only triggers change events
-  document.querySelectorAll(".btn-check").forEach((radio) => {
-    const label = document.querySelector(`label[for="${radio.id}"]`);
-    label?.addEventListener("click", () => {
-      setTimeout(() => {
-        radio.checked = true;
-        radio.dispatchEvent(new Event("change", { bubbles: true }));
-      }, 0);
+  const typeOptions = ["typeNew", "typeRework", "typeRebalance"];
+  typeOptions.forEach((id) => {
+    document.getElementById(id).addEventListener("change", function () {
+      if (this.checked) {
+        // Uncheck others
+        typeOptions.forEach((otherId) => {
+          if (otherId !== id) {
+            document.getElementById(otherId).checked = false;
+          }
+        });
+      }
     });
   });
 }

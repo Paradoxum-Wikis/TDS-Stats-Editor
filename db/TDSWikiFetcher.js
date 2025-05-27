@@ -458,3 +458,5 @@ class TDSWikiFetcher {
     ];
   }
 }
+
+window.TDSWikiFetcher = TDSWikiFetcher;
