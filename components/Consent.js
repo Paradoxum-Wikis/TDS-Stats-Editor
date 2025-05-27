@@ -53,20 +53,15 @@ class Consent {
   }
 
   async init() {
-    await this.determineConsentRequirement();
     const consent = localStorage.getItem(this.consentKey);
 
-    if (this.requiresConsent) {
-      if (consent === null) {
+    if (consent === null) {
+      await this.determineConsentRequirement();
+
+      if (this.requiresConsent) {
         this.createBanner();
         this.attachEventListeners();
-      } else if (consent === "true") {
-        this.updateConsentMode(true);
-      } else if (consent === "false") {
-        this.updateConsentMode(false);
-      }
-    } else {
-      if (consent === null || consent === "true") {
+      } else {
         localStorage.setItem(this.consentKey, "true");
         this.updateConsentMode(true);
 
@@ -75,6 +70,10 @@ class Consent {
             detail: { consent: true },
           }),
         );
+      }
+    } else {
+      if (consent === "true") {
+        this.updateConsentMode(true);
       } else if (consent === "false") {
         this.updateConsentMode(false);
       }
