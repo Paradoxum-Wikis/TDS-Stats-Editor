@@ -340,3 +340,5 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   });
 });
+
+export default MobileNavigation;

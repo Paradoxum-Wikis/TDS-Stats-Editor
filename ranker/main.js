@@ -1,5 +1,14 @@
+import * as bootstrap from 'bootstrap';
+window.bootstrap = bootstrap;
+import CryptoJS from 'crypto-js';
+window.CryptoJS = CryptoJS;
+import html2canvas from 'html2canvas';
+window.html2canvas = html2canvas;
+
 import ImageLoader from "../components/ImageLoader.js";
 import { renderTowerShorthands } from "./Shorthand.js";
+import './MobileNav.js';
+import './SettingsSync.js';
 
 // if you have the time, please split this main.js file into smaller files, it's getting a bit too much tbh
 function debounce(func, wait) {
@@ -31,7 +40,7 @@ let towerAliases = {};
 
 async function initializeTierlistData() {
   try {
-    const response = await fetch("tierlist.lua");
+    const response = await fetch("/tierlist.lua");
     if (!response.ok) {
       throw new Error(`Failed to load tierlist.lua: ${response.status}`);
     }
