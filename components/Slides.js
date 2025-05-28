@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let slideInterval;
 
   showSlides();
-  
+
   const autoSlideEnabled = localStorage.getItem("autoSlideEnabled") !== "false";
   if (autoSlideEnabled) {
     startSlideshow();
@@ -44,9 +44,10 @@ document.addEventListener("DOMContentLoaded", function () {
     if (slideIndex < 0) slideIndex = slides.length - 1;
 
     showSlides();
-    
+
     // Only restart slideshow if auto slide is enabled
-    const autoSlideEnabled = localStorage.getItem("autoSlideEnabled") !== "false";
+    const autoSlideEnabled =
+      localStorage.getItem("autoSlideEnabled") !== "false";
     if (autoSlideEnabled) {
       startSlideshow();
     }

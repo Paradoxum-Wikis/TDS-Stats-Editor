@@ -1,3 +1,13 @@
+import "./Styles/bootstrap.css";
+import "./Styles/Dashboard.css";
+import "./Styles/Sidebars.css";
+import "./Styles/json-viewer.css";
+import "./Styles/torus.css";
+import "./Styles/theme.css";
+import "./Styles/MobileNav.css";
+import "./Styles/Consent.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
+
 import App from "./components/App.js";
 import { UpdateLog } from "./components/News/UpdateLog.js";
 import SidebarToggle from "./components/SidebarToggle.js";

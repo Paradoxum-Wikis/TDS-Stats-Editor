@@ -115,7 +115,7 @@ export default class AbilityManager {
     abilityDiv.appendChild(titleInput);
 
     const unlockLevelInput = this.createInputField(
-      `side-unlock-level-${index}`,  // possible future use
+      `side-unlock-level-${index}`, // possible future use
       "Unlock Level",
       ability.Level,
       (value) => {

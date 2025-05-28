@@ -47,7 +47,8 @@ class SettingsManager {
     this.keepDropdownOpen = localStorage.getItem("keepDropdownOpen") === "true";
     this.classicTableSize = localStorage.getItem("classicTableSize") === "true";
     this.imageCacheDebug = localStorage.getItem("imageCacheDebug") === "true";
-    this.autoSlideEnabled = localStorage.getItem("autoSlideEnabled") !== "false";
+    this.autoSlideEnabled =
+      localStorage.getItem("autoSlideEnabled") !== "false";
     this.analyticsConsent = localStorage.getItem("analyticsConsent") === "true";
 
     this.towerRegistryDebugToggle = document.getElementById(

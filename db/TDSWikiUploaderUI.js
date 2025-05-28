@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     '<img id="image-preview" class="img-fluid border border-secondary rounded" style="max-height: 150px; display: none;">';
   imageUrlInput.parentNode.appendChild(previewContainer);
   const imagePreview = document.getElementById("image-preview");
-  
+
   // handle json file selection
   document.getElementById("towerJSON").addEventListener("change", function () {
     const selectedText = document.getElementById("selectedJSONName");
