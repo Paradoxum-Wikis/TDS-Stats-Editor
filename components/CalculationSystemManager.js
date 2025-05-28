@@ -37,6 +37,7 @@ export default class CalculationSystemManager {
       "Accelerator",
       "Ace Pilot",
       "Archer",
+      "Biologist",
       "Brawler",
       "Commander",
       "Commando",
