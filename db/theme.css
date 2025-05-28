@@ -70,12 +70,12 @@
   background-color: #e9ecef !important;
 }
 
-.light-mode .nav-link.text-light {
+.light-mode .nav-link {
   color: #343a40 !important;
 }
 
-.light-mode .nav-link.text-light:hover {
-  color: #0d6efd !important;
+.light-mode .nav-link:hover {
+  color: black !important;
 }
 
 .light-mode .sidebar-heading {
@@ -113,16 +113,6 @@
 .light-mode .btn-outline-secondary.text-light:hover {
   background-color: #6c757d1a !important;
   color: #212529 !important;
-}
-
-.light-mode .btn-primary {
-  background-color: #00b2ee;
-  border-color: #00b2ee;
-}
-
-.light-mode .btn-primary:hover {
-  background-color: #00bfff;
-  border-color: #00bfff;
 }
 
 .light-mode .btn-secondary {
@@ -299,16 +289,6 @@
 
 .light-mode .card.border-gold:hover .card-body {
   background-color: #ffd70008;
-}
-
-.light-mode .btn-primary {
-  background-color: #035d7c !important;
-  border-color: #035d7c !important;
-}
-
-.light-mode .btn-primary:hover {
-  background-color: #035d7c !important;
-  border-color: #035d7c !important;
 }
 
 .light-mode .btn.active {

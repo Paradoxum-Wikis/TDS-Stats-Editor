@@ -1,5 +1,5 @@
-import "../Styles/torus.css";
 import "../Styles/bootstrap.css";
+import "../Styles/torus.css";
 import "./Style.css";
 import "./theme.css";
 import "./GridScale.css";

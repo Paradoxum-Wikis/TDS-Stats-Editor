@@ -21,12 +21,6 @@
   font-weight: 600 !important;
 }
 
-.card {
-  border-radius: 25px 0 25px 0 !important;
-  overflow: hidden !important;
-  border: 2px solid #0484ae !important;
-}
-
 .card-footer {
   border-top: 1px solid #0484ae !important;
 }
@@ -69,6 +63,7 @@ hr {
 
 .form-check-input {
   cursor: pointer !important;
+  transition: all 0.2s ease !important;
 }
 
 .form-check-input:hover {
@@ -96,7 +91,11 @@ hr {
 }
 
 .sidebar .nav-link.active {
-  color: #007bff !important;
+  color: #00b2ee !important;
+}
+
+.sidebar .nav-link.active:hover {
+  color: #144b7b !important;
 }
 
 .form-control-dark {
@@ -238,7 +237,7 @@ a:hover {
   border: 2px solid #0484ae !important;
   transition:
     transform 0.3s ease,
-    box-shadow 0.3s ease;
+    box-shadow 0.3s ease !important;
 }
 
 .card:hover {
@@ -360,4 +359,16 @@ a.btn:hover {
 .card-img-top {
   aspect-ratio: 1 / 1;
   object-fit: contain;
+}
+
+#all-towers .btn,
+.card .btn,
+.btn.copy-json,
+.btn.download-json {
+  border-radius: 25px 0 25px 0 !important;
+}
+
+.card-footer .btn-sm,
+.card-body .btn-sm {
+  border-radius: 25px 0 25px 0 !important;
 }
