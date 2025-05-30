@@ -52,6 +52,7 @@ const approvedTowers = [
   "Hellscream2008/Paint Baller Rework",
   "Hellscream2008/John Tower!",
   "Hellscream2008/Turret Rework!",
+  "ImAllOutOfNames/Medic",
 ];
 
 // List of featured towers
