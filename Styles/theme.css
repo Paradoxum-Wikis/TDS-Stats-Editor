@@ -20,11 +20,21 @@
 
 .light-mode .card.bg-dark {
   background-color: #fff !important;
+  border-color: #ced4da !important;
 }
 
 .light-mode .card {
   background-color: #fff;
   border-color: #ced4da;
+}
+
+.light-mode .card-header.bg-dark {
+  background-color: #f8f9fa !important;
+  border-bottom-color: #dee2e6 !important;
+}
+
+.light-mode .bg-gradient {
+  background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%) !important;
 }
 
 .light-mode .text-white {
@@ -559,4 +569,14 @@
 
 .light-mode .linvert {
   filter: invert(1);
+}
+
+.light-mode .form-select.bg-dark {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+  color: #212529 !important;
+}
+
+.light-mode .form-select.bg-dark:focus {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
 }
