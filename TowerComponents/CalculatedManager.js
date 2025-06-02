@@ -1202,29 +1202,14 @@ class CalculatedManager {
       );
     }
 
-    // custom calculation systems
-    if (calculatedField.Requires && skinData.tower.calculationSystem) {
-      const basicAttributes = ["Damage", "Cooldown"];
-      const criticalAttributes = calculatedField.Requires.filter(
-        (attr) => !basicAttributes.includes(attr),
-      );
-
-      // only validate critical attributes if they're referenced in the calculation
-      if (criticalAttributes.length > 0) {
-        const fnStr = calculatedField.Value.toString();
-        valid &= criticalAttributes.every(
-          (attr) =>
-            // only require attribute if it's actually used in calculation
-            !fnStr.includes(`level.${attr}`) ||
-            skinData.levels.attributes.includes(attr),
-        );
-      }
-    } else if (calculatedField.Requires) {
+    // VITE FIX: always validate requirements properly, regardless of calculation system
+    if (calculatedField.Requires) {
       valid &= calculatedField.Requires.reduce((a, v) => {
         return a && skinData.levels.attributes.includes(v);
       }, true);
     }
 
+    // criteria
     if (skinData.tower.calculationSystem) {
       if (calculatedField.For) {
         // If this is a custom calc system, check if it matches
@@ -1261,6 +1246,7 @@ class CalculatedManager {
   addCalculate(skinData) {
     this.unitManager.load();
 
+    // always added
     this.#add("Cooldown", skinData);
     this.#add("Damage", skinData);
     this.#add("Range", skinData);
