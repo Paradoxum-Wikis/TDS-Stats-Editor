@@ -29,7 +29,7 @@ import "./components/TableMode/json-viewer.js";
 import * as bootstrap from "bootstrap";
 import CryptoJS from "crypto-js";
 
-const TDSVersion = "1.65.0"; // change GAME version number here
+const TDSVersion = "1.65.3"; // change GAME version number here
 
 window.clearUrlAndShowLanding = clearUrlAndShowLanding;
 window.bootstrap = bootstrap;
