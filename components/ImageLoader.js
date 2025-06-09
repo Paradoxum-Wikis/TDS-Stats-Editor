@@ -101,7 +101,7 @@ export default class ImageLoader {
       }
     } else {
       // Roblox asset ID handling
-      const roProxyUrl = `https://assetdelivery.roproxy.com/v2/assetId/${imageIdStr}`;
+      const roProxyUrl = `https://assetdelivery.roblox.com/v2/assetId/${imageIdStr}`;
       try {
         const response = await fetch(
           `https://api.tds-editor.com/?url=${encodeURIComponent(roProxyUrl)}`,

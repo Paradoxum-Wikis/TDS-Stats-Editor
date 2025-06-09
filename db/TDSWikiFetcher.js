@@ -301,7 +301,7 @@ class TDSWikiFetcher {
             if (robloxIdMatch) {
               const robloxId = robloxIdMatch[1];
               try {
-                const roProxyUrl = `https://assetdelivery.roproxy.com/v2/assetId/${robloxId}`;
+                const roProxyUrl = `https://assetdelivery.roblox.com/v2/assetId/${robloxId}`;
                 const robloxResponse = await fetch(
                   `https://api.tds-editor.com/?url=${encodeURIComponent(roProxyUrl)}`,
                   {

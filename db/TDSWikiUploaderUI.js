@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
           contentUrl = `RobloxID${imageIdStr}`;
 
           // get actual image for preview using the o;n proxy
-          const roProxyUrl = `https://assetdelivery.roproxy.com/v2/assetId/${imageIdStr}`;
+          const roProxyUrl = `https://assetdelivery.roblox.com/v2/assetId/${imageIdStr}`;
           try {
             const response = await fetch(
               `https://api.tds-editor.com/?url=${encodeURIComponent(roProxyUrl)}`,
