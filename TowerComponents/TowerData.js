@@ -6667,7 +6667,7 @@ Accelerator: {
             Extras: ["Unlocked Wire Fraud: 7.5% Increase to enemy cash rewards"],
             Attributes: {
               Beams: 1,
-              "Hologram Enemy EV": 0.6,
+              "Hologram Enemy EV": 60,
               "Wire Fraud": 7.5,
               Slowness: 0,
             },
@@ -6694,7 +6694,7 @@ Accelerator: {
             ],
             Attributes: {
               Beams: 2,
-              "Hologram Enemy EV": 0.65,
+              "Hologram Enemy EV": 65,
               Slowness: 15,
               "Wire Fraud": 10,
             },
@@ -6720,7 +6720,7 @@ Accelerator: {
             ],
             Attributes: {
               Beams: 2,
-              "Hologram Enemy EV": 0.725,
+              "Hologram Enemy EV": 72.5,
               Slowness: 15,
               "Wire Fraud": 10,
               "Hologram Tower Lifetime": 60,
@@ -6749,7 +6749,7 @@ Accelerator: {
             ],
             Attributes: {
               Beams: 2,
-              "Hologram Enemy EV": 0.825,
+              "Hologram Enemy EV": 82.5,
               Slowness: 20,
               "Wire Fraud": 12.5,
               "Hologram Tower Lifetime": 75,
@@ -6776,7 +6776,7 @@ Accelerator: {
             ],
             Attributes: {
               Beams: 4,
-              "Hologram Enemy EV": 0.9,
+              "Hologram Enemy EV": 90,
               Slowness: 15,
               "Wire Fraud": 12.5,
               "Hologram Tower Lifetime": 75,
@@ -6808,7 +6808,7 @@ Accelerator: {
             ],
             Attributes: {
               Beams: 3,
-              "Hologram Enemy EV": 0.825,
+              "Hologram Enemy EV": 82.5,
               Slowness: 25,
               "Wire Fraud": 20,
               "Hologram Tower Lifetime": 120,
@@ -6833,7 +6833,7 @@ Accelerator: {
         Detections: { Flying: false, Hidden: false, Lead: false },
         Attributes: {
           Beams: 1,
-          "Hologram Enemy EV": 0.6,
+          "Hologram Enemy EV": 60,
           Slowness: 0,
           CostClone: 80,
           "Unit Cap": 1000,

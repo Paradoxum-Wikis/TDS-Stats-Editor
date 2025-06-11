@@ -260,6 +260,8 @@ export default class TableInput {
       case "CriticalMultiplier":
       case "AftershockMultiplier":
       case "SpeedMultiplier":
+      case "Hologram Enemy EV":
+      case "CostClone":
         return formatter.format(value) + "%";
 
       case "BuffLength":
@@ -291,6 +293,7 @@ export default class TableInput {
       case "ParryLength":
       case "LaserTime":
       case "AmmoDischargeTime":
+      case "Hologram Tower Lifetime":
         return formatter.format(value) + (showSeconds ? "s" : "");
     }
 
@@ -324,6 +327,7 @@ export default class TableInput {
     "BuildDelay",
     "ParryCooldown",
     "TrapPlacementTime",
+    "CostClone",
   ];
 
   #getDelta(cellData, deltaData, input) {

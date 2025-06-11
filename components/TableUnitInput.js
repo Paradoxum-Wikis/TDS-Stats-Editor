@@ -258,6 +258,8 @@ export default class TableUnitInput {
       case "BaseDefenseMelt":
       case "DefenseMeltPerTower":
       case "MaxDefenseMelt":
+      case "CostClone":
+      case "Hologram Enemy EV":
         return formatter.format(number) + "%";
 
       case "Duration":
@@ -275,6 +277,7 @@ export default class TableUnitInput {
       case "PoisonLength":
       case "SlowdownTime":
       case "Spawnrate":
+      case "Hologram Tower Lifetime":
         return formatter.format(number) + (showSeconds ? "s" : "");
     }
 
@@ -302,6 +305,7 @@ export default class TableUnitInput {
     "ConfusionCooldown",
     "Spawnrate",
     "ScrapCost",
+    "CostClone",
   ];
 
   #getDelta(cellData, deltaData, input) {

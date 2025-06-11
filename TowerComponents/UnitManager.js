@@ -223,8 +223,8 @@ const register = {
 
   Hacker: {
     Default: [
-      "Hologram Enemy 5T",
-      "Hologram Enemy 5B",
+      "5T",
+      "5B",
     ],
   },
 };
