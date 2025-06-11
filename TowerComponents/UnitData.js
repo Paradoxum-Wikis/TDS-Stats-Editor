@@ -2013,6 +2013,7 @@ export default {
     Defense: 0,
     Speed: 4,
     Lifetime: 75,
+    Cost: 63500,
   },
   "5B": {
     Damage: 4,
@@ -2034,5 +2035,6 @@ export default {
     Defense: 0,
     Speed: 4,
     Lifetime: 120,
+    Cost: 48000,
   },
 };
