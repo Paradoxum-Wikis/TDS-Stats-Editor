@@ -1,8 +1,8 @@
 {
   "poll": {
     "endDate": "2025-06-12",
-    "id": "NULL11062",
+    "id": "NULL11063",
     "title": "Quick heads up about the new update",
-    "description": "We are currently updating to the latest update with the Hacker tower, some towers will be outdated for a while, but we are fixing them as soon as possible."
+    "description": "We are working on Hacker and will add it ASAP, every other towers that had a rebalance this update has been added. Make sure to reset to default if you see that button lights up. Clear all data if you can."
   }
 }
