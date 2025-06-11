@@ -220,6 +220,13 @@ const register = {
       "Nightshade 4",
     ],
   },
+
+  Hacker: {
+    Default: [
+      "Hologram Enemy 5T",
+      "Hologram Enemy 5B",
+    ],
+  },
 };
 
 export default class UnitManager {

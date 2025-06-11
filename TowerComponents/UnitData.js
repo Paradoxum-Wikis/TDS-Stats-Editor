@@ -1991,4 +1991,52 @@ export default {
     MaxSlow: 0,
     ConfusionTime: 1.25,
   },
+
+  // Hacker
+  "Hologram Enemy 5T": {
+    Health: "90% of original",
+    Damage: 0,
+    Range: 2,
+    Detections: {
+      Hidden: false,
+      Flying: false,
+      Lead: false,
+    },
+    Attributes: {
+      "Hologram Enemy EV": 0.9,
+      Beams: 4,
+      Slowness: 15,
+      "Wire Fraud": 12.5,
+      "Hologram Tower Lifetime": 75,
+      CostClone: 90,
+    },
+    Cooldown: 0,
+    Defense: 0,
+    Speed: 4,
+    Lifetime: 75,
+    Notes: "Overclock path - Higher beam count, faster conversion rate",
+  },
+  "Hologram Enemy 5B": {
+    Health: "82.5% of original", 
+    Damage: 0,
+    Range: 2,
+    Detections: {
+      Hidden: false,
+      Flying: false,
+      Lead: false,
+    },
+    Attributes: {
+      "Hologram Enemy EV": 0.825,
+      Beams: 3,
+      Slowness: 25,
+      "Wire Fraud": 20,
+      "Hologram Tower Lifetime": 120,
+      CostClone: 65,
+    },
+    Cooldown: 0,
+    Defense: 0,
+    Speed: 4,
+    Lifetime: 120,
+    Notes: "Rug Pull path - Better economy, longer lifetime",
+  },
 };
