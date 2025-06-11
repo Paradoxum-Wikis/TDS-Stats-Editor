@@ -1,78 +1,86 @@
 export default {
-  Accelerator: {
-    Default: {
-      Upgrades: [
-        // Level 1
-        {
-          Stats: { Detections: { Hidden: true }, Damage: 20 },
-          Image: 11821094308,
-          Title: "Extra Juice",
-          Cost: 1200,
+Accelerator: {
+  Default: {
+    Upgrades: [
+      // Level 1
+      {
+        Stats: { 
+          Detections: { Hidden: true }, 
+          Damage: 15,
+          Attributes: { LaserTime: 4 }
         },
-        // Level 2
-        {
-          Stats: {
-            Damage: 20,
-            Extras: ["Max Ammo: 240 → 420"],
-            Range: 19,
-            MaxAmmo: 420,
-          },
-          Image: 11821094198,
-          Title: "Second Energy Canister",
-          Cost: 2250,
-        },
-        // Level 3
-        {
-          Stats: {
-            MaxAmmo: 600,
-            Extras: ["Max Ammo: 420 → 600"],
-            Damage: 30,
-          },
-          Image: 11821093989,
-          Title: "Powerhouse Armor",
-          Cost: 4000,
-        },
-        // Level 4
-        {
-          Stats: {
-            MaxAmmo: 1050,
-            Cooldown: 0.15,
-            Extras: ["Max Ammo: 600 → 1050", "Charge Time: 2.5 → 1.5"],
-            Attributes: { ChargeTime: 1.5 },
-            Damage: 30,
-            Range: 20.5,
-          },
-          Image: 11821093828,
-          Title: "Supercharger",
-          Cost: 9500,
-        },
-        // Level 5
-        {
-          Stats: {
-            MaxAmmo: 4800,
-            Cooldown: 0.1,
-            Range: 22,
-            Extras: ["Max Ammo: 1050 → 4800"],
-            Damage: 40,
-          },
-          Image: 11821093672,
-          Title: "Vessel Of Infinite Destruction",
-          Cost: 30000,
-        },
-      ],
-      // Level 0
-      Defaults: {
-        MaxAmmo: 240,
-        Detections: { Flying: false, Hidden: false, Lead: true },
-        Limit: 8,
-        Cooldown: 0.2,
-        Price: 5000,
-        Attributes: { ChargeTime: 2.5, LaserCooldown: 2.5 },
-        Range: 17.5,
-        Damage: 12,
+        Image: 11821094308,
+        Title: "Extra Juice",
+        Cost: 1000,
       },
+      // Level 2
+      {
+        Stats: {
+          Damage: 20,
+          Extras: ["Overcharge: 300 → 600"],
+          Range: 20,
+          MaxAmmo: 600,
+          Attributes: { LaserTime: 8 }
+        },
+        Image: 11821094198,
+        Title: "Second Energy Canister",
+        Cost: 2500,
+      },
+      // Level 3
+      {
+        Stats: {
+          MaxAmmo: 600,
+          Extras: [],
+          Damage: 40,
+          Range: 20,
+          Attributes: { LaserTime: 3 }
+        },
+        Image: 11821093989,
+        Title: "Powerhouse Armor",
+        Cost: 4750,
+      },
+      // Level 4
+      {
+        Stats: {
+          MaxAmmo: 1280,
+          Cooldown: 0.15,
+          Extras: ["Overcharge: 600 → 1280", "Faster Charge"],
+          Attributes: { ChargeTime: 1.5, LaserTime: 4.8 },
+          Damage: 40,
+          Range: 22.5,
+        },
+        Image: 11821093828,
+        Title: "Supercharger",
+        Cost: 11250,
+      },
+      // Level 5
+      {
+        Stats: {
+          MaxAmmo: 2400,
+          Cooldown: 0.1,
+          Range: 25,
+          Extras: ["Overcharge: 1280 → 2400"],
+          Damage: 100,
+          Attributes: { ChargeTime: 1.5, LaserTime: 2 }
+        },
+        Image: 11821093672,
+        Title: "Vessel Of Infinite Destruction",
+        Cost: 36000,
+      },
+    ],
+    // Level 0
+    Defaults: {
+      MaxAmmo: 300,
+      Detections: { Flying: false, Hidden: false, Lead: true },
+      Limit: 8,
+      Cooldown: 0.2,
+      Price: 4500,
+      Attributes: { ChargeTime: 2.5, LaserCooldown: 2.5, LaserTime: 6 },
+      Range: 18,
+      Damage: 10,
     },
   },
+},
   "Ace Pilot": {
     Default: {
       Upgrades: [
@@ -767,7 +775,7 @@ export default {
           Image: 4999425200,
           Stats: {
             Attributes: { MaxAmmo: 6, SpinDuration: 1.25 },
-            Extras: [],
+            Extras: ["Spin: 1.5 → 1.25 secs"],
             Income: 30,
             Detections: {
               Flying: false,
@@ -805,7 +813,7 @@ export default {
           Image: 5523231844,
           Stats: {
             Attributes: { MaxAmmo: 6, SpinDuration: 1 },
-            Extras: ["Spin: 1.7 → 1.3 secs"],
+            Extras: ["Spin: 1.25 → 1 secs"],
             Income: 50,
             Detections: {
               Flying: false,
@@ -824,7 +832,7 @@ export default {
           Image: 5523234030,
           Stats: {
             Attributes: { MaxAmmo: 12, SpinDuration: 1 },
-            Extras: [],
+            Extras: ["Max Ammo: 6 → 12"],
             Income: 100,
             Detections: {
               Flying: false,
@@ -843,7 +851,7 @@ export default {
           Image: 5523234990,
           Stats: {
             Attributes: { MaxAmmo: 12, SpinDuration: 1 },
-            Extras: ["Spin: 1.3 → 1 secs"],
+            Extras: [],
             Income: 200,
             Detections: {
               Flying: false,
@@ -875,102 +883,102 @@ export default {
         {
           Image: 5523231844,
           Stats: {
-            Attributes: { MaxAmmo: 6, SpinDuration: 1.35 },
-            Extras: [],
-            Income: 30,
+            Attributes: { MaxAmmo: 6, SpinDuration: 1.25 },
+            Extras: ["Spin: 1.5 → 1.25 secs"],
+            Income: 35,
             Detections: {
               Flying: false,
               Hidden: false,
               Lead: false,
             },
-            Cooldown: 0.7,
-            Range: 16,
-            Damage: 3,
+            Cooldown: 0.75,
+            Range: 14,
+            Damage: 4,
           },
           Title: "Headshot Practice",
-          Cost: 225,
+          Cost: 150,
         },
         {
           Image: 4999425200,
           Stats: {
-            Attributes: { MaxAmmo: 6, SpinDuration: 1.35 },
+            Attributes: { MaxAmmo: 6, SpinDuration: 1.25 },
             Extras: [],
-            Income: 50,
+            Income: 60,
             Detections: {
               Flying: false,
               Hidden: false,
               Lead: false,
             },
-            Cooldown: 0.7,
+            Cooldown: 0.75,
             Range: 16,
-            Damage: 4,
+            Damage: 6,
           },
           Title: "Gold Shot",
-          Cost: 500,
+          Cost: 600,
         },
         {
           Image: 5523233366,
           Stats: {
             Attributes: { MaxAmmo: 6, SpinDuration: 1 },
-            Extras: ["Spin: 1.7 → 1.3 secs"],
-            Income: 50,
+            Extras: ["Spin: 1.25 → 1 secs"],
+            Income: 60,
             Detections: {
               Flying: false,
               Hidden: true,
               Lead: false,
             },
-            Cooldown: 0.7,
+            Cooldown: 0.5,
             Range: 18,
-            Damage: 12,
+            Damage: 10,
           },
           Title: "Faster Instincts",
-          Cost: 2000,
+          Cost: 1750,
         },
         {
           Image: 5523234030,
           Stats: {
             Attributes: { MaxAmmo: 12, SpinDuration: 1 },
-            Extras: ["Longer Burst (12)"],
+            Extras: ["Max Ammo: 6 → 12"],
             Income: 150,
             Detections: {
               Flying: false,
               Hidden: true,
               Lead: false,
             },
-            Cooldown: 0.3,
-            Range: 18,
-            Damage: 12,
+            Cooldown: 0.25,
+            Range: 20,
+            Damage: 10,
           },
           Title: "Double Tap II",
-          Cost: 5850,
+          Cost: 4750,
         },
         {
           Image: 5523234990,
           Stats: {
-            Attributes: { MaxAmmo: 12, SpinDuration: 0.75 },
-            Extras: ["Spin: 1.3 → 1 secs"],
-            Income: 250,
+            Attributes: { MaxAmmo: 12, SpinDuration: 1 },
+            Extras: [],
+            Income: 225,
             Detections: {
               Flying: false,
               Hidden: true,
               Lead: false,
             },
-            Cooldown: 0.2,
+            Cooldown: 0.25,
             Range: 20,
             Damage: 24,
           },
           Title: "Wildest Of The West",
-          Cost: 17500,
+          Cost: 9500,
         },
       ],
       Defaults: {
-        Income: 30,
+        Income: 35,
         Detections: { Flying: false, Hidden: false, Lead: false },
         Range: 14,
         Price: 600,
-        Attributes: { MaxAmmo: 6, SpinDuration: 1.75 },
+        Attributes: { MaxAmmo: 6, SpinDuration: 1.5 },
         Cooldown: 1,
-        Damage: 3,
+        Damage: 4,
       },
     },
   },
@@ -2229,7 +2237,7 @@ export default {
     Default: {
       Defaults: {
         Detections: { Flying: true },
-        Price: 5750,
+        Price: 5250,
         Ammo: 50,
         Range: 25,
         Attributes: {
@@ -2286,13 +2294,13 @@ export default {
             },
             Cooldown: 0.15,
             Range: 30,
-            Damage: 10,
+            Damage: 12,
             Ammo: 100,
             Extras: ["Increased Ammo Size (50 -> 100)"],
           },
           Image: 104227180979769,
           Title: "Bigger Magazine",
-          Cost: 7250,
+          Cost: 7500,
         },
         {
           Stats: {
@@ -2305,7 +2313,7 @@ export default {
             Range: 35,
             Ammo: 200,
             Cooldown: 0.12,
-            Damage: 15,
+            Damage: 16,
             Extras: [
               "Angle (35 -> 40)",
               "Improved Spread",
@@ -2315,7 +2323,7 @@ export default {
           },
           Image: 71764582498505,
           Title: "Extra Barrel",
-          Cost: 17500,
+          Cost: 15000,
         },
         {
           Stats: {
@@ -2336,7 +2344,7 @@ export default {
           },
           Image: 128136625170591,
           Title: "Minigun Barrel",
-          Cost: 35000,
+          Cost: 32500,
         },
         {
           Stats: {
@@ -2364,7 +2372,7 @@ export default {
           },
           Image: 125372339735512,
           Title: "Impenetrable Fortress",
-          Cost: 60000,
+          Cost: 50000,
         },
         {
           Stats: {
@@ -2379,7 +2387,7 @@ export default {
             Cooldown: 0.09,
             Ammo: 600,
             Range: 50,
-            Damage: 75,
+            Damage: 85,
             Detections: { Hidden: true },
             Extras: [
               "Increased Ammo Size (400 -> 600)",
@@ -3479,7 +3487,7 @@ export default {
             Extras: ["Explosion Radius: 7.5 → 8.5"],
             Detections: { Flying: true, Hidden: false, Lead: true },
             Cooldown: 3,
-            Damage: 60,
+            Damage: 55,
           },
           Image: 4538447424,
           Title: "Bigger Cannon",
@@ -3503,7 +3511,7 @@ export default {
             ],
             Detections: { Flying: true, Hidden: false, Lead: true },
             Cooldown: 3,
-            Damage: 120,
+            Damage: 100,
           },
           Image: 4538447493,
           Title: "Loaded Warhead",
@@ -3516,17 +3524,17 @@ export default {
               ClusterRadius: 5,
               ClusterCount: 6,
               ClusterDamage: 50,
-              ExplosionRadius: 10,
+              ExplosionRadius: 9,
             },
             Range: 30,
             Extras: [
               "Cluster Damage: 40 → 50",
               "Cluster Count: 3 → 6",
-              "Explosion Radius: 8.5 → 10",
+              "Explosion Radius: 8.5 → 9",
             ],
             Detections: { Flying: true, Hidden: false, Lead: true },
             Cooldown: 3,
-            Damage: 200,
+            Damage: 150,
           },
           Image: 4538447579,
           Title: "City Buster",
@@ -5549,7 +5557,7 @@ export default {
         {
           Stats: {
             Attributes: {
-              MaxTraps: 8,
+              MaxTraps: 7,
               "Spike Trap": true,
               "Landmine Trap": true,
               "Bear Trap": false,
@@ -5564,7 +5572,7 @@ export default {
         {
           Stats: {
             Attributes: {
-              MaxTraps: 10,
+              MaxTraps: 9,
               "Spike Trap": true,
               "Landmine Trap": true,
               "Bear Trap": true,

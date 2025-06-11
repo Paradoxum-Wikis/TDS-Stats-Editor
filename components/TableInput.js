@@ -289,6 +289,8 @@ export default class TableInput {
       case "BeeDuration":
       case "ParryCooldown":
       case "ParryLength":
+      case "LaserTime":
+      case "AmmoDischargeTime":
         return formatter.format(value) + (showSeconds ? "s" : "");
     }
 

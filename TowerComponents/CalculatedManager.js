@@ -233,7 +233,7 @@ class CalculatedManager {
         },
       },
     },
-    LaserTime: {
+    AmmoDischargeTime: {
       Default: {
         For: ["Accelerator"],
         Requires: ["MaxAmmo", "LaserDPS"],
@@ -405,12 +405,10 @@ class CalculatedManager {
       },
       Accel: {
         For: ["Accelerator"],
-        Requires: ["MaxAmmo", "ChargeTime", "Cooldown", "LaserTime"],
+        Requires: ["MaxAmmo", "ChargeTime", "LaserCooldown", "LaserTime"],
         Value: (level) => {
           const totalDamage = level.MaxAmmo;
-
           const burstCool = level.ChargeTime + level.LaserCooldown;
-
           return totalDamage / (level.LaserTime + burstCool);
         },
       },
@@ -1285,7 +1283,7 @@ class CalculatedManager {
     this.#add("UnitDPS", skinData);
     this.#add("AggregateUnitDPS", skinData);
     this.#add("RamDPS", skinData);
-    this.#add("LaserTime", skinData);
+    this.#add("AmmoDischargeTime", skinData);
     this.#add("MissileDPS", skinData);
     this.#add("DPS", skinData);
     this.#add("BurnDPS", skinData);
