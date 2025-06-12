@@ -2004,7 +2004,7 @@ export default {
     },
     Cost: 63500,
     Attributes: {
-      Limit: 18.5,
+      Limit: 2,
       Beams: 4,
       "Hologram Enemy EV": 90,
       Slowdown: 15,
