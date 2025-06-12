@@ -260,6 +260,7 @@ export default class TableUnitInput {
       case "MaxDefenseMelt":
       case "CostClone":
       case "Hologram Enemy EV":
+      case "Slowdown":
         return formatter.format(number) + "%";
 
       case "Duration":

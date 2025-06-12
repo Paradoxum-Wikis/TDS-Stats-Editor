@@ -262,6 +262,7 @@ export default class TableInput {
       case "SpeedMultiplier":
       case "Hologram Enemy EV":
       case "CostClone":
+      case "Slowdown":
         return formatter.format(value) + "%";
 
       case "BuffLength":
