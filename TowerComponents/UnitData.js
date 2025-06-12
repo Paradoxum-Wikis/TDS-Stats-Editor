@@ -1994,9 +1994,9 @@ export default {
 
   // Hacker
   "5T": {
-    Damage: 18,
-    Cooldown: 0.3,
-    Range: 2,
+    Damage: 15,
+    Cooldown: 0.1,
+    Range: 18.5,
     Detections: {
       Hidden: true,
       Flying: false,
@@ -2016,9 +2016,9 @@ export default {
     },
   },
   "5B": {
-    Damage: 4,
-    Cooldown: 0.8,
-    Range: 22,
+    Damage: 18,
+    Cooldown: 0.3,
+    Range: 21,
     Detections: {
       Hidden: true,
       Flying: false,
