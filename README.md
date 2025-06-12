@@ -3,7 +3,7 @@
 
 The website can be found at: https://tds-editor.com/
 
-For the updated README, please see: https://tds.fandom.com/wiki/Help:StatisticsEditor/Information
+For the updated README, please see: https://tds.fandom.com/wiki/Help:Statistics_Editor/Information
 
 ---
 
