@@ -6687,7 +6687,7 @@ Accelerator: {
           Image: 84772480553742,
           Stats: {
             Extras: [
-              "Number of Beamss: 1 → 2",
+              "Number of synapses: 1 → 2",
               "Slowness: 0% → 15%",
               "Wire Fraud: 7.5% → 10%",
               "Enemies converted now have higher health",
@@ -6771,7 +6771,7 @@ Accelerator: {
           Image: 78547724037844,
           Stats: {
             Extras: [
-              "Number of Beamss: 2 → 4",
+              "Number of synapses: 2 → 4",
               "Enemies converted now have higher health",
             ],
             Attributes: {
@@ -6800,7 +6800,7 @@ Accelerator: {
           Image: 105579078081734,
           Stats: {
             Extras: [
-              "Number of Beamss: 2 → 3",
+              "Number of synapses: 2 → 3",
               "Slowness: 20% → 25%",
               "Wire Fraud: 12.5% → 20%",
               "Cloning costs: 90% → 65%",
