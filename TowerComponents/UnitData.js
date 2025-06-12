@@ -2004,7 +2004,7 @@ export default {
     },
     Cost: 63500,
     Attributes: {
-      Limit: 2,
+      Limit: 18.5,
       Beams: 4,
       "Hologram Enemy EV": 90,
       Slowness: 15,
@@ -2018,7 +2018,7 @@ export default {
   "5B": {
     Damage: 4,
     Cooldown: 0.8,
-    Range: 2,
+    Range: 22,
     Detections: {
       Hidden: true,
       Flying: false,
