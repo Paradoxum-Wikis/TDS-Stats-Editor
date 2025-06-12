@@ -197,11 +197,6 @@ class UnitCalculations {
           return directDPS + poisonDPS;
         },
       },
-
-      Hacker: {
-        For: ["5T", "5B"],
-        Value: (level) => (level.Damage * level.Beams) / level.Cooldown,
-      },
     },
 
     TotalElapsedDamage: {
