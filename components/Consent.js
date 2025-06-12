@@ -241,7 +241,7 @@ class Consent {
         window.trackEvent(
           "Settings",
           "CalculationSystemChanged",
-          e.detail.system,
+          e.detail.tower.calculationSystem,
         );
       }
     });

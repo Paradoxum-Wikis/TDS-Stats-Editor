@@ -1,86 +1,86 @@
 export default {
-Accelerator: {
-  Default: {
-    Upgrades: [
-      // Level 1
-      {
-        Stats: { 
-          Detections: { Hidden: true }, 
-          Damage: 15,
-          Attributes: { LaserTime: 4 }
+  Accelerator: {
+    Default: {
+      Upgrades: [
+        // Level 1
+        {
+          Stats: {
+            Detections: { Hidden: true },
+            Damage: 15,
+            Attributes: { LaserTime: 4 },
+          },
+          Image: 11821094308,
+          Title: "Extra Juice",
+          Cost: 1000,
         },
-        Image: 11821094308,
-        Title: "Extra Juice",
-        Cost: 1000,
-      },
-      // Level 2
-      {
-        Stats: {
-          Damage: 20,
-          Extras: ["Overcharge: 300 → 600"],
-          Range: 20,
-          MaxAmmo: 600,
-          Attributes: { LaserTime: 8 }
+        // Level 2
+        {
+          Stats: {
+            Damage: 20,
+            Extras: ["Overcharge: 300 → 600"],
+            Range: 20,
+            MaxAmmo: 600,
+            Attributes: { LaserTime: 8 },
+          },
+          Image: 11821094198,
+          Title: "Second Energy Canister",
+          Cost: 2500,
         },
-        Image: 11821094198,
-        Title: "Second Energy Canister",
-        Cost: 2500,
-      },
-      // Level 3
-      {
-        Stats: {
-          MaxAmmo: 600,
-          Extras: [],
-          Damage: 40,
-          Range: 20,
-          Attributes: { LaserTime: 3 }
+        // Level 3
+        {
+          Stats: {
+            MaxAmmo: 600,
+            Extras: [],
+            Damage: 40,
+            Range: 20,
+            Attributes: { LaserTime: 3 },
+          },
+          Image: 11821093989,
+          Title: "Powerhouse Armor",
+          Cost: 4750,
         },
-        Image: 11821093989,
-        Title: "Powerhouse Armor",
-        Cost: 4750,
-      },
-      // Level 4
-      {
-        Stats: {
-          MaxAmmo: 1280,
-          Cooldown: 0.15,
-          Extras: ["Overcharge: 600 → 1280", "Faster Charge"],
-          Attributes: { ChargeTime: 1.5, LaserTime: 4.8 },
-          Damage: 40,
-          Range: 22.5,
+        // Level 4
+        {
+          Stats: {
+            MaxAmmo: 1280,
+            Cooldown: 0.15,
+            Extras: ["Overcharge: 600 → 1280", "Faster Charge"],
+            Attributes: { ChargeTime: 1.5, LaserTime: 4.8 },
+            Damage: 40,
+            Range: 22.5,
+          },
+          Image: 11821093828,
+          Title: "Supercharger",
+          Cost: 11250,
         },
-        Image: 11821093828,
-        Title: "Supercharger",
-        Cost: 11250,
-      },
-      // Level 5
-      {
-        Stats: {
-          MaxAmmo: 2400,
-          Cooldown: 0.1,
-          Range: 25,
-          Extras: ["Overcharge: 1280 → 2400"],
-          Damage: 100,
-          Attributes: { ChargeTime: 1.5, LaserTime: 2 }
+        // Level 5
+        {
+          Stats: {
+            MaxAmmo: 2400,
+            Cooldown: 0.1,
+            Range: 25,
+            Extras: ["Overcharge: 1280 → 2400"],
+            Damage: 100,
+            Attributes: { ChargeTime: 1.5, LaserTime: 2 },
+          },
+          Image: 11821093672,
+          Title: "Vessel Of Infinite Destruction",
+          Cost: 36000,
         },
-        Image: 11821093672,
-        Title: "Vessel Of Infinite Destruction",
-        Cost: 36000,
+      ],
+      // Level 0
+      Defaults: {
+        MaxAmmo: 300,
+        Detections: { Flying: false, Hidden: false, Lead: true },
+        Limit: 8,
+        Cooldown: 0.2,
+        Price: 4500,
+        Attributes: { ChargeTime: 2.5, LaserCooldown: 2.5, LaserTime: 6 },
+        Range: 18,
+        Damage: 10,
       },
-    ],
-    // Level 0
-    Defaults: {
-      MaxAmmo: 300,
-      Detections: { Flying: false, Hidden: false, Lead: true },
-      Limit: 8,
-      Cooldown: 0.2,
-      Price: 4500,
-      Attributes: { ChargeTime: 2.5, LaserCooldown: 2.5, LaserTime: 6 },
-      Range: 18,
-      Damage: 10,
     },
   },
-},
   "Ace Pilot": {
     Default: {
       Upgrades: [
@@ -6664,7 +6664,9 @@ Accelerator: {
         {
           Image: 116572141213630,
           Stats: {
-            Extras: ["Unlocked Wire Fraud: 7.5% Increase to enemy cash rewards"],
+            Extras: [
+              "Unlocked Wire Fraud: 7.5% Increase to enemy cash rewards",
+            ],
             Attributes: {
               Beams: 1,
               "Hologram Enemy EV": 60,

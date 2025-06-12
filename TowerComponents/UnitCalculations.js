@@ -200,8 +200,8 @@ class UnitCalculations {
 
       Hacker: {
         For: ["5T", "5B"],
-        Value: (level) => level.Damage * level.Beams / level.Cooldown,
-      }
+        Value: (level) => (level.Damage * level.Beams) / level.Cooldown,
+      },
     },
 
     TotalElapsedDamage: {
@@ -443,7 +443,7 @@ class UnitCalculations {
           return isFinite(efficiency) ? efficiency : NaN;
         },
       },
-      
+
       Pursuit: {
         For: ["Top 4", "Top 5", "Bottom 4", "Bottom 5"],
         Requires: ["NetCost", "TotalDPS"],

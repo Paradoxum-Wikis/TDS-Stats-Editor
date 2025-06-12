@@ -40,7 +40,7 @@ export default class PropertyViewer {
       "AnimTimes",
       "SummonDebounce",
       "BookDebounce",
-      "AmmoDischargeTime"
+      "AmmoDischargeTime",
     ];
     this.disabled = [...this.defaultDisabled];
     // stuffs we never show

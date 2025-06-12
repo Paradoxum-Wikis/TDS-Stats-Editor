@@ -583,8 +583,8 @@ class CalculatedManager {
       },
       Hacker: {
         For: ["Hacker"],
-        Value: (level) => level.Damage * level.Beams / level.Cooldown,
-      }
+        Value: (level) => (level.Damage * level.Beams) / level.Cooldown,
+      },
     },
 
     CriticalDamage: {

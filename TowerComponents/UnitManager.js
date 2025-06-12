@@ -222,10 +222,7 @@ const register = {
   },
 
   Hacker: {
-    Default: [
-      "5T",
-      "5B",
-    ],
+    Default: ["5T", "5B"],
   },
 };
 
