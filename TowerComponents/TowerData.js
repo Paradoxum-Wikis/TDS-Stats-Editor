@@ -6671,12 +6671,12 @@ export default {
               Beams: 1,
               "Hologram Enemy EV": 60,
               WireFraud: 7.5,
-              Slowness: 0,
+              Slowdown: 0,
             },
             Detections: {
               Flying: false,
               Hidden: false,
-              Lead: false,
+              Lead: true,
             },
             Cooldown: 0.5,
             Range: 14,
@@ -6697,13 +6697,13 @@ export default {
             Attributes: {
               Beams: 2,
               "Hologram Enemy EV": 65,
-              Slowness: 15,
+              Slowdown: 15,
               WireFraud: 10,
             },
             Detections: {
               Flying: false,
               Hidden: true,
-              Lead: false,
+              Lead: true,
             },
             Cooldown: 0.5,
             Range: 14,
@@ -6723,7 +6723,7 @@ export default {
             Attributes: {
               Beams: 2,
               "Hologram Enemy EV": 72.5,
-              Slowness: 15,
+              Slowdown: 15,
               WireFraud: 10,
               HologramTowerLifetime: 60,
               CostClone: 90,
@@ -6731,7 +6731,7 @@ export default {
             Detections: {
               Flying: false,
               Hidden: false,
-              Lead: false,
+              Lead: true,
             },
             Cooldown: 0.5,
             Range: 15,
@@ -6752,7 +6752,7 @@ export default {
             Attributes: {
               Beams: 2,
               "Hologram Enemy EV": 82.5,
-              Slowness: 20,
+              Slowdown: 20,
               WireFraud: 12.5,
               HologramTowerLifetime: 75,
               CostClone: 90,
@@ -6760,7 +6760,7 @@ export default {
             Detections: {
               Flying: false,
               Hidden: false,
-              Lead: false,
+              Lead: true,
             },
             Cooldown: 0.3,
             Range: 16,
@@ -6779,7 +6779,7 @@ export default {
             Attributes: {
               Beams: 4,
               "Hologram Enemy EV": 90,
-              Slowness: 15,
+              Slowdown: 15,
               WireFraud: 12.5,
               HologramTowerLifetime: 75,
               CostClone: 90,
@@ -6789,7 +6789,7 @@ export default {
             Detections: {
               Flying: false,
               Hidden: false,
-              Lead: false,
+              Lead: true,
             },
             Cooldown: 0.1,
             Range: 18.5,
@@ -6811,7 +6811,7 @@ export default {
             Attributes: {
               Beams: 3,
               "Hologram Enemy EV": 82.5,
-              Slowness: 25,
+              Slowdown: 25,
               WireFraud: 20,
               HologramTowerLifetime: 120,
               CostClone: 65,
@@ -6821,7 +6821,7 @@ export default {
             Detections: {
               Flying: false,
               Hidden: false,
-              Lead: false,
+              Lead: true,
             },
             Cooldown: 0.3,
             Range: 21,
@@ -6832,11 +6832,11 @@ export default {
         },
       ],
       Defaults: {
-        Detections: { Flying: false, Hidden: false, Lead: false },
+        Detections: { Flying: false, Hidden: false, Lead: true },
         Attributes: {
           Beams: 1,
           "Hologram Enemy EV": 60,
-          Slowness: 0,
+          Slowdown: 0,
           CostClone: 80,
           UnitCap: 1000,
           UnitSendCooldown: 0.1,
