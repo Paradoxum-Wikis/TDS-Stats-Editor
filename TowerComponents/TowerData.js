@@ -6687,7 +6687,7 @@ Accelerator: {
           Image: 84772480553742,
           Stats: {
             Extras: [
-              "Number of synapses: 1 → 2",
+              "Number of Beamss: 1 → 2",
               "Slowness: 0% → 15%",
               "Wire Fraud: 7.5% → 10%",
               "Enemies converted now have higher health",
@@ -6723,7 +6723,7 @@ Accelerator: {
               "Hologram Enemy EV": 72.5,
               Slowness: 15,
               WireFraud: 10,
-              "Hologram Tower Lifetime": 60,
+              HologramTowerLifetime: 60,
               CostClone: 90,
             },
             Detections: {
@@ -6752,7 +6752,7 @@ Accelerator: {
               "Hologram Enemy EV": 82.5,
               Slowness: 20,
               WireFraud: 12.5,
-              "Hologram Tower Lifetime": 75,
+              HologramTowerLifetime: 75,
               CostClone: 90,
             },
             Detections: {
@@ -6771,7 +6771,7 @@ Accelerator: {
           Image: 78547724037844,
           Stats: {
             Extras: [
-              "Number of synapses: 2 → 4",
+              "Number of Beamss: 2 → 4",
               "Enemies converted now have higher health",
             ],
             Attributes: {
@@ -6779,7 +6779,7 @@ Accelerator: {
               "Hologram Enemy EV": 90,
               Slowness: 15,
               WireFraud: 12.5,
-              "Hologram Tower Lifetime": 75,
+              HologramTowerLifetime: 75,
               CostClone: 90,
               NoTable: true,
               SideLevel: "5T",
@@ -6800,7 +6800,7 @@ Accelerator: {
           Image: 105579078081734,
           Stats: {
             Extras: [
-              "Number of synapses: 2 → 3",
+              "Number of Beamss: 2 → 3",
               "Slowness: 20% → 25%",
               "Wire Fraud: 12.5% → 20%",
               "Cloning costs: 90% → 65%",
@@ -6811,7 +6811,7 @@ Accelerator: {
               "Hologram Enemy EV": 82.5,
               Slowness: 25,
               WireFraud: 20,
-              "Hologram Tower Lifetime": 120,
+              HologramTowerLifetime: 120,
               CostClone: 65,
               NoTable: true,
               SideLevel: "5B",
@@ -6839,7 +6839,7 @@ Accelerator: {
           UnitCap: 1000,
           UnitSendCooldown: 0.1,
           WireFraud: "NaN",
-          "Hologram Tower Lifetime": "NaN",
+          HologramTowerLifetime: "NaN",
         },
         Abilities: [
           {

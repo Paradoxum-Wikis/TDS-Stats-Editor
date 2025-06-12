@@ -581,6 +581,10 @@ class CalculatedManager {
           level.CriticalSwing /
           level.Cooldown,
       },
+      Hacker: {
+        For: ["Hacker"],
+        Value: (level) => level.Damage * level.Beams / level.Cooldown,
+      }
     },
 
     CriticalDamage: {

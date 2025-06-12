@@ -197,6 +197,11 @@ class UnitCalculations {
           return directDPS + poisonDPS;
         },
       },
+
+      Hacker: {
+        For: ["5T", "5B"],
+        Value: (level) => level.Damage * level.Beams / level.Cooldown,
+      }
     },
 
     TotalElapsedDamage: {
@@ -373,6 +378,31 @@ class UnitCalculations {
           return totalCost;
         },
       },
+
+      Hacker: {
+        For: ["5T", "5B"],
+        Value: (level) => {
+          TowerRegistry.log(`Calculating NetCost for Hacker ${level.Name}`);
+
+          const baseCost = this.getTowerCostForLevel("Hacker", 4);
+          if (baseCost === null) {
+            console.error(
+              `Could not determine base cost for Hacker up to level 4.`,
+            );
+            return NaN;
+          }
+          TowerRegistry.log(`Using base cost (level 4): ${baseCost}`);
+
+          const currentPathLevelCost = level.Cost || 0;
+          TowerRegistry.log(
+            `Cost of current path level (${level.Name}): ${currentPathLevelCost}`,
+          );
+
+          const totalCost = baseCost + currentPathLevelCost;
+          TowerRegistry.log(`Final NetCost for ${level.Name}: ${totalCost}`);
+          return totalCost;
+        },
+      },
     },
 
     MissileDPS: {
@@ -406,6 +436,14 @@ class UnitCalculations {
     },
 
     CostEfficiency: {
+      Default: {
+        Requires: ["NetCost", "DPS"],
+        Value: (level) => {
+          const efficiency = level.NetCost / level.DPS;
+          return isFinite(efficiency) ? efficiency : NaN;
+        },
+      },
+      
       Pursuit: {
         For: ["Top 4", "Top 5", "Bottom 4", "Bottom 5"],
         Requires: ["NetCost", "TotalDPS"],
