@@ -277,7 +277,7 @@ export default class TableUnitInput {
       case "PoisonLength":
       case "SlowdownTime":
       case "Spawnrate":
-      case "Hologram Tower Lifetime":
+      case "HologramTowerLifetime":
         return formatter.format(number) + (showSeconds ? "s" : "");
     }
 

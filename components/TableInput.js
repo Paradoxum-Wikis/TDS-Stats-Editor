@@ -293,7 +293,7 @@ export default class TableInput {
       case "ParryLength":
       case "LaserTime":
       case "AmmoDischargeTime":
-      case "Hologram Tower Lifetime":
+      case "HologramTowerLifetime":
         return formatter.format(value) + (showSeconds ? "s" : "");
     }
 
