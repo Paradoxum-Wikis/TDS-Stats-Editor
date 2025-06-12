@@ -259,7 +259,6 @@ export default class TableUnitInput {
       case "DefenseMeltPerTower":
       case "MaxDefenseMelt":
       case "CostClone":
-      case "Hologram Enemy EV":
       case "Slowdown":
         return formatter.format(number) + "%";
 
@@ -278,8 +277,12 @@ export default class TableUnitInput {
       case "PoisonLength":
       case "SlowdownTime":
       case "Spawnrate":
-      case "HologramTowerLifetime":
+      case "HologramLifetime":
+      case "UnitSendCooldown":
         return formatter.format(number) + (showSeconds ? "s" : "");
+      
+      case "Hologram EV":
+        return formatter.format(number);
     }
 
     return formatter.format(+(+number).toFixed(2));

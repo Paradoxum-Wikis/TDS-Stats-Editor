@@ -260,7 +260,6 @@ export default class TableInput {
       case "CriticalMultiplier":
       case "AftershockMultiplier":
       case "SpeedMultiplier":
-      case "Hologram Enemy EV":
       case "CostClone":
       case "Slowdown":
         return formatter.format(value) + "%";
@@ -294,8 +293,12 @@ export default class TableInput {
       case "ParryLength":
       case "LaserTime":
       case "AmmoDischargeTime":
-      case "HologramTowerLifetime":
+      case "HologramLifetime":
+      case "UnitSendCooldown":
         return formatter.format(value) + (showSeconds ? "s" : "");
+
+      case "Hologram EV":
+        return formatter.format(value);
     }
 
     return formatter.format(+(+value).toFixed(2));

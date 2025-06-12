@@ -6669,7 +6669,7 @@ export default {
             ],
             Attributes: {
               Beams: 1,
-              "Hologram Enemy EV": 60,
+              "Hologram EV": 0.6,
               WireFraud: 7.5,
               Slowdown: 0,
             },
@@ -6696,7 +6696,7 @@ export default {
             ],
             Attributes: {
               Beams: 2,
-              "Hologram Enemy EV": 65,
+              "Hologram EV": 0.65,
               Slowdown: 15,
               WireFraud: 10,
             },
@@ -6722,10 +6722,10 @@ export default {
             ],
             Attributes: {
               Beams: 2,
-              "Hologram Enemy EV": 72.5,
+              "Hologram EV": 0.725,
               Slowdown: 15,
               WireFraud: 10,
-              HologramTowerLifetime: 60,
+              HologramLifetime: 60,
               CostClone: 90,
             },
             Detections: {
@@ -6751,10 +6751,10 @@ export default {
             ],
             Attributes: {
               Beams: 2,
-              "Hologram Enemy EV": 82.5,
+              "Hologram EV": 0.825,
               Slowdown: 20,
               WireFraud: 12.5,
-              HologramTowerLifetime: 75,
+              HologramLifetime: 75,
               CostClone: 90,
             },
             Detections: {
@@ -6778,10 +6778,10 @@ export default {
             ],
             Attributes: {
               Beams: 4,
-              "Hologram Enemy EV": 90,
+              "Hologram EV": 0.9,
               Slowdown: 15,
               WireFraud: 12.5,
-              HologramTowerLifetime: 75,
+              HologramLifetime: 75,
               CostClone: 90,
               NoTable: true,
               SideLevel: "5T",
@@ -6810,10 +6810,10 @@ export default {
             ],
             Attributes: {
               Beams: 3,
-              "Hologram Enemy EV": 82.5,
+              "Hologram EV": 0.825,
               Slowdown: 25,
               WireFraud: 20,
-              HologramTowerLifetime: 120,
+              HologramLifetime: 120,
               CostClone: 65,
               NoTable: true,
               SideLevel: "5B",
@@ -6835,13 +6835,13 @@ export default {
         Detections: { Flying: false, Hidden: false, Lead: true },
         Attributes: {
           Beams: 1,
-          "Hologram Enemy EV": 60,
+          "Hologram EV": 0.6,
           Slowdown: 0,
           CostClone: 80,
           UnitCap: 1000,
           UnitSendCooldown: 0.1,
           WireFraud: "NaN",
-          HologramTowerLifetime: "NaN",
+          HologramLifetime: "NaN",
         },
         Abilities: [
           {

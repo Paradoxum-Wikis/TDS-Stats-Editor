@@ -2006,13 +2006,13 @@ export default {
     Attributes: {
       Limit: 2,
       Beams: 4,
-      "Hologram Enemy EV": 90,
+      "Hologram EV": 0.9,
       Slowdown: 15,
       CostClone: 90,
       UnitCap: 1000,
       UnitSendCooldown: 0.1,
       WireFraud: 12.5,
-      HologramTowerLifetime: 75,
+      HologramLifetime: 75,
     },
   },
   "5B": {
@@ -2028,13 +2028,13 @@ export default {
     Attributes: {
       Limit: 2,
       Beams: 3,
-      "Hologram Enemy EV": 82.5,
+      "Hologram EV": 0.825,
       Slowdown: 25,
       CostClone: 65,
       UnitCap: 1000,
       UnitSendCooldown: 0.1,
       WireFraud: 20,
-      HologramTowerLifetime: 120,
+      HologramLifetime: 120,
     },
   },
 };
