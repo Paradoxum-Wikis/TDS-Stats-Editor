@@ -8,10 +8,7 @@ export default class CalculationSystemManager {
   }
 
   initialize() {
-    // grab all calculation systems
     this.collectAvailableSystems();
-
-    // set up the dropdown
     this.setupSelectElement();
 
     // catch tower changes
@@ -29,7 +26,6 @@ export default class CalculationSystemManager {
   }
 
   collectAvailableSystems() {
-    // toss in the usual stuff
     const uniqueSystems = new Set();
 
     const specializedSystems = [
@@ -135,7 +131,6 @@ export default class CalculationSystemManager {
       this.select.value = "default";
     }
 
-    // update tower object
     this.currentTower.calculationSystem = existingSystem || null;
 
     // fix for calculatedsystem json data being ignored when loading
@@ -220,13 +215,16 @@ export default class CalculationSystemManager {
           viewer.towerTable.removeTable();
         }
 
-        setTimeout(() => {
+        const waitForViewerReady = () => {
           if (typeof viewer.loadTable === "function") {
             viewer.loadTable();
           } else if (typeof viewer.reload === "function") {
             viewer.reload();
+          } else {
+            setTimeout(waitForViewerReady, 10);
           }
-        }, 50); // delay just to make sure changes are made
+        };
+        waitForViewerReady();
       }
     }
   }

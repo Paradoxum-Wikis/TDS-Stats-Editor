@@ -280,7 +280,7 @@ export default class TableUnitInput {
       case "HologramLifetime":
       case "UnitSendCooldown":
         return formatter.format(number) + (showSeconds ? "s" : "");
-      
+
       case "Hologram EV":
         return formatter.format(number);
     }
