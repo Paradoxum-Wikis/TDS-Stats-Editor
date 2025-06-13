@@ -272,20 +272,6 @@ input {
   justify-content: center;
 }
 
-/* When sidebar is collapsed, position toggle button fixed at bottom left */
-.sidebar-collapsed #sidebar-toggle {
-  position: fixed;
-  bottom: 10px;
-  left: 10px;
-  z-index: 1100;
-  opacity: 0.7;
-  transform: rotate(180deg);
-}
-
-.sidebar-collapsed #sidebar-toggle:hover {
-  opacity: 1;
-}
-
 /* Mini sidebar when collapsed */
 .container-main.sidebar-collapsed .aside {
   width: 50px !important;
@@ -303,7 +289,6 @@ input {
   position: static;
   transform: rotate(180deg);
   opacity: 1;
-  margin: 0 auto;
 }
 
 .container-main.sidebar-collapsed .sidebar-toggle-container {
