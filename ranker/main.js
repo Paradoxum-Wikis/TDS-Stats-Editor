@@ -228,7 +228,7 @@ function populateTowerGallery() {
   const scrollPosition = gallery.scrollTop;
   gallery.innerHTML = "";
 
-  const fragment = document.createDocumentFragment(); // Create a fragment
+  const fragment = document.createDocumentFragment();
 
   const sections = {
     towers: {
@@ -313,6 +313,7 @@ function populateTowerGallery() {
 
   gallery.appendChild(fragment);
   gallery.scrollTop = scrollPosition;
+  filterTowerGallery();
 }
 
 // show animation when tower is added to tier list
