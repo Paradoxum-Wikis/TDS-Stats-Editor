@@ -1,5 +1,13 @@
 [
   {
+    "version": "1.2.7",
+    "date": "June 14, 2025",
+    "changes": [
+      "Lua format updated",
+      "Performance improvements"
+    ]
+  },
+  {
     "version": "1.2.6",
     "date": "May 25, 2025",
     "changes": [

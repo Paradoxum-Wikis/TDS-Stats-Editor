@@ -15,7 +15,8 @@ export default class LuaConverter {
    * @param {Object} json - The JSON object to be converted to Lua
    */
   showJSONAsLua(json) {
-    this.#domContainer.innerHTML = this.#formatAsLua(json);
+    const luaContent = this.#formatAsLua(json);
+    this.#domContainer.innerHTML = `<span class="lua-key">local</span> <span class="lua-key">data</span> = ${luaContent}\n\n<span class="lua-key">return</span> <span class="lua-key">data</span>`;
   }
 
   /**

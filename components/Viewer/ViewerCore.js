@@ -478,44 +478,43 @@ class ViewerCore {
   }
 
   exportLua(data) {
-    const luaString = this.convertToLuaString(data);
+    const luaString = `local data = ${this.convertToLuaString(data)}\n\nreturn data`;
     this.downloadFile(luaString, `${this.tower.name}.lua`, "lua");
   }
 
   exportLuaWithUnits() {
     const combinedData = this._getCombinedData();
-    this.exportLua(combinedData);
+    const luaString = `local data = ${this.convertToLuaString(combinedData)}\n\nreturn data`;
+    this.downloadFile(luaString, `${this.tower.name}_with_units.lua`, "lua");
   }
 
   isLuaTable(text) {
-    // detect lua syntaxes
-    text = text.trim();
+  text = text.trim();
+  
+  const startsWithLocal = /^local\s+data\s*=/.test(text);
+  const hasReturnData = /return\s+data\s*$/.test(text);
 
-    const startsWithReturn = text.startsWith("return");
-    const containsLuaAssignments = /\w+\s*=/.test(text);
-    const hasNil = /\bnil\b/.test(text);
-
-    // if it's a valid json, it's probably not Lua
-    try {
-      JSON.parse(text);
-      return false;
-    } catch (e) {
-      // confirms to not be json, might be lua
-      return startsWithReturn || containsLuaAssignments || hasNil;
-    }
+  // if it's a valid json, it's probably not Lua
+  try {
+    JSON.parse(text);
+    return false;
+  } catch (e) {
+    return startsWithLocal && hasReturnData;
   }
+}
 
   parseLuaToJSON(luaText) {
-    // in case some smartass puts a 'return' at the beginning
     let text = luaText.trim();
-    if (text.startsWith("return")) {
-      text = text.substring(6).trim();
+
+    const modulePattern = /local\s+data\s*=\s*({[\s\S]*})\s*return\s+data/;
+    const moduleMatch = text.match(modulePattern);
+    
+    if (!moduleMatch) {
+      throw new Error("Invalid Lua format. Expected 'local data = { ... } return data' format.");
     }
-
-    // replace Lua's nil with null
+    
+    text = moduleMatch[1];
     text = text.replace(/\bnil\b/g, "null");
-
-    // handle Lua comments
     text = text.replace(/--.*$/gm, "");
 
     // process nested Lua tables recursively

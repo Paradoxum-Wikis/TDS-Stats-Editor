@@ -36,8 +36,6 @@ document.addEventListener("DOMContentLoaded", function () {
       reader.onload = function (e) {
         const fileContent = e.target.result;
         jsonImportText.value = fileContent;
-
-        // detect if lua or json
         const isLuaFile =
           file.name.toLowerCase().endsWith(".lua") || isLuaContent(fileContent);
 
@@ -90,7 +88,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // detect lua content patterns
   function isLuaContent(text) {
     text = text.trim();
 
@@ -99,15 +96,10 @@ document.addEventListener("DOMContentLoaded", function () {
       JSON.parse(text);
       return false;
     } catch (e) {
-      // check for common lua patterns
-      const startsWithReturn = text.startsWith("return");
-      const containsLuaAssignments = /\w+\s*=/.test(text);
-      const hasNil = /\bnil\b/.test(text);
-      const hasCurlyBraces = text.startsWith("{") && text.includes("=");
+      const startsWithLocal = /^local\s+data\s*=/.test(text);
+      const hasReturnData = /return\s+data\s*$/.test(text);
 
-      return (
-        startsWithReturn || containsLuaAssignments || hasNil || hasCurlyBraces
-      );
+      return startsWithLocal && hasReturnData;
     }
   }
 

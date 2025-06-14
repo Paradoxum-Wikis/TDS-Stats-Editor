@@ -57,7 +57,7 @@ const ViewerUtils = {
           ? this._getCombinedData()
           : this.tower.json;
 
-      const luaString = this.convertToLuaString(data);
+      const luaString = `local data = ${this.convertToLuaString(data)}\n\nreturn data`;
       navigator.clipboard.writeText(luaString);
       const alert = new Alert("Lua Copied!", {
         alertStyle: "alert-success",
