@@ -10,6 +10,8 @@ export default defineConfig({
         db: resolve(__dirname, "db/index.html"),
         migrate: resolve(__dirname, "migrate.html"),
         privacy: resolve(__dirname, "privacy.html"),
+        misc: resolve(__dirname, "misc/index.html"),
+        skills: resolve(__dirname, "misc/skills/index.html"),
         404: resolve(__dirname, "404.html"),
       },
     },

@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TDS Skills Planner</title>
+  <meta
+    name="description"
+    content="Plan your skill builds for the Roblox game Tower Defense Simulator"
+  />
+
+  <meta property="og:title" content="TDS Skill Tree Planner" />
+  <meta
+    property="og:description"
+    content="Plan and optimize your skill builds for Tower Defense Simulator!"
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://tds-editor.com/misc/skills" />
+  <meta
+    property="og:image"
+    content="https://tds-editor.com/htmlassets/thumbnail.png?v=3"
+  />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="Tower Defense Simulator Skill Planner" />
+  <meta name="twitter:title" content="TDS Skill Tree Planner" />
+  <meta
+    name="twitter:description"
+    content="Plan and optimize your skill builds for Tower Defense Simulator!"
+  />
+  <meta
+    name="twitter:image:src"
+    content="https://tds-editor.com/htmlassets/thumbnail.png?v=3"
+  />
+  <meta name="theme-color" content="#035D7C" />
+  <meta property="og:site_name" content="TDS Skill Tree Planner" />
+
+  <link id="animsCSS" href="../../Styles/animations.css" rel="stylesheet" />
+  <link
+    rel="icon"
+    type="image/png"
+    href="/htmlassets/favicon-96x96.png"
+    sizes="96x96"
+  />
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="/htmlassets/favicon.svg"
+  />
+  <link
+    rel="shortcut icon"
+    href="/htmlassets/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="/htmlassets/apple-touch-icon.png"
+  />
+  <meta name="apple-mobile-web-app-title" content="TDS Skills" /> 
+  <link
+    rel="manifest"
+    href="/htmlassets/site.webmanifest"
+  />
+
+  <script type="module" src="main.js"></script>
+</head>
+
+<body class="bg-dark">
+  <div
+    id="alert-container"
+    class="position-absolute w-100 p-4 text-center d-flex flex-column"
+  ></div>
+
+  <div class="container-main">
+    <!-- Side Panel -->
+    <div
+      class="aside d-flex flex-column flex-shrink-0 text-white p-2"
+      style="min-width: 240px; width: 19%; height: 100vh; overflow-y: auto"
+    >
+      <!-- Title -->
+      <div class="logo-slideshow">
+        <div class="slide-nav slide-prev">&#10094;</div>
+
+        <div class="slides-container">
+          <div class="slide active">
+            <a href="https://tds.fandom.com/wiki/">
+              <br /><img
+                class="zoomup"
+                src="/htmlassets/wikilogo.png"
+                style="width: 200px"
+                alt="Tower Defense Simulator Wiki"
+                loading="lazy"
+              />
+            </a>
+          </div>
+          <div class="slide">
+            <a href="../../">
+              <br /><img
+                class="zoomup"
+                src="/htmlassets/landinglogo.webp"
+                style="width: 200px; height: 62.1167px; object-fit: cover"
+                alt="TDS Statistics Editor"
+                loading="lazy"
+              />
+            </a>
+          </div>
+          <div class="slide">
+            <a href="../../db/">
+              <br /><img
+                class="zoomup"
+                src="/htmlassets/databaselogo.png"
+                style="width: 200px"
+                alt="Tower Defense Simulator Database"
+                loading="lazy"
+              />
+            </a>
+          </div>
+          <div class="slide">
+            <a href="https://resources.tds-editor.com/">
+              <br /><img
+                class="zoomup"
+                src="https://raw.githubusercontent.com/t7ru/TDS-Page-Resources/refs/heads/main/logo.png"
+                style="width: 200px"
+                alt="Game Page Resources"
+                loading="lazy"
+              />
+            </a>
+          </div>
+          <div class="slide">
+            <a href="../../ranker/">
+              <br /><img
+                class="zoomup"
+                src="/htmlassets/tdsrankerlogo.png"
+                style="width: 200px"
+                alt="Adachi's TDS Ranker"
+                loading="lazy"
+              />
+            </a>
+          </div>
+        </div>
+
+        <div class="slide-nav slide-next">&#10095;</div>
+      </div>
+      <hr />
+
+      <!-- Total Points Section -->
+      <div class="p-2">
+        <h5 class="text-white mb-3">
+          <i class="bi bi-calculator me-2"></i>Management
+        </h5>
+        
+        <div class="form-group mb-3">
+          <label for="total-credits" class="form-label text-credit fw-bold">
+            <img src="/htmlassets/SkillCredit.png" alt="Skill Credits" class="cost-icon me-2">Skill Credits Available
+          </label>
+          <input
+            type="number"
+            id="total-credits"
+            class="form-control form-control-sm bg-dark text-white"
+            placeholder="Enter skill credits..."
+            min="0"
+            value="0"
+          />
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="total-coins" class="form-label text-warning fw-bold">
+            <img src="/htmlassets/Coin.png" alt="Coins" class="cost-icon me-2">Coins Available
+          </label>
+          <input
+            type="number"
+            id="total-coins"
+            class="form-control form-control-sm bg-dark text-white"
+            placeholder="Enter coins..."
+            min="0"
+            value="0"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-6">
+            <div class="text-center">
+              <div class="h6 text-credit fw-bold mb-0" id="available-credits">0</div>
+              <small class="text-light">Credits Left</small>
+            </div>
+            <div class="text-center mt-2">
+              <div class="h6 text-info fw-bold mb-0" id="used-credits">0</div>
+              <small class="text-light">Credits Used</small>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="text-center">
+              <div class="h6 text-warning fw-bold mb-0" id="available-coins">0</div>
+              <small class="text-light">Coins Left</small>
+            </div>
+            <div class="text-center mt-2">
+              <div class="h6 text-success fw-bold mb-0" id="used-coins">0</div>
+              <small class="text-light">Coins Used</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-grid gap-2">
+          <button id="reset-skills" class="btn btn-outline-danger">
+            <i class="bi bi-arrow-clockwise me-1"></i>Reset All
+          </button>
+          <button id="save-build" class="btn btn-outline-success">
+            <i class="bi bi-download me-1"></i>Export Build
+          </button>
+          <button id="load-build" class="btn btn-outline-info">
+            <i class="bi bi-upload me-1"></i>Import Build
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <main role="main" class="d-flex flex-column">
+      <!-- Body Header -->
+      <header class="p-3 stickme">
+        <div
+          class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center"
+          id="topnavheader"
+        >
+          <!-- Title -->
+          <h1 class="h2 text-white unisans" style="text-wrap: balance">
+            TDS Skills Planner
+          </h1>
+
+          <div
+            class="btn-toolbar mb-2 justify-content-center"
+            style="gap: 0.25rem; margin: 0 auto"
+          >
+            <!-- These buttons are hidden on mobile -->
+            <div id="button-discord" class="btn-group d-none d-md-block me-2">
+              <button
+                title="Information about this website."
+                class="btn btn-sm btn-outline-secondary"
+                data-bs-toggle="modal"
+                data-bs-target="#about-modal"
+              >
+                About
+              </button>
+            </div>
+
+            <div id="button-settings" class="btn-group d-none d-md-block">
+              <button
+                title="The totally real settings."
+                class="btn btn-sm btn-outline-secondary"
+                data-bs-toggle="modal"
+                data-bs-target="#settings-modal"
+              >
+                Settings
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Skills Grid -->
+      <div class="container-fluid p-3">
+        <div class="row">
+          <!-- Offensive Skills -->
+          <div class="col-lg-6 mb-4">
+            <div class="card bg-dark border-secondary h-100">
+              <div class="card-header bg-danger bg-gradient">
+                <h4 class="mb-0 text-white d-flex align-items-center">
+                  <img src="/htmlassets/skills/OffensiveModifier.png" alt="Offensive" class="me-2" style="width: 24px; height: 24px;">
+                  Offensive Skills
+                </h4>
+              </div>
+              <div class="card-body" id="offensive-skills">
+                <!-- Skills will be populated by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Economy Skills -->
+          <div class="col-lg-6 mb-4">
+            <div class="card bg-dark border-secondary h-100">
+              <div class="card-header bg-warning bg-gradient">
+                <h4 class="mb-0 text-dark d-flex align-items-center">
+                  <img src="/htmlassets/skills/EconomyModifier.png" alt="Economy" class="me-2" style="width: 24px; height: 24px;">
+                  Economy Skills
+                </h4>
+              </div>
+              <div class="card-body" id="economy-skills">
+                <!-- Skills will be populated by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Strategy Skills -->
+          <div class="col-lg-6 mb-4">
+            <div class="card bg-dark border-secondary h-100">
+              <div class="card-header bg-info bg-gradient">
+                <h4 class="mb-0 text-white d-flex align-items-center">
+                  <img src="/htmlassets/skills/StrategyModifier.png" alt="Strategy" class="me-2" style="width: 24px; height: 24px;">
+                  Strategy Skills
+                </h4>
+              </div>
+              <div class="card-body" id="strategy-skills">
+                <!-- Skills will be populated by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Defense Skills -->
+          <div class="col-lg-6 mb-4">
+            <div class="card bg-dark border-secondary h-100">
+              <div class="card-header bg-success bg-gradient">
+                <h4 class="mb-0 text-white d-flex align-items-center">
+                  <img src="/htmlassets/skills/DefenseModifier.png" alt="Defense" class="me-2" style="width: 24px; height: 24px; object-fit: scale-down;">
+                  Defense Skills
+                </h4>
+              </div>
+              <div class="card-body" id="defense-skills">
+                <!-- Skills will be populated by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- About Modal -->
+  <div
+    class="modal fade"
+    id="about-modal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="about-modal-label"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content bg-dark text-white">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <div class="d-flex align-items-center">
+            <div class="toru-icon-container me-3">
+              <i class="bi bi-info-circle-fill fs-3"></i>
+            </div>
+            <div>
+              <h5 class="modal-title unisans mb-0" id="about-modal-label">
+                About Skills Planner
+              </h5>
+              <p class="text-muted small mb-0">
+                Information about the Skills Planner
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="modal-body p-3">
+          <div class="toru-section">
+            <h6 class="toru-heading">
+              <i class="bi bi-book me-2"></i>Overview
+            </h6>
+            <div class="toru-options">
+              <p>
+                The TDS Skills Planner is a tool for planning your skill tree in Tower Defense Simulator. 
+                It allows you to try out different skill combinations and optimize your builds before 
+                spending your hard-earned coins in-game.
+              </p>
+              <p>
+                This planner is part of the TDS Statistics Editor project, maintained by the Tower Defense Simulator Wiki community.
+              </p>
+            </div>
+          </div>
+
+          <div class="toru-section">
+            <h6 class="toru-heading">
+              <i class="bi bi-question-circle me-2"></i>How to Use
+            </h6>
+            <div class="toru-options">
+              <ol>
+                <li>Enter your total available coins in the sidebar</li>
+                <li>Use the + and - buttons to allocate skill points</li>
+                <li>Prerequisites must be met before unlocking advanced skills</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="toru-section">
+            <div class="d-flex align-items-center justify-content-center">
+              <a
+                href="https://discord.gg/fBgQzudY3h"
+                target="_blank"
+                class="mx-3 text-decoration-none d-flex flex-column align-items-center"
+              >
+                <img
+                  style="width: 48px"
+                  class="zoomup type1"
+                  title="Join the Tower Defense Simulator Wiki Discord server!"
+                  src="https://static.wikia.nocookie.net/tower-defense-sim/images/4/4c/Discord-Symbol-Blurple.svg"
+                  alt="Discord Logo"
+                  loading="lazy"
+                />
+              </a>
+              <a
+                href="https://github.com/Paradoxum-Wikis/TDS-Stats-Editor"
+                target="_blank"
+                class="mx-3 text-decoration-none d-flex flex-column align-items-center"
+              >
+                <img
+                  style="width: 48px"
+                  class="zoomup theme-image"
+                  title="Contribute to the website's source code!"
+                  src="../../htmlassets/github-mark-white.svg"
+                  data-light-src="../../htmlassets/github-mark.svg"
+                  data-dark-src="../../htmlassets/github-mark-white.svg"
+                  alt="GitHub Logo"
+                  loading="lazy"
+                />
+              </a>
+              <a
+                href="https://tds.fandom.com/wiki/Help:Statistics_Editor"
+                target="_blank"
+                class="mx-3 text-decoration-none d-flex flex-column align-items-center"
+              >
+                <img
+                  style="width: 48px"
+                  class="zoomup type1"
+                  title="Visit the dedicated help guide on the TDS Wiki!"
+                  src="../../htmlassets/wikisquaredsmall.png"
+                  alt="TDS Wiki Logo"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Footer-->
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="w-100 btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div
+    class="modal fade"
+    id="settings-modal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="settings-modal-label"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content bg-dark text-white">
+        <div class="modal-header">
+          <div class="d-flex align-items-center">
+            <div class="toru-icon-container me-3">
+              <i class="bi bi-gear-fill fs-3"></i>
+            </div>
+            <div>
+              <h5 class="modal-title unisans mb-0" id="settings-modal-label">
+                Settings
+              </h5>
+              <p class="text-muted small mb-0">Totally available to change</p>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body p-4">
+          <div class="alert alert-info mb-0 text-center">
+            Apologies, but settings for appearance currently can only be
+            changed in the <a href="../../">Statistics Editor</a>.<br />
+            Please head over there to adjust your preferences, sorry again!
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="w-100 btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load Build Modal -->
+  <div class="modal fade" id="load-build-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content bg-dark border-secondary">
+        <div class="modal-header border-secondary">
+          <h5 class="modal-title text-white">
+            <i class="bi bi-upload me-2"></i>Import Skill Build
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="build-import" class="form-label text-white">Paste build data:</label>
+            <textarea
+              id="build-import"
+              class="form-control bg-dark border-secondary text-white"
+              rows="10"
+              placeholder="Paste your exported build data here..."
+            ></textarea>
+            <small class="text-muted">
+              Paste the JSON data you copied when exporting a build
+            </small>
+          </div>
+        </div>
+        <div class="modal-footer border-secondary">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" id="import-build" class="btn btn-success">
+            <i class="bi bi-check me-1"></i>Import Build
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

@@ -3,6 +3,7 @@
     "version": "1.2.7",
     "date": "June 14, 2025",
     "changes": [
+      "Skills planner added",
       "Lua format updated",
       "Performance improvements"
     ]

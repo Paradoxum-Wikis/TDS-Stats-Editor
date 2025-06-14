@@ -1,0 +1,49 @@
+.skill-item {
+  position: relative;
+  z-index: 1;
+}
+
+.skill-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('../../htmlassets/Stripes.png');
+  opacity: 0.05;
+  z-index: -1;
+}
+
+.skill-level-display .badge {
+  font-size: 0.8em;
+}
+
+.skill-controls {
+  margin-top: 0.5rem;
+}
+
+.skill-cost-info {
+  min-width: 120px;
+}
+
+.card-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.text-credit {
+  color: #ace3cb;
+}
+
+#total-credits, #total-coins {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.lockedout {
+  background-color: rgba(100, 30, 30, 0.5) !important;
+  border-color: #dc3545 !important;
+}
+
+.cost-icon {
+  width: 15px;
+}
