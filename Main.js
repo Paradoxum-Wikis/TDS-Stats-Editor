@@ -8,6 +8,7 @@ import "./Styles/MobileNav.css";
 import "./Styles/Consent.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
+import "./components/ButtonSelection.js";
 import App from "./components/App.js";
 import { UpdateLog } from "./components/News/UpdateLog.js";
 import SidebarToggle from "./components/SidebarToggle.js";
@@ -24,6 +25,10 @@ import Consent from "./components/Consent.js";
 import "./components/TableMode/JSONUploader.js";
 import "./components/SettingsManager.js";
 import "./components/TableMode/json-viewer.js";
+import "./components/Consent.js";
+import "./components/Slides.js";
+import "./components/News/UpdateLog.js";
+import "./components/News/HeadsUp.js";
 
 // node modules
 import * as bootstrap from "bootstrap";
