@@ -1,4 +1,4 @@
-import { skillData } from './skillData.js';
+import { skillData } from './SkillData.js';
 import { SkillElement } from './SkillElement.js';
 import { BuildManager } from './BuildManager.js';
 
