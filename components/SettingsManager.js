@@ -496,7 +496,6 @@ class SettingsManager {
   }
 }
 
-// Initialize the settings manager when DOM is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
   window.settingsManager = new SettingsManager();
 });

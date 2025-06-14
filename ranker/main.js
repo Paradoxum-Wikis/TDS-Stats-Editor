@@ -17,7 +17,9 @@ window.html2canvas = html2canvas;
 import ImageLoader from "../components/ImageLoader.js";
 import { renderTowerShorthands } from "./Shorthand.js";
 import "./MobileNav.js";
-import "./SettingsSync.js";
+import "../components/Slides.js"
+import "../components/News/UpdateLog.js";
+import "../components/SettingsManager.js";
 
 // if you have the time, please split this main.js file into smaller files, it's getting a bit too much tbh
 function debounce(func, wait) {
