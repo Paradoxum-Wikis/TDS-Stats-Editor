@@ -407,9 +407,9 @@ class CalculatedManager {
         For: ["Accelerator"],
         Requires: ["MaxAmmo", "ChargeTime", "LaserCooldown", "LaserTime"],
         Value: (level) => {
-          const totalDamage = level.MaxAmmo;
-          const burstCool = level.ChargeTime + level.LaserCooldown;
-          return totalDamage / (level.LaserTime + burstCool);
+          const totalDamage = (level.MaxAmmo / level.Damage) * level.Cooldown;
+          const totalCharge = level.ChargeTime + level.LaserCooldown;
+          return level.MaxAmmo / (totalCharge + totalDamage);
         },
       },
       Brawler: {
