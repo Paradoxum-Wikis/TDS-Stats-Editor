@@ -29,17 +29,20 @@ export class SkillTreePlanner {
     this.loadFromURL();
     this.renderSkills();
     this.setupEventListeners();
+    this.setupMobileEventListeners();
     this.updateDisplay();
   }
 
   setupEventListeners() {
     document.getElementById('total-coins').addEventListener('input', (e) => {
       this.totalCoins = parseInt(e.target.value) || 0;
+      this.syncMobileInputs('coins', this.totalCoins);
       this.updateDisplay();
     });
 
     document.getElementById('total-credits').addEventListener('input', (e) => {
       this.totalCredits = parseInt(e.target.value) || 0;
+      this.syncMobileInputs('credits', this.totalCredits);
       this.updateDisplay();
     });
 
@@ -53,6 +56,26 @@ export class SkillTreePlanner {
       this.updateURL(true);
       BuildManager.shareURL();
     });
+  }
+
+  setupMobileEventListeners() {
+    // mobile events
+    document.addEventListener('skillsReset', () => {
+      this.resetSkills();
+    });
+
+    document.addEventListener('skillsShare', () => {
+      this.updateURL(true);
+      BuildManager.shareURL();
+    });
+  }
+
+  syncMobileInputs(type, value) {
+    // sync mobile sidebar inputs with main inputs
+    const mobileInput = document.querySelector(`.mobile-sidebar #total-${type}`);
+    if (mobileInput && mobileInput.value != value) {
+      mobileInput.value = value;
+    }
   }
 
   calculateCostBreakdown(cost) {

@@ -90,10 +90,11 @@
     class="position-absolute w-100 p-4 text-center d-flex flex-column"
   ></div>
 
+  <!-- Document -->
   <div class="container-main">
-    <!-- Side Panel -->
+    <!-- Side Panel - Hidden on mobile -->
     <div
-      class="aside d-flex flex-column flex-shrink-0 text-white p-2"
+      class="aside d-flex flex-column flex-shrink-0 text-white p-2 d-none d-md-flex"
       style="min-width: 240px; width: 19%; height: 100vh; overflow-y: auto"
     >
       <!-- Title -->
@@ -226,17 +227,16 @@
           <button id="share-build" class="btn btn-outline-primary">
             <i class="bi bi-share me-2"></i>Share Build
           </button>
-          <span class="text-muted small text-center">
+          <span class="text-muted small text-center mb-2">
             Your URL is automatically updated every 10 seconds, click the share button to force an update.
           </span>
         </div>
       </div>
     </div>
 
-    <!-- Body -->
     <main role="main" class="d-flex flex-column">
       <!-- Body Header -->
-      <header class="p-3 stickme">
+      <header class="p-3">
         <div
           class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center"
           id="topnavheader"
@@ -325,7 +325,7 @@
           </div>
 
           <!-- Defense Skills -->
-          <div class="col-lg-6 mb-4">
+          <div class="col-lg-6 mb-10">
             <div class="card bg-dark border-secondary h-100">
               <div class="card-header bg-success bg-gradient">
                 <h4 class="mb-0 text-white d-flex align-items-center">
@@ -341,6 +341,27 @@
         </div>
       </div>
     </main>
+  </div>
+
+  <!-- Mobile Navigation Bar -->
+  <div class="mobile-nav d-md-none">
+    <a href="#" class="mobile-nav-btn" data-mobile-section="controls">
+      <i class="bi bi-sliders"></i>
+      <span>Controls</span>
+    </a>
+    <a href="#" class="mobile-nav-btn" data-mobile-section="about">
+      <i class="bi bi-info-circle-fill"></i>
+      <span>About</span>
+    </a>
+    <a href="#" class="mobile-nav-btn" data-mobile-section="settings">
+      <i class="bi bi-gear-fill"></i>
+      <span>Settings</span>
+    </a>
+  </div>
+
+  <!-- Mobile Sidebar Overlay -->
+  <div class="mobile-sidebar">
+    <div class="mobile-sidebar-content"></div>
   </div>
 
   <!-- About Modal -->
