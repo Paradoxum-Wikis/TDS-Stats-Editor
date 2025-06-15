@@ -173,8 +173,7 @@ export class SkillElement {
             </button>
           </div>
           <input type="number" 
-                 class="form-control form-control-sm skill-increment" 
-                 style="width: 60px;" 
+                 class="form-control form-control-sm skill-increment"  
                  min="1" 
                  max="${this.skill.maxLevel}" 
                  value="1"

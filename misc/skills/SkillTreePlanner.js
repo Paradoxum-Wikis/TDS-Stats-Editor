@@ -46,6 +46,12 @@ export class SkillTreePlanner {
       this.updateDisplay();
     });
 
+    document.getElementById('global-increment').addEventListener('input', (e) => {
+      const globalIncrement = parseInt(e.target.value) || 1;
+      this.updateAllSkillIncrements(globalIncrement);
+      this.syncMobileInputs('increment', globalIncrement);
+    });
+
     document.getElementById('reset-skills').addEventListener('click', () => {
       if (confirm('Are you sure you want to reset all skills?')) {
         this.resetSkills();
@@ -76,6 +82,20 @@ export class SkillTreePlanner {
     if (mobileInput && mobileInput.value != value) {
       mobileInput.value = value;
     }
+
+    if (type === 'increment') {
+      const mobileGlobalIncrement = document.querySelector('.mobile-sidebar #global-increment');
+      if (mobileGlobalIncrement && mobileGlobalIncrement.value != value) {
+        mobileGlobalIncrement.value = value;
+      }
+    }
+  }
+
+  updateAllSkillIncrements(value) {
+    const allIncrementInputs = document.querySelectorAll('.skill-increment');
+    allIncrementInputs.forEach(input => {
+      input.value = value;
+    });
   }
 
   calculateCostBreakdown(cost) {

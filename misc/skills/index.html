@@ -92,10 +92,10 @@
 
   <!-- Document -->
   <div class="container-main">
-    <!-- Side Panel - Hidden on mobile -->
+    <!-- Sidebar - Hidden on mobile -->
     <div
       class="aside d-flex flex-column flex-shrink-0 text-white p-2 d-none d-md-flex"
-      style="min-width: 240px; width: 19%; height: 100vh; overflow-y: auto"
+      style="min-width: 240px; width: 19%; height: 100vh; overflow-y: auto; position: sticky; top: 0"
     >
       <!-- Title -->
       <div class="logo-slideshow">
@@ -197,6 +197,23 @@
           />
         </div>
 
+        <!-- Global Increment Control -->
+        <div class="form-group mb-3">
+          <label for="global-increment" class="form-label text-info fw-bold">
+            <i class="bi bi-plus-slash-minus me-2"></i>Global Increment
+          </label>
+          <input
+            type="number"
+            id="global-increment"
+            class="form-control form-control-sm bg-dark text-white"
+            placeholder="Set increment for all skills..."
+            min="1"
+            max="50"
+            value="1"
+            title="Changes the increment amount for all skills at once"
+          />
+        </div>
+
         <div class="row mb-3">
           <div class="col-6">
             <div class="text-center">
@@ -214,7 +231,7 @@
               <small class="text-light">Coins Left</small>
             </div>
             <div class="text-center mt-2">
-              <div class="h6 text-success fw-bold mb-0" id="used-coins">0</div>
+              <div class="h6 text-primary fw-bold mb-0" id="used-coins">0</div>
               <small class="text-light">Coins Used</small>
             </div>
           </div>

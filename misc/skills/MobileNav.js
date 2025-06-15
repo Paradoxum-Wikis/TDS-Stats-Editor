@@ -94,6 +94,7 @@ export class MobileNav {
     const shareBtn = container.querySelector('#share-build');
     const coinsInput = container.querySelector('#total-coins');
     const creditsInput = container.querySelector('#total-credits');
+    const globalIncrementInput = container.querySelector('#global-increment');
 
     if (resetBtn) {
       resetBtn.addEventListener('click', () => {
@@ -126,6 +127,16 @@ export class MobileNav {
     if (creditsInput) {
       creditsInput.addEventListener('input', (e) => {
         const mainInput = document.querySelector('.aside #total-credits');
+        if (mainInput) {
+          mainInput.value = e.target.value;
+          mainInput.dispatchEvent(new Event('input'));
+        }
+      });
+    }
+
+    if (globalIncrementInput) {
+      globalIncrementInput.addEventListener('input', (e) => {
+        const mainInput = document.querySelector('.aside #global-increment');
         if (mainInput) {
           mainInput.value = e.target.value;
           mainInput.dispatchEvent(new Event('input'));

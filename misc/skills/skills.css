@@ -21,7 +21,6 @@
 }
 
 .skill-increment {
-  border-radius: 0.25rem;
   margin-bottom: 6px;
   font-weight: 600;
 }
@@ -40,7 +39,7 @@
   color: #ace3cb;
 }
 
-#total-credits, #total-coins {
+.form-control {
   padding-left: 24px;
   padding-right: 24px;
 }
