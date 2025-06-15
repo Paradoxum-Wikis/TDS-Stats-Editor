@@ -11,6 +11,7 @@ export class SkillTreePlanner {
     this.skillLevels = {};
     this.skillElements = new Map();
     this.skillSpending = {};
+    this.currentGlobalIncrement = 1;
     this.urlUpdateTimer = null;
     this.lastUrlUpdate = 0;
     this.URL_UPDATE_DELAY = 10000; // 10 secs
@@ -64,6 +65,13 @@ export class SkillTreePlanner {
       this.updateURL(true);
       BuildManager.shareURL();
     });
+
+      document.getElementById("global-increment").addEventListener("input", (e) => {
+      const globalIncrement = parseInt(e.target.value) || 1;
+      this.currentGlobalIncrement = globalIncrement;
+      this.updateAllSkillIncrements(globalIncrement);
+      this.syncMobileInputs("increment", globalIncrement);
+    });
   }
 
   setupMobileEventListeners() {
@@ -98,6 +106,7 @@ export class SkillTreePlanner {
   }
 
   updateAllSkillIncrements(value) {
+    this.currentGlobalIncrement = value;
     const allIncrementInputs = document.querySelectorAll(".skill-increment");
     allIncrementInputs.forEach((input) => {
       input.value = value;
