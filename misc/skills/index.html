@@ -221,14 +221,14 @@
 
         <div class="d-grid gap-2">
           <button id="reset-skills" class="btn btn-outline-danger">
-            <i class="bi bi-arrow-clockwise me-2"></i>Reset All
+            <i class="bi bi-arrow-clockwise me-2"></i>Reset Skills
           </button>
-          <button id="save-build" class="btn btn-outline-success">
-            <i class="bi bi-download me-2"></i>Export Build
+          <button id="share-build" class="btn btn-outline-primary">
+            <i class="bi bi-share me-2"></i>Share Build
           </button>
-          <button id="load-build" class="btn btn-outline-info">
-            <i class="bi bi-upload me-2"></i>Import Build
-          </button>
+          <span class="text-muted small text-center">
+            Your URL is automatically updated every 10 seconds, click the share button to force an update.
+          </span>
         </div>
       </div>
     </div>
@@ -521,41 +521,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Load Build Modal -->
-  <div class="modal fade" id="load-build-modal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content bg-dark border-secondary">
-        <div class="modal-header border-secondary">
-          <h5 class="modal-title text-white">
-            <i class="bi bi-upload me-2"></i>Import Skill Build
-          </h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label for="build-import" class="form-label text-white">Paste build data:</label>
-            <textarea
-              id="build-import"
-              class="form-control bg-dark border-secondary text-white"
-              rows="10"
-              placeholder="Paste your exported build data here..."
-            ></textarea>
-            <small class="text-muted">
-              Paste the JSON data you copied when exporting a build
-            </small>
-          </div>
-        </div>
-        <div class="modal-footer border-secondary">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" id="import-build" class="btn btn-success">
-            <i class="bi bi-check me-2"></i>Import Build
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
 </body>
 
 </html>

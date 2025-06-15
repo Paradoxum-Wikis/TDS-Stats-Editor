@@ -11,6 +11,9 @@ export class SkillTreePlanner {
     this.skillLevels = {};
     this.skillElements = new Map();
     this.skillSpending = {};
+    this.urlUpdateTimer = null;
+    this.lastUrlUpdate = 0;
+    this.URL_UPDATE_DELAY = 10000; // 10 secs
     
     Object.keys(skillData).forEach(category => {
       Object.keys(skillData[category]).forEach(skill => {
@@ -23,6 +26,7 @@ export class SkillTreePlanner {
   }
 
   init() {
+    this.loadFromURL();
     this.renderSkills();
     this.setupEventListeners();
     this.updateDisplay();
@@ -45,17 +49,9 @@ export class SkillTreePlanner {
       }
     });
 
-    document.getElementById('save-build').addEventListener('click', () => {
-      this.saveBuild();
-    });
-
-    document.getElementById('load-build').addEventListener('click', () => {
-      const modal = new bootstrap.Modal(document.getElementById('load-build-modal'));
-      modal.show();
-    });
-
-    document.getElementById('import-build').addEventListener('click', () => {
-      this.loadBuild();
+    document.getElementById('share-build')?.addEventListener('click', () => {
+      this.updateURL(true);
+      BuildManager.shareURL();
     });
   }
 
@@ -152,66 +148,50 @@ getCostForSkillLevel(skillName, level) {
     return skill.prerequisites.every(prereq => this.skillLevels[prereq] >= 10);
   }
 
-upgradeSkill(skillName) {
-    if (!this.canUpgradeSkill(skillName)) return;
-    
+upgradeSkill(skillName, updateUrl = true) {
+    const skill = this.getSkillData(skillName);
+    if (!skill) return;
+
     const currentLevel = this.skillLevels[skillName];
+    if (currentLevel >= skill.maxLevel) return;
+
+    if (!this.canUpgradeSkill(skillName)) return;
+
     const cost = this.getCostForSkillLevel(skillName, currentLevel + 1);
     const breakdown = this.calculateCostBreakdown(cost);
-    
-    this.skillLevels[skillName]++;
+
     this.usedCredits += breakdown.credits;
     this.usedCoins += breakdown.coins;
     this.skillSpending[skillName].credits += breakdown.credits;
     this.skillSpending[skillName].coins += breakdown.coins;
-    
-    this.updateSkillDisplay(skillName);
-    this.updateDisplay();
+    this.skillLevels[skillName]++;
+
+    if (updateUrl) {
+      this.updateDisplay();
+    }
   }
 
-  decreaseSkill(skillName) {
+  decreaseSkill(skillName, updateUrl = true) {
     const currentLevel = this.skillLevels[skillName];
-    if (currentLevel === 0) return;
+    if (currentLevel <= 0) return;
 
     if (this.isSkillRequired(skillName, currentLevel - 1)) {
-      alert(`Cannot downgrade ${skillName} below level 10 as other skills depend on it.`);
+      alert(`Cannot decrease ${skillName} as it's required by other skills.`);
       return;
     }
-    
-    const costOfLevelBeingRemoved = this.getCostForSkillLevel(skillName, currentLevel);
-    
-    let creditsToRefund = 0;
-    let coinsToRefund = 0;
 
-    // Determine how much to refund from the skill's own spending pool.
-    // It should refund from what the skill has "stored".
-    // Prioritize refunding credits if the skill has them, up to the cost, then coins.
-    const skillSpecificCredits = this.skillSpending[skillName].credits;
-    const skillSpecificCoins = this.skillSpending[skillName].coins;
-    creditsToRefund = Math.min(costOfLevelBeingRemoved, skillSpecificCredits);
-    const remainingCostAfterCreditRefund = costOfLevelBeingRemoved - creditsToRefund;
-    coinsToRefund = Math.min(remainingCostAfterCreditRefund, skillSpecificCoins);
+    const cost = this.getCostForSkillLevel(skillName, currentLevel);
+    const refund = this.calculateRefundBreakdown(cost);
 
-    if (creditsToRefund + coinsToRefund < costOfLevelBeingRemoved) {
-        console.warn(`Skill ${skillName} (level ${currentLevel}): Could not fully refund cost ${costOfLevelBeingRemoved}. ` +
-                      `Attempted to refund ${creditsToRefund} credits and ${coinsToRefund} coins. ` +
-                      `Skill had ${skillSpecificCredits} credits and ${skillSpecificCoins} coins stored.`);
-        // In this scenario, we are refunding the maximum possible based on what the skill has.
-        // The costOfLevelBeingRemoved might be higher than what the skill's specific spending can cover if there's a logic flaw elsewhere
-        // or if skillSpending wasn't correctly incremented.
-        // For now, we just make sure we don't refund more than the skill has lol.
-        creditsToRefund = Math.min(creditsToRefund, skillSpecificCredits);
-        coinsToRefund = Math.min(coinsToRefund, skillSpecificCoins);
-    }
-    
+    this.usedCredits -= refund.credits;
+    this.usedCoins -= refund.coins;
+    this.skillSpending[skillName].credits -= refund.credits;
+    this.skillSpending[skillName].coins -= refund.coins;
     this.skillLevels[skillName]--;
-    this.usedCredits -= creditsToRefund;
-    this.usedCoins -= coinsToRefund;
-    this.skillSpending[skillName].credits -= creditsToRefund;
-    this.skillSpending[skillName].coins -= coinsToRefund;
-    
-    this.updateSkillDisplay(skillName);
-    this.updateDisplay();
+
+    if (updateUrl) {
+      this.updateDisplay();
+    }
   }
 
   calculateRefundBreakdown(cost) {
@@ -262,6 +242,67 @@ upgradeSkill(skillName) {
     Object.keys(this.skillLevels).forEach(skillName => {
       this.updateSkillDisplay(skillName);
     });
+
+    this.scheduleURLUpdate();
+  }
+
+  // Schedule URL update
+  scheduleURLUpdate() {
+    if (this.urlUpdateTimer) {
+      clearTimeout(this.urlUpdateTimer);
+    }
+
+    this.urlUpdateTimer = setTimeout(() => {
+      this.updateURL(false);
+    }, this.URL_UPDATE_DELAY);
+  }
+
+  updateURL(forceUpdate = false) {
+    const now = Date.now();
+
+    if (!forceUpdate && (now - this.lastUrlUpdate) < this.URL_UPDATE_DELAY) {
+      return;
+    }
+
+    const buildData = {
+      totalCoins: this.totalCoins,
+      totalCredits: this.totalCredits,
+      skillLevels: this.skillLevels
+    };
+    
+    BuildManager.updateURL(buildData);
+    this.lastUrlUpdate = now;
+
+    if (this.urlUpdateTimer) {
+      clearTimeout(this.urlUpdateTimer);
+      this.urlUpdateTimer = null;
+    }
+  }
+
+  loadFromURL() {
+    const buildData = BuildManager.loadFromURL();
+    
+    if (buildData.totalCoins > 0) {
+      this.totalCoins = buildData.totalCoins;
+      document.getElementById('total-coins').value = this.totalCoins;
+    }
+    
+    if (buildData.totalCredits > 0) {
+      this.totalCredits = buildData.totalCredits;
+      document.getElementById('total-credits').value = this.totalCredits;
+    }
+
+    if (buildData.skillLevels && Object.keys(buildData.skillLevels).length > 0) {
+      Object.keys(buildData.skillLevels).forEach(skillName => {
+        if (this.skillLevels.hasOwnProperty(skillName)) {
+          const level = parseInt(buildData.skillLevels[skillName]) || 0;
+          // Apply each level one by one to properly calculate costs
+          for (let i = 1; i <= level; i++) {
+            this.upgradeSkill(skillName, false);
+          }
+        }
+      });
+    }
   }
 
   resetSkills() {
@@ -272,45 +313,6 @@ upgradeSkill(skillName) {
     this.usedCoins = 0;
     this.usedCredits = 0;
     this.updateDisplay();
-  }
-
-  saveBuild() {
-    const buildData = {
-      totalCoins: this.totalCoins,
-      totalCredits: this.totalCredits,
-      skillLevels: { ...this.skillLevels },
-      usedCoins: this.usedCoins,
-      usedCredits: this.usedCredits,
-      skillSpending: { ...this.skillSpending },
-      timestamp: new Date().toISOString()
-    };
-    
-    BuildManager.saveBuild(buildData);
-  }
-
-  loadBuild() {
-    const buildDataString = document.getElementById('build-import').value.trim();
-    const result = BuildManager.loadBuild(buildDataString);
-    
-    if (result.success) {
-      this.totalCoins = result.data.totalCoins || 0;
-      this.totalCredits = result.data.totalCredits || 0;
-      this.skillLevels = { ...result.data.skillLevels };
-      this.usedCoins = result.data.usedCoins || 0;
-      this.usedCredits = result.data.usedCredits || 0;
-      this.skillSpending = result.data.skillSpending || {};
-      
-      document.getElementById('total-coins').value = this.totalCoins;
-      document.getElementById('total-credits').value = this.totalCredits;
-      this.updateDisplay();
-      
-      const modal = bootstrap.Modal.getInstance(document.getElementById('load-build-modal'));
-      modal.hide();
-      document.getElementById('build-import').value = '';
-      
-      alert('Build loaded successfully!');
-    } else {
-      alert('Error loading build: ' + result.error);
-    }
+    this.updateURL(true);
   }
 }
