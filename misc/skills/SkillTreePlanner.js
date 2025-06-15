@@ -1,4 +1,4 @@
-import { skillData } from './SkillData.js';
+import { skillData, skillExponentialValues } from './SkillData.js';
 import { SkillElement } from './SkillElement.js';
 import { BuildManager } from './BuildManager.js';
 
@@ -78,6 +78,31 @@ export class SkillTreePlanner {
     return breakdown.credits <= availableCredits && breakdown.coins <= availableCoins;
   }
 
+getCostForSkillLevel(skillName, level) {
+    if (level <= 0) return 0;
+    const skillInfo = this.getSkillData(skillName);
+    if (!skillInfo || skillInfo.baseCost === undefined) {
+      console.error(`Skill data or baseCost not found for ${skillName}`);
+      return Infinity;
+    }
+    const exponent = skillExponentialValues[skillName];
+    if (exponent === undefined) {
+      console.error(`Exponent not found for ${skillName}`);
+      return Infinity;
+    }
+    
+    const calculatedCost = Math.pow(skillInfo.baseCost * level, exponent);
+    const divided = calculatedCost / 5;
+    const remainder = divided - Math.floor(divided);
+    
+    // If remainder is greater than 0.6, round up; otherwise round down
+    if (remainder > 0.6) {
+      return Math.ceil(divided) * 5;
+    } else {
+      return Math.floor(divided) * 5;
+    }
+  }
+
   renderSkills() {
     Object.keys(skillData).forEach(category => {
       const container = document.getElementById(`${category.toLowerCase()}-skills`);
@@ -92,7 +117,8 @@ export class SkillTreePlanner {
           this.skillLevels,
           (name) => this.canUpgradeSkill(name),
           (cost) => this.calculateCostBreakdown(cost),
-          (name) => this.skillSpending[name] // Pass individual skill spending
+          (name) => this.skillSpending[name],
+          (sName, lvl) => this.getCostForSkillLevel(sName, lvl) // Pass cost calculation method
         );
         
         const skillDiv = skillElementInstance.createElement();
@@ -120,18 +146,17 @@ export class SkillTreePlanner {
     
     if (currentLevel >= skill.maxLevel) return false;
     
-    const nextCost = skill.costs[currentLevel];
+    const nextCost = this.getCostForSkillLevel(skillName, currentLevel + 1);
     if (!this.canAfford(nextCost)) return false;
     
     return skill.prerequisites.every(prereq => this.skillLevels[prereq] >= 10);
   }
 
-  upgradeSkill(skillName) {
+upgradeSkill(skillName) {
     if (!this.canUpgradeSkill(skillName)) return;
     
-    const skill = this.getSkillData(skillName);
     const currentLevel = this.skillLevels[skillName];
-    const cost = skill.costs[currentLevel];
+    const cost = this.getCostForSkillLevel(skillName, currentLevel + 1);
     const breakdown = this.calculateCostBreakdown(cost);
     
     this.skillLevels[skillName]++;
@@ -147,25 +172,37 @@ export class SkillTreePlanner {
   decreaseSkill(skillName) {
     const currentLevel = this.skillLevels[skillName];
     if (currentLevel === 0) return;
+
     if (this.isSkillRequired(skillName, currentLevel - 1)) {
       alert(`Cannot downgrade ${skillName} below level 10 as other skills depend on it.`);
       return;
     }
     
-    const skill = this.getSkillData(skillName);
-    const cost = skill.costs[currentLevel - 1];
+    const costOfLevelBeingRemoved = this.getCostForSkillLevel(skillName, currentLevel);
     
-    // Get what was actually spent on this skill so far
-    const skillCreditsUsed = this.skillSpending[skillName].credits;
-    const skillCoinsUsed = this.skillSpending[skillName].coins;
-    
-    // Refund proportionally based on what was actually spent on this skill
-    const totalSpentOnSkill = skillCreditsUsed + skillCoinsUsed;
-    if (totalSpentOnSkill === 0) return; // Safety check
-    
-    const creditRatio = skillCreditsUsed / totalSpentOnSkill;
-    const creditsToRefund = Math.min(cost, Math.floor(cost * creditRatio));
-    const coinsToRefund = cost - creditsToRefund;
+    let creditsToRefund = 0;
+    let coinsToRefund = 0;
+
+    // Determine how much to refund from the skill's own spending pool.
+    // It should refund from what the skill has "stored".
+    // Prioritize refunding credits if the skill has them, up to the cost, then coins.
+    const skillSpecificCredits = this.skillSpending[skillName].credits;
+    const skillSpecificCoins = this.skillSpending[skillName].coins;
+    creditsToRefund = Math.min(costOfLevelBeingRemoved, skillSpecificCredits);
+    const remainingCostAfterCreditRefund = costOfLevelBeingRemoved - creditsToRefund;
+    coinsToRefund = Math.min(remainingCostAfterCreditRefund, skillSpecificCoins);
+
+    if (creditsToRefund + coinsToRefund < costOfLevelBeingRemoved) {
+        console.warn(`Skill ${skillName} (level ${currentLevel}): Could not fully refund cost ${costOfLevelBeingRemoved}. ` +
+                      `Attempted to refund ${creditsToRefund} credits and ${coinsToRefund} coins. ` +
+                      `Skill had ${skillSpecificCredits} credits and ${skillSpecificCoins} coins stored.`);
+        // In this scenario, we are refunding the maximum possible based on what the skill has.
+        // The costOfLevelBeingRemoved might be higher than what the skill's specific spending can cover if there's a logic flaw elsewhere
+        // or if skillSpending wasn't correctly incremented.
+        // For now, we just make sure we don't refund more than the skill has lol.
+        creditsToRefund = Math.min(creditsToRefund, skillSpecificCredits);
+        coinsToRefund = Math.min(coinsToRefund, skillSpecificCoins);
+    }
     
     this.skillLevels[skillName]--;
     this.usedCredits -= creditsToRefund;

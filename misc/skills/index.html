@@ -65,6 +65,21 @@
     rel="manifest"
     href="/htmlassets/site.webmanifest"
   />
+  
+  <!-- Google tag (gtag.js) -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-D48H2PL948"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-D48H2PL948");
+  </script>
 
   <script type="module" src="main.js"></script>
 </head>
@@ -206,13 +221,13 @@
 
         <div class="d-grid gap-2">
           <button id="reset-skills" class="btn btn-outline-danger">
-            <i class="bi bi-arrow-clockwise me-1"></i>Reset All
+            <i class="bi bi-arrow-clockwise me-2"></i>Reset All
           </button>
           <button id="save-build" class="btn btn-outline-success">
-            <i class="bi bi-download me-1"></i>Export Build
+            <i class="bi bi-download me-2"></i>Export Build
           </button>
           <button id="load-build" class="btn btn-outline-info">
-            <i class="bi bi-upload me-1"></i>Import Build
+            <i class="bi bi-upload me-2"></i>Import Build
           </button>
         </div>
       </div>
@@ -534,7 +549,7 @@
         <div class="modal-footer border-secondary">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
           <button type="button" id="import-build" class="btn btn-success">
-            <i class="bi bi-check me-1"></i>Import Build
+            <i class="bi bi-check me-2"></i>Import Build
           </button>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { skillImages } from './SkillData.js';
 
 export class SkillElement {
-  constructor(skillName, skill, category, skillLevels, canUpgradeCallback, costBreakdownCallback, skillSpendingCallback) {
+  constructor(skillName, skill, category, skillLevels, canUpgradeCallback, costBreakdownCallback, skillSpendingCallback, getCostForSkillLevelCallback) {
     this.skillName = skillName;
     this.skill = skill;
     this.category = category;
@@ -9,6 +9,7 @@ export class SkillElement {
     this.canUpgradeCallback = canUpgradeCallback;
     this.costBreakdownCallback = costBreakdownCallback;
     this.skillSpendingCallback = skillSpendingCallback;
+    this.getCostForSkillLevelCallback = getCostForSkillLevelCallback;
   }
 
   createElement() {
@@ -72,8 +73,10 @@ export class SkillElement {
 
   updateElement(skillDiv) {
     const currentLevel = this.skillLevels[this.skillName];
-    const nextCost = currentLevel < this.skill.maxLevel ? this.skill.costs[currentLevel] : 0;
-    const totalCost = this.skill.costs.slice(0, currentLevel).reduce((sum, cost) => sum + cost, 0);
+    let nextCost = 0;
+    if (currentLevel < this.skill.maxLevel && this.getCostForSkillLevelCallback) {
+      nextCost = this.getCostForSkillLevelCallback(this.skillName, currentLevel + 1);
+    }
 
     // prerequisites check
     const prereqsMet = this.skill.prerequisites.every(prereq => this.skillLevels[prereq] >= 10);
@@ -105,9 +108,9 @@ export class SkillElement {
       </small>`;
     }
 
-    // total spent using spending data
     let totalSpentHtml = '';
-    if (totalCost > 0 && this.skillSpendingCallback) {
+
+    if (currentLevel > 0 && this.skillSpendingCallback) {
       const actualSpending = this.skillSpendingCallback(this.skillName);
       const totalParts = [];
       
