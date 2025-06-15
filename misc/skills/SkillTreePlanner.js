@@ -114,7 +114,7 @@ getCostForSkillLevel(skillName, level) {
           (name) => this.canUpgradeSkill(name),
           (cost) => this.calculateCostBreakdown(cost),
           (name) => this.skillSpending[name],
-          (sName, lvl) => this.getCostForSkillLevel(sName, lvl) // Pass cost calculation method
+          (sName, lvl) => this.getCostForSkillLevel(sName, lvl)
         );
         
         const skillDiv = skillElementInstance.createElement();
@@ -124,16 +124,46 @@ getCostForSkillLevel(skillName, level) {
           const targetButton = event.target.closest('button');
           if (!targetButton) return;
 
+          const incrementInput = skillDiv.querySelector('.skill-increment');
+          const increment = parseInt(incrementInput.value) || 1;
+
           if (targetButton.classList.contains('skill-decrease')) {
-            this.decreaseSkill(skillName);
+            this.decreaseSkillMultiple(skillName, increment);
           } else if (targetButton.classList.contains('skill-increase')) {
-            this.upgradeSkill(skillName);
+            this.upgradeSkillMultiple(skillName, increment);
           }
         });
         
         container.appendChild(skillDiv);
       });
     });
+  }
+
+  upgradeSkillMultiple(skillName, count) {
+    for (let i = 0; i < count; i++) {
+      if (!this.canUpgradeSkill(skillName)) {
+        break; // Stop if we can't upgrade anymore
+      }
+      this.upgradeSkill(skillName, false);
+    }
+    this.updateDisplay();
+  }
+
+  decreaseSkillMultiple(skillName, count) {
+    for (let i = 0; i < count; i++) {
+      const currentLevel = this.skillLevels[skillName];
+      if (currentLevel <= 0) {
+        break;
+      }
+      
+      if (this.isSkillRequired(skillName, currentLevel - 1)) {
+        alert(`Cannot decrease ${skillName} further as it's required by other skills.`);
+        break;
+      }
+      
+      this.decreaseSkill(skillName, false);
+    }
+    this.updateDisplay();
   }
 
   canUpgradeSkill(skillName) {

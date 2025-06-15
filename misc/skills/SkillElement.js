@@ -159,14 +159,26 @@ export class SkillElement {
       </div>
       
       <div class="skill-controls d-flex align-items-center justify-content-between">
-        <div class="btn-group" role="group">
-          <button class="btn btn-sm btn-outline-danger skill-decrease" ${currentLevel === 0 ? 'disabled' : ''}>
-            <i class="bi bi-dash"></i>
-          </button>
-          <button class="btn btn-sm btn-outline-success skill-increase" 
-                  ${currentLevel >= this.skill.maxLevel || !this.canUpgradeCallback(this.skillName) ? 'disabled' : ''}>
-            <i class="bi bi-plus"></i>
-          </button>
+        <div class="d-flex align-items-center" style="gap: 0.5rem;">
+          <div class="btn-group" role="group">
+            <button class="btn btn-sm btn-outline-danger skill-decrease" 
+                    ${currentLevel === 0 ? 'disabled' : ''}
+                    title="Decrease skill level">
+              <i class="bi bi-dash"></i>
+            </button>
+            <button class="btn btn-sm btn-outline-success skill-increase" 
+                    ${currentLevel >= this.skill.maxLevel || !this.canUpgradeCallback(this.skillName) ? 'disabled' : ''}
+                    title="Increase skill level">
+              <i class="bi bi-plus"></i>
+            </button>
+          </div>
+          <input type="number" 
+                 class="form-control form-control-sm skill-increment" 
+                 style="width: 60px;" 
+                 min="1" 
+                 max="${this.skill.maxLevel}" 
+                 value="1"
+                 title="Number of levels to add/remove at once">
         </div>
         
         <div class="skill-cost-info text-end">

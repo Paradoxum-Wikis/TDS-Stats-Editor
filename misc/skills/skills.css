@@ -20,6 +20,12 @@
   margin-top: 0.5rem;
 }
 
+.skill-increment {
+  border-radius: 0.25rem;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
 .skill-cost-info {
   min-width: 120px;
 }
