@@ -13,7 +13,7 @@ export const skillExponentialValues = {
   "Re-enforcements": 1.5,
   Fortify: 1.4,
   "Over-Heal": 1.7,
-  Bandages: 1.685,
+  Bandages: 1.7,
   "Extreme Conditioning": 1.725,
   "Beefed Up Minions": 1.68,
 };
