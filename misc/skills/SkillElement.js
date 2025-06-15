@@ -103,7 +103,7 @@ export class SkillElement {
         parts.push(`${breakdown.coins.toLocaleString()} <img src="/htmlassets/Coin.png" alt="Coins" class="cost-icon">`);
       }
       
-      costBreakdownHtml = `<small>
+      costBreakdownHtml = `<small class="text-light">
         Next: ${parts.join(' + ')}
       </small>`;
     }

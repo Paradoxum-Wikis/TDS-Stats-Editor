@@ -176,3 +176,12 @@
     padding-bottom: 0 !important;
   }
 }
+
+/* Light mode */
+.light-mode .skill-item::before {
+  opacity: 0.02 !important;
+}
+
+.light-mode .text-credit {
+  color: #7daa96;
+}

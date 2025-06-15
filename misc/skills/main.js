@@ -6,6 +6,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "./skills.css";
 
 import "../../components/Slides.js";
+import "../../components/SettingsManager.js";
 
 import * as bootstrap from "bootstrap";
 import { SkillTreePlanner } from './SkillTreePlanner.js';
