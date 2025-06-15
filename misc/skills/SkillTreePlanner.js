@@ -36,15 +36,23 @@ export class SkillTreePlanner {
 
   setupEventListeners() {
     document.getElementById("total-coins").addEventListener("input", (e) => {
-      this.totalCoins = parseInt(e.target.value) || 0;
-      this.syncMobileInputs("coins", this.totalCoins);
-      this.updateDisplay();
+      const newTotalCoins = parseInt(e.target.value) || 0;
+      if (newTotalCoins !== this.totalCoins) {
+        this.totalCoins = newTotalCoins;
+        this.recalculateAllSkillSpending();
+        this.syncMobileInputs("coins", this.totalCoins);
+        this.updateDisplay();
+      }
     });
 
     document.getElementById("total-credits").addEventListener("input", (e) => {
-      this.totalCredits = parseInt(e.target.value) || 0;
-      this.syncMobileInputs("credits", this.totalCredits);
-      this.updateDisplay();
+      const newTotalCredits = parseInt(e.target.value) || 0;
+      if (newTotalCredits !== this.totalCredits) {
+        this.totalCredits = newTotalCredits;
+        this.recalculateAllSkillSpending();
+        this.syncMobileInputs("credits", this.totalCredits);
+        this.updateDisplay();
+      }
     });
 
     document
@@ -233,6 +241,32 @@ export class SkillTreePlanner {
     this.updateDisplay();
   }
 
+  recalculateAllSkillSpending() {
+    const currentLevelsSnapshot = { ...this.skillLevels };
+
+    this.usedCoins = 0;
+    this.usedCredits = 0;
+    Object.keys(this.skillLevels).forEach(skillName => {
+      this.skillLevels[skillName] = 0;
+      this.skillSpending[skillName] = { credits: 0, coins: 0 };
+    });
+
+    Object.keys(skillData).forEach(category => {
+      Object.keys(skillData[category]).forEach(skillName => {
+        const targetLevel = currentLevelsSnapshot[skillName];
+        if (targetLevel > 0) {
+          for (let i = 0; i < targetLevel; i++) {
+            if (this.canUpgradeSkill(skillName)) {
+              this.upgradeSkill(skillName, false);
+            } else {
+              break;
+            }
+          }
+        }
+      });
+    });
+  }
+
   canUpgradeSkill(skillName) {
     const skill = this.getSkillData(skillName);
     const currentLevel = this.skillLevels[skillName];
@@ -385,6 +419,7 @@ export class SkillTreePlanner {
 
   loadFromURL() {
     const buildData = BuildManager.loadFromURL();
+    let skillsToLoad = false;
 
     if (buildData.totalCoins > 0) {
       this.totalCoins = buildData.totalCoins;
@@ -400,15 +435,22 @@ export class SkillTreePlanner {
       buildData.skillLevels &&
       Object.keys(buildData.skillLevels).length > 0
     ) {
-      Object.keys(buildData.skillLevels).forEach((skillName) => {
-        if (this.skillLevels.hasOwnProperty(skillName)) {
-          const level = parseInt(buildData.skillLevels[skillName]) || 0;
-          // Apply each level one by one to properly calculate costs
-          for (let i = 1; i <= level; i++) {
-            this.upgradeSkill(skillName, false);
-          }
+      skillsToLoad = true;
+    }
+
+    // If totals were set from URL, or skills are present, recalculate spending
+    // This allows skills loaded from URL to be processed with the correct initial totals.
+    if (buildData.totalCoins > 0 || buildData.totalCredits > 0 || skillsToLoad) {
+        // Temporarily assign skill levels from URL to be used by recalculate
+        if (skillsToLoad) {
+            Object.keys(this.skillLevels).forEach(skill => this.skillLevels[skill] = 0);
+            Object.keys(buildData.skillLevels).forEach((skillName) => {
+                if (this.skillLevels.hasOwnProperty(skillName)) {
+                    this.skillLevels[skillName] = parseInt(buildData.skillLevels[skillName]) || 0;
+                }
+            });
         }
-      });
+        this.recalculateAllSkillSpending();
     }
   }
 
