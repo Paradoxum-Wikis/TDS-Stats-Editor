@@ -5,35 +5,55 @@ class SettingsManager {
     this.themeToggleLabel = document.querySelector('label[for="themeToggle"]');
     this.showSecondsToggle = document.getElementById("showSecondsToggle");
     this.forceUSNumbersToggle = document.getElementById("forceUSNumbersToggle");
-    this.showCollapsibleCountsToggle = document.getElementById("showCollapsibleCountsToggle");
+    this.showCollapsibleCountsToggle = document.getElementById(
+      "showCollapsibleCountsToggle",
+    );
     this.animationsToggle = document.getElementById("animationsToggle");
-    this.enableLuaViewerToggle = document.getElementById("enableLuaViewerToggle");
-    this.keepDropdownOpenToggle = document.getElementById("keepDropdownOpenToggle");
-    this.classicTableSizeToggle = document.getElementById("classicTableSizeToggle");
-    this.imageCacheDebugToggle = document.getElementById("imageCacheDebugToggle");
+    this.enableLuaViewerToggle = document.getElementById(
+      "enableLuaViewerToggle",
+    );
+    this.keepDropdownOpenToggle = document.getElementById(
+      "keepDropdownOpenToggle",
+    );
+    this.classicTableSizeToggle = document.getElementById(
+      "classicTableSizeToggle",
+    );
+    this.imageCacheDebugToggle = document.getElementById(
+      "imageCacheDebugToggle",
+    );
     this.autoSlideToggle = document.getElementById("autoSlideToggle");
-    this.analyticsConsentToggle = document.getElementById("analyticsConsentToggle");
-    this.towerRegistryDebugToggle = document.getElementById("towerRegistryDebugToggle");
-    
+    this.analyticsConsentToggle = document.getElementById(
+      "analyticsConsentToggle",
+    );
+    this.towerRegistryDebugToggle = document.getElementById(
+      "towerRegistryDebugToggle",
+    );
+
     this.animationsStylesheet = document.getElementById("animsCSS");
     this.body = document.body;
     this.systemThemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
     this.themeMode = localStorage.getItem("themeMode") || "auto";
-    this.theme = localStorage.getItem("theme") || (this.systemThemeQuery.matches ? "dark" : "light");
+    this.theme =
+      localStorage.getItem("theme") ||
+      (this.systemThemeQuery.matches ? "dark" : "light");
     this.updateCurrentTheme();
 
     this.showSeconds = localStorage.getItem("showSeconds") !== "false";
     this.forceUSNumbers = localStorage.getItem("forceUSNumbers") !== "false";
-    this.showCollapsibleCounts = localStorage.getItem("showCollapsibleCounts") !== "false";
-    this.animationsEnabled = localStorage.getItem("animationsEnabled") !== "false";
+    this.showCollapsibleCounts =
+      localStorage.getItem("showCollapsibleCounts") !== "false";
+    this.animationsEnabled =
+      localStorage.getItem("animationsEnabled") !== "false";
     this.enableLuaViewer = localStorage.getItem("enableLuaViewer") === "true";
     this.keepDropdownOpen = localStorage.getItem("keepDropdownOpen") === "true";
     this.classicTableSize = localStorage.getItem("classicTableSize") === "true";
     this.imageCacheDebug = localStorage.getItem("imageCacheDebug") === "true";
-    this.autoSlideEnabled = localStorage.getItem("autoSlideEnabled") !== "false";
+    this.autoSlideEnabled =
+      localStorage.getItem("autoSlideEnabled") !== "false";
     this.analyticsConsent = localStorage.getItem("analyticsConsent") === "true";
-    this.towerRegistryDebug = localStorage.getItem("towerRegistryDebug") === "true";
+    this.towerRegistryDebug =
+      localStorage.getItem("towerRegistryDebug") === "true";
 
     window.state = window.state || {};
     window.state.settings = window.state.settings || {};
@@ -71,12 +91,12 @@ class SettingsManager {
   applyTheme() {
     this.body.classList.toggle("light-mode", this.currentTheme === "light");
     this.updateThemeImages();
-    
+
     if (this.themeToggle) {
       this.themeToggle.checked = this.currentTheme === "dark";
       this.updateToggleLabel();
     }
-    
+
     if (this.themeModeControl) {
       this.themeModeControl.value = this.themeMode;
     }
@@ -90,7 +110,9 @@ class SettingsManager {
       this.themeToggle.disabled = isDisabled;
     }
     if (this.themeToggleLabel) {
-      this.themeToggleLabel.closest(".toru-item")?.classList.toggle("disabled", isDisabled);
+      this.themeToggleLabel
+        .closest(".toru-item")
+        ?.classList.toggle("disabled", isDisabled);
     }
   }
 
@@ -104,13 +126,19 @@ class SettingsManager {
   init() {
     if (this.themeModeControl) {
       this.themeModeControl.value = this.themeMode;
-      this.themeModeControl.addEventListener("change", this.setThemeMode.bind(this));
+      this.themeModeControl.addEventListener(
+        "change",
+        this.setThemeMode.bind(this),
+      );
     }
 
     this.applyTheme();
 
     if (this.themeMode === "auto") {
-      this.systemThemeQuery.addEventListener("change", this.handleSystemThemeChange.bind(this));
+      this.systemThemeQuery.addEventListener(
+        "change",
+        this.handleSystemThemeChange.bind(this),
+      );
     }
 
     if (this.animationsStylesheet) {
@@ -123,57 +151,90 @@ class SettingsManager {
 
     if (this.animationsToggle) {
       this.animationsToggle.checked = !this.animationsEnabled;
-      this.animationsToggle.addEventListener("change", this.toggleAnimations.bind(this));
+      this.animationsToggle.addEventListener(
+        "change",
+        this.toggleAnimations.bind(this),
+      );
     }
 
     if (this.showSecondsToggle) {
       this.showSecondsToggle.checked = this.showSeconds;
-      this.showSecondsToggle.addEventListener("change", this.toggleShowSeconds.bind(this));
+      this.showSecondsToggle.addEventListener(
+        "change",
+        this.toggleShowSeconds.bind(this),
+      );
     }
 
     if (this.forceUSNumbersToggle) {
       this.forceUSNumbersToggle.checked = this.forceUSNumbers;
-      this.forceUSNumbersToggle.addEventListener("change", this.toggleForceUSNumbers.bind(this));
+      this.forceUSNumbersToggle.addEventListener(
+        "change",
+        this.toggleForceUSNumbers.bind(this),
+      );
     }
 
     if (this.showCollapsibleCountsToggle) {
       this.showCollapsibleCountsToggle.checked = this.showCollapsibleCounts;
-      this.showCollapsibleCountsToggle.addEventListener("change", this.toggleShowCollapsibleCounts.bind(this));
+      this.showCollapsibleCountsToggle.addEventListener(
+        "change",
+        this.toggleShowCollapsibleCounts.bind(this),
+      );
     }
 
     if (this.autoSlideToggle) {
       this.autoSlideToggle.checked = this.autoSlideEnabled;
-      this.autoSlideToggle.addEventListener("change", this.toggleAutoSlide.bind(this));
+      this.autoSlideToggle.addEventListener(
+        "change",
+        this.toggleAutoSlide.bind(this),
+      );
     }
 
     if (this.enableLuaViewerToggle) {
       this.enableLuaViewerToggle.checked = this.enableLuaViewer;
-      this.enableLuaViewerToggle.addEventListener("change", this.toggleEnableLuaViewer.bind(this));
+      this.enableLuaViewerToggle.addEventListener(
+        "change",
+        this.toggleEnableLuaViewer.bind(this),
+      );
     }
 
     if (this.keepDropdownOpenToggle) {
-      this.keepDropdownOpenToggle.addEventListener("change", this.toggleKeepDropdownOpen.bind(this));
+      this.keepDropdownOpenToggle.addEventListener(
+        "change",
+        this.toggleKeepDropdownOpen.bind(this),
+      );
     }
 
     if (this.classicTableSizeToggle) {
       this.classicTableSizeToggle.checked = this.classicTableSize;
-      this.classicTableSizeToggle.addEventListener("change", this.toggleClassicTableSize.bind(this));
+      this.classicTableSizeToggle.addEventListener(
+        "change",
+        this.toggleClassicTableSize.bind(this),
+      );
       this.applyClassicTableSize();
     }
 
     if (this.imageCacheDebugToggle) {
       this.imageCacheDebugToggle.checked = this.imageCacheDebug;
-      this.imageCacheDebugToggle.addEventListener("change", this.toggleImageCacheDebug.bind(this));
+      this.imageCacheDebugToggle.addEventListener(
+        "change",
+        this.toggleImageCacheDebug.bind(this),
+      );
     }
 
     if (this.towerRegistryDebugToggle) {
       this.towerRegistryDebugToggle.checked = this.towerRegistryDebug;
-      this.towerRegistryDebugToggle.addEventListener("change", this.toggleTowerRegistryDebug.bind(this));
+      this.towerRegistryDebugToggle.addEventListener(
+        "change",
+        this.toggleTowerRegistryDebug.bind(this),
+      );
     }
 
     if (this.analyticsConsentToggle) {
       this.analyticsConsentToggle.checked = this.analyticsConsent;
-      this.analyticsConsentToggle.addEventListener("change", this.toggleAnalyticsConsent.bind(this));
+      this.analyticsConsentToggle.addEventListener(
+        "change",
+        this.toggleAnalyticsConsent.bind(this),
+      );
     }
 
     this.updateThemeImages();
@@ -185,9 +246,15 @@ class SettingsManager {
     if (this.themeMode === newMode) return;
 
     if (newMode === "auto") {
-      this.systemThemeQuery.addEventListener("change", this.handleSystemThemeChange.bind(this));
+      this.systemThemeQuery.addEventListener(
+        "change",
+        this.handleSystemThemeChange.bind(this),
+      );
     } else {
-      this.systemThemeQuery.removeEventListener("change", this.handleSystemThemeChange.bind(this));
+      this.systemThemeQuery.removeEventListener(
+        "change",
+        this.handleSystemThemeChange.bind(this),
+      );
     }
 
     this.themeMode = newMode;
@@ -209,94 +276,113 @@ class SettingsManager {
     this.autoSlideEnabled = this.autoSlideToggle.checked;
     window.state.settings.autoSlideEnabled = this.autoSlideEnabled;
     localStorage.setItem("autoSlideEnabled", this.autoSlideEnabled);
-    
-    document.dispatchEvent(new CustomEvent("settingsChanged", {
-      detail: { setting: "autoSlideEnabled", value: this.autoSlideEnabled }
-    }));
+
+    document.dispatchEvent(
+      new CustomEvent("settingsChanged", {
+        detail: { setting: "autoSlideEnabled", value: this.autoSlideEnabled },
+      }),
+    );
   }
 
   toggleShowSeconds() {
     this.showSeconds = this.showSecondsToggle.checked;
     window.state.settings.showSeconds = this.showSeconds;
     localStorage.setItem("showSeconds", this.showSeconds);
-    
-    document.dispatchEvent(new CustomEvent("settingsChanged", {
-      detail: { setting: "showSeconds", value: this.showSeconds }
-    }));
+
+    document.dispatchEvent(
+      new CustomEvent("settingsChanged", {
+        detail: { setting: "showSeconds", value: this.showSeconds },
+      }),
+    );
   }
 
   toggleForceUSNumbers() {
     this.forceUSNumbers = this.forceUSNumbersToggle.checked;
     window.state.settings.forceUSNumbers = this.forceUSNumbers;
     localStorage.setItem("forceUSNumbers", this.forceUSNumbers);
-    
+
     this.updateNumberFormatLabel();
-    
-    document.dispatchEvent(new CustomEvent("settingsChanged", {
-      detail: { setting: "forceUSNumbers", value: this.forceUSNumbers }
-    }));
+
+    document.dispatchEvent(
+      new CustomEvent("settingsChanged", {
+        detail: { setting: "forceUSNumbers", value: this.forceUSNumbers },
+      }),
+    );
   }
 
   toggleShowCollapsibleCounts() {
     this.showCollapsibleCounts = this.showCollapsibleCountsToggle.checked;
     window.state.settings.showCollapsibleCounts = this.showCollapsibleCounts;
     localStorage.setItem("showCollapsibleCounts", this.showCollapsibleCounts);
-    
-    document.dispatchEvent(new CustomEvent("settingsChanged", {
-      detail: { setting: "showCollapsibleCounts", value: this.showCollapsibleCounts }
-    }));
+
+    document.dispatchEvent(
+      new CustomEvent("settingsChanged", {
+        detail: {
+          setting: "showCollapsibleCounts",
+          value: this.showCollapsibleCounts,
+        },
+      }),
+    );
   }
 
   toggleAnimations() {
     this.animationsEnabled = !this.animationsToggle.checked;
     window.state.settings.animationsEnabled = this.animationsEnabled;
     localStorage.setItem("animationsEnabled", this.animationsEnabled);
-    
+
     if (this.animationsStylesheet) {
       this.animationsStylesheet.disabled = !this.animationsEnabled;
     }
-    
-    document.dispatchEvent(new CustomEvent("settingsChanged", {
-      detail: { setting: "animationsEnabled", value: this.animationsEnabled }
-    }));
+
+    document.dispatchEvent(
+      new CustomEvent("settingsChanged", {
+        detail: { setting: "animationsEnabled", value: this.animationsEnabled },
+      }),
+    );
   }
 
   toggleEnableLuaViewer() {
     this.enableLuaViewer = this.enableLuaViewerToggle.checked;
     window.state.settings.enableLuaViewer = this.enableLuaViewer;
     localStorage.setItem("enableLuaViewer", this.enableLuaViewer);
-    
-    document.dispatchEvent(new CustomEvent("settingsChanged", {
-      detail: { setting: "enableLuaViewer", value: this.enableLuaViewer }
-    }));
+
+    document.dispatchEvent(
+      new CustomEvent("settingsChanged", {
+        detail: { setting: "enableLuaViewer", value: this.enableLuaViewer },
+      }),
+    );
   }
 
   toggleKeepDropdownOpen() {
     this.keepDropdownOpen = this.keepDropdownOpenToggle.checked;
     window.state.settings.keepDropdownOpen = this.keepDropdownOpen;
     localStorage.setItem("keepDropdownOpen", this.keepDropdownOpen);
-    
-    document.dispatchEvent(new CustomEvent("settingsChanged", {
-      detail: { setting: "keepDropdownOpen", value: this.keepDropdownOpen }
-    }));
+
+    document.dispatchEvent(
+      new CustomEvent("settingsChanged", {
+        detail: { setting: "keepDropdownOpen", value: this.keepDropdownOpen },
+      }),
+    );
   }
 
   toggleClassicTableSize() {
     this.classicTableSize = this.classicTableSizeToggle.checked;
     window.state.settings.classicTableSize = this.classicTableSize;
     localStorage.setItem("classicTableSize", this.classicTableSize);
-    
+
     this.applyClassicTableSize();
-    
-    document.dispatchEvent(new CustomEvent("settingsChanged", {
-      detail: { setting: "classicTableSize", value: this.classicTableSize }
-    }));
+
+    document.dispatchEvent(
+      new CustomEvent("settingsChanged", {
+        detail: { setting: "classicTableSize", value: this.classicTableSize },
+      }),
+    );
   }
 
   applyClassicTableSize() {
     const towerTable = document.getElementById("tower-table");
     const unitTable = document.getElementById("unit-table");
-    
+
     if (this.classicTableSize) {
       if (towerTable) towerTable.style.fontSize = "0.825rem";
       if (unitTable) unitTable.style.fontSize = "0.825rem";
@@ -310,35 +396,46 @@ class SettingsManager {
     this.imageCacheDebug = this.imageCacheDebugToggle.checked;
     window.state.settings.imageCacheDebug = this.imageCacheDebug;
     localStorage.setItem("imageCacheDebug", this.imageCacheDebug);
-    
-    document.dispatchEvent(new CustomEvent("settingsChanged", {
-      detail: { setting: "imageCacheDebug", value: this.imageCacheDebug }
-    }));
+
+    document.dispatchEvent(
+      new CustomEvent("settingsChanged", {
+        detail: { setting: "imageCacheDebug", value: this.imageCacheDebug },
+      }),
+    );
   }
 
   toggleTowerRegistryDebug() {
     this.towerRegistryDebug = this.towerRegistryDebugToggle.checked;
     window.state.settings.towerRegistryDebug = this.towerRegistryDebug;
     localStorage.setItem("towerRegistryDebug", this.towerRegistryDebug);
-    
-    document.dispatchEvent(new CustomEvent("settingsChanged", {
-      detail: { setting: "towerRegistryDebug", value: this.towerRegistryDebug }
-    }));
+
+    document.dispatchEvent(
+      new CustomEvent("settingsChanged", {
+        detail: {
+          setting: "towerRegistryDebug",
+          value: this.towerRegistryDebug,
+        },
+      }),
+    );
   }
 
   toggleAnalyticsConsent() {
     this.analyticsConsent = this.analyticsConsentToggle.checked;
     window.state.settings.analyticsConsent = this.analyticsConsent;
     localStorage.setItem("analyticsConsent", this.analyticsConsent);
-    
-    document.dispatchEvent(new CustomEvent("settingsChanged", {
-      detail: { setting: "analyticsConsent", value: this.analyticsConsent }
-    }));
-    
-    document.dispatchEvent(new CustomEvent("analyticsConsentChanged", {
-      detail: { consent: this.analyticsConsent }
-    }));
-    
+
+    document.dispatchEvent(
+      new CustomEvent("settingsChanged", {
+        detail: { setting: "analyticsConsent", value: this.analyticsConsent },
+      }),
+    );
+
+    document.dispatchEvent(
+      new CustomEvent("analyticsConsentChanged", {
+        detail: { consent: this.analyticsConsent },
+      }),
+    );
+
     if (this.analyticsConsent && typeof gtag === "undefined") {
       window.location.reload();
     }
@@ -346,15 +443,17 @@ class SettingsManager {
 
   updateToggleLabel() {
     if (!this.themeToggleLabel) return;
-    
+
     const icon = this.themeToggleLabel.querySelector(".bi");
     const titleSpan = this.themeToggleLabel.querySelector(".toru-title");
-    const descriptionSpan = this.themeToggleLabel.querySelector(".d-block.small.text-muted");
-    
+    const descriptionSpan = this.themeToggleLabel.querySelector(
+      ".d-block.small.text-muted",
+    );
+
     if (!icon || !titleSpan || !descriptionSpan) return;
-    
+
     const displayTheme = this.currentTheme;
-    
+
     if (displayTheme === "dark") {
       icon.className = "bi bi-moon-stars me-2 toru-icon";
       titleSpan.textContent = "Dark Mode";
@@ -384,12 +483,12 @@ class SettingsManager {
   updateNumberFormatLabel() {
     const label = document.querySelector('label[for="forceUSNumbersToggle"]');
     if (!label) return;
-    
+
     const titleSpan = label.querySelector(".toru-title");
     const descriptionSpan = label.querySelector(".d-block.small.text-muted");
-    
+
     if (!titleSpan || !descriptionSpan) return;
-    
+
     if (this.forceUSNumbers) {
       titleSpan.textContent = "US Number Format";
       descriptionSpan.textContent = "Format numbers as 1,234.56";

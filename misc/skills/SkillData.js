@@ -2,20 +2,20 @@ export const skillExponentialValues = {
   "Enhanced Optics": 1.73,
   "Improved Gunpowder": 1.725,
   "Fight Dirty": 1.77,
-  "Precision": 2.035,
-  "Resourcefulness": 1.75,
+  Precision: 2.035,
+  Resourcefulness: 1.75,
   "Bigger Budget": 1.82,
-  "Stonks": 1.78,
-  "Scavenger": 1.865,
-  "Accelerator": 1.77,
-  "Scholar": 1.83,
+  Stonks: 1.78,
+  Scavenger: 1.865,
+  Accelerator: 1.77,
+  Scholar: 1.83,
   "Expanded Barracks": 1.86,
   "Re-enforcements": 1.5,
-  "Fortify": 1.4,
+  Fortify: 1.4,
   "Over-Heal": 1.7,
-  "Bandages": 1.685,
+  Bandages: 1.685,
   "Extreme Conditioning": 1.725,
-  "Beefed Up Minions": 1.68
+  "Beefed Up Minions": 1.68,
 };
 
 export const skillData = {
@@ -25,145 +25,146 @@ export const skillData = {
       maxLevel: 20,
       baseCost: 6,
       prerequisites: [],
-      effect: "0.5% range increase per level"
+      effect: "0.5% range increase per level",
     },
     "Improved Gunpowder": {
       description: "AOE explosion radius is increased by X%",
       maxLevel: 25,
       baseCost: 5,
       prerequisites: ["Enhanced Optics"],
-      effect: "0.5% explosion radius increase per level"
+      effect: "0.5% explosion radius increase per level",
     },
     "Fight Dirty": {
       description: "Debuff durations applied to enemies are increased by X%",
       maxLevel: 25,
       baseCost: 5,
       prerequisites: ["Improved Gunpowder"],
-      effect: "1% debuff duration increase per level"
+      effect: "1% debuff duration increase per level",
     },
-    "Precision": {
+    Precision: {
       description: "Every X shots, towers deal a critical hit (1.25x damage)",
       maxLevel: 15,
       baseCost: 7,
       prerequisites: ["Fight Dirty"],
-      effect: "Critical hit every 29-X shots (decreases by 1 per level)"
-    }
+      effect: "Critical hit every 29-X shots (decreases by 1 per level)",
+    },
   },
   Economy: {
-    "Resourcefulness": {
+    Resourcefulness: {
       description: "Selling towers returns X% more money",
       maxLevel: 25,
       baseCost: 4,
       prerequisites: [],
-      effect: "1.2% sell value increase per level"
+      effect: "1.2% sell value increase per level",
     },
     "Bigger Budget": {
       description: "Starting cash is increased by X%",
       maxLevel: 25,
       baseCost: 4,
       prerequisites: ["Resourcefulness"],
-      effect: "1% starting cash increase per level"
+      effect: "1% starting cash increase per level",
     },
-    "Stonks": {
+    Stonks: {
       description: "Wave rewards are increased by X%",
       maxLevel: 20,
       baseCost: 7,
       prerequisites: ["Bigger Budget"],
-      effect: "0.5% wave reward increase per level"
+      effect: "0.5% wave reward increase per level",
     },
-    "Scavenger": {
+    Scavenger: {
       description: "Every X enemy kills grant 1.5x rewards from enemies",
       maxLevel: 20,
       baseCost: 7,
       prerequisites: ["Stonks"],
-      effect: "Bonus every 29-X kills (decreases by 1 per level)"
-    }
+      effect: "Bonus every 29-X kills (decreases by 1 per level)",
+    },
   },
   Strategy: {
-    "Accelerator": {
+    Accelerator: {
       description: "Reduces cooldowns of active abilities by X%",
       maxLevel: 25,
       baseCost: 4,
       prerequisites: [],
-      effect: "0.5% cooldown reduction per level"
+      effect: "0.5% cooldown reduction per level",
     },
-    "Scholar": {
+    Scholar: {
       description: "Logbook drop rate increases by X",
       maxLevel: 20,
       baseCost: 5,
       prerequisites: ["Accelerator"],
-      effect: "1.01x multiplier increasing by 0.01 per level"
+      effect: "1.01x multiplier increasing by 0.01 per level",
     },
     "Expanded Barracks": {
       description: "Cooldown for spawning units is reduced by X%",
       maxLevel: 20,
       baseCost: 6,
       prerequisites: ["Accelerator"],
-      effect: "0.75% spawn cooldown reduction per level"
+      effect: "0.75% spawn cooldown reduction per level",
     },
     "Re-enforcements": {
       description: "Increases the tower placement limit by X",
       maxLevel: 10,
       baseCost: 100,
       prerequisites: ["Expanded Barracks"],
-      effect: "1 placement limit increase per level (scales with players)"
-    }
+      effect: "1 placement limit increase per level (scales with players)",
+    },
   },
   Defense: {
-    "Fortify": {
+    Fortify: {
       description: "Increases the player's health pool by X",
       maxLevel: 40,
       baseCost: 3,
       prerequisites: [],
-      effect: "5 health increase per level"
+      effect: "5 health increase per level",
     },
     "Over-Heal": {
-      description: "Increases how much extra HP can be kept from over-healing by X",
+      description:
+        "Increases how much extra HP can be kept from over-healing by X",
       maxLevel: 25,
       baseCost: 5,
       prerequisites: ["Fortify"],
-      effect: "8 over-heal capacity increase per level"
+      effect: "8 over-heal capacity increase per level",
     },
-    "Bandages": {
+    Bandages: {
       description: "Regenerates X health at the start of every wave",
       maxLevel: 25,
       baseCost: 5,
       prerequisites: ["Over-Heal"],
-      effect: "1 health regeneration per level"
+      effect: "1 health regeneration per level",
     },
     "Extreme Conditioning": {
       description: "Reduces stun and debuff durations from enemies by X%",
       maxLevel: 25,
       baseCost: 5,
       prerequisites: ["Bandages"],
-      effect: "0.8% debuff duration reduction per level"
+      effect: "0.8% debuff duration reduction per level",
     },
     "Beefed Up Minions": {
       description: "Health of summoned units is increased by X%",
       maxLevel: 25,
       baseCost: 6,
       prerequisites: ["Extreme Conditioning"],
-      effect: "0.6% unit health increase per level"
-    }
-  }
+      effect: "0.6% unit health increase per level",
+    },
+  },
 };
 
 export const skillImages = {
   "Enhanced Optics": "EnhancedOpticsSkill.png",
   "Improved Gunpowder": "ImprovedGunpowderSkill.png",
   "Fight Dirty": "FightDirtySkill.png",
-  "Precision": "PrecisionSkill.png",
-  "Resourcefulness": "ResourcefulnessSkill.png",
+  Precision: "PrecisionSkill.png",
+  Resourcefulness: "ResourcefulnessSkill.png",
   "Bigger Budget": "BiggerBudgetSkill.png",
-  "Stonks": "StonksSkill.png",
-  "Scavenger": "ScavengerSkill.png",
-  "Accelerator": "AcceleratorSkill.png",
-  "Scholar": "ScholarSkill.png",
+  Stonks: "StonksSkill.png",
+  Scavenger: "ScavengerSkill.png",
+  Accelerator: "AcceleratorSkill.png",
+  Scholar: "ScholarSkill.png",
   "Expanded Barracks": "ExpandedBarracksSkill.png",
   "Re-enforcements": "Re-enforcementsSkill.png",
-  "Fortify": "FortifySkill.png",
+  Fortify: "FortifySkill.png",
   "Over-Heal": "Over-HealSkill.png",
-  "Bandages": "BandagesSkill.png",
+  Bandages: "BandagesSkill.png",
   "Extreme Conditioning": "ExtremeConditioningSkill.png",
-  "Beefed Up Minions": "BeefedUpMinionsSkill.png"
+  "Beefed Up Minions": "BeefedUpMinionsSkill.png",
 };

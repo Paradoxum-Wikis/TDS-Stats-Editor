@@ -489,30 +489,32 @@ class ViewerCore {
   }
 
   isLuaTable(text) {
-  text = text.trim();
-  
-  const startsWithLocal = /^local\s+data\s*=/.test(text);
-  const hasReturnData = /return\s+data\s*$/.test(text);
+    text = text.trim();
 
-  // if it's a valid json, it's probably not Lua
-  try {
-    JSON.parse(text);
-    return false;
-  } catch (e) {
-    return startsWithLocal && hasReturnData;
+    const startsWithLocal = /^local\s+data\s*=/.test(text);
+    const hasReturnData = /return\s+data\s*$/.test(text);
+
+    // if it's a valid json, it's probably not Lua
+    try {
+      JSON.parse(text);
+      return false;
+    } catch (e) {
+      return startsWithLocal && hasReturnData;
+    }
   }
-}
 
   parseLuaToJSON(luaText) {
     let text = luaText.trim();
 
     const modulePattern = /local\s+data\s*=\s*({[\s\S]*})\s*return\s+data/;
     const moduleMatch = text.match(modulePattern);
-    
+
     if (!moduleMatch) {
-      throw new Error("Invalid Lua format. Expected 'local data = { ... } return data' format.");
+      throw new Error(
+        "Invalid Lua format. Expected 'local data = { ... } return data' format.",
+      );
     }
-    
+
     text = moduleMatch[1];
     text = text.replace(/\bnil\b/g, "null");
     text = text.replace(/--.*$/gm, "");

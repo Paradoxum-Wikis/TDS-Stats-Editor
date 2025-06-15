@@ -7,7 +7,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url('../../htmlassets/Stripes.png');
+  background-image: url("../../htmlassets/Stripes.png");
   opacity: 0.05;
   z-index: -1;
 }
@@ -131,7 +131,8 @@
     text-align: left;
   }
 
-  #total-credits, #total-coins {
+  #total-credits,
+  #total-coins {
     font-size: 16px !important;
     padding: 12px 16px;
   }

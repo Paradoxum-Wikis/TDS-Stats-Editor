@@ -9,18 +9,18 @@ import "../../components/Slides.js";
 import "../../components/SettingsManager.js";
 
 import * as bootstrap from "bootstrap";
-import { SkillTreePlanner } from './SkillTreePlanner.js';
-import { MobileNav } from './MobileNav.js';
+import { SkillTreePlanner } from "./SkillTreePlanner.js";
+import { MobileNav } from "./MobileNav.js";
 
 window.bootstrap = bootstrap;
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   new SkillTreePlanner();
 
   if (window.innerWidth < 768) {
     new MobileNav();
   }
 
-  window.addEventListener('resize', () => {
+  window.addEventListener("resize", () => {
     if (window.innerWidth < 768 && !window.skillsMobileNav) {
       window.skillsMobileNav = new MobileNav();
     }

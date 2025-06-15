@@ -1,6 +1,6 @@
-import { skillData, skillExponentialValues } from './SkillData.js';
-import { SkillElement } from './SkillElement.js';
-import { BuildManager } from './BuildManager.js';
+import { skillData, skillExponentialValues } from "./SkillData.js";
+import { SkillElement } from "./SkillElement.js";
+import { BuildManager } from "./BuildManager.js";
 
 export class SkillTreePlanner {
   constructor() {
@@ -14,9 +14,9 @@ export class SkillTreePlanner {
     this.urlUpdateTimer = null;
     this.lastUrlUpdate = 0;
     this.URL_UPDATE_DELAY = 10000; // 10 secs
-    
-    Object.keys(skillData).forEach(category => {
-      Object.keys(skillData[category]).forEach(skill => {
+
+    Object.keys(skillData).forEach((category) => {
+      Object.keys(skillData[category]).forEach((skill) => {
         this.skillLevels[skill] = 0;
         this.skillSpending[skill] = { credits: 0, coins: 0 };
       });
@@ -34,31 +34,33 @@ export class SkillTreePlanner {
   }
 
   setupEventListeners() {
-    document.getElementById('total-coins').addEventListener('input', (e) => {
+    document.getElementById("total-coins").addEventListener("input", (e) => {
       this.totalCoins = parseInt(e.target.value) || 0;
-      this.syncMobileInputs('coins', this.totalCoins);
+      this.syncMobileInputs("coins", this.totalCoins);
       this.updateDisplay();
     });
 
-    document.getElementById('total-credits').addEventListener('input', (e) => {
+    document.getElementById("total-credits").addEventListener("input", (e) => {
       this.totalCredits = parseInt(e.target.value) || 0;
-      this.syncMobileInputs('credits', this.totalCredits);
+      this.syncMobileInputs("credits", this.totalCredits);
       this.updateDisplay();
     });
 
-    document.getElementById('global-increment').addEventListener('input', (e) => {
-      const globalIncrement = parseInt(e.target.value) || 1;
-      this.updateAllSkillIncrements(globalIncrement);
-      this.syncMobileInputs('increment', globalIncrement);
-    });
+    document
+      .getElementById("global-increment")
+      .addEventListener("input", (e) => {
+        const globalIncrement = parseInt(e.target.value) || 1;
+        this.updateAllSkillIncrements(globalIncrement);
+        this.syncMobileInputs("increment", globalIncrement);
+      });
 
-    document.getElementById('reset-skills').addEventListener('click', () => {
-      if (confirm('Are you sure you want to reset all skills?')) {
+    document.getElementById("reset-skills").addEventListener("click", () => {
+      if (confirm("Are you sure you want to reset all skills?")) {
         this.resetSkills();
       }
     });
 
-    document.getElementById('share-build')?.addEventListener('click', () => {
+    document.getElementById("share-build")?.addEventListener("click", () => {
       this.updateURL(true);
       BuildManager.shareURL();
     });
@@ -66,11 +68,11 @@ export class SkillTreePlanner {
 
   setupMobileEventListeners() {
     // mobile events
-    document.addEventListener('skillsReset', () => {
+    document.addEventListener("skillsReset", () => {
       this.resetSkills();
     });
 
-    document.addEventListener('skillsShare', () => {
+    document.addEventListener("skillsShare", () => {
       this.updateURL(true);
       BuildManager.shareURL();
     });
@@ -78,13 +80,17 @@ export class SkillTreePlanner {
 
   syncMobileInputs(type, value) {
     // sync mobile sidebar inputs with main inputs
-    const mobileInput = document.querySelector(`.mobile-sidebar #total-${type}`);
+    const mobileInput = document.querySelector(
+      `.mobile-sidebar #total-${type}`,
+    );
     if (mobileInput && mobileInput.value != value) {
       mobileInput.value = value;
     }
 
-    if (type === 'increment') {
-      const mobileGlobalIncrement = document.querySelector('.mobile-sidebar #global-increment');
+    if (type === "increment") {
+      const mobileGlobalIncrement = document.querySelector(
+        ".mobile-sidebar #global-increment",
+      );
       if (mobileGlobalIncrement && mobileGlobalIncrement.value != value) {
         mobileGlobalIncrement.value = value;
       }
@@ -92,8 +98,8 @@ export class SkillTreePlanner {
   }
 
   updateAllSkillIncrements(value) {
-    const allIncrementInputs = document.querySelectorAll('.skill-increment');
-    allIncrementInputs.forEach(input => {
+    const allIncrementInputs = document.querySelectorAll(".skill-increment");
+    allIncrementInputs.forEach((input) => {
       input.value = value;
     });
   }
@@ -101,11 +107,11 @@ export class SkillTreePlanner {
   calculateCostBreakdown(cost) {
     const creditsToUse = Math.min(cost, this.totalCredits - this.usedCredits);
     const coinsToUse = Math.max(0, cost - creditsToUse);
-    
+
     return {
       credits: creditsToUse,
       coins: coinsToUse,
-      total: creditsToUse + coinsToUse
+      total: creditsToUse + coinsToUse,
     };
   }
 
@@ -113,11 +119,13 @@ export class SkillTreePlanner {
     const breakdown = this.calculateCostBreakdown(cost);
     const availableCoins = this.totalCoins - this.usedCoins;
     const availableCredits = this.totalCredits - this.usedCredits;
-    
-    return breakdown.credits <= availableCredits && breakdown.coins <= availableCoins;
+
+    return (
+      breakdown.credits <= availableCredits && breakdown.coins <= availableCoins
+    );
   }
 
-getCostForSkillLevel(skillName, level) {
+  getCostForSkillLevel(skillName, level) {
     if (level <= 0) return 0;
     const skillInfo = this.getSkillData(skillName);
     if (!skillInfo || skillInfo.baseCost === undefined) {
@@ -129,11 +137,11 @@ getCostForSkillLevel(skillName, level) {
       console.error(`Exponent not found for ${skillName}`);
       return Infinity;
     }
-    
+
     const calculatedCost = Math.pow(skillInfo.baseCost * level, exponent);
     const divided = calculatedCost / 5;
     const remainder = divided - Math.floor(divided);
-    
+
     // If remainder is greater than 0.6, round up; otherwise round down
     if (remainder > 0.6) {
       return Math.ceil(divided) * 5;
@@ -143,40 +151,45 @@ getCostForSkillLevel(skillName, level) {
   }
 
   renderSkills() {
-    Object.keys(skillData).forEach(category => {
-      const container = document.getElementById(`${category.toLowerCase()}-skills`);
+    Object.keys(skillData).forEach((category) => {
+      const container = document.getElementById(
+        `${category.toLowerCase()}-skills`,
+      );
       if (!container) return;
-      
-      Object.keys(skillData[category]).forEach(skillName => {
+
+      Object.keys(skillData[category]).forEach((skillName) => {
         const skill = skillData[category][skillName];
         const skillElementInstance = new SkillElement(
-          skillName, 
-          skill, 
-          category, 
+          skillName,
+          skill,
+          category,
           this.skillLevels,
           (name) => this.canUpgradeSkill(name),
           (cost) => this.calculateCostBreakdown(cost),
           (name) => this.skillSpending[name],
-          (sName, lvl) => this.getCostForSkillLevel(sName, lvl)
+          (sName, lvl) => this.getCostForSkillLevel(sName, lvl),
         );
-        
-        const skillDiv = skillElementInstance.createElement();
-        this.skillElements.set(skillName, { instance: skillElementInstance, element: skillDiv });
 
-        skillDiv.addEventListener('click', (event) => {
-          const targetButton = event.target.closest('button');
+        const skillDiv = skillElementInstance.createElement();
+        this.skillElements.set(skillName, {
+          instance: skillElementInstance,
+          element: skillDiv,
+        });
+
+        skillDiv.addEventListener("click", (event) => {
+          const targetButton = event.target.closest("button");
           if (!targetButton) return;
 
-          const incrementInput = skillDiv.querySelector('.skill-increment');
+          const incrementInput = skillDiv.querySelector(".skill-increment");
           const increment = parseInt(incrementInput.value) || 1;
 
-          if (targetButton.classList.contains('skill-decrease')) {
+          if (targetButton.classList.contains("skill-decrease")) {
             this.decreaseSkillMultiple(skillName, increment);
-          } else if (targetButton.classList.contains('skill-increase')) {
+          } else if (targetButton.classList.contains("skill-increase")) {
             this.upgradeSkillMultiple(skillName, increment);
           }
         });
-        
+
         container.appendChild(skillDiv);
       });
     });
@@ -198,12 +211,14 @@ getCostForSkillLevel(skillName, level) {
       if (currentLevel <= 0) {
         break;
       }
-      
+
       if (this.isSkillRequired(skillName, currentLevel - 1)) {
-        alert(`Cannot decrease ${skillName} further as it's required by other skills.`);
+        alert(
+          `Cannot decrease ${skillName} further as it's required by other skills.`,
+        );
         break;
       }
-      
+
       this.decreaseSkill(skillName, false);
     }
     this.updateDisplay();
@@ -212,16 +227,18 @@ getCostForSkillLevel(skillName, level) {
   canUpgradeSkill(skillName) {
     const skill = this.getSkillData(skillName);
     const currentLevel = this.skillLevels[skillName];
-    
+
     if (currentLevel >= skill.maxLevel) return false;
-    
+
     const nextCost = this.getCostForSkillLevel(skillName, currentLevel + 1);
     if (!this.canAfford(nextCost)) return false;
-    
-    return skill.prerequisites.every(prereq => this.skillLevels[prereq] >= 10);
+
+    return skill.prerequisites.every(
+      (prereq) => this.skillLevels[prereq] >= 10,
+    );
   }
 
-upgradeSkill(skillName, updateUrl = true) {
+  upgradeSkill(skillName, updateUrl = true) {
     const skill = this.getSkillData(skillName);
     if (!skill) return;
 
@@ -270,20 +287,21 @@ upgradeSkill(skillName, updateUrl = true) {
   calculateRefundBreakdown(cost) {
     const creditsToRefund = Math.min(cost, this.usedCredits);
     const coinsToRefund = Math.max(0, cost - creditsToRefund);
-    
+
     return {
       credits: creditsToRefund,
-      coins: coinsToRefund
+      coins: coinsToRefund,
     };
   }
 
   isSkillRequired(skillName, newLevel) {
-    return Object.keys(skillData).some(category => 
-      Object.keys(skillData[category]).some(otherSkill => 
-        skillData[category][otherSkill].prerequisites.includes(skillName) && 
-        this.skillLevels[otherSkill] > 0 &&
-        newLevel < 10
-      )
+    return Object.keys(skillData).some((category) =>
+      Object.keys(skillData[category]).some(
+        (otherSkill) =>
+          skillData[category][otherSkill].prerequisites.includes(skillName) &&
+          this.skillLevels[otherSkill] > 0 &&
+          newLevel < 10,
+      ),
     );
   }
 
@@ -306,13 +324,17 @@ upgradeSkill(skillName, updateUrl = true) {
   updateDisplay() {
     const availableCoins = this.totalCoins - this.usedCoins;
     const availableCredits = this.totalCredits - this.usedCredits;
-    
-    document.getElementById('available-coins').textContent = availableCoins.toLocaleString();
-    document.getElementById('used-coins').textContent = this.usedCoins.toLocaleString();
-    document.getElementById('available-credits').textContent = availableCredits.toLocaleString();
-    document.getElementById('used-credits').textContent = this.usedCredits.toLocaleString();
 
-    Object.keys(this.skillLevels).forEach(skillName => {
+    document.getElementById("available-coins").textContent =
+      availableCoins.toLocaleString();
+    document.getElementById("used-coins").textContent =
+      this.usedCoins.toLocaleString();
+    document.getElementById("available-credits").textContent =
+      availableCredits.toLocaleString();
+    document.getElementById("used-credits").textContent =
+      this.usedCredits.toLocaleString();
+
+    Object.keys(this.skillLevels).forEach((skillName) => {
       this.updateSkillDisplay(skillName);
     });
 
@@ -333,16 +355,16 @@ upgradeSkill(skillName, updateUrl = true) {
   updateURL(forceUpdate = false) {
     const now = Date.now();
 
-    if (!forceUpdate && (now - this.lastUrlUpdate) < this.URL_UPDATE_DELAY) {
+    if (!forceUpdate && now - this.lastUrlUpdate < this.URL_UPDATE_DELAY) {
       return;
     }
 
     const buildData = {
       totalCoins: this.totalCoins,
       totalCredits: this.totalCredits,
-      skillLevels: this.skillLevels
+      skillLevels: this.skillLevels,
     };
-    
+
     BuildManager.updateURL(buildData);
     this.lastUrlUpdate = now;
 
@@ -354,19 +376,22 @@ upgradeSkill(skillName, updateUrl = true) {
 
   loadFromURL() {
     const buildData = BuildManager.loadFromURL();
-    
+
     if (buildData.totalCoins > 0) {
       this.totalCoins = buildData.totalCoins;
-      document.getElementById('total-coins').value = this.totalCoins;
-    }
-    
-    if (buildData.totalCredits > 0) {
-      this.totalCredits = buildData.totalCredits;
-      document.getElementById('total-credits').value = this.totalCredits;
+      document.getElementById("total-coins").value = this.totalCoins;
     }
 
-    if (buildData.skillLevels && Object.keys(buildData.skillLevels).length > 0) {
-      Object.keys(buildData.skillLevels).forEach(skillName => {
+    if (buildData.totalCredits > 0) {
+      this.totalCredits = buildData.totalCredits;
+      document.getElementById("total-credits").value = this.totalCredits;
+    }
+
+    if (
+      buildData.skillLevels &&
+      Object.keys(buildData.skillLevels).length > 0
+    ) {
+      Object.keys(buildData.skillLevels).forEach((skillName) => {
         if (this.skillLevels.hasOwnProperty(skillName)) {
           const level = parseInt(buildData.skillLevels[skillName]) || 0;
           // Apply each level one by one to properly calculate costs
@@ -379,7 +404,7 @@ upgradeSkill(skillName, updateUrl = true) {
   }
 
   resetSkills() {
-    Object.keys(this.skillLevels).forEach(skill => {
+    Object.keys(this.skillLevels).forEach((skill) => {
       this.skillLevels[skill] = 0;
       this.skillSpending[skill] = { credits: 0, coins: 0 };
     });

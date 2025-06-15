@@ -17,7 +17,7 @@ window.html2canvas = html2canvas;
 import ImageLoader from "../components/ImageLoader.js";
 import { renderTowerShorthands } from "./Shorthand.js";
 import "./MobileNav.js";
-import "../components/Slides.js"
+import "../components/Slides.js";
 import "../components/News/UpdateLog.js";
 import "../components/SettingsManager.js";
 
