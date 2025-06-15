@@ -248,3 +248,7 @@ hr {
 .mobile-nav {
   z-index: 3;
 }
+
+hr:not([size]) {
+  border: revert !important;
+}

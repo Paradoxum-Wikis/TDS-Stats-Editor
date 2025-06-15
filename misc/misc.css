@@ -39,6 +39,6 @@
   object-fit: cover;
 }
 
-a:hover {
+a.btn.btn-primary:hover {
   color: white !important;
 }
