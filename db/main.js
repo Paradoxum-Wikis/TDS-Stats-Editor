@@ -1,3 +1,4 @@
+import "bootstrap/dist/css/bootstrap.min.css"; // temp fix
 import "../Styles/bootstrap.css";
 import "../Styles/torus.css";
 import "./Style.css";

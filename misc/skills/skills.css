@@ -7,7 +7,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("../../htmlassets/Stripes.png");
+  background-image: url("/htmlassets/Stripes.png");
   opacity: 0.05;
   z-index: -1;
 }
