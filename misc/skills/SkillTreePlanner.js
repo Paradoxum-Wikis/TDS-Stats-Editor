@@ -74,12 +74,14 @@ export class SkillTreePlanner {
       BuildManager.shareURL();
     });
 
-      document.getElementById("global-increment").addEventListener("input", (e) => {
-      const globalIncrement = parseInt(e.target.value) || 1;
-      this.currentGlobalIncrement = globalIncrement;
-      this.updateAllSkillIncrements(globalIncrement);
-      this.syncMobileInputs("increment", globalIncrement);
-    });
+    document
+      .getElementById("global-increment")
+      .addEventListener("input", (e) => {
+        const globalIncrement = parseInt(e.target.value) || 1;
+        this.currentGlobalIncrement = globalIncrement;
+        this.updateAllSkillIncrements(globalIncrement);
+        this.syncMobileInputs("increment", globalIncrement);
+      });
   }
 
   setupMobileEventListeners() {
@@ -246,13 +248,13 @@ export class SkillTreePlanner {
 
     this.usedCoins = 0;
     this.usedCredits = 0;
-    Object.keys(this.skillLevels).forEach(skillName => {
+    Object.keys(this.skillLevels).forEach((skillName) => {
       this.skillLevels[skillName] = 0;
       this.skillSpending[skillName] = { credits: 0, coins: 0 };
     });
 
-    Object.keys(skillData).forEach(category => {
-      Object.keys(skillData[category]).forEach(skillName => {
+    Object.keys(skillData).forEach((category) => {
+      Object.keys(skillData[category]).forEach((skillName) => {
         const targetLevel = currentLevelsSnapshot[skillName];
         if (targetLevel > 0) {
           for (let i = 0; i < targetLevel; i++) {
@@ -440,17 +442,24 @@ export class SkillTreePlanner {
 
     // If totals were set from URL, or skills are present, recalculate spending
     // This allows skills loaded from URL to be processed with the correct initial totals.
-    if (buildData.totalCoins > 0 || buildData.totalCredits > 0 || skillsToLoad) {
-        // Temporarily assign skill levels from URL to be used by recalculate
-        if (skillsToLoad) {
-            Object.keys(this.skillLevels).forEach(skill => this.skillLevels[skill] = 0);
-            Object.keys(buildData.skillLevels).forEach((skillName) => {
-                if (this.skillLevels.hasOwnProperty(skillName)) {
-                    this.skillLevels[skillName] = parseInt(buildData.skillLevels[skillName]) || 0;
-                }
-            });
-        }
-        this.recalculateAllSkillSpending();
+    if (
+      buildData.totalCoins > 0 ||
+      buildData.totalCredits > 0 ||
+      skillsToLoad
+    ) {
+      // Temporarily assign skill levels from URL to be used by recalculate
+      if (skillsToLoad) {
+        Object.keys(this.skillLevels).forEach(
+          (skill) => (this.skillLevels[skill] = 0),
+        );
+        Object.keys(buildData.skillLevels).forEach((skillName) => {
+          if (this.skillLevels.hasOwnProperty(skillName)) {
+            this.skillLevels[skillName] =
+              parseInt(buildData.skillLevels[skillName]) || 0;
+          }
+        });
+      }
+      this.recalculateAllSkillSpending();
     }
   }
 

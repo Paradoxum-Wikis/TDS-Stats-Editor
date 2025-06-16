@@ -56,29 +56,29 @@ export class SkillElement {
 
   getDynamicDescription(skillName, currentLevel) {
     const value = this.calculateSkillValue(skillName, currentLevel);
-    
+
     // level 0
     if (currentLevel === 0) {
       const placeholderDescriptions = {
         "Enhanced Optics": `Tower range is increased by X%`,
         "Improved Gunpowder": `AOE explosion radius is increased by X%`,
         "Fight Dirty": `Debuff durations applied to enemies are increased by X%`,
-        "Precision": `Every X shots, towers deal a critical hit (1.25x damage)`,
-        "Resourcefulness": `Selling towers returns X% more money`,
+        Precision: `Every X shots, towers deal a critical hit (1.25x damage)`,
+        Resourcefulness: `Selling towers returns X% more money`,
         "Bigger Budget": `Starting cash is increased by X%`,
-        "Stonks": `Wave rewards are increased by X%`,
-        "Scavenger": `Every X enemy kills grant 1.5x rewards from enemies`,
-        "Accelerator": `Reduces cooldowns of active abilities by X%`,
-        "Scholar": `Logbook drop rate increases by X.XXx`,
+        Stonks: `Wave rewards are increased by X%`,
+        Scavenger: `Every X enemy kills grant 1.5x rewards from enemies`,
+        Accelerator: `Reduces cooldowns of active abilities by X%`,
+        Scholar: `Logbook drop rate increases by X.XXx`,
         "Expanded Barracks": `Cooldown for spawning units is reduced by X%`,
         "Re-enforcements": `Increases the tower placement limit by X`,
-        "Fortify": `Increases the player's health pool by X`,
+        Fortify: `Increases the player's health pool by X`,
         "Over-Heal": `Increases how much extra HP can be kept from over-healing by X`,
-        "Bandages": `Regenerates X health at the start of every wave`,
+        Bandages: `Regenerates X health at the start of every wave`,
         "Extreme Conditioning": `Reduces stun and debuff durations from enemies by X%`,
-        "Beefed Up Minions": `Health of summoned units is increased by X%`
+        "Beefed Up Minions": `Health of summoned units is increased by X%`,
       };
-      
+
       return placeholderDescriptions[skillName] || this.skill.description;
     }
 
@@ -87,10 +87,10 @@ export class SkillElement {
       "Enhanced Optics": `Tower range is increased by ${value.toFixed(1)}%`,
       "Improved Gunpowder": `AOE explosion radius is increased by ${value.toFixed(1)}%`,
       "Fight Dirty": `Debuff durations applied to enemies are increased by ${value}%`,
-      "Precision": `Every ${Math.floor(value)} shots, towers deal a critical hit (1.25x damage)`,
-      "Resourcefulness": `Selling towers returns ${value.toFixed(1)}% more money`,
+      Precision: `Every ${Math.floor(value)} shots, towers deal a critical hit (1.25x damage)`,
+      Resourcefulness: `Selling towers returns ${value.toFixed(1)}% more money`,
       "Bigger Budget": `Starting cash is increased by ${value}%`,
-      "Stonks": `Wave rewards are increased by ${value.toFixed(1)}%`,
+      Stonks: `Wave rewards are increased by ${value.toFixed(1)}%`,
       Scavenger: `Every ${Math.floor(value)} enemy kills grant 1.5x rewards from enemies`,
       Accelerator: `Reduces cooldowns of active abilities by ${value.toFixed(1)}%`,
       Scholar: `Logbook drop rate increases by ${value.toFixed(2)}x`,
@@ -108,12 +108,20 @@ export class SkillElement {
 
   updateElement(skillDiv) {
     const currentLevel = this.skillLevels[this.skillName];
-    const existingIncrementInput = skillDiv.querySelector('.skill-increment');
-    const currentIncrementValue = existingIncrementInput ? existingIncrementInput.value : '1';
-    
+    const existingIncrementInput = skillDiv.querySelector(".skill-increment");
+    const currentIncrementValue = existingIncrementInput
+      ? existingIncrementInput.value
+      : "1";
+
     let nextCost = 0;
-    if (currentLevel < this.skill.maxLevel && this.getCostForSkillLevelCallback) {
-      nextCost = this.getCostForSkillLevelCallback(this.skillName, currentLevel + 1);
+    if (
+      currentLevel < this.skill.maxLevel &&
+      this.getCostForSkillLevelCallback
+    ) {
+      nextCost = this.getCostForSkillLevelCallback(
+        this.skillName,
+        currentLevel + 1,
+      );
     }
 
     // prerequisites check
@@ -129,7 +137,10 @@ export class SkillElement {
     }
 
     const skillImage = skillImages[this.skillName] || "Unavailable.png";
-    const dynamicDescription = this.getDynamicDescription(this.skillName, currentLevel);
+    const dynamicDescription = this.getDynamicDescription(
+      this.skillName,
+      currentLevel,
+    );
 
     let costBreakdownHtml = "";
     if (currentLevel < this.skill.maxLevel && this.costBreakdownCallback) {

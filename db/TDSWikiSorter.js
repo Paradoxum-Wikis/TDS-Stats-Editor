@@ -21,7 +21,7 @@ function setupSearch() {
   searchInput.addEventListener(
     "input",
     debounce(function () {
-      applyFilters(); // Use standalone applyFilters
+      applyFilters();
     }, 300),
   );
 }
