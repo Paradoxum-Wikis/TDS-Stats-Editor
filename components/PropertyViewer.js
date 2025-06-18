@@ -10,7 +10,7 @@ export default class PropertyViewer {
     this.buttonClasses = ["btn", "btn-sm", "w-100", "text-white"];
     this.activeButtonClass = "btn-outline-secondary";
     this.inactiveButtonClass = "btn-outline-dark";
-    // stuffs that's off limits by default
+    // stuffs that's hidden by default
     this.defaultDisabled = [
       "LimitDPS",
       "LimitNetCost",
@@ -40,7 +40,6 @@ export default class PropertyViewer {
       "AnimTimes",
       "SummonDebounce",
       "BookDebounce",
-      "AmmoDischargeTime",
     ];
     this.disabled = [...this.defaultDisabled];
     // stuffs we never show
