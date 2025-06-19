@@ -1,5 +1,5 @@
 import Levels from "../TowerComponents/Levels.js";
-import Viewer from "./Viewer/index.js";
+import Viewer from "./Viewer";
 import {
   towerRegistry,
   TowerRegistry,

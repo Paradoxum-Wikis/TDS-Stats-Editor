@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
   imageUrlInput.parentNode.appendChild(previewContainer);
   const imagePreview = document.getElementById("image-preview");
 
-  // handle json file selection
   document.getElementById("towerJSON").addEventListener("change", function () {
     const selectedText = document.getElementById("selectedJSONName");
     if (this.files && this.files.length > 0) {
@@ -33,12 +32,10 @@ document.addEventListener("DOMContentLoaded", function () {
         "No file selected";
     });
 
-  // display validation error
   function showValidationError(message) {
     showAlert(message, "danger");
   }
 
-  // display alert message
   function showAlert(message, type) {
     const alertPlaceholder = document.createElement("div");
     alertPlaceholder.className = "position-fixed bottom-0 end-0 p-3";
@@ -67,7 +64,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 3000);
   }
 
-  // process image url as you type
   imageUrlInput.addEventListener(
     "input",
     debounce(function () {
@@ -75,7 +71,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 500),
   );
 
-  // prevent too many requests while typing
   function debounce(func, wait) {
     let timeout;
     return function () {
@@ -86,7 +81,6 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   }
 
-  // handle image url
   async function processImageUrl(imageId) {
     if (!imageId) {
       imagePreview.style.display = "none";
@@ -96,7 +90,6 @@ document.addEventListener("DOMContentLoaded", function () {
     try {
       const imageUrl = await fetchImage(imageId);
       if (imageUrl) {
-        // show preview
         imagePreview.src = imageUrl;
         imagePreview.style.display = "block";
         return imageUrl;
@@ -111,43 +104,34 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // get image from url or roblox id
   async function fetchImage(imageId) {
     if (!imageId) return "";
 
     const imageIdStr = String(imageId);
 
-    // for the preview
     let previewUrl;
-    // for the wiki content
     let contentUrl;
 
-    // check if we already loaded this image
     if (window.imageCache[imageIdStr]) {
       previewUrl = window.imageCache[imageIdStr];
     } else {
-      // syntax for Fandom images
       if (imageIdStr.startsWith("File:")) {
-        const filename = imageIdStr.substring(5); // Remove "File:" prefix
+        const filename = imageIdStr.substring(5);
         previewUrl = convertFileToFandomUrl(filename);
-        contentUrl = previewUrl; // Use same URL for content
+        contentUrl = previewUrl;
         console.log(`Converted File: syntax to URL: ${previewUrl}`);
       } else if (imageIdStr.startsWith("https")) {
-        // handle urls
         if (imageIdStr.startsWith("https://static.wikia.nocookie.net/")) {
-          previewUrl = trimFandomUrl(imageIdStr); // clean up fandom urls
-          contentUrl = previewUrl; // use same url for content
+          previewUrl = trimFandomUrl(imageIdStr);
+          contentUrl = previewUrl;
         } else {
-          previewUrl = imageIdStr; // use url directly
-          contentUrl = previewUrl; // keep same url for content
+          previewUrl = imageIdStr;
+          contentUrl = previewUrl;
         }
       } else {
-        // check for roblox ids
         if (/^\d+$/.test(imageIdStr)) {
-          // format as robloxid for wiki
           contentUrl = `RobloxID${imageIdStr}`;
 
-          // get actual image for preview using the o;n proxy
           const roProxyUrl = `https://assetdelivery.roblox.com/v2/assetId/${imageIdStr}`;
           try {
             const response = await fetch(
@@ -169,22 +153,19 @@ document.addEventListener("DOMContentLoaded", function () {
             }
           } catch (error) {
             console.error(`Failed to fetch Roblox asset ${imageIdStr}:`, error);
-            previewUrl = ""; // nothing to show if failed
+            previewUrl = "";
           }
         } else {
-          // use as-is for other input
           previewUrl = imageIdStr;
           contentUrl = imageIdStr;
         }
       }
 
-      // save for later
       if (previewUrl) {
         window.imageCache[imageIdStr] = previewUrl;
       }
     }
 
-    // save formatted url for wiki content
     if (contentUrl) {
       window.imageCache[`content_${imageIdStr}`] = contentUrl;
     }
@@ -192,9 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return previewUrl;
   }
 
-  // clean up fandom urls
   function trimFandomUrl(fullUrl) {
-    // extract the basic url without parameters
     const match = fullUrl.match(
       /https:\/\/static\.wikia\.nocookie\.net\/.*?\.(png|jpg|jpeg|gif)/i,
     );
@@ -210,12 +189,10 @@ document.addEventListener("DOMContentLoaded", function () {
     return `https://static.wikia.nocookie.net/tower-defense-sim/images/${firstChar}/${firstTwoChars}/${encodeURIComponent(filename)}`;
   }
 
-  // process url if already filled in
   if (imageUrlInput.value) {
     processImageUrl(imageUrlInput.value.trim());
   }
 
-  // change handler for the link input to auto-fill username and tower name
   document.getElementById("towerJSONLink")?.addEventListener(
     "input",
     debounce(function () {
@@ -230,13 +207,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 500),
   );
 
-  // Export functions used by TDSWikiUploader.js
   window.showAlert = showAlert;
   window.showValidationError = showValidationError;
   window.setupRadioButtonHandlers = setupRadioButtonHandlers;
 });
 
-// improved setupRadioButtonHandlers function to fix all radio button groups
 function setupRadioButtonHandlers() {
   const toggleVisibility = (options, inputs) => {
     options.forEach((option, i) => {
@@ -279,7 +254,6 @@ function setupRadioButtonHandlers() {
   typeOptions.forEach((id) => {
     document.getElementById(id).addEventListener("change", function () {
       if (this.checked) {
-        // Uncheck others
         typeOptions.forEach((otherId) => {
           if (otherId !== id) {
             document.getElementById(otherId).checked = false;

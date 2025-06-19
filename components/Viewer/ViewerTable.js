@@ -3,9 +3,7 @@ import TowerManager from "../../TowerComponents/TowerManager.js";
 
 const ViewerTable = {
   methods: {
-    // loads the table view
     loadTable() {
-      // clear old wikitable boxes before a fresh start
       const existingContainers =
         this.towerTable.root.parentElement.querySelectorAll(
           ".wikitable-container",
@@ -16,14 +14,12 @@ const ViewerTable = {
 
       this.towerTable.root.parentElement.classList.remove("d-none");
 
-      // unit table shows up in table view
       if (this.unitTable && this.unitTable.root) {
         this.unitTable.root.classList.remove("d-none");
       }
 
       const skinData = this.getActiveSkin();
 
-      // Filter out hidden properties for the table
       const allProps = [
         ...skinData.levels.attributes,
         ...skinData.levels.complexAttributes,
@@ -37,15 +33,12 @@ const ViewerTable = {
       this.towerTable.load(skinData, {
         ignore: [
           ...this.propertyViewer.disabled,
-          // Also ignore all hidden properties
           ...allProps.filter((prop) => this.propertyViewer.isHidden(prop)),
         ],
       });
 
-      // give property viewer its slave properties
       this.propertyViewer.initializeUnitProperties();
 
-      // load the slave table with property filtering
       this.unitTable.load(this.activeUnits, {
         ignore:
           this.propertyViewer.currentView === "unit"
@@ -54,7 +47,6 @@ const ViewerTable = {
       });
     },
 
-    // updates unit table data
     applyUnitTable() {
       Object.entries(this.activeUnits).forEach(([unitName, unitData]) => {
         this.unitDeltaManager.baseData[unitName] = unitData.data;
@@ -65,9 +57,7 @@ const ViewerTable = {
       this.reload();
     },
 
-    // resets unit table to default
     resetUnitTable() {
-      // cache manager instances
       const defaultUnitManager =
         window.cachedDefaultUnitManager || new UnitManager();
       if (!window.cachedDefaultUnitManager)
@@ -82,7 +72,6 @@ const ViewerTable = {
         this.tower.name,
       );
 
-      // batch process changes before saving/reloading
       const updates = [];
 
       Object.entries(this.activeUnits).forEach(([unitName, _]) => {
@@ -106,9 +95,7 @@ const ViewerTable = {
         }
       });
 
-      // apply all updates at once
       updates.forEach(({ unitName, data }) => {
-        // efficient cloning
         const dataCopy =
           typeof structuredClone !== "undefined"
             ? structuredClone(data)
@@ -124,7 +111,6 @@ const ViewerTable = {
       this.reload();
     },
 
-    // clears unit table changes
     clearUnitTable() {
       Object.entries(this.activeUnits).forEach(([unitName, _]) => {
         this.unitManager.baseData[unitName] =
@@ -136,7 +122,6 @@ const ViewerTable = {
       this.reload();
     },
 
-    // checks if units have changes
     hasUnitChanges() {
       if (!this.activeUnits) return false;
 
@@ -155,7 +140,6 @@ const ViewerTable = {
       return false;
     },
 
-    // checks if unit deltas have changes
     hasUnitDeltaChanges() {
       if (!this.activeUnits) return false;
 

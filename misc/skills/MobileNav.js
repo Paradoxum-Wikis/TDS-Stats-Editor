@@ -151,13 +151,13 @@ export class MobileNav {
   updateActiveButton(sectionName) {
     this.mobileNavBtns.forEach((btn) => {
       const btnSection = btn.getAttribute("data-mobile-section");
-      
+
       btn.classList.remove("active");
       const iconElement = btn.querySelector("i");
-      
+
       if (btnSection === sectionName) {
         btn.classList.add("active");
-        
+
         if (iconElement) {
           if (!iconElement.dataset.originalClass) {
             iconElement.dataset.originalClass = iconElement.className;

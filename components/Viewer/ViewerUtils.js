@@ -2,7 +2,6 @@ import Alert from "../Alert.js";
 
 const ViewerUtils = {
   methods: {
-    // sets up the variant buttons
     setVariantButtons() {
       const skinNames = this.tower.skinNames;
       const variantContainer = this.towerVariants.root;
@@ -21,12 +20,10 @@ const ViewerUtils = {
       variantContainer.addEventListener("submit", () => this.loadBody());
     },
 
-    // clears json display
     clearJSON() {
       document.querySelector("#json").innerHTML = "";
     },
 
-    // loads json view
     loadJSON() {
       document
         .querySelector("#json")

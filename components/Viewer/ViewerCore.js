@@ -26,7 +26,6 @@ class ViewerCore {
   constructor(app) {
     this.app = app;
 
-    // setting up managers for units and towers
     this.unitManager = new UnitManager("units");
     this.unitDeltaManager = new UnitManager("unitDeltas");
     this.defaultTowerManager = new TowerManager("default");
@@ -39,7 +38,6 @@ class ViewerCore {
     Object.assign(this, ViewerWikitable.methods);
     Object.assign(this, ViewerUtils.methods);
 
-    // hooking up the property viewer and side panel
     this.propertyViewer = new PropertyViewer(
       this,
       document.getElementById("property-viewer"),
@@ -49,10 +47,8 @@ class ViewerCore {
     this.upgradeViewer = new UpgradeViewer(this);
     this.boostPanel = new BoostPanel(this);
 
-    // grabbing the tower name heading
     this.towerNameH1 = document.querySelector("#tower-name");
 
-    // setting up buttons for variants and views
     this.towerVariants = new ButtonSelection(
       document.querySelector("#tower-variants"),
     );
@@ -80,10 +76,8 @@ class ViewerCore {
           viewOptions.push("Lua");
         }
 
-        // Store current view
         const currentView = this.tableView.getSelectedName();
 
-        // Update buttons
         this.tableView.setButtons(viewOptions);
 
         // If Lua was selected but is now disabled, switch to JSON view
@@ -94,13 +88,11 @@ class ViewerCore {
       }
     });
 
-    // toggle button for delta view
     this.buttonDeltaButton = new ToggleButton(
       document.querySelector("#button-delta"),
       { state: true },
     );
 
-    // reloads when toggle changes
     this.buttonDeltaButton.element.addEventListener(
       "toggled",
       (() => {
@@ -112,7 +104,6 @@ class ViewerCore {
       "#tower-view-dropdown",
     );
 
-    // setting up tables and viewers
     this.towerTable = new TowerTable(
       document.querySelector("#tower-table"),
       this,
@@ -122,7 +113,6 @@ class ViewerCore {
     this.jsonViewer = new JSONViewer();
     this.luaViewer = new LuaViewer();
 
-    // json copy button setup - now works because onCopyJSON exists
     this.jsonCopy = document.querySelector("#json-copy");
     this.jsonCopy.addEventListener("click", this.onCopyJSON.bind(this));
 
@@ -131,19 +121,16 @@ class ViewerCore {
       this.luaCopy.addEventListener("click", this.onCopyLua.bind(this));
     }
 
-    // toggle for showing combined json
     this.showCombinedJSON = document.querySelector("#show-combined-json");
     if (this.showCombinedJSON) {
-      this.showCombinedJSONActive = true; // default to active state
+      this.showCombinedJSONActive = true;
 
-      // applies active styling immediately
       this.showCombinedJSON.classList.remove("btn-outline-secondary");
       this.showCombinedJSON.classList.add("btn-primary");
 
       this.showCombinedJSON.addEventListener("click", () => {
-        this.showCombinedJSONActive = !this.showCombinedJSONActive; // toggle state
+        this.showCombinedJSONActive = !this.showCombinedJSONActive;
 
-        // toggles button appearance
         if (this.showCombinedJSONActive) {
           this.showCombinedJSON.classList.remove("btn-outline-secondary");
           this.showCombinedJSON.classList.add("btn-primary");
@@ -156,7 +143,6 @@ class ViewerCore {
       });
     }
 
-    // setup faithful format toggle
     this.useFaithfulFormat = false;
     this.useFaithfulFormatButton = document.querySelector(
       "#use-faithful-format",
@@ -181,7 +167,6 @@ class ViewerCore {
       });
     }
 
-    // import button setup
     this.importButtonOpen = document.querySelector("#json-import");
     this.importButtonOpen.addEventListener(
       "click",
@@ -190,7 +175,6 @@ class ViewerCore {
       }).bind(this),
     );
 
-    // export button
     this.exportButton = document.querySelector("#json-export");
     this.exportButton.addEventListener(
       "click",
@@ -203,7 +187,6 @@ class ViewerCore {
       }).bind(this),
     );
 
-    // export with units button
     this.exportWithUnitsButton = document.querySelector(
       "#json-export-with-units",
     );
@@ -225,13 +208,11 @@ class ViewerCore {
       });
     }
 
-    // setting up more management stuff
     this.tableManagement = new TableDataManagement(this);
     new AddAttributeForm(this);
     new CloneTowerForm(this);
     this.removeAttributeForm = new RemoveAttributeForm(this);
 
-    // starts wikitable setup
     this.wikitablePanel = document.querySelector("#wikitable-panel");
     this.wikitableContent = document.querySelector("#wikitable");
     this.wikitableCopy = document.querySelector("#wikitable-copy");
@@ -246,22 +227,18 @@ class ViewerCore {
       this.exportWikitable.bind(this),
     );
 
-    // Create wikitable viewer instance
     this.wikitextViewer = new WikitextViewer();
 
-    // wikitable events
     if (this.setupWikitableEventListeners) {
       this.setupWikitableEventListeners();
     } else if (ViewerWikitable.init) {
       ViewerWikitable.init.call(this);
     }
 
-    // add tower import event listener
     document.addEventListener("towerDataImport", (event) => {
       try {
         const { data, type, error } = event.detail;
 
-        // handle empty content
         if (type === "empty") {
           const alert = new Alert("No content to import.", {
             alertStyle: "alert-warning",
@@ -270,7 +247,6 @@ class ViewerCore {
           return;
         }
 
-        // handle error case
         if (type === "error") {
           const alert = new Alert(`Failed to import: ${error}`, {
             alertStyle: "alert-danger",
@@ -279,13 +255,10 @@ class ViewerCore {
           return;
         }
 
-        // process valid input
         if (type === "lua") {
-          // Convert Lua to JSON first
           const jsonData = this.parseLuaToJSON(data);
           this.import(JSON.stringify(jsonData), true);
         } else {
-          // Process as JSON directly
           this.import(data, true);
         }
       } catch (error) {
@@ -299,7 +272,6 @@ class ViewerCore {
 
     document.addEventListener("calculationSystemChanged", (e) => {
       if (e.detail.tower === this.tower) {
-        // get the active skin
         const activeSkin = this.getActiveSkin();
         if (activeSkin) {
           activeSkin.createData();
@@ -326,7 +298,6 @@ class ViewerCore {
 
     this.calculationSystemManager = new CalculationSystemManager();
 
-    // setup notes saving
     const notesTextarea = document.getElementById("tower-notes-textarea");
     if (notesTextarea) {
       notesTextarea.addEventListener("input", () => {
@@ -343,7 +314,6 @@ class ViewerCore {
     const towerName = this.tower.name;
     const skinName = this.towerVariants.getSelectedName();
 
-    // checks for structure
     if (!this.deltaTower.json[towerName]) {
       this.deltaTower.json[towerName] = {};
     }
@@ -356,7 +326,6 @@ class ViewerCore {
       this.deltaTower.json[towerName][skinName].Defaults = {};
     }
 
-    // add/update the note
     this.deltaTower.json[towerName][skinName].Defaults.Note = noteText;
 
     if (!this.tower.json[towerName]) {
@@ -376,12 +345,10 @@ class ViewerCore {
     this.app.towerManager.saveTower(this.tower);
   }
 
-  // loads up a tower to show
   load(tower) {
     this.tower = tower;
     this.deltaTower = this.deltaTowerManager.towers[this.tower.name];
 
-    // dispatch event that tower was loaded
     document.dispatchEvent(
       new CustomEvent("towerLoaded", {
         detail: { tower: this.tower },
@@ -395,7 +362,6 @@ class ViewerCore {
     this.loadBody();
   }
 
-  // refreshes everything
   reload() {
     this.unitManager.load();
     this.unitDeltaManager.load();
@@ -403,7 +369,6 @@ class ViewerCore {
     this.loadBody();
   }
 
-  // gets the current skin being viewed
   getActiveSkin() {
     return this.tower.skins[this.towerVariants.getSelectedName()];
   }
@@ -519,14 +484,11 @@ class ViewerCore {
     text = text.replace(/\bnil\b/g, "null");
     text = text.replace(/--.*$/gm, "");
 
-    // process nested Lua tables recursively
     const parseNestedLua = (luaStr) => {
-      // basic sanity check for table structure
       if (!luaStr.trim().startsWith("{") || !luaStr.trim().endsWith("}")) {
         throw new Error("Invalid Lua table format");
       }
 
-      // remove outer braces
       luaStr = luaStr.trim().slice(1, -1).trim();
 
       const result = {};
@@ -541,7 +503,6 @@ class ViewerCore {
       for (let i = 0; i < luaStr.length; i++) {
         const char = luaStr[i];
 
-        // handle strings
         if (
           (char === '"' || char === "'") &&
           (i === 0 || luaStr[i - 1] !== "\\")
@@ -561,17 +522,14 @@ class ViewerCore {
           continue;
         }
 
-        // track bracket depth for nested tables
         if (char === "{") bracketDepth++;
         if (char === "}") bracketDepth--;
 
-        // if we're in a nested structure, just collect everything until we reach the matching closing bracket
         if (bracketDepth > 0 || inString) {
           currentToken += char;
           continue;
         }
 
-        // handle key-value separators
         if (char === "=" && !inKey) {
           inKey = true;
           currentKey = currentToken.trim();
@@ -579,16 +537,12 @@ class ViewerCore {
           continue;
         }
 
-        // handle entry separators
         if (char === "," || i === luaStr.length - 1) {
-          // includes last character if we're at the end
           if (i === luaStr.length - 1 && char !== ",") {
             currentToken += char;
           }
 
-          // process what was collected
           if (inKey) {
-            // keys
             let value = currentToken.trim();
 
             if (currentKey.startsWith("[") && currentKey.endsWith("]")) {
@@ -600,11 +554,9 @@ class ViewerCore {
                 currentKey = currentKey.slice(1, -1);
               }
             } else {
-              // normal keys don't need quotes in Lua but need them in JSON soooo
               currentKey = currentKey;
             }
 
-            // parse the value
             if (value === "null" || value === "nil") {
               result[currentKey] = null;
             } else if (value === "true") {
@@ -614,20 +566,16 @@ class ViewerCore {
             } else if (!isNaN(Number(value))) {
               result[currentKey] = Number(value);
             } else if (value.startsWith("{") && value.endsWith("}")) {
-              // recursively parse nested table
               result[currentKey] = parseNestedLua(value);
             } else if (
               (value.startsWith('"') && value.endsWith('"')) ||
               (value.startsWith("'") && value.endsWith("'"))
             ) {
-              // handle string values
               result[currentKey] = value.slice(1, -1);
             } else {
-              // default
               result[currentKey] = value;
             }
           } else {
-            // no = sign, so it must be an array element
             let value = currentToken.trim();
 
             if (value === "null" || value === "nil") {
@@ -650,7 +598,6 @@ class ViewerCore {
             }
           }
 
-          // reset for the next entry
           currentToken = "";
           inKey = false;
           continue;

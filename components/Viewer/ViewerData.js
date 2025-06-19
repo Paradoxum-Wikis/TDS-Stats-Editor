@@ -3,14 +3,12 @@ import TowerManager from "../../TowerComponents/TowerManager.js";
 
 const ViewerData = {
   methods: {
-    // brings in json data
     import(json, enableAlert, noCustomAlert = false) {
       enableAlert = enableAlert ?? false;
 
       const oldJSON = JSON.parse(JSON.stringify(this.tower.json));
       const oldUnits = {};
 
-      // saving current unit data just in case (i think)
       if (this.activeUnits) {
         Object.entries(this.activeUnits).forEach(([unitName, _]) => {
           if (this.unitManager.baseData[unitName]) {
@@ -28,7 +26,6 @@ const ViewerData = {
         let newTowerData = null;
 
         if (importedData.master && importedData.slave) {
-          // get the imported master data to get the tower name
           newTowerData = importedData.master;
 
           for (const [key] of Object.entries(importedData.master)) {
@@ -36,7 +33,6 @@ const ViewerData = {
             break;
           }
         } else if (importedData.tower && importedData.units) {
-          // legacy format
           newTowerData = importedData.tower;
 
           for (const [key] of Object.entries(importedData.tower)) {
@@ -44,7 +40,6 @@ const ViewerData = {
             break;
           }
         } else {
-          // just tower data
           newTowerData = importedData;
 
           for (const [key] of Object.entries(importedData)) {
@@ -53,7 +48,6 @@ const ViewerData = {
           }
         }
 
-        // check if it's a custom tower by comparing the tower name with the default tower names
         const defaultManager = new TowerManager();
         isCustomTower = !defaultManager.towerData.hasOwnProperty(towerName);
 
@@ -65,8 +59,6 @@ const ViewerData = {
             JSON.stringify(newTowerData[originalName]),
           );
 
-          // add the new tower. This calls load() internally
-          // the load() method shoulddddd dispatch towerLoaded
           this.addNewTower(originalName, renamedTowerData[originalName]);
 
           if (!window.originalCustomTowers) {
@@ -86,11 +78,9 @@ const ViewerData = {
             }
 
             Object.entries(slaveData).forEach(([unitName, unitData]) => {
-              // add metadata to track which tower this unit belongs to
               unitData._towerName = originalName;
               unitData._skinName = skinName;
 
-              // store the original import state
               window.originalCustomUnits[unitName] = JSON.parse(
                 JSON.stringify(unitData),
               );
@@ -101,7 +91,6 @@ const ViewerData = {
                 JSON.stringify(unitData),
               );
 
-              // apply changes automatically
               this.unitDeltaManager.unitData[unitName] = JSON.parse(
                 JSON.stringify(unitData),
               );
@@ -111,7 +100,6 @@ const ViewerData = {
             this.unitDeltaManager.save();
           }
 
-          // reload ui again
           this.reload();
 
           this.deltaTower.importJSON(
@@ -131,7 +119,6 @@ const ViewerData = {
 
           return;
         } else {
-          // non custom towers
           this.tower.importJSON(newTowerData);
           this.deltaTower.importJSON(newTowerData);
 
@@ -148,7 +135,6 @@ const ViewerData = {
             this.unitManager.save();
           }
 
-          // dispatch towerLoaded AFTER importing data
           document.dispatchEvent(
             new CustomEvent("towerLoaded", {
               detail: { tower: this.tower },
@@ -166,7 +152,6 @@ const ViewerData = {
           }
         }
       } catch (e) {
-        // oops, something went wrong, let's roll back
         this.tower.importJSON(oldJSON);
         if (Object.keys(oldUnits).length > 0) {
           Object.entries(oldUnits).forEach(([unitName, unitData]) => {
@@ -185,13 +170,11 @@ const ViewerData = {
       }
     },
 
-    // saves json to a file
     export(json) {
       const filename = `${this.tower.name}-stats.json`;
       this.downloadFile(json, filename);
     },
 
-    // exports tower and units together
     exportTowerWithUnits() {
       const combinedData = this._getCombinedData();
       const filename = `${this.tower.name}-full.json`;
@@ -199,7 +182,6 @@ const ViewerData = {
       this.downloadFile(json, filename);
     },
 
-    // applies json changes
     apply(json) {
       const towerData = JSON.parse(json);
       this.deltaTower.importJSON(towerData);
@@ -207,9 +189,7 @@ const ViewerData = {
       this.reload();
     },
 
-    // resets tower to default
     reset() {
-      // avoid creating new managers and reuse existing ones
       const defaultTowerManager =
         window.cachedDefaultTowerManager || new TowerManager("default");
       if (!window.cachedDefaultTowerManager)
@@ -238,17 +218,15 @@ const ViewerData = {
           this.reload();
           return;
         }
-        // If there's no note value - just clear notes
         if (notesTextarea) notesTextarea.value = "";
         this.reload();
         return;
       }
 
-      // for non custom towers just reset to default
       const defaultTower = defaultTowerManager.towers[this.tower.name];
       if (!defaultTower) {
         console.error(`Default tower data not found for ${this.tower.name}`);
-        if (notesTextarea) notesTextarea.value = ""; // Clear notes if default is missing
+        if (notesTextarea) notesTextarea.value = "";
         this.reload();
         return;
       }
@@ -261,7 +239,6 @@ const ViewerData = {
       this.deltaTower.importJSON(towerDataCopy);
       this.tower.importJSON(towerDataCopy);
 
-      // reset notes textarea to default value from the default tower data
       const defaultNote =
         defaultTower?.json?.[this.tower.name]?.[skinName]?.Defaults?.Note || "";
       if (notesTextarea) notesTextarea.value = defaultNote;
@@ -269,14 +246,12 @@ const ViewerData = {
       this.reload();
     },
 
-    // wipes all unit changes
     clearUnitChanges() {
       localStorage.removeItem(this.unitManager.dataKey);
       localStorage.removeItem(this.unitDeltaManager.dataKey);
       this.reload();
     },
 
-    // adds a new tower
     addNewTower(name, json) {
       this.app.towerManager.addTower(name, json);
       this.deltaTowerManager.addTower(name, json);

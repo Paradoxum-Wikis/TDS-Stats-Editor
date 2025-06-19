@@ -17,7 +17,7 @@ export default class ButtonSelection {
    * @param {String} innerText
    * @returns {HTMLButtonElement}
    */
-  createButton(innerText, options) {
+  createButton(innerText) {
     const button = document.createElement("button");
 
     this.buttonClasses.forEach((className) => button.classList.add(className));
