@@ -50,8 +50,9 @@ const ViewerData = {
         if (isCustomTower) {
           const originalName = towerName;
 
+          const towerDataSource = importedData.master || importedData;
           const towerData = JSON.parse(
-            JSON.stringify(importedData.master[originalName]),
+            JSON.stringify(towerDataSource[originalName]),
           );
 
           this.addNewTower(originalName, towerData);
@@ -62,7 +63,7 @@ const ViewerData = {
 
           if (!window.originalCustomTowers[towerName]) {
             window.originalCustomTowers[towerName] = JSON.parse(
-              JSON.stringify(importedData.master[originalName]),
+              JSON.stringify(towerDataSource[originalName]),
             );
           }
 
