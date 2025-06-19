@@ -151,7 +151,7 @@ textarea {
   border-top: 1px solid #ffd700 !important;
 }
 
-.card.border-gold {
+.col > .card.border-gold {
   border: 2px solid #ffd700 !important;
   transition:
     transform 0.3s ease,
@@ -234,10 +234,13 @@ a:hover {
 .card {
   border-radius: 25px 0 25px 0 !important;
   overflow: hidden !important;
-  border: 2px solid #0484ae !important;
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease !important;
+}
+
+.col > .card {
+  border: 2px solid #0484ae !important;
 }
 
 .card:hover {
