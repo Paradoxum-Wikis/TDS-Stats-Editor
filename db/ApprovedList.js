@@ -53,6 +53,7 @@ const approvedTowers = [
   "Hellscream2008/John Tower!",
   "Hellscream2008/Turret Rework!",
   "ImAllOutOfNames/Medic",
+  "Onett4smash/Medic Rework (V2)"
 ];
 
 // List of featured towers
@@ -79,7 +80,7 @@ const grandfatheredTowers = [
 // its own section the page
 const highlights = [
   "Vessel Of Infinite Destruction/Ranger",
-  "Onett4smash/Medic Rework (V1)",
+  "Onett4smash/Medic Rework (V2)",
   "Vessel Of Infinite Destruction/Military Base",
   "Hellscream2008/John Tower!",
 ];
