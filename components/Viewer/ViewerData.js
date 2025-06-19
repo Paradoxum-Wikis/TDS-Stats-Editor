@@ -122,15 +122,21 @@ const ViewerData = {
 
           const towerName = Object.keys(towerDataToImport)[0];
           if (towerName && towerDataToImport[towerName]) {
-            this.app.towerManager.addTower(towerName, towerDataToImport[towerName]);
-            this.deltaTowerManager.addTower(
+            this.app.towerManager.addTower(
               towerName,
               towerDataToImport[towerName],
             );
           }
 
           this.tower.importJSON(towerDataToImport);
-          this.deltaTower.importJSON(towerDataToImport);
+
+          const defaultTowerManager =
+            window.cachedDefaultTowerManager || new TowerManager("default");
+          if (!window.cachedDefaultTowerManager)
+            window.cachedDefaultTowerManager = defaultTowerManager;
+
+          const defaultData = defaultTowerManager.towerData[towerName];
+          this.deltaTower.importJSON({ [towerName]: defaultData });
 
           if (importedData.slave || importedData.units) {
             const slaveData = importedData.slave || importedData.units;
