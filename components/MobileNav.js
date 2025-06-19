@@ -1,3 +1,4 @@
+// if you're reading this, please never use mutationobserver that shit killed me i had to rewrite this whole thing twice
 export default class MobileNav {
   constructor() {
     this.isMobile = window.innerWidth <= 768;
@@ -7,7 +8,6 @@ export default class MobileNav {
     this.navButtons = document.querySelectorAll(".mobile-nav-btn");
     this.activeSection = null;
 
-    // store references to desktop elements
     this.containers = {
       upgrades: {
         element: document.getElementById("level-view"),
@@ -32,7 +32,6 @@ export default class MobileNav {
       },
     };
 
-    // remember original display states
     for (const section in this.containers) {
       const container = this.containers[section];
       container.originalDisplay = window.getComputedStyle(
@@ -45,13 +44,10 @@ export default class MobileNav {
   }
 
   init() {
-    // check if we're on mobile
     this.checkMobile();
-
     window.addEventListener("resize", () => this.checkMobile());
   }
 
-  // helper to get element's index in its parent
   getElementIndex(element) {
     return Array.from(element.parentNode.children).indexOf(element);
   }
@@ -60,14 +56,11 @@ export default class MobileNav {
     const wasMobile = this.isMobile;
     this.isMobile = window.innerWidth <= 768;
 
-    // transitions between mobile and desktop fixes
     if (wasMobile && !this.isMobile) {
-      // moving from mobile to desktop
       this.restoreAllSections();
       this.mobileSidebar.style.display = "none";
       document.body.classList.remove("is-mobile");
     } else if (!wasMobile && this.isMobile) {
-      // moving from desktop to mobile
       this.mobileSidebar.style.display = "";
       document.body.classList.add("is-mobile");
     }
@@ -79,7 +72,6 @@ export default class MobileNav {
         e.preventDefault();
         const section = btn.dataset.mobileSection;
 
-        // close if tapping the active button
         if (
           this.activeSection === section &&
           this.mobileSidebar.classList.contains("active")
@@ -90,7 +82,6 @@ export default class MobileNav {
 
         this.openSection(section);
 
-        // reset all button icons
         this.navButtons.forEach((b) => {
           b.classList.remove("active");
           const iconElement = b.querySelector("i");
@@ -99,7 +90,6 @@ export default class MobileNav {
           iconElement.className = originalClass;
         });
 
-        // show x icon on active button
         btn.classList.add("active");
         const iconElement = btn.querySelector("i");
         if (!iconElement.dataset.originalClass) {
@@ -111,7 +101,6 @@ export default class MobileNav {
   }
 
   openSection(section) {
-    // first close the current section
     if (
       this.activeSection &&
       this.activeSection !== section &&
@@ -124,7 +113,6 @@ export default class MobileNav {
     this.sidebarContent.innerHTML = "";
 
     if (section === "tools") {
-      // create tools section ui
       const content = document.createElement("div");
       content.className = "mobile-tools-section";
       content.innerHTML = `
@@ -160,7 +148,6 @@ export default class MobileNav {
             <div class="card-body p-3">
               <select class="form-select form-select-sm bg-dark text-white mb-2" id="mobile-calculation-system-select">
                 <option value="default">Default</option>
-                <!-- Options will be populated dynamically -->
               </select>
               <div class="form-text text-muted small">
                 Choose calculation formulas for DPS, Cost Efficiency, etc.
@@ -195,6 +182,9 @@ export default class MobileNav {
           <a href="./ranker/" class="btn btn-outline-secondary" id="mobile-gpr-btn">
             <i class="bi bi-bar-chart-steps me-2"></i>TDS Ranker
           </a>
+          <a href="./misc/" class="btn btn-outline-secondary" id="mobile-gpr-btn">
+            <i class="bi bi-app me-2"></i>Miscellaneous
+          </a>
           <button class="btn btn-outline-secondary" id="mobile-about-btn" data-bs-toggle="modal" data-bs-target="#discord-modal">
             <i class="bi bi-info-circle me-2"></i>About
           </button>
@@ -207,7 +197,6 @@ export default class MobileNav {
       this.connectToolButton("mobile-delta-btn", "button-delta");
       this.connectToolButton("mobile-poll-btn", "poll-toggle");
 
-      // close sidebar when a modal opens
       const modalButtons = [
         "mobile-clone-btn",
         "mobile-settings-btn",
@@ -222,20 +211,16 @@ export default class MobileNav {
         }
       });
     } else if (this.containers[section]) {
-      // direct movement - move the original element to the sidebar
       const container = this.containers[section];
       const element = container.element;
 
-      // apply mobile-specific class
       element.classList.add("mobile-view");
 
-      // add directly to sidebar
       const wrapper = document.createElement("div");
       wrapper.className = "mobile-direct-container";
       wrapper.appendChild(element);
       this.sidebarContent.appendChild(wrapper);
 
-      // ensure it's visible
       element.style.display = "block";
     }
 
@@ -266,29 +251,24 @@ export default class MobileNav {
     }
   }
 
-  // restore a specific section to its original position
   restoreSection(section) {
     if (this.containers[section]) {
       const container = this.containers[section];
       const element = container.element;
       const parent = container.parent;
 
-      // remove mobile-specific class
       element.classList.remove("mobile-view");
 
-      // reinsert at original position
       if (container.originalIndex < parent.children.length) {
         parent.insertBefore(element, parent.children[container.originalIndex]);
       } else {
         parent.appendChild(element);
       }
 
-      // clear inline display style
       element.style.display = "";
     }
   }
 
-  // restore all sections to their original positions
   restoreAllSections() {
     for (const section in this.containers) {
       this.restoreSection(section);
@@ -296,16 +276,13 @@ export default class MobileNav {
   }
 
   closeSidebar() {
-    // restore sections to their original locations
     if (this.activeSection && this.activeSection !== "tools") {
       this.restoreSection(this.activeSection);
     }
 
-    // reset sidebar state
     this.mobileSidebar.classList.remove("active");
     this.activeSection = null;
 
-    // reset buttons
     this.navButtons.forEach((btn) => {
       btn.classList.remove("active");
       const iconElement = btn.querySelector("i");
@@ -320,18 +297,15 @@ export default class MobileNav {
     const desktopButton = document.getElementById(desktopButtonId);
 
     if (mobileButton && desktopButton) {
-      // avoid duplicate listeners
       const newMobileButton = mobileButton.cloneNode(true);
       mobileButton.parentNode.replaceChild(newMobileButton, mobileButton);
 
       newMobileButton.addEventListener("click", (event) => {
         event.preventDefault();
 
-        // click the original desktop button
         desktopButton.click();
         this.updateToolButtonState(newMobileButton, desktopButton);
 
-        // close sidebar for delta view
         if (mobileButtonId === "mobile-delta-btn") {
           setTimeout(() => this.closeSidebar(), 100);
         }
@@ -339,7 +313,6 @@ export default class MobileNav {
 
       this.updateToolButtonState(newMobileButton, desktopButton);
 
-      // track desktop button state
       const observer = new MutationObserver(() => {
         this.updateToolButtonState(newMobileButton, desktopButton);
       });
@@ -349,20 +322,17 @@ export default class MobileNav {
         attributeFilter: ["class", "aria-pressed"],
       });
 
-      // store observer for cleanup
       if (!this.toolButtonObservers) this.toolButtonObservers = {};
       this.toolButtonObservers[mobileButtonId] = observer;
     }
   }
 
   updateToolButtonState(mobileButton, desktopButton) {
-    // check if active
     const isActive =
       desktopButton.classList.contains("active") ||
       desktopButton.getAttribute("aria-pressed") === "true" ||
       desktopButton.classList.contains("btn-primary");
 
-    // update style
     if (isActive) {
       mobileButton.classList.add("active");
       mobileButton.classList.remove("btn-outline-secondary");
@@ -374,7 +344,6 @@ export default class MobileNav {
     }
   }
 
-  // make table viewer button shows that it's active
   setupMobileViewButtons() {
     const mobileViewContainer = document.getElementById("mobile-table-view");
     if (!mobileViewContainer) return;
@@ -397,7 +366,6 @@ export default class MobileNav {
       btn.classList.remove("btn-primary");
       btn.classList.add("btn-outline-secondary");
 
-      // mark the active button based on the current desktop state
       if (viewMode === currentView) {
         btn.classList.remove("btn-outline-secondary");
         btn.classList.add("btn-primary");
@@ -415,7 +383,6 @@ export default class MobileNav {
         if (desktopButton) {
           desktopButton.click();
 
-          // update the active button state
           buttons.forEach((b) => {
             b.classList.remove("btn-primary");
             b.classList.add("btn-outline-secondary");
@@ -423,13 +390,11 @@ export default class MobileNav {
           btn.classList.remove("btn-outline-secondary");
           btn.classList.add("btn-primary");
 
-          // close menu after selecting a view mode
           setTimeout(() => this.closeSidebar(), 100);
         }
       });
     });
 
-    // observer to update when desktop view changes
     if (!this.viewButtonObserver) {
       this.viewButtonObserver = new MutationObserver(() => {
         if (this.activeSection === "tools") {
@@ -474,7 +439,6 @@ export default class MobileNav {
     });
   }
 
-  // sync calc system with pc version
   syncCalculationSystemDropdown() {
     const desktopSelect = document.getElementById("calculation-system-select");
     const mobileSelect = document.getElementById(
@@ -483,17 +447,12 @@ export default class MobileNav {
 
     if (!desktopSelect || !mobileSelect) return;
 
-    // copy all options from desktop to mobile
     mobileSelect.innerHTML = desktopSelect.innerHTML;
-
-    // set the same selected value
     mobileSelect.value = desktopSelect.value;
 
-    // listens to update desktop select when mobile changes
     mobileSelect.addEventListener("change", () => {
       desktopSelect.value = mobileSelect.value;
       desktopSelect.dispatchEvent(new Event("change"));
     });
   }
 }
-// if you're reading this, please never use mutationobserver that shit killed me i had to rewrite this whole thing twice

@@ -150,9 +150,24 @@ export class MobileNav {
 
   updateActiveButton(sectionName) {
     this.mobileNavBtns.forEach((btn) => {
+      const btnSection = btn.getAttribute("data-mobile-section");
+      
       btn.classList.remove("active");
-      if (btn.getAttribute("data-mobile-section") === sectionName) {
+      const iconElement = btn.querySelector("i");
+      
+      if (btnSection === sectionName) {
         btn.classList.add("active");
+        
+        if (iconElement) {
+          if (!iconElement.dataset.originalClass) {
+            iconElement.dataset.originalClass = iconElement.className;
+          }
+          iconElement.className = "bi bi-x-lg";
+        }
+      } else {
+        if (iconElement && iconElement.dataset.originalClass) {
+          iconElement.className = iconElement.dataset.originalClass;
+        }
       }
     });
   }
@@ -162,6 +177,10 @@ export class MobileNav {
     this.activeSection = null;
     this.mobileNavBtns.forEach((btn) => {
       btn.classList.remove("active");
+      const iconElement = btn.querySelector("i");
+      if (iconElement && iconElement.dataset.originalClass) {
+        iconElement.className = iconElement.dataset.originalClass;
+      }
     });
   }
 
