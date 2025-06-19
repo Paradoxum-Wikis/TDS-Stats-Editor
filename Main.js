@@ -16,6 +16,7 @@ import MobileNav from "./components/MobileNav.js";
 import CalcSystemUI from "./components/CalcSystemUI.js";
 import StorageManager from "./components/StorageManager.js";
 import KeyboardNavigation from "./components/KeyboardNavigation.js";
+import TowerImportHandler from "./components/TowerImportHandler.js";
 import {
   setVersionNumber,
   loadUpdateLog,
@@ -44,6 +45,7 @@ import JSONViewerModule from "./components/TableMode/json-viewer.js";
 window.JSONViewer = JSONViewerModule;
 
 const app = new App();
+window.app = app;
 app.start();
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -57,8 +59,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const mobileNav = new MobileNav();
   window.mobileNav = mobileNav;
 
+  const towerImportHandler = new TowerImportHandler();
+
   loadUpdateLog();
   setVersionNumber(TDSVersion);
+
+  towerImportHandler.checkForPendingImport();
 
   document.addEventListener("calculationSystemChanged", (e) => {
     if (e.detail.tower) {

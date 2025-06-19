@@ -106,28 +106,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Save preference
       localStorage.setItem("towerViewPreference", "grid");
-
-      // make sure buttons are visible
-      document.querySelectorAll("#all-towers .card-body").forEach((body) => {
-        const towerId = body.querySelector("[data-tower-id]")?.dataset.towerId;
-        if (towerId && window.towerDataCache[towerId]) {
-          const buttonContainer = document.createElement("div");
-          buttonContainer.className = "d-flex gap-2 mt-3";
-          buttonContainer.innerHTML = `
-                    <button class="btn btn-sm btn-outline-info copy-json" data-tower-id="${towerId}">
-                        <i class="bi bi-clipboard me-2"></i>Copy JSON
-                    </button>
-                    <button class="btn btn-sm btn-outline-primary download-json" data-tower-id="${towerId}">
-                        <i class="bi bi-download me-2"></i>Download
-                    </button>
-                `;
-          const existingButtons = body.querySelector(".d-flex.gap-2.mt-3");
-          if (existingButtons) {
-            existingButtons.remove();
-          }
-          body.appendChild(buttonContainer);
-        }
-      });
     });
 
   // switch to list view
@@ -214,8 +192,8 @@ document.addEventListener("DOMContentLoaded", function () {
       buttonsHTML = `<button class="btn btn-sm btn-outline-info copy-json me-2" data-tower-id="${towerId}">
                 <i class="bi bi-clipboard me-2"></i>Copy JSON
             </button>
-            <button class="btn btn-sm btn-outline-primary download-json" data-tower-id="${towerId}">
-                <i class="bi bi-download me-2"></i>Download
+            <button class="btn btn-sm btn-outline-success import-to-editor" data-tower-id="${towerId}">
+                <i class="bi bi-box-arrow-up-right me-2"></i>Import Tower
             </button>`;
     }
 
@@ -236,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
 
     col.innerHTML = `
-            <div class="card h-100 bg-dark bg-gradient text-white ${tower.featured ? "border-gold" : ""} ${isListView ? "list-view-card" : ""}">
+            <div class="card h-100 bg-dark bg-gradient text-white ${tower.featured ? "border-gold" : ""} ${isListView ? "list-view-card" : ""}" data-tower-name="${tower.name.toLowerCase()}" data-author-name="${tower.author.toLowerCase()}">
                 ${
                   !isListView
                     ? `
@@ -402,45 +380,34 @@ document.addEventListener("click", function (event) {
     }
   }
 
-  // download json as file
-  if (event.target.closest(".download-json")) {
-    const button = event.target.closest(".download-json");
+  // import to editor
+  if (event.target.closest(".import-to-editor")) {
+    const button = event.target.closest(".import-to-editor");
     const towerId = button.dataset.towerId;
     const towerData = window.towerDataCache[towerId];
 
     if (towerData) {
-      // get name for filename
-      const card = button.closest(".card");
-      const towerName = card.querySelector(".card-title").textContent;
-
-      // get author name
-      const authorElement = card.querySelector(".card-footer .fw-bold");
-      let authorName = "Unknown";
-
-      if (authorElement) {
-        const authorText = authorElement.textContent;
-        authorName = authorText.replace("By ", "").trim();
+      try {
+        const importData = {
+          data: JSON.stringify(towerData, null, 2),
+          timestamp: Date.now(),
+          source: 'database'
+        };
+        
+        localStorage.setItem('pendingTowerImport', JSON.stringify(importData));
+        
+        const currentOrigin = window.location.origin;
+        const editorUrl = currentOrigin.replace('/db', '') + '/?import=pending';
+        
+        window.open(editorUrl, '_blank');
+        
+        showAlert("Tower data sent to editor! Check the new tab.", "success");
+      } catch (error) {
+        console.error("Failed to prepare tower data for import:", error);
+        showAlert("Failed to prepare tower data for import: " + error.message, "danger");
       }
-
-      const fileName = `${towerName.replace(/\s+/g, "_")}-${authorName.replace(/\s+/g, "_")}.json`;
-
-      const jsonString = JSON.stringify(towerData, null, 2);
-      const blob = new Blob([jsonString], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
-
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = fileName;
-      document.body.appendChild(a);
-      a.click();
-
-      // cleanup
-      setTimeout(() => {
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-      }, 0);
     } else {
-      showAlert("No JSON data available", "warning");
+      showAlert("No tower data available for import", "warning");
     }
   }
 });

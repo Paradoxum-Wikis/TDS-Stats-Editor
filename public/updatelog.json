@@ -1,5 +1,13 @@
 [
   {
+    "version": "1.2.8",
+    "date": "June 19, 2025",
+    "changes": [
+      "Import from database functionality added",
+      "Tower data performance improvements"
+    ]
+  },
+  {
     "version": "1.2.7",
     "date": "June 14, 2025",
     "changes": [
