@@ -97,7 +97,6 @@ class TowerImportHandler {
       }
       
       this.storeOriginalCustomTowerData(parsedData, towerName);
-      this.markAsImportedCustomTower(towerName);
       this.dispatchImportEvent(importData);
       
       setTimeout(() => {
@@ -122,13 +121,6 @@ class TowerImportHandler {
           ? structuredClone(towerData)
           : JSON.parse(JSON.stringify(towerData));
     }
-  }
-
-  markAsImportedCustomTower(towerName) {
-    if (!window.importedCustomTowers) {
-      window.importedCustomTowers = new Set();
-    }
-    window.importedCustomTowers.add(towerName);
   }
 
   dispatchImportEvent(importData) {
