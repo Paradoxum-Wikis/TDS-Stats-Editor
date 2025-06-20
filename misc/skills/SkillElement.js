@@ -112,146 +112,138 @@ export class SkillElement {
     const currentIncrementValue = existingIncrementInput
       ? existingIncrementInput.value
       : "1";
-
-    let nextCost = 0;
-    if (
-      currentLevel < this.skill.maxLevel &&
-      this.getCostForSkillLevelCallback
-    ) {
-      nextCost = this.getCostForSkillLevelCallback(
-        this.skillName,
-        currentLevel + 1,
-      );
-    }
-
-    // prerequisites check
     const prereqsMet = this.skill.prerequisites.every(
       (prereq) => this.skillLevels[prereq] >= 10,
     );
     const hasPrereqs = this.skill.prerequisites.length > 0;
-
-    if (hasPrereqs && !prereqsMet) {
-      skillDiv.classList.add("lockedout");
-    } else {
-      skillDiv.classList.remove("lockedout");
-    }
-
     const skillImage = skillImages[this.skillName] || "Unavailable.png";
     const dynamicDescription = this.getDynamicDescription(
       this.skillName,
       currentLevel,
     );
 
-    let costBreakdownHtml = "";
-    if (currentLevel < this.skill.maxLevel && this.costBreakdownCallback) {
-      const breakdown = this.costBreakdownCallback(nextCost);
-      const parts = [];
-
+    skillDiv.innerHTML = '';
+    const createCostNodes = (breakdown) => {
+      const nodes = [];
       if (breakdown.credits > 0) {
-        parts.push(
-          `${breakdown.credits.toLocaleString()} <img src="/htmlassets/SkillCredit.png" alt="Skill Credits" class="cost-icon">`,
-        );
+        nodes.push(document.createTextNode(`${breakdown.credits.toLocaleString()} `));
+        const img = document.createElement('img');
+        img.src = "/htmlassets/SkillCredit.png";
+        img.alt = "Skill Credits";
+        img.className = "cost-icon";
+        nodes.push(img);
+      }
+      if (nodes.length > 0 && breakdown.coins > 0) {
+        nodes.push(document.createTextNode(' + '));
       }
       if (breakdown.coins > 0) {
-        parts.push(
-          `${breakdown.coins.toLocaleString()} <img src="/htmlassets/Coin.png" alt="Coins" class="cost-icon">`,
-        );
+        nodes.push(document.createTextNode(`${breakdown.coins.toLocaleString()} `));
+        const img = document.createElement('img');
+        img.src = "/htmlassets/Coin.png";
+        img.alt = "Coins";
+        img.className = "cost-icon";
+        nodes.push(img);
       }
+      return nodes;
+    };
 
-      costBreakdownHtml = `<small class="text-light">
-        Next: ${parts.join(" + ")}
-      </small>`;
+    const mainWrapper = document.createElement('div');
+    mainWrapper.className = 'd-flex justify-content-between align-items-start mb-2';
+
+    const contentWrapper = document.createElement('div');
+    contentWrapper.className = 'd-flex align-items-start flex-grow-1';
+
+    const img = document.createElement('img');
+    img.src = `/htmlassets/skills/${skillImage}`;
+    img.alt = this.skillName;
+    img.className = 'me-3 rounded';
+    img.style = 'width: 48px; height: 48px; object-fit: cover; flex-shrink: 0;';
+    img.loading = 'lazy';
+
+    const textWrapper = document.createElement('div');
+    textWrapper.className = 'flex-grow-1';
+
+    const title = document.createElement('h6');
+    title.className = 'text-white mb-1';
+    title.textContent = this.skillName;
+
+    const description = document.createElement('p');
+    description.className = 'text-light small mb-2';
+    description.textContent = dynamicDescription;
+
+    const effect = document.createElement('small');
+    effect.className = 'text-info d-block mb-1';
+    effect.textContent = this.skill.effect;
+
+    textWrapper.append(title, description, effect);
+
+    if (hasPrereqs) {
+      const prereqEl = document.createElement('small');
+      prereqEl.className = prereqsMet ? 'text-success' : 'text-warning';
+      const icon = document.createElement('i');
+      icon.className = 'bi bi-arrow-right me-1';
+      prereqEl.append(icon, document.createTextNode(`Requires: ${this.skill.prerequisites.join(", ")} (Level 10)`));
+      textWrapper.append(prereqEl);
     }
 
-    let totalSpentHtml = "";
-    if (currentLevel > 0 && this.skillSpendingCallback) {
-      const actualSpending = this.skillSpendingCallback(this.skillName);
-      const totalParts = [];
+    contentWrapper.append(img, textWrapper);
 
-      if (actualSpending.credits > 0) {
-        totalParts.push(
-          `${actualSpending.credits.toLocaleString()} <img src="/htmlassets/SkillCredit.png" alt="Skill Credits" class="cost-icon">`,
-        );
-      }
-      if (actualSpending.coins > 0) {
-        totalParts.push(
-          `${actualSpending.coins.toLocaleString()} <img src="/htmlassets/Coin.png" alt="Coins" class="cost-icon">`,
-        );
-      }
+    const endWrapper = document.createElement('div');
+    endWrapper.className = 'text-end';
+    const levelDisplay = document.createElement('div');
+    levelDisplay.className = 'skill-level-display';
+    const badge = document.createElement('span');
+    badge.className = `badge ${currentLevel === this.skill.maxLevel ? "bg-success" : "bg-secondary"}`;
+    badge.textContent = `${currentLevel}/${this.skill.maxLevel}`;
+    levelDisplay.append(badge);
+    endWrapper.append(levelDisplay);
 
-      if (totalParts.length > 0) {
-        totalSpentHtml = `<br><small class="text-muted">
-          Total spent: ${totalParts.join(" + ")}
-        </small>`;
-      }
-    }
+    mainWrapper.append(contentWrapper, endWrapper);
 
-    skillDiv.innerHTML = `
-      <div class="d-flex justify-content-between align-items-start mb-2">
-        <div class="d-flex align-items-start flex-grow-1">
-          <img 
-            src="/htmlassets/skills/${skillImage}" 
-            alt="${this.skillName}" 
-            class="me-3 rounded"
-            style="width: 48px; height: 48px; object-fit: cover; flex-shrink: 0;"
-            loading="lazy"
-          />
-          <div class="flex-grow-1">
-            <h6 class="text-white mb-1">${this.skillName}</h6>
-            <p class="text-light small mb-2">${dynamicDescription}</p>
-            <small class="text-info d-block mb-1">${this.skill.effect}</small>
-            ${
-              hasPrereqs
-                ? `<small class="${prereqsMet ? "text-success" : "text-warning"}">
-                <i class="bi bi-arrow-right me-1"></i>Requires: ${this.skill.prerequisites.join(", ")} (Level 10)
-              </small>`
-                : ""
-            }
-          </div>
+    const controlsWrapper = document.createElement('div');
+    controlsWrapper.className = 'skill-controls d-flex align-items-center justify-content-between';
+    
+    controlsWrapper.innerHTML = `
+      <div class="d-flex align-items-center" style="gap: 0.5rem;">
+        <div class="btn-group" role="group">
+          <button class="btn btn-sm btn-outline-danger skill-decrease" ${currentLevel === 0 ? "disabled" : ""} title="Decrease skill level">
+            <i class="bi bi-dash"></i>
+          </button>
+          <button class="btn btn-sm btn-outline-success skill-increase" ${currentLevel >= this.skill.maxLevel || !this.canUpgradeCallback(this.skillName) ? "disabled" : ""} title="Increase skill level">
+            <i class="bi bi-plus"></i>
+          </button>
         </div>
-        <div class="text-end">
-          <div class="skill-level-display">
-            <span class="badge ${currentLevel === this.skill.maxLevel ? "bg-success" : "bg-secondary"}">
-              ${currentLevel}/${this.skill.maxLevel}
-            </span>
-          </div>
-        </div>
-      </div>
-      
-      <div class="skill-controls d-flex align-items-center justify-content-between">
-        <div class="d-flex align-items-center" style="gap: 0.5rem;">
-          <div class="btn-group" role="group">
-            <button class="btn btn-sm btn-outline-danger skill-decrease" 
-                    ${currentLevel === 0 ? "disabled" : ""}
-                    title="Decrease skill level">
-              <i class="bi bi-dash"></i>
-            </button>
-            <button class="btn btn-sm btn-outline-success skill-increase" 
-                    ${currentLevel >= this.skill.maxLevel || !this.canUpgradeCallback(this.skillName) ? "disabled" : ""}
-                    title="Increase skill level">
-              <i class="bi bi-plus"></i>
-            </button>
-          </div>
-          <input type="number" 
-                 class="form-control form-control-sm skill-increment"  
-                 min="1" 
-                 max="${this.skill.maxLevel}" 
-                 value="${currentIncrementValue}"
-                 title="Number of levels to add/remove at once">
-        </div>
-        
-        <div class="skill-cost-info text-end">
-          ${
-            currentLevel < this.skill.maxLevel
-              ? costBreakdownHtml
-              : `<small class="text-success">
-              <i class="bi bi-check-circle"></i> Maxed
-            </small>`
-          }
-          ${totalSpentHtml}
-        </div>
+        <input type="number" class="form-control form-control-sm skill-increment" min="1" max="${this.skill.maxLevel}" value="${currentIncrementValue}" title="Number of levels to add/remove at once">
       </div>
     `;
+
+    const costInfo = document.createElement('div');
+    costInfo.className = 'skill-cost-info text-end';
+
+    if (currentLevel < this.skill.maxLevel) {
+      const nextCost = this.getCostForSkillLevelCallback(this.skillName, currentLevel + 1);
+      const breakdown = this.costBreakdownCallback(nextCost);
+      const nextCostEl = document.createElement('small');
+      nextCostEl.className = 'text-light';
+      nextCostEl.append(document.createTextNode('Next: '), ...createCostNodes(breakdown));
+      costInfo.append(nextCostEl);
+    } else {
+      costInfo.innerHTML = `<small class="text-success"><i class="bi bi-check-circle"></i> Maxed</small>`;
+    }
+
+    if (currentLevel > 0) {
+      const actualSpending = this.skillSpendingCallback(this.skillName);
+      if (actualSpending.credits > 0 || actualSpending.coins > 0) {
+        const totalSpentEl = document.createElement('small');
+        totalSpentEl.className = 'text-muted';
+        const br = document.createElement('br');
+        totalSpentEl.append(br, document.createTextNode('Total spent: '), ...createCostNodes(actualSpending));
+        costInfo.append(totalSpentEl);
+      }
+    }
+    
+    controlsWrapper.append(costInfo);
+    skillDiv.append(mainWrapper, controlsWrapper);
   }
 
   updateDisplay(skillDiv) {
