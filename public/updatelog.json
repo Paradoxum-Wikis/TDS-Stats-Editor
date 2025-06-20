@@ -4,6 +4,7 @@
     "date": "June 19, 2025",
     "changes": [
       "Import from database functionality added",
+      "DarkGabonnie nows notify tower verification on Fandom",
       "Tower data performance improvements"
     ]
   },
