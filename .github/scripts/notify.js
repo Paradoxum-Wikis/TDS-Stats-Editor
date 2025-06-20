@@ -1,3 +1,4 @@
+require('dotenv').config();
 const fetch = require('node-fetch');
 const FormData = require('form-data');
 const { execSync } = require('child_process');
@@ -113,52 +114,68 @@ async function getUserId(username) {
   throw new Error(`User ${username} not found`);
 }
 
-async function sendMessage(token, userId, title, content) {
-  console.log('\n--- Preparing to send message ---');
-  console.log(`Recipient User ID: ${userId}`);
-  console.log(`Message Title: ${title}`);
+async function sendMessage(token, userId, title, username, pluralTowers, towerList, towerCount) {
+  // --- 1. Build rawContent ---
+  const rawTowerList = towerList.join('\n');
+  const rawContent = `Hello ${username}!\nGreat news! Your ${pluralTowers} been approved and added to the TDS Statistics Editor database:\n${rawTowerList}\nYour ${towerCount > 1 ? 'towers are' : 'tower is'} now verified and will no longer be hidden by the "unverified" tag. You can view ${towerCount > 1 ? 'them' : 'it'} on the database at: https://tds-editor.com/db/\nThank you for your contribution to the TDS community!\n-----------------------------------------------------------------------------------------------------------\n This is an automated message from the TDS Statistics Editor system.`;
 
-  const jsonModel = JSON.stringify({
-    type: 'doc',
+  // --- 2. Build jsonModel ---
+  const dbUrl = 'https://tds-editor.com/db/';
+  const jsonContent = [];
+
+  jsonContent.push({ type: 'paragraph', content: [{ type: 'text', text: `Hello ${username}!` }] });
+  jsonContent.push({ type: 'paragraph' });
+  jsonContent.push({ type: 'paragraph', content: [{ type: 'text', text: `Great news! Your ${pluralTowers} been approved and added to the TDS Statistics Editor database:` }] });
+
+  const bulletListItems = towerList.map(towerName => ({
+    type: 'listItem',
+    content: [{ type: 'paragraph', content: [{ type: 'text', text: towerName }] }]
+  }));
+  jsonContent.push({ type: 'bulletList', attrs: { createdWith: '*+' }, content: bulletListItems });
+
+  const verifiedText = `Your ${towerCount > 1 ? 'towers are' : 'tower is'} now verified and will no longer be hidden by the "unverified" tag. You can view ${towerCount > 1 ? 'them' : 'it'} on the database at: `;
+  jsonContent.push({
+    type: 'paragraph',
     content: [
-      {
-        type: 'paragraph',
-        content: [{ type: 'text', text: content }]
-      }
+      { type: 'text', text: verifiedText },
+      { type: 'text', marks: [{ type: 'link', attrs: { href: dbUrl, title: null } }], text: dbUrl }
     ]
   });
 
+  jsonContent.push({ type: 'openGraph', attrs: { id: 0, url: dbUrl, wasAddedWithInlineLink: true } });
+  jsonContent.push({ type: 'paragraph', content: [{ type: 'text', text: 'Thank you for your contribution to the TDS community!' }] });
+  jsonContent.push({ type: 'paragraph', content: [{ type: 'text', text: '-----------------------------------------------------------------------------------------------------------' }] });
+  jsonContent.push({ type: 'paragraph', content: [{ type: 'text', marks: [{ type: 'em' }], text: ' This is an automated message from the TDS Statistics Editor system.' }] });
+
+  const jsonModel = JSON.stringify({ type: 'doc', content: jsonContent });
+
+  // --- 3. Build attachments ---
+  const attachments = JSON.stringify({
+    contentImages: [],
+    openGraphs: [{
+      imageHeight: 630,
+      imageUrl: "https://static.wikia.nocookie.net/3c87bdc9-09d5-4306-ae9a-4281214bc071",
+      imageWidth: 1200,
+      siteName: "TDS+Database+Browser",
+      title: "TDS+Database+Browser",
+      description: "Browse+and+share+your+custom+tower+ideas+for+the+Roblox+game+Tower+Defense+Simulator!",
+      type: "website",
+      url: "https://tds-editor.com/db",
+      originalUrl: "https://tds-editor.com/db/"
+    }],
+    atMentions: []
+  });
+
+  // --- 4. Create Form Data ---
   const form = new FormData();
   form.append('token', token);
   form.append('wallOwnerId', userId);
   form.append('title', title);
-  form.append('rawContent', content);
+  form.append('rawContent', rawContent);
   form.append('jsonModel', jsonModel);
-  form.append('attachments', JSON.stringify({
-    contentImages: [],
-    openGraphs: [],
-    atMentions: []
-  }));
+  form.append('attachments', attachments);
 
-  console.log('--- Form Data Payload ---');
-  console.log(`token: ${token}`);
-  console.log(`wallOwnerId: ${userId}`);
-  console.log(`title: ${title}`);
-  console.log(`rawContent:\n${content}`);
-  console.log(`jsonModel: ${jsonModel}`);
-  console.log('------------------------');
-
-  const headers = {
-    'User-Agent': USER_AGENT,
-    'Cookie': COOKIE_HEADER,
-    'X-Requested-With': 'XMLHttpRequest',
-    ...form.getHeaders()
-  };
-
-  console.log('--- Request Headers ---');
-  console.log(JSON.stringify(headers, null, 2));
-  console.log('-----------------------');
-
+  // --- 5. Send Request ---
   const res = await fetch(`${WIKI_BASE}/wikia.php?controller=Fandom\\MessageWall\\MessageWall&method=createThread&format=json`, {
     method: 'POST',
     headers: {
@@ -170,7 +187,6 @@ async function sendMessage(token, userId, title, content) {
     body: form
   });
 
-  console.log(`--- API Response Status: ${res.status} ${res.statusText} ---`);
   const responseText = await res.text();
   if (!res.ok) {
     console.error('Raw API response:', responseText);
@@ -179,7 +195,6 @@ async function sendMessage(token, userId, title, content) {
   
   try {
     const json = JSON.parse(responseText);
-    console.log('Fandom API Response:', JSON.stringify(json, null, 2));
     return json;
   } catch (parseError) {
     console.error('Raw API response (could not parse as JSON):', responseText);
@@ -227,19 +242,18 @@ async function main() {
           const userId = await getUserId(username);
           console.log(`User ID for ${username}: ${userId}`);
           
-          const towerList = userTowers.map(tower => `• ${tower.split('/')[1]}`).join('\n');
+          const towerList = userTowers.map(tower => tower.split('/')[1]);
           const pluralTowers = userTowers.length > 1 ? 'towers have' : 'tower has';
           
           const messageTitle = `🎉 Your ${userTowers.length > 1 ? 'towers' : 'tower'} ${userTowers.length > 1 ? 'have' : 'has'} been approved!`;
-          const messageContent = `Hello ${username}!\n\nGreat news! Your ${pluralTowers} been approved and added to the TDS Stats Editor database:\n\n${towerList}\n\nYour ${userTowers.length > 1 ? 'towers are' : 'tower is'} now verified and will no longer show the "unverified" tag. You can view ${userTowers.length > 1 ? 'them' : 'it'} on the database at: https://tds-editor.com/db/\n\nThank you for your contribution to the TDS community!\n\n---\n*This is an automated message from the TDS Stats Editor system.*`;
           
-          console.log(`\nConstructed message for ${username}:`);
+          console.log(`\nConstructing message for ${username}:`);
           console.log('====================================');
-          console.log(messageContent);
+          console.log(`Towers: ${towerList.join(', ')}`);
           console.log('====================================');
 
           console.log(`Sending message to ${username}...`);
-          await sendMessage(token, userId, messageTitle, messageContent);
+          await sendMessage(token, userId, messageTitle, username, pluralTowers, towerList, userTowers.length);
           console.log(`✅ Message sent successfully to ${username}`);
           
         } catch (error) {
