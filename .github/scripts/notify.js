@@ -117,13 +117,13 @@ async function getUserId(username) {
 async function sendMessage(token, userId, title, username, pluralTowers, towerList, towerCount) {
   // --- 1. Build rawContent ---
   const rawTowerList = towerList.join('\n');
-  const rawContent = `Hello ${username}!\nGreat news! Your ${pluralTowers} been approved and added to the TDS Statistics Editor database:\n${rawTowerList}\nYour ${towerCount > 1 ? 'towers are' : 'tower is'} now verified and will no longer be hidden by the "unverified" tag. You can view ${towerCount > 1 ? 'them' : 'it'} on the database at: https://tds-editor.com/db/\nThank you for your contribution to the TDS community!\n-----------------------------------------------------------------------------------------------------------\n This is an automated message from the TDS Statistics Editor system.`;
+  const rawContent = `Hello, ${username}!\nGreat news! Your ${pluralTowers} been approved and added to the TDS Statistics Editor database:\n${rawTowerList}\nYour ${towerCount > 1 ? 'towers are' : 'tower is'} now verified and will no longer be hidden by the "unverified" tag. You can view ${towerCount > 1 ? 'them' : 'it'} on the database at: https://tds-editor.com/db/\nThank you for your contribution to the TDS community!\n-----------------------------------------------------------------------------------------------------------\n This is an automated message from the TDS Statistics Editor system.`;
 
   // --- 2. Build jsonModel ---
   const dbUrl = 'https://tds-editor.com/db/';
   const jsonContent = [];
 
-  jsonContent.push({ type: 'paragraph', content: [{ type: 'text', text: `Hello ${username}!` }] });
+  jsonContent.push({ type: 'paragraph', content: [{ type: 'text', text: `Hello, ${username}!` }] });
   jsonContent.push({ type: 'paragraph' });
   jsonContent.push({ type: 'paragraph', content: [{ type: 'text', text: `Great news! Your ${pluralTowers} been approved and added to the TDS Statistics Editor database:` }] });
 
