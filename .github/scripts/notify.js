@@ -199,44 +199,67 @@ async function main() {
     }
     
     console.log(`Found ${newEntries.length} new tower entries:`, newEntries);
-    const usernames = extractUsernames(newEntries);
-    console.log('Users to notify:', usernames);
+    let usersToNotify = extractUsernames(newEntries);
+    console.log('Initial users to notify:', usersToNotify);
     
     console.log('Getting CSRF token...');
     const token = await getCsrfToken();
     
-    for (const username of usernames) {
-      try {
-        console.log(`Processing user: ${username}`);
-        const userTowers = newEntries.filter(entry => entry.startsWith(username + '/'));
-        
-        if (userTowers.length === 0) continue;
-        
-        const userId = await getUserId(username);
-        console.log(`User ID for ${username}: ${userId}`);
-        
-        const towerList = userTowers.map(tower => `• ${tower.split('/')[1]}`).join('\n');
-        const pluralTowers = userTowers.length > 1 ? 'towers have' : 'tower has';
-        
-        const messageTitle = `🎉 Your ${userTowers.length > 1 ? 'towers' : 'tower'} ${userTowers.length > 1 ? 'have' : 'has'} been approved!`;
-        const messageContent = `Hello ${username}!\n\nGreat news! Your ${pluralTowers} been approved and added to the TDS Stats Editor database:\n\n${towerList}\n\nYour ${userTowers.length > 1 ? 'towers are' : 'tower is'} now verified and will no longer show the "unverified" tag. You can view ${userTowers.length > 1 ? 'them' : 'it'} on the database at: https://tds-editor.com/db/\n\nThank you for your contribution to the TDS community!\n\n---\n*This is an automated message from the TDS Stats Editor system.*`;
-        
-        console.log(`\nConstructed message for ${username}:`);
-        console.log('====================================');
-        console.log(messageContent);
-        console.log('====================================');
+    let failedUsers = [];
+    const MAX_RETRIES = 5;
+    let retryCount = 0;
 
-        console.log(`Sending message to ${username}...`);
-        await sendMessage(token, userId, messageTitle, messageContent);
-        console.log(`✅ Message sent successfully to ${username}`);
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        
-      } catch (error) {
-        console.error(`❌ Failed to notify ${username}:`, error.message);
+    while (usersToNotify.length > 0 && retryCount <= MAX_RETRIES) {
+      if (retryCount > 0) {
+        console.log(`\n--- RETRY ATTEMPT ${retryCount}/${MAX_RETRIES} for ${usersToNotify.length} failed users ---`);
+        await new Promise(resolve => setTimeout(resolve, 15000));
       }
+
+      failedUsers = [];
+
+      for (const username of usersToNotify) {
+        try {
+          console.log(`Processing user: ${username}`);
+          const userTowers = newEntries.filter(entry => entry.startsWith(username + '/'));
+          
+          if (userTowers.length === 0) continue;
+          
+          const userId = await getUserId(username);
+          console.log(`User ID for ${username}: ${userId}`);
+          
+          const towerList = userTowers.map(tower => `• ${tower.split('/')[1]}`).join('\n');
+          const pluralTowers = userTowers.length > 1 ? 'towers have' : 'tower has';
+          
+          const messageTitle = `🎉 Your ${userTowers.length > 1 ? 'towers' : 'tower'} ${userTowers.length > 1 ? 'have' : 'has'} been approved!`;
+          const messageContent = `Hello ${username}!\n\nGreat news! Your ${pluralTowers} been approved and added to the TDS Stats Editor database:\n\n${towerList}\n\nYour ${userTowers.length > 1 ? 'towers are' : 'tower is'} now verified and will no longer show the "unverified" tag. You can view ${userTowers.length > 1 ? 'them' : 'it'} on the database at: https://tds-editor.com/db/\n\nThank you for your contribution to the TDS community!\n\n---\n*This is an automated message from the TDS Stats Editor system.*`;
+          
+          console.log(`\nConstructed message for ${username}:`);
+          console.log('====================================');
+          console.log(messageContent);
+          console.log('====================================');
+
+          console.log(`Sending message to ${username}...`);
+          await sendMessage(token, userId, messageTitle, messageContent);
+          console.log(`✅ Message sent successfully to ${username}`);
+          
+        } catch (error) {
+          console.error(`❌ Failed to notify ${username}:`, error.message);
+          failedUsers.push(username);
+        } finally {
+          console.log('Waiting 5 seconds before processing next user...');
+          await new Promise(resolve => setTimeout(resolve, 5000));
+        }
+      }
+
+      usersToNotify = failedUsers;
+      retryCount++;
     }
     
-    console.log('✅ Notification process completed!');
+    if (failedUsers.length > 0) {
+      console.error(`\n❌ Notification process completed, but ${failedUsers.length} users could not be notified after ${MAX_RETRIES} retries:`, failedUsers);
+    } else {
+      console.log('\n✅ Notification process completed successfully!');
+    }
     
   } catch (error) {
     console.error('Error in main process:', error.message);
