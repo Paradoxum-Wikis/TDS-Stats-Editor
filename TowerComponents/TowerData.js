@@ -6676,7 +6676,7 @@ export default {
             Detections: {
               Flying: false,
               Hidden: false,
-              Lead: true,
+              Lead: false,
             },
             Cooldown: 0.5,
             Range: 14,
@@ -6703,7 +6703,7 @@ export default {
             Detections: {
               Flying: false,
               Hidden: true,
-              Lead: true,
+              Lead: false,
             },
             Cooldown: 0.5,
             Range: 14,
@@ -6731,7 +6731,7 @@ export default {
             Detections: {
               Flying: false,
               Hidden: false,
-              Lead: true,
+              Lead: false,
             },
             Cooldown: 0.5,
             Range: 15,
@@ -6760,7 +6760,7 @@ export default {
             Detections: {
               Flying: false,
               Hidden: false,
-              Lead: true,
+              Lead: false,
             },
             Cooldown: 0.3,
             Range: 16,
@@ -6789,7 +6789,7 @@ export default {
             Detections: {
               Flying: false,
               Hidden: false,
-              Lead: true,
+              Lead: false,
             },
             Cooldown: 0.1,
             Range: 18.5,
@@ -6832,7 +6832,7 @@ export default {
         },
       ],
       Defaults: {
-        Detections: { Flying: false, Hidden: false, Lead: true },
+        Detections: { Flying: false, Hidden: false, Lead: false },
         Attributes: {
           Beams: 1,
           "Hologram EV": 0.6,

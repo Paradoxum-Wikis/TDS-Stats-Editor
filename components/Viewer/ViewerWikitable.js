@@ -12,9 +12,7 @@ const ViewerWikitable = {
       responsiveDiv.appendChild(this.wikitextViewer.getContainer());
 
       this.wikitableContent.appendChild(responsiveDiv);
-
       this.activeUnits = this.populateActiveUnits();
-
       this.wikitableGenerator = new WikitableGenerator(
         this.tower,
         this.activeUnits,

@@ -2000,7 +2000,7 @@ export default {
     Detections: {
       Hidden: true,
       Flying: false,
-      Lead: true,
+      Lead: false,
     },
     Cost: 63500,
     Attributes: {
@@ -2022,7 +2022,7 @@ export default {
     Detections: {
       Hidden: true,
       Flying: false,
-      Lead: true,
+      Lead: false,
     },
     Cost: 48000,
     Attributes: {
