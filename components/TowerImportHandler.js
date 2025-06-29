@@ -11,24 +11,27 @@ class TowerImportHandler {
 
   checkForPendingImport() {
     const urlParams = new URLSearchParams(window.location.search);
-    const shouldImport = urlParams.get('import');
-    
-    if (shouldImport === 'pending') {
-      const pendingImport = localStorage.getItem('pendingTowerImport');
-      
+    const shouldImport = urlParams.get("import");
+
+    if (shouldImport === "pending") {
+      const pendingImport = localStorage.getItem("pendingTowerImport");
+
       if (pendingImport) {
         try {
           const importData = JSON.parse(pendingImport);
           const now = Date.now();
           const importAge = now - importData.timestamp;
-          
-          if (importAge < this.maxImportAge && importData.source === 'database') {
+
+          if (
+            importAge < this.maxImportAge &&
+            importData.source === "database"
+          ) {
             this.attemptImportWithRetry(importData);
           } else {
-            localStorage.removeItem('pendingTowerImport');
+            localStorage.removeItem("pendingTowerImport");
           }
         } catch (error) {
-          console.error('Failed to parse pending import:', error);
+          console.error("Failed to parse pending import:", error);
         }
       }
     }
@@ -64,7 +67,7 @@ class TowerImportHandler {
     if (firstTowerName) {
       const defaultTower = window.app.towerManager.towers[firstTowerName];
       window.app.viewer.load(defaultTower);
-      
+
       setTimeout(() => {
         if (window.app.viewer.tower) {
           this.performImport(importData);
@@ -80,7 +83,7 @@ class TowerImportHandler {
       this.performImport(importData);
       return true;
     } catch (importError) {
-      console.error('Error during tower import:', importError);
+      console.error("Error during tower import:", importError);
       return false;
     }
   }
@@ -89,23 +92,22 @@ class TowerImportHandler {
     try {
       const parsedData = JSON.parse(importData.data);
       let towerName;
-      
+
       if (parsedData.master) {
         towerName = Object.keys(parsedData.master)[0];
       } else {
         towerName = Object.keys(parsedData)[0];
       }
-      
+
       this.storeOriginalCustomTowerData(parsedData, towerName);
       this.dispatchImportEvent(importData);
-      
+
       setTimeout(() => {
         this.loadImportedTowerInUI(towerName);
         this.cleanupAfterImport();
       }, 100);
-      
     } catch (importError) {
-      console.error('Error during tower import:', importError);
+      console.error("Error during tower import:", importError);
     }
   }
 
@@ -113,10 +115,10 @@ class TowerImportHandler {
     if (!window.originalCustomTowers) {
       window.originalCustomTowers = {};
     }
-    
+
     const towerData = parsedData.master?.[towerName] || parsedData[towerName];
     if (towerData) {
-      window.originalCustomTowers[towerName] = 
+      window.originalCustomTowers[towerName] =
         typeof structuredClone !== "undefined"
           ? structuredClone(towerData)
           : JSON.parse(JSON.stringify(towerData));
@@ -128,24 +130,24 @@ class TowerImportHandler {
       detail: {
         data: importData.data,
         type: "json",
-        source: "database"
-      }
+        source: "database",
+      },
     });
     document.dispatchEvent(importEvent);
   }
 
-  loadImportedTowerInUI(towerName) {    
+  loadImportedTowerInUI(towerName) {
     if (window.app.towerManager.towers[towerName]) {
       const tower = window.app.towerManager.towers[towerName];
       loadTower(tower, window.app.viewer);
     }
-    
+
     const newUrl = `${window.location.pathname}?tower=${encodeURIComponent(towerName)}`;
     window.history.replaceState({}, document.title, newUrl);
   }
 
   cleanupAfterImport() {
-    localStorage.removeItem('pendingTowerImport');
+    localStorage.removeItem("pendingTowerImport");
   }
 }
 

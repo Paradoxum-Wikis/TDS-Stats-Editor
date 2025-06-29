@@ -21,7 +21,7 @@ const ViewerData = {
 
       try {
         const importedData = JSON.parse(json);
-        
+
         let isCustomTower = false;
         let towerName = "";
 
@@ -36,7 +36,7 @@ const ViewerData = {
           }
         } else {
           const directKeys = Object.keys(importedData);
-          
+
           // Check if any imported towers are custom
           for (const key of directKeys) {
             if (!this.app.towerManager.towerData.hasOwnProperty(key)) {
@@ -233,9 +233,9 @@ const ViewerData = {
 
           this.tower.importJSON({ [this.tower.name]: originalData });
           this.deltaTower.importJSON({ [this.tower.name]: originalData });
-          
+
           if (notesTextarea) notesTextarea.value = "";
-          
+
           this.reload();
           return;
         }

@@ -391,20 +391,23 @@ document.addEventListener("click", function (event) {
         const importData = {
           data: JSON.stringify(towerData, null, 2),
           timestamp: Date.now(),
-          source: 'database'
+          source: "database",
         };
-        
-        localStorage.setItem('pendingTowerImport', JSON.stringify(importData));
-        
+
+        localStorage.setItem("pendingTowerImport", JSON.stringify(importData));
+
         const currentOrigin = window.location.origin;
-        const editorUrl = currentOrigin.replace('/db', '') + '/?import=pending';
-        
-        window.open(editorUrl, '_blank');
-        
+        const editorUrl = currentOrigin.replace("/db", "") + "/?import=pending";
+
+        window.open(editorUrl, "_blank");
+
         showAlert("Tower data sent to editor! Check the new tab.", "success");
       } catch (error) {
         console.error("Failed to prepare tower data for import:", error);
-        showAlert("Failed to prepare tower data for import: " + error.message, "danger");
+        showAlert(
+          "Failed to prepare tower data for import: " + error.message,
+          "danger",
+        );
       }
     } else {
       showAlert("No tower data available for import", "warning");
