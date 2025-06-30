@@ -41,14 +41,14 @@ export default class CloneTowerForm {
 
     this.addCloneSubmit.addEventListener(
       "click",
-      ((e) => {
+      (() => {
         this.#onSubmit();
       }).bind(this),
     );
 
     this.towerName.addEventListener(
       "input",
-      ((e) => {
+      (() => {
         this.#onNameInput(this.towerName.value);
       }).bind(this),
     );

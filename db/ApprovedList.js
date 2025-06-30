@@ -56,6 +56,7 @@ const approvedTowers = [
   "Onett4smash/Medic Rework (V2)",
   "BertoYT/Gladiator",
   "Hellscream2008/Scout - Mass Rework!",
+  "GubbyTheGoat69/Gladiator(meta rework)",
 ];
 
 // List of featured towers
