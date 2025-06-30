@@ -26,7 +26,6 @@ class TDSWikiFetcher {
     return this.corsProxies[this.currentProxyIndex];
   }
 
-  // tries next proxy if current one fails
   switchToNextProxy() {
     if (this.currentProxyIndex < this.corsProxies.length - 1) {
       this.currentProxyIndex++;
@@ -37,7 +36,6 @@ class TDSWikiFetcher {
     return false;
   }
 
-  // tries to fetch with fallbacks
   async fetchWithFallback(url) {
     let attempts = 0;
     const maxAttempts = this.corsProxies.length;
@@ -221,8 +219,6 @@ class TDSWikiFetcher {
 
       const response = await this.fetchWithFallback(url);
       const html = await response.text();
-
-      // parse html
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, "text/html");
 
@@ -421,7 +417,7 @@ class TDSWikiFetcher {
     }
   }
 
-  // fallback towers if wiki fails (placeholder data for testing mostly tbh)
+  // called it fallbacks, but it's mostly placeholder data for testing tbh
   getFallbackTowers() {
     console.log("using fallback towers");
     return [

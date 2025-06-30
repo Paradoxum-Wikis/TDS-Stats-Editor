@@ -15,12 +15,12 @@ class Dropdown {
     this.dropdown = dropdown;
     this.options = options;
     this.setTextMode = config.setTextMode ?? false;
-    this.currentHighlightedIndex = -1; // highlight index
+    this.currentHighlightedIndex = -1;
 
     this.textForm.addEventListener("focusin", this.#onFocusIn.bind(this));
     this.textForm.addEventListener("focusout", this.#onFocusOut.bind(this));
     this.textForm.addEventListener("input", this.#onInput.bind(this));
-    this.textForm.addEventListener("keydown", this.#onKeyDown.bind(this)); // keybind listener
+    this.textForm.addEventListener("keydown", this.#onKeyDown.bind(this));
     this.textForm.parentElement.addEventListener("submit", (e) => {
       e.preventDefault();
     });
@@ -125,18 +125,16 @@ class Dropdown {
 
     const keepOpen = window.state?.settings?.keepDropdownOpen === true;
     if (!keepOpen) {
-      // default behavior: Hide, blur, and reset highlight
       this.#hide();
       this.textForm.blur();
-      this.#removeHighlightFromAll(); // Clear visual highlight
+      this.#removeHighlightFromAll();
     } else {
-      // keep open setting: fefilter, but DO NOT reset highlight
       this.#filterOptions();
     }
   }
 
   #onKeyDown(event) {
-    if (!this.dropdown.classList.contains("d-block")) return; // act if dropdown is visible
+    if (!this.dropdown.classList.contains("d-block")) return;
 
     const options = Array.from(
       this.dropdown.querySelectorAll(".dropdown-item:not(.d-none)"),
@@ -162,7 +160,6 @@ class Dropdown {
             new MouseEvent("mousedown", { bubbles: true }),
           );
 
-          // Check the setting AFTER the selection logic runs
           const keepOpen = window.state?.settings?.keepDropdownOpen === true;
           if (!keepOpen) {
             this.textForm.blur();
@@ -183,11 +180,9 @@ class Dropdown {
     this.#removeHighlightFromAll();
 
     if (this.currentHighlightedIndex === -1 && direction === -1) {
-      // If starting navigation upwards, go to the last item
       this.currentHighlightedIndex = options.length - 1;
     } else {
       this.currentHighlightedIndex += direction;
-      // Wrap around
       if (this.currentHighlightedIndex < 0) {
         this.currentHighlightedIndex = options.length - 1;
       } else if (this.currentHighlightedIndex >= options.length) {

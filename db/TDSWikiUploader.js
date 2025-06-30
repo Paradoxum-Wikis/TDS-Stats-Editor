@@ -10,11 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const jsonFileOption = document.getElementById("jsonFileOption");
   const jsonPasteOption = document.getElementById("jsonPasteOption");
   const jsonLinkOption = document.getElementById("jsonLinkOption");
-
-  // setup the modal
   const towerModal = new bootstrap.Modal(uploadTowerModal);
 
-  // clean up when modal is closed
   uploadTowerModal.addEventListener("hidden.bs.modal", function () {
     const backdrop = document.querySelector(".modal-backdrop");
     if (backdrop) {
@@ -25,14 +22,11 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.style.paddingRight = "";
   });
 
-  // show modal when upload button is clicked
   uploadTowerBtn.addEventListener("click", function () {
     towerModal.show();
   });
 
-  // when the upload button is clicked
   uploadTowerButton.addEventListener("click", async () => {
-    // store original button content
     const originalButtonContent = uploadTowerButton.innerHTML;
 
     try {
@@ -40,25 +34,21 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      // disable the button and show loading state
       uploadTowerButton.disabled = true;
       uploadTowerButton.innerHTML = `
                 <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
                 Processing...
             `;
 
-      // get and check the json data
       const jsonData = await getJsonData();
       if (!jsonData) {
         window.showValidationError("JSON data is required");
         return;
       }
 
-      // format everything for the wiki
       const content = formatWikiContent();
       const finalContent = content.replace("JSONDATA", jsonData);
 
-      // try to copy to clipboard
       let clipboardSuccess = false;
       if (navigator.clipboard && navigator.clipboard.writeText) {
         await navigator.clipboard.writeText(finalContent);
@@ -87,13 +77,8 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       if (clipboardSuccess) {
-        // Only add a delay if clipboard copy was successful
         await new Promise((resolve) => setTimeout(resolve, 2000));
-
-        // open the wiki page
         openFandomEditPage();
-
-        // make sure modal is fully gone
         towerModal.hide();
 
         setTimeout(() => {
@@ -107,16 +92,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 300);
       }
     } catch (error) {
-      // show error if something went wrong
       window.showValidationError("Error: " + error.message);
     } finally {
-      // always restore button state, regardless of success or failure
       uploadTowerButton.innerHTML = originalButtonContent;
       uploadTowerButton.disabled = false;
     }
   });
 
-  // check if the form is filled properly
   function validateForm() {
     let isValid = true;
     let requiredFields = ["towerDescription"];
@@ -166,7 +148,6 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         linkInput.classList.remove("is-invalid");
 
-        // get info from the blog link
         const linkInfo = extractInfoFromBlogLink(linkValue);
         if (linkInfo) {
           const usernameField = document.getElementById("fandomUsername");
@@ -241,7 +222,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // format the content for the wiki
   function formatWikiContent() {
     const description = document
       .getElementById("towerDescription")
@@ -257,28 +237,23 @@ document.addEventListener("DOMContentLoaded", function () {
       towerType = "New";
     }
 
-    // process the image
     let imageContent = "";
     const imageUrlOption = document.getElementById("imageUrlOption");
     if (imageUrlOption.checked) {
       const imageUrl = document.getElementById("towerImageUrl").value.trim();
       if (imageUrl) {
-        // check if we already have a formatted version
         const contentFormat = window.imageCache?.[`content_${imageUrl}`];
         imageContent = contentFormat || imageUrl;
 
-        // handle roblox ids
         if (!contentFormat && /^\d+$/.test(imageUrl)) {
           imageContent = `RobloxID${imageUrl}`;
         }
       }
     }
 
-    // add wiki categories - wrap the description with id
     return `<div id="desc">${description}</div>\n\n${imageContent}\n\n${towerType}\n\n<pre id="towerdata">JSONDATA</pre>\n\n<!-- DO NOT EDIT, MODIFY, DELETE, ANYTHING IN HERE UNLESS YOU KNOW WHAT YOU ARE DOING. MAKE SURE THE CODE YOU PASTED IS THE ONLY THING HERE. -->\n[[Category:TDSDatabase]]\n[[Category:Blog posts]]`;
   }
 
-  // open the wiki edit page
   function openFandomEditPage() {
     const username = document.getElementById("fandomUsername").value.trim();
     const towerName = document
@@ -290,7 +265,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function extractInfoFromBlogLink(link) {
-    // Pattern: https://tds.fandom.com/wiki/User_blog:USERNAME/TOWERNAME
     const match = link.match(
       /https?:\/\/tds\.fandom\.com\/wiki\/User_blog:([^\/]+)\/([^?&#]+)/i,
     );
@@ -305,12 +279,10 @@ document.addEventListener("DOMContentLoaded", function () {
     return null;
   }
 
-  // expose this function globally
   window.formatWikiContent = formatWikiContent;
   window.openFandomEditPage = openFandomEditPage;
   window.extractInfoFromBlogLink = extractInfoFromBlogLink;
 
-  // Setup radio buttons if they exist
   if (typeof window.setupRadioButtonHandlers === "function") {
     window.setupRadioButtonHandlers();
   }

@@ -3,7 +3,6 @@
  * Handles searching, filtering and sorting of towers in the tower browser
  */
 
-// globals
 window.sortState = {
   criteria: "wiki",
   direction: "asc",
@@ -11,7 +10,6 @@ window.sortState = {
 window.originalCardsOrder = [];
 window.towerDataCache = window.towerDataCache || {};
 
-// search functionality
 function setupSearch() {
   const searchInput = document.querySelector(
     '.form-control[placeholder="Search a Tower or Author"]',
@@ -65,7 +63,6 @@ window.setupFilters = function () {
   applyFilters();
 };
 
-// clear filter helper func
 function addClearFilterButton(container, icon, message) {
   const noResults = document.createElement("div");
   noResults.id =
@@ -112,14 +109,10 @@ function applyFilters(maintainSort = true) {
   const showGrandfathered =
     document.getElementById("filterGrandfathered")?.checked ?? false;
 
-  // check if any exclusive filter is active
   const hasExclusiveFilter =
     showUnverified || showFeatured || showGrandfathered;
-
-  // check if all regular filters are off
   const allRegularFiltersOff = !showNew && !showRework && !showRebalance;
 
-  // Get search query
   const searchInput = document.querySelector(
     '.form-control[placeholder="Search a Tower or Author"]',
   );
@@ -133,7 +126,6 @@ function applyFilters(maintainSort = true) {
   const cards = allTowersContainer.querySelectorAll(".col");
   let matchCount = 0;
 
-  // Remove any existing filter messages
   document.getElementById("no-filter-results")?.remove();
   document.getElementById("no-search-results")?.remove();
   document.getElementById("no-unverified-results")?.remove();
@@ -242,7 +234,6 @@ function applyFilters(maintainSort = true) {
     }
   });
 
-  // no results message for search
   if (matchCount === 0 && query) {
     const noResults = document.createElement("div");
     noResults.id = "no-search-results";
@@ -267,7 +258,6 @@ function applyFilters(maintainSort = true) {
 
   // generate appropriate messages for exclusive filters
   if (matchCount === 0 && !query) {
-    // multiple filters:
     if (
       (showFeatured && showGrandfathered) ||
       (showFeatured && showUnverified) ||
@@ -312,7 +302,6 @@ function applyFilters(maintainSort = true) {
   }
 }
 
-// sort functionality
 function setupSorting() {
   const allTowersContainer = document.getElementById("all-towers");
   if (allTowersContainer) {
@@ -449,7 +438,6 @@ function sortTowers(criteria, direction = "asc") {
   applyFilters(false);
 }
 
-// time sort functionality
 function compareUploadDates(dateA, dateB) {
   function getDateValue(dateText) {
     dateText = dateText.trim();
@@ -502,7 +490,6 @@ function compareUploadDates(dateA, dateB) {
   return getDateValue(dateA) - getDateValue(dateB);
 }
 
-// globals export
 window.setupSearch = setupSearch;
 window.setupFilters = setupFilters;
 window.setupSorting = setupSorting;

@@ -48,7 +48,6 @@ document.addEventListener("DOMContentLoaded", function () {
     listViewBtn.classList.add("btn-outline-primary");
   }
 
-  // toggle GridScale.css
   function toggleGridStylesheet(enabled) {
     const gridStyleLink = document.querySelector('link[href="GridScale.css"]');
     if (gridStyleLink) {
@@ -58,7 +57,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   toggleGridStylesheet(savedView === "grid");
 
-  // open upload modal
   document
     .getElementById("upload-tower-btn")
     .addEventListener("click", function () {
@@ -68,7 +66,6 @@ document.addEventListener("DOMContentLoaded", function () {
       uploadModal.show();
     });
 
-  // switch to grid view
   document
     .getElementById("grid-view-btn")
     .addEventListener("click", function () {
@@ -86,10 +83,8 @@ document.addEventListener("DOMContentLoaded", function () {
       listViewBtn.classList.remove("active", "btn-primary");
       listViewBtn.classList.add("btn-outline-primary");
 
-      // enable the grid stylesheet
       toggleGridStylesheet(true);
 
-      // apply grid view to cards and also move badges
       document.querySelectorAll("#all-towers .card").forEach((card) => {
         card.classList.remove("list-view-card");
 
@@ -104,16 +99,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
 
-      // Save preference
       localStorage.setItem("towerViewPreference", "grid");
     });
 
-  // switch to list view
   document
     .getElementById("list-view-btn")
     .addEventListener("click", function () {
       removeAllGridClasses(allTowers);
-      // add the single column class
       allTowers.classList.add("row-cols-1");
 
       listViewBtn.classList.add("active", "btn-primary");
@@ -121,7 +113,6 @@ document.addEventListener("DOMContentLoaded", function () {
       gridViewBtn.classList.remove("active", "btn-primary");
       gridViewBtn.classList.add("btn-outline-primary");
 
-      // disable grid stylesheet
       toggleGridStylesheet(false);
 
       document.querySelectorAll("#all-towers .card").forEach((card) => {
@@ -140,7 +131,6 @@ document.addEventListener("DOMContentLoaded", function () {
             listContainer.className = "mt-2";
             listContainer.innerHTML = absoluteBadgesContainer.innerHTML;
 
-            // add badge after the description
             cardBody.appendChild(listContainer);
             absoluteBadgesContainer.remove();
           }
@@ -152,19 +142,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const wikiFetcher = new TDSWikiFetcher();
 
-  // render a tower card
   function renderTowerCard(tower, container) {
     const col = document.createElement("div");
     col.className = "col";
 
-    // Create unique id
     const towerId = `tower-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
 
-    // Save tower data in cache
     if (!window.towerDataCache) window.towerDataCache = {};
     if (tower.data) window.towerDataCache[towerId] = tower.data;
 
-    // Set badge color based on tag
     let tagClass = "bg-secondary";
     if (tower.tag === "New") {
       tagClass = "bg-success";
@@ -174,21 +160,17 @@ document.addEventListener("DOMContentLoaded", function () {
       tagClass = "bg-info";
     }
 
-    // Check if we're in list view
     const isListView =
       container.id === "all-towers" &&
       container.classList.contains("row-cols-1");
 
-    // Create buttons HTML based on tower type
     let buttonsHTML = "";
 
     if (tower.isLink && tower.linkedTower) {
-      // For linked towers
       buttonsHTML = `<a href="${tower.linkedTower}" target="_blank" class="btn btn-sm btn-outline-primary">
                 <i class="bi bi-box-arrow-up-right me-2"></i>Visit Blog
             </a>`;
     } else if (tower.data) {
-      // For towers with JSON data
       buttonsHTML = `<button class="btn btn-sm btn-outline-info copy-json me-2" data-tower-id="${towerId}">
                 <i class="bi bi-clipboard me-2"></i>Copy JSON
             </button>
@@ -197,7 +179,6 @@ document.addEventListener("DOMContentLoaded", function () {
             </button>`;
     }
 
-    // Format author name as a link
     const authorLink = `<a href="https://tds.fandom.com/wiki/User:${encodeURIComponent(tower.author)}" 
                               target="_blank" 
                               class="author-link" 
@@ -205,7 +186,6 @@ document.addEventListener("DOMContentLoaded", function () {
                               ${tower.author}
                            </a>`;
 
-    // Create badges HTML
     const badgesHtml = `
             ${tower.featured ? '<span class="badge bg-gold me-1">Featured</span>' : ""}
             ${tower.grandfathered ? '<span class="badge bg-dark me-1" data-grandfathered="true">Grandfathered</span>' : ""}
@@ -243,22 +223,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     container.appendChild(col);
 
-    // Hide unverified towers by default
     if (tower.unverified && container.id === "all-towers") {
       col.classList.add("d-none");
     }
   }
 
-  // load towers from wiki
   async function loadTowersFromWiki(forceRefresh = false) {
-    // disable the refresh button while loading
     const refreshButton = document.getElementById("refresh-towers-btn");
     refreshButton.disabled = true;
     refreshButton.innerHTML =
       '<i class="spinner-border spinner-border-sm me-2"></i>Refreshing...';
 
     try {
-      // reset the stored original cards to prevent duplicates when using the refresh button
       window.originalCardsOrder = [];
 
       if (!forceRefresh) {
@@ -285,7 +261,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
 
-      // show loading spinners
       document.getElementById("featured-towers").innerHTML =
         '<div class="col-12 text-center text-light p-5"><div class="spinner-border" role="status"></div><p class="mt-2">Commander get the highlights before I sell you to Lord Exo.</p></div>';
 
@@ -294,7 +269,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const towers = await wikiFetcher.fetchTowers();
 
-      // Save to cache
       localStorage.setItem("towerDataCache", JSON.stringify(towers));
       localStorage.setItem("towerDataTimestamp", Date.now().toString());
 
@@ -304,23 +278,19 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("all-towers").innerHTML =
         '<div class="col-12 text-center text-danger p-5"><i class="bi bi-exclamation-triangle-fill fs-1"></i><p class="mt-2">Failed to load towers from the wiki. Please try again later.</p></div>';
     } finally {
-      // Re-enable refresh button when done (whether successful or not)
       refreshButton.disabled = false;
       refreshButton.innerHTML =
         '<i class="bi bi-arrow-clockwise me-2"></i>Refresh';
     }
   }
 
-  // cards renderer
   function renderAllTowers(towers) {
-    // clear containers
     const featuredContainer = document.querySelector(".featured-towers");
     const allTowersContainer = document.getElementById("all-towers");
 
     featuredContainer.innerHTML = "";
     allTowersContainer.innerHTML = "";
 
-    // highlited towers cards
     const highlightedTowers = towers.filter((tower) => tower.highlighted);
 
     if (highlightedTowers.length === 0) {
@@ -332,7 +302,6 @@ document.addEventListener("DOMContentLoaded", function () {
       );
     }
 
-    // show all towers
     towers.forEach((tower) => renderTowerCard(tower, allTowersContainer));
 
     if (window.setupSearch) window.setupSearch();
@@ -340,10 +309,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (window.setupSorting) window.setupSorting();
   }
 
-  // load towers on page load
   loadTowersFromWiki();
 
-  // add event listener for refresh button
   document
     .getElementById("refresh-towers-btn")
     .addEventListener("click", () => loadTowersFromWiki(true));
@@ -357,9 +324,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (window.setupSorting) window.setupSorting();
 });
 
-// handle json buttons
 document.addEventListener("click", function (event) {
-  // copy json to clipboard
   if (event.target.closest(".copy-json")) {
     const button = event.target.closest(".copy-json");
     const towerId = button.dataset.towerId;
@@ -415,7 +380,6 @@ document.addEventListener("click", function (event) {
   }
 });
 
-// show alert with animation
 function showAlert(message, type) {
   const alertPlaceholder = document.createElement("div");
   alertPlaceholder.className = "position-fixed bottom-0 end-0 p-3";

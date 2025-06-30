@@ -2,7 +2,7 @@ export default class ImageLoader {
   static cacheName = "tdse-image-cache-v1";
   static debugMode = false;
 
-  // helper to log when in debug mode
+  // log only if debug mode is enabled
   static log(...args) {
     if (this.debugMode) {
       console.log("[ImageLoader]", ...args);
@@ -37,17 +37,14 @@ export default class ImageLoader {
         }
       } catch (error) {
         console.warn("Cache API error:", error);
-        // continue to fetch if cache fails
       }
     }
 
-    // get the url for the image
     const imageUrl = await this.resolveImageUrl(imageIdStr);
     if (!imageUrl) {
       return "";
     }
 
-    // fetch the image
     try {
       const imageResponse = await fetch(imageUrl, { mode: "cors" });
 
@@ -63,11 +60,9 @@ export default class ImageLoader {
           this.log(`Image ${imageIdStr} stored in Cache API`);
         } catch (cacheError) {
           console.error(`Failed to cache image ${imageIdStr}:`, cacheError);
-          // continue even if caching fails
         }
       }
 
-      // return as object URL
       const blob = await imageResponse.blob();
       return URL.createObjectURL(blob);
     } catch (error) {
@@ -89,11 +84,10 @@ export default class ImageLoader {
 
     // "File:" syntax for tdsw images
     if (imageIdStr.startsWith("File:")) {
-      const filename = imageIdStr.substring(5); // Remove "File:" prefix
+      const filename = imageIdStr.substring(5);
       url = this.convertFileToFandomUrl(filename);
       this.log(`Converted File: syntax to URL: ${url}`);
     } else if (imageIdStr.startsWith("https")) {
-      // url handling
       if (imageIdStr.startsWith("https://static.wikia.nocookie.net/")) {
         url = this.trimFandomUrl(imageIdStr);
       } else {
@@ -129,20 +123,14 @@ export default class ImageLoader {
     return url;
   }
 
-  // file: syntax to fandom url converter
   static convertFileToFandomUrl(filename) {
     const md5Hash = CryptoJS.MD5(filename).toString();
-
-    // get first character and first two characters for the path
     const firstChar = md5Hash.charAt(0);
     const firstTwoChars = md5Hash.substring(0, 2);
-
-    // construct the tdsw image url
     return `https://static.wikia.nocookie.net/tower-defense-sim/images/${firstChar}/${firstTwoChars}/${encodeURIComponent(filename)}`;
   }
 
   static trimFandomUrl(fullUrl) {
-    // Fandom url chopping
     const match = fullUrl.match(
       /https:\/\/static\.wikia\.nocookie\.net\/.*?\.(png|jpg|jpeg|gif)/i,
     );
@@ -156,7 +144,6 @@ export default class ImageLoader {
       return;
     }
 
-    // clear from Cache API
     if ("caches" in window) {
       try {
         const cache = await caches.open(this.cacheName);
@@ -170,7 +157,6 @@ export default class ImageLoader {
     }
   }
 
-  // method to clear all cached images
   static async clearAllCache() {
     if ("caches" in window) {
       try {
@@ -189,7 +175,6 @@ export default class ImageLoader {
   }
 }
 
-// settings check for debug mode
 if (localStorage.getItem("imageCacheDebug") === "true") {
   ImageLoader.setDebugMode(true);
 }

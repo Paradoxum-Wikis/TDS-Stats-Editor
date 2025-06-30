@@ -2,7 +2,6 @@ import TextFormatter from "./TextFormatter.js";
 
 const previewClass =
   "small text-muted mt-1 formatted-preview ps-2 border-start border-secondary";
-const colorRegex = /\\c([a-zA-Z]+|#[0-9a-fA-F]{3,6})\\/;
 const formControlClass = [
   "form-control",
   "form-control-sm",
@@ -98,7 +97,6 @@ export default class ExtrasManager {
       upgradeStats.Extras = [];
     }
 
-    // form to add group
     const groupForm = document.createElement("div");
     groupForm.classList.add(
       "mb-3",
@@ -123,8 +121,6 @@ export default class ExtrasManager {
             </select>
         `;
     const groupIdSelect = groupIdField.querySelector("select");
-
-    // Group name field
     const groupNameField = document.createElement("div");
     groupNameField.classList.add("mb-2");
     groupNameField.innerHTML = `
@@ -136,7 +132,6 @@ export default class ExtrasManager {
         `;
     const groupNameInput = groupNameField.querySelector("input");
 
-    // name preview
     this.createPreviewElement(groupNameInput, groupNameField);
 
     const contentField = document.createElement("div");
@@ -147,10 +142,8 @@ export default class ExtrasManager {
         `;
     const contentInput = contentField.querySelector("textarea");
 
-    // content preview
     this.createPreviewElement(contentInput, contentField);
 
-    // Buttons
     const buttonGroup = document.createElement("div");
     buttonGroup.classList.add("d-flex", "justify-content-end", "gap-2");
 
@@ -292,19 +285,16 @@ export default class ExtrasManager {
     const collapsibleGroups = {};
 
     upgradeChanges.forEach((change) => {
-      // check for collapsible groups with custom names: [Collapsible], [Collapsible1], [Collapsible:CustomName], etc.
+      // Check for collapsible groups with custom names:
+      // [Collapsible], [Collapsible1], [Collapsible:CustomName], etc.
       const collapsibleMatch = change.match(/^\[Collapsible(\d*):?(.*?)\]/);
 
       if (collapsibleMatch) {
-        // get the group number or use default if none
         const groupId = collapsibleMatch[1] || "default";
-
-        // get custom name if provided
         const customName = collapsibleMatch[2]
           ? collapsibleMatch[2].trim()
           : "";
 
-        // create the group array if it doesn't already exist
         if (!collapsibleGroups[groupId]) {
           collapsibleGroups[groupId] = {
             items: [],
@@ -319,19 +309,17 @@ export default class ExtrasManager {
           .trim();
         collapsibleGroups[groupId].items.push(cleanedText);
       } else {
-        // this is a regular extra
         regularExtras.push(change);
       }
     });
 
     let html = "";
     regularExtras.forEach((change) => {
-      // if this is a user-entered extra (starts with ●) or an auto-generated change with icons
+      // user entered extra (starts with ●)
+      // auto generated extra (has img icon)
       if (change.startsWith("●")) {
-        // User entered extra - DO escape HTML
         html += `<div class="upgrade-change">${TextFormatter.format(change)}</div>`;
       } else {
-        // Auto generated change with icons - DO NOT escape HTML
         html += `<div class="upgrade-change">${TextFormatter.format(change, false)}</div>`;
       }
     });
@@ -345,7 +333,6 @@ export default class ExtrasManager {
       return parseInt(a) - parseInt(b);
     });
 
-    // add each collapsible group
     sortedGroupIds.forEach((groupId) => {
       const group = collapsibleGroups[groupId];
       const items = group.items;
@@ -363,7 +350,6 @@ export default class ExtrasManager {
           }
         }
 
-        // format group label without escaping HTML (cuz customName might have color tags)
         html += `
                     <div class="mt-2">
                         <button class="btn btn-sm btn-primary border25 w-100" 
@@ -378,7 +364,6 @@ export default class ExtrasManager {
                             <div class="ps-2 border-start border-secondary">
                                 ${items
                                   .map((item) => {
-                                    // again, check if it's a user entered extra
                                     const escapeHtml = item.startsWith("●");
                                     return `<div>${TextFormatter.format(item, !escapeHtml)}</div>`;
                                   })

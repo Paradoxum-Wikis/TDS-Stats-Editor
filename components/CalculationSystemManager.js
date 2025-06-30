@@ -11,13 +11,11 @@ export default class CalculationSystemManager {
     this.collectAvailableSystems();
     this.setupSelectElement();
 
-    // catch tower changes
     document.addEventListener("towerLoaded", (e) => {
       this.currentTower = e.detail.tower;
       this.updateSelectForTower();
     });
 
-    // catch tower data updates too
     document.addEventListener("towerDataChanged", (e) => {
       if (e.detail.tower === this.currentTower) {
         this.updateSelectForTower();
@@ -74,12 +72,10 @@ export default class CalculationSystemManager {
     this.select = document.getElementById("calculation-system-select");
 
     if (this.select) {
-      // clear old options
       this.select.innerHTML = '<option value="default">Default</option>';
 
-      // add all systems
       this.availableSystems.forEach((system) => {
-        if (system === "Default") return; // skip default, already there
+        if (system === "Default") return;
 
         const option = document.createElement("option");
         option.value = system;
@@ -87,17 +83,14 @@ export default class CalculationSystemManager {
         this.select.appendChild(option);
       });
 
-      // update on change
       this.select.addEventListener("change", () => {
         this.applySelectedSystem();
       });
 
-      // mobile compatibility
       const mobileSelect = document.getElementById(
         "mobile-calculation-system-select",
       );
       if (mobileSelect) {
-        // when desktop changes - also update mobile (in case)
         this.select.addEventListener("change", () => {
           if (mobileSelect.value !== this.select.value) {
             mobileSelect.value = this.select.value;
@@ -110,11 +103,9 @@ export default class CalculationSystemManager {
   updateSelectForTower() {
     if (!this.select || !this.currentTower) return;
 
-    // check tower json for calc system
     const towerName = this.currentTower.name;
     let existingSystem = null;
 
-    // peek at first skin for calc system
     const skins = this.currentTower.json[towerName];
     if (skins) {
       const firstSkinName = Object.keys(skins)[0];
@@ -133,7 +124,6 @@ export default class CalculationSystemManager {
 
     this.currentTower.calculationSystem = existingSystem || null;
 
-    // fix for calculatedsystem json data being ignored when loading
     if (existingSystem && previousValue !== existingSystem) {
       document.dispatchEvent(
         new CustomEvent("calculationSystemChanged", {
@@ -149,7 +139,6 @@ export default class CalculationSystemManager {
     const selectedSystem = this.select.value;
     const towerName = this.currentTower.name;
 
-    // grab current system from json
     let currentSystem = "default";
     const skins = this.currentTower.json[towerName];
     if (skins) {
@@ -159,48 +148,39 @@ export default class CalculationSystemManager {
       }
     }
 
-    // skip if no change - ALLOW DEFAULT TO ALWAYS TRIGGER
-    // this was causing the bug that didn't allow default to be loaded
     if (selectedSystem === currentSystem && selectedSystem !== "default")
       return;
 
-    // update tower object
     if (selectedSystem === "default") {
       this.currentTower.calculationSystem = null;
     } else {
       this.currentTower.calculationSystem = selectedSystem;
     }
 
-    // tweak tower json
     for (const skinName in this.currentTower.json[towerName]) {
       const skin = this.currentTower.json[towerName][skinName];
 
       if (selectedSystem === "default") {
-        // ditch calc system if default
         if (skin.hasOwnProperty("CalculationSystem")) {
           delete skin.CalculationSystem;
         }
       } else {
-        // slap on new calc system
         skin.CalculationSystem = selectedSystem;
       }
     }
 
-    // kick off recalc
     document.dispatchEvent(
       new CustomEvent("calculationSystemChanged", {
         detail: { tower: this.currentTower },
       }),
     );
 
-    // refresh ui
     document.dispatchEvent(
       new CustomEvent("towerDataChanged", {
         detail: { tower: this.currentTower },
       }),
     );
 
-    // table force rebuild/reload
     if (
       document.querySelector("#table-view .active")?.textContent.trim() ===
       "Table"

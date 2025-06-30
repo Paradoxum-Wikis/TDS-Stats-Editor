@@ -6,7 +6,7 @@ export default class SidebarToggle {
 
     if (this.collapsed) {
       this.container.classList.add("sidebar-collapsed");
-      // set initial button style for collapsed state
+      // collapsed state
       this.toggleButton.classList.add("btn-outline-secondary");
       this.toggleButton.classList.remove("btn-primary");
     } else {
@@ -33,7 +33,6 @@ export default class SidebarToggle {
 
     // save to localStorage
     localStorage.setItem("sidebar-collapsed", this.collapsed);
-
     window.dispatchEvent(new Event("resize"));
   }
 }

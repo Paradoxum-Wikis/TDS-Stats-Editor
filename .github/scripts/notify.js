@@ -145,11 +145,11 @@ async function sendMessage(
   towerList,
   towerCount,
 ) {
-  // --- 1. Build rawContent ---
+  // Build rawContent
   const rawTowerList = towerList.join("\n");
   const rawContent = `Hello, ${username}!\nGreat news! Your ${pluralTowers} been approved and added to the TDS Statistics Editor database:\n${rawTowerList}\nYour ${towerCount > 1 ? "towers are" : "tower is"} now verified and will no longer be hidden by the "unverified" tag. You can view ${towerCount > 1 ? "them" : "it"} on the database at: https://tds-editor.com/db/\nThank you for your contribution to the TDS community!\n-----------------------------------------------------------------------------------------------------------\n This is an automated message from the TDS Statistics Editor system.`;
 
-  // --- 2. Build jsonModel ---
+  // Build jsonModel
   const dbUrl = "https://tds-editor.com/db/";
   const jsonContent = [];
 
@@ -228,7 +228,7 @@ async function sendMessage(
 
   const jsonModel = JSON.stringify({ type: "doc", content: jsonContent });
 
-  // --- 3. Build attachments ---
+  // Build attachments
   const attachments = JSON.stringify({
     contentImages: [],
     openGraphs: [
@@ -249,7 +249,7 @@ async function sendMessage(
     atMentions: [],
   });
 
-  // --- 4. Create Form Data ---
+  // Create Form Data
   const form = new FormData();
   form.append("token", token);
   form.append("wallOwnerId", userId);
@@ -258,7 +258,7 @@ async function sendMessage(
   form.append("jsonModel", jsonModel);
   form.append("attachments", attachments);
 
-  // --- 5. Send Request ---
+  // Send Request
   const res = await fetch(
     `${WIKI_BASE}/wikia.php?controller=Fandom\\MessageWall\\MessageWall&method=createThread&format=json`,
     {

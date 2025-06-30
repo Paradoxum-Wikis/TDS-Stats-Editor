@@ -7,7 +7,6 @@ export default class KeyboardNavigation {
   }
 
   setupFocusStyles() {
-    // add class to focusable elements to highlight them with keyboard css
     this.makeElementsKeyboardAccessible(
       [
         "button",
@@ -21,7 +20,6 @@ export default class KeyboardNavigation {
   }
 
   makeElementsKeyboardAccessible(selector) {
-    // track input method
     let usingKeyboard = false;
 
     document.addEventListener("keydown", (event) => {
@@ -32,12 +30,10 @@ export default class KeyboardNavigation {
 
     document.addEventListener("mousedown", () => {
       usingKeyboard = false;
-      // remove highlight from any currently focused element
       document.activeElement?.classList.remove("keyboard-focus-visible");
     });
 
     document.addEventListener("focusin", (event) => {
-      // only add class if focused through keyboard
       if (usingKeyboard && event.target.matches(selector)) {
         event.target.classList.add("keyboard-focus-visible");
       }
@@ -47,7 +43,7 @@ export default class KeyboardNavigation {
       event.target.classList.remove("keyboard-focus-visible");
     });
 
-    // watch for new elements
+    // tabindex to new matching elements for accessibility
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.addedNodes.length) {
@@ -137,7 +133,6 @@ export default class KeyboardNavigation {
   }
 
   addKeyboardShortcuts() {
-    // global shortcuts
     document.addEventListener("keydown", (event) => {
       if (document.body.classList.contains("modal-open")) {
         if (event.key !== "Escape") {

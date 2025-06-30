@@ -54,12 +54,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function startSlideshow() {
-    clearInterval(slideInterval); // Clear any existing interval
+    clearInterval(slideInterval);
     slideInterval = setInterval(function () {
       slideIndex++;
       if (slideIndex >= slides.length) slideIndex = 0;
       showSlides();
-    }, 15000); // 15 seconds to change slides
+    }, 15000); // 15 seconds
   }
 
   function stopSlideshow() {
