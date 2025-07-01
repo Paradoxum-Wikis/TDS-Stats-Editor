@@ -4,7 +4,8 @@
     "date": "June 19, 2025",
     "changes": [
       "Import from database functionality added",
-      "DarkGabonnie nows notify tower verification on Fandom",
+      "DarkGabonnie now notify tower verification on Fandom",
+      "ALTER EGO Companion site added",
       "Tower data performance improvements"
     ]
   },
