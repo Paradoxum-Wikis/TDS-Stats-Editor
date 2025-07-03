@@ -383,7 +383,7 @@ class WikitableGenerator {
     }
 
     const showSeconds = window.state?.settings?.showSeconds !== false;
-    const showStuds = window.state?.settings?.showStuds !== false;
+    const showStuds = window.state?.settings?.showStuds === true;
 
     // Time formatting
     if (
@@ -425,7 +425,13 @@ class WikitableGenerator {
     }
 
     // Studs
-    if (["Range", "ExplosionRadius", "AssistRange"].includes(attribute)) {
+    if (
+      [
+        "Range",
+        "ExplosionRadius",
+        "AssistRange",
+      ].includes(attribute)
+    ) {
       if (this.viewer.useFaithfulFormat) {
         return this.#formatFaithfulNumber(value);
       } else {

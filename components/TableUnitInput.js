@@ -230,7 +230,7 @@ export default class TableUnitInput {
       ? Intl.NumberFormat("en-US")
       : Intl.NumberFormat("ru-RU");
     const showSeconds = window.state?.settings?.showSeconds !== false;
-    const showStuds = window.state?.settings?.showStuds !== false;
+    const showStuds = window.state?.settings?.showStuds === true;
 
     if (this.attribute === "Cooldown") {
       const formatted = formatter.format(+(+number).toFixed(3));

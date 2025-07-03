@@ -228,7 +228,7 @@ export default class TableInput {
       ? Intl.NumberFormat("en-US")
       : Intl.NumberFormat("ru-RU");
     const showSeconds = window.state?.settings?.showSeconds !== false;
-    const showStuds = window.state?.settings?.showStuds !== false;
+    const showStuds = window.state?.settings?.showStuds === true;
 
     // allows cooldown to have 3 decimal places
     if (this.attribute === "Cooldown") {
