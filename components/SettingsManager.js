@@ -4,6 +4,7 @@ class SettingsManager {
     this.themeToggle = document.getElementById("themeToggle");
     this.themeToggleLabel = document.querySelector('label[for="themeToggle"]');
     this.showSecondsToggle = document.getElementById("showSecondsToggle");
+    this.showStudsToggle = document.getElementById("showStudsToggle");
     this.forceUSNumbersToggle = document.getElementById("forceUSNumbersToggle");
     this.showCollapsibleCountsToggle = document.getElementById(
       "showCollapsibleCountsToggle",
@@ -40,6 +41,7 @@ class SettingsManager {
     this.updateCurrentTheme();
 
     this.showSeconds = localStorage.getItem("showSeconds") !== "false";
+    this.showStuds = localStorage.getItem("showStuds") === "true";
     this.forceUSNumbers = localStorage.getItem("forceUSNumbers") !== "false";
     this.showCollapsibleCounts =
       localStorage.getItem("showCollapsibleCounts") !== "false";
@@ -58,6 +60,7 @@ class SettingsManager {
     window.state = window.state || {};
     window.state.settings = window.state.settings || {};
     window.state.settings.showSeconds = this.showSeconds;
+    window.state.settings.showStuds = this.showStuds;
     window.state.settings.forceUSNumbers = this.forceUSNumbers;
     window.state.settings.showCollapsibleCounts = this.showCollapsibleCounts;
     window.state.settings.animationsEnabled = this.animationsEnabled;
@@ -162,6 +165,14 @@ class SettingsManager {
       this.showSecondsToggle.addEventListener(
         "change",
         this.toggleShowSeconds.bind(this),
+      );
+    }
+
+    if (this.showStudsToggle) {
+      this.showStudsToggle.checked = this.showStuds;
+      this.showStudsToggle.addEventListener(
+        "change",
+        this.toggleShowStuds.bind(this),
       );
     }
 
@@ -292,6 +303,18 @@ class SettingsManager {
     document.dispatchEvent(
       new CustomEvent("settingsChanged", {
         detail: { setting: "showSeconds", value: this.showSeconds },
+      }),
+    );
+  }
+
+  toggleShowStuds() {
+    this.showStuds = this.showStudsToggle.checked;
+    window.state.settings.showStuds = this.showStuds;
+    localStorage.setItem("showStuds", this.showStuds);
+
+    document.dispatchEvent(
+      new CustomEvent("settingsChanged", {
+        detail: { setting: "showStuds", value: this.showStuds },
       }),
     );
   }

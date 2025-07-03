@@ -85,6 +85,11 @@ class ViewerCore {
           this.tableView.selectButton("JSON");
           this.loadBody();
         }
+      } else if (
+        e.detail.setting === "showStuds" ||
+        e.detail.setting === "showSeconds"
+      ) {
+        this.reload();
       }
     });
 

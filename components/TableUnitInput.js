@@ -230,6 +230,7 @@ export default class TableUnitInput {
       ? Intl.NumberFormat("en-US")
       : Intl.NumberFormat("ru-RU");
     const showSeconds = window.state?.settings?.showSeconds !== false;
+    const showStuds = window.state?.settings?.showStuds !== false;
 
     if (this.attribute === "Cooldown") {
       const formatted = formatter.format(+(+number).toFixed(3));
@@ -280,6 +281,19 @@ export default class TableUnitInput {
       case "HologramLifetime":
       case "UnitSendCooldown":
         return formatter.format(number) + (showSeconds ? "s" : "");
+
+      case "Range":
+      case "ExplosionRadius":
+        return (
+          formatter.format(number) +
+          (showStuds ? " " + (number === 1 ? "stud" : "studs") : "")
+        );
+
+      case "Speed":
+        return (
+          formatter.format(number) +
+          (showStuds ? " " + (number === 1 ? "stud/s" : "studs/s") : "")
+        );
 
       case "Hologram EV":
         return formatter.format(number);

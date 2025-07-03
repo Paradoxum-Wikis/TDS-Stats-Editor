@@ -57,6 +57,7 @@ const ViewerWikitable = {
       document.addEventListener("settingsChanged", (e) => {
         if (
           e.detail.setting === "showSeconds" ||
+          e.detail.setting === "showStuds" ||
           e.detail.setting === "forceUSNumbers"
         ) {
           if (

@@ -228,6 +228,7 @@ export default class TableInput {
       ? Intl.NumberFormat("en-US")
       : Intl.NumberFormat("ru-RU");
     const showSeconds = window.state?.settings?.showSeconds !== false;
+    const showStuds = window.state?.settings?.showStuds !== false;
 
     // allows cooldown to have 3 decimal places
     if (this.attribute === "Cooldown") {
@@ -296,6 +297,14 @@ export default class TableInput {
       case "HologramLifetime":
       case "UnitSendCooldown":
         return formatter.format(value) + (showSeconds ? "s" : "");
+
+      case "Range":
+      case "ExplosionRadius":
+      case "AssistRange":
+        return (
+          formatter.format(value) +
+          (showStuds ? " " + (value === 1 ? "stud" : "studs") : "")
+        );
 
       case "Hologram EV":
         return formatter.format(value);

@@ -1,11 +1,18 @@
 [
   {
+    "version": "1.2.9",
+    "date": "July 2, 2025",
+    "changes": [
+      "ALTER EGO Companion site added",
+      "Studs unit for table added"
+    ]
+  },
+  {
     "version": "1.2.8",
     "date": "June 19, 2025",
     "changes": [
       "Import from database functionality added",
       "DarkGabonnie now notify tower verification on Fandom",
-      "ALTER EGO Companion site added",
       "Tower data performance improvements"
     ]
   },

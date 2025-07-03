@@ -383,6 +383,7 @@ class WikitableGenerator {
     }
 
     const showSeconds = window.state?.settings?.showSeconds !== false;
+    const showStuds = window.state?.settings?.showStuds !== false;
 
     // Time formatting
     if (
@@ -421,6 +422,23 @@ class WikitableGenerator {
       return this.viewer.useFaithfulFormat
         ? this.#formatFaithfulNumber(value)
         : `${this.#formatNumber(value)}${showSeconds ? "s" : ""}`;
+    }
+
+    // Studs
+    if (["Range", "ExplosionRadius", "AssistRange"].includes(attribute)) {
+      if (this.viewer.useFaithfulFormat) {
+        return this.#formatFaithfulNumber(value);
+      } else {
+        return `${this.#formatNumber(value)}${showStuds ? ` ${value === 1 ? "stud" : "studs"}` : ""}`;
+      }
+    }
+
+    if (["Speed"].includes(attribute)) {
+      if (this.viewer.useFaithfulFormat) {
+        return this.#formatFaithfulNumber(value);
+      } else {
+        return `${this.#formatNumber(value)}${showStuds ? ` ${value === 1 ? "stud/s" : "studs/s"}` : ""}`;
+      }
     }
 
     // boolean values

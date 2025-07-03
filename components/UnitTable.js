@@ -10,6 +10,7 @@ export default class UnitTable extends Table {
       if (
         this.isLoaded &&
         (e.detail.setting === "showSeconds" ||
+          e.detail.setting === "showStuds" ||
           e.detail.setting === "forceUSNumbers")
       ) {
         this.refresh();
