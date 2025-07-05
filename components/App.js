@@ -58,8 +58,6 @@ class App {
     );
 
     this.viewer = new Viewer(this);
-
-    // attach event listener
     this.dropdown.textForm.addEventListener("submit", (e) => {
       const towerName = e.detail || e.target?.value;
 
@@ -104,21 +102,18 @@ class App {
   findClosestTowerName(searchName) {
     searchName = searchName.toLowerCase();
 
-    // try exact match
     const exactMatch = this.towerManager.towerNames.find(
       (name) => name.toLowerCase() === searchName,
     );
 
     if (exactMatch) return exactMatch;
 
-    // try starts with
     const startsWithMatch = this.towerManager.towerNames.find((name) =>
       name.toLowerCase().startsWith(searchName),
     );
 
     if (startsWithMatch) return startsWithMatch;
-
-    // check if any tower contains the search term
+    
     const containsMatch = this.towerManager.towerNames.find((name) =>
       name.toLowerCase().includes(searchName),
     );
