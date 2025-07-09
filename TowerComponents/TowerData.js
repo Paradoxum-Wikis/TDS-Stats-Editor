@@ -4386,7 +4386,7 @@ export default {
             Accuracy: 1,
           },
           Title: "Heavier Payload",
-          Cost: 1600,
+          Cost: 1750,
         },
         {
           Image: 103303357353083,
@@ -4410,7 +4410,7 @@ export default {
             Accuracy: 1,
           },
           Title: "Explosive Risks",
-          Cost: 7500,
+          Cost: 6500,
         },
         {
           Image: 133610100963797,
@@ -4439,7 +4439,7 @@ export default {
             Accuracy: 0.5,
           },
           Title: "Missle Maelstorm",
-          Cost: 18500,
+          Cost: 20000,
         },
       ],
       Defaults: {
