@@ -2150,14 +2150,13 @@ export default {
           Image: 15686412605,
           Stats: {
             Extras: [],
-            Detections: { Flying: false, Hidden: false, Lead: true },
+            Detections: { Flying: false, Hidden: true, Lead: true },
             Attributes: {
               FreezeTime: 0.75,
               MaxHits: 3,
               DefenseMelt: 0,
               ProjectileSpeed: 60,
             },
-            Detections: { Flying: false, Hidden: true },
             Cooldown: 1,
             Range: 15,
             Damage: 6,
@@ -2168,14 +2167,14 @@ export default {
         {
           Image: 15686412501,
           Stats: {
-            Extras: ["Max Hits: 3 → 4"],
+            Extras: ["Max Hits: 3 → 4", "Defense Melt: 0 → 10"],
             Attributes: {
               FreezeTime: 0.75,
               MaxHits: 4,
               DefenseMelt: 10,
               ProjectileSpeed: 60,
             },
-            Detections: { Flying: false, Hidden: true },
+            Detections: { Flying: false, Hidden: true, Lead: true },
             Cooldown: 1,
             Range: 15,
             Damage: 10,
@@ -2186,9 +2185,13 @@ export default {
         {
           Image: 15686412400,
           Stats: {
-            Extras: ["🧊Freeze Time: 0.75s → 1s", "Max Hits: 4 → 5"],
-            Attributes: { FreezeTime: 1, MaxHits: 5, ProjectileSpeed: 60 },
-            Detections: { Flying: false, Hidden: true },
+            Extras: ["Freeze Time: 0.75 → 1", "Max Hits: 4 → 5"],
+            Attributes: {
+              FreezeTime: 1,
+              MaxHits: 5,
+              ProjectileSpeed: 60,
+            },
+            Detections: { Flying: false, Hidden: true, Lead: true },
             Cooldown: 1,
             Range: 17.5,
             Damage: 20,
@@ -2200,13 +2203,13 @@ export default {
           Image:
             "https://static.wikia.nocookie.net/0091553a-cf86-42a1-94e3-730515d3fca8",
           Stats: {
-            Extras: [
-              "🧊Freeze Time: 1 → 1.5s",
-              "Max Hits: 4 → 5",
-              "Faster projectile speed",
-            ],
-            Attributes: { FreezeTime: 1.5, MaxHits: 5, ProjectileSpeed: 90 },
-            Detections: { Flying: true, Hidden: true },
+            Extras: ["Freeze Time: 1 → 1.5", "Projectile Speed: 60 → 90"],
+            Attributes: {
+              FreezeTime: 1.5,
+              MaxHits: 5,
+              ProjectileSpeed: 90,
+            },
+            Detections: { Flying: true, Hidden: true, Lead: true },
             Cooldown: 1.5,
             Range: 23,
             Damage: 60,
@@ -3147,8 +3150,11 @@ export default {
         {
           Image: 3877874591,
           Stats: {
-            Extras: ["Spawn Time: 45 → 30"],
-            Attributes: { Spawnrate: 30, UnitToSend: "Humvee 1" },
+            Extras: ["Spawnrate: 45 → 30", "Unit To Send: Humvee → Humvee 1"],
+            Attributes: {
+              Spawnrate: 30,
+              UnitToSend: "Humvee 1",
+            },
             Detections: {
               Flying: false,
               Hidden: false,
@@ -3161,8 +3167,11 @@ export default {
         {
           Image: 3877875003,
           Stats: {
-            Extras: ["Humvee 2", "Health: 35 → 30"],
-            Attributes: { Spawnrate: 30, UnitToSend: "Humvee 2" },
+            Extras: ["Unit To Send: Humvee 1 → Humvee 2"],
+            Attributes: {
+              Spawnrate: 30,
+              UnitToSend: "Humvee 2",
+            },
             Detections: {
               Flying: false,
               Hidden: false,
@@ -3175,14 +3184,11 @@ export default {
         {
           Image: 3877873543,
           Stats: {
-            Extras: [
-              "Humvee 3",
-              "Health: 60 → 90",
-              "Damage: 0 → 3",
-              "Cooldown: 0 → 0.2",
-              "Range: 0 → 30",
-            ],
-            Attributes: { Spawnrate: 30, UnitToSend: "Humvee 3" },
+            Extras: ["Unit To Send: Humvee 2 → Humvee 3"],
+            Attributes: {
+              Spawnrate: 30,
+              UnitToSend: "Humvee 3",
+            },
             Detections: {
               Flying: false,
               Hidden: false,
@@ -3196,14 +3202,9 @@ export default {
           Image: 3444568329,
           Stats: {
             Extras: [
-              "Tank",
-              "Health: 90 → 500",
-              "Damage: 3 → 10",
-              "Explosive Damage: 0 → 40",
-              "Explosive Radius: 0 → 7",
-              "Airstrike",
-              "Airstrike Damage: 450",
-              "Missile Amount: 6",
+              "Unit To Send: Humvee 3 → Tank",
+              "Airstrike Damage: 0 → 75",
+              "Missile Amount: 1 → 6",
               "Airstrike Radius: 0 → 8",
             ],
             Attributes: {
@@ -3226,12 +3227,9 @@ export default {
           Image: 3444568580,
           Stats: {
             Extras: [
-              "Railgun Tank",
-              "Health: 500 → 1500",
-              "Damage: 10 → 24",
-              "Explosive Damage: 40 → 80",
-              "Explosive Radius: 8 → 7",
-              "Airstrike Damage: 450 → 750",
+              "Unit To Send: Tank → Railgun Tank",
+              "Spawnrate: 30 → 35",
+              "Airstrike Damage: 75 → 125",
               "Airstrike Radius: 8 → 12",
             ],
             Attributes: {
@@ -3259,7 +3257,11 @@ export default {
           MissileAmount: 1,
           AirstrikeRadius: 0,
         },
-        Detections: { Flying: false, Hidden: false, Lead: false },
+        Detections: {
+          Flying: false,
+          Hidden: false,
+          Lead: false,
+        },
         Abilities: [
           {
             Name: "Airstrike",
@@ -4415,7 +4417,8 @@ export default {
           Stats: {
             Extras: [
               "Explosion Radius: 4 → 5",
-              "Missle Amount: 1 → 2",
+              "Missile Amount: 1 → 4",
+              "Spread Angle: NaN → 60",
               "Accuracy: 1 → 0.5",
             ],
             Attributes: {
@@ -4645,9 +4648,12 @@ export default {
         {
           Image: 5587697884,
           Stats: {
-            Extras: ["Shot Size: 6 → 8", "Spread: 55 → 45"],
+            Extras: ["Shot Size: 8 → 10", "Spread: 45 → 40"],
             Attributes: { Spread: 40, ShotSize: 10 },
-            Detections: { Flying: false, Hidden: true },
+            Detections: {
+              Flying: false,
+              Hidden: true,
+            },
             Cooldown: 1.2,
             Range: 9,
             Damage: 2,
@@ -4659,10 +4665,14 @@ export default {
           Image: 5587698104,
           Stats: {
             Extras: [],
-            Attributes: { Spread: 40, ShotSize: 8 },
-            Detections: { Flying: false, Hidden: true, Lead: true },
+            Attributes: { Spread: 40, ShotSize: 10 },
+            Detections: {
+              Flying: false,
+              Hidden: true,
+              Lead: true,
+            },
             Cooldown: 1.1,
-            Range: 9,
+            Range: 9.5,
             Damage: 4,
           },
           Title: "Slug Madness",
@@ -4671,9 +4681,13 @@ export default {
         {
           Image: 5587698246,
           Stats: {
-            Extras: ["Spread: 40 → 30", "Shot Size: 10 → 12"],
+            Extras: ["Spread: 40 → 30", "Shot Size: 8 → 12"],
             Attributes: { Spread: 30, ShotSize: 12 },
-            Detections: { Flying: false, Hidden: true, Lead: true },
+            Detections: {
+              Flying: false,
+              Hidden: true,
+              Lead: true,
+            },
             Cooldown: 0.95,
             Range: 11,
             Damage: 6,
@@ -4683,8 +4697,16 @@ export default {
         },
       ],
       Defaults: {
-        Detections: { Flying: false, Hidden: false, Lead: false },
-        Attributes: { Spread: 45, ShotSize: 8, MaxHits: 3 },
+        Detections: {
+          Flying: false,
+          Hidden: false,
+          Lead: false,
+        },
+        Attributes: {
+          Spread: 45,
+          ShotSize: 8,
+          MaxHits: 3,
+        },
         Price: 300,
         Range: 7.5,
         Cooldown: 1.2,
