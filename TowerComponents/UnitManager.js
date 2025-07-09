@@ -202,7 +202,7 @@ const register = {
   },
 
   "Military Base": {
-    Default: ["Humvee", "Humvee 2", "Humvee 3", "Tank", "Railgun Tank"],
+    Default: ["Humvee", "Humvee 1", "Humvee 2", "Humvee 3", "Tank", "Railgun Tank"],
   },
 
   Biologist: {

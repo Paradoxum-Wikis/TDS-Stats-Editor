@@ -533,7 +533,22 @@ export default {
 
   // Military base
   Humvee: {
-    Health: 30,
+    Health: 50,
+    Damage: 0,
+    Range: 5,
+    Detections: {
+      Hidden: false,
+      Flying: false,
+      Lead: false,
+    },
+    Cooldown: 0.2,
+    ExplosionDamage: 0,
+    ExplosionRadius: 0,
+    Speed: 8,
+    TimeBetweenMissiles: 0,
+  },
+  ["Humvee 1"]: {
+    Health: 50,
     Damage: 0,
     Range: 5,
     Detections: {
@@ -548,7 +563,7 @@ export default {
     TimeBetweenMissiles: 0,
   },
   ["Humvee 2"]: {
-    Health: 60,
+    Health: 80,
     Damage: 0,
     Range: 5,
     Detections: {
@@ -563,8 +578,8 @@ export default {
     TimeBetweenMissiles: 0,
   },
   ["Humvee 3"]: {
-    Health: 90,
-    Damage: 3,
+    Health: 100,
+    Damage: 4,
     Range: 30,
     Detections: {
       Hidden: true,
@@ -593,8 +608,8 @@ export default {
     TimeBetweenMissiles: 2,
   },
   ["Railgun Tank"]: {
-    Health: 1500,
-    Damage: 24,
+    Health: 1600,
+    Damage: 25,
     Range: 30,
     Detections: {
       Hidden: true,
