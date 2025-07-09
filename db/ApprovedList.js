@@ -57,6 +57,8 @@ const approvedTowers = [
   "BertoYT/Gladiator",
   "Hellscream2008/Scout - Mass Rework!",
   "GubbyTheGoat69/Gladiator(meta rework)",
+  "Midzislaw/Jester",
+  "Vessel Of Infinite Destruction/Golden Crook Boss",
 ];
 
 // List of featured towers
@@ -68,6 +70,7 @@ const featuredTowers = [
   "Onett4smash/Medic Rework (V1)",
   "Hellscream2008/John Tower!",
   "Onett4smash/Tsukasa Tower (but JSON)",
+  "Vessel Of Infinite Destruction/Golden Crook Boss",
 ];
 
 // List of grandfathered towers
@@ -84,7 +87,7 @@ const grandfatheredTowers = [
 // its own section the page
 const highlights = [
   "Vessel Of Infinite Destruction/Ranger",
-  "Onett4smash/Medic Rework (V2)",
+  "Vessel Of Infinite Destruction/Golden Crook Boss",
   "Vessel Of Infinite Destruction/Military Base",
   "Onett4smash/Tsukasa Tower (but JSON)",
 ];
