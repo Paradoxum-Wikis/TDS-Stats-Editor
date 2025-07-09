@@ -3196,7 +3196,7 @@ export default {
             },
           },
           Title: "Mounted Gunner",
-          Cost: 1600,
+          Cost: 1750,
         },
         {
           Image: 3444568329,
@@ -3221,7 +3221,7 @@ export default {
             },
           },
           Title: "Tank",
-          Cost: 8000,
+          Cost: 7500,
         },
         {
           Image: 3444568580,
@@ -3246,7 +3246,7 @@ export default {
             },
           },
           Title: "Railgun Tank",
-          Cost: 24000,
+          Cost: 25000,
         },
       ],
       Defaults: {
