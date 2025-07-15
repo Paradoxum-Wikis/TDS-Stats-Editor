@@ -508,6 +508,7 @@ export default {
         Range: 6,
         Cooldown: 0.6,
         Damage: 6,
+        Note: "Has a placement footprint of 1 (small)."
       },
     },
   },
@@ -1408,6 +1409,7 @@ export default {
         ],
         Cooldown: 1,
         Damage: 0,
+        Note: "Has a placement footprint of 2.5 (very large)."
       },
     },
   },
@@ -2022,6 +2024,7 @@ export default {
         Price: 250,
         Cooldown: 0,
         Damage: 0,
+        Note: "Has a placement footprint of 1.75 (above average)."
       },
     },
   },
@@ -2266,6 +2269,7 @@ export default {
         Limit: 1,
         Cooldown: 0.15,
         Damage: 5,
+        Note: "Has a placement footprint of 2 (large)."
       },
       Upgrades: [
         {
@@ -2537,6 +2541,7 @@ export default {
         Range: 5,
         Cooldown: 1,
         Damage: 2,
+        Note: "Has a placement footprint of 1 (small)."
       },
     },
   },
@@ -2801,7 +2806,7 @@ export default {
         Attributes: { Spawnrate: 60, UnitToSend: "Mark I" },
         Cooldown: 0.5,
         Damage: 0,
-        Note: "Lead can be damaged by splash damage and collision.",
+        Note: "Lead can be damaged by splash damage and collision.\nHas a placement footprint of 2.25 (very large).",
       },
     },
   },
@@ -2943,7 +2948,7 @@ export default {
         Cooldown: 0,
         Range: 6,
         Damage: 0,
-        Note: "Lead can be damaged by splash damage and collision.",
+        Note: "Lead can be damaged by splash damage and collision.\nHas a placement footprint of 2.25 (very large).",
       },
       Upgrades: [
         {
@@ -3275,7 +3280,7 @@ export default {
         ],
         Price: 400,
         Limit: 5,
-        Note: "Lead can be damaged by splash damage and collision.",
+        Note: "Lead can be damaged by splash damage and collision.\nHas a placement footprint of 2.25 (very large).",
       },
     },
   },
@@ -4711,6 +4716,7 @@ export default {
         Range: 7.5,
         Cooldown: 1.2,
         Damage: 1,
+        Note: "Has a placement footprint of 1 (small)."
       },
     },
   },
@@ -4833,7 +4839,7 @@ export default {
         Range: 5,
         Cooldown: 0.4,
         Damage: 5,
-        Note: "Bleed Damage Tick and Bleed Collapse Damage has various health options in the 'Views' tab.",
+        Note: "Bleed Damage Tick and Bleed Collapse Damage has various health options in the 'Views' tab.\nHas a placement footprint of 1 (small).",
       },
     },
   },
@@ -5003,6 +5009,7 @@ export default {
         Limit: 6,
         Cooldown: 1.2,
         Damage: 8,
+        Note: "Has a placement footprint of 1 (small)."
       },
     },
   },
@@ -5712,6 +5719,7 @@ export default {
         Range: 15,
         Cooldown: 0.3,
         Damage: 10,
+        Note: "Has a placement footprint of 2 (large)."
       },
     },
   },
@@ -6524,6 +6532,7 @@ export default {
         Range: 5,
         Cooldown: 0.55,
         Damage: 6,
+        Note: "Has a placement footprint of 1 (small)."
       },
     },
   },
