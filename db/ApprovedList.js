@@ -59,6 +59,9 @@ const approvedTowers = [
   "GubbyTheGoat69/Gladiator(meta rework)",
   "Midzislaw/Jester",
   "Vessel Of Infinite Destruction/Golden Crook Boss",
+  "Paccet/Accelerator (REWORK)",
+  "Paccet/Gladiator (REBALANCE)",
+  "Paccet/Ace Pilot (Balance)",
 ];
 
 // List of featured towers
