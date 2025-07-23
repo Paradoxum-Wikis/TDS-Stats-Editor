@@ -1,0 +1,156 @@
+@media (max-width: 767.98px) {
+    header.p-3 {
+      padding: 0 !important;
+    }
+
+  #topnavheader {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  #topnavheader h1 {
+    font-size: 1.5rem !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin: 0.5rem !important;
+  }
+
+  #topnavheader .btn-toolbar {
+    display: none !important; /* Hide desktop buttons on mobile */
+  }
+
+  .mobile-nav {
+    display: flex !important; /* Ensure mobile nav is visible */
+  }
+
+  main[role="main"] {
+    padding-top: 0 !important;
+  }
+
+  .randomized-section img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Mobile Navigation */
+  main[role="main"] {
+    width: 100% !important;
+    padding-bottom: 70px; /* To account for fixed mobile nav */
+    padding-top: 0 !important; /* Ensure no top padding from desktop styles */
+  }
+
+  .mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #212529;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex; /* Ensure mobile nav is visible */
+    justify-content: space-around;
+    z-index: 1000;
+    padding: 8px 0;
+  }
+
+  .mobile-nav-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #adb5bd;
+    text-decoration: none;
+    font-size: 0.8rem;
+    padding: 8px 12px;
+    transition: all 0.2s ease;
+  }
+
+  .mobile-nav-btn i {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+    transition: all 0.2s ease;
+  }
+
+  .mobile-nav-btn.active {
+    color: #0dcaf0;
+  }
+
+  .mobile-sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 60px; /* Height of mobile nav */
+    left: 0;
+    right: 0;
+    background-color: #191c1f;
+    z-index: 999;
+    padding: 1rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+  }
+
+  .mobile-sidebar.active {
+    transform: translateY(0);
+  }
+
+  .mobile-sidebar-content {
+    max-width: 100vw;
+    width: 100%;
+  }
+
+  /* Header adjustments for mobile */
+  header {
+    padding: 0 !important; /* Remove padding from header */
+  }
+
+  #topnavheader {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    margin: 0.5rem !important; /* Adjust margins for header content */
+  }
+
+  #topnavheader h1 {
+    font-size: 1.5rem !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin: 0.5rem !important;
+  }
+
+  #topnavheader .btn-toolbar {
+    display: none !important; /* Hide desktop header buttons on mobile */
+  }
+
+  .text-center.mt-3 {
+    margin-bottom: 2rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  #clear-filters-btn {
+    margin-bottom: 10px; /* Add some space below the button */
+  }
+
+  /* Hide the desktop sidebar when the mobile sidebar is open */
+  body.mobile-sidebar-open .aside {
+    display: none !important;
+  }
+}
+
+/* Desktop-specific styles (min-width: 768px) */
+@media (min-width: 768px) {
+  .mobile-nav {
+    display: none !important; /* Hide mobile nav on desktop */
+  }
+
+  .mobile-sidebar {
+    display: none !important; /* Hide mobile sidebar on desktop */
+  }
+
+  main[role="main"] {
+    padding-bottom: 0 !important; /* Reset padding from mobile nav */
+  }
+
+  /* Ensure desktop sidebar is visible on desktop, regardless of body class */
+  .aside {
+    display: flex !important; /* Or block, depending on its original display */
+  }
+}

@@ -1,3 +1,5 @@
+import CryptoJS from "crypto-js";
+
 export default class ImageLoader {
   static cacheName = "tdse-image-cache-v1";
   static debugMode = false;
@@ -124,10 +126,13 @@ export default class ImageLoader {
   }
 
   static convertFileToFandomUrl(filename) {
-    const md5Hash = CryptoJS.MD5(filename).toString();
+    const normalizedFilename = filename.replace(/ /g, '_');
+    const md5Hash = CryptoJS.MD5(normalizedFilename).toString();
     const firstChar = md5Hash.charAt(0);
     const firstTwoChars = md5Hash.substring(0, 2);
-    return `https://static.wikia.nocookie.net/tower-defense-sim/images/${firstChar}/${firstTwoChars}/${encodeURIComponent(filename)}`;
+    const finalUrl = `https://static.wikia.nocookie.net/tower-defense-sim/images/${firstChar}/${firstTwoChars}/${encodeURIComponent(normalizedFilename)}`;
+
+    return finalUrl;
   }
 
   static trimFandomUrl(fullUrl) {

@@ -12,6 +12,7 @@ export default defineConfig({
         privacy: resolve(__dirname, "privacy.html"),
         misc: resolve(__dirname, "misc/index.html"),
         skills: resolve(__dirname, "misc/skills/index.html"),
+        randomizer: resolve(__dirname, "misc/randomizer/index.html"),
         404: resolve(__dirname, "404.html"),
       },
     },
