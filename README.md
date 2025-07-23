@@ -5,6 +5,8 @@ The website can be found at: https://tds-editor.com/
 
 For the updated README, please see: https://tds.fandom.com/wiki/Help:Statistics_Editor/Information
 
+Everything inside ``public/htmlassets/`` folder is under CC-BY-SA 3.0
+
 ---
 
 # Tower Defense Simulator Statistics Editor
