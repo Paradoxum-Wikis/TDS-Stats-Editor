@@ -182,7 +182,7 @@ class MobileNavigation extends MobileNavBase {
             if (mainCheckbox) {
               mainCheckbox.checked = event.target.checked;
               mainCheckbox.dispatchEvent(
-                new Event("change", { bubbles: true })
+                new Event("change", { bubbles: true }),
               );
             }
             window.filterTowerGallery();

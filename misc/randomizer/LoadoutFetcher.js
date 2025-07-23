@@ -56,13 +56,15 @@ class LoadoutFetcher {
         for (const cellContent of imageAndLinkCells) {
           const tower = {};
           const match = cellContent.match(/\[\[File:(.*?)\|.*?link=(.*?)]]/);
-
           if (match && match[1] && match[2]) {
             tower.imageFile = match[1];
             tower.imageUrl = ImageLoader.convertFileToFandomUrl(
               tower.imageFile,
             );
             tower.name = match[2];
+            tower.isExclusive = tableCount === 6;
+            tower.isGolden = tableCount === 5;
+            tower.isRemoved = tableCount === 7;
             towers.push(tower);
           } else {
             console.warn(

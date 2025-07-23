@@ -1,7 +1,7 @@
 import { UI_ELEMENTS, appState } from "./Constants.js";
 import { getFilteredMapsForMode } from "../ModeMapExceptions.js";
 import { renderRandomizedResult } from "./Render.js";
-import { generateResultUrl } from "./url.js"; // Import to update URL
+import { generateResultUrl } from "./url.js";
 
 export function performRandomization() {
   let selectedMap = null;
@@ -87,6 +87,24 @@ export function performRandomization() {
           (exclTower) => exclTower.name === tower.name,
         ),
     );
+
+    if (UI_ELEMENTS.excludeExclusiveTowersToggle.checked) {
+      availableTowersForRandomization = availableTowersForRandomization.filter(
+        (tower) => !tower.isExclusive,
+      );
+    }
+
+    if (UI_ELEMENTS.excludeGoldenTowersToggle.checked) {
+      availableTowersForRandomization = availableTowersForRandomization.filter(
+        (tower) => !tower.isGolden,
+      );
+    }
+
+    if (UI_ELEMENTS.excludeRemovedTowersToggle.checked) {
+      availableTowersForRandomization = availableTowersForRandomization.filter(
+        (tower) => !tower.isRemoved,
+      );
+    }
 
     for (let i = finalTowers.length; i < loadoutSize; i++) {
       if (availableTowersForRandomization.length === 0) {

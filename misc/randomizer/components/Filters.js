@@ -113,4 +113,7 @@ export function clearAllFilters() {
   UI_ELEMENTS.includeMapsToggle.checked = true;
   UI_ELEMENTS.includeLoadoutsToggle.checked = true;
   UI_ELEMENTS.includeGamemodesToggle.checked = true;
+  UI_ELEMENTS.excludeExclusiveTowersToggle.checked = false;
+  UI_ELEMENTS.excludeGoldenTowersToggle.checked = false;
+  UI_ELEMENTS.excludeRemovedTowersToggle.checked = true;
 }

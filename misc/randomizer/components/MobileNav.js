@@ -30,7 +30,11 @@ class RandomizerMobileNav extends MobileNavBase {
       settings: "settings-modal",
     };
 
-    super({ sectionConfigs, modalConfigs, bodyActiveClass: "mobile-sidebar-open" });
+    super({
+      sectionConfigs,
+      modalConfigs,
+      bodyActiveClass: "mobile-sidebar-open",
+    });
   }
 
   /**
@@ -71,46 +75,63 @@ class RandomizerMobileNav extends MobileNavBase {
     if (sectionName === "controls") {
       function setupClonedEventListeners(container) {
         // Syncs
-        const clonedIncludeMapsToggle = container.querySelector('#includeMapsToggle');
-        const clonedIncludeGamemodesToggle = container.querySelector('#includeGamemodesToggle');
-        const clonedIncludeLoadoutsToggle = container.querySelector('#includeLoadoutsToggle');
-        const clonedExcludeExclusiveTowersToggle = container.querySelector('#excludeExclusiveTowersToggle');
-        const clonedExcludeGoldenTowersToggle = container.querySelector('#excludeGoldenTowersToggle');
-        const clonedExcludeRemovedTowersToggle = container.querySelector('#excludeRemovedTowersToggle');
+        const clonedIncludeMapsToggle =
+          container.querySelector("#includeMapsToggle");
+        const clonedIncludeGamemodesToggle = container.querySelector(
+          "#includeGamemodesToggle",
+        );
+        const clonedIncludeLoadoutsToggle = container.querySelector(
+          "#includeLoadoutsToggle",
+        );
+        const clonedExcludeExclusiveTowersToggle = container.querySelector(
+          "#excludeExclusiveTowersToggle",
+        );
+        const clonedExcludeGoldenTowersToggle = container.querySelector(
+          "#excludeGoldenTowersToggle",
+        );
+        const clonedExcludeRemovedTowersToggle = container.querySelector(
+          "#excludeRemovedTowersToggle",
+        );
 
         if (clonedIncludeMapsToggle) {
-          clonedIncludeMapsToggle.checked = UI_ELEMENTS.includeMapsToggle.checked;
-          clonedIncludeMapsToggle.addEventListener('change', (e) => {
+          clonedIncludeMapsToggle.checked =
+            UI_ELEMENTS.includeMapsToggle.checked;
+          clonedIncludeMapsToggle.addEventListener("change", (e) => {
             UI_ELEMENTS.includeMapsToggle.checked = e.target.checked;
           });
         }
         if (clonedIncludeGamemodesToggle) {
-          clonedIncludeGamemodesToggle.checked = UI_ELEMENTS.includeGamemodesToggle.checked;
-          clonedIncludeGamemodesToggle.addEventListener('change', (e) => {
+          clonedIncludeGamemodesToggle.checked =
+            UI_ELEMENTS.includeGamemodesToggle.checked;
+          clonedIncludeGamemodesToggle.addEventListener("change", (e) => {
             UI_ELEMENTS.includeGamemodesToggle.checked = e.target.checked;
           });
         }
         if (clonedIncludeLoadoutsToggle) {
-          clonedIncludeLoadoutsToggle.checked = UI_ELEMENTS.includeLoadoutsToggle.checked;
-          clonedIncludeLoadoutsToggle.addEventListener('change', (e) => {
+          clonedIncludeLoadoutsToggle.checked =
+            UI_ELEMENTS.includeLoadoutsToggle.checked;
+          clonedIncludeLoadoutsToggle.addEventListener("change", (e) => {
             UI_ELEMENTS.includeLoadoutsToggle.checked = e.target.checked;
           });
         }
         if (clonedExcludeExclusiveTowersToggle) {
-          clonedExcludeExclusiveTowersToggle.checked = UI_ELEMENTS.excludeExclusiveTowersToggle.checked;
-          clonedExcludeExclusiveTowersToggle.addEventListener('change', (e) => {
+          clonedExcludeExclusiveTowersToggle.checked =
+            UI_ELEMENTS.excludeExclusiveTowersToggle.checked;
+          clonedExcludeExclusiveTowersToggle.addEventListener("change", (e) => {
             UI_ELEMENTS.excludeExclusiveTowersToggle.checked = e.target.checked;
           });
         }
         if (clonedExcludeGoldenTowersToggle) {
-          clonedExcludeGoldenTowersToggle.checked = UI_ELEMENTS.excludeGoldenTowersToggle.checked;
-          clonedExcludeGoldenTowersToggle.addEventListener('change', (e) => {
+          clonedExcludeGoldenTowersToggle.checked =
+            UI_ELEMENTS.excludeGoldenTowersToggle.checked;
+          clonedExcludeGoldenTowersToggle.addEventListener("change", (e) => {
             UI_ELEMENTS.excludeGoldenTowersToggle.checked = e.target.checked;
           });
         }
         if (clonedExcludeRemovedTowersToggle) {
-          clonedExcludeRemovedTowersToggle.checked = UI_ELEMENTS.excludeRemovedTowersToggle.checked;
-          clonedExcludeRemovedTowersToggle.addEventListener('change', (e) => {
+          clonedExcludeRemovedTowersToggle.checked =
+            UI_ELEMENTS.excludeRemovedTowersToggle.checked;
+          clonedExcludeRemovedTowersToggle.addEventListener("change", (e) => {
             UI_ELEMENTS.excludeRemovedTowersToggle.checked = e.target.checked;
           });
         }
@@ -118,95 +139,120 @@ class RandomizerMobileNav extends MobileNavBase {
 
       setupClonedEventListeners(container);
 
-      const clonedPreselectMapDropdown = container.querySelector("#preselectMap");
-      const clonedPreselectModeDropdown = container.querySelector("#preselectMode");
+      const clonedPreselectMapDropdown =
+        container.querySelector("#preselectMap");
+      const clonedPreselectModeDropdown =
+        container.querySelector("#preselectMode");
 
       if (clonedPreselectMapDropdown) {
-        clonedPreselectMapDropdown.innerHTML = UI_ELEMENTS.preselectMapDropdown.innerHTML;
-        clonedPreselectMapDropdown.value = UI_ELEMENTS.preselectMapDropdown.value;
+        clonedPreselectMapDropdown.innerHTML =
+          UI_ELEMENTS.preselectMapDropdown.innerHTML;
+        clonedPreselectMapDropdown.value =
+          UI_ELEMENTS.preselectMapDropdown.value;
         clonedPreselectMapDropdown.addEventListener("change", (e) => {
           UI_ELEMENTS.preselectMapDropdown.value = e.target.value;
         });
       }
       if (clonedPreselectModeDropdown) {
-        clonedPreselectModeDropdown.innerHTML = UI_ELEMENTS.preselectModeDropdown.innerHTML;
-        clonedPreselectModeDropdown.value = UI_ELEMENTS.preselectModeDropdown.value;
+        clonedPreselectModeDropdown.innerHTML =
+          UI_ELEMENTS.preselectModeDropdown.innerHTML;
+        clonedPreselectModeDropdown.value =
+          UI_ELEMENTS.preselectModeDropdown.value;
         clonedPreselectModeDropdown.addEventListener("change", (e) => {
           UI_ELEMENTS.preselectModeDropdown.value = e.target.value;
         });
       }
 
-      const clonedPreselectedTowersContainer = container.querySelector("#preselectedTowersContainer");
+      const clonedPreselectedTowersContainer = container.querySelector(
+        "#preselectedTowersContainer",
+      );
       if (clonedPreselectedTowersContainer) {
         clonedPreselectedTowersContainer.innerHTML = "";
         appState.preselectedTowers.forEach((tower, index) => {
           const towerBadge = document.createElement("span");
-          towerBadge.className = "badge bg-primary text-white d-flex align-items-center me-1 mb-1";
+          towerBadge.className =
+            "badge bg-primary text-white d-flex align-items-center me-1 mb-1";
           towerBadge.innerHTML = `
             ${tower.name}
             <button type="button" class="btn-close btn-close-white ms-2" aria-label="Remove" data-index="${index}"></button>
           `;
           clonedPreselectedTowersContainer.appendChild(towerBadge);
 
-          towerBadge.querySelector(".btn-close").addEventListener("click", (e) => {
-            const idxToRemove = parseInt(e.target.dataset.index);
-            appState.preselectedTowers.splice(idxToRemove, 1);
-            renderPreselectedTowers();
-            this.populateSidebarContent("controls");
-          });
+          towerBadge
+            .querySelector(".btn-close")
+            .addEventListener("click", (e) => {
+              const idxToRemove = parseInt(e.target.dataset.index);
+              appState.preselectedTowers.splice(idxToRemove, 1);
+              renderPreselectedTowers();
+              this.populateSidebarContent("controls");
+            });
         });
         container.querySelector("#preselectedTowerCount").textContent =
           `${appState.preselectedTowers.length}/5 towers selected`;
       }
 
-      const clonedExcludedMapsContainer = container.querySelector("#excludedMapsContainer");
+      const clonedExcludedMapsContainer = container.querySelector(
+        "#excludedMapsContainer",
+      );
       if (clonedExcludedMapsContainer) {
         clonedExcludedMapsContainer.innerHTML = "";
         appState.excludedMaps.forEach((map, index) => {
           const mapBadge = document.createElement("span");
-          mapBadge.className = "badge bg-danger text-white d-flex align-items-center me-1 mb-1";
+          mapBadge.className =
+            "badge bg-danger text-white d-flex align-items-center me-1 mb-1";
           mapBadge.innerHTML = `
             ${map.name}
             <button type="button" class="btn-close btn-close-white ms-2" aria-label="Remove" data-index="${index}"></button>
           `;
           clonedExcludedMapsContainer.appendChild(mapBadge);
 
-          mapBadge.querySelector(".btn-close").addEventListener("click", (e) => {
-            const idxToRemove = parseInt(e.target.dataset.index);
-            appState.excludedMaps.splice(idxToRemove, 1);
-            renderExcludedMaps();
-            this.populateSidebarContent("controls");
-          });
+          mapBadge
+            .querySelector(".btn-close")
+            .addEventListener("click", (e) => {
+              const idxToRemove = parseInt(e.target.dataset.index);
+              appState.excludedMaps.splice(idxToRemove, 1);
+              renderExcludedMaps();
+              this.populateSidebarContent("controls");
+            });
         });
         container.querySelector("#excludedMapCount").textContent =
           `${appState.excludedMaps.length} maps excluded`;
       }
 
-      const clonedExcludedTowersContainer = container.querySelector("#excludedTowersContainer");
+      const clonedExcludedTowersContainer = container.querySelector(
+        "#excludedTowersContainer",
+      );
       if (clonedExcludedTowersContainer) {
         clonedExcludedTowersContainer.innerHTML = "";
         appState.excludedTowers.forEach((tower, index) => {
           const towerBadge = document.createElement("span");
-          towerBadge.className = "badge bg-danger text-white d-flex align-items-center me-1 mb-1";
+          towerBadge.className =
+            "badge bg-danger text-white d-flex align-items-center me-1 mb-1";
           towerBadge.innerHTML = `
             ${tower.name}
             <button type="button" class="btn-close btn-close-white ms-2" aria-label="Remove" data-index="${index}"></button>
           `;
           clonedExcludedTowersContainer.appendChild(towerBadge);
 
-          towerBadge.querySelector(".btn-close").addEventListener("click", (e) => {
-            const idxToRemove = parseInt(e.target.dataset.index);
-            appState.excludedTowers.splice(idxToRemove, 1);
-            renderExcludedTowers();
-            this.populateSidebarContent("controls");
-          });
+          towerBadge
+            .querySelector(".btn-close")
+            .addEventListener("click", (e) => {
+              const idxToRemove = parseInt(e.target.dataset.index);
+              appState.excludedTowers.splice(idxToRemove, 1);
+              renderExcludedTowers();
+              this.populateSidebarContent("controls");
+            });
         });
         container.querySelector("#excludedTowerCount").textContent =
           `${appState.excludedTowers.length} towers excluded`;
       }
 
-      const clonedAddPreselectTowerBtn = container.querySelector("#addPreselectTowerBtn");
-      const clonedPreselectTowerInput = container.querySelector("#preselectTowerInput");
+      const clonedAddPreselectTowerBtn = container.querySelector(
+        "#addPreselectTowerBtn",
+      );
+      const clonedPreselectTowerInput = container.querySelector(
+        "#preselectTowerInput",
+      );
       if (clonedAddPreselectTowerBtn && clonedPreselectTowerInput) {
         clonedAddPreselectTowerBtn.addEventListener("click", () => {
           const towerName = clonedPreselectTowerInput.value.trim();
@@ -239,7 +285,8 @@ class RandomizerMobileNav extends MobileNavBase {
         });
       }
 
-      const clonedAddExcludeMapBtn = container.querySelector("#addExcludeMapBtn");
+      const clonedAddExcludeMapBtn =
+        container.querySelector("#addExcludeMapBtn");
       const clonedExcludeMapInput = container.querySelector("#excludeMapInput");
       if (clonedAddExcludeMapBtn && clonedExcludeMapInput) {
         clonedAddExcludeMapBtn.addEventListener("click", () => {
@@ -270,8 +317,11 @@ class RandomizerMobileNav extends MobileNavBase {
         });
       }
 
-      const clonedAddExcludeTowerBtn = container.querySelector("#addExcludeTowerBtn");
-      const clonedExcludeTowerInput = container.querySelector("#excludeTowerInput");
+      const clonedAddExcludeTowerBtn = container.querySelector(
+        "#addExcludeTowerBtn",
+      );
+      const clonedExcludeTowerInput =
+        container.querySelector("#excludeTowerInput");
       if (clonedAddExcludeTowerBtn && clonedExcludeTowerInput) {
         clonedAddExcludeTowerBtn.addEventListener("click", () => {
           const towerName = clonedExcludeTowerInput.value.trim();
@@ -304,7 +354,8 @@ class RandomizerMobileNav extends MobileNavBase {
 
       const clonedRandomizeBtn = container.querySelector("#randomize-btn");
       const clonedCopyResultBtn = container.querySelector("#copy-result-btn");
-      const clonedClearFiltersBtn = container.querySelector("#clear-filters-btn");
+      const clonedClearFiltersBtn =
+        container.querySelector("#clear-filters-btn");
 
       if (clonedRandomizeBtn) {
         clonedRandomizeBtn.addEventListener("click", () => {

@@ -10,7 +10,9 @@ export class MobileNavBase {
    */
   constructor(options = {}) {
     this.mobileSidebar = document.querySelector(".mobile-sidebar");
-    this.mobileSidebarContent = document.querySelector(".mobile-sidebar-content");
+    this.mobileSidebarContent = document.querySelector(
+      ".mobile-sidebar-content",
+    );
     this.mobileNavBtns = document.querySelectorAll(".mobile-nav-btn");
     this.activeSection = null;
 
@@ -90,7 +92,9 @@ export class MobileNavBase {
     // Handle sections that open a modal instead of sidebar content
     if (this.modalConfigs[sectionName]) {
       this.closeSidebar();
-      const modalElement = document.getElementById(this.modalConfigs[sectionName]);
+      const modalElement = document.getElementById(
+        this.modalConfigs[sectionName],
+      );
       if (modalElement) {
         const bsModal = new bootstrap.Modal(modalElement);
         bsModal.show();
@@ -129,7 +133,7 @@ export class MobileNavBase {
         if (config.style) {
           Object.assign(contentElement.style, config.style);
         }
-      } else if (typeof config.contentGenerator === 'function') {
+      } else if (typeof config.contentGenerator === "function") {
         contentElement = config.contentGenerator();
       }
 

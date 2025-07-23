@@ -24,12 +24,7 @@ import { populatePreselectionOptions } from "./components/Populator.js";
 import { setupFilterHandlers } from "./components/Filters.js";
 import { performRandomization } from "./components/Randomize.js";
 import { generateResultUrl, applyUrlParameters } from "./components/url.js";
-import {
-  setupMobileNav,
-  populateControlsSection,
-  isSidebarOpen,
-  closeSidebar,
-} from "./components/MobileNav.js";
+import RandomizerMobileNav from "./components/MobileNav.js";
 
 import * as bootstrap from "bootstrap";
 document.addEventListener("DOMContentLoaded", function () {
@@ -118,17 +113,23 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   // mobile shit
+  const randomizerMobileNavInstance = new RandomizerMobileNav();
+
   setupFilterHandlers(() => {
-    if (isSidebarOpen() && appState.activeMobileSection === "controls") {
-      populateControlsSection();
+    if (
+      randomizerMobileNavInstance.isSidebarOpen() &&
+      appState.activeMobileSection === "controls"
+    ) {
+      randomizerMobileNavInstance.populateSidebarContent("controls");
     }
   });
 
-  setupMobileNav();
-
   window.addEventListener("resize", () => {
-    if (window.innerWidth >= 768 && isSidebarOpen()) {
-      closeSidebar();
+    if (
+      window.innerWidth >= 768 &&
+      randomizerMobileNavInstance.isSidebarOpen()
+    ) {
+      randomizerMobileNavInstance.closeSidebar();
     }
   });
 });

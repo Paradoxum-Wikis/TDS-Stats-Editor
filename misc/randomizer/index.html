@@ -294,6 +294,7 @@
                 placeholder="Type tower name to exclude..."
                 list="tower-datalist"
               />
+              <datalist id="tower-datalist"></datalist>
               <button
                 id="addExcludeTowerBtn"
                 class="btn btn-outline-danger btn-sm"
@@ -310,6 +311,58 @@
             <small class="text-muted" id="excludedTowerCount"
               >0 towers excluded</small
             >
+          </div>
+
+          <!-- Exclude Exclusive Towers -->
+          <div class="form-group mb-3">
+            <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="excludeExclusiveTowersToggle"
+              />
+              <label
+                class="form-check-label text-light"
+                for="excludeExclusiveTowersToggle"
+              >
+                Exclude Exclusive Towers
+              </label>
+            </div>
+          </div>
+
+          <!-- Exclude Golden Towers -->
+          <div class="form-group mb-3">
+            <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="excludeGoldenTowersToggle"
+              />
+              <label
+                class="form-check-label text-light"
+                for="excludeGoldenTowersToggle"
+              >
+                Exclude Golden Towers
+              </label>
+            </div>
+          </div>
+
+          <!-- Exclude Removed Towers -->
+          <div class="form-group mb-3">
+            <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="excludeRemovedTowersToggle"
+                checked
+              />
+              <label
+                class="form-check-label text-light"
+                for="excludeRemovedTowersToggle"
+              >
+                Exclude Removed Towers
+              </label>
+            </div>
           </div>
 
           <hr class="my-3 border-secondary" />
@@ -384,7 +437,7 @@
                 id="randomized-results-container"
               >
                 <p class="text-muted text-center mb-0">
-                  Click "Randomize!" to generate your challenge!
+                  "Randomize!" to generate your hopefully fun challenge!
                 </p>
               </div>
             </div>

@@ -47,6 +47,15 @@ export const UI_ELEMENTS = {
   addExcludeTowerBtn: document.getElementById("addExcludeTowerBtn"),
   excludedTowersContainer: document.getElementById("excludedTowersContainer"),
   excludedTowerCountSpan: document.getElementById("excludedTowerCount"),
+  excludeExclusiveTowersToggle: document.getElementById(
+    "excludeExclusiveTowersToggle",
+  ),
+  excludeGoldenTowersToggle: document.getElementById(
+    "excludeGoldenTowersToggle",
+  ),
+  excludeRemovedTowersToggle: document.getElementById(
+    "excludeRemovedTowersToggle",
+  ),
 
   mobileSidebar: document.querySelector(".mobile-sidebar"),
   mobileSidebarContent: document.querySelector(".mobile-sidebar-content"),

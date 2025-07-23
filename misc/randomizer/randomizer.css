@@ -21,11 +21,11 @@ hr {
   }
 
   #topnavheader .btn-toolbar {
-    display: none !important; /* Hide desktop buttons on mobile */
+    display: none !important;
   }
 
   .mobile-nav {
-    display: flex !important; /* Ensure mobile nav is visible */
+    display: flex !important;
   }
 
   main[role="main"] {
@@ -37,11 +37,10 @@ hr {
     height: auto;
   }
 
-  /* Mobile Navigation */
   main[role="main"] {
     width: 100% !important;
-    padding-bottom: 70px; /* To account for fixed mobile nav */
-    padding-top: 0 !important; /* Ensure no top padding from desktop styles */
+    padding-bottom: 70px;
+    padding-top: 0 !important;
   }
 
   .mobile-nav {
@@ -51,7 +50,7 @@ hr {
     right: 0;
     background-color: #212529;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    display: flex; /* Ensure mobile nav is visible */
+    display: flex;
     justify-content: space-around;
     z-index: 1000;
     padding: 8px 0;
@@ -81,7 +80,7 @@ hr {
   .mobile-sidebar {
     position: fixed;
     top: 0;
-    bottom: 60px; /* Height of mobile nav */
+    bottom: 60px;
     left: 0;
     right: 0;
     background-color: #191c1f;
@@ -101,16 +100,15 @@ hr {
     width: 100%;
   }
 
-  /* Header adjustments for mobile */
   header {
-    padding: 0 !important; /* Remove padding from header */
+    padding: 0 !important;
   }
 
   #topnavheader {
     flex-direction: column !important;
     align-items: center !important;
     text-align: center !important;
-    margin: 0.5rem !important; /* Adjust margins for header content */
+    margin: 0.5rem !important;
   }
 
   #topnavheader h1 {
@@ -121,7 +119,7 @@ hr {
   }
 
   #topnavheader .btn-toolbar {
-    display: none !important; /* Hide desktop header buttons on mobile */
+    display: none !important;
   }
 
   .text-center.mt-3 {
@@ -130,31 +128,28 @@ hr {
   }
 
   #clear-filters-btn {
-    margin-bottom: 10px; /* Add some space below the button */
+    margin-bottom: 10px;
   }
 
-  /* Hide the desktop sidebar when the mobile sidebar is open */
   body.mobile-sidebar-open .aside {
     display: none !important;
   }
 }
 
-/* Desktop-specific styles (min-width: 768px) */
 @media (min-width: 768px) {
   .mobile-nav {
-    display: none !important; /* Hide mobile nav on desktop */
+    display: none !important;
   }
 
   .mobile-sidebar {
-    display: none !important; /* Hide mobile sidebar on desktop */
+    display: none !important;
   }
 
   main[role="main"] {
-    padding-bottom: 0 !important; /* Reset padding from mobile nav */
+    padding-bottom: 0 !important;
   }
 
-  /* Ensure desktop sidebar is visible on desktop, regardless of body class */
   .aside {
-    display: flex !important; /* Or block, depending on its original display */
+    display: flex !important;
   }
 }
