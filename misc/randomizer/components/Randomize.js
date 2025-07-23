@@ -1,7 +1,7 @@
-import { UI_ELEMENTS, appState } from './Constants.js';
-import { getFilteredMapsForMode } from '../ModeMapExceptions.js';
-import { renderRandomizedResult } from './Render.js';
-import { generateResultUrl } from './url.js'; // Import to update URL
+import { UI_ELEMENTS, appState } from "./Constants.js";
+import { getFilteredMapsForMode } from "../ModeMapExceptions.js";
+import { renderRandomizedResult } from "./Render.js";
+import { generateResultUrl } from "./url.js"; // Import to update URL
 
 export function performRandomization() {
   let selectedMap = null;
@@ -9,10 +9,15 @@ export function performRandomization() {
   let finalTowers = [];
 
   // check selectedMode (preselected or randomized)
-  if (UI_ELEMENTS.includeGamemodesToggle.checked && appState.allModes.length > 0) {
+  if (
+    UI_ELEMENTS.includeGamemodesToggle.checked &&
+    appState.allModes.length > 0
+  ) {
     const preselectedModeName = UI_ELEMENTS.preselectModeDropdown.value;
-    if (preselectedModeName !== 'random') {
-      selectedMode = appState.allModes.find(m => m.name === preselectedModeName);
+    if (preselectedModeName !== "random") {
+      selectedMode = appState.allModes.find(
+        (m) => m.name === preselectedModeName,
+      );
     } else {
       const randomIndex = Math.floor(Math.random() * appState.allModes.length);
       selectedMode = appState.allModes[randomIndex];
@@ -24,48 +29,72 @@ export function performRandomization() {
     let availableMapsForRandomization = [...appState.allMaps];
 
     availableMapsForRandomization = availableMapsForRandomization.filter(
-      map => !appState.excludedMaps.some(exclMap => exclMap.name === map.name)
+      (map) =>
+        !appState.excludedMaps.some((exclMap) => exclMap.name === map.name),
     );
 
     const preselectedMapName = UI_ELEMENTS.preselectMapDropdown.value;
-    if (preselectedMapName !== 'random') {
-      selectedMap = availableMapsForRandomization.find(m => m.name === preselectedMapName);
+    if (preselectedMapName !== "random") {
+      selectedMap = availableMapsForRandomization.find(
+        (m) => m.name === preselectedMapName,
+      );
       if (!selectedMap) {
-        console.warn(`Pre-selected map "${preselectedMapName}" is excluded or not found. Falling back to random.`);
-        UI_ELEMENTS.preselectMapDropdown.value = 'random';
+        console.warn(
+          `Pre-selected map "${preselectedMapName}" is excluded or not found. Falling back to random.`,
+        );
+        UI_ELEMENTS.preselectMapDropdown.value = "random";
       }
     } else {
-      const allowedMapsByMode = getFilteredMapsForMode(selectedMode, availableMapsForRandomization);
+      const allowedMapsByMode = getFilteredMapsForMode(
+        selectedMode,
+        availableMapsForRandomization,
+      );
       if (allowedMapsByMode.length > 0) {
-        const randomIndex = Math.floor(Math.random() * allowedMapsByMode.length);
+        const randomIndex = Math.floor(
+          Math.random() * allowedMapsByMode.length,
+        );
         selectedMap = allowedMapsByMode[randomIndex];
       } else {
-        console.warn(`No maps found for selected mode: ${selectedMode ? selectedMode.name : 'N/A'} after exclusions. Randomizing from all non-excluded maps as fallback.`);
+        console.warn(
+          `No maps found for selected mode: ${selectedMode ? selectedMode.name : "N/A"} after exclusions. Randomizing from all non-excluded maps as fallback.`,
+        );
         if (availableMapsForRandomization.length > 0) {
-          const randomIndex = Math.floor(Math.random() * availableMapsForRandomization.length);
+          const randomIndex = Math.floor(
+            Math.random() * availableMapsForRandomization.length,
+          );
           selectedMap = availableMapsForRandomization[randomIndex];
         } else {
-          console.error("No maps available for randomization after all filters.");
+          console.error(
+            "No maps available for randomization after all filters.",
+          );
         }
       }
     }
   }
 
   // check finalTowers (preselected+randomized to fill slots, and check exclusions)
-  if (UI_ELEMENTS.includeLoadoutsToggle.checked && appState.allTowers.length > 0) {
+  if (
+    UI_ELEMENTS.includeLoadoutsToggle.checked &&
+    appState.allTowers.length > 0
+  ) {
     finalTowers = [...appState.preselectedTowers];
     const loadoutSize = 5;
-    
+
     let availableTowersForRandomization = appState.allTowers.filter(
-      tower => !finalTowers.some(pre => pre.name === tower.name) &&
-               !appState.excludedTowers.some(exclTower => exclTower.name === tower.name)
+      (tower) =>
+        !finalTowers.some((pre) => pre.name === tower.name) &&
+        !appState.excludedTowers.some(
+          (exclTower) => exclTower.name === tower.name,
+        ),
     );
 
     for (let i = finalTowers.length; i < loadoutSize; i++) {
       if (availableTowersForRandomization.length === 0) {
         break;
       }
-      const randomIndex = Math.floor(Math.random() * availableTowersForRandomization.length);
+      const randomIndex = Math.floor(
+        Math.random() * availableTowersForRandomization.length,
+      );
       finalTowers.push(availableTowersForRandomization[randomIndex]);
       availableTowersForRandomization.splice(randomIndex, 1);
     }
@@ -75,10 +104,18 @@ export function performRandomization() {
   appState.lastSelectedMode = selectedMode;
   appState.lastFinalTowers = finalTowers;
 
-  renderRandomizedResult(appState.lastSelectedMap, appState.lastSelectedMode, appState.lastFinalTowers);
+  renderRandomizedResult(
+    appState.lastSelectedMap,
+    appState.lastSelectedMode,
+    appState.lastFinalTowers,
+  );
 
   if (!appState.isInitialLoadFromUrl) {
-    const resultUrl = generateResultUrl(appState.lastSelectedMap, appState.lastSelectedMode, appState.lastFinalTowers);
-    history.replaceState(null, '', resultUrl);
+    const resultUrl = generateResultUrl(
+      appState.lastSelectedMap,
+      appState.lastSelectedMode,
+      appState.lastFinalTowers,
+    );
+    history.replaceState(null, "", resultUrl);
   }
 }

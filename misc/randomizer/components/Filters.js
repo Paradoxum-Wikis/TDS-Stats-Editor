@@ -1,17 +1,29 @@
-import { UI_ELEMENTS, appState } from './Constants.js';
-import { renderPreselectedTowers, renderExcludedMaps, renderExcludedTowers } from './Render.js';
+import { UI_ELEMENTS, appState } from "./Constants.js";
+import {
+  renderPreselectedTowers,
+  renderExcludedMaps,
+  renderExcludedTowers,
+} from "./Render.js";
 
 export function setupFilterHandlers(syncMobileControls) {
-  UI_ELEMENTS.addPreselectTowerBtn.addEventListener('click', () => {
+  UI_ELEMENTS.addPreselectTowerBtn.addEventListener("click", () => {
     const towerName = UI_ELEMENTS.preselectTowerInput.value.trim();
     if (towerName && appState.preselectedTowers.length < 5) {
-      const tower = appState.allTowers.find(t => t.name.toLowerCase() === towerName.toLowerCase());
+      const tower = appState.allTowers.find(
+        (t) => t.name.toLowerCase() === towerName.toLowerCase(),
+      );
       if (tower) {
-        if (!appState.preselectedTowers.some(t => t.name.toLowerCase() === tower.name.toLowerCase()) &&
-            !appState.excludedTowers.some(t => t.name.toLowerCase() === tower.name.toLowerCase())) {
+        if (
+          !appState.preselectedTowers.some(
+            (t) => t.name.toLowerCase() === tower.name.toLowerCase(),
+          ) &&
+          !appState.excludedTowers.some(
+            (t) => t.name.toLowerCase() === tower.name.toLowerCase(),
+          )
+        ) {
           appState.preselectedTowers.push(tower);
           renderPreselectedTowers();
-          UI_ELEMENTS.preselectTowerInput.value = '';
+          UI_ELEMENTS.preselectTowerInput.value = "";
           syncMobileControls();
         } else {
           alert(`"${tower.name}" is already selected or excluded.`);
@@ -24,16 +36,23 @@ export function setupFilterHandlers(syncMobileControls) {
     }
   });
 
-  UI_ELEMENTS.addExcludeMapBtn.addEventListener('click', () => {
+  UI_ELEMENTS.addExcludeMapBtn.addEventListener("click", () => {
     const mapName = UI_ELEMENTS.excludeMapInput.value.trim();
     if (mapName) {
-      const map = appState.allMaps.find(m => m.name.toLowerCase() === mapName.toLowerCase());
+      const map = appState.allMaps.find(
+        (m) => m.name.toLowerCase() === mapName.toLowerCase(),
+      );
       if (map) {
-        if (!appState.excludedMaps.some(m => m.name.toLowerCase() === map.name.toLowerCase()) &&
-            UI_ELEMENTS.preselectMapDropdown.value.toLowerCase() !== map.name.toLowerCase()) {
+        if (
+          !appState.excludedMaps.some(
+            (m) => m.name.toLowerCase() === map.name.toLowerCase(),
+          ) &&
+          UI_ELEMENTS.preselectMapDropdown.value.toLowerCase() !==
+            map.name.toLowerCase()
+        ) {
           appState.excludedMaps.push(map);
           renderExcludedMaps();
-          UI_ELEMENTS.excludeMapInput.value = '';
+          UI_ELEMENTS.excludeMapInput.value = "";
           syncMobileControls();
         } else {
           alert(`"${map.name}" is already excluded or pre-selected.`);
@@ -44,16 +63,24 @@ export function setupFilterHandlers(syncMobileControls) {
     }
   });
 
-  UI_ELEMENTS.addExcludeTowerBtn.addEventListener('click', () => {
+  UI_ELEMENTS.addExcludeTowerBtn.addEventListener("click", () => {
     const towerName = UI_ELEMENTS.excludeTowerInput.value.trim();
     if (towerName) {
-      const tower = appState.allTowers.find(t => t.name.toLowerCase() === towerName.toLowerCase());
+      const tower = appState.allTowers.find(
+        (t) => t.name.toLowerCase() === towerName.toLowerCase(),
+      );
       if (tower) {
-        if (!appState.excludedTowers.some(t => t.name.toLowerCase() === tower.name.toLowerCase()) &&
-            !appState.preselectedTowers.some(t => t.name.toLowerCase() === tower.name.toLowerCase())) {
+        if (
+          !appState.excludedTowers.some(
+            (t) => t.name.toLowerCase() === tower.name.toLowerCase(),
+          ) &&
+          !appState.preselectedTowers.some(
+            (t) => t.name.toLowerCase() === tower.name.toLowerCase(),
+          )
+        ) {
           appState.excludedTowers.push(tower);
           renderExcludedTowers();
-          UI_ELEMENTS.excludeTowerInput.value = '';
+          UI_ELEMENTS.excludeTowerInput.value = "";
           syncMobileControls();
         } else {
           alert(`"${tower.name}" is already excluded or pre-selected.`);
@@ -64,16 +91,16 @@ export function setupFilterHandlers(syncMobileControls) {
     }
   });
 
-  UI_ELEMENTS.clearFiltersBtn.addEventListener('click', () => {
+  UI_ELEMENTS.clearFiltersBtn.addEventListener("click", () => {
     clearAllFilters();
     syncMobileControls();
   });
 }
 
 export function clearAllFilters() {
-  UI_ELEMENTS.preselectMapDropdown.value = 'random';
-  UI_ELEMENTS.preselectModeDropdown.value = 'random';
-  
+  UI_ELEMENTS.preselectMapDropdown.value = "random";
+  UI_ELEMENTS.preselectModeDropdown.value = "random";
+
   appState.preselectedTowers = [];
   renderPreselectedTowers();
 

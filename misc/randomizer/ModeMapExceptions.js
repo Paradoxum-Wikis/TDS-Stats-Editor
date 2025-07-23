@@ -9,12 +9,12 @@ export function getFilteredMapsForMode(selectedMode, allMaps) {
     return [];
   }
 
-  if (selectedMode.type === 'special') {
-    return allMaps.filter(map => map.name === selectedMode.name);
+  if (selectedMode.type === "special") {
+    return allMaps.filter((map) => map.name === selectedMode.name);
   }
 
-  if (selectedMode.name === 'Hardcore') {
-    return allMaps.filter(map => map.tableNumber === 4); // table 4 is from its location on the wiki
+  if (selectedMode.name === "Hardcore") {
+    return allMaps.filter((map) => map.tableNumber === 4); // table 4 is from its location on the wiki
   }
 
   return allMaps;

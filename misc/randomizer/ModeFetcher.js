@@ -1,6 +1,6 @@
 class ModeFetcher {
   constructor() {
-    this.modesJsonUrl = './modes.json';
+    this.modesJsonUrl = "/modes.json";
   }
 
   async fetchModes() {
@@ -12,7 +12,7 @@ class ModeFetcher {
       const modesData = await response.json();
 
       for (const mode of modesData) {
-        mode.imageUrl = `/htmlassets/${mode.imageFile}`; 
+        mode.imageUrl = `/htmlassets/${mode.imageFile}`;
       }
 
       return modesData;

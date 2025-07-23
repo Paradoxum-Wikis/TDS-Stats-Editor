@@ -113,7 +113,7 @@ class App {
     );
 
     if (startsWithMatch) return startsWithMatch;
-    
+
     const containsMatch = this.towerManager.towerNames.find((name) =>
       name.toLowerCase().includes(searchName),
     );

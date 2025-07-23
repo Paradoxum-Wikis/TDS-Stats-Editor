@@ -23,7 +23,7 @@
         }
       })();
     </script>
-    
+
     <title>TDS Randomizer</title>
     <meta
       name="description"
@@ -46,10 +46,7 @@
     <meta property="og:image:height" content="630" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:site"
-      content="Tower Defense Simulator Randomizer"
-    />
+    <meta name="twitter:site" content="Tower Defense Simulator Randomizer" />
     <meta name="twitter:title" content="TDS Randomizer" />
     <meta
       name="twitter:description"
@@ -144,7 +141,10 @@
                 id="includeMapsToggle"
                 checked
               />
-              <label class="form-check-label text-light" for="includeMapsToggle">
+              <label
+                class="form-check-label text-light"
+                for="includeMapsToggle"
+              >
                 Include Maps
               </label>
             </div>
@@ -155,7 +155,10 @@
             <label for="preselectMap" class="form-label text-info fw-bold">
               <i class="bi bi-map me-2"></i>Pre-select Map
             </label>
-            <select id="preselectMap" class="form-select form-select-sm bg-dark text-white">
+            <select
+              id="preselectMap"
+              class="form-select form-select-sm bg-dark text-white"
+            >
               <option value="random">Random Map</option>
               <!-- js -->
             </select>
@@ -169,7 +172,10 @@
                 id="includeGamemodesToggle"
                 checked
               />
-              <label class="form-check-label text-light" for="includeGamemodesToggle">
+              <label
+                class="form-check-label text-light"
+                for="includeGamemodesToggle"
+              >
                 Include Gamemodes
               </label>
             </div>
@@ -180,7 +186,10 @@
             <label for="preselectMode" class="form-label text-info fw-bold">
               <i class="bi bi-controller me-2"></i>Pre-select Gamemode
             </label>
-            <select id="preselectMode" class="form-select form-select-sm bg-dark text-white">
+            <select
+              id="preselectMode"
+              class="form-select form-select-sm bg-dark text-white"
+            >
               <option value="random">Random Gamemode</option>
               <!-- js -->
             </select>
@@ -194,7 +203,10 @@
                 id="includeLoadoutsToggle"
                 checked
               />
-              <label class="form-check-label text-light" for="includeLoadoutsToggle">
+              <label
+                class="form-check-label text-light"
+                for="includeLoadoutsToggle"
+              >
                 Include Loadouts
               </label>
             </div>
@@ -202,7 +214,10 @@
 
           <!-- Tower Preselect -->
           <div class="form-group mb-3">
-            <label for="preselectTowerInput" class="form-label text-info fw-bold">
+            <label
+              for="preselectTowerInput"
+              class="form-label text-info fw-bold"
+            >
               <i class="bi bi-people me-2"></i>Pre-select Towers (Max 5)
             </label>
             <div class="input-group mb-2">
@@ -214,12 +229,22 @@
                 list="tower-datalist"
               />
               <datalist id="tower-datalist"></datalist>
-              <button id="addPreselectTowerBtn" class="btn btn-outline-secondary btn-sm">Add</button>
+              <button
+                id="addPreselectTowerBtn"
+                class="btn btn-outline-secondary btn-sm"
+              >
+                Add
+              </button>
             </div>
-            <div id="preselectedTowersContainer" class="d-flex flex-wrap gap-2 mb-2">
+            <div
+              id="preselectedTowersContainer"
+              class="d-flex flex-wrap gap-2 mb-2"
+            >
               <!-- js -->
             </div>
-            <small class="text-muted" id="preselectedTowerCount">0/5 towers selected</small>
+            <small class="text-muted" id="preselectedTowerCount"
+              >0/5 towers selected</small
+            >
           </div>
 
           <hr class="my-3 border-secondary" />
@@ -238,17 +263,27 @@
                 list="map-datalist"
               />
               <datalist id="map-datalist"></datalist>
-              <button id="addExcludeMapBtn" class="btn btn-outline-danger btn-sm">Exclude</button>
+              <button
+                id="addExcludeMapBtn"
+                class="btn btn-outline-danger btn-sm"
+              >
+                Exclude
+              </button>
             </div>
             <div id="excludedMapsContainer" class="d-flex flex-wrap gap-2 mb-2">
               <!-- js -->
             </div>
-            <small class="text-muted" id="excludedMapCount">0 maps excluded</small>
+            <small class="text-muted" id="excludedMapCount"
+              >0 maps excluded</small
+            >
           </div>
 
           <!-- Exclude Towers Section -->
           <div class="form-group mb-3">
-            <label for="excludeTowerInput" class="form-label text-danger fw-bold">
+            <label
+              for="excludeTowerInput"
+              class="form-label text-danger fw-bold"
+            >
               <i class="bi bi-x-circle-fill me-2"></i>Exclude Towers
             </label>
             <div class="input-group mb-2">
@@ -259,12 +294,22 @@
                 placeholder="Type tower name to exclude..."
                 list="tower-datalist"
               />
-              <button id="addExcludeTowerBtn" class="btn btn-outline-danger btn-sm">Exclude</button>
+              <button
+                id="addExcludeTowerBtn"
+                class="btn btn-outline-danger btn-sm"
+              >
+                Exclude
+              </button>
             </div>
-            <div id="excludedTowersContainer" class="d-flex flex-wrap gap-2 mb-2">
+            <div
+              id="excludedTowersContainer"
+              class="d-flex flex-wrap gap-2 mb-2"
+            >
               <!-- js -->
             </div>
-            <small class="text-muted" id="excludedTowerCount">0 towers excluded</small>
+            <small class="text-muted" id="excludedTowerCount"
+              >0 towers excluded</small
+            >
           </div>
 
           <hr class="my-3 border-secondary" />
@@ -300,7 +345,8 @@
                   class="btn btn-sm btn-outline-secondary"
                   data-bs-toggle="modal"
                   data-bs-target="#about-modal"
-                  data-bs-tooltip="true" data-bs-placement="bottom"
+                  data-bs-tooltip="true"
+                  data-bs-placement="bottom"
                 >
                   About
                 </button>
@@ -312,7 +358,8 @@
                   class="btn btn-sm btn-outline-secondary"
                   data-bs-toggle="modal"
                   data-bs-target="#settings-modal"
-                  data-bs-tooltip="true" data-bs-placement="bottom"
+                  data-bs-tooltip="true"
+                  data-bs-placement="bottom"
                 >
                   Settings
                 </button>
@@ -326,16 +373,26 @@
           <div class="row">
             <div class="col-lg-12 mb-4">
               <h2 class="text-white unisans mb-3 text-center">
-                <i class="bi bi-shuffle me-2" style="width: 24px; height: 24px"></i>
+                <i
+                  class="bi bi-shuffle me-2"
+                  style="width: 24px; height: 24px"
+                ></i>
                 Your Challenge
               </h2>
-              <div class="bg-dark border border-secondary rounded p-3" id="randomized-results-container">
-                <p class="text-muted text-center mb-0">Click "Randomize!" to generate your challenge!</p>
+              <div
+                class="bg-dark border border-secondary rounded p-3"
+                id="randomized-results-container"
+              >
+                <p class="text-muted text-center mb-0">
+                  Click "Randomize!" to generate your challenge!
+                </p>
               </div>
             </div>
 
             <!-- Randomize and Copy Buttons -->
-            <div class="col-lg-12 mb-4 d-grid gap-2 d-md-flex justify-content-md-center">
+            <div
+              class="col-lg-12 mb-4 d-grid gap-2 d-md-flex justify-content-md-center"
+            >
               <button id="randomize-btn" class="btn btn-outline-primary">
                 <i class="bi bi-shuffle me-2"></i>Randomize!
               </button>
@@ -349,7 +406,10 @@
               <h3 class="text-white unisans mb-3 text-center">
                 <i class="bi bi-collection me-2"></i>Available Maps
               </h3>
-              <div class="bg-dark border border-secondary rounded p-3" style="max-height: 400px; overflow-y: auto;">
+              <div
+                class="bg-dark border border-secondary rounded p-3"
+                style="max-height: 400px; overflow-y: auto"
+              >
                 <div class="row g-2" id="map-gallery">
                   <!-- js -->
                   <p class="text-muted text-center mb-0">Loading maps...</p>
@@ -362,7 +422,10 @@
               <h3 class="text-white unisans mb-3 text-center">
                 <i class="bi bi-collection-fill me-2"></i>Available Towers
               </h3>
-              <div class="bg-dark border border-secondary rounded p-3" style="max-height: 400px; overflow-y: auto;">
+              <div
+                class="bg-dark border border-secondary rounded p-3"
+                style="max-height: 400px; overflow-y: auto"
+              >
                 <div class="row g-2" id="tower-gallery">
                   <!-- js -->
                   <p class="text-muted text-center mb-0">Loading towers...</p>
@@ -445,8 +508,9 @@
               </h6>
               <div class="toru-options">
                 <p>
-                  The TDS Randomizer is a tool for generating random suggestions for your Tower Defense Simulator gameplay.
-                  It can suggest maps, gamemodes, and even full loadouts to spice up your runs!
+                  The TDS Randomizer is a tool for generating random suggestions
+                  for your Tower Defense Simulator gameplay. It can suggest
+                  maps, gamemodes, and even full loadouts to spice up your runs!
                 </p>
                 <p>
                   This randomizer is part of the TDS Statistics Editor project,
@@ -461,10 +525,20 @@
               </h6>
               <div class="toru-options">
                 <ol>
-                  <li>Select the categories you want to randomize (Maps, Gamemodes, Loadouts).</li>
-                  <li>Choose the quantity of items to randomize for each category.</li>
-                  <li>Click the "Randomize!" button to get your suggestions.</li>
-                  <li>Use the "Copy Result URL" button to share your randomized setup.</li>
+                  <li>
+                    Select the categories you want to randomize (Maps,
+                    Gamemodes, Loadouts).
+                  </li>
+                  <li>
+                    Choose the quantity of items to randomize for each category.
+                  </li>
+                  <li>
+                    Click the "Randomize!" button to get your suggestions.
+                  </li>
+                  <li>
+                    Use the "Copy Result URL" button to share your randomized
+                    setup.
+                  </li>
                 </ol>
               </div>
             </div>
@@ -483,7 +557,8 @@
                     src="https://static.wikia.nocookie.net/tower-defense-sim/images/4/4c/Discord-Symbol-Blurple.svg"
                     alt="Discord Logo"
                     loading="lazy"
-                    data-bs-tooltip="true" data-bs-placement="bottom"
+                    data-bs-tooltip="true"
+                    data-bs-placement="bottom"
                   />
                 </a>
                 <a
@@ -500,7 +575,8 @@
                     data-dark-src="../../htmlassets/github-mark-white.svg"
                     alt="GitHub Logo"
                     loading="lazy"
-                    data-bs-tooltip="true" data-bs-placement="bottom"
+                    data-bs-tooltip="true"
+                    data-bs-placement="bottom"
                   />
                 </a>
                 <a
@@ -515,7 +591,8 @@
                     src="../../htmlassets/wikisquaredsmall.png"
                     alt="TDS Wiki Logo"
                     loading="lazy"
-                    data-bs-tooltip="true" data-bs-placement="bottom"
+                    data-bs-tooltip="true"
+                    data-bs-placement="bottom"
                   />
                 </a>
               </div>

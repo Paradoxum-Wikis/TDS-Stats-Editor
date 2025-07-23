@@ -1,7 +1,7 @@
 @media (max-width: 767.98px) {
-    header.p-3 {
-      padding: 0 !important;
-    }
+  header.p-3 {
+    padding: 0 !important;
+  }
 
   #topnavheader {
     flex-direction: column !important;
@@ -29,11 +29,11 @@
   }
 
   .randomized-section img {
-  max-width: 100%;
-  height: auto;
-}
+    max-width: 100%;
+    height: auto;
+  }
 
-/* Mobile Navigation */
+  /* Mobile Navigation */
   main[role="main"] {
     width: 100% !important;
     padding-bottom: 70px; /* To account for fixed mobile nav */

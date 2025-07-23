@@ -508,7 +508,7 @@ export default {
         Range: 6,
         Cooldown: 0.6,
         Damage: 6,
-        Note: "Has a placement footprint of 1 stud (small)."
+        Note: "Has a placement footprint of 1 stud (small).",
       },
     },
   },
@@ -1409,7 +1409,7 @@ export default {
         ],
         Cooldown: 1,
         Damage: 0,
-        Note: "Has a placement footprint of 2.5 studs (very large)."
+        Note: "Has a placement footprint of 2.5 studs (very large).",
       },
     },
   },
@@ -2024,7 +2024,7 @@ export default {
         Price: 250,
         Cooldown: 0,
         Damage: 0,
-        Note: "Has a placement footprint of 1.75 studs (above average)."
+        Note: "Has a placement footprint of 1.75 studs (above average).",
       },
     },
   },
@@ -2269,7 +2269,7 @@ export default {
         Limit: 1,
         Cooldown: 0.15,
         Damage: 5,
-        Note: "Has a placement footprint of 2 studs (large)."
+        Note: "Has a placement footprint of 2 studs (large).",
       },
       Upgrades: [
         {
@@ -2541,7 +2541,7 @@ export default {
         Range: 5,
         Cooldown: 1,
         Damage: 2,
-        Note: "Has a placement footprint of 1 stud (small)."
+        Note: "Has a placement footprint of 1 stud (small).",
       },
     },
   },
@@ -4716,7 +4716,7 @@ export default {
         Range: 7.5,
         Cooldown: 1.2,
         Damage: 1,
-        Note: "Has a placement footprint of 1 stud (small)."
+        Note: "Has a placement footprint of 1 stud (small).",
       },
     },
   },
@@ -5009,7 +5009,7 @@ export default {
         Limit: 6,
         Cooldown: 1.2,
         Damage: 8,
-        Note: "Has a placement footprint of 1 stud (small)."
+        Note: "Has a placement footprint of 1 stud (small).",
       },
     },
   },
@@ -5719,7 +5719,7 @@ export default {
         Range: 15,
         Cooldown: 0.3,
         Damage: 10,
-        Note: "Has a placement footprint of 2 studs (large)."
+        Note: "Has a placement footprint of 2 studs (large).",
       },
     },
   },
@@ -6532,7 +6532,7 @@ export default {
         Range: 5,
         Cooldown: 0.55,
         Damage: 6,
-        Note: "Has a placement footprint of 1 stud (small)."
+        Note: "Has a placement footprint of 1 stud (small).",
       },
     },
   },

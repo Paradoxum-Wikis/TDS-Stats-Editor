@@ -18,6 +18,10 @@
   background-color: #f8f9fa !important;
 }
 
+.light-mode.bg-dark {
+  background-color: #fbfbfb;
+}
+
 .light-mode .card.bg-dark {
   background-color: #fff !important;
   border-color: #ced4da !important;

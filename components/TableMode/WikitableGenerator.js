@@ -425,13 +425,7 @@ class WikitableGenerator {
     }
 
     // Studs
-    if (
-      [
-        "Range",
-        "ExplosionRadius",
-        "AssistRange",
-      ].includes(attribute)
-    ) {
+    if (["Range", "ExplosionRadius", "AssistRange"].includes(attribute)) {
       if (this.viewer.useFaithfulFormat) {
         return this.#formatFaithfulNumber(value);
       } else {

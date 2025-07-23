@@ -126,7 +126,7 @@ export default class ImageLoader {
   }
 
   static convertFileToFandomUrl(filename) {
-    const normalizedFilename = filename.replace(/ /g, '_');
+    const normalizedFilename = filename.replace(/ /g, "_");
     const md5Hash = CryptoJS.MD5(normalizedFilename).toString();
     const firstChar = md5Hash.charAt(0);
     const firstTwoChars = md5Hash.substring(0, 2);
