@@ -1,26 +1,49 @@
-class MobileNavigation {
-  constructor() {
-    this.mobileSidebar = document.querySelector(".mobile-sidebar");
-    this.mobileSidebarContent = document.querySelector(
-      ".mobile-sidebar-content",
-    );
-    this.mobileNavBtns = document.querySelectorAll(".mobile-nav-btn");
-    this.activeSection = null;
+import { MobileNavBase } from "../Shared/MobileNavBase.js";
 
-    // elements we'll clone for the sidebar
-    this.controlsSection = document.getElementById("tier-list-controls");
-    this.filtersSection = document.getElementById("tower-filters");
+class MobileNavigation extends MobileNavBase {
+  constructor() {
+    const sectionConfigs = {
+      controls: {
+        originalElement: document.getElementById("tier-list-controls"),
+        removeClasses: ["aside", "d-none", "d-md-flex"],
+        addClasses: ["mobile-controls-section"],
+        style: {
+          width: "100%",
+          height: "auto",
+          minWidth: "auto",
+          overflowY: "visible",
+        },
+      },
+      filters: {
+        originalElement: document.getElementById("tower-filters"),
+        removeClasses: ["aside", "d-none", "d-md-flex"],
+        addClasses: ["mobile-controls-section"],
+        style: {
+          width: "100%",
+          height: "auto",
+          minWidth: "auto",
+          overflowY: "visible",
+        },
+      },
+      navigation: {
+        contentGenerator: () => this.createNavigationMenu(),
+      },
+    };
+
+    const modalConfigs = {
+      about: "discord-modal",
+    };
+
+    super({ sectionConfigs, modalConfigs, bodyActiveClass: "sidebar-open" });
 
     // store the currently selected tier
     this.selectedTier = "S";
-
-    this.init();
   }
 
-  init() {
-    this.setupEventListeners();
-
-    // check if url wants a specific section open
+  /**
+   * Overrides the base onInit to handle URL hash checking for initial section opening.
+   */
+  onInit() {
     const urlHash = window.location.hash.substring(1);
     if (
       urlHash === "controls" ||
@@ -31,130 +54,148 @@ class MobileNavigation {
     }
   }
 
-  setupEventListeners() {
-    // handle nav button clicks
-    this.mobileNavBtns.forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        e.preventDefault();
-        const sectionName = btn.getAttribute("data-mobile-section");
-
-        // toggle off if already open
-        if (this.activeSection === sectionName && this.isSidebarOpen()) {
-          this.closeSidebar();
-          return;
-        }
-
-        this.openSection(sectionName);
-      });
-    });
-
-    // close when clicking backdrop
-    if (this.mobileSidebar) {
-      this.mobileSidebar.addEventListener("click", (e) => {
-        if (e.target === this.mobileSidebar) {
-          this.closeSidebar();
-        }
-      });
-    }
-
-    // close on resize to desktop
-    window.addEventListener("resize", () => {
-      if (window.innerWidth >= 768 && this.isSidebarOpen()) {
-        this.closeSidebar();
-      }
-    });
-
-    // close on escape key
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && this.isSidebarOpen()) {
-        this.closeSidebar();
-      }
-    });
-  }
-
-  openSection(sectionName) {
-    if (!sectionName) return;
-
-    // about section opens a modal instead
-    if (sectionName === "about") {
-      this.closeSidebar();
-      const aboutModal = document.getElementById("discord-modal");
-      if (aboutModal) {
-        const bsModal = new bootstrap.Modal(aboutModal);
-        bsModal.show();
-      }
-      return;
-    }
-
-    this.populateSidebar(sectionName);
-    this.updateActiveButton(sectionName);
-    this.openSidebar();
-    this.activeSection = sectionName;
-  }
-
-  updateActiveButton(sectionName) {
-    this.mobileNavBtns.forEach((btn) => {
-      const btnSection = btn.getAttribute("data-mobile-section");
-
-      btn.classList.toggle("active", btnSection === sectionName);
-
-      const iconElement = btn.querySelector("i");
-      if (!iconElement) return;
-
-      if (btnSection === sectionName) {
-        // save original icon
-        if (!iconElement.dataset.originalClass) {
-          iconElement.dataset.originalClass = iconElement.className;
-        }
-        iconElement.className = "bi bi-x-lg";
-      } else if (iconElement.dataset.originalClass) {
-        // restore original icon
-        iconElement.className = iconElement.dataset.originalClass;
-      }
-    });
-  }
-
-  populateSidebar(sectionName) {
+  /**
+   * Overrides the base populateSidebarContent to handle specific ranker sections
+   * and set the tier select dropdown value.
+   * @param {string} sectionName - The name of the section to populate.
+   */
+  populateSidebarContent(sectionName) {
     if (!this.mobileSidebarContent) return;
 
     this.mobileSidebarContent.innerHTML = "";
 
     let contentElement = null;
+    const config = this.sectionConfigs[sectionName];
 
-    switch (sectionName) {
-      case "controls":
-        contentElement = this.controlsSection?.cloneNode(true);
+    if (config) {
+      if (config.originalElement) {
+        contentElement = config.originalElement.cloneNode(true);
+        if (config.removeClasses) {
+          contentElement.classList.remove(...config.removeClasses);
+        }
+        if (config.addClasses) {
+          contentElement.classList.add(...config.addClasses);
+        }
+        if (config.style) {
+          Object.assign(contentElement.style, config.style);
+        }
+
         // set the dropdown to the saved tier value
-        if (contentElement) {
+        if (sectionName === "controls") {
           const tierSelect = contentElement.querySelector("#tier-select");
           if (tierSelect) {
             tierSelect.value = this.selectedTier;
           }
         }
-        break;
+      } else if (typeof config.contentGenerator === "function") {
+        contentElement = config.contentGenerator();
+      }
 
-      case "filters":
-        contentElement = this.filtersSection?.cloneNode(true);
-        break;
-
-      case "navigation":
-        contentElement = this.createNavigationMenu();
-        break;
-
-      default:
-        const message = document.createElement("p");
-        message.className = "text-white";
-        message.textContent = "Unknown section selected.";
-        this.mobileSidebarContent.appendChild(message);
-        return;
-    }
-
-    if (contentElement) {
-      this.mobileSidebarContent.appendChild(contentElement);
-      this.reattachEventListeners(sectionName);
+      if (contentElement) {
+        this.mobileSidebarContent.appendChild(contentElement);
+        this.attachSectionEventListeners(contentElement, sectionName);
+      }
+    } else {
+      const message = document.createElement("p");
+      message.className = "text-white";
+      message.textContent = "Unknown section selected.";
+      this.mobileSidebarContent.appendChild(message);
     }
   }
 
+  /**
+   * Overrides the base attachSectionEventListeners for ranker-specific listeners.
+   * @param {HTMLElement} container - The container element where the section content was added.
+   * @param {string} sectionName - The name of the section.
+   */
+  attachSectionEventListeners(container, sectionName) {
+    switch (sectionName) {
+      case "controls":
+        const tierSelect = container.querySelector("#tier-select");
+        const towerInput = container.querySelector("#tower-input");
+        const addTowerBtn = container.querySelector("#add-tower-btn");
+        const resetBtn = container.querySelector("#reset-tierlist");
+        const exportBtn = container.querySelector("#export-image");
+        const copyBtn = container.querySelector("#copy-tierlist");
+
+        if (tierSelect) {
+          tierSelect.addEventListener("change", () => {
+            this.selectedTier = tierSelect.value;
+            // update desktop ui from mobile
+            const mainTierSelect = document.getElementById("tier-select");
+            if (mainTierSelect && mainTierSelect !== tierSelect) {
+              mainTierSelect.value = this.selectedTier;
+            }
+          });
+        }
+
+        if (addTowerBtn) {
+          addTowerBtn.addEventListener("click", () => {
+            if (tierSelect) {
+              this.selectedTier = tierSelect.value;
+            }
+            const selectedTier = this.selectedTier;
+            if (towerInput && towerInput.value) {
+              const towers = towerInput.value.split(",");
+              towers.forEach((tower) => {
+                const trimmedName = tower.trim();
+                if (trimmedName) {
+                  window.addTowerToTier(trimmedName, selectedTier);
+                }
+              });
+              towerInput.value = "";
+            }
+          });
+        }
+
+        if (resetBtn) {
+          resetBtn.addEventListener("click", () => {
+            if (confirm("Are you sure you want to reset your tier list?")) {
+              window.resetTierList();
+            }
+          });
+        }
+
+        if (exportBtn) {
+          exportBtn.addEventListener("click", () => {
+            window.exportTierListImage();
+            this.closeSidebar();
+          });
+        }
+
+        if (copyBtn) {
+          copyBtn.addEventListener("click", () => {
+            window.copyTierListCode();
+            this.closeSidebar();
+          });
+        }
+        break;
+
+      case "filters":
+        const filterCheckboxes = container.querySelectorAll(".filter-category");
+        // sorta compact syncer
+        filterCheckboxes.forEach((checkbox) => {
+          checkbox.addEventListener("change", (event) => {
+            const checkboxId = event.target.id;
+            const mainCheckbox = document.getElementById(checkboxId);
+
+            if (mainCheckbox) {
+              mainCheckbox.checked = event.target.checked;
+              mainCheckbox.dispatchEvent(
+                new Event("change", { bubbles: true })
+              );
+            }
+            window.filterTowerGallery();
+          });
+        });
+        break;
+    }
+  }
+
+  /**
+   * Creates and returns the navigation menu element for the "navigation" section.
+   * @returns {HTMLElement} The navigation menu container.
+   */
   createNavigationMenu() {
     const navContainer = document.createElement("div");
     navContainer.className = "navigation-links d-grid gap-3 p-3";
@@ -213,120 +254,8 @@ class MobileNavigation {
 
     return navContainer;
   }
-
-  reattachEventListeners(sectionName) {
-    switch (sectionName) {
-      case "controls":
-        const tierSelect =
-          this.mobileSidebarContent.querySelector("#tier-select");
-        const towerInput =
-          this.mobileSidebarContent.querySelector("#tower-input");
-        const addTowerBtn =
-          this.mobileSidebarContent.querySelector("#add-tower-btn");
-        const resetBtn =
-          this.mobileSidebarContent.querySelector("#reset-tierlist");
-        const exportBtn =
-          this.mobileSidebarContent.querySelector("#export-image");
-        const copyBtn =
-          this.mobileSidebarContent.querySelector("#copy-tierlist");
-
-        if (tierSelect) {
-          tierSelect.addEventListener("change", () => {
-            this.selectedTier = tierSelect.value;
-
-            // update desktop ui from mobile
-            const mainTierSelect = document.getElementById("tier-select");
-            if (mainTierSelect && mainTierSelect !== tierSelect) {
-              mainTierSelect.value = this.selectedTier;
-            }
-          });
-        }
-
-        if (addTowerBtn) {
-          addTowerBtn.addEventListener("click", () => {
-            if (tierSelect) {
-              this.selectedTier = tierSelect.value; // Save the selected tier
-            }
-            const selectedTier = this.selectedTier;
-            if (towerInput && towerInput.value) {
-              const towers = towerInput.value.split(",");
-              towers.forEach((tower) => {
-                const trimmedName = tower.trim();
-                if (trimmedName) {
-                  window.addTowerToTier(trimmedName, selectedTier);
-                }
-              });
-              towerInput.value = "";
-            }
-          });
-        }
-
-        if (resetBtn) {
-          resetBtn.addEventListener("click", () => {
-            if (confirm("Are you sure you want to reset your tier list?")) {
-              window.resetTierList();
-            }
-          });
-        }
-
-        if (exportBtn) {
-          exportBtn.addEventListener("click", () => {
-            window.exportTierListImage();
-            this.closeSidebar();
-          });
-        }
-
-        if (copyBtn) {
-          copyBtn.addEventListener("click", () => {
-            window.copyTierListCode();
-            this.closeSidebar();
-          });
-        }
-        break;
-
-      case "filters":
-        const filterCheckboxes =
-          this.mobileSidebarContent.querySelectorAll(".filter-category");
-        filterCheckboxes.forEach((checkbox) => {
-          checkbox.addEventListener("change", () => {
-            window.filterTowerGallery();
-          });
-        });
-        break;
-    }
-  }
-
-  openSidebar() {
-    if (this.mobileSidebar) {
-      this.mobileSidebar.classList.add("active");
-      document.body.classList.add("sidebar-open");
-    }
-  }
-
-  closeSidebar() {
-    if (this.mobileSidebar) {
-      this.mobileSidebar.classList.remove("active");
-      document.body.classList.remove("sidebar-open");
-
-      // reset button icons
-      this.mobileNavBtns.forEach((btn) => {
-        btn.classList.remove("active");
-        const iconElement = btn.querySelector("i");
-        if (iconElement && iconElement.dataset.originalClass) {
-          iconElement.className = iconElement.dataset.originalClass;
-        }
-      });
-
-      this.activeSection = null;
-    }
-  }
-
-  isSidebarOpen() {
-    return this.mobileSidebar?.classList.contains("active");
-  }
 }
 
-// init when page loads
 document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("load", () => {
     window.mobileNav = new MobileNavigation();
