@@ -89,7 +89,7 @@ export class MobileNavBase {
   openSection(sectionName) {
     if (!sectionName) return;
 
-    // Handle sections that open a modal instead of sidebar content
+    // For sections that open a modal instead of sidebar content
     if (this.modalConfigs[sectionName]) {
       this.closeSidebar();
       const modalElement = document.getElementById(
