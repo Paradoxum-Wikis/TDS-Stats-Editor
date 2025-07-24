@@ -97,7 +97,7 @@ class UnitCalculations {
       },
 
       PursuitMissiles: {
-        For: ["Top 4", "Top 5", "Bottom 4", "Bottom 5"],
+        For: ["4T   ", "5T   ", "4B   ", "5B   "],
         Value: (level) => {
           return (
             (level.Damage * level.Ammo) /
@@ -314,9 +314,9 @@ class UnitCalculations {
 
     NetCost: {
       Pursuit: {
-        For: ["Top 4", "Top 5", "Bottom 4", "Bottom 5"],
+        For: ["4T   ", "5T   ", "4B   ", "5B   "],
         Value: (level) => {
-          // 'level' here is the Unit object for 'Top 4', 'Top 5', etc.
+          // 'level' here is the Unit object for '4T   ', '5T   ', etc.
           TowerRegistry.log(`Calculating NetCost for Pursuit ${level.Name}`);
 
           // parse the path and level from the Unit name
@@ -335,7 +335,7 @@ class UnitCalculations {
           TowerRegistry.log(`Using base cost (level 3): ${baseCost}`);
           let totalCost = baseCost;
 
-          // get the cost of the current path level upgrade (e.g., Cost of 'Top 4' unit)
+          // get the cost of the current path level upgrade (e.g., Cost of '4T   ' unit)
           const currentPathLevelCost = level.Cost || 0;
           TowerRegistry.log(
             `Cost of current path level (${level.Name}): ${currentPathLevelCost}`,
@@ -411,7 +411,7 @@ class UnitCalculations {
         },
       },
       Pursuit: {
-        For: ["Top 4", "Top 5", "Bottom 4", "Bottom 5"],
+        For: ["4T   ", "5T   ", "4B   ", "5B   "],
         Requires: [
           "ExplosionDamage",
           "MissileCooldown",
@@ -440,7 +440,7 @@ class UnitCalculations {
       },
 
       Pursuit: {
-        For: ["Top 4", "Top 5", "Bottom 4", "Bottom 5"],
+        For: ["4T   ", "5T   ", "4B   ", "5B   "],
         Requires: ["NetCost", "TotalDPS"],
         Value: (level) => {
           const efficiency = level.NetCost / level.TotalDPS;

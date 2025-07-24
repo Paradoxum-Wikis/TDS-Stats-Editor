@@ -1,8 +1,8 @@
 {
   "poll": {
-    "endDate": "2025-06-12",
-    "id": "NULL11065",
-    "title": "Quick heads up about the new update",
-    "description": "We are still working on Hacker and will be CONSTANTLY UPDATING it, every other towers that had a rebalance this update has been added. Make sure to reset to default if you see that button lights up. Clear all data if you can. THERE MAY BE WRONG INFO."
+    "endDate": "2025-07-25",
+    "id": "NULL1137123",
+    "title": "PVP statistics",
+    "description": "PVP tower statistics have been added to towers that has one, you can find them in the same place as where you'd find Golden statistics. We consider them to be correct, but if you find any issues, please report them in the TDS Wiki Discord server, or DM 't7ru'."
   }
 }

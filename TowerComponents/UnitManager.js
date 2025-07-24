@@ -53,6 +53,7 @@ const calculated = {
 const register = {
   Engineer: {
     Default: ["Sentry", "Rifle Sentry", "Minigun Sentry", "War Machine Sentry"],
+    PVP: ["Sentry ", "Rifle Sentry ", "Minigun Sentry ", "War Machine Sentry "],
   },
   Necromancer: {
     Default: [
@@ -71,6 +72,7 @@ const register = {
       "Golden Tommy Goon 2",
     ],
     Default: ["Pistol Goon", "Tommy Goon 1", "Tommy Goon 2"],
+    PVP: ["Pistol Goon ", "Tommy Goon 1 ", "Tommy Goon 2 "],
   },
   "Mercenary Base": {
     Default: [
@@ -101,7 +103,7 @@ const register = {
     Frost: ["Ice Turret 2", "Ice Turret 3", "Ice Turret 4"],
   },
   Pursuit: {
-    Default: ["Top 4", "Top 5", "Bottom 4", "Bottom 5"],
+    Default: ["4T   ", "5T   ", "4B   ", "5B   "],
   },
   Commander: {
     Default: ["Gunner APC", "Missile APC"],
@@ -230,6 +232,7 @@ const register = {
 
   Hacker: {
     Default: ["5T", "5B"],
+    PVP: ["5T ", "5B "],
   },
 };
 

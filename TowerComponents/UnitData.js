@@ -144,6 +144,53 @@ export default {
     Speed: 4,
   },
 
+  // pvp cb
+  "Pistol Goon ": {
+    Health: 255,
+    Damage: 3,
+    Range: 20,
+    Detections: {
+      Hidden: true,
+      Flying: true,
+      Lead: false,
+    },
+    Cooldown: 0.9,
+    Lifetime: 150,
+    Limit: 10,
+    Spawnrate: 50,
+    Speed: 4,
+  },
+  "Tommy Goon 1 ": {
+    Health: 125,
+    Damage: 5,
+    Range: 17.5,
+    Detections: {
+      Hidden: true,
+      Flying: false,
+      Lead: false,
+    },
+    Cooldown: 0.25,
+    Lifetime: 200,
+    Limit: 4,
+    Spawnrate: 50,
+    Speed: 4,
+  },
+  "Tommy Goon 2 ": {
+    Health: 225,
+    Damage: 8,
+    Range: 20,
+    Detections: {
+      Hidden: true,
+      Flying: false,
+      Lead: false,
+    },
+    Cooldown: 0.12,
+    Lifetime: 200,
+    Limit: 4,
+    Spawnrate: 50,
+    Speed: 4,
+  },
+
   // Golden crook boss
   "Golden Pistol Goon": {
     Health: 25,
@@ -477,6 +524,92 @@ export default {
       Lead: false,
     },
     SendTime: 1.5,
+    ScrapCost: 32,
+    Lifetime: 30,
+    BurstCooldown: 0,
+    Cooldown: 0.2,
+    ExplosionDamage: 0,
+    ExplosionRadius: 0,
+    IgnoreCollisionDamage: true,
+    Lifetime: 30,
+    MissileAmount: 0,
+    Speed: 1.25,
+  },
+  "Minigun Sentry": {
+    Health: 60,
+    Damage: 6,
+    Range: 20,
+    Detections: {
+      Hidden: true,
+      Flying: false,
+      Lead: false,
+    },
+    SendTime: 1.75,
+    ScrapCost: 120,
+    Lifetime: 45,
+    BurstCooldown: 0,
+    Cooldown: 0.15,
+    ExplosionDamage: 0,
+    ExplosionRadius: 0,
+    IgnoreCollisionDamage: true,
+    Lifetime: 45,
+    MissileAmount: 0,
+    Speed: 1.25,
+  },
+  "War Machine Sentry": {
+    Health: 250,
+    Damage: 10,
+    Range: 24,
+    Detections: {
+      Hidden: true,
+      Flying: false,
+      Lead: false,
+    },
+    SendTime: 1.75,
+    ScrapCost: 250,
+    Lifetime: 60,
+    BurstCooldown: 4,
+    Cooldown: 0.1,
+    ExplosionDamage: 35,
+    ExplosionRadius: 5,
+    IgnoreCollisionDamage: true,
+    Lifetime: 60,
+    MissileAmount: 2,
+    Speed: 1.5,
+  },
+
+  // pvp engi
+  "Sentry ": {
+    Health: 20,
+    Damage: 2,
+    Range: 18,
+    Detections: {
+      Hidden: false,
+      Flying: false,
+      Lead: false,
+    },
+    SendTime: 1.25,
+    ScrapCost: 16,
+    Lifetime: 20,
+    BurstCooldown: 0,
+    Cooldown: 0.45,
+    ExplosionDamage: 0,
+    ExplosionRadius: 0,
+    IgnoreCollisionDamage: true,
+    Lifetime: 30,
+    MissileAmount: 0,
+    Speed: 1.25,
+  },
+  "Rifle Sentry ": {
+    Health: 40,
+    Damage: 2,
+    Range: 20,
+    Detections: {
+      Hidden: false,
+      Flying: false,
+      Lead: false,
+    },
+    SendTime: 1.5,
     ScrapCost: 36,
     Lifetime: 30,
     BurstCooldown: 0,
@@ -488,7 +621,7 @@ export default {
     MissileAmount: 0,
     Speed: 1.25,
   },
-  "Minigun Sentry": {
+  "Minigun Sentry ": {
     Health: 60,
     Damage: 5,
     Range: 20,
@@ -509,7 +642,7 @@ export default {
     MissileAmount: 0,
     Speed: 1.25,
   },
-  "War Machine Sentry": {
+  "War Machine Sentry ": {
     Health: 250,
     Damage: 8,
     Range: 24,
@@ -821,7 +954,7 @@ export default {
   },
 
   // Pursuit
-  "Top 4": {
+  "4T   ": {
     Damage: 12,
     Range: 11,
     Detections: { Hidden: false, Flying: true, Lead: true },
@@ -840,7 +973,7 @@ export default {
     Speed: 25,
     TimeBetweenMissiles: 0.5,
   },
-  "Top 5": {
+  "5T   ": {
     Damage: 26,
     Range: 12,
     Detections: { Hidden: false, Flying: true, Lead: true },
@@ -859,7 +992,7 @@ export default {
     Speed: 25,
     TimeBetweenMissiles: 0.25,
   },
-  "Bottom 4": {
+  "4B   ": {
     Damage: 10,
     Range: 11,
     Detections: { Hidden: true, Flying: true, Lead: true },
@@ -878,7 +1011,7 @@ export default {
     Speed: 25,
     TimeBetweenMissiles: 0.25,
   },
-  "Bottom 5": {
+  "5B   ": {
     Damage: 12,
     Range: 12,
     Detections: { Hidden: true, Flying: true, Lead: true },
@@ -2046,6 +2179,52 @@ export default {
       "Hologram EV": 0.825,
       Slowdown: 25,
       CostClone: 65,
+      UnitCap: 1000,
+      UnitSendCooldown: 0.1,
+      WireFraud: 20,
+      HologramLifetime: 120,
+    },
+  },
+
+  // pvp hacker
+  "5T ": {
+    Damage: 15,
+    Cooldown: 0.1,
+    Range: 18.5,
+    Detections: {
+      Hidden: true,
+      Flying: false,
+      Lead: false,
+    },
+    Cost: 63500,
+    Attributes: {
+      Limit: 2,
+      Beams: 4,
+      "Hologram EV": 0.9,
+      Slowdown: 15,
+      CostClone: 30,
+      UnitCap: 1000,
+      UnitSendCooldown: 0.1,
+      WireFraud: 12.5,
+      HologramLifetime: 75,
+    },
+  },
+  "5B ": {
+    Damage: 18,
+    Cooldown: 0.3,
+    Range: 21,
+    Detections: {
+      Hidden: true,
+      Flying: false,
+      Lead: false,
+    },
+    Cost: 48000,
+    Attributes: {
+      Limit: 2,
+      Beams: 3,
+      "Hologram EV": 0.825,
+      Slowdown: 25,
+      CostClone: 25,
       UnitCap: 1000,
       UnitSendCooldown: 0.1,
       WireFraud: 20,
