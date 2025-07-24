@@ -1225,66 +1225,93 @@ export default {
       },
     },
     PVP: {
+      Defaults: {
+        Income: 45,
+        Detections: { Flying: false, Hidden: false, Lead: false },
+        Range: 14,
+        Price: 550,
+        Attributes: { MaxAmmo: 6, SpinDuration: 1.25 },
+        Cooldown: 1.25,
+        Damage: 4,
+        Limit: 10,
+      },
       Upgrades: [
         {
+          Image: 4999425200,
           Stats: {
-            Attributes: {},
+            Attributes: { MaxAmmo: 6, SpinDuration: 1 },
+            Extras: [],
+            Income: 45,
+            Detections: { Flying: false, Hidden: false, Lead: false },
+            Cooldown: 1,
             Range: 14,
-            Cooldown: 0.75,
-            Extras: ["Pistol Goon (50s Spawn Time)"],
-            Damage: 5,
+            Damage: 4,
+            Limit: 10,
           },
-          Image: 3032133716,
-          Title: "Quick Getaway",
-          Cost: 525,
+          Title: "Steady Hand",
+          Cost: 200,
         },
         {
+          Image: 5523233366,
           Stats: {
-            Attributes: { DoublePistolGoons: true },
-            Range: 15,
-            Detections: { Hidden: true },
-            Cooldown: 0.75,
-            Extras: ["Pistol Goon: 1 → 2"],
+            Attributes: { MaxAmmo: 6, SpinDuration: 1 },
+            Extras: [],
+            Income: 55,
+            Detections: { Flying: false, Hidden: false, Lead: false },
+            Cooldown: 1,
+            Range: 16,
+            Damage: 6,
+            Limit: 10,
+          },
+          Title: "Lucky Shot",
+          Cost: 500,
+        },
+        {
+          Image: 5523231844,
+          Stats: {
+            Attributes: { MaxAmmo: 6, SpinDuration: 0.75 },
+            Extras: [],
+            Income: 65,
+            Detections: { Flying: false, Hidden: true, Lead: false },
+            Cooldown: 0.6,
+            Range: 18,
             Damage: 10,
+            Limit: 10,
           },
-          Image: 3444643559,
-          Title: "Double Trouble",
-          Cost: 1100,
+          Title: "Faster Instincts",
+          Cost: 2000,
         },
         {
+          Image: 5523234030,
           Stats: {
-            Attributes: {},
-            Range: 16.5,
-            Extras: ["Tommy Goon (50s Spawn Time)"],
-            Cooldown: 0.2,
+            Attributes: { MaxAmmo: 12, SpinDuration: 0.75 },
+            Extras: [],
+            Income: 125,
+            Detections: { Flying: false, Hidden: true, Lead: false },
+            Cooldown: 0.3,
+            Range: 20,
             Damage: 10,
+            Limit: 10,
           },
-          Image: 3838914605,
-          Title: "Tommy Goons",
-          Cost: 5000,
+          Title: "Double Tap",
+          Cost: 3825,
         },
         {
+          Image: 5523234990,
           Stats: {
-            Attributes: {},
-            Range: 17.5,
-            Extras: ["Upgraded Tommy Goon"],
-            Cooldown: 0.12,
+            Attributes: { MaxAmmo: 12, SpinDuration: 0.75 },
+            Extras: [],
+            Income: 225,
+            Detections: { Flying: false, Hidden: true, Lead: false },
+            Cooldown: 0.3,
+            Range: 20,
             Damage: 18,
+            Limit: 10,
           },
-          Image: 3444644903,
-          Title: "The Godfather",
-          Cost: 15250,
+          Title: "Outlawed",
+          Cost: 7500,
         },
       ],
-      Defaults: {
-        Range: 14,
-        Attributes: { DoublePistolGoons: false },
-        Limit: 5,
-        Price: 700,
-        Detections: { Flying: false, Hidden: false, Lead: false },
-        Cooldown: 0.9,
-        Damage: 5,
-      },
     },
   },
   "Crook Boss": {
@@ -2315,7 +2342,7 @@ export default {
             Detections: { Flying: true, Hidden: true, Lead: true },
             Cooldown: 1.2,
             Range: 17,
-            Damage: 16, // was 12 → 16
+            Damage: 16,
           },
           Title: "Auto Converter",
           Cost: 1800,
@@ -2335,11 +2362,11 @@ export default {
             },
             Detections: { Flying: true, Hidden: true, Lead: true },
             Cooldown: 0.75,
-            Range: 20, // was 18 → 20
-            Damage: 22, // was 18 → 22
+            Range: 20,
+            Damage: 22,
           },
           Title: "Improved Blueprints",
-          Cost: 2600, // was 3000 → 2600
+          Cost: 2600,
         },
         {
           Image: 155526941,
@@ -2356,11 +2383,11 @@ export default {
             },
             Detections: { Flying: true, Hidden: true, Lead: true },
             Cooldown: 0.75,
-            Range: 20, // was 18 → 20
-            Damage: 30, // unchanged
+            Range: 20,
+            Damage: 30,
           },
           Title: "Heavy Construction",
-          Cost: 11500, // was 12500 → 11500
+          Cost: 11500,
         },
         {
           Image: 7852911857,
@@ -2377,11 +2404,11 @@ export default {
             },
             Detections: { Flying: true, Hidden: true, Lead: true },
             Cooldown: 0.6,
-            Range: 22, // was 20 → 22
-            Damage: 50, // unchanged
+            Range: 22,
+            Damage: 50,
           },
           Title: "Illegal Gun Parts",
-          Cost: 27500, // was 35000 → 27500
+          Cost: 27500,
         },
       ],
     },
@@ -4278,12 +4305,12 @@ export default {
     PVP: {
       Defaults: {
         Attributes: {
-          Spawnrate: 40, // 45s → 40s
+          Spawnrate: 40,
           UnitToSend: "Humvee",
           AirstrikeDamage: 0,
           MissileAmount: 1,
           AirstrikeRadius: 0,
-          UnitHealth: 60, // Humvee Health 50 → 60
+          UnitHealth: 60,
         },
         Detections: { Flying: false, Hidden: false, Lead: false },
         Abilities: [
@@ -4307,9 +4334,9 @@ export default {
           Stats: {
             Extras: ["Spawnrate: 45 → 30", "Unit To Send: Humvee → Humvee 1"],
             Attributes: {
-              Spawnrate: 25, // 30s → 25s
+              Spawnrate: 25,
               UnitToSend: "Humvee 1",
-              UnitHealth: 60, // default Humvee health
+              UnitHealth: 60,
             },
             Detections: { Flying: false, Hidden: false, Lead: false },
           },
@@ -4323,7 +4350,7 @@ export default {
             Attributes: {
               Spawnrate: 30,
               UnitToSend: "Humvee 2",
-              UnitHealth: 100, // Humvee Health 80 → 100
+              UnitHealth: 100,
             },
             Detections: { Flying: false, Hidden: false, Lead: false },
           },
@@ -4787,7 +4814,7 @@ export default {
           },
           Image: 4538447347,
           Title: "Upgraded Armaments",
-          Cost: 1400, // unchanged
+          Cost: 1400,
         },
         {
           Stats: {
