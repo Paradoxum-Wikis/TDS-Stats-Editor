@@ -4348,7 +4348,7 @@ export default {
           Stats: {
             Extras: ["Unit To Send: Humvee 1 → Humvee 2"],
             Attributes: {
-              Spawnrate: 30,
+              Spawnrate: 25,
               UnitToSend: "Humvee 2",
               UnitHealth: 100,
             },
@@ -4362,7 +4362,7 @@ export default {
           Stats: {
             Extras: ["Unit To Send: Humvee 2 → Humvee 3"],
             Attributes: {
-              Spawnrate: 30,
+              Spawnrate: 25,
               UnitToSend: "Humvee 3",
               UnitHealth: 100,
             },
@@ -4381,7 +4381,7 @@ export default {
               "Airstrike Radius: 0 → 8",
             ],
             Attributes: {
-              Spawnrate: 30,
+              Spawnrate: 25,
               UnitToSend: "Tank",
               AirstrikeDamage: 75,
               MissileAmount: 6,
@@ -4397,12 +4397,11 @@ export default {
           Stats: {
             Extras: [
               "Unit To Send: Tank → Railgun Tank",
-              "Spawnrate: 30 → 35",
               "Airstrike Damage: 75 → 125",
               "Airstrike Radius: 8 → 12",
             ],
             Attributes: {
-              Spawnrate: 35,
+              Spawnrate: 25,
               UnitToSend: "Railgun Tank",
               AirstrikeDamage: 125,
               MissileAmount: 6,

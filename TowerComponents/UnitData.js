@@ -146,7 +146,7 @@ export default {
 
   // pvp cb
   "Pistol Goon ": {
-    Health: 255,
+    Health: 25,
     Damage: 3,
     Range: 20,
     Detections: {
