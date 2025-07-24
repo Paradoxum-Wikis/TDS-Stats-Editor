@@ -610,10 +610,10 @@ export default {
       Lead: false,
     },
     SendTime: 1.5,
-    ScrapCost: 36,
+    ScrapCost: 32,
     Lifetime: 30,
     BurstCooldown: 0,
-    Cooldown: 0.3,
+    Cooldown: 0.2,
     ExplosionDamage: 0,
     ExplosionRadius: 0,
     IgnoreCollisionDamage: true,
@@ -623,7 +623,7 @@ export default {
   },
   "Minigun Sentry ": {
     Health: 60,
-    Damage: 5,
+    Damage: 6,
     Range: 20,
     Detections: {
       Hidden: true,
@@ -634,7 +634,7 @@ export default {
     ScrapCost: 120,
     Lifetime: 45,
     BurstCooldown: 0,
-    Cooldown: 0.16,
+    Cooldown: 0.15,
     ExplosionDamage: 0,
     ExplosionRadius: 0,
     IgnoreCollisionDamage: true,
@@ -644,7 +644,7 @@ export default {
   },
   "War Machine Sentry ": {
     Health: 250,
-    Damage: 8,
+    Damage: 10,
     Range: 24,
     Detections: {
       Hidden: true,

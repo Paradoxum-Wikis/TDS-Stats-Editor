@@ -2350,10 +2350,10 @@ export default {
         {
           Image: 31857714,
           Stats: {
-            Extras: ["3 Max Units", "Sentry Shield"],
+            Extras: ["Sentry Shield"],
             Attributes: {
               BuildTime: 2,
-              MaxUnits: 3,
+              MaxUnits: 2,
               UnitToSend: "Rifle Sentry ",
               Spawnrate: 1,
               SentryShield: true,
@@ -2371,7 +2371,7 @@ export default {
         {
           Image: 155526941,
           Stats: {
-            Extras: ["Minigun Sentry", "Sentry Shield"],
+            Extras: ["3 Max Units", "Minigun Sentry", "Sentry Shield"],
             Attributes: {
               BuildTime: 2,
               MaxUnits: 3,
@@ -2392,10 +2392,10 @@ export default {
         {
           Image: 7852911857,
           Stats: {
-            Extras: ["War Machine Sentry", "4 Max Units"],
+            Extras: ["War Machine Sentry", "3 Max Units"],
             Attributes: {
               BuildTime: 2,
-              MaxUnits: 4,
+              MaxUnits: 3,
               UnitToSend: "War Machine Sentry ",
               Spawnrate: 1,
               SentryShield: true,
