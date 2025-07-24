@@ -5066,7 +5066,6 @@ export default {
         },
         Cooldown: 1.5,
         Damage: 10,
-        Note: "Lead can be damaged by splash damage and collision.\n\nAt level 0, Raise the Dead: Max Units - 2x Skeleton; Combined Total Health - 120; Combined DPS - NaN\nAt level 1, Raise the Dead: Max Units - 4x Skeleton; Combined Total Health - 240; Combined DPS - NaN\nAt level 2, Raise the Dead: Max Units - 3x Skeleton, 3x Sword Skeleton; Combined Total Health - 450; Combined DPS - 74.25\nAt level 3, Raise the Dead: Max Units - 1x Giant Skeleton, 4x Sword Skeleton, 1x Skeleton Knight; Combined Total Health - 1210; Combined DPS - 235.78\nAt level 4, Raise the Dead: Max Units - 1x Executioner Skeleton, 6 Skeleton Knight, 2x Hallow Guard; Combined Total Health - 8600; Combined DPS - 986.89",
       },
       Upgrades: [
         {

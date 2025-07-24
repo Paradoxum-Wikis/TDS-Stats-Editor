@@ -64,6 +64,14 @@ const register = {
       "Hallow Guard",
       "Executioner Skeleton",
     ],
+    PVP: [
+      "Skeleton ",
+      "Sword Skeleton ",
+      "Giant Skeleton ",
+      "Skeleton Knight ",
+      "Hallow Guard ",
+      "Executioner Skeleton ",
+    ],
   },
   "Crook Boss": {
     Golden: [
