@@ -424,7 +424,7 @@ class UnitCalculations {
             level.TimeBetweenMissiles * level.MissileAmount),
       },
       WarMachineSentry: {
-        For: ["War Machine Sentry"],
+        For: ["War Machine Sentry", "War Machine Sentry "],
         Value: (level) =>
           (level.ExplosionDamage * level.MissileAmount) / level.BurstCooldown,
       },
