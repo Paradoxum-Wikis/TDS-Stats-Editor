@@ -129,6 +129,17 @@ const register = {
       "Landmine 4",
       "Bear Trap 4",
     ],
+    PVP: [
+      "Spike 0 ",
+      "Spike 1 ",
+      "Spike 2 ",
+      "Spike 3 ",
+      "Spike 4 ",
+      "Landmine 2 ",
+      "Landmine 3 ",
+      "Landmine 4 ",
+      "Bear Trap 4 ",
+    ],
   },
 
   Commando: {
@@ -219,6 +230,14 @@ const register = {
       "Humvee 3",
       "Tank",
       "Railgun Tank",
+    ],
+    PVP: [
+      "Humvee ",
+      "Humvee 1 ",
+      "Humvee 2 ",
+      "Humvee 3 ",
+      "Tank ",
+      "Railgun Tank ",
     ],
   },
 

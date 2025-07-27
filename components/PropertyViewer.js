@@ -65,7 +65,7 @@ export default class PropertyViewer {
     this.extraBtn.addEventListener("click", this.toggleExtra.bind(this));
     this.calcBtn.addEventListener("click", this.toggleCalc.bind(this));
 
-    // slave table's configs - all in one place
+    // slave table's configs - aio
     this.unitDisabled = [];
 
     this.unitHidden = ["_towerName", "_skinName"];
@@ -147,12 +147,6 @@ export default class PropertyViewer {
     if (!activeSkin) return false;
     return activeSkin.tower.name === "Mercenary Base";
   }
-
-  //  isSwarmerTower() {
-  //    const activeSkin = this.viewer.getActiveSkin();
-  //    if (!activeSkin) return false;
-  //    return activeSkin.tower.name === "Swarmer";
-  //  }
 
   isDJTower() {
     const activeSkin = this.viewer.getActiveSkin();
@@ -295,12 +289,9 @@ export default class PropertyViewer {
         return true;
       }
 
-      //      if (
-      //        (this.isTrapperTower() || this.isSwarmerTower()) &&
-      //        property === "Damage"
-      //      ) {
-      //        return true;
-      //      }
+      if (this.isTrapperTower() && property === "Damage") {
+        return true;
+      }
 
       if (
         this.isMercenaryBaseTower() &&

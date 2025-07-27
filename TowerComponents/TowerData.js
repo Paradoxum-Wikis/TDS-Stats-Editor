@@ -7521,6 +7521,90 @@ export default {
         Note: "All traps can damage hidden enemies, but this tower can never directly target hidden enemies.\n\nThrough splash damage, flying enemies may be hit indirectly if another detectable enemy is nearby, but this tower can never directly target flying enemies.",
       },
     },
+    PVP: {
+      Upgrades: [
+        {
+          Stats: {
+            Attributes: {
+              MaxTraps: 5,
+              "Spike Trap": true,
+              "Landmine Trap": false,
+              "Bear Trap": false,
+            },
+            Range: 7,
+            Cooldown: 5,
+            Extras: ["Upgraded Spike", "Max Traps: 4 → 5"],
+          },
+          Image: 16493201931,
+          Title: "Faster Throwing",
+          Cost: 550,
+        },
+        {
+          Stats: {
+            Attributes: {
+              MaxTraps: 6,
+              "Spike Trap": true,
+              "Landmine Trap": true,
+              "Bear Trap": false,
+            },
+            Range: 9,
+            Extras: ["Upgraded Spike", "Landmine", "Max Traps: 5 → 6"],
+          },
+          Image: 16493202507,
+          Title: "Watch your step",
+          Cost: 1500,
+        },
+        {
+          Stats: {
+            Attributes: {
+              MaxTraps: 7,
+              "Spike Trap": true,
+              "Landmine Trap": true,
+              "Bear Trap": false,
+            },
+            Range: 10,
+            Extras: ["Upgraded Spike", "Upgraded Landmine", "Max Traps: 6 → 8"],
+          },
+          Image: 16493202350,
+          Title: "Better Traps",
+          Cost: 5000,
+        },
+        {
+          Stats: {
+            Attributes: {
+              MaxTraps: 9,
+              "Spike Trap": true,
+              "Landmine Trap": true,
+              "Bear Trap": true,
+            },
+            Extras: [
+              "Upgraded Spike",
+              "Upgrade Mine",
+              "Bear Trap",
+              "Max Traps: 8 → 10",
+            ],
+          },
+          Image: 16493202129,
+          Title: "Don't try this at home",
+          Cost: 13500,
+        },
+      ],
+      Defaults: {
+        Attributes: {
+          Velocity: 15,
+          MaxTraps: 4,
+          TrapPlacementTime: 0.5,
+          Lifetime: 75,
+          "Spike Trap": true,
+          "Landmine Trap": false,
+          "Bear Trap": false,
+        },
+        Limit: 7,
+        Price: 500,
+        Range: 7,
+        Note: "All traps can damage hidden enemies, but this tower can never directly target hidden enemies.\n\nThrough splash damage, flying enemies may be hit indirectly if another detectable enemy is nearby, but this tower can never directly target flying enemies.",
+      },
+    },
   },
   Turret: {
     Default: {
