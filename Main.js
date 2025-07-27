@@ -35,7 +35,7 @@ import "./components/News/HeadsUp.js";
 import * as bootstrap from "bootstrap";
 import CryptoJS from "crypto-js";
 
-const TDSVersion = "1.71.5"; // change GAME version number here
+const TDSVersion = "1.71.7"; // change GAME version number here
 
 window.clearUrlAndShowLanding = clearUrlAndShowLanding;
 window.bootstrap = bootstrap;

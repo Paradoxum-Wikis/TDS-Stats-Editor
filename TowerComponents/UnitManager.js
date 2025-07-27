@@ -111,7 +111,7 @@ const register = {
     Frost: ["Ice Turret 2", "Ice Turret 3", "Ice Turret 4"],
   },
   Pursuit: {
-    Default: ["4T   ", "5T   ", "4B   ", "5B   "],
+    Default: ["4T  ", "5T  ", "4B  ", "5B  "],
   },
   Commander: {
     Default: ["Gunner APC", "Missile APC"],

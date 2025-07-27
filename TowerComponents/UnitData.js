@@ -1144,7 +1144,7 @@ export default {
   },
 
   // Pursuit
-  "4T   ": {
+  "4T  ": {
     Damage: 12,
     Range: 11,
     Detections: { Hidden: false, Flying: true, Lead: true },
@@ -1163,7 +1163,7 @@ export default {
     Speed: 25,
     TimeBetweenMissiles: 0.5,
   },
-  "5T   ": {
+  "5T  ": {
     Damage: 26,
     Range: 12,
     Detections: { Hidden: false, Flying: true, Lead: true },
@@ -1182,7 +1182,7 @@ export default {
     Speed: 25,
     TimeBetweenMissiles: 0.25,
   },
-  "4B   ": {
+  "4B  ": {
     Damage: 10,
     Range: 11,
     Detections: { Hidden: true, Flying: true, Lead: true },
@@ -1201,7 +1201,7 @@ export default {
     Speed: 25,
     TimeBetweenMissiles: 0.25,
   },
-  "5B   ": {
+  "5B  ": {
     Damage: 12,
     Range: 12,
     Detections: { Hidden: true, Flying: true, Lead: true },
