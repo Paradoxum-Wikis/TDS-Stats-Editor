@@ -7059,7 +7059,7 @@ export default {
     },
     PVP: {
       Defaults: {
-        Detections: { Flying: false, Hidden: false, Lead: false },
+        Detections: { Flying: true, Hidden: false, Lead: false },
         Attributes: { Burst: 4, BurstCooldown: 0.4 },
         Price: 450,
         Range: 17,
@@ -7072,7 +7072,7 @@ export default {
           Stats: {
             Extras: [],
             Attributes: { Burst: 6, BurstCooldown: 0.3 },
-            Detections: { Flying: false, Hidden: false, Lead: false },
+            Detections: { Flying: true, Hidden: false, Lead: false },
             Cooldown: 0.12,
             Range: 17,
             Damage: 1,
@@ -7085,7 +7085,7 @@ export default {
           Stats: {
             Extras: [],
             Attributes: { Burst: 6, BurstCooldown: 0.3 },
-            Detections: { Flying: false, Hidden: true, Lead: false },
+            Detections: { Flying: true, Hidden: true, Lead: false },
             Cooldown: 0.12,
             Range: 19,
             Damage: 2,
@@ -7098,7 +7098,7 @@ export default {
           Stats: {
             Extras: ["Increased burst (5)"],
             Attributes: { Burst: 8, BurstCooldown: 0.3 },
-            Detections: { Flying: false, Hidden: true, Lead: false },
+            Detections: { Flying: true, Hidden: true, Lead: false },
             Cooldown: 0.12,
             Range: 21,
             Damage: 5,
@@ -7111,7 +7111,7 @@ export default {
           Stats: {
             Extras: ["Increased burst (7)"],
             Attributes: { Burst: 10, BurstCooldown: 0.2 },
-            Detections: { Flying: false, Hidden: true, Lead: false },
+            Detections: { Flying: true, Hidden: true, Lead: false },
             Cooldown: 0.1,
             Range: 21,
             Damage: 10,
