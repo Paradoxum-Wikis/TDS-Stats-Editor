@@ -48,15 +48,20 @@ export default class AddAttributeForm {
     const typeDropdownElement = document.getElementById(
       "add-attribute-type-dropdown",
     );
+
+    const typeDropdownMenu = typeDropdownElement.querySelector(".dropdown-menu");
+    if (typeDropdownMenu) {
+      typeDropdownMenu.querySelectorAll(".dropdown-item").forEach(item => {
+        item.addEventListener("click", (e) => {
+          const selectedType = e.target.textContent;
+          this.typeInput.value = selectedType;
+          this.#onTypeChange();
+        });
+      });
+    }
+
     typeDropdownElement.addEventListener("hidden.bs.dropdown", (e) => {
-      const targetValue = e.target.querySelector(
-        ".dropdown-item:focus",
-      )?.textContent;
-
-      if (targetValue === undefined) return;
-
-      this.typeInput.value = targetValue;
-      this.#onTypeChange();
+      console.log("Dropdown hidden event fired jfshagjsagj0 jej");
     });
 
     this.addAttributeSubmit.addEventListener(
