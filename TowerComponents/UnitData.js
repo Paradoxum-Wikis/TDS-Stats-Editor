@@ -1399,7 +1399,7 @@ export default {
     Damage: 45,
     BurnDamage: 3,
     BurnTime: 1,
-    Cooldown: 5,
+    Cooldown: 4.5,
     ExplosionRadius: 4,
     StunLength: 0,
     TickRate: 1,
