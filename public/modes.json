@@ -1,47 +1,47 @@
 [
   {
-    "name": "Easy Mode",
-    "imageFile": "EasyReworkIcon.png",
+    "name": "Easy",
+    "imageUrl": "https://static.wikia.nocookie.net/tower-defense-sim/images/8/87/EasyReworkIcon.png",
     "type": "regular"
   },
   {
-    "name": "Casual Mode",
-    "imageFile": "GraveDiggerEasyIcon.png",
+    "name": "Casual",
+    "imageUrl": "https://static.wikia.nocookie.net/tower-defense-sim/images/0/02/GraveDiggerEasyIcon.png",
     "type": "regular"
   },
   {
     "name": "Intermediate",
-    "imageFile": "PatientZeroIntermediateIcon.png",
+    "imageUrl": "https://static.wikia.nocookie.net/tower-defense-sim/images/9/96/PatientZeroIntermediateIcon.png",
     "type": "regular"
   },
   {
     "name": "Molten",
-    "imageFile": "MoltenBossMoltenIcon.png",
+    "imageUrl": "https://static.wikia.nocookie.net/tower-defense-sim/images/7/7f/MoltenBossMoltenIcon.png",
     "type": "regular"
   },
   {
     "name": "Fallen",
-    "imageFile": "FallenReworkIcon.png",
+    "imageUrl": "https://static.wikia.nocookie.net/tower-defense-sim/images/1/1c/FallenReworkIcon.png",
     "type": "regular"
   },
   {
     "name": "Hardcore",
-    "imageFile": "HardcoreModeIcon.png",
+    "imageUrl": "https://static.wikia.nocookie.net/tower-defense-sim/images/e/e4/HardcoreModeIcon.png",
     "type": "regular"
   },
   {
     "name": "Pizza Party",
-    "imageFile": "PizzaPartyIconNew.png",
+    "imageUrl": "https://static.wikia.nocookie.net/tower-defense-sim/images/9/96/PizzaPartyIconNew.png",
     "type": "special"
   },
   {
     "name": "Polluted Wasteland II",
-    "imageFile": "PollutedWastelandIIIconNew.png",
+    "imageUrl": "https://static.wikia.nocookie.net/tower-defense-sim/images/b/bd/PollutedWastelandIIIconNew.png",
     "type": "special"
   },
   {
     "name": "Badlands II",
-    "imageFile": "BadlandsIIIconNew.png",
+    "imageUrl": "https://static.wikia.nocookie.net/tower-defense-sim/images/7/78/BadlandsIIIconNew.png",
     "type": "special"
   }
 ]
