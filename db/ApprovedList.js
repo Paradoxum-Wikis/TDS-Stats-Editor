@@ -62,6 +62,7 @@ const approvedTowers = [
   "Paccet/Accelerator (REWORK)",
   "Paccet/Gladiator (REBALANCE)",
   "Paccet/Ace Pilot (Balance)",
+  "Sharkepicgamer07/Engineer Rebalance",
 ];
 
 // List of featured towers
