@@ -49,9 +49,10 @@ export default class AddAttributeForm {
       "add-attribute-type-dropdown",
     );
 
-    const typeDropdownMenu = typeDropdownElement.querySelector(".dropdown-menu");
+    const typeDropdownMenu =
+      typeDropdownElement.querySelector(".dropdown-menu");
     if (typeDropdownMenu) {
-      typeDropdownMenu.querySelectorAll(".dropdown-item").forEach(item => {
+      typeDropdownMenu.querySelectorAll(".dropdown-item").forEach((item) => {
         item.addEventListener("click", (e) => {
           const selectedType = e.target.textContent;
           this.typeInput.value = selectedType;

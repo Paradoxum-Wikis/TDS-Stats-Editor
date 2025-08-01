@@ -21,6 +21,7 @@ import ViewerWikitable from "./ViewerWikitable.js";
 import ViewerUtils from "./ViewerUtils.js";
 import Alert from "../Alert.js";
 import CalculationSystemManager from "../CalculationSystemManager.js";
+import StatsImageExporter from "../StatsImageExporter.js";
 
 class ViewerCore {
   constructor(app) {
@@ -311,6 +312,8 @@ class ViewerCore {
         }
       });
     }
+
+    this.statsImageExporter = new StatsImageExporter(this);
   }
 
   saveNotes(noteText) {
