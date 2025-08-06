@@ -9329,28 +9329,12 @@ export default {
           Image: "88526006090438",
           Stats: {
             Detections: { Hidden: true },
-            Cooldown: 0.6,
-            Range: 6,
-            Damage: 8,
-            Attributes: {
-              WhirlwindHit: 3,
-              WhirlwindDamage: 8,
-              WhirlwindRange: 6,
-            },
-          },
-          Title: "Advanced Hand to Hand Training",
-          Cost: 600,
-        },
-        {
-          Image: "84825021113385",
-          Stats: {
-            Detections: { Hidden: true },
             Cooldown: 0.5,
             Range: 7,
             Damage: 30,
             Attributes: {
               WhirlwindHit: 3,
-              WhirlwindDamage: 8,
+              WhirlwindDamage: 30,
               WhirlwindRange: 6,
               DamageThreshold: 150,
               KnifeDamage: 25,
@@ -9362,7 +9346,7 @@ export default {
               "[Collapsible]Knife Pierce: 0 → 3",
               "[Collapsible]Knife Range: 0 → 11",
               "[Collapsible]Damage Threshold: 0 → 150",
-              "[Collapsible1:Upgraded Whirlwind Slash]Whirlwind Damage: 8 → 30",
+              "[Collapsible1:Upgraded Whirlwind Slash]Whirlwind Damage: 18 → 30",
           ],
           },
           Title: "Black Ops",
@@ -9370,5 +9354,104 @@ export default {
         },
       ],
     },
+    PVP: {
+      Defaults: {
+        Detections: { Flying: false, Hidden: false, Lead: false },
+        Range: 5.5,
+        Price: 300,
+        Cooldown: 0.75,
+        Damage: 2,
+        Attributes: {
+          WhirlwindHit: 0,
+          WhirlwindDamage: 0,
+          WhirlwindRange: 0,
+          DamageThreshold: 0,
+          KnifeDamage: 0,
+          KnifePierce: 0,
+          KnifeRange: 0,
+        },
+        Note: "Has a placement footprint of 1 stud (small).",
+      },
+      Upgrades: [
+        {
+          Image: "111493227843909",
+          Stats: {
+            Range: 6.5,
+            Damage: 3,
+            Cooldown: 0.75,
+          },
+          Title: "CQC Training",
+          Cost: 150,
+        },
+        {
+          Image: "92894447316956",
+          Stats: {
+            Detections: { Hidden: true },
+            Cooldown: 0.6,
+            Range: 6,
+            Damage: 8,
+            Attributes: {
+              WhirlwindHit: 3,
+              WhirlwindDamage: 6,
+              WhirlwindRange: 6,
+            },
+            Extras: [
+              "[Collapsible:Unlocks Whirlwind Slash]Whirlwind Hit: 0 → 3",
+              "[Collapsible]Whirlwind Damage: 0 → 6",
+              "[Collapsible]Whirlwind Range: 0 → 6",
+            ],
+          },
+          Title: "Advanced Hand to Hand Training",
+          Cost: 600,
+        },
+        {
+          Image: "71356771597575",
+          Stats: {
+            Detections: { Hidden: true },
+            Cooldown: 0.5,
+            Range: 6.5,
+            Damage: 14,
+            Attributes: {
+              WhirlwindHit: 3,
+              WhirlwindDamage: 14,
+              WhirlwindRange: 6,
+            },
+            Extras: [
+              "[Collapsible:Upgraded Whirlwind Slash]Whirlwind Damage: 6 → 14",
+            ],
+          },
+          Title: "Upgraded Blades",
+          Cost: 1700,
+        },
+        {
+          Image: "84825021113385",
+          Stats: {
+            Detections: { Hidden: true },
+            Cooldown: 0.5,
+            Range: 7,
+            Damage: 25,
+            Attributes: {
+              WhirlwindHit: 3,
+              WhirlwindDamage: 25,
+              WhirlwindRange: 7,
+              DamageThreshold: 150,
+              KnifeDamage: 25,
+              KnifePierce: 3,
+              KnifeRange: 10,
+            },
+            Extras: [
+              "[Collapsible:Unlocks Fan of Knives]Knife Damage: 0 → 25",
+              "[Collapsible]Knife Pierce: 0 → 3",
+              "[Collapsible]Knife Range: 0 → 10",
+              "[Collapsible]Damage Threshold: 0 → 150",
+              "[Collapsible1:Upgraded Whirlwind Slash]Whirlwind Damage: 14 → 25",
+              "[Collapsible1]Whirlwind Range: 6 → 7",
+            ],
+          },
+          Title: "Black Ops",
+          Cost: 4750,
+        },
+      ],
+    }
   },
 };
