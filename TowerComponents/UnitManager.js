@@ -95,6 +95,18 @@ const register = {
       "Field Medic 0",
       "Field Medic 1",
     ],
+    PVP: [
+      "Rifleman 0 ",
+      "Rifleman 1 ",
+      "Rifleman 2 ",
+      "Grenadier 0 ",
+      "Grenadier 1 ",
+      "Grenadier 2 ",
+      "Riot Guard 0 ",
+      "Riot Guard 1 ",
+      "Field Medic 0 ",
+      "Field Medic 1 ",
+    ],
   },
   Harvester: {
     Default: [
@@ -112,6 +124,7 @@ const register = {
   },
   Pursuit: {
     Default: ["4T  ", "5T  ", "4B  ", "5B  "],
+    PVP: ["4T   ", "5T   ", "4B   ", "5B   "],
   },
   Commander: {
     Default: ["Gunner APC", "Missile APC"],

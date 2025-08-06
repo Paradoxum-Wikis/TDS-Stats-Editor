@@ -314,14 +314,16 @@ class UnitCalculations {
 
     NetCost: {
       Pursuit: {
-        For: ["4T  ", "5T  ", "4B  ", "5B  "],
+        For: ["4T  ", "5T  ", "4B  ", "5B  ", "4T   ", "5T   ", "4B   ", "5B   "],
         Value: (level) => {
           // 'level' here is the Unit object for '4T  ', '5T  ', etc.
           TowerRegistry.log(`Calculating NetCost for Pursuit ${level.Name}`);
 
-          // parse the path and level from the Unit name
-          const [path, levelStr] = level.Name.split(" ");
-          const pathLevel = parseInt(levelStr);
+          // parse the path and level from the
+          const trimmedName = level.Name.trim(); // "4T  " becomes '4T' temporarily
+          const pathLevel = parseInt(trimmedName.charAt(0)); // Gets '4' or '5'
+          const path = trimmedName.substring(1); // Gets 'T' or 'B'
+
           TowerRegistry.log(`Path: ${path}, Level: ${pathLevel}`);
 
           // get cumulative cost for base tower (up to level 3)
@@ -349,7 +351,7 @@ class UnitCalculations {
             );
           } else if (pathLevel === 5) {
             // for level 5, we need the cost of level 4 path + cost of level 5 path
-            const level4PathName = `${path} 4`;
+            const level4PathName = `4${path}  `;
 
             // get the cost of the level 4 path upgrade from UnitData
             const level4PathCost = UnitData[level4PathName]?.Cost || 0;
