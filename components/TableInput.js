@@ -301,6 +301,8 @@ export default class TableInput {
       case "Range":
       case "ExplosionRadius":
       case "AssistRange":
+      case "WhirlwindRange":
+      case "KnifeRange":
         return (
           formatter.format(value) +
           (showStuds ? " " + (value === 1 ? "stud" : "studs") : "")
