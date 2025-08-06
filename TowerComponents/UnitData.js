@@ -2026,7 +2026,7 @@ export default {
   },
   "Flame Arrow 4": {
     Detections: { Flying: true, Hidden: true, Lead: true },
-    BurnDamage: 2,
+    BurnDamage: 4,
     BurnTime: 3,
     ExplosionDamage: 0,
     ExplosionRadius: 0,
@@ -2036,11 +2036,11 @@ export default {
   },
   "Flame Arrow 5": {
     Detections: { Flying: true, Hidden: true, Lead: true },
-    BurnDamage: 4,
+    BurnDamage: 8,
     BurnTime: 4,
     ExplosionDamage: 0,
     ExplosionRadius: 0,
-    MaxHits: 6,
+    MaxHits: 5,
     StunTime: 0,
     TickRate: 0.5,
   },
@@ -2051,7 +2051,7 @@ export default {
     ExplosionDamage: 0,
     ExplosionRadius: 0,
     MaxHits: 3,
-    StunTime: 0.25,
+    StunTime: 0.3,
     TickRate: 0,
   },
   "Shock Arrow 5": {
@@ -2061,7 +2061,7 @@ export default {
     ExplosionDamage: 0,
     ExplosionRadius: 0,
     MaxHits: 3,
-    StunTime: 0.3,
+    StunTime: 0.45,
     TickRate: 0,
   },
   "Explosive Arrow 5": {
