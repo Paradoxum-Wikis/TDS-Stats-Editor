@@ -621,9 +621,7 @@ class CalculatedManager {
           if (level.ClusterDamage === 0 || level.ClusterCount === 0) {
             return NaN;
           }
-          return Math.ceil(
-            (level.ClusterDamage * level.ClusterCount) / level.Cooldown,
-          );
+          return (level.ClusterDamage * level.ClusterCount) / level.Cooldown;
         },
       },
     },

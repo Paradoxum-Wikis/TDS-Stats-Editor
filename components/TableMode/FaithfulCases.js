@@ -29,6 +29,7 @@ export const allowedAttributes = [
   "DamageThreshold",
   "KnifePierce",
   "KnifeDamage",
+  "KnifeAmount",
   "KnifeRange",
 
   "Range",
