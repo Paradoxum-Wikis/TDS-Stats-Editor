@@ -1448,7 +1448,7 @@ export default {
           Stats: {
             Attributes: {},
             Range: 14,
-            Cooldown: 0.75,
+            Cooldown: 0.6,
             Extras: ["Pistol Goon (50s Spawn Time)"],
             Damage: 6,
           },
@@ -1461,7 +1461,7 @@ export default {
             Attributes: { DoublePistolGoons: true },
             Range: 15,
             Detections: { Hidden: true },
-            Cooldown: 0.75,
+            Cooldown: 0.6,
             Extras: ["Pistol Goon: 1 → 2"],
             Damage: 10,
           },
