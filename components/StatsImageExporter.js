@@ -1,4 +1,5 @@
 import html2canvas from "html2canvas";
+import Alert from "./Alert.js";
 
 export default class StatsImageExporter {
   constructor(viewer) {
@@ -13,6 +14,11 @@ export default class StatsImageExporter {
         "click",
         this.exportStatsAsImage.bind(this),
       );
+    }
+
+    const copyButton = document.getElementById("copy-stats-image");
+    if (copyButton) {
+      copyButton.addEventListener("click", this.copyStatsAsImage.bind(this));
     }
   }
 
@@ -107,6 +113,49 @@ export default class StatsImageExporter {
     return wrapper;
   }
 
+  async generateStatsCanvas() {
+    await this.ensureFontLoaded();
+
+    const wrapper = this.createWrapper();
+
+    wrapper.style.position = "absolute";
+    wrapper.style.top = "-9999px";
+    wrapper.style.left = "-9999px";
+    wrapper.style.visibility = "visible";
+    wrapper.style.opacity = "1";
+
+    document.body.appendChild(wrapper);
+
+    await this.waitForImages(wrapper);
+    await new Promise((resolve) => setTimeout(resolve, 300));
+
+    const canvas = await html2canvas(wrapper, {
+      backgroundColor: document.body.classList.contains("light-mode")
+        ? "#f8f9fa"
+        : "#212529",
+      scale: 2,
+      logging: false,
+      useCORS: true,
+      allowTaint: true,
+      width: wrapper.scrollWidth,
+      height: wrapper.scrollHeight,
+      onclone: (clonedDoc) => {
+        const fontStyle = clonedDoc.createElement("style");
+        fontStyle.textContent = `
+          @font-face {
+            font-family: "Uni Sans Heavy";
+            src: url("https://static.wikia.nocookie.net/abd-stand-archive/images/d/d6/Uni_Sans_Heavy.ttf") format("truetype");
+            font-display: swap;
+          }
+        `;
+        clonedDoc.head.appendChild(fontStyle);
+      },
+    });
+
+    document.body.removeChild(wrapper);
+    return canvas;
+  }
+
   async exportStatsAsImage() {
     const exportBtn = document.getElementById("export-stats-image");
     const originalHTML = exportBtn.innerHTML;
@@ -116,60 +165,77 @@ export default class StatsImageExporter {
     exportBtn.disabled = true;
 
     try {
-      await this.ensureFontLoaded();
-
-      const wrapper = this.createWrapper();
-
-      wrapper.style.position = "absolute";
-      wrapper.style.top = "-9999px";
-      wrapper.style.left = "-9999px";
-      wrapper.style.visibility = "visible";
-      wrapper.style.opacity = "1";
-
-      document.body.appendChild(wrapper);
-
-      await this.waitForImages(wrapper);
-      await new Promise((resolve) => setTimeout(resolve, 300));
-
-      const canvas = await html2canvas(wrapper, {
-        backgroundColor: document.body.classList.contains("light-mode")
-          ? "#f8f9fa"
-          : "#212529",
-        scale: 2,
-        logging: false,
-        useCORS: true,
-        allowTaint: true,
-        width: wrapper.scrollWidth,
-        height: wrapper.scrollHeight,
-        onclone: (clonedDoc) => {
-          const fontStyle = clonedDoc.createElement("style");
-          fontStyle.textContent = `
-            @font-face {
-              font-family: "Uni Sans Heavy";
-              src: url("https://static.wikia.nocookie.net/abd-stand-archive/images/d/d6/Uni_Sans_Heavy.ttf") format("truetype");
-              font-display: swap;
-            }
-          `;
-          clonedDoc.head.appendChild(fontStyle);
-        },
-      });
+      const canvas = await this.generateStatsCanvas();
 
       const link = document.createElement("a");
       const towerName = this.viewer.tower.name;
       const variant = this.viewer.towerVariants.getSelectedName();
       const displayedVariant = variant === "Default" ? "" : `${variant}-`;
+      const filename = `${displayedVariant}${towerName}-stats.png`;
 
-      link.download = `${displayedVariant}${towerName}-stats.png`;
+      link.download = filename;
       link.href = canvas.toDataURL("image/png");
       link.click();
 
-      document.body.removeChild(wrapper);
+      const alert = new Alert(
+        `Statistics image exported successfully as "${filename}"!`,
+        { alertStyle: "alert-success" },
+      );
+      alert.fire();
     } catch (error) {
-      console.error("Error exporting stats image:", error);
-      alert("Failed to export stats image. Check console for details.");
+      console.error("Error exporting statistics image:", error);
+      const alert = new Alert(
+        "Failed to export statistics image. Check console for details.",
+        { alertStyle: "alert-danger" },
+      );
+      alert.fire();
     } finally {
       exportBtn.innerHTML = originalHTML;
       exportBtn.disabled = false;
+    }
+  }
+
+  async copyStatsAsImage() {
+    const copyBtn = document.getElementById("copy-stats-image");
+    const originalHTML = copyBtn.innerHTML;
+
+    copyBtn.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>Copying...';
+    copyBtn.disabled = true;
+
+    try {
+      const canvas = await this.generateStatsCanvas();
+
+      canvas.toBlob(async (blob) => {
+        try {
+          await navigator.clipboard.write([
+            new ClipboardItem({
+              "image/png": blob,
+            }),
+          ]);
+
+          const alert = new Alert("Statistics image copied to clipboard!", {
+            alertStyle: "alert-success",
+          });
+          alert.fire();
+        } catch (clipboardError) {
+          console.error("Failed to copy to clipboard:", clipboardError);
+          const alert = new Alert(
+            "Unable to copy to clipboard. Your browser may not support this feature. Try using the Export button instead.",
+            { alertStyle: "alert-warning" },
+          );
+          alert.fire();
+        }
+      }, "image/png");
+    } catch (error) {
+      console.error("Error copying statistics image:", error);
+      const alert = new Alert(
+        "Failed to copy statistics image. Check console for details.",
+        { alertStyle: "alert-danger" },
+      );
+      alert.fire();
+    } finally {
+      copyBtn.innerHTML = originalHTML;
+      copyBtn.disabled = false;
     }
   }
 
