@@ -314,7 +314,16 @@ class UnitCalculations {
 
     NetCost: {
       Pursuit: {
-        For: ["4T  ", "5T  ", "4B  ", "5B  ", "4T   ", "5T   ", "4B   ", "5B   "],
+        For: [
+          "4T  ",
+          "5T  ",
+          "4B  ",
+          "5B  ",
+          "4T   ",
+          "5T   ",
+          "4B   ",
+          "5B   ",
+        ],
         Value: (level) => {
           // 'level' here is the Unit object for '4T  ', '5T  ', etc.
           TowerRegistry.log(`Calculating NetCost for Pursuit ${level.Name}`);

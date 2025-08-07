@@ -294,17 +294,42 @@ class WikitableGenerator {
 
   #formatWikitableCell(value, attribute) {
     // formats cell values with appropriate units
+    if (window.state?.settings?.wikitableDebug) {
+      console.log(
+        `[WikitableGenerator] formatWikitableCell called - attribute: ${attribute}, value:`,
+        value,
+        `type: ${typeof value}`,
+      );
+    }
+
     if (value === undefined || value === null) {
+      if (window.state?.settings?.wikitableDebug) {
+        console.log(
+          `[WikitableGenerator] Value is undefined/null for ${attribute}`,
+        );
+      }
       return "";
     }
 
     // don't convert 0 or nan to n/a for levels
     if (attribute === "Level") {
+      if (window.state?.settings?.wikitableDebug) {
+        console.log(`[WikitableGenerator] Processing Level attribute`);
+      }
       return value.toString();
     }
 
     if (typeof value === "object" && !Array.isArray(value)) {
+      if (window.state?.settings?.wikitableDebug) {
+        console.log(
+          `[WikitableGenerator] Processing object for attribute: ${attribute}`,
+        );
+      }
+
       if (attribute === "Detections") {
+        if (window.state?.settings?.wikitableDebug) {
+          console.log(`[WikitableGenerator] Processing Detections object`);
+        }
         const detections = [];
         if (value.Hidden !== undefined)
           detections.push(`Hidden: ${value.Hidden ? "Yes" : "No"}`);
@@ -314,15 +339,78 @@ class WikitableGenerator {
           detections.push(`Lead: ${value.Lead ? "Yes" : "No"}`);
         return detections.join(", ") || "";
       } else if (attribute === "Attributes") {
+        if (window.state?.settings?.wikitableDebug) {
+          console.log(
+            `[WikitableGenerator] Processing Attributes object:`,
+            value,
+          );
+          console.log(
+            `[WikitableGenerator] useFaithfulFormat:`,
+            this.viewer.useFaithfulFormat,
+          );
+        }
+
         return Object.entries(value)
-          .map(
-            ([key, val]) =>
-              `${key}: ${typeof val === "boolean" ? (val ? "Yes" : "No") : val}`,
-          )
+          .map(([key, val]) => {
+            if (window.state?.settings?.wikitableDebug) {
+              console.log(
+                `[WikitableGenerator] Processing attribute ${key}: ${val} (type: ${typeof val})`,
+              );
+            }
+
+            let formattedVal;
+            if (typeof val === "boolean") {
+              formattedVal = val ? "Yes" : "No";
+              if (window.state?.settings?.wikitableDebug) {
+                console.log(
+                  `[WikitableGenerator] Boolean value ${key}: ${formattedVal}`,
+                );
+              }
+            } else if (
+              this.viewer.useFaithfulFormat &&
+              (val === "NaN" || val === 0 || isNaN(val))
+            ) {
+              formattedVal = "N/A";
+              if (window.state?.settings?.wikitableDebug) {
+                console.log(
+                  `[WikitableGenerator] Converting ${key} value '${val}' to N/A (faithful format)`,
+                );
+              }
+            } else {
+              formattedVal = val;
+              if (window.state?.settings?.wikitableDebug) {
+                console.log(
+                  `[WikitableGenerator] Keeping ${key} value as: ${formattedVal}`,
+                );
+              }
+            }
+            return `${key}: ${formattedVal}`;
+          })
           .join(", ");
       } else {
+        if (window.state?.settings?.wikitableDebug) {
+          console.log(
+            `[WikitableGenerator] Processing other object type for ${attribute}`,
+          );
+        }
         return JSON.stringify(value).replace(/[{}"]/g, "");
       }
+    }
+
+    if (window.state?.settings?.wikitableDebug) {
+      console.log(
+        `[WikitableGenerator] Processing non-object value for ${attribute}`,
+      );
+    }
+
+    // Handle NaN strings in faithful format BEFORE other formatting
+    if (this.viewer.useFaithfulFormat && value === "NaN") {
+      if (window.state?.settings?.wikitableDebug) {
+        console.log(
+          `[WikitableGenerator] Converting NaN string to N/A for ${attribute}`,
+        );
+      }
+      return "N/A";
     }
 
     // Currency formatting
@@ -343,7 +431,7 @@ class WikitableGenerator {
     ) {
       if (this.viewer.useFaithfulFormat) {
         // Check for NaN/0 before using Money template
-        if (isNaN(value) || value === 0) {
+        if (isNaN(value) || value === 0 || value === "NaN") {
           return "N/A";
         }
         return `{{Money|${this.#formatNumberWithCommas(value)}}}`;
@@ -459,11 +547,27 @@ class WikitableGenerator {
   }
 
   #formatNumber(num) {
+    if (window.state?.settings?.wikitableDebug) {
+      console.log(
+        `[WikitableGenerator] formatNumber called with: ${num} (type: ${typeof num}), useFaithfulFormat: ${this.viewer.useFaithfulFormat}`,
+      );
+    }
+
     // formats a number for display in the wikitable
-    if (Math.abs(num) < 0.01) return "0";
+    if (Math.abs(num) < 0.01) {
+      if (window.state?.settings?.wikitableDebug) {
+        console.log(`[WikitableGenerator] Number too small, returning "0"`);
+      }
+      return "0";
+    }
 
     // non faithful format uses locale formatting
     if (!this.viewer.useFaithfulFormat) {
+      if (window.state?.settings?.wikitableDebug) {
+        console.log(
+          `[WikitableGenerator] Using locale formatting for non-faithful format`,
+        );
+      }
       const forceUSFormat = window.state?.settings?.forceUSNumbers !== false;
       const formatter = forceUSFormat
         ? new Intl.NumberFormat("en-US", {
@@ -483,9 +587,22 @@ class WikitableGenerator {
     }
 
     // faithful no locale
-    if (Number.isInteger(num)) return num.toString();
+    if (Number.isInteger(num)) {
+      if (window.state?.settings?.wikitableDebug) {
+        console.log(
+          `[WikitableGenerator] Integer detected, returning as string: ${num.toString()}`,
+        );
+      }
+      return num.toString();
+    }
 
-    return (+num).toFixed(2).replace(/\.?0+$/, "");
+    const result = (+num).toFixed(2).replace(/\.?0+$/, "");
+    if (window.state?.settings?.wikitableDebug) {
+      console.log(
+        `[WikitableGenerator] Decimal number formatted to: ${result}`,
+      );
+    }
+    return result;
   }
 
   // helper method for formatting numbers with commas but no decimal places
@@ -502,10 +619,26 @@ class WikitableGenerator {
   }
 
   #formatFaithfulNumber(value) {
+    if (window.state?.settings?.wikitableDebug) {
+      console.log(
+        `[WikitableGenerator] formatFaithfulNumber called with value: ${value} (type: ${typeof value})`,
+      );
+    }
+
     // NaN and 0 to N/A in faithful format
-    if (isNaN(value) || value === 0) {
+    if (isNaN(value) || value === 0 || value === "NaN") {
+      if (window.state?.settings?.wikitableDebug) {
+        console.log(
+          `[WikitableGenerator] Converting value to N/A - isNaN: ${isNaN(value)}, value === 0: ${value === 0}, value === "NaN": ${value === "NaN"}`,
+        );
+      }
       return "N/A";
     }
+
+    if (window.state?.settings?.wikitableDebug) {
+      console.log(`[WikitableGenerator] Formatting number normally: ${value}`);
+    }
+
     return this.#formatNumber(value);
   }
 }

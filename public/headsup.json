@@ -1,8 +1,8 @@
 {
   "poll": {
     "endDate": "2025-08-07",
-    "id": "NULL1137134",
+    "id": "NULL1137135",
     "title": "New pvp stats",
-    "description": "We're adding PVP stats and improving Assassin, please wait!"
+    "description": "We've added all new stats from v1.72, report any issues you find in the TDS Wiki Discord server, or dm 't7ru'."
   }
 }

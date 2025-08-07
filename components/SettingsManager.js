@@ -29,6 +29,7 @@ class SettingsManager {
     this.towerRegistryDebugToggle = document.getElementById(
       "towerRegistryDebugToggle",
     );
+    this.wikitableDebugToggle = document.getElementById("wikitableDebugToggle");
 
     this.animationsStylesheet = document.getElementById("animsCSS");
     this.body = document.body;
@@ -56,6 +57,7 @@ class SettingsManager {
     this.analyticsConsent = localStorage.getItem("analyticsConsent") === "true";
     this.towerRegistryDebug =
       localStorage.getItem("towerRegistryDebug") === "true";
+    this.wikitableDebug = localStorage.getItem("wikitableDebug") === "true";
 
     window.state = window.state || {};
     window.state.settings = window.state.settings || {};
@@ -71,6 +73,7 @@ class SettingsManager {
     window.state.settings.autoSlideEnabled = this.autoSlideEnabled;
     window.state.settings.towerRegistryDebug = this.towerRegistryDebug;
     window.state.settings.analyticsConsent = this.analyticsConsent;
+    window.state.settings.wikitableDebug = this.wikitableDebug;
 
     document.addEventListener("analyticsConsentChanged", (e) => {
       this.analyticsConsent = e.detail.consent;
@@ -237,6 +240,14 @@ class SettingsManager {
       this.towerRegistryDebugToggle.addEventListener(
         "change",
         this.toggleTowerRegistryDebug.bind(this),
+      );
+    }
+
+    if (this.wikitableDebugToggle) {
+      this.wikitableDebugToggle.checked = this.wikitableDebug;
+      this.wikitableDebugToggle.addEventListener(
+        "change",
+        this.toggleWikitableDebug.bind(this),
       );
     }
 
@@ -437,6 +448,21 @@ class SettingsManager {
         detail: {
           setting: "towerRegistryDebug",
           value: this.towerRegistryDebug,
+        },
+      }),
+    );
+  }
+
+  toggleWikitableDebug() {
+    this.wikitableDebug = this.wikitableDebugToggle.checked;
+    window.state.settings.wikitableDebug = this.wikitableDebug;
+    localStorage.setItem("wikitableDebug", this.wikitableDebug);
+
+    document.dispatchEvent(
+      new CustomEvent("settingsChanged", {
+        detail: {
+          setting: "wikitableDebug",
+          value: this.wikitableDebug,
         },
       }),
     );

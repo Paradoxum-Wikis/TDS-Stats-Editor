@@ -590,7 +590,7 @@ export default {
     Speed: 2.5,
   },
 
-// Mercenary base pvp
+  // Mercenary base pvp
   "Rifleman 0 ": {
     Health: 40,
     Damage: 5,

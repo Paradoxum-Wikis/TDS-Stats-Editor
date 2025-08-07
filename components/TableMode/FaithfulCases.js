@@ -23,6 +23,13 @@ export const allowedAttributes = [
   "ChargeTime",
   "LaserCooldown",
   "MaxAmmo",
+  "WhirlwindHit",
+  "WhirlwindDamage",
+  "WhirlwindRange",
+  "DamageThreshold",
+  "KnifePierce",
+  "KnifeDamage",
+  "KnifeRange",
 
   "Range",
   "AssistRange",
