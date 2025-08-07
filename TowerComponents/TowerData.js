@@ -4046,7 +4046,7 @@ export default {
         ],
         Attributes: {
           UnitQueues: 1,
-          Queue1: "Rifleman 0",
+          Queue1: "Rifleman 0 ",
           Queue2: "NaN",
           Queue3: "NaN",
           Queue4: "NaN",
