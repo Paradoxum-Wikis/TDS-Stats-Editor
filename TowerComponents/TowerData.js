@@ -89,7 +89,7 @@ export default {
         Price: 4250,
         Attributes: { ChargeTime: 2.5, LaserCooldown: 2, LaserTime: 6 },
         Range: 18,
-        Damage: 10,
+        Damage: 12,
       },
       Upgrades: [
         {
