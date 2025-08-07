@@ -245,14 +245,14 @@ export default {
   // pvp cb
   "Pistol Goon ": {
     Health: 25,
-    Damage: 3,
-    Range: 20,
+    Damage: 2,
+    Range: 18,
     Detections: {
       Hidden: true,
       Flying: true,
       Lead: false,
     },
-    Cooldown: 0.9,
+    Cooldown: 0.8,
     Lifetime: 150,
     Limit: 10,
     Spawnrate: 50,
@@ -261,7 +261,7 @@ export default {
   "Tommy Goon 1 ": {
     Health: 125,
     Damage: 5,
-    Range: 17.5,
+    Range: 20,
     Detections: {
       Hidden: true,
       Flying: false,
