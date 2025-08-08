@@ -37,27 +37,31 @@ export class TowerRegistry {
     return this.#towerData[towerName] || null;
   }
 
-  getTowerCostForLevel(towerName, level) {
+  getTowerCostForLevel(towerName, level, variant = "Default") {
     const towerData = this.getTower(towerName);
     if (!towerData) return null;
 
     try {
       const towerInfo = towerData[towerName];
-      if (!towerInfo || !towerInfo.Default || !towerInfo.Default.Defaults) {
-        TowerRegistry.log(`invalid tower data structure for ${towerName}`);
+      if (!towerInfo || !towerInfo[variant] || !towerInfo[variant].Defaults) {
+        TowerRegistry.log(
+          `invalid tower data structure for ${towerName} ${variant}`,
+        );
         return null;
       }
 
-      let price = towerInfo.Default.Defaults.Price;
-      TowerRegistry.log(`registry base price for ${towerName}: ${price}`);
+      let price = towerInfo[variant].Defaults.Price;
+      TowerRegistry.log(
+        `registry base price for ${towerName} ${variant}: ${price}`,
+      );
 
-      if (level > 0 && towerInfo.Default.Upgrades) {
+      if (level > 0 && towerInfo[variant].Upgrades) {
         for (
           let i = 0;
-          i < level && i < towerInfo.Default.Upgrades.length;
+          i < level && i < towerInfo[variant].Upgrades.length;
           i++
         ) {
-          const upgradeCost = towerInfo.Default.Upgrades[i]?.Cost || 0;
+          const upgradeCost = towerInfo[variant].Upgrades[i]?.Cost || 0;
           price += upgradeCost;
           TowerRegistry.log(
             `registry after adding level ${i + 1} cost (${upgradeCost}): ${price}`,
@@ -66,11 +70,11 @@ export class TowerRegistry {
       }
 
       TowerRegistry.log(
-        `registry final price for ${towerName} level ${level}: ${price}`,
+        `registry final price for ${towerName} ${variant} level ${level}: ${price}`,
       );
       return price;
-    } catch (e) {
-      console.error(`failed to get tower cost from registry:`, e);
+    } catch (error) {
+      TowerRegistry.log(`Error getting tower cost: ${error.message}`);
       return null;
     }
   }

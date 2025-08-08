@@ -23,32 +23,38 @@ class UnitCalculations {
     }
   }
 
-  getTowerCostForLevel(towerName, level) {
+  getTowerCostForLevel(towerName, level, variant = "Default") {
     TowerRegistry.log(
-      `getTowerCostForLevel called for ${towerName}, level ${level}`,
+      `getTowerCostForLevel called for ${towerName}, level ${level}, variant ${variant}`,
     );
 
     // get data from the registry
-    const registryPrice = towerRegistry.getTowerCostForLevel(towerName, level);
+    const registryPrice = towerRegistry.getTowerCostForLevel(
+      towerName,
+      level,
+      variant,
+    );
     if (registryPrice !== null) {
       TowerRegistry.log(`Found tower in registry, price: ${registryPrice}`);
       return registryPrice;
     }
 
     const towerData = TowerData[towerName];
-    if (!towerData) {
-      TowerRegistry.log(`No tower data found for ${towerName}`);
+    if (!towerData || !towerData[variant]) {
+      TowerRegistry.log(`No tower data found for ${towerName} ${variant}`);
       return null;
     }
 
-    let price = towerData.Default.Defaults.Price;
-    TowerRegistry.log(`Using ${towerName} base price: ${price}`);
+    let price = towerData[variant].Defaults.Price;
+    TowerRegistry.log(`Using ${towerName} ${variant} base price: ${price}`);
 
     // add costs for upgrades up to the level
-    for (let i = 0; i < level && i < towerData.Default.Upgrades.length; i++) {
-      price += towerData.Default.Upgrades[i].Cost;
+    const upgrades = towerData[variant].Upgrades || [];
+    for (let i = 0; i < level && i < upgrades.length; i++) {
+      const upgradeCost = upgrades[i].Cost || 0;
+      price += upgradeCost;
       TowerRegistry.log(
-        `After adding ${towerName} level ${i + 1} cost: ${price}`,
+        `After adding ${towerName} ${variant} level ${i + 1} cost (${upgradeCost}): ${price}`,
       );
     }
 
@@ -97,7 +103,16 @@ class UnitCalculations {
       },
 
       PursuitMissiles: {
-        For: ["4T  ", "5T  ", "4B  ", "5B  "],
+        For: [
+          "4T  ",
+          "5T  ",
+          "4B  ",
+          "5B  ", // default
+          "4T   ",
+          "5T   ",
+          "4B   ",
+          "5B   ", // PVP
+        ],
         Value: (level) => {
           return (
             (level.Damage * level.Ammo) /
@@ -328,41 +343,52 @@ class UnitCalculations {
           // 'level' here is the Unit object for '4T  ', '5T  ', etc.
           TowerRegistry.log(`Calculating NetCost for Pursuit ${level.Name}`);
 
-          // parse the path and level from the
-          const trimmedName = level.Name.trim(); // "4T  " becomes '4T' temporarily
-          const pathLevel = parseInt(trimmedName.charAt(0)); // Gets '4' or '5'
-          const path = trimmedName.substring(1); // Gets 'T' or 'B'
+          const isPVP = level.Name.includes("   "); // 3 spaces = PVP, 2 spaces = Default
+          const towerVariant = isPVP ? "PVP" : "Default";
+
+          TowerRegistry.log(
+            `Detected variant: ${towerVariant} for ${level.Name}`,
+          );
+
+          // parse the path and level from the unit name
+          const trimmedName = level.Name.trim();
+          const pathLevel = parseInt(trimmedName.charAt(0));
+          const path = trimmedName.substring(1);
 
           TowerRegistry.log(`Path: ${path}, Level: ${pathLevel}`);
 
           // get cumulative cost for base tower (up to level 3)
-          const baseCost = this.getTowerCostForLevel("Pursuit", 3);
+          const baseCost = this.getTowerCostForLevel(
+            "Pursuit",
+            3,
+            towerVariant,
+          );
           if (baseCost === null) {
             console.error(
-              `Could not determine base cost for Pursuit up to level 3.`,
+              `Could not determine base cost for Pursuit ${towerVariant} up to level 3.`,
             );
             return NaN;
           }
-          TowerRegistry.log(`Using base cost (level 3): ${baseCost}`);
+          TowerRegistry.log(
+            `Using base cost (level 3, ${towerVariant}): ${baseCost}`,
+          );
           let totalCost = baseCost;
 
-          // get the cost of the current path level upgrade (e.g., Cost of '4T  ' unit)
+          // get the cost of the current path level upgrade
           const currentPathLevelCost = level.Cost || 0;
           TowerRegistry.log(
             `Cost of current path level (${level.Name}): ${currentPathLevelCost}`,
           );
 
           if (pathLevel === 4) {
-            // for level 4, add its own cost to the base cost
             totalCost += currentPathLevelCost;
             TowerRegistry.log(
               `Added level 4 path cost: ${currentPathLevelCost}`,
             );
           } else if (pathLevel === 5) {
-            // for level 5, we need the cost of level 4 path + cost of level 5 path
-            const level4PathName = `4${path}  `;
+            // reconstruct level 4 path name with correct spacing
+            const level4PathName = isPVP ? `4${path}   ` : `4${path}  `;
 
-            // get the cost of the level 4 path upgrade from UnitData
             const level4PathCost = UnitData[level4PathName]?.Cost || 0;
             if (level4PathCost === 0) {
               console.warn(
@@ -373,7 +399,6 @@ class UnitCalculations {
               `Cost of prerequisite path level (${level4PathName}): ${level4PathCost}`,
             );
 
-            // add both level 4 and level 5 path costs to the base cost
             totalCost += level4PathCost + currentPathLevelCost;
             TowerRegistry.log(
               `Added level 4 path cost (${level4PathCost}) and level 5 path cost (${currentPathLevelCost})`,
@@ -422,7 +447,16 @@ class UnitCalculations {
         },
       },
       Pursuit: {
-        For: ["4T  ", "5T  ", "4B  ", "5B  "],
+        For: [
+          "4T  ",
+          "5T  ",
+          "4B  ",
+          "5B  ", // default
+          "4T   ",
+          "5T   ",
+          "4B   ",
+          "5B   ", // PVP
+        ],
         Requires: [
           "ExplosionDamage",
           "MissileCooldown",
@@ -451,7 +485,16 @@ class UnitCalculations {
       },
 
       Pursuit: {
-        For: ["4T  ", "5T  ", "4B  ", "5B  "],
+        For: [
+          "4T  ",
+          "5T  ",
+          "4B  ",
+          "5B  ", // default
+          "4T   ",
+          "5T   ",
+          "4B   ",
+          "5B   ", // PVP
+        ],
         Requires: ["NetCost", "TotalDPS"],
         Value: (level) => {
           const efficiency = level.NetCost / level.TotalDPS;

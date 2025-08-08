@@ -5784,7 +5784,7 @@ export default {
       Defaults: {
         Limit: 5,
         Detections: { Flying: true, Hidden: false, Lead: false },
-        Range: 8,
+        Range: 7,
         Price: 2500,
         Attributes: {
           Ammo: 35,
