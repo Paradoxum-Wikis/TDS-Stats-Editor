@@ -103,15 +103,10 @@ class UnitCalculations {
       },
 
       PursuitMissiles: {
+        // prettier-ignore
         For: [
-          "4T  ",
-          "5T  ",
-          "4B  ",
-          "5B  ", // default
-          "4T   ",
-          "5T   ",
-          "4B   ",
-          "5B   ", // PVP
+          "4T  ", "5T  ", "4B  ", "5B  ", // default
+          "4T   ", "5T   ", "4B   ", "5B   ", // PVP
         ],
         Value: (level) => {
           return (
@@ -415,14 +410,19 @@ class UnitCalculations {
         Value: (level) => {
           TowerRegistry.log(`Calculating NetCost for Hacker ${level.Name}`);
 
-          const baseCost = this.getTowerCostForLevel("Hacker", 4);
+          const isPVP = level.Name.endsWith(" ");
+          const towerVariant = isPVP ? "PVP" : "Default";
+          
+          TowerRegistry.log(`Detected variant: ${towerVariant} for ${level.Name}`);
+          
+          const baseCost = this.getTowerCostForLevel("Hacker", 4, towerVariant);
           if (baseCost === null) {
             console.error(
-              `Could not determine base cost for Hacker up to level 4.`,
+              `Could not determine base cost for Hacker ${towerVariant} up to level 4.`,
             );
             return NaN;
           }
-          TowerRegistry.log(`Using base cost (level 4): ${baseCost}`);
+          TowerRegistry.log(`Using base cost (level 4, ${towerVariant}): ${baseCost}`);
 
           const currentPathLevelCost = level.Cost || 0;
           TowerRegistry.log(
@@ -447,15 +447,10 @@ class UnitCalculations {
         },
       },
       Pursuit: {
+        // prettier-ignore
         For: [
-          "4T  ",
-          "5T  ",
-          "4B  ",
-          "5B  ", // default
-          "4T   ",
-          "5T   ",
-          "4B   ",
-          "5B   ", // PVP
+          "4T  ", "5T  ", "4B  ", "5B  ", // default
+          "4T   ", "5T   ", "4B   ", "5B   ", // PVP
         ],
         Requires: [
           "ExplosionDamage",
@@ -485,15 +480,10 @@ class UnitCalculations {
       },
 
       Pursuit: {
+        // prettier-ignore
         For: [
-          "4T  ",
-          "5T  ",
-          "4B  ",
-          "5B  ", // default
-          "4T   ",
-          "5T   ",
-          "4B   ",
-          "5B   ", // PVP
+          "4T  ", "5T  ", "4B  ", "5B  ", // default
+          "4T   ", "5T   ", "4B   ", "5B   ", // PVP
         ],
         Requires: ["NetCost", "TotalDPS"],
         Value: (level) => {
