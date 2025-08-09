@@ -68,7 +68,12 @@ export default class PropertyViewer {
     this.calcBtn.addEventListener("click", this.toggleCalc.bind(this));
 
     // slave table's configs - aio
-    this.unitDisabled = [];
+    this.defaultUnitDisabled = [
+      "RepulsionRadius",
+      "MissileTargeting"
+    ];
+
+    this.unitDisabled = [...this.defaultUnitDisabled];
 
     this.unitHidden = ["_towerName", "_skinName"];
 
@@ -349,7 +354,7 @@ export default class PropertyViewer {
   }
 
   // show this property (remove from disabled list)
-  show(property, userAction = false) {
+  show(property, _userAction = false) {
     // userAction is kept for potential future use in case i wanted to add it back in again
     const targetList =
       this.currentView === "tower" ? this.disabled : this.unitDisabled;
