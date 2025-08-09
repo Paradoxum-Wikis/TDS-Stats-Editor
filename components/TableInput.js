@@ -263,6 +263,7 @@ export default class TableInput {
       case "SpeedMultiplier":
       case "CostClone":
       case "Slowdown":
+      case "WhirlwindMultiplier":
         return formatter.format(value) + "%";
 
       case "BuffLength":
@@ -296,6 +297,7 @@ export default class TableInput {
       case "AmmoDischargeTime":
       case "HologramLifetime":
       case "UnitSendCooldown":
+      case "MissileTargeting":
         return formatter.format(value) + (showSeconds ? "s" : "");
 
       case "Range":
@@ -304,6 +306,7 @@ export default class TableInput {
       case "WhirlwindRange":
       case "KnifeRange":
       case "ClusterRadius":
+      case "RepulsionRadius":
         return (
           formatter.format(value) +
           (showStuds ? " " + (value === 1 ? "stud" : "studs") : "")

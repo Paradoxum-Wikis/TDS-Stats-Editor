@@ -318,7 +318,7 @@ export default {
     Default: {
       Upgrades: [
         {
-          Image: 3280081327,
+          Image: 78487255054043,
           Stats: {
             Extras: [],
             Attributes: {},
@@ -335,7 +335,7 @@ export default {
           Cost: 100,
         },
         {
-          Image: 524302408,
+          Image: 118177062176518,
           Stats: {
             Extras: ["Max Hits: 2 → 3"],
             Attributes: {},
@@ -348,7 +348,7 @@ export default {
           Cost: 400,
         },
         {
-          Image: 141745478,
+          Image: 83003777730604,
           Stats: {
             Extras: [
               "[Collapsible:Unlocks Flame Arrow] Burn Damage: 0 → 1",
@@ -365,7 +365,7 @@ export default {
           Cost: 1000,
         },
         {
-          Image: 456573844,
+          Image: 115104563492355,
           Stats: {
             Extras: [
               "[Collapsible1:Upgraded Flame Arrow]Burn Damage: 2 → 4",
@@ -384,7 +384,7 @@ export default {
           Cost: 2375,
         },
         {
-          Image: 106341823,
+          Image: 73857609172576,
           Stats: {
             Extras: [
               "[Collapsible3:Upgraded Flame Arrow]Burn Damage: 4 → 8",
@@ -5622,11 +5622,13 @@ export default {
           ExplosionRadius: 0,
           MissileCooldown: 0,
           BurstCooldown: 0,
+          MissileTargeting: 3,
+          RepulsionRadius: 6,
           ReloadTime: 4,
           RevTime: 0,
           RocketSpeed: 0,
           PatrolRange: 14,
-          Speed: 25,
+          Speed: 30,
         },
         Cooldown: 0.25,
         Damage: 6,
@@ -5784,7 +5786,7 @@ export default {
       Defaults: {
         Limit: 5,
         Detections: { Flying: true, Hidden: false, Lead: false },
-        Range: 7,
+        Range: 8,
         Price: 2500,
         Attributes: {
           Ammo: 35,
@@ -5793,6 +5795,8 @@ export default {
           ExplosionRadius: 0,
           MissileCooldown: 0,
           BurstCooldown: 0,
+          MissileTargeting: 3,
+          RepulsionRadius: 6,
           ReloadTime: 4,
           RevTime: 0,
           RocketSpeed: 0,
@@ -9587,14 +9591,15 @@ export default {
         Cooldown: 0.75,
         Damage: 2,
         Attributes: {
-          WhirlwindHit: "NaN",
-          WhirlwindDamage: "NaN",
-          WhirlwindRange: "NaN",
           DamageThreshold: "NaN",
           KnifePierce: "NaN",
           KnifeDamage: "NaN",
           KnifeAmount: "NaN",
           KnifeRange: "NaN",
+          KnifeTime: 0.5,
+          WhirlwindHit: "NaN",
+          WhirlwindMultiplier: "NaN",
+          WhirlwindRange: "NaN",
         },
         Note: "Has a placement footprint of 1 stud (small).",
       },
@@ -9618,7 +9623,7 @@ export default {
             Damage: 8,
             Attributes: {
               WhirlwindHit: 3,
-              WhirlwindDamage: 8,
+              WhirlwindMultiplier: 100,
               WhirlwindRange: 6,
             },
             Extras: [
@@ -9639,7 +9644,7 @@ export default {
             Damage: 18,
             Attributes: {
               WhirlwindHit: 3,
-              WhirlwindDamage: 18,
+              WhirlwindMultiplier: 100,
               WhirlwindRange: 6,
             },
             Extras: [
@@ -9658,18 +9663,18 @@ export default {
             Damage: 30,
             Attributes: {
               WhirlwindHit: 3,
-              WhirlwindDamage: 30,
+              WhirlwindMultiplier: 100,
               WhirlwindRange: 7,
               DamageThreshold: 150,
               KnifePierce: 3,
               KnifeDamage: 25,
               KnifeAmount: 3,
-              KnifeRange: 11,
+              KnifeRange: 10,
             },
             Extras: [
               "[Collapsible:Unlocks Fan of Knives]Knife Damage: NaN → 25",
               "[Collapsible]Knife Pierce: NaN → 3",
-              "[Collapsible]Knife Range: NaN → 11",
+              "[Collapsible]Knife Range: NaN → 10",
               "[Collapsible]Damage Threshold: NaN → 150",
               "[Collapsible1:Upgraded Whirlwind Slash]Whirlwind Damage: 18 → 30",
               "[Collapsible1:Upgraded Whirlwind Slash]Whirlwind Range: 6 → 7",
@@ -9688,14 +9693,15 @@ export default {
         Cooldown: 0.6,
         Damage: 2,
         Attributes: {
-          WhirlwindHit: "NaN",
-          WhirlwindDamage: "NaN",
-          WhirlwindRange: "NaN",
           DamageThreshold: "NaN",
           KnifePierce: "NaN",
           KnifeDamage: "NaN",
           KnifeAmount: "NaN",
           KnifeRange: "NaN",
+          KnifeTime: 0.5,
+          WhirlwindHit: "NaN",
+          WhirlwindMultiplier: "NaN",
+          WhirlwindRange: "NaN",
         },
         Note: "Has a placement footprint of 1 stud (small).",
       },
@@ -9719,7 +9725,7 @@ export default {
             Damage: 8,
             Attributes: {
               WhirlwindHit: 3,
-              WhirlwindDamage: 6,
+              WhirlwindMultiplier: 75,
               WhirlwindRange: 6,
             },
             Extras: [
@@ -9740,7 +9746,7 @@ export default {
             Damage: 14,
             Attributes: {
               WhirlwindHit: 3,
-              WhirlwindDamage: 14,
+              WhirlwindMultiplier: 100,
               WhirlwindRange: 6,
             },
             Extras: [
@@ -9759,7 +9765,7 @@ export default {
             Damage: 25,
             Attributes: {
               WhirlwindHit: 3,
-              WhirlwindDamage: 25,
+              WhirlwindMultiplier: 100,
               WhirlwindRange: 7,
               DamageThreshold: 150,
               KnifePierce: 3,

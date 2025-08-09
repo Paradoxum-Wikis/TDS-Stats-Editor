@@ -280,10 +280,12 @@ export default class TableUnitInput {
       case "Spawnrate":
       case "HologramLifetime":
       case "UnitSendCooldown":
+      case "MissileTargeting":
         return formatter.format(number) + (showSeconds ? "s" : "");
 
       case "Range":
       case "ExplosionRadius":
+      case "RepulsionRadius":
         return (
           formatter.format(number) +
           (showStuds ? " " + (number === 1 ? "stud" : "studs") : "")

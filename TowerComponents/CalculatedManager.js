@@ -437,6 +437,15 @@ class CalculatedManager {
             (level.Ammo / level.Burst - 1) * level.BurstCooldown +
             level.ReloadTime),
       },
+      Assassin: {
+        For: ["Assassin"],
+        Value: (level) => {
+          if (isNaN(level.WhirlwindDamage)) {
+            return level.Damage / level.Cooldown;
+          }
+          return (level.Damage * 2 + level.WhirlwindDamage) / (level.Cooldown * level.WhirlwindHit);
+        },
+      },
       BurnTower: {
         For: ["Pyromancer"],
         Requires: ["Damage", "Cooldown", "BurnDamage", "TickRate"],
@@ -877,6 +886,19 @@ class CalculatedManager {
       },
     },
 
+    WhirlwindDamage: {
+      Default: {
+        For: ["Assassin"],
+        Value: (level) => Math.ceil(level.Damage * (level.WhirlwindMultiplier / 100)),
+      },
+    },
+    KnifeDPS: {
+      Default: {
+        For: ["Assassin"],
+        Value: (level) => level.KnifeDamage * level.KnifeAmount / (level.DamageThreshold / level.Damage * level.Cooldown),
+      },
+    },
+
     "BleedDamageTick (100HP)": {
       Default: {
         For: ["Slasher"],
@@ -1261,6 +1283,7 @@ class CalculatedManager {
     this.#add("CriticalDamage", skinData);
     this.#add("AftershockDamage", skinData);
     this.#add("AftershockDPS", skinData);
+    this.#add("WhirlwindDamage", skinData);
     this.#add("BleedDamageTick (10HP)", skinData);
     this.#add("BleedCollaspeDamage (10HP)", skinData);
     this.#add("BleedDamageTick (100HP)", skinData);
@@ -1291,8 +1314,9 @@ class CalculatedManager {
     this.#add("ClusterDPS", skinData);
     this.#add("CallToArmsDPS", skinData);
     this.#add("CaravanDPS", skinData);
-    this.#add("LimitDPS", skinData);
+    this.#add("KnifeDPS", skinData);
     this.#add("DPS Rate", skinData);
+    this.#add("LimitDPS", skinData);
     this.#add("MaxDPS", skinData);
     this.#add("NetCost", skinData);
     this.#add("LimitNetCost", skinData);
