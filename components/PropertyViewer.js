@@ -5,7 +5,9 @@ export default class PropertyViewer {
   constructor(viewer, root) {
     this.viewer = viewer;
     this.root = root;
-    this.userModified = false;
+    this.towerUserModified = false;
+    this.unitUserModified = false;
+    
     this.liClasses = ["nav-item", "position-relative", "mb-1"];
     this.buttonClasses = ["btn", "btn-sm", "w-100", "text-white"];
     this.activeButtonClass = "btn-outline-secondary";
@@ -72,7 +74,6 @@ export default class PropertyViewer {
       "RepulsionRadius",
       "MissileTargeting"
     ];
-
     this.unitDisabled = [...this.defaultUnitDisabled];
 
     this.unitHidden = ["_towerName", "_skinName"];
@@ -346,8 +347,8 @@ export default class PropertyViewer {
 
   // hide said property (add to disabled list)
   hide(property) {
-    const targetList =
-      this.currentView === "tower" ? this.disabled : this.unitDisabled;
+    const targetList = this.currentView === "tower" ? this.disabled : this.unitDisabled;
+    
     if (!targetList.includes(property)) {
       targetList.push(property);
     }
@@ -356,11 +357,10 @@ export default class PropertyViewer {
   // show this property (remove from disabled list)
   show(property, _userAction = false) {
     // userAction is kept for potential future use in case i wanted to add it back in again
-    const targetList =
-      this.currentView === "tower" ? this.disabled : this.unitDisabled;
+    const targetList = this.currentView === "tower" ? this.disabled : this.unitDisabled;
+    
     const index = targetList.indexOf(property);
     if (index !== -1) {
-      console.log(`Removing ${property} from disabled list`);
       targetList.splice(index, 1);
     }
   }
@@ -384,23 +384,15 @@ export default class PropertyViewer {
     });
 
     toggleButton.element.addEventListener("enabled", () => {
-      this.userModified = true;
-      console.log(`Enabling property: ${innerText}`);
-      this.show(innerText, true); // user clicked it
+      this.towerUserModified = true;
+      this.show(innerText, true);
       this.viewer.reload();
-      console.log(
-        `Property ${innerText} state after show: ${this.isDisabled(innerText) ? "disabled" : "enabled"}`,
-      );
     });
 
     toggleButton.element.addEventListener("disabled", () => {
-      this.userModified = true;
-      console.log(`Disabling property: ${innerText}`);
+      this.towerUserModified = true;
       this.hide(innerText);
       this.viewer.reload();
-      console.log(
-        `Property ${innerText} state after hide: ${this.isDisabled(innerText) ? "disabled" : "enabled"}`,
-      );
     });
 
     this.liClasses.forEach((className) => listElement.classList.add(className));
@@ -414,7 +406,7 @@ export default class PropertyViewer {
   createButtons(attributes) {
     // reset disabled list to defaults when switching towers,
     // unless the user has manually changed it for this tower
-    if (!this.userModified) {
+    if (!this.towerUserModified) {
       this.disabled = [...this.defaultDisabled];
     }
 
@@ -484,6 +476,10 @@ export default class PropertyViewer {
   }
 
   createUnitButtons() {
+    if (!this.unitUserModified) {
+      this.unitDisabled = [...this.defaultUnitDisabled];
+    }
+    
     this.root.innerHTML = "";
 
     // check if units exist
@@ -499,6 +495,7 @@ export default class PropertyViewer {
     }
 
     const unitAttributes = this.getUnitAttributes();
+    
     unitAttributes.forEach((attributeName) => {
       const button = this.createUnitPropertyButton(attributeName);
       if (button) {
@@ -528,14 +525,14 @@ export default class PropertyViewer {
     });
 
     toggleButton.element.addEventListener("enabled", () => {
-      console.log(`Enabling unit property: ${innerText}`);
-      this.show(innerText); // Use show which handles currentView
+      this.unitUserModified = true;
+      this.show(innerText);
       this.refreshUnitTable();
     });
 
     toggleButton.element.addEventListener("disabled", () => {
-      console.log(`Disabling unit property: ${innerText}`);
-      this.hide(innerText); // Use hide which handles currentView
+      this.unitUserModified = true
+      this.hide(innerText);
       this.refreshUnitTable();
     });
 
