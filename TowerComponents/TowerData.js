@@ -4410,7 +4410,7 @@ export default {
               "Airstrike Radius: 8 → 12",
             ],
             Attributes: {
-              Spawnrate: 35,
+              Spawnrate: 30,
               UnitToSend: "Railgun Tank",
               AirstrikeDamage: 125,
               MissileAmount: 6,
