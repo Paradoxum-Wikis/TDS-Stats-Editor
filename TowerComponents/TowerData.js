@@ -2921,7 +2921,7 @@ export default {
             Extras: ["Freeze Time: 1 → 1.5", "Projectile Speed: 60 → 90"],
             Attributes: {
               FreezeTime: 1.5,
-              MaxHits: 5,
+              MaxHits: 7,
               ProjectileSpeed: 90,
             },
             Detections: { Flying: true, Hidden: true, Lead: true },
