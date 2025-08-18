@@ -76,7 +76,6 @@ class MapFetcher {
           } else if (line.startsWith('|') && !line.startsWith('|-') && currentDataRowType) {
             console.log(`[MapFetcher] Found data line for ${currentDataRowType}: ${line}`);
             
-            // Each cell can contain multiple | characters within hyperlink [[]] brackets
             const cells = this.parseWikiTableCells(line);
             console.log(`[MapFetcher] Extracted ${cells.length} cells:`, cells);
             extractedRows[currentDataRowType].push(...cells);
@@ -128,20 +127,31 @@ class MapFetcher {
           }
 
           const difficultyCell = extractedRows.difficulty[i];
-          console.log(`[MapFetcher] Processing difficulty cell: "${difficultyCell}"`);
-          const difficultyMatch = difficultyCell.match(/\{\{Colour\|(.*?)\}\}/);
-          if (difficultyMatch && difficultyMatch[1]) {
-            map.difficulty = difficultyMatch[1];
-            console.log(`[MapFetcher] Map ${i} difficulty: ${map.difficulty}`);
+          if (difficultyCell) {
+            console.log(`[MapFetcher] Processing difficulty cell: "${difficultyCell}"`);
+            const difficultyMatch = difficultyCell.match(/\{\{Colour\|([^}|]+)\}\}/);
+            if (difficultyMatch && difficultyMatch[1]) {
+              map.difficulty = difficultyMatch[1];
+              console.log(`[MapFetcher] Map ${i} difficulty: ${map.difficulty}`);
+            } else {
+              map.difficulty = "Unknown";
+              console.warn(
+                `[MapFetcher] Map ${i} difficulty not found for cell: "${difficultyCell}", using fallback.`,
+              );
+            }
           } else {
             map.difficulty = "Unknown";
-            console.warn(
-              `[MapFetcher] Map ${i} difficulty not found for cell: "${difficultyCell}", using fallback.`,
-            );
+            console.warn(`[MapFetcher] Map ${i} has no difficulty data, using fallback.`);
           }
 
-          map.enemiesBeta = extractedRows.enemiesBeta[i].trim();
-          console.log(`[MapFetcher] Map ${i} enemiesBeta: ${map.enemiesBeta}`);
+          const enemiesBetaCell = extractedRows.enemiesBeta[i];
+          if (enemiesBetaCell) {
+            map.enemiesBeta = enemiesBetaCell.trim();
+            console.log(`[MapFetcher] Map ${i} enemiesBeta: ${map.enemiesBeta}`);
+          } else {
+            map.enemiesBeta = "Unknown";
+            console.warn(`[MapFetcher] Map ${i} has no enemiesBeta data, using fallback.`);
+          }
 
           console.log(`[MapFetcher] Completed map ${i}:`, map);
           maps.push(map);
@@ -165,7 +175,9 @@ class MapFetcher {
     const cells = [];
     let currentCell = '';
     let bracketDepth = 0;
+    let braceDepth = 0;
     let inBrackets = false;
+    let inBraces = false;
     
     for (let i = 0; i < content.length; i++) {
       const char = content[i];
@@ -181,7 +193,17 @@ class MapFetcher {
         if (bracketDepth === 0) {
           inBrackets = false;
         }
-      } else if (char === '|' && !inBrackets) {
+      } else if (char === '{' && nextChar === '{') {
+        inBraces = true;
+        braceDepth++;
+        currentCell += char;
+      } else if (char === '}' && nextChar === '}' && inBraces) {
+        braceDepth--;
+        currentCell += char;
+        if (braceDepth === 0) {
+          inBraces = false;
+        }
+      } else if (char === '|' && !inBrackets && !inBraces) {
         // This is a cell separator
         if (currentCell.trim()) {
           cells.push(currentCell.trim());
