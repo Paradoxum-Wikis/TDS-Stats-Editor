@@ -367,21 +367,27 @@ export default class StatsImageExporter {
       const cooldown = cooldownInput?.value || "";
       const cost = costInput?.value || "";
 
-      let abilityContent = `<strong>${abilityTitle}</strong>`;
+      const titleEl = document.createElement("strong");
+      titleEl.textContent = abilityTitle;
+      abilityDiv.appendChild(titleEl);
 
       if (level || cooldown || cost) {
         const details = [];
         if (level) details.push(`Level: ${level}`);
         if (cooldown) details.push(`Cooldown: ${cooldown}s`);
         if (cost) details.push(`Cost: $${cost}`);
-        abilityContent += ` (${details.join(" | ")})`;
+        
+        const detailsText = document.createTextNode(` (${details.join(" | ")})`);
+        abilityDiv.appendChild(detailsText);
       }
 
       if (description) {
-        abilityContent += `<br><em>${description}</em>`;
+        abilityDiv.appendChild(document.createElement("br"));
+        const descEl = document.createElement("em");
+        descEl.textContent = description;
+        abilityDiv.appendChild(descEl);
       }
 
-      abilityDiv.innerHTML = abilityContent;
       section.appendChild(abilityDiv);
     });
 
