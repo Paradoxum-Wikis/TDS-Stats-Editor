@@ -215,6 +215,7 @@ class MapFetcher {
     }
     
     // Add the last cell
+    // whole smuck is pretty complex imo
     if (currentCell.trim()) {
       cells.push(currentCell.trim());
     }

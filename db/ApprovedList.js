@@ -63,6 +63,8 @@ const approvedTowers = [
   "Paccet/Gladiator (REBALANCE)",
   "Paccet/Ace Pilot (Balance)",
   "Sharkepicgamer07/Engineer Rebalance",
+  "Hellscream2008/Acidinator (Rebalanced)",
+  "Hellscream2008/Acidinator",
 ];
 
 // List of featured towers
@@ -75,6 +77,8 @@ const featuredTowers = [
   "Hellscream2008/John Tower!",
   "Onett4smash/Tsukasa Tower (but JSON)",
   "Vessel Of Infinite Destruction/Golden Crook Boss",
+  "Hellscream2008/Acidinator (Rebalanced)",
+  "Hellscream2008/Acidinator",
 ];
 
 // List of grandfathered towers
@@ -90,7 +94,7 @@ const grandfatheredTowers = [
 
 // its own section the page
 const highlights = [
-  "Vessel Of Infinite Destruction/Ranger",
+  "Hellscream2008/Acidinator (Rebalanced)",
   "Vessel Of Infinite Destruction/Golden Crook Boss",
   "Vessel Of Infinite Destruction/Military Base",
   "Onett4smash/Tsukasa Tower (but JSON)",
