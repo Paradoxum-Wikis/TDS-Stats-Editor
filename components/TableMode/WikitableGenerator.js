@@ -42,7 +42,7 @@ class WikitableGenerator {
 
     let wikitable;
     if (this.viewer.useFaithfulFormat) {
-      wikitable = `<div style="overflow-x: scroll;">\n{| class="wikitable" style="text-align: center; margin: 0 auto"\n`;
+      wikitable = `<div class="overflow-box">\n{| class="wikitable stats-table" style="width:max-content;"\n`;
     } else {
       wikitable = `<div style="overflow-x: scroll;">\n{| class="wikitable sortable" style="margin: 0 auto"\n`;
       wikitable += `|+ '''${fullTowerName} Master'''\n`;
@@ -60,15 +60,8 @@ class WikitableGenerator {
         }
       }
 
-      // Use the ordered attributes for headers
-      let isFirst = true;
       orderedAttributes.forEach((attr) => {
-        if (isFirst) {
-          wikitable += `! scope="col" style="padding: 5px;" |${this.#formatWikitableHeader(attr)}`;
-          isFirst = false;
-        } else {
-          wikitable += `\n! scope="col" style="padding: 5px;" |${this.#formatWikitableHeader(attr)}`;
-        }
+        wikitable += `!${this.#formatWikitableHeader(attr)}\n`;
       });
     } else {
       // regular format remains unchanged
@@ -76,8 +69,8 @@ class WikitableGenerator {
       displayAttributes.forEach((attr) => {
         wikitable += ` !! ${this.#formatWikitableHeader(attr)}`;
       });
+      wikitable += `\n`;
     }
-    wikitable += `\n`;
 
     // Format rows
     levels.levels.forEach((level, index) => {
@@ -94,19 +87,13 @@ class WikitableGenerator {
           }
         }
 
-        let isFirst = true;
         orderedAttributes.forEach((attr) => {
           const value =
             attr === "Level"
               ? (level.Level ?? index)
               : levels.getCell(index, attr);
 
-          if (isFirst) {
-            wikitable += `| style="padding: 5px;" |${this.#formatWikitableCell(value, attr)}`;
-            isFirst = false;
-          } else {
-            wikitable += `\n| style="padding: 5px;" |${this.#formatWikitableCell(value, attr)}`;
-          }
+          wikitable += `|${this.#formatWikitableCell(value, attr)}\n`;
         });
       } else {
         // regular format remains unchanged
@@ -116,9 +103,8 @@ class WikitableGenerator {
           const value = levels.getCell(index, attr);
           wikitable += ` || ${this.#formatWikitableCell(value, attr)}`;
         });
+        wikitable += `\n`;
       }
-
-      wikitable += `\n`;
     });
 
     // Close table
@@ -160,14 +146,14 @@ class WikitableGenerator {
       );
     }
 
-    const sortableClass = this.viewer.useFaithfulFormat ? "" : "sortable";
-
     // line break for faithful format (intentionally 2 empty space)
     let wikitable = this.viewer.useFaithfulFormat ? "\n" : "";
 
-    wikitable += `<div style="overflow-x: scroll;">\n{| class="wikitable ${sortableClass}" style="text-align: center; margin: 0 auto"\n`;
-
-    if (!this.viewer.useFaithfulFormat) {
+    if (this.viewer.useFaithfulFormat) {
+      wikitable += `<div class="overflow-box">\n{| class="wikitable stats-table" style="width:max-content;"\n`;
+    } else {
+      const sortableClass = "sortable";
+      wikitable += `<div style="overflow-x: scroll;">\n{| class="wikitable ${sortableClass}" style="text-align: center; margin: 0 auto"\n`;
       wikitable += `|+ '''${fullTowerName} Slave'''\n`;
     }
 
@@ -181,14 +167,10 @@ class WikitableGenerator {
         }
       }
 
-      let isFirst = true;
+      // Updated faithful header format - simple headers
       orderedAttributes.forEach((attr) => {
-        if (isFirst) {
-          wikitable += `! scope="col" style="padding: 5px;" |${this.#formatWikitableHeader(attr === "Name" ? "Name" : attr)}`;
-          isFirst = false;
-        } else {
-          wikitable += `\n! scope="col" style="padding: 5px;" |${this.#formatWikitableHeader(attr)}`;
-        }
+        const headerText = attr === "Name" ? "Name" : this.#formatWikitableHeader(attr);
+        wikitable += `!${headerText}\n`;
       });
     } else {
       // og format
@@ -196,9 +178,8 @@ class WikitableGenerator {
       attributes.forEach((attr) => {
         wikitable += ` !! ${this.#formatWikitableHeader(attr)}`;
       });
+      wikitable += `\n`;
     }
-
-    wikitable += `\n`;
 
     // Row formatting
     Object.entries(this.activeUnits).forEach(([unitName, unitData]) => {
@@ -217,7 +198,6 @@ class WikitableGenerator {
           }
         }
 
-        let isFirst = true;
         orderedAttributes.forEach((attr) => {
           let value;
 
@@ -227,12 +207,7 @@ class WikitableGenerator {
             value = unitData.attributes[attr];
           }
 
-          if (isFirst) {
-            wikitable += `| style="padding: 5px;" |${this.#formatWikitableCell(value, attr)}`;
-            isFirst = false;
-          } else {
-            wikitable += `\n| style="padding: 5px;" |${this.#formatWikitableCell(value, attr)}`;
-          }
+          wikitable += `|${this.#formatWikitableCell(value, attr)}\n`;
         });
       } else {
         wikitable += `| ${unitName}`;
@@ -241,9 +216,8 @@ class WikitableGenerator {
           const value = unitData.attributes[attr];
           wikitable += ` || ${this.#formatWikitableCell(value, attr)}`;
         });
+        wikitable += `\n`;
       }
-
-      wikitable += `\n`;
     });
 
     wikitable += `|}\n</div>`;
