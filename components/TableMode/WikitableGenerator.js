@@ -145,8 +145,7 @@ class WikitableGenerator {
       );
     }
 
-    // line break for faithful format (intentionally 2 empty space)
-    let wikitable = this.viewer.useFaithfulFormat ? "\n" : "";
+    let wikitable = "";
 
     if (this.viewer.useFaithfulFormat) {
       wikitable += `<div class="overflow-box">\n{| class="wikitable stats-table" style="width:max-content;"\n`;
