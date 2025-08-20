@@ -261,6 +261,7 @@ export default class TableUnitInput {
       case "MaxDefenseMelt":
       case "CostClone":
       case "Slowdown":
+      case "DamageBoost":
         return formatter.format(number) + "%";
 
       case "Duration":

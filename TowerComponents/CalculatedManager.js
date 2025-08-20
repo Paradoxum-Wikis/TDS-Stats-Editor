@@ -350,6 +350,7 @@ class CalculatedManager {
           "Trapper",
           "Mercenary Base",
           "Biologist",
+          "Medic",
         ],
         Value: (level) => {
           const DPS = level.Damage / level.Cooldown;

@@ -174,6 +174,12 @@ export default class PropertyViewer {
     return activeSkin.tower.name === "Elf Camp";
   }
 
+  isMedicTower() {
+    const activeSkin = this.viewer.getActiveSkin();
+    if (!activeSkin) return false;
+    return activeSkin.tower.name === "Medic";
+  }
+
   // grab all properties for the current tower
   getProperties() {
     const levelData = this.viewer.getActiveSkin().levels;
@@ -273,7 +279,8 @@ export default class PropertyViewer {
     if (this.currentView === "tower") {
       // Only apply tower rules in tower view
       if (
-        this.isFarmTower() &&
+        (this.isFarmTower() ||
+        this.isMedicTower()) &&
         (property === "Damage" ||
           property === "Cooldown" ||
           property === "Hidden" ||

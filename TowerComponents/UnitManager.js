@@ -274,6 +274,10 @@ const register = {
     Default: ["5T", "5B"],
     PVP: ["5T ", "5B "],
   },
+
+  Medic: {
+    Default: ["Ubercharge 3", "Ubercharge 4", "Ubercharge 5"]
+  }
 };
 
 export default class UnitManager {

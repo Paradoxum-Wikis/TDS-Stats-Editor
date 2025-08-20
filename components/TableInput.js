@@ -298,6 +298,9 @@ export default class TableInput {
       case "HologramLifetime":
       case "UnitSendCooldown":
       case "MissileTargeting":
+      case "ShieldRechargeSpeed":
+      case "BoostsCooldown":
+      case "TowerSelectionCooldown":
         return formatter.format(value) + (showSeconds ? "s" : "");
 
       case "Range":
