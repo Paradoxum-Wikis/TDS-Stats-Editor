@@ -48,8 +48,6 @@ class WikitableGenerator {
       wikitable += `|+ '''${fullTowerName} Master'''\n`;
     }
 
-    wikitable += `|-\n`;
-
     // header formatting for faithful format
     if (this.viewer.useFaithfulFormat) {
       // use the order defined in allowedAttributes
@@ -157,8 +155,6 @@ class WikitableGenerator {
       wikitable += `|+ '''${fullTowerName} Slave'''\n`;
     }
 
-    wikitable += `|-\n`;
-
     if (this.viewer.useFaithfulFormat) {
       let orderedAttributes = ["Name"];
       for (const attr of allowedAttributes) {
@@ -167,7 +163,6 @@ class WikitableGenerator {
         }
       }
 
-      // Updated faithful header format - simple headers
       orderedAttributes.forEach((attr) => {
         const headerText = attr === "Name" ? "Name" : this.#formatWikitableHeader(attr);
         wikitable += `!${headerText}\n`;
