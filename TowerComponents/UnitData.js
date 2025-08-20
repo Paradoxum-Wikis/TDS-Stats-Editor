@@ -2856,19 +2856,18 @@ export default {
 
   // medic
   "Ubercharge 3": {
-  DamageBoost: 20,
-  Duration: 7.5,
-  Cooldown: 60,
-},
-"Ubercharge 4": {
-  DamageBoost: 27.5,
-  Duration: 10,
-  Cooldown: 60,
-},
-"Ubercharge 5": {
-  DamageBoost: 40,
-  Duration: 15,
-  Cooldown: 60,
-},
-
+    DamageBoost: 20,
+    Duration: 7.5,
+    Cooldown: 60,
+  },
+  "Ubercharge 4": {
+    DamageBoost: 27.5,
+    Duration: 10,
+    Cooldown: 60,
+  },
+  "Ubercharge 5": {
+    DamageBoost: 40,
+    Duration: 15,
+    Cooldown: 60,
+  },
 };

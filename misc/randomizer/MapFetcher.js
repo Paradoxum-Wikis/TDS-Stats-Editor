@@ -33,18 +33,23 @@ class MapFetcher {
       const maps = [];
       const tableRegex = /\{\|\s*class="light-table[^]*?\|\}/gs;
       console.log("[MapFetcher] Starting table search with regex:", tableRegex);
-      
+
       let tableMatch;
       let tableCount = 0;
 
       while ((tableMatch = tableRegex.exec(rawContent)) !== null) {
         tableCount++;
         console.log(`[MapFetcher] Found table #${tableCount}`);
-        console.log(`[MapFetcher] Table content preview:`, tableMatch[0].substring(0, 500));
-        
+        console.log(
+          `[MapFetcher] Table content preview:`,
+          tableMatch[0].substring(0, 500),
+        );
+
         const tableContent = tableMatch[0];
         const lines = tableContent.split("\n").map((line) => line.trim());
-        console.log(`[MapFetcher] Table #${tableCount} has ${lines.length} lines.`);
+        console.log(
+          `[MapFetcher] Table #${tableCount} has ${lines.length} lines.`,
+        );
 
         let currentDataRowType = null;
         const extractedRows = {
@@ -57,8 +62,8 @@ class MapFetcher {
         for (let lineIndex = 0; lineIndex < lines.length; lineIndex++) {
           const line = lines[lineIndex];
           console.log(`[MapFetcher] Processing line ${lineIndex}: "${line}"`);
-          
-          if (line.startsWith('!') && !line.startsWith('|-')) {
+
+          if (line.startsWith("!") && !line.startsWith("|-")) {
             console.log(`[MapFetcher] Found header line: ${line}`);
             if (line.includes("Map")) {
               currentDataRowType = "name";
@@ -68,22 +73,35 @@ class MapFetcher {
               console.log(`[MapFetcher] Switching to difficulty data row type`);
             } else if (line.includes("Enemies Beta?")) {
               currentDataRowType = "enemiesBeta";
-              console.log(`[MapFetcher] Switching to enemiesBeta data row type`);
+              console.log(
+                `[MapFetcher] Switching to enemiesBeta data row type`,
+              );
             } else {
               currentDataRowType = "image";
               console.log(`[MapFetcher] Switching to image data row type`);
             }
-          } else if (line.startsWith('|') && !line.startsWith('|-') && currentDataRowType) {
-            console.log(`[MapFetcher] Found data line for ${currentDataRowType}: ${line}`);
-            
+          } else if (
+            line.startsWith("|") &&
+            !line.startsWith("|-") &&
+            currentDataRowType
+          ) {
+            console.log(
+              `[MapFetcher] Found data line for ${currentDataRowType}: ${line}`,
+            );
+
             const cells = this.parseWikiTableCells(line);
             console.log(`[MapFetcher] Extracted ${cells.length} cells:`, cells);
             extractedRows[currentDataRowType].push(...cells);
-            console.log(`[MapFetcher] ${currentDataRowType} now has ${extractedRows[currentDataRowType].length} entries`);
+            console.log(
+              `[MapFetcher] ${currentDataRowType} now has ${extractedRows[currentDataRowType].length} entries`,
+            );
           }
         }
-        
-        console.log(`[MapFetcher] Extracted rows for table #${tableCount}:`, extractedRows);
+
+        console.log(
+          `[MapFetcher] Extracted rows for table #${tableCount}:`,
+          extractedRows,
+        );
 
         const numMapsInTable = Math.min(
           extractedRows.image.length,
@@ -91,10 +109,14 @@ class MapFetcher {
           extractedRows.difficulty.length,
           extractedRows.enemiesBeta.length,
         );
-        console.log(`[MapFetcher] Number of maps to process in table #${tableCount}: ${numMapsInTable}`);
+        console.log(
+          `[MapFetcher] Number of maps to process in table #${tableCount}: ${numMapsInTable}`,
+        );
 
         for (let i = 0; i < numMapsInTable; i++) {
-          console.log(`[MapFetcher] Processing map ${i} in table ${tableCount}`);
+          console.log(
+            `[MapFetcher] Processing map ${i} in table ${tableCount}`,
+          );
           const map = {};
           map.tableNumber = tableCount;
 
@@ -104,7 +126,9 @@ class MapFetcher {
           if (imageMatch && imageMatch[1]) {
             map.imageFile = imageMatch[1];
             map.imageUrl = ImageLoader.convertFileToFandomUrl(map.imageFile);
-            console.log(`[MapFetcher] Map ${i} image: ${map.imageFile}, URL: ${map.imageUrl}`);
+            console.log(
+              `[MapFetcher] Map ${i} image: ${map.imageFile}, URL: ${map.imageUrl}`,
+            );
           } else {
             map.imageFile = "Unavailable.png";
             map.imageUrl = "./htmlassets/Unavailable.png";
@@ -118,7 +142,9 @@ class MapFetcher {
           const nameMatch = nameCell.match(/\[\[(?:[^|]*\|)?(.*?)]]/);
           if (nameMatch && nameMatch[1]) {
             map.name = nameMatch[1];
-            console.log(`[MapFetcher] Extracted Map Name: ${map.name} (Table: ${map.tableNumber})`);
+            console.log(
+              `[MapFetcher] Extracted Map Name: ${map.name} (Table: ${map.tableNumber})`,
+            );
           } else {
             map.name = "Unknown Map";
             console.warn(
@@ -128,11 +154,17 @@ class MapFetcher {
 
           const difficultyCell = extractedRows.difficulty[i];
           if (difficultyCell) {
-            console.log(`[MapFetcher] Processing difficulty cell: "${difficultyCell}"`);
-            const difficultyMatch = difficultyCell.match(/\{\{Colour\|([^}|]+)\}\}/);
+            console.log(
+              `[MapFetcher] Processing difficulty cell: "${difficultyCell}"`,
+            );
+            const difficultyMatch = difficultyCell.match(
+              /\{\{Colour\|([^}|]+)\}\}/,
+            );
             if (difficultyMatch && difficultyMatch[1]) {
               map.difficulty = difficultyMatch[1];
-              console.log(`[MapFetcher] Map ${i} difficulty: ${map.difficulty}`);
+              console.log(
+                `[MapFetcher] Map ${i} difficulty: ${map.difficulty}`,
+              );
             } else {
               map.difficulty = "Unknown";
               console.warn(
@@ -141,27 +173,33 @@ class MapFetcher {
             }
           } else {
             map.difficulty = "Unknown";
-            console.warn(`[MapFetcher] Map ${i} has no difficulty data, using fallback.`);
+            console.warn(
+              `[MapFetcher] Map ${i} has no difficulty data, using fallback.`,
+            );
           }
 
           const enemiesBetaCell = extractedRows.enemiesBeta[i];
           if (enemiesBetaCell) {
             map.enemiesBeta = enemiesBetaCell.trim();
-            console.log(`[MapFetcher] Map ${i} enemiesBeta: ${map.enemiesBeta}`);
+            console.log(
+              `[MapFetcher] Map ${i} enemiesBeta: ${map.enemiesBeta}`,
+            );
           } else {
             map.enemiesBeta = "Unknown";
-            console.warn(`[MapFetcher] Map ${i} has no enemiesBeta data, using fallback.`);
+            console.warn(
+              `[MapFetcher] Map ${i} has no enemiesBeta data, using fallback.`,
+            );
           }
 
           console.log(`[MapFetcher] Completed map ${i}:`, map);
           maps.push(map);
         }
       }
-      
+
       console.log(`[MapFetcher] Total tables found: ${tableCount}`);
       console.log(`[MapFetcher] Total maps extracted: ${maps.length}`);
       console.log(`[MapFetcher] All extracted maps:`, maps);
-      
+
       return maps;
     } catch (error) {
       console.error("[MapFetcher] Error fetching or parsing map data:", error);
@@ -173,53 +211,53 @@ class MapFetcher {
   parseWikiTableCells(line) {
     const content = line.substring(1);
     const cells = [];
-    let currentCell = '';
+    let currentCell = "";
     let bracketDepth = 0;
     let braceDepth = 0;
     let inBrackets = false;
     let inBraces = false;
-    
+
     for (let i = 0; i < content.length; i++) {
       const char = content[i];
       const nextChar = content[i + 1];
-      
-      if (char === '[' && nextChar === '[') {
+
+      if (char === "[" && nextChar === "[") {
         inBrackets = true;
         bracketDepth++;
         currentCell += char;
-      } else if (char === ']' && nextChar === ']' && inBrackets) {
+      } else if (char === "]" && nextChar === "]" && inBrackets) {
         bracketDepth--;
         currentCell += char;
         if (bracketDepth === 0) {
           inBrackets = false;
         }
-      } else if (char === '{' && nextChar === '{') {
+      } else if (char === "{" && nextChar === "{") {
         inBraces = true;
         braceDepth++;
         currentCell += char;
-      } else if (char === '}' && nextChar === '}' && inBraces) {
+      } else if (char === "}" && nextChar === "}" && inBraces) {
         braceDepth--;
         currentCell += char;
         if (braceDepth === 0) {
           inBraces = false;
         }
-      } else if (char === '|' && !inBrackets && !inBraces) {
+      } else if (char === "|" && !inBrackets && !inBraces) {
         // This is a cell separator
         if (currentCell.trim()) {
           cells.push(currentCell.trim());
         }
-        currentCell = '';
+        currentCell = "";
       } else {
         currentCell += char;
       }
     }
-    
+
     // Add the last cell
     // whole smuck is pretty complex imo
     if (currentCell.trim()) {
       cells.push(currentCell.trim());
     }
-    
+
     return cells;
   }
 }

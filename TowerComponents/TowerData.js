@@ -3769,161 +3769,160 @@ export default {
     },
   },
   Medic: {
-  Default: {
-    Upgrades: [
-      {
-        Image: 117008581932706,
-        Stats: {
-          Extras: [
-            "Max Assigned Towers: 1 → 2"
-          ],
-          Attributes: {
-            ShieldRechargeSpeed: 8,
-            HealthRegen: 5,
-            OverhealLimit: 0,
-            TowersCanSupport: 2,
-            BoostsCooldown: 20,
-          },
-          Detections: { Flying: false, Hidden: false, Lead: false },
-          Cooldown: 0,
-          Range: 12,
-          Damage: 0,
-        },
-        Title: "Medical Precautions",
-        Cost: 300,
-      },
-      {
-        Image: 71546954858462,
-        Stats: {
-          Extras: [
-            "Max Assigned Towers: 2 → 3",
-            "[Collapsible:Upgraded Medi Gun]Shield Regen Speed: 8s → 6s",
-            "[Collapsible]Overheal Limit: 0 → 5"
-          ],
-          Attributes: {
-            ShieldRechargeSpeed: 6,
-            HealthRegen: 5,
-            OverhealLimit: 5,
-            TowersCanSupport: 3,
-            BoostsCooldown: 20,
-          },
-          Detections: { Flying: false, Hidden: false, Lead: false },
-          Cooldown: 0,
-          Range: 14,
-          Damage: 0,
-        },
-        Title: "Prescribed Vitamins",
-        Cost: 750,
-      },
-      {
-        Image: 130592941614779,
-        Stats: {
-          Extras: [
-            "[Collapsible:Upgraded Medi Gun]Health Regen: 5 → 10",
-            "[Collapsible]Overheal Limit: 5 → 10",
-            "[Collapsible1:Unlock Ubercharge]Give all assigned towers a temporary damage boost",
-            "[Collapsible1]Damage Boost: 20%",
-            "[Collapsible1]Duration: 7.5s",
-            "[Collapsible1]Cooldown: 60s"
-          ],
-          Attributes: {
-            ShieldRechargeSpeed: 6,
-            HealthRegen: 10,
-            OverhealLimit: 10,
-            TowersCanSupport: 3,
-            BoostsCooldown: 20,
-          },
-          Detections: { Flying: false, Hidden: false, Lead: false },
-          Cooldown: 0,
-          Range: 15,
-          Damage: 0,
-        },
-        Title: "BIG BRAIN",
-        Cost: 2700,
-      },
-      {
-        Image: 112504548905627,
-        Stats: {
-          Extras: [
-            "Max Assigned Towers: 3 → 4",
-            "[Collapsible:Upgraded Medi Gun]Shield Regen Speed: 6s → 4.5s",
-            "[Collapsible1:Upgraded Ubercharge]Damage Boost: 20% → 27.5%",
-            "[Collapsible1]Duration: 7.5s → 10s",
-            "[Collapsible1]Cooldown: 60s",
-            "[Collapsible2:Upgraded Health Regen]Health Regen: 10 → 20",
-            "[Collapsible2]Overheal Limit: 10 → 20"
-          ],
-          Attributes: {
-            ShieldRechargeSpeed: 4.5,
-            HealthRegen: 20,
-            OverhealLimit: 20,
-            TowersCanSupport: 4,
-            BoostsCooldown: 20,
-          },
-          Detections: { Flying: false, Hidden: false, Lead: false },
-          Cooldown: 0,
-          Range: 18,
-          Damage: 0,
-        },
-        Title: "Medical Pack",
-        Cost: 6000,
-      },
-      {
-        Image: 112504548905627,
-        Stats: {
-          Extras: [
-            "Max Assigned Towers: 4 → 5",
-            "[Collapsible:Upgraded Medi Gun]Shield Regen Speed: 4.5s → 2.5s",
-            "[Collapsible1:Upgraded Ubercharge]Damage Boost: 27.5% → 40%",
-            "[Collapsible1]Duration: 10s → 15s",
-            "[Collapsible1]Cooldown: 60s",
-            "[Collapsible2:Upgraded Health Regen]Health Regen: 20 → 25",
-            "[Collapsible2]Overheal Limit: 20 → 50"
-          ],
-          Attributes: {
-            ShieldRechargeSpeed: 2.5,
-            HealthRegen: 25,
-            OverhealLimit: 50,
-            TowersCanSupport: 5,
-            BoostsCooldown: 20,
-          },
-          Detections: { Flying: false, Hidden: false, Lead: false },
-          Cooldown: 0,
-          Range: 20,
-          Damage: 0,
-        },
-        Title: "PHD",
-        Cost: 16000,
-      },
-    ],
-    Defaults: {
-      Detections: { Flying: false, Hidden: false, Lead: false },
-      Attributes: {
-        ShieldRechargeSpeed: 8,
-        HealthRegen: 5,
-        OverhealLimit: 0,
-        TowersCanSupport: 1,
-        BoostsCooldown: 20,
-        TowerSelectionCooldown: 0.5
-      },
-      Abilities: [
+    Default: {
+      Upgrades: [
         {
-          Name: "Ubercharge",
-          Level: 3,
-          Icon: 231100685,
-          Cooldown: 60,
-          Cost: 0,
-          Description: "Temporarily boosts assigned towers with increased damage, lead detection, hidden detection, and flying detection."
+          Image: 117008581932706,
+          Stats: {
+            Extras: ["Max Assigned Towers: 1 → 2"],
+            Attributes: {
+              ShieldRechargeSpeed: 8,
+              HealthRegen: 5,
+              OverhealLimit: 0,
+              TowersCanSupport: 2,
+              BoostsCooldown: 20,
+            },
+            Detections: { Flying: false, Hidden: false, Lead: false },
+            Cooldown: 0,
+            Range: 12,
+            Damage: 0,
+          },
+          Title: "Medical Precautions",
+          Cost: 300,
+        },
+        {
+          Image: 71546954858462,
+          Stats: {
+            Extras: [
+              "Max Assigned Towers: 2 → 3",
+              "[Collapsible:Upgraded Medi Gun]Shield Regen Speed: 8s → 6s",
+              "[Collapsible]Overheal Limit: 0 → 5",
+            ],
+            Attributes: {
+              ShieldRechargeSpeed: 6,
+              HealthRegen: 5,
+              OverhealLimit: 5,
+              TowersCanSupport: 3,
+              BoostsCooldown: 20,
+            },
+            Detections: { Flying: false, Hidden: false, Lead: false },
+            Cooldown: 0,
+            Range: 14,
+            Damage: 0,
+          },
+          Title: "Prescribed Vitamins",
+          Cost: 750,
+        },
+        {
+          Image: 130592941614779,
+          Stats: {
+            Extras: [
+              "[Collapsible:Upgraded Medi Gun]Health Regen: 5 → 10",
+              "[Collapsible]Overheal Limit: 5 → 10",
+              "[Collapsible1:Unlock Ubercharge]Give all assigned towers a temporary damage boost",
+              "[Collapsible1]Damage Boost: 20%",
+              "[Collapsible1]Duration: 7.5s",
+              "[Collapsible1]Cooldown: 60s",
+            ],
+            Attributes: {
+              ShieldRechargeSpeed: 6,
+              HealthRegen: 10,
+              OverhealLimit: 10,
+              TowersCanSupport: 3,
+              BoostsCooldown: 20,
+            },
+            Detections: { Flying: false, Hidden: false, Lead: false },
+            Cooldown: 0,
+            Range: 15,
+            Damage: 0,
+          },
+          Title: "BIG BRAIN",
+          Cost: 2700,
+        },
+        {
+          Image: 112504548905627,
+          Stats: {
+            Extras: [
+              "Max Assigned Towers: 3 → 4",
+              "[Collapsible:Upgraded Medi Gun]Shield Regen Speed: 6s → 4.5s",
+              "[Collapsible1:Upgraded Ubercharge]Damage Boost: 20% → 27.5%",
+              "[Collapsible1]Duration: 7.5s → 10s",
+              "[Collapsible1]Cooldown: 60s",
+              "[Collapsible2:Upgraded Health Regen]Health Regen: 10 → 20",
+              "[Collapsible2]Overheal Limit: 10 → 20",
+            ],
+            Attributes: {
+              ShieldRechargeSpeed: 4.5,
+              HealthRegen: 20,
+              OverhealLimit: 20,
+              TowersCanSupport: 4,
+              BoostsCooldown: 20,
+            },
+            Detections: { Flying: false, Hidden: false, Lead: false },
+            Cooldown: 0,
+            Range: 18,
+            Damage: 0,
+          },
+          Title: "Medical Pack",
+          Cost: 6000,
+        },
+        {
+          Image: 112504548905627,
+          Stats: {
+            Extras: [
+              "Max Assigned Towers: 4 → 5",
+              "[Collapsible:Upgraded Medi Gun]Shield Regen Speed: 4.5s → 2.5s",
+              "[Collapsible1:Upgraded Ubercharge]Damage Boost: 27.5% → 40%",
+              "[Collapsible1]Duration: 10s → 15s",
+              "[Collapsible1]Cooldown: 60s",
+              "[Collapsible2:Upgraded Health Regen]Health Regen: 20 → 25",
+              "[Collapsible2]Overheal Limit: 20 → 50",
+            ],
+            Attributes: {
+              ShieldRechargeSpeed: 2.5,
+              HealthRegen: 25,
+              OverhealLimit: 50,
+              TowersCanSupport: 5,
+              BoostsCooldown: 20,
+            },
+            Detections: { Flying: false, Hidden: false, Lead: false },
+            Cooldown: 0,
+            Range: 20,
+            Damage: 0,
+          },
+          Title: "PHD",
+          Cost: 16000,
         },
       ],
-      Price: 500,
-      Range: 12,
-      Cooldown: 0,
-      Damage: 0,
-      Limit: 5,
+      Defaults: {
+        Detections: { Flying: false, Hidden: false, Lead: false },
+        Attributes: {
+          ShieldRechargeSpeed: 8,
+          HealthRegen: 5,
+          OverhealLimit: 0,
+          TowersCanSupport: 1,
+          BoostsCooldown: 20,
+          TowerSelectionCooldown: 0.5,
+        },
+        Abilities: [
+          {
+            Name: "Ubercharge",
+            Level: 3,
+            Icon: 231100685,
+            Cooldown: 60,
+            Cost: 0,
+            Description:
+              "Temporarily boosts assigned towers with increased damage, lead detection, hidden detection, and flying detection.",
+          },
+        ],
+        Price: 500,
+        Range: 12,
+        Cooldown: 0,
+        Damage: 0,
+        Limit: 5,
+      },
     },
   },
-},
   "Mercenary Base": {
     Default: {
       Defaults: {

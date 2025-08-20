@@ -376,8 +376,10 @@ export default class StatsImageExporter {
         if (level) details.push(`Level: ${level}`);
         if (cooldown) details.push(`Cooldown: ${cooldown}s`);
         if (cost) details.push(`Cost: $${cost}`);
-        
-        const detailsText = document.createTextNode(` (${details.join(" | ")})`);
+
+        const detailsText = document.createTextNode(
+          ` (${details.join(" | ")})`,
+        );
         abilityDiv.appendChild(detailsText);
       }
 

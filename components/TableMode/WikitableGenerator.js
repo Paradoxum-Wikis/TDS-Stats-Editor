@@ -132,9 +132,10 @@ class WikitableGenerator {
 
     let attributes = firstUnit.attributeNames.filter((attr) => {
       return (
-        !this.propertyViewer.isDisabled(attr) &&
-        !this.propertyViewer.isHidden(attr) &&
-        !["NoTable", "SideLevel", "Level"].includes(attr)
+        (!this.propertyViewer.isDisabled(attr) &&
+          !this.propertyViewer.isHidden(attr) &&
+          !["NoTable", "SideLevel", "Level"].includes(attr)) ||
+        (this.viewer.useFaithfulFormat && allowedAttributes.includes(attr))
       );
     });
 
@@ -164,7 +165,8 @@ class WikitableGenerator {
       }
 
       orderedAttributes.forEach((attr) => {
-        const headerText = attr === "Name" ? "Name" : this.#formatWikitableHeader(attr);
+        const headerText =
+          attr === "Name" ? "Name" : this.#formatWikitableHeader(attr);
         wikitable += `!${headerText}\n`;
       });
     } else {

@@ -444,7 +444,10 @@ class CalculatedManager {
           if (isNaN(level.WhirlwindDamage)) {
             return level.Damage / level.Cooldown;
           }
-          return (level.Damage * 2 + level.WhirlwindDamage) / (level.Cooldown * level.WhirlwindHit);
+          return (
+            (level.Damage * 2 + level.WhirlwindDamage) /
+            (level.Cooldown * level.WhirlwindHit)
+          );
         },
       },
       BurnTower: {
@@ -890,13 +893,16 @@ class CalculatedManager {
     WhirlwindDamage: {
       Default: {
         For: ["Assassin"],
-        Value: (level) => Math.ceil(level.Damage * (level.WhirlwindMultiplier / 100)),
+        Value: (level) =>
+          Math.ceil(level.Damage * (level.WhirlwindMultiplier / 100)),
       },
     },
     KnifeDPS: {
       Default: {
         For: ["Assassin"],
-        Value: (level) => level.KnifeDamage * level.KnifeAmount / (level.DamageThreshold / level.Damage * level.Cooldown),
+        Value: (level) =>
+          (level.KnifeDamage * level.KnifeAmount) /
+          ((level.DamageThreshold / level.Damage) * level.Cooldown),
       },
     },
 

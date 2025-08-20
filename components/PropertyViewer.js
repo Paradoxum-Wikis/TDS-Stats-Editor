@@ -7,7 +7,7 @@ export default class PropertyViewer {
     this.root = root;
     this.towerUserModified = false;
     this.unitUserModified = false;
-    
+
     this.liClasses = ["nav-item", "position-relative", "mb-1"];
     this.buttonClasses = ["btn", "btn-sm", "w-100", "text-white"];
     this.activeButtonClass = "btn-outline-secondary";
@@ -43,7 +43,7 @@ export default class PropertyViewer {
       "SummonDebounce",
       "BookDebounce",
       "RepulsionRadius",
-      "MissileTargeting"
+      "MissileTargeting",
     ];
     this.disabled = [...this.defaultDisabled];
     // stuffs we never show
@@ -70,10 +70,7 @@ export default class PropertyViewer {
     this.calcBtn.addEventListener("click", this.toggleCalc.bind(this));
 
     // slave table's configs - aio
-    this.defaultUnitDisabled = [
-      "RepulsionRadius",
-      "MissileTargeting"
-    ];
+    this.defaultUnitDisabled = ["RepulsionRadius", "MissileTargeting"];
     this.unitDisabled = [...this.defaultUnitDisabled];
 
     this.unitHidden = ["_towerName", "_skinName"];
@@ -279,8 +276,7 @@ export default class PropertyViewer {
     if (this.currentView === "tower") {
       // Only apply tower rules in tower view
       if (
-        (this.isFarmTower() ||
-        this.isMedicTower()) &&
+        (this.isFarmTower() || this.isMedicTower()) &&
         (property === "Damage" ||
           property === "Cooldown" ||
           property === "Hidden" ||
@@ -354,8 +350,9 @@ export default class PropertyViewer {
 
   // hide said property (add to disabled list)
   hide(property) {
-    const targetList = this.currentView === "tower" ? this.disabled : this.unitDisabled;
-    
+    const targetList =
+      this.currentView === "tower" ? this.disabled : this.unitDisabled;
+
     if (!targetList.includes(property)) {
       targetList.push(property);
     }
@@ -364,8 +361,9 @@ export default class PropertyViewer {
   // show this property (remove from disabled list)
   show(property, _userAction = false) {
     // userAction is kept for potential future use in case i wanted to add it back in again
-    const targetList = this.currentView === "tower" ? this.disabled : this.unitDisabled;
-    
+    const targetList =
+      this.currentView === "tower" ? this.disabled : this.unitDisabled;
+
     const index = targetList.indexOf(property);
     if (index !== -1) {
       targetList.splice(index, 1);
@@ -486,7 +484,7 @@ export default class PropertyViewer {
     if (!this.unitUserModified) {
       this.unitDisabled = [...this.defaultUnitDisabled];
     }
-    
+
     this.root.innerHTML = "";
 
     // check if units exist
@@ -502,7 +500,7 @@ export default class PropertyViewer {
     }
 
     const unitAttributes = this.getUnitAttributes();
-    
+
     unitAttributes.forEach((attributeName) => {
       const button = this.createUnitPropertyButton(attributeName);
       if (button) {
@@ -538,7 +536,7 @@ export default class PropertyViewer {
     });
 
     toggleButton.element.addEventListener("disabled", () => {
-      this.unitUserModified = true
+      this.unitUserModified = true;
       this.hide(innerText);
       this.refreshUnitTable();
     });

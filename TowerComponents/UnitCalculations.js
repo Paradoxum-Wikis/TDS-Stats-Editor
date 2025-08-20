@@ -412,9 +412,11 @@ class UnitCalculations {
 
           const isPVP = level.Name.endsWith(" ");
           const towerVariant = isPVP ? "PVP" : "Default";
-          
-          TowerRegistry.log(`Detected variant: ${towerVariant} for ${level.Name}`);
-          
+
+          TowerRegistry.log(
+            `Detected variant: ${towerVariant} for ${level.Name}`,
+          );
+
           const baseCost = this.getTowerCostForLevel("Hacker", 4, towerVariant);
           if (baseCost === null) {
             console.error(
@@ -422,7 +424,9 @@ class UnitCalculations {
             );
             return NaN;
           }
-          TowerRegistry.log(`Using base cost (level 4, ${towerVariant}): ${baseCost}`);
+          TowerRegistry.log(
+            `Using base cost (level 4, ${towerVariant}): ${baseCost}`,
+          );
 
           const currentPathLevelCost = level.Cost || 0;
           TowerRegistry.log(

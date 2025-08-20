@@ -276,8 +276,8 @@ const register = {
   },
 
   Medic: {
-    Default: ["Ubercharge 3", "Ubercharge 4", "Ubercharge 5"]
-  }
+    Default: ["Ubercharge 3", "Ubercharge 4", "Ubercharge 5"],
+  },
 };
 
 export default class UnitManager {

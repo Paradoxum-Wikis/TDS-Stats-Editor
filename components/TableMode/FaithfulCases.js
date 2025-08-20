@@ -8,6 +8,13 @@ export const allowedAttributes = [
   "NetCost",
   "Damage",
 
+  "Shield RechargeSpeed",
+  "HealthRegen",
+  "OverhealLimit",
+  "TowersCanSupport",
+  "BoostsCooldown",
+  "TowerSelectionCooldown",
+
   "ExplosionDamage",
   "BombTime",
   "ExplosionRadius",
@@ -65,11 +72,15 @@ export const allowedAttributes = [
   "DamageBuff",
   "RangeBuff",
   "BuffLength",
+
+  "Duration",
+  "DamageBoost",
 ];
 
 // special case handlers cuz some attributes need different labels in faithful format
 export const attributeLabels = {
   NetCost: "Total Price",
+  BurstCooldown: "Rocket Firerate",
   Cooldown: "Firerate",
   ChargeTime: "Charge-Up",
   LaserCooldown: "Cooldown",
