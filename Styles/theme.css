@@ -210,11 +210,11 @@
 }
 
 .light-mode .json-viewer a {
-  color:#3e8bd8 !important;
+  color: #3e8bd8 !important;
 }
 
 .light-mode .json-viewer a:hover {
-  color:#0d6efd !important;
+  color: #0d6efd !important;
 }
 
 .light-mode .json-viewer .type-string {

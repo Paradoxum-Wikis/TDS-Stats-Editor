@@ -914,11 +914,14 @@ class CalculatedManager {
         },
       },
     },
-    
+
     FlameArrowDPS: {
       Default: {
         For: ["Archer"],
-        Value: (level) => level.BurnDPS === 0 ? NaN : level.Damage / level.Cooldown + level.BurnDPS,
+        Value: (level) =>
+          level.BurnDPS === 0
+            ? NaN
+            : level.Damage / level.Cooldown + level.BurnDPS,
       },
     },
 
@@ -947,7 +950,10 @@ class CalculatedManager {
     ExplosiveArrowDPS: {
       Default: {
         For: ["Archer"],
-        Value: (level) => level.ExplosionDPS === 0 ? NaN : level.Damage / level.Cooldown + level.ExplosionDPS,
+        Value: (level) =>
+          level.ExplosionDPS === 0
+            ? NaN
+            : level.Damage / level.Cooldown + level.ExplosionDPS,
       },
     },
 

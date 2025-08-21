@@ -94,7 +94,7 @@ export const attributeLabels = {
   DefenseMelt: "Defense Dropping",
   MaxDefenseMelt: "Max Defense Dropping",
   CooldownBoost: "[[Firerate Buff]]",
-  DamageBoost: "[[Damage Buff]]"
+  DamageBoost: "[[Damage Buff]]",
 };
 
 /**
