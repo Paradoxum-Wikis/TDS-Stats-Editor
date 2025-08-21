@@ -12,7 +12,7 @@ export const allowedAttributes = [
   "HealthRegen",
   "OverhealLimit",
   "TowersCanSupport",
-  "BoostsCooldown",
+  "CooldownBoost",
   "TowerSelectionCooldown",
 
   "ExplosionDamage",
@@ -93,6 +93,8 @@ export const attributeLabels = {
   RevTime: "Rev-Up Time",
   DefenseMelt: "Defense Dropping",
   MaxDefenseMelt: "Max Defense Dropping",
+  CooldownBoost: "[[Firerate Buff]]",
+  DamageBoost: "[[Damage Buff]]"
 };
 
 /**

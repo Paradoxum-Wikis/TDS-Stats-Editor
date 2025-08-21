@@ -264,6 +264,7 @@ export default class TableInput {
       case "CostClone":
       case "Slowdown":
       case "WhirlwindMultiplier":
+      case "CooldownBoost":
         return formatter.format(value) + "%";
 
       case "BuffLength":
@@ -299,7 +300,6 @@ export default class TableInput {
       case "UnitSendCooldown":
       case "MissileTargeting":
       case "ShieldRechargeSpeed":
-      case "BoostsCooldown":
       case "TowerSelectionCooldown":
         return formatter.format(value) + (showSeconds ? "s" : "");
 
