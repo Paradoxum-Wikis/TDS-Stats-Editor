@@ -351,6 +351,7 @@ class CalculatedManager {
           "Mercenary Base",
           "Biologist",
           "Medic",
+          "Archer",
         ],
         Value: (level) => {
           const DPS = level.Damage / level.Cooldown;
@@ -890,6 +891,94 @@ class CalculatedManager {
       },
     },
 
+    ArrowDPS: {
+      Default: {
+        For: ["Archer"],
+        Value: (level) => {
+          this.unitManager.load();
+
+          let arrowName;
+          if (level.Level <= 2) {
+            arrowName = "Arrow 2";
+          } else if (level.Level <= 1) {
+            arrowName = "Arrow 1";
+          } else if (level.Level <= 0) {
+            arrowName = "Arrow 0";
+          } else {
+            return NaN;
+          }
+
+          if (!this.unitManager.hasUnit(arrowName)) return NaN;
+
+          return level.Damage / level.Cooldown;
+        },
+      },
+    },
+    
+    FlameArrowDPS: {
+      Default: {
+        For: ["Archer"],
+        Value: (level) => level.BurnDPS === 0 ? NaN : level.Damage / level.Cooldown + level.BurnDPS,
+      },
+    },
+
+    ShockArrowDPS: {
+      Default: {
+        For: ["Archer"],
+        Value: (level) => {
+          this.unitManager.load();
+
+          let arrowName;
+          if (level.Level >= 5) {
+            arrowName = "Shock Arrow 5";
+          } else if (level.Level >= 4) {
+            arrowName = "Shock Arrow 4";
+          } else {
+            return NaN;
+          }
+
+          if (!this.unitManager.hasUnit(arrowName)) return NaN;
+
+          return level.Damage / level.Cooldown;
+        },
+      },
+    },
+
+    ExplosiveArrowDPS: {
+      Default: {
+        For: ["Archer"],
+        Value: (level) => level.ExplosionDPS === 0 ? NaN : level.Damage / level.Cooldown + level.ExplosionDPS,
+      },
+    },
+
+    ArrowCE: {
+      Default: {
+        For: ["Archer"],
+        Value: (level) => level.NetCost / level.ArrowDPS,
+      },
+    },
+
+    FlameArrowCE: {
+      Default: {
+        For: ["Archer"],
+        Value: (level) => level.NetCost / level.FlameArrowDPS,
+      },
+    },
+
+    ShockArrowCE: {
+      Default: {
+        For: ["Archer"],
+        Value: (level) => level.NetCost / level.ShockArrowDPS,
+      },
+    },
+
+    ExplosiveArrowCE: {
+      Default: {
+        For: ["Archer"],
+        Value: (level) => level.NetCost / level.ExplosiveArrowDPS,
+      },
+    },
+
     WhirlwindDamage: {
       Default: {
         For: ["Assassin"],
@@ -1317,6 +1406,10 @@ class CalculatedManager {
     this.#add("BurnDPS", skinData);
     this.#add("PoisonDPS", skinData);
     this.#add("ExplosionDPS", skinData);
+    this.#add("ArrowDPS", skinData);
+    this.#add("FlameArrowDPS", skinData);
+    this.#add("ShockArrowDPS", skinData);
+    this.#add("ExplosiveArrowDPS", skinData);
     this.#add("TotalDPS", skinData);
     this.#add("ClusterDPS", skinData);
     this.#add("CallToArmsDPS", skinData);
@@ -1329,6 +1422,10 @@ class CalculatedManager {
     this.#add("LimitNetCost", skinData);
     this.#add("CostEfficiency", skinData);
     this.#add("MaxCostEfficiency", skinData);
+    this.#add("ArrowCE", skinData);
+    this.#add("FlameArrowCE", skinData);
+    this.#add("ShockArrowCE", skinData);
+    this.#add("ExplosiveArrowCE", skinData);
     this.#add("Coverage", skinData);
     this.#add("BossPotential", skinData);
     this.#add("LimitBossPotential", skinData);
