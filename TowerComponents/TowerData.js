@@ -8047,7 +8047,7 @@ export default {
             Extras: [],
             Attributes: {},
             Detections: { Flying: false, Hidden: true, Lead: true },
-            Cooldown: 0.12,
+            Cooldown: 0.15,
             Range: 26,
             Damage: 75,
             Limit: 3,
