@@ -65,6 +65,12 @@ const approvedTowers = [
   "Sharkepicgamer07/Engineer Rebalance",
   "Hellscream2008/Acidinator (Rebalanced)",
   "Hellscream2008/Acidinator",
+  "Hellscream2008/Sniper but with ability",
+  "Hellscream2008/Paintballer but with ability",
+  "Hellscream2008/Demoman but with ability",
+  "Hellscream2008/Hunter but with ability",
+  "Hellscream2008/Soldier but with ability",
+  "Hellscream2008/Militant but with ability",
 ];
 
 // List of featured towers
@@ -96,7 +102,7 @@ const grandfatheredTowers = [
 const highlights = [
   "Hellscream2008/Acidinator (Rebalanced)",
   "Vessel Of Infinite Destruction/Golden Crook Boss",
-  "Vessel Of Infinite Destruction/Military Base",
+  "Vessel Of Infinite Destruction/Ranger",
   "Onett4smash/Tsukasa Tower (but JSON)",
 ];
 
