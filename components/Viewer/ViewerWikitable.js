@@ -5,13 +5,7 @@ const ViewerWikitable = {
   methods: {
     loadWikitableContent() {
       this.wikitableContent.innerHTML = "";
-
-      const responsiveDiv = document.createElement("div");
-      responsiveDiv.className = "table-responsive";
-
-      responsiveDiv.appendChild(this.wikitextViewer.getContainer());
-
-      this.wikitableContent.appendChild(responsiveDiv);
+      this.wikitableContent.appendChild(this.wikitextViewer.getContainer());
       this.activeUnits = this.populateActiveUnits();
       this.wikitableGenerator = new WikitableGenerator(
         this.tower,

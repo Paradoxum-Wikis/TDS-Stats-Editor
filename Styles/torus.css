@@ -329,6 +329,7 @@ input {
 
 .lua-viewer {
   color: #afafaf;
+  white-space: pre-wrap;
 }
 
 .lua-string {
