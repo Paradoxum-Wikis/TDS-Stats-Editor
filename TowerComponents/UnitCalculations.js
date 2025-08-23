@@ -111,7 +111,7 @@ class UnitCalculations {
         Value: (level) => {
           return (
             (level.Damage * level.Ammo) /
-            (level.ReloadTime + level.Cooldown * level.Ammo)
+            (level.ReloadTime + level.RevTime + level.Cooldown * level.Ammo)
           );
         },
       },

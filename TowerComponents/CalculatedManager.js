@@ -489,27 +489,13 @@ class CalculatedManager {
         Requires: [
           "Damage",
           "Cooldown",
-          "ExplosionDamage",
-          "MissileAmount",
-          "MissileCooldown",
           "Ammo",
           "ReloadTime",
-          "BurstCooldown",
+          "RevTime",
         ],
-        Value: (level) => {
-          let baseDamage =
-            (level.Damage * level.Ammo) /
-            (level.ReloadTime + level.Cooldown * level.Ammo);
-          let explosionDamage =
-            level.ExplosionDamage &&
-            level.MissileCooldown + level.BurstCooldown * level.MissileAmount >
-              0
-              ? (level.ExplosionDamage * level.MissileAmount) /
-                (level.MissileCooldown +
-                  level.BurstCooldown * level.MissileAmount)
-              : 0;
-          return baseDamage + explosionDamage;
-        },
+        Value: (level) =>
+          (level.Damage * level.Ammo) /
+          (level.ReloadTime + level.RevTime + level.Cooldown * level.Ammo),
       },
 
       Swarmer: {
@@ -841,6 +827,21 @@ class CalculatedManager {
 
           return unitData.attributes.MissileDPS;
         },
+      },
+      Pursuit: {
+        For: [
+          "Pursuit"
+        ],
+        Requires: [
+          "ExplosionDamage",
+          "MissileCooldown",
+          "MissileAmount",
+          "TimeBetweenMissiles",
+        ],
+        Value: (level) =>
+          (level.ExplosionDamage * level.MissileAmount) /
+          (level.MissileCooldown +
+            level.TimeBetweenMissiles * level.MissileAmount),
       },
     },
 
@@ -1178,7 +1179,7 @@ class CalculatedManager {
       },
 
       WarMachine: {
-        For: ["War Machine"],
+        For: ["War Machine", "Pursuit"],
         Value: (level) => {
           let totalDPS = level.DPS;
           if (!isNaN(level.MissileDPS)) {

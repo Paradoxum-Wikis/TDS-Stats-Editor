@@ -301,6 +301,7 @@ export default class TableInput {
       case "MissileTargeting":
       case "ShieldRechargeSpeed":
       case "TowerSelectionCooldown":
+      case "TimeBetweenMissiles":
         return formatter.format(value) + (showSeconds ? "s" : "");
 
       case "Range":
@@ -310,9 +311,17 @@ export default class TableInput {
       case "KnifeRange":
       case "ClusterRadius":
       case "RepulsionRadius":
+      case "PatrolRange":
         return (
           formatter.format(value) +
           (showStuds ? " " + (value === 1 ? "stud" : "studs") : "")
+        );
+      
+      case "Speed":
+      case "RocketSpeed":
+        return (
+          formatter.format(value) +
+          (showStuds ? " " + (value === 1 ? "stud/s" : "studs/s") : "")
         );
 
       case "Hologram EV":

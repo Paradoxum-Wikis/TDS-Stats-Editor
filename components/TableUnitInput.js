@@ -287,12 +287,14 @@ export default class TableUnitInput {
       case "Range":
       case "ExplosionRadius":
       case "RepulsionRadius":
+      case "PatrolRange":
         return (
           formatter.format(number) +
           (showStuds ? " " + (number === 1 ? "stud" : "studs") : "")
         );
 
       case "Speed":
+      case "RocketSpeed":
         return (
           formatter.format(number) +
           (showStuds ? " " + (number === 1 ? "stud/s" : "studs/s") : "")
