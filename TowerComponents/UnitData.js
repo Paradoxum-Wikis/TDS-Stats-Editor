@@ -887,7 +887,7 @@ export default {
   },
   "Minigun Sentry": {
     Health: 60,
-    Damage: 6,
+    Damage: 5,
     Range: 20,
     Detections: {
       Hidden: true,
@@ -907,7 +907,7 @@ export default {
   },
   "War Machine Sentry": {
     Health: 250,
-    Damage: 10,
+    Damage: 8,
     Range: 24,
     Detections: {
       Hidden: true,
