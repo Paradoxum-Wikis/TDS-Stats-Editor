@@ -6,23 +6,27 @@ async function main() {
   const eventData = fs.readFileSync(eventPath, 'utf8');
   const event = JSON.parse(eventData);
 
-  if (!event.commits || event.commits.length === 0) {
+  if (!Array.isArray(event.commits) || event.commits.length === 0) {
     console.log('No commits in this push event');
     return;
   }
 
   const commits = event.commits.map(commit => ({
-    sha: commit.id,
-    message: commit.message.split('\n')[0],
-    full_message: commit.message,
-    author: commit.author.name
+    sha: commit.id || 'unknown',
+    message: commit.message ? commit.message.split('\n')[0] : 'No message',
+    full_message: commit.message || 'No message',
+    author: commit.author && commit.author.name ? commit.author.name : 'Unknown Author'
   }));
 
   const filesChanged = new Set();
   event.commits.forEach(commit => {
-    commit.added.forEach(file => filesChanged.add(file));
-    commit.removed.forEach(file => filesChanged.add(file));
-    commit.modified.forEach(file => filesChanged.add(file));
+    const added = Array.isArray(commit.added) ? commit.added : [];
+    const removed = Array.isArray(commit.removed) ? commit.removed : [];
+    const modified = Array.isArray(commit.modified) ? commit.modified : [];
+
+    added.forEach(file => filesChanged.add(file));
+    removed.forEach(file => filesChanged.add(file));
+    modified.forEach(file => filesChanged.add(file));
   });
 
   const fileCount = filesChanged.size;
