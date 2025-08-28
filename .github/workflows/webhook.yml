@@ -11,79 +11,40 @@ jobs:
       contents: read
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
-      - name: Send Discord notification (all commits in push)
-        uses: actions/github-script@v6
-        env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      - name: Get commit and file details
+        id: commit
+        run: |
+          COMMITS_JSON=$(git log --oneline ${{ github.event.before }}..${{ github.event.after }} --pretty=format:'{"sha":"%h","message":"%s","author":"%an","full_message":"%B"}' | jq -s .)
+          
+          echo "commits_json=$COMMITS_JSON" >> $GITHUB_OUTPUT
+
+      - name: Get changed files count
+        id: changed-files
+        uses: tj-actions/changed-files@v44
+        with:
+          since_last_remote_commit: true
+
+      - name: Send Discord notification
+        uses: actions/github-script@v7
         with:
           script: |
-            const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
-            if (!webhookUrl) core.setFailed('DISCORD_WEBHOOK_URL secret is missing');
-
-            const commits = context.payload?.commits;
-            if (!commits || commits.length === 0) core.setFailed('No commits found in this push event');
-
-            const fields = commits.map(commit => {
-              const sha = commit.id?.slice(0,7) || '(unknown)';
-              const msg = commit.message?.split('\n')[0] || '(no message)';
-              const body = commit.message?.split('\n').slice(1).join('\n') || '';
-              const author = commit.author?.name || commit.author?.username || '(unknown)';
-              const fileCount = (commit.added?.length || 0) + (commit.removed?.length || 0) + (commit.modified?.length || 0);
-
-              const commitFields = [
-                { name: `Commit ${sha}`, value: msg, inline: false }
-              ];
-              if (body.trim() !== '') commitFields.push({ name: 'Details', value: body, inline: false });
-              commitFields.push(
-                { name: 'Files Updated', value: `${fileCount} file(s)`, inline: true },
-                { name: 'By', value: author, inline: true }
-              );
-
-              return commitFields;
-            }).flat();
-
-            const embed = {
-              title: 'TDS Statistics Editor Update',
-              description: `Push contains ${commits.length} commit(s)`,
-              color: 5763719,
-              fields,
-              footer: { text: 'Thank you for using the Statisics Editor!' },
-              timestamp: new Date().toISOString()
-            };
-
-            const payload = { embeds: [embed] };
-
-            const { request } = require('https');
-            const u = new URL(webhookUrl);
-            const data = JSON.stringify(payload);
-
-            const options = {
-              hostname: u.hostname,
-              path: u.pathname + u.search,
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Content-Length': Buffer.byteLength(data),
-                'User-Agent': 'github-actions/discord-notify'
-              }
-            };
-
-            const req = request(options, res => {
-              let body = '';
-              res.on('data', d => body += d);
-              res.on('end', () => {
-                if (res.statusCode < 200 || res.statusCode >= 300) {
-                  core.setFailed(`Failed to post to Discord: HTTP ${res.statusCode} ${body}`);
-                } else {
-                  core.info('Discord webhook posted successfully');
-                }
-              });
-            });
-
-            req.on('error', err => core.setFailed(`Failed to post to Discord: ${err.message}`));
-            req.write(data);
-            req.end();
+            const { sendDiscordNotification } = require('./.github/scripts/webhook.js');
+            
+            const commits = JSON.parse(process.env.COMMITS_JSON || '[]');
+            const fileCount = parseInt(process.env.FILE_COUNT || '0');
+            
+            await sendDiscordNotification(
+              process.env.DISCORD_WEBHOOK_URL,
+              commits,
+              fileCount
+            );
+            
+            console.log('Discord webhook posted successfully');
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          COMMITS_JSON: ${{ steps.commit.outputs.commits_json }}
+          FILE_COUNT: ${{ steps.changed-files.outputs.changed_files_count }}
