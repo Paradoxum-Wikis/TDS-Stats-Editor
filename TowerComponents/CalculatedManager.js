@@ -486,13 +486,7 @@ class CalculatedManager {
       //            },
       Missiles: {
         For: ["Pursuit"],
-        Requires: [
-          "Damage",
-          "Cooldown",
-          "Ammo",
-          "ReloadTime",
-          "RevTime",
-        ],
+        Requires: ["Damage", "Cooldown", "Ammo", "ReloadTime", "RevTime"],
         Value: (level) =>
           (level.Damage * level.Ammo) /
           (level.ReloadTime + level.RevTime + level.Cooldown * level.Ammo),
@@ -829,9 +823,7 @@ class CalculatedManager {
         },
       },
       Pursuit: {
-        For: [
-          "Pursuit"
-        ],
+        For: ["Pursuit"],
         Requires: [
           "ExplosionDamage",
           "MissileCooldown",
@@ -1214,7 +1206,12 @@ class CalculatedManager {
           const { extraCooldown, firerateBuff, RateOfFireBug } =
             window.state.boosts.tower;
 
-          return Math.round((cooldown / (firerateBuff + 1) + extraCooldown + RateOfFireBug) * 1000) / 1000;
+          return (
+            Math.round(
+              (cooldown / (firerateBuff + 1) + extraCooldown + RateOfFireBug) *
+                1000,
+            ) / 1000
+          );
         },
       },
     },

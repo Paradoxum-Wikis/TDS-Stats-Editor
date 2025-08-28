@@ -316,7 +316,7 @@ export default class TableInput {
           formatter.format(value) +
           (showStuds ? " " + (value === 1 ? "stud" : "studs") : "")
         );
-      
+
       case "Speed":
       case "RocketSpeed":
         return (

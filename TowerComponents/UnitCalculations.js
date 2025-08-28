@@ -269,7 +269,12 @@ class UnitCalculations {
           const { extraCooldown, firerateBuff, RateOfFireBug } =
             window.state.boosts.unit;
 
-          return Math.round((cooldown / (firerateBuff + 1) + extraCooldown + RateOfFireBug) * 1000) / 1000;
+          return (
+            Math.round(
+              (cooldown / (firerateBuff + 1) + extraCooldown + RateOfFireBug) *
+                1000,
+            ) / 1000
+          );
         },
       },
     },

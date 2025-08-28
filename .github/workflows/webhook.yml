@@ -19,7 +19,7 @@ jobs:
         id: commit
         run: |
           COMMITS_JSON=$(git log --oneline ${{ github.event.before }}..${{ github.event.after }} --format='%h%x00%an%x00%s%x00%B%x00' | jq -R -s 'split("\u0000") | map(select(. != "")) as $lines | [range(0; $lines | length; 4) as $i | $lines[$i:$i+4]] | map({sha: .[0], author: .[1], message: .[2], full_message: .[3]}) | .')
-          
+
           echo "commits_json=$COMMITS_JSON" >> $GITHUB_OUTPUT
 
       - name: Get changed files count
@@ -33,16 +33,16 @@ jobs:
         with:
           script: |
             const { sendDiscordNotification } = require('./.github/scripts/webhook.js');
-            
+
             const commits = JSON.parse(process.env.COMMITS_JSON || '[]');
             const fileCount = parseInt(process.env.FILE_COUNT || '0');
-            
+
             await sendDiscordNotification(
               process.env.DISCORD_WEBHOOK_URL,
               commits,
               fileCount
             );
-            
+
             console.log('Discord webhook posted successfully');
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
