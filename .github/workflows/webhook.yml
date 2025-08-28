@@ -18,9 +18,11 @@ jobs:
       - name: Get commit and file details
         id: commit
         run: |
-          COMMITS_JSON=$(git log --oneline ${{ github.event.before }}..${{ github.event.after }} --format='%h%x00%an%x00%s%x00%B%x00' | jq -R -s 'split("\u0000") | map(select(. != "")) as $lines | [range(0; $lines | length; 4) as $i | $lines[$i:$i+4]] | map({sha: .[0], author: .[1], message: .[2], full_message: .[3]}) | .')
-
-          echo "commits_json=$COMMITS_JSON" >> $GITHUB_OUTPUT
+          COMMITS_JSON=$(git log --oneline ${{ github.event.before }}..${{ github.event.after }} --format='%h%x00%an%x00%s%x00%B%x00' | jq -R -s 'split("") | map(select(. != "")) as $lines | [range(0; $lines | length; 4) as $i | $lines[$i:$i+4]] | map({sha: .[0], author: .[1], message: .[2], full_message: .[3]}) | .')
+    
+          echo "commits_json<<EOF" >> $GITHUB_OUTPUT
+          echo "$COMMITS_JSON" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Get changed files count
         id: changed-files
