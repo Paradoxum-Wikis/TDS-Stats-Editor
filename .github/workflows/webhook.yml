@@ -51,7 +51,7 @@ jobs:
               description: `Push contains ${commits.length} commit(s)`,
               color: 5763719,
               fields,
-              footer: { text: 'TDS Stats Editor' },
+              footer: { text: 'Thank you for using the Statisics Editor!' },
               timestamp: new Date().toISOString()
             };
 

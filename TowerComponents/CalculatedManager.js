@@ -1214,7 +1214,7 @@ class CalculatedManager {
           const { extraCooldown, firerateBuff, RateOfFireBug } =
             window.state.boosts.tower;
 
-          return cooldown / (firerateBuff + 1) + extraCooldown + RateOfFireBug;
+          return Math.round((cooldown / (firerateBuff + 1) + extraCooldown + RateOfFireBug) * 1000) / 1000;
         },
       },
     },
