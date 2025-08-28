@@ -18,7 +18,7 @@ jobs:
       - name: Get commit and file details
         id: commit
         run: |
-          COMMITS_JSON=$(git log --oneline ${{ github.event.before }}..${{ github.event.after }} --pretty=format:'{"sha":"%h","message":"%s","author":"%an","full_message":"%B"}' | jq -s .)
+          COMMITS_JSON=$(git log --oneline ${{ github.event.before }}..${{ github.event.after }} --format='%h%x00%an%x00%s%x00%B%x00' | jq -R -s 'split("\u0000") | map(select(. != "")) as $lines | [range(0; $lines | length; 4) as $i | $lines[$i:$i+4]] | map({sha: .[0], author: .[1], message: .[2], full_message: .[3]}) | .')
           
           echo "commits_json=$COMMITS_JSON" >> $GITHUB_OUTPUT
 
@@ -47,4 +47,4 @@ jobs:
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COMMITS_JSON: ${{ steps.commit.outputs.commits_json }}
-          FILE_COUNT: ${{ steps.changed-files.outputs.changed_files_count }}
+          FILE_COUNT: ${{ steps.changed-files.outputs.all_changed_files_count }}
