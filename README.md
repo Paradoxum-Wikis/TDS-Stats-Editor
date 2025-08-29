@@ -13,6 +13,8 @@ Everything inside `public/htmlassets/` folder is under CC-BY-SA 3.0
 
 A forked version that aims to keep the editor up to date, featuring numerous quality of life improvements, primarily due to its support for the **TDS Wiki**. (Hopefully more to come in the future, lolol.)
 
+The repository is a monorepo, hosting not only the Statistics Editor itself, but also other tools such as the Randomizer, Skills Planner, and etc.
+
 ## FAQ
 
 ### Will there be new features?
@@ -27,7 +29,7 @@ I can make no guarantees that it'd be forever updated, although I do expect it t
 
 Direct messages on Discord are preferred (my user is t7ru), though there are multiple ways you can contact me and any of them are fine.
 
-There are also discussions and updates about this editor on #general's thread of the Tower Defense Simulator Wiki [server](https://discord.com/invite/fBgQzudY3h). Unfortunately, you will need a FANDOM account to access it, so make one if you're interested.
+There are also discussions and updates about this editor on the #stat-editor channel of the Tower Defense Simulator Wiki [server](https://discord.com/invite/fBgQzudY3h). Unfortunately, you will need a FANDOM account to access it, so make one if you're interested.
 
 ### Is this official?
 
