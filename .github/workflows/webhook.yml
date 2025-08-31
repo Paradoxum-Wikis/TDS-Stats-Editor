@@ -28,17 +28,20 @@ jobs:
             if (!commits || commits.length === 0) core.setFailed('No commits found in this push event');
 
             const fields = commits.map(commit => {
-              const sha = commit.id?.slice(0,7) || '(unknown)';
+              const sha = commit.id || '(unknown)';
+              const shortSha = sha.slice(0, 7);
               const msg = commit.message?.split('\n')[0] || '(no message)';
               const body = commit.message?.split('\n').slice(1).join('\n') || '';
               const author = commit.author?.name || commit.author?.username || '(unknown)';
+              const commitUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/commit/${sha}`;
 
               const commitFields = [
-                { name: `Commit ${sha}`, value: msg, inline: false }
+                { name: `Commit ${shortSha}`, value: msg, inline: false }
               ];
               if (body.trim() !== '') commitFields.push({ name: 'Details', value: body, inline: false });
               commitFields.push(
-                { name: 'By', value: author, inline: true }
+                { name: 'By', value: author, inline: true },
+                { name: 'Link', value: `[View on GitHub](${commitUrl})`, inline: true }
               );
 
               return commitFields;

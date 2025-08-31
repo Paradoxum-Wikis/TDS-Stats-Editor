@@ -1,4 +1,4 @@
-import 'dotenv/config';
+// import 'dotenv/config';
 import { execSync } from "child_process";
 
 const WIKI_BASE = process.env.WIKI_BASE || "https://tds.fandom.com";
