@@ -1,7 +1,5 @@
-// require("dotenv").config();
-const fetch = require("node-fetch");
-const FormData = require("form-data");
-const { execSync } = require("child_process");
+import 'dotenv/config';
+import { execSync } from "child_process";
 
 const WIKI_BASE = process.env.WIKI_BASE || "https://tds.fandom.com";
 const USER_AGENT = process.env.USER_AGENT || "DarkGabonnie/1.048596";

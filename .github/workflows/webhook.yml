@@ -49,39 +49,28 @@ jobs:
               description: `Push contains ${commits.length} commit(s)`,
               color: 5763719,
               fields,
-              footer: { text: 'Thank you for using the Statisics Editor!' },
+              footer: { text: 'Thank you for using the Statistics Editor!' },
               timestamp: new Date().toISOString()
             };
 
             const payload = { embeds: [embed] };
-
-            const { request } = require('https');
-            const u = new URL(webhookUrl);
             const data = JSON.stringify(payload);
 
-            const options = {
-              hostname: u.hostname,
-              path: u.pathname + u.search,
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Content-Length': Buffer.byteLength(data),
-                'User-Agent': 'github-actions/discord-notify'
-              }
-            };
-
-            const req = request(options, res => {
-              let body = '';
-              res.on('data', d => body += d);
-              res.on('end', () => {
-                if (res.statusCode < 200 || res.statusCode >= 300) {
-                  core.setFailed(`Failed to post to Discord: HTTP ${res.statusCode} ${body}`);
-                } else {
-                  core.info('Discord webhook posted successfully');
-                }
+            try {
+              const response = await fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'User-Agent': 'github-actions/discord-notify'
+                },
+                body: data
               });
-            });
 
-            req.on('error', err => core.setFailed(`Failed to post to Discord: ${err.message}`));
-            req.write(data);
-            req.end();
+              if (!response.ok) {
+                core.setFailed(`Failed to post to Discord: HTTP ${response.status} ${response.statusText}`);
+              } else {
+                core.info('Discord webhook posted successfully');
+              }
+            } catch (error) {
+              core.setFailed(`Failed to post to Discord: ${error.message}`);
+            }

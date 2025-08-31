@@ -23,10 +23,6 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Install dependencies
-        run: |
-          npm install node-fetch@2 form-data
-
       - name: Detect changes and notify users
         run: node .github/scripts/notify.js
         env:

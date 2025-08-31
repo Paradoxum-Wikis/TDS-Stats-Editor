@@ -1,4 +1,5 @@
 import Alert from "../Alert.js";
+import Unit from "../../TowerComponents/Unit.js";
 
 const ViewerUtils = {
   methods: {
@@ -98,7 +99,6 @@ const ViewerUtils = {
             if (this.unitManager.unitData[unitName]) {
               customUnits[unitName] = this.unitManager.unitData[unitName];
             } else {
-              const Unit = require("../../TowerComponents/Unit.js").default;
               const newUnit = new Unit(unitName, unitData);
               this.unitManager.unitData[unitName] = newUnit;
               customUnits[unitName] = newUnit;
