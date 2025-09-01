@@ -13,7 +13,7 @@
   "author": "t7ru",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^5.3.7",
+    "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.13.1",
     "crypto-js": "^4.2.0",
     "html2canvas": "^1.4.1"
