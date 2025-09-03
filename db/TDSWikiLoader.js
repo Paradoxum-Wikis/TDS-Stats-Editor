@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 ${
                   !isListView
                     ? `
-                    <div class="position-absolute top-0 end-0 p-2 d-flex flex-wrap justify-content-end gap-2">
+                    <div class="position-absolute top-0 end-0 p-2 d-flex flex-wrap justify-content-end gap-2 badge-fade">
                         ${badgesHtml}
                     </div>
                 `
