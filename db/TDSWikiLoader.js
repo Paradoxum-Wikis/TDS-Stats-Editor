@@ -187,9 +187,9 @@ document.addEventListener("DOMContentLoaded", function () {
                            </a>`;
 
     const badgesHtml = `
-            ${tower.featured ? '<span class="badge bg-gold me-1">Featured</span>' : ""}
-            ${tower.grandfathered ? '<span class="badge bg-dark me-1" data-grandfathered="true">Grandfathered</span>' : ""}
-            ${tower.unverified ? '<span class="badge bg-secondary me-1" data-unverified="true">Unverified</span>' : ""}
+            ${tower.featured ? '<span class="badge bg-gold">Featured</span>' : ""}
+            ${tower.grandfathered ? '<span class="badge bg-dark" data-grandfathered="true">Grandfathered</span>' : ""}
+            ${tower.unverified ? '<span class="badge bg-secondary" data-unverified="true">Unverified</span>' : ""}
             ${tower.tag ? `<span class="badge ${tagClass}">${tower.tag}</span>` : ""}
         `;
 
@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 ${
                   !isListView
                     ? `
-                    <div class="position-absolute top-0 end-0 p-2">
+                    <div class="position-absolute top-0 end-0 p-2 d-flex flex-wrap justify-content-end gap-2">
                         ${badgesHtml}
                     </div>
                 `
