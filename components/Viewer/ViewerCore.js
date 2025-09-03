@@ -357,6 +357,20 @@ class ViewerCore {
     this.tower = tower;
     this.deltaTower = this.deltaTowerManager.towers[this.tower.name];
 
+    if (!this.deltaTower || !this.deltaTower.skins) {
+      console.warn(`Delta tower missing for ${this.tower.name}, creating from current tower data`);
+      this.deltaTower = this.deltaTowerManager.addTower(this.tower.name, this.tower.json[this.tower.name]);
+    }
+
+    Object.keys(this.tower.skins).forEach(skinName => {
+      if (!this.deltaTower.skins[skinName]) {
+        console.warn(`Delta skin missing: ${skinName}, creating from current skin data`);
+        // trigger the tower to rebuild its skins
+        const currentData = this.tower.json[this.tower.name];
+        this.deltaTower.importJSON({ [this.tower.name]: currentData });
+      }
+    });
+
     document.dispatchEvent(
       new CustomEvent("towerLoaded", {
         detail: { tower: this.tower },

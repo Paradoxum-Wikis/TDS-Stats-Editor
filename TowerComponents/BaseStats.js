@@ -38,7 +38,7 @@ class BaseStats {
    */
 
   constructor(data, locator) {
-    this.data = data;
+    this.data = data || {};
     this.locator = locator;
 
     this.special = {};
@@ -52,18 +52,21 @@ class BaseStats {
     this.addDetection("Flying");
     this.addDetection("Lead");
 
-    this.attributes.Cost = data.Cost | data.Price;
+    this.attributes.Cost = data.Cost || data.Price || 0;
 
-    for (let [key, value] of Object.entries(data)) {
-      if (this.#baseAttributes.includes(key)) continue;
+    if (data && typeof data === 'object') {
+      for (let [key, value] of Object.entries(data)) {
+        if (this.#baseAttributes.includes(key)) continue;
+        this.addAttribute(key);
+      }
 
-      this.addAttribute(key);
-    }
-
-    for (let [key, value] of Object.entries(data.Attributes ?? {})) {
-      if (this.#baseAttributes.includes(key)) continue;
-
-      this.addAttribute(key, ["Attributes"]);
+      const attributesObj = data.Attributes;
+      if (attributesObj && typeof attributesObj === 'object') {
+        for (let [key, value] of Object.entries(attributesObj)) {
+          if (this.#baseAttributes.includes(key)) continue;
+          this.addAttribute(key, ["Attributes"]);
+        }
+      }
     }
   }
 

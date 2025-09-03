@@ -51,11 +51,11 @@ const ViewerData = {
           const originalName = towerName;
 
           const towerDataSource = importedData.master || importedData;
-          const towerData = JSON.parse(
+          const customTowerData = JSON.parse(
             JSON.stringify(towerDataSource[originalName]),
           );
 
-          this.addNewTower(originalName, towerData);
+          this.addNewTower(originalName, customTowerData);
 
           if (!window.originalCustomTowers) {
             window.originalCustomTowers = {};
@@ -100,9 +100,8 @@ const ViewerData = {
 
           this.reload();
 
-          this.deltaTower.importJSON(
-            JSON.parse(JSON.stringify(this.tower.json)),
-          );
+          const deltaTowerData = JSON.parse(JSON.stringify(this.tower.json));
+          this.deltaTower.importJSON(deltaTowerData);
 
           if (!noCustomAlert) {
             const alert = new Alert(
@@ -120,11 +119,11 @@ const ViewerData = {
           const towerDataToImport =
             importedData.master || importedData.tower || importedData;
 
-          const towerName = Object.keys(towerDataToImport)[0];
-          if (towerName && towerDataToImport[towerName]) {
+          const importedTowerName = Object.keys(towerDataToImport)[0];
+          if (importedTowerName && towerDataToImport[importedTowerName]) {
             this.app.towerManager.addTower(
-              towerName,
-              towerDataToImport[towerName],
+              importedTowerName,
+              towerDataToImport[importedTowerName],
             );
           }
 
@@ -135,8 +134,14 @@ const ViewerData = {
           if (!window.cachedDefaultTowerManager)
             window.cachedDefaultTowerManager = defaultTowerManager;
 
-          const defaultData = defaultTowerManager.towerData[towerName];
-          this.deltaTower.importJSON({ [towerName]: defaultData });
+          const defaultData = defaultTowerManager.towerData[importedTowerName];
+
+          if (defaultData) {
+            this.deltaTower.importJSON({ [importedTowerName]: defaultData });
+          } else {
+            console.warn(`No default data found for ${importedTowerName}, using imported data as reference`);
+            this.deltaTower.importJSON(towerDataToImport);
+          }
 
           if (importedData.slave || importedData.units) {
             const slaveData = importedData.slave || importedData.units;

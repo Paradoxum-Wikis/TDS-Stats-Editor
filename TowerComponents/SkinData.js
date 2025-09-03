@@ -21,6 +21,21 @@ class SkinData {
     this.data = data;
     this.calculatedManager = new CalculatedManager(unitKey ?? "units");
 
+    if (!data || typeof data !== 'object') {
+      console.error(`Invalid skin data structure for ${tower.name}.${name}:`, data);
+      this.data = {
+        Defaults: {},
+        Upgrades: []
+      };
+    }
+
+    if (!this.data.Defaults) {
+      this.data.Defaults = {};
+    }
+    if (!this.data.Upgrades || !Array.isArray(this.data.Upgrades)) {
+      this.data.Upgrades = [];
+    }
+
     this.createData();
   }
 

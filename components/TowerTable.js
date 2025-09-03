@@ -62,9 +62,9 @@ export default class TowerTable extends Table {
   }
 
   #addBody(levels) {
-    const deltaLevels =
-      this.viewer.deltaTower.skins[this.viewer.towerVariants.getSelectedName()]
-        .levels;
+    const selectedVariant = this.viewer.towerVariants.getSelectedName();
+    const deltaTowerSkin = this.viewer.deltaTower?.skins?.[selectedVariant];
+    const deltaLevels = deltaTowerSkin?.levels || levels;
 
     levels.levels.forEach((level, index) => {
       // skip if NoTable =true

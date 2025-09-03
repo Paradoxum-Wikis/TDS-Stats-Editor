@@ -68,22 +68,40 @@ export default class AddAttributeForm {
     this.addAttributeSubmit.addEventListener(
       "click",
       ((e) => {
-        const targetLocation = this.#getTargetLocation();
+        try {
+          const targetLocation = this.#getTargetLocation();
 
-        const didAdd = this.viewer
-          .getActiveSkin()
-          .addAttribute(this.nameInput.value, this.#getInput(), targetLocation);
+          const didAdd = this.viewer
+            .getActiveSkin()
+            .addAttribute(this.nameInput.value, this.#getInput(), targetLocation);
 
-        if (didAdd) {
-          const alert = new Alert(
-            `${this.nameInput.value} added to ${this.viewer.tower.name}`,
-            { alertStyle: "alert-success" },
+          if (didAdd) {
+            const alert = new Alert(
+              `${this.nameInput.value} added to ${this.viewer.tower.name}`,
+              { alertStyle: "alert-success" },
+            );
+            alert.alertTimeInSeconds = 1;
+            alert.fire();
+
+            try {
+              this.viewer.import(JSON.stringify(this.viewer.tower.json));
+            } catch (importError) {
+              console.error("Error reimporting tower data:", importError);
+              const errorAlert = new Alert(
+                "Attribute added but failed to refresh display. Please reload manually.",
+                { alertStyle: "alert-danger" }
+              );
+              errorAlert.fire();
+            }
+          }
+        } catch (error) {
+          console.error("Error adding attribute:", error);
+          const errorAlert = new Alert(
+            "Failed to add attribute. Check console for details.",
+            { alertStyle: "alert-danger" }
           );
-          alert.alertTimeInSeconds = 1;
-          alert.fire();
+          errorAlert.fire();
         }
-
-        this.viewer.import(JSON.stringify(this.viewer.tower.json));
       }).bind(this),
     );
 

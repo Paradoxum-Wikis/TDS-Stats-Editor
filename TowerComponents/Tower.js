@@ -27,13 +27,28 @@ class Tower {
   }
 
   #getSkinNames() {
-    return Object.entries(this.json[this.name]).map(([skinName]) => skinName);
+    const towerData = this.json[this.name];
+    if (!towerData || typeof towerData !== 'object') {
+      console.warn(`Invalid tower data for ${this.name}:`, towerData);
+      return [];
+    }
+
+    try {
+      return Object.entries(towerData).map(([skinName]) => skinName);
+    } catch (error) {
+      console.error(`Error getting skin names for ${this.name}:`, error);
+      return [];
+    }
   }
 
   #getSkins() {
     return this.skinNames.reduce((output, skinName) => {
-      const skinData = this.json[this.name][skinName];
-      output[skinName] = new SkinData(this, skinName, skinData, this.unitKey);
+      const skinData = this.json[this.name]?.[skinName];
+      if (skinData && typeof skinData === 'object') {
+        output[skinName] = new SkinData(this, skinName, skinData, this.unitKey);
+      } else {
+        console.warn(`Invalid skin data for ${this.name}.${skinName}:`, skinData);
+      }
       return output;
     }, {});
   }
