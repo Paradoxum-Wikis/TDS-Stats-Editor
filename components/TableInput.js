@@ -312,6 +312,8 @@ export default class TableInput {
       case "ClusterRadius":
       case "RepulsionRadius":
       case "PatrolRange":
+      case "Buildzone":
+      case "Deadzone":
         return (
           formatter.format(value) +
           (showStuds ? " " + (value === 1 ? "stud" : "studs") : "")

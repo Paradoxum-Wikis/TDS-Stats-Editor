@@ -435,6 +435,12 @@ class CalculatedManager {
         For: ["Commando"],
         Value: (level) =>
           (level.Damage * level.Ammo) /
+          (level.Ammo * level.Cooldown + level.ReloadTime),
+      },
+      CommandoLegacy: {
+        For: ["Commando Pre-V1.74.0"],
+        Value: (level) =>
+          (level.Damage * level.Ammo) /
           (level.Ammo * level.Cooldown +
             (level.Ammo / level.Burst - 1) * level.BurstCooldown +
             level.ReloadTime),
@@ -442,15 +448,26 @@ class CalculatedManager {
       Assassin: {
         For: ["Assassin"],
         Value: (level) => {
+          // Level 1
           if (isNaN(level.WhirlwindDamage)) {
             return level.Damage / level.Cooldown;
           }
+
+          // Level 4
+          if (!isNaN(level.DamageThreshold) && !isNaN(level.KnifeDamage) && !isNaN(level.KnifeTime)) {
+            return (
+                (level.DamageThreshold / ((level.DamageThreshold / (((level.Damage * (level.WhirlwindHit - 1)) + level.WhirlwindDamage) / level.WhirlwindHit)) * level.Cooldown + level.KnifeTime))
+            );
+          }
+
+          // Level 2-3
           return (
             (level.Damage * 2 + level.WhirlwindDamage) /
             (level.Cooldown * level.WhirlwindHit)
           );
         },
       },
+
       BurnTower: {
         For: ["Pyromancer"],
         Requires: ["Damage", "Cooldown", "BurnDamage", "TickRate"],
@@ -697,7 +714,7 @@ class CalculatedManager {
       },
 
       TotalDPS: {
-        For: ["Commando", "Sledger", "War Machine", "Toxic Gunner"],
+        For: ["Commando", "Sledger", "War Machine", "Toxic Gunner", "Assassin"],
         Value: (level) => level.NetCost / level.TotalDPS,
       },
     },
@@ -989,8 +1006,7 @@ class CalculatedManager {
       Default: {
         For: ["Assassin"],
         Value: (level) =>
-          (level.KnifeDamage * level.KnifeAmount) /
-          ((level.DamageThreshold / level.Damage) * level.Cooldown),
+          (level.KnifeDamage * level.KnifeAmount) / ((level.DamageThreshold / (((level.Damage * (level.WhirlwindHit - 1)) + level.WhirlwindDamage) / level.WhirlwindHit)) * level.Cooldown + level.KnifeTime)
       },
     },
 
@@ -1193,6 +1209,11 @@ class CalculatedManager {
       ToxicGunner: {
         For: ["Toxic Gunner"],
         Value: (level) => level.DPS + level.PoisonDPS,
+      },
+
+      Assassin: {
+        For: ["Assassin"],
+        Value: (level) => level.DPS + level.KnifeDPS,
       },
     },
 
@@ -1414,11 +1435,11 @@ class CalculatedManager {
     this.#add("FlameArrowDPS", skinData);
     this.#add("ShockArrowDPS", skinData);
     this.#add("ExplosiveArrowDPS", skinData);
+    this.#add("KnifeDPS", skinData);
     this.#add("TotalDPS", skinData);
     this.#add("ClusterDPS", skinData);
     this.#add("CallToArmsDPS", skinData);
     this.#add("CaravanDPS", skinData);
-    this.#add("KnifeDPS", skinData);
     this.#add("DPS Rate", skinData);
     this.#add("LimitDPS", skinData);
     this.#add("MaxDPS", skinData);
