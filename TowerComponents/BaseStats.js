@@ -88,7 +88,7 @@ class BaseStats {
     return true;
   }
 
-  addNewAttribute(attributeName, defaultValue) {
+  addNewAttribute(attributeName, defaultValue, targetLocation = null) {
     if (this.locator.hasLocation(attributeName)) {
       const alert = new Alert(`Attribute already exists`, {
         alertStyle: "alert-warning",
@@ -98,15 +98,27 @@ class BaseStats {
       return false;
     }
 
-    const towerManager = new TowerManager();
-    const location = towerManager.getAttributeLocation(attributeName) ?? [
-      "Attributes",
-    ];
+    const location = targetLocation || this.#determineAttributeLocation(attributeName);
     const targetData = this.locator.getOrCreateTargetData(this.data, location);
 
     targetData[attributeName] = defaultValue;
 
     return true;
+  }
+
+  #determineAttributeLocation(attributeName) {
+    const attributeLower = attributeName.toLowerCase();
+    
+    if (['hidden', 'flying', 'lead'].includes(attributeLower)) {
+      return ['Detections'];
+    }
+    
+    // Core stats typically don't go in Attributes
+    if (['damage', 'cooldown', 'range', 'cost', 'price'].includes(attributeLower)) {
+      return [];
+    }
+    
+    return ['Attributes'];
   }
 
   addAttributeValue(name, value) {

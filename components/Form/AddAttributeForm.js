@@ -68,9 +68,11 @@ export default class AddAttributeForm {
     this.addAttributeSubmit.addEventListener(
       "click",
       ((e) => {
+        const targetLocation = this.#getTargetLocation();
+
         const didAdd = this.viewer
           .getActiveSkin()
-          .addAttribute(this.nameInput.value, this.#getInput());
+          .addAttribute(this.nameInput.value, this.#getInput(), targetLocation);
 
         if (didAdd) {
           const alert = new Alert(
@@ -165,5 +167,9 @@ export default class AddAttributeForm {
 
         break;
     }
+  }
+
+  #getTargetLocation() {
+    return null;
   }
 }

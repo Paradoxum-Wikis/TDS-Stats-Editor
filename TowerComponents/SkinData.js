@@ -62,7 +62,7 @@ class SkinData {
     return true;
   }
 
-  addAttribute(attributeName, defaultValue) {
+  addAttribute(attributeName, defaultValue, targetLocation = null) {
     if (attributeName === "" || defaultValue === undefined) {
       const alert = new Alert(`Empty data, reloaded table instead`, {
         alertStyle: "alert-warning",
@@ -73,7 +73,7 @@ class SkinData {
     }
 
     for (const baseStat of [this.defaults, ...this.upgrades]) {
-      const success = baseStat.addNewAttribute(attributeName, defaultValue);
+      const success = baseStat.addNewAttribute(attributeName, defaultValue, targetLocation);
 
       if (!success) return false;
     }
