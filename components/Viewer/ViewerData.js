@@ -139,7 +139,9 @@ const ViewerData = {
           if (defaultData) {
             this.deltaTower.importJSON({ [importedTowerName]: defaultData });
           } else {
-            console.warn(`No default data found for ${importedTowerName}, using imported data as reference`);
+            console.warn(
+              `No default data found for ${importedTowerName}, using imported data as reference`,
+            );
             this.deltaTower.importJSON(towerDataToImport);
           }
 

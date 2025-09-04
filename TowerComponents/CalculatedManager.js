@@ -454,9 +454,19 @@ class CalculatedManager {
           }
 
           // Level 4
-          if (!isNaN(level.DamageThreshold) && !isNaN(level.KnifeDamage) && !isNaN(level.KnifeTime)) {
+          if (
+            !isNaN(level.DamageThreshold) &&
+            !isNaN(level.KnifeDamage) &&
+            !isNaN(level.KnifeTime)
+          ) {
             return (
-                (level.DamageThreshold / ((level.DamageThreshold / (((level.Damage * (level.WhirlwindHit - 1)) + level.WhirlwindDamage) / level.WhirlwindHit)) * level.Cooldown + level.KnifeTime))
+              level.DamageThreshold /
+              ((level.DamageThreshold /
+                ((level.Damage * (level.WhirlwindHit - 1) +
+                  level.WhirlwindDamage) /
+                  level.WhirlwindHit)) *
+                level.Cooldown +
+                level.KnifeTime)
             );
           }
 
@@ -1006,7 +1016,12 @@ class CalculatedManager {
       Default: {
         For: ["Assassin"],
         Value: (level) =>
-          (level.KnifeDamage * level.KnifeAmount) / ((level.DamageThreshold / (((level.Damage * (level.WhirlwindHit - 1)) + level.WhirlwindDamage) / level.WhirlwindHit)) * level.Cooldown + level.KnifeTime)
+          (level.KnifeDamage * level.KnifeAmount) /
+          ((level.DamageThreshold /
+            ((level.Damage * (level.WhirlwindHit - 1) + level.WhirlwindDamage) /
+              level.WhirlwindHit)) *
+            level.Cooldown +
+            level.KnifeTime),
       },
     },
 

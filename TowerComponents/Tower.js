@@ -28,7 +28,7 @@ class Tower {
 
   #getSkinNames() {
     const towerData = this.json[this.name];
-    if (!towerData || typeof towerData !== 'object') {
+    if (!towerData || typeof towerData !== "object") {
       console.warn(`Invalid tower data for ${this.name}:`, towerData);
       return [];
     }
@@ -44,10 +44,13 @@ class Tower {
   #getSkins() {
     return this.skinNames.reduce((output, skinName) => {
       const skinData = this.json[this.name]?.[skinName];
-      if (skinData && typeof skinData === 'object') {
+      if (skinData && typeof skinData === "object") {
         output[skinName] = new SkinData(this, skinName, skinData, this.unitKey);
       } else {
-        console.warn(`Invalid skin data for ${this.name}.${skinName}:`, skinData);
+        console.warn(
+          `Invalid skin data for ${this.name}.${skinName}:`,
+          skinData,
+        );
       }
       return output;
     }, {});

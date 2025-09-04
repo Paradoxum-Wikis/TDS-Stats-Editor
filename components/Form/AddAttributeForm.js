@@ -73,7 +73,11 @@ export default class AddAttributeForm {
 
           const didAdd = this.viewer
             .getActiveSkin()
-            .addAttribute(this.nameInput.value, this.#getInput(), targetLocation);
+            .addAttribute(
+              this.nameInput.value,
+              this.#getInput(),
+              targetLocation,
+            );
 
           if (didAdd) {
             const alert = new Alert(
@@ -89,7 +93,7 @@ export default class AddAttributeForm {
               console.error("Error reimporting tower data:", importError);
               const errorAlert = new Alert(
                 "Attribute added but failed to refresh display. Please reload manually.",
-                { alertStyle: "alert-danger" }
+                { alertStyle: "alert-danger" },
               );
               errorAlert.fire();
             }
@@ -98,7 +102,7 @@ export default class AddAttributeForm {
           console.error("Error adding attribute:", error);
           const errorAlert = new Alert(
             "Failed to add attribute. Check console for details.",
-            { alertStyle: "alert-danger" }
+            { alertStyle: "alert-danger" },
           );
           errorAlert.fire();
         }

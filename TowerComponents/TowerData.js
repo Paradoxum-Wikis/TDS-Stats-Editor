@@ -921,7 +921,7 @@ export default {
             Attributes: {
               ReloadTime: 1.5,
               Ammo: 60,
-              MaxHits: 3,
+              MaxHits: 2,
             },
             Detections: {
               Flying: false,
@@ -953,7 +953,7 @@ export default {
             Attributes: {
               ReloadTime: 1.25,
               Ammo: 80,
-              MaxHits: 3,
+              MaxHits: 2,
             },
             Detections: {
               Flying: false,
@@ -2124,7 +2124,7 @@ export default {
               Hidden: false,
               Lead: true,
             },
-            Cooldown: 1.2,
+            Cooldown: 1,
             Range: 16,
             Damage: 6,
           },
@@ -2137,7 +2137,7 @@ export default {
             Extras: ["2 Max Units"],
             Attributes: {
               BuildTime: 2,
-              MaxUnits: 2,
+              MaxUnits: 1,
               UnitToSend: "Sentry",
               Spawnrate: 1,
               SentryShield: false,
@@ -2145,7 +2145,7 @@ export default {
               Deadzone: 1.5,
             },
             Detections: { Flying: true, Hidden: true, Lead: true },
-            Cooldown: 1.2,
+            Cooldown: 1,
             Range: 18,
             Damage: 10,
           },
@@ -2162,11 +2162,11 @@ export default {
               UnitToSend: "Rifle Sentry",
               Spawnrate: 1,
               SentryShield: false,
-              Buildzone: 3,
+              Buildzone: 4,
               Deadzone: 1.5,
             },
             Detections: { Flying: true, Hidden: true, Lead: true },
-            Cooldown: 1.2,
+            Cooldown: 1,
             Range: 18,
             Damage: 15,
           },
@@ -2249,7 +2249,7 @@ export default {
           Spawnrate: 1,
           SentryShield: false,
           Buildzone: 4,
-          Deadzone: 1,
+          Deadzone: 1.5,
         },
         Cooldown: 1.2,
         Damage: 4,
@@ -9654,7 +9654,7 @@ export default {
           Image: "92894447316956",
           Stats: {
             Detections: { Hidden: true },
-            Cooldown: 0.5,
+            Cooldown: 0.6,
             Range: 6,
             Damage: 12,
             Attributes: {
@@ -9675,7 +9675,7 @@ export default {
           Image: "71356771597575",
           Stats: {
             Detections: { Hidden: true },
-            Cooldown: 0.5,
+            Cooldown: 0.6,
             Range: 6,
             Damage: 24,
             Attributes: {

@@ -54,14 +54,14 @@ class BaseStats {
 
     this.attributes.Cost = data.Cost || data.Price || 0;
 
-    if (data && typeof data === 'object') {
+    if (data && typeof data === "object") {
       for (let [key, value] of Object.entries(data)) {
         if (this.#baseAttributes.includes(key)) continue;
         this.addAttribute(key);
       }
 
       const attributesObj = data.Attributes;
-      if (attributesObj && typeof attributesObj === 'object') {
+      if (attributesObj && typeof attributesObj === "object") {
         for (let [key, value] of Object.entries(attributesObj)) {
           if (this.#baseAttributes.includes(key)) continue;
           this.addAttribute(key, ["Attributes"]);
@@ -101,7 +101,8 @@ class BaseStats {
       return false;
     }
 
-    const location = targetLocation || this.#determineAttributeLocation(attributeName);
+    const location =
+      targetLocation || this.#determineAttributeLocation(attributeName);
     const targetData = this.locator.getOrCreateTargetData(this.data, location);
 
     targetData[attributeName] = defaultValue;
@@ -111,17 +112,19 @@ class BaseStats {
 
   #determineAttributeLocation(attributeName) {
     const attributeLower = attributeName.toLowerCase();
-    
-    if (['hidden', 'flying', 'lead'].includes(attributeLower)) {
-      return ['Detections'];
+
+    if (["hidden", "flying", "lead"].includes(attributeLower)) {
+      return ["Detections"];
     }
-    
+
     // Core stats typically don't go in Attributes
-    if (['damage', 'cooldown', 'range', 'cost', 'price'].includes(attributeLower)) {
+    if (
+      ["damage", "cooldown", "range", "cost", "price"].includes(attributeLower)
+    ) {
       return [];
     }
-    
-    return ['Attributes'];
+
+    return ["Attributes"];
   }
 
   addAttributeValue(name, value) {
