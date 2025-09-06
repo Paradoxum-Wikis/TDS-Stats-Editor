@@ -20,6 +20,7 @@ import TowerImportHandler from "./components/TowerImportHandler.js";
 import {
   setVersionNumber,
   loadUpdateLog,
+  loadAnnouncements,
 } from "./components/News/UIHelpers.js";
 import { clearUrlAndShowLanding } from "./components/TowerLoader.js";
 import Consent from "./components/Consent.js";
@@ -62,6 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const towerImportHandler = new TowerImportHandler();
 
   loadUpdateLog();
+  loadAnnouncements();
   setVersionNumber(TDSVersion);
 
   towerImportHandler.checkForPendingImport();
