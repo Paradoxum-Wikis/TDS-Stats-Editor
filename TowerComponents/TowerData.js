@@ -3786,7 +3786,7 @@ export default {
             Extras: [
               "Max Assigned Towers: 2 → 3",
               "[Collapsible:Upgraded Medi Gun]Shield Regen Speed: 8s → 6s",
-              "[Collapsible]Overheal Limit: 0 → 5",
+              "[Collapsible1:Upgraded Health Regen]Overheal Limit: 0 → 5",
             ],
             Attributes: {
               ShieldRechargeSpeed: 6,
