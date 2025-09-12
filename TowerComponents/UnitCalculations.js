@@ -236,6 +236,26 @@ class UnitCalculations {
           return damage / 60;
         },
       },
+      Explosions: {
+        For: ["Gift Bomber", "Ripped Elf"],
+        Requires: ["MissileDPS", "Spawnrate"],
+        Value: (level) => {
+          let damage = 0;
+          let remainingTime = 60;
+
+          if (level.Spawnrate <= 0.1) {
+            return Infinity;
+          }
+
+          while (remainingTime > 0) {
+            damage += level.MissileDPS * remainingTime;
+
+            remainingTime -= level.Spawnrate;
+          }
+
+          return damage / 60;
+        },
+      },
     },
     RamDPS: {
       Default: {
@@ -455,6 +475,10 @@ class UnitCalculations {
           return level.ExplosionDamage / level.TimeBetweenMissiles;
         },
       },
+      Elfs: {
+        For: ["Gift Bomber", "Ripped Elf"],
+        Value: (level) => level.ExplosionDamage / level.Cooldown,
+      },
       Pursuit: {
         // prettier-ignore
         For: [
@@ -670,6 +694,7 @@ class UnitCalculations {
     TotalDPS: {
       Default: {
         Requires: ["DPS", "MissileDPS"],
+        Exclude: ["Elf 0", "Elf 1", "Snowball Elf", "Bomber Elf", "Cannoneer Elf", "Guardian Elf", "Gunner Elf", "Gift Bomber", "Ripped Elf"],
         Value: (level) => {
           const unitDPS = level.DPS;
           const missileDPS = isNaN(level.MissileDPS) ? 0 : level.MissileDPS;
