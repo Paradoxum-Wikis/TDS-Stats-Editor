@@ -304,9 +304,8 @@ class UnitCalculations {
       Default: {
         Requires: ["Damage"],
         Value: (damage) => {
-          const { damageBuff } = window?.state?.boosts?.unit ?? 0;
-
-          return damage * (damageBuff + 1);
+          const { damageBuff, flatDamage } = window?.state?.boosts?.unit ?? { damageBuff: 0, flatDamage: 0 };
+          return (damage + (flatDamage || 0)) * (damageBuff + 1);
         },
       },
     },
@@ -316,9 +315,8 @@ class UnitCalculations {
       Default: {
         Requires: ["ExplosionDamage"],
         Value: (explosionDamage) => {
-          const { damageBuff } = window.state.boosts.unit;
-
-          return explosionDamage * (damageBuff + 1);
+          const { damageBuff, flatDamage } = window.state.boosts.unit;
+          return (explosionDamage + (flatDamage || 0)) * (damageBuff + 1);
         },
       },
     },

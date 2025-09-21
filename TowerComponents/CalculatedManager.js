@@ -1257,9 +1257,8 @@ class CalculatedManager {
       Default: {
         Requires: ["Damage"],
         Value: (damage) => {
-          const { damageBuff } = window.state.boosts.tower;
-
-          return damage * (damageBuff + 1);
+          const { damageBuff, flatDamage } = window.state.boosts.tower;
+          return (damage + (flatDamage || 0)) * (damageBuff + 1);
         },
       },
     },
@@ -1269,9 +1268,8 @@ class CalculatedManager {
       Default: {
         Requires: ["ExplosionDamage"],
         Value: (explosionDamage) => {
-          const { damageBuff } = window.state.boosts.tower;
-
-          return explosionDamage * (damageBuff + 1);
+          const { damageBuff, flatDamage } = window.state.boosts.tower;
+          return (explosionDamage + (flatDamage || 0)) * (damageBuff + 1);
         },
       },
     },

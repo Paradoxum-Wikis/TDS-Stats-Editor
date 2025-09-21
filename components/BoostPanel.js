@@ -100,6 +100,7 @@ export default class BoostPanel {
 
       switch (name) {
         case "extraCooldown":
+        case "flatDamage":
           boosts[name] = +value;
           break;
         default:
@@ -156,6 +157,8 @@ export default class BoostPanel {
     switch (attribute) {
       case "extraCooldown":
         return `${this.#formatNumber(value)}s`;
+      case "flatDamage":
+        return `${this.#formatNumber(value)}`;
       default:
         return this.#formatPercent(value);
     }
@@ -186,7 +189,7 @@ export default class BoostPanel {
     const boosts = this.#getBoosts();
 
     for (const [boostName, boostValue] of Object.entries(boosts)) {
-      if (boostName === "extraCooldown") {
+      if (boostName === "extraCooldown" || boostName === "flatDamage") {
         this.#createInput(boostName, boostValue);
       } else if (boostName === "RateOfFireBug") {
         this.#createYesNoInput(boostName, boostValue === 0.008 ? "Yes" : "No");
