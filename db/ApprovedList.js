@@ -71,6 +71,7 @@ const approvedTowers = [
   "Hellscream2008/Hunter but with ability",
   "Hellscream2008/Soldier but with ability",
   "Hellscream2008/Militant but with ability",
+  "Vessel Of Infinite Destruction/Militant",
 ];
 
 // List of featured towers
@@ -85,6 +86,7 @@ const featuredTowers = [
   "Vessel Of Infinite Destruction/Golden Crook Boss",
   "Hellscream2008/Acidinator (Rebalanced)",
   "Hellscream2008/Acidinator",
+  "Vessel Of Infinite Destruction/Militant",
 ];
 
 // List of grandfathered towers
@@ -102,11 +104,10 @@ const grandfatheredTowers = [
 const highlights = [
   "Hellscream2008/Acidinator (Rebalanced)",
   "Vessel Of Infinite Destruction/Golden Crook Boss",
-  "Vessel Of Infinite Destruction/Ranger",
+  "Vessel Of Infinite Destruction/Militant",
   "Onett4smash/Tsukasa Tower (but JSON)",
 ];
 
-// Make these arrays available to other scripts
 window.approvedTowers = approvedTowers;
 window.featuredTowers = featuredTowers;
 window.grandfatheredTowers = grandfatheredTowers;
