@@ -87,6 +87,7 @@ const featuredTowers = [
   "Hellscream2008/Acidinator (Rebalanced)",
   "Hellscream2008/Acidinator",
   "Vessel Of Infinite Destruction/Militant",
+  "Vessel Of Infinite Destruction/Golden Cowboy",
 ];
 
 // List of grandfathered towers
@@ -103,7 +104,7 @@ const grandfatheredTowers = [
 // its own section the page
 const highlights = [
   "Hellscream2008/Acidinator (Rebalanced)",
-  "Vessel Of Infinite Destruction/Golden Crook Boss",
+  "Vessel Of Infinite Destruction/Golden Cowboy",
   "Vessel Of Infinite Destruction/Militant",
   "Onett4smash/Tsukasa Tower (but JSON)",
 ];
