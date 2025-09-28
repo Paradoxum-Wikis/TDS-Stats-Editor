@@ -7404,7 +7404,7 @@ export default {
             Attributes: { Burst: "NaN", BurstCooldown: 0 },
             Detections: { Flying: true, Hidden: true, Lead: false },
             Cooldown: 0.08,
-            Range: 25,
+            Range: 24,
             Damage: 10,
           },
           Title: "Deadliest's Soldier",
