@@ -7388,7 +7388,7 @@ export default {
           Image: 5523195646,
           Stats: {
             Extras: ["Increased Burst (20)", "Increased Burst Cooldown"],
-            Attributes: { Burst: 8, BurstCooldown: 0 },
+            Attributes: { Burst: "NaN", BurstCooldown: 0 },
             Detections: { Flying: true, Hidden: true, Lead: false },
             Cooldown: 0.08,
             Range: 20,
@@ -7401,7 +7401,7 @@ export default {
           Image: 5523196519,
           Stats: {
             Extras: ["Increased Burst (30)"],
-            Attributes: { Burst: 12, BurstCooldown: 0 },
+            Attributes: { Burst: "NaN", BurstCooldown: 0 },
             Detections: { Flying: true, Hidden: true, Lead: false },
             Cooldown: 0.08,
             Range: 25,
@@ -7418,7 +7418,7 @@ export default {
         Range: 18,
         Cooldown: 0.1,
         Damage: 1,
-        Note: "Even though Level 3 and Level 4 has burst values, it doesn't actually use bursts. Meaning it is effectively NaN.",
+        Note: "Level 3 and 4 have burst values (8 and 12) but no cooldown, making them effectively NaN.",
       },
     },
     PVP: {
