@@ -72,6 +72,7 @@ const approvedTowers = [
   "Hellscream2008/Soldier but with ability",
   "Hellscream2008/Militant but with ability",
   "Vessel Of Infinite Destruction/Militant",
+  "Vessel Of Infinite Destruction/Soldier",
 ];
 
 // List of featured towers
@@ -88,6 +89,7 @@ const featuredTowers = [
   "Hellscream2008/Acidinator",
   "Vessel Of Infinite Destruction/Militant",
   "Vessel Of Infinite Destruction/Golden Cowboy",
+  "Vessel Of Infinite Destruction/Soldier",
 ];
 
 // List of grandfathered towers
@@ -104,7 +106,7 @@ const grandfatheredTowers = [
 // its own section the page
 const highlights = [
   "Hellscream2008/Acidinator (Rebalanced)",
-  "Vessel Of Infinite Destruction/Golden Cowboy",
+  "Vessel Of Infinite Destruction/Soldier",
   "Vessel Of Infinite Destruction/Militant",
   "Onett4smash/Tsukasa Tower (but JSON)",
 ];
