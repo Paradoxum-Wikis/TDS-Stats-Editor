@@ -73,6 +73,7 @@ const approvedTowers = [
   "Hellscream2008/Militant but with ability",
   "Vessel Of Infinite Destruction/Militant",
   "Vessel Of Infinite Destruction/Soldier",
+  "Vessel Of Infinite Destruction/Scout",
 ];
 
 // List of featured towers
@@ -90,6 +91,7 @@ const featuredTowers = [
   "Vessel Of Infinite Destruction/Militant",
   "Vessel Of Infinite Destruction/Golden Cowboy",
   "Vessel Of Infinite Destruction/Soldier",
+  "Vessel Of Infinite Destruction/Scout",
 ];
 
 // List of grandfathered towers
@@ -108,7 +110,7 @@ const highlights = [
   "Hellscream2008/Acidinator (Rebalanced)",
   "Vessel Of Infinite Destruction/Soldier",
   "Vessel Of Infinite Destruction/Militant",
-  "Onett4smash/Tsukasa Tower (but JSON)",
+  "Vessel Of Infinite Destruction/Scout",
 ];
 
 window.approvedTowers = approvedTowers;
