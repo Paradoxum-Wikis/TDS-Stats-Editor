@@ -74,6 +74,7 @@ const approvedTowers = [
   "Vessel Of Infinite Destruction/Militant",
   "Vessel Of Infinite Destruction/Soldier",
   "Vessel Of Infinite Destruction/Scout",
+  "Vessel Of Infinite Destruction/Turret",
 ];
 
 // List of featured towers
