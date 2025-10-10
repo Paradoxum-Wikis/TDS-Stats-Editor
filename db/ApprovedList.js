@@ -111,7 +111,7 @@ const grandfatheredTowers = [
 // its own section the page
 const highlights = [
   "Hellscream2008/Acidinator (Rebalanced)",
-  "Vessel Of Infinite Destruction/Soldier",
+  "Vessel Of Infinite Destruction/Militant",
   "Vessel Of Infinite Destruction/Toxic Gunner",
   "Vessel Of Infinite Destruction/Scout",
 ];
