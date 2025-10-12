@@ -1892,6 +1892,53 @@
                     </a>
                   </div>
                 </div>
+
+                <div class="toru-section">
+                  <h6 class="toru-heading">
+                    <i class="bi bi-heart-fill me-2"></i>Support Us
+                  </h6>
+                  <div class="toru-options">
+                    <p>
+                      If you find this tool useful and would like to support its development and maintenance, consider making a donation. Your support helps us keep the site running and implement new features!
+                    </p>
+                    <div class="row g-3 mt-2">
+                      <div class="col-md-4">
+                        <a
+                          href="https://github.com/sponsors/Paradoxum-Wikis"
+                          target="_blank"
+                          class="btn btn-outline-light w-100 d-flex flex-column align-items-center p-3"
+                        >
+                          <i class="bi bi-github fs-3 mb-2"></i>
+                          <span class="fw-bold">GitHub Sponsors</span>
+                          <small class="text-muted mt-1">Get yourself a GitHub sponsor badge too!</small>
+                        </a>
+                      </div>
+                      <div class="col-md-4">
+                        <a
+                          href="https://ko-fi.com/paradoxumwikis"
+                          target="_blank"
+                          class="btn btn-outline-light w-100 d-flex flex-column align-items-center p-3"
+                        >
+                          <i class="bi bi-cup-hot-fill fs-3 mb-2"></i>
+                          <span class="fw-bold">Ko-fi</span>
+                          <small class="text-muted mt-1">The most convenient way to support us!</small>
+                        </a>
+                      </div>
+                      <div class="col-md-4">
+                        <button
+                          type="button"
+                          class="btn btn-outline-light w-100 d-flex flex-column align-items-center p-3"
+                          data-bs-toggle="modal"
+                          data-bs-target="#momo-qr-modal"
+                        >
+                          <i class="bi bi-qr-code fs-3 mb-2"></i>
+                          <span class="fw-bold">MoMo</span>
+                          <small class="text-muted mt-1">Quyên góp qua ngân hàng nội địa!</small>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <!-- Update Log content section -->
@@ -2215,7 +2262,7 @@
                               >Make animations less distracting</span
                             >
                           </div>
-                        </label>
+                                               </label>
                       </div>
                       <div class="form-check form-switch">
                         <input
@@ -2783,6 +2830,70 @@
               data-bs-dismiss="modal"
             >
               Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MoMo Modal -->
+    <div
+      class="modal fade"
+      id="momo-qr-modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="momo-qr-label"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content bg-dark text-white">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <div class="d-flex align-items-center">
+              <div class="toru-icon-container me-3">
+                <i class="bi bi-qr-code-scan fs-3"></i>
+              </div>
+              <div>
+                <h5 class="modal-title unisans mb-0" id="momo-qr-label">
+                  Quyên góp qua MoMo
+                </h5>
+                <p class="text-muted small mb-0">
+                  Cảm ơn bạn nhiều nhé =D
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <!-- Modal Body -->
+          <div class="modal-body text-center p-4 pb-0">
+            <div class="mb-3">
+              <img
+                src="https://bin.t7ru.link/a551f4de9d6d"
+                alt="MoMo QR Code"
+                class="img-fluid"
+                style="max-width: 300px; border-radius: 8px;"
+                loading="lazy"
+              />
+            </div>
+            <p class="text-muted">
+              Mở MoMo, hoặc bất kỳ ứng dụng ngân hàng Việt Nam nào để quét mã QR này, sau đó thì làm theo hướng dẫn để hoàn tất quyên góp của bạn. ^^
+            </p>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Đóng
             </button>
           </div>
         </div>
