@@ -31,6 +31,7 @@ import "./components/Consent.js";
 import "./components/Slides.js";
 import "./components/News/UpdateLog.js";
 import "./components/News/HeadsUp.js";
+import AboutModal from "./Shared/AboutModal.js";
 
 // node modules
 import * as bootstrap from "bootstrap";
@@ -61,6 +62,33 @@ document.addEventListener("DOMContentLoaded", () => {
   window.mobileNav = mobileNav;
 
   const towerImportHandler = new TowerImportHandler();
+
+  new AboutModal({
+    modalId: 'discord-modal', // backwards compatb
+    title: 'About Us',
+    subtitle: 'Information about the TDS Statistics Editor',
+    showDonations: true,
+    showUpdateLog: true,
+    showCredits: true,
+    customFooter: `
+      <span class="text-muted small me-auto">Last updated for game version: <b class="tdsversion"></b></span>
+      <button
+        type="button"
+        class="btn btn-primary me-2"
+        onclick="clearUrlAndShowLanding()"
+        data-bs-dismiss="modal"
+      >
+        Home
+      </button>
+      <button
+        type="button"
+        class="btn btn-secondary"
+        data-bs-dismiss="modal"
+      >
+        Close
+      </button>
+    `
+  });
 
   loadUpdateLog();
   loadAnnouncements();

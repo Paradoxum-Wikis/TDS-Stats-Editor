@@ -20,6 +20,44 @@ import "./MobileNav.js";
 import "../components/Slides.js";
 import "../components/News/UpdateLog.js";
 import "../components/SettingsManager.js";
+import AboutModal from "../Shared/AboutModal.js";
+
+new AboutModal({
+  modalId: 'discord-modal',
+  title: 'About Us',
+  subtitle: 'Information about the Tier List Maker',
+  overviewText: `
+    <p>
+      Adachi's TDS Ranker is a part of the TDS Statistics
+      Editor, a project owned by the community of Tower Defense
+      Simulator Wiki.
+    </p>
+    <p>
+      The official Tower Defense Simulator Wiki is hosted by
+      <img
+        width="60px"
+        class="theme-image"
+        src="https://static.wikia.nocookie.net/6a181c72-e8bf-419b-b4db-18fd56a0eb60"
+        data-light-src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Fandom.svg"
+        data-dark-src="https://static.wikia.nocookie.net/6a181c72-e8bf-419b-b4db-18fd56a0eb60"
+        style="vertical-align: text-top"
+        alt="Fandom"
+        loading="lazy"
+      />
+      which manages and maintains the platform for the
+      community. This website operates independently and is not
+      directly affiliated with it.
+    </p>
+  `,
+  showUpdateLog: true,
+  showCredits: true,
+  showDonations: true,
+  customFooter: `
+    <button type="button" class="w-100 btn btn-secondary" data-bs-dismiss="modal">
+      Close
+    </button>
+  `
+});
 
 // if you have the time, please split this main.js file into smaller files, it's getting a bit too much tbh
 function debounce(func, wait) {
