@@ -19,6 +19,8 @@ export default class AboutModal {
 
     this.modal = null;
     this.updateLogContainer = null;
+    this.supporters = [];
+    this.supportersLoaded = false;
     this.init();
   }
 
@@ -69,6 +71,7 @@ export default class AboutModal {
       this.#setupUpdateLogLoading();
     }
 
+    this.#setupSupportersLoading();
     this.#updateThemeImages();
 
     if (window.bootstrap && window.bootstrap.Tooltip) {
@@ -414,12 +417,20 @@ export default class AboutModal {
   #generateTabs() {
     const baseTabs = [];
     
-    // About tab (always present)
+    // Supporters tab
+    baseTabs.push({
+      id: 'supporters',
+      title: 'Supporters',
+      icon: 'bi-heart',
+      active: true
+    });
+
+    // About tab
     baseTabs.push({
       id: 'about',
       title: 'About',
       icon: 'bi-info-circle',
-      active: true
+      active: false
     });
 
     // Update Log tab
@@ -470,6 +481,7 @@ export default class AboutModal {
   #generateTabContent() {
     const baseContent = [];
 
+    baseContent.push(this.#generateSupportersContent());
     baseContent.push(this.#generateAboutContent());
 
     if (this.options.showUpdateLog) {
@@ -499,59 +511,88 @@ export default class AboutModal {
     `;
   }
 
-  #generateAboutContent() {
-    const donationsSection = this.options.showDonations ? `
-      <div class="toru-section">
-        <h6 class="toru-heading">
-          <i class="bi bi-heart-fill me-2"></i>Support Us
-        </h6>
-        <div class="toru-options">
-          <p>
-            If you find this tool useful and would like to support its development and maintenance, consider making a donation. Your support helps us keep the site running and implement new features!
-          </p>
-          <div class="row g-3 mt-2">
-            <div class="col-md-4">
-              <a
-                href="https://github.com/sponsors/Paradoxum-Wikis"
-                target="_blank"
-                class="btn btn-outline-light w-100 d-flex flex-column align-items-center p-3"
-              >
-                <i class="bi bi-github fs-3 mb-2"></i>
-                <span class="fw-bold">GitHub Sponsors</span>
-                <small class="text-muted mt-1">Get yourself a GitHub sponsor badge too!</small>
-              </a>
-            </div>
-            <div class="col-md-4">
-              <a
-                href="https://ko-fi.com/paradoxumwikis"
-                target="_blank"
-                class="btn btn-outline-light w-100 d-flex flex-column align-items-center p-3"
-              >
-                <i class="bi bi-cup-hot-fill fs-3 mb-2"></i>
-                <span class="fw-bold">Ko-fi</span>
-                <small class="text-muted mt-1">The most convenient way to support us!</small>
-              </a>
-            </div>
-            <div class="col-md-4">
-              <button
-                type="button"
-                class="btn btn-outline-light w-100 d-flex flex-column align-items-center p-3"
-                data-bs-toggle="modal"
-                data-bs-target="#momo-qr-modal"
-              >
-                <i class="bi bi-qr-code fs-3 mb-2"></i>
-                <span class="fw-bold">MoMo</span>
-                <small class="text-muted mt-1">Quyên góp qua ngân hàng nội địa!</small>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    ` : '';
-
+  #generateSupportersContent() {
     return `
       <div
         class="tab-pane fade show active"
+        id="${this.options.modalId}-supporters-content"
+        role="tabpanel"
+        aria-labelledby="${this.options.modalId}-supporters-tab"
+      >
+        <div class="toru-section">
+          <h6 class="toru-heading">
+            <i class="bi bi-heart-fill me-2"></i>Our Supporters
+          </h6>
+          <div class="toru-options">
+            <p class="text-center text-muted mb-3">
+              Special thanks to our generous supporters who help keep this project running!
+            </p>
+            <div id="supporters-container">
+              <div class="text-center">
+                <div class="spinner-border spinner-border-sm text-secondary" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        ${this.options.showDonations ? `
+          <div class="toru-section">
+            <h6 class="toru-heading">
+              <i class="bi bi-envelope-open-heart me-2"></i>Support Us
+            </h6>
+            <div class="toru-options">
+              <p class="text-center">
+                If you find this tool useful and would like to support its development, consider making a donation!
+              </p>
+              <div class="row g-3 mt-2">
+                <div class="col-md-4">
+                  <a
+                    href="https://github.com/sponsors/Paradoxum-Wikis"
+                    target="_blank"
+                    class="btn btn-outline-light w-100 d-flex flex-column align-items-center p-3"
+                  >
+                    <i class="bi bi-github fs-3 mb-2"></i>
+                    <span class="fw-bold">GitHub Sponsors</span>
+                    <small class="text-muted mt-1">Get yourself a GitHub sponsor badge too!</small>
+                  </a>
+                </div>
+                <div class="col-md-4">
+                  <a
+                    href="https://ko-fi.com/paradoxumwikis"
+                    target="_blank"
+                    class="btn btn-outline-light w-100 d-flex flex-column align-items-center p-3"
+                  >
+                    <i class="bi bi-cup-hot-fill fs-3 mb-2"></i>
+                    <span class="fw-bold">Ko-fi</span>
+                    <small class="text-muted mt-1">The most convenient way to support us!</small>
+                  </a>
+                </div>
+                <div class="col-md-4">
+                  <button
+                    type="button"
+                    class="btn btn-outline-light w-100 d-flex flex-column align-items-center p-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#momo-qr-modal"
+                  >
+                    <i class="bi bi-qr-code fs-3 mb-2"></i>
+                    <span class="fw-bold">MoMo</span>
+                    <small class="text-muted mt-1">Quyên góp qua ngân hàng nội địa!</small>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ` : ''}
+      </div>
+    `;
+  }
+
+  #generateAboutContent() {
+    return `
+      <div
+        class="tab-pane fade"
         id="${this.options.modalId}-about-content"
         role="tabpanel"
         aria-labelledby="${this.options.modalId}-about-tab"
@@ -619,8 +660,6 @@ export default class AboutModal {
             </a>
           </div>
         </div>
-
-        ${donationsSection}
       </div>
     `;
   }
@@ -781,5 +820,74 @@ export default class AboutModal {
         modalInstance.hide();
       }
     }
+  }
+
+  #setupSupportersLoading() {
+    const loadSupporters = async () => {
+      if (!this.supportersLoaded) {
+        await this.#fetchSupporters();
+        this.#updateSupportersDisplay();
+        this.supportersLoaded = true;
+      }
+    };
+
+    this.modal.addEventListener('shown.bs.modal', loadSupporters);
+  }
+
+  async #fetchSupporters() {
+    try {
+      const response = await fetch('/supporters.json');
+      if (response.ok) {
+        this.supporters = await response.json();
+      }
+    } catch (error) {
+      console.error('Failed to load supporters:', error);
+      this.supporters = [];
+    }
+  }
+
+  #updateSupportersDisplay() {
+    const supportersContainer = this.modal.querySelector('#supporters-container');
+    if (supportersContainer) {
+      supportersContainer.innerHTML = this.#generateSupporterCards();
+    }
+  }
+
+  #generateSupporterCards() {
+    if (this.supporters.length === 0) {
+      return '<p class="text-center text-muted">Be the first to support us!</p>';
+    }
+
+    return this.supporters.map(supporter => {
+      const linkStart = supporter.link ? `<a href="${supporter.link}" target="_blank" class="text-decoration-none">` : '';
+      const linkEnd = supporter.link ? '</a>' : '';
+      const tierBadge = supporter.tier ? `<span class="badge bg-warning text-dark mb-2">Tier ${supporter.tier}</span>` : '';
+      const message = supporter.message ? `<p class="card-text small text-muted fst-italic mt-2 mb-0">"${supporter.message}"</p>` : '';
+
+      return `
+        <div class="card bg-dark border-secondary mb-3">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              ${linkStart}
+                <img
+                  src="${supporter.avatar}"
+                  alt="${supporter.name || 'Supporter'}"
+                  class="rounded-circle me-3"
+                  style="width: 3.5rem; height: 3.5rem; object-fit: cover;"
+                  loading="lazy"
+                />
+              ${linkEnd}
+              <div class="flex-grow-1">
+                ${linkStart}
+                  <h6 class="card-title mb-1">${supporter.name || 'Anonymous Supporter'}</h6>
+                ${linkEnd}
+                ${tierBadge}
+              </div>
+            </div>
+            ${message}
+          </div>
+        </div>
+      `;
+    }).join('');
   }
 }
