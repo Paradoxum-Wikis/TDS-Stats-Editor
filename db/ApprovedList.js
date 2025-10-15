@@ -76,6 +76,7 @@ const approvedTowers = [
   "Vessel Of Infinite Destruction/Scout",
   "Vessel Of Infinite Destruction/Turret",
   "Vessel Of Infinite Destruction/Toxic Gunner",
+  "Hellscream2008/Lucky Shooter",
 ];
 
 // List of featured towers
@@ -95,6 +96,7 @@ const featuredTowers = [
   "Vessel Of Infinite Destruction/Soldier",
   "Vessel Of Infinite Destruction/Scout",
   "Vessel Of Infinite Destruction/Toxic Gunner",
+  "Hellscream2008/Lucky Shooter",
 ];
 
 // List of grandfathered towers
@@ -113,7 +115,7 @@ const highlights = [
   "Hellscream2008/Acidinator (Rebalanced)",
   "Vessel Of Infinite Destruction/Militant",
   "Vessel Of Infinite Destruction/Toxic Gunner",
-  "Vessel Of Infinite Destruction/Scout",
+  "Hellscream2008/Lucky Shooter",
 ];
 
 window.approvedTowers = approvedTowers;
