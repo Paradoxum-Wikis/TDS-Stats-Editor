@@ -77,6 +77,7 @@ const approvedTowers = [
   "Vessel Of Infinite Destruction/Turret",
   "Vessel Of Infinite Destruction/Toxic Gunner",
   "Hellscream2008/Lucky Shooter",
+  "Vessel Of Infinite Destruction/Gatling Gunner",
 ];
 
 // List of featured towers
