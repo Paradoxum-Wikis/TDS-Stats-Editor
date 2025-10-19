@@ -400,7 +400,7 @@ export default {
             Detections: { Flying: true, Hidden: true, Lead: false },
             Cooldown: 1.25,
             Range: 24,
-            Damage: 32,
+            Damage: 35,
           },
           Title: "Shot of the Century",
           Cost: 8575,

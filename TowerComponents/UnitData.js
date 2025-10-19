@@ -2343,7 +2343,7 @@ export default {
     TickRate: 0,
   },
   "Arrow 1": {
-    Detections: { Flying: true, Hidden: false, Lead: false },
+    Detections: { Flying: false, Hidden: false, Lead: false },
     BurnDamage: 0,
     BurnTime: 0,
     ExplosionDamage: 0,
@@ -2353,7 +2353,7 @@ export default {
     TickRate: 0,
   },
   "Arrow 2": {
-    Detections: { Flying: true, Hidden: true, Lead: false },
+    Detections: { Flying: false, Hidden: true, Lead: false },
     BurnDamage: 0,
     BurnTime: 0,
     ExplosionDamage: 0,
@@ -2363,7 +2363,7 @@ export default {
     TickRate: 0,
   },
   "Flame Arrow 3": {
-    Detections: { Flying: true, Hidden: true, Lead: true },
+    Detections: { Flying: false, Hidden: true, Lead: true },
     BurnDamage: 1,
     BurnTime: 2,
     ExplosionDamage: 0,
@@ -2373,7 +2373,7 @@ export default {
     TickRate: 0.5,
   },
   "Flame Arrow 4": {
-    Detections: { Flying: true, Hidden: true, Lead: true },
+    Detections: { Flying: false, Hidden: true, Lead: true },
     BurnDamage: 3,
     BurnTime: 3,
     ExplosionDamage: 0,
@@ -2383,7 +2383,7 @@ export default {
     TickRate: 0.5,
   },
   "Flame Arrow 5": {
-    Detections: { Flying: true, Hidden: true, Lead: true },
+    Detections: { Flying: false, Hidden: true, Lead: true },
     BurnDamage: 6,
     BurnTime: 4,
     ExplosionDamage: 0,
@@ -2393,7 +2393,7 @@ export default {
     TickRate: 0.5,
   },
   "Shock Arrow 4": {
-    Detections: { Flying: true, Hidden: true, Lead: false },
+    Detections: { Flying: false, Hidden: true, Lead: false },
     BurnDamage: 0,
     BurnTime: 0,
     ExplosionDamage: 0,
@@ -2403,7 +2403,7 @@ export default {
     TickRate: 0,
   },
   "Shock Arrow 5": {
-    Detections: { Flying: true, Hidden: true, Lead: false },
+    Detections: { Flying: false, Hidden: true, Lead: false },
     BurnDamage: 0,
     BurnTime: 0,
     ExplosionDamage: 0,
@@ -2413,7 +2413,7 @@ export default {
     TickRate: 0,
   },
   "Explosive Arrow 5": {
-    Detections: { Flying: true, Hidden: true, Lead: true },
+    Detections: { Flying: false, Hidden: true, Lead: true },
     BurnDamage: 0,
     BurnTime: 0,
     ExplosionDamage: 35,
