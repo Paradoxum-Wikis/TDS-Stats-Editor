@@ -72,7 +72,8 @@ function loadAnnouncements() {
       announcementsList.innerHTML = "";
       announcements.forEach((announcement) => {
         const listItem = document.createElement("li");
-        listItem.className = "list-group-item bg-dark text-light border-secondary";
+        listItem.className =
+          "list-group-item bg-dark text-light border-secondary";
         listItem.innerHTML = `
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">${announcement.title}</h5>
@@ -100,4 +101,9 @@ function loadAnnouncements() {
     });
 }
 
-export { setVersionNumber, generateUpdateLogHtml, loadUpdateLog, loadAnnouncements };
+export {
+  setVersionNumber,
+  generateUpdateLogHtml,
+  loadUpdateLog,
+  loadAnnouncements,
+};

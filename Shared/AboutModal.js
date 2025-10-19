@@ -5,16 +5,16 @@
 export default class AboutModal {
   constructor(options = {}) {
     this.options = {
-      modalId: options.modalId || 'about-modal',
-      title: options.title || 'About Us',
-      subtitle: options.subtitle || 'Information about this tool',
+      modalId: options.modalId || "about-modal",
+      title: options.title || "About Us",
+      subtitle: options.subtitle || "Information about this tool",
       overviewText: options.overviewText || this.#getDefaultOverview(),
-      projectName: options.projectName || 'TDS Statistics Editor',
+      projectName: options.projectName || "TDS Statistics Editor",
       showUpdateLog: options.showUpdateLog !== false,
       showCredits: options.showCredits !== false,
       showDonations: options.showDonations !== false,
       additionalTabs: options.additionalTabs || [],
-      ...options
+      ...options,
     };
 
     this.modal = null;
@@ -57,7 +57,7 @@ export default class AboutModal {
     }
 
     const modalHTML = this.#generateModalHTML();
-    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    document.body.insertAdjacentHTML("beforeend", modalHTML);
 
     this.modal = document.getElementById(this.options.modalId);
 
@@ -66,7 +66,9 @@ export default class AboutModal {
     }
 
     if (this.options.showUpdateLog) {
-      this.updateLogContainer = this.modal.querySelector(`#${this.options.modalId}-updates-content`);
+      this.updateLogContainer = this.modal.querySelector(
+        `#${this.options.modalId}-updates-content`,
+      );
 
       this.#setupUpdateLogLoading();
     }
@@ -76,9 +78,9 @@ export default class AboutModal {
 
     if (window.bootstrap && window.bootstrap.Tooltip) {
       const tooltipTriggerList = [].slice.call(
-        this.modal.querySelectorAll('[data-bs-tooltip="true"]')
+        this.modal.querySelectorAll('[data-bs-tooltip="true"]'),
       );
-      tooltipTriggerList.forEach(tooltipTriggerEl => {
+      tooltipTriggerList.forEach((tooltipTriggerEl) => {
         new window.bootstrap.Tooltip(tooltipTriggerEl);
       });
     }
@@ -88,9 +90,9 @@ export default class AboutModal {
     if (!this.modal) return;
 
     const body = document.body;
-    const isLightMode = body.classList.contains('light-mode');
+    const isLightMode = body.classList.contains("light-mode");
 
-    this.modal.querySelectorAll('.theme-image').forEach((img) => {
+    this.modal.querySelectorAll(".theme-image").forEach((img) => {
       if (isLightMode) {
         if (img.dataset.lightSrc) {
           img.src = img.dataset.lightSrc;
@@ -104,7 +106,7 @@ export default class AboutModal {
   }
 
   #createMoMoModal() {
-    if (document.getElementById('momo-qr-modal')) {
+    if (document.getElementById("momo-qr-modal")) {
       return;
     }
 
@@ -177,37 +179,39 @@ export default class AboutModal {
       </div>
     `;
 
-    document.body.insertAdjacentHTML('beforeend', momoModalHTML);
+    document.body.insertAdjacentHTML("beforeend", momoModalHTML);
   }
 
   #setupUpdateLogLoading() {
     if (!this.modal || !this.updateLogContainer) return;
 
-    const updatesTab = this.modal.querySelector(`#${this.options.modalId}-updates-tab`);
+    const updatesTab = this.modal.querySelector(
+      `#${this.options.modalId}-updates-tab`,
+    );
     const loadCommits = () => {
       if (this.updateLogContainer && !this.updateLogContainer.dataset.loaded) {
         this.#fetchGitHubCommits();
-        this.updateLogContainer.dataset.loaded = 'true';
+        this.updateLogContainer.dataset.loaded = "true";
       }
     };
 
-    this.modal.addEventListener('shown.bs.modal', loadCommits);
+    this.modal.addEventListener("shown.bs.modal", loadCommits);
 
     if (updatesTab) {
-      updatesTab.addEventListener('click', loadCommits);
+      updatesTab.addEventListener("click", loadCommits);
     }
   }
 
   async #fetchGitHubCommits() {
     if (!this.updateLogContainer) return;
 
-    const repoOwner = 'Paradoxum-Wikis';
-    const repoName = 'TDS-Stats-Editor';
+    const repoOwner = "Paradoxum-Wikis";
+    const repoName = "TDS-Stats-Editor";
     const commitLimit = 20;
 
     try {
       const response = await fetch(
-        `https://api.github.com/repos/${repoOwner}/${repoName}/commits?per_page=${commitLimit}`
+        `https://api.github.com/repos/${repoOwner}/${repoName}/commits?per_page=${commitLimit}`,
       );
 
       if (!response.ok) {
@@ -217,7 +221,7 @@ export default class AboutModal {
       const commits = await response.json();
       this.#displayCommits(commits);
     } catch (error) {
-      console.error('Failed to fetch commits:', error);
+      console.error("Failed to fetch commits:", error);
       this.#showError("Couldn't fetch GitHub updates. Please try again later.");
     }
   }
@@ -230,10 +234,10 @@ export default class AboutModal {
     commits.forEach((commit) => {
       const message = commit.commit.message;
       const fullDate = new Date(commit.commit.author.date);
-      const formattedDate = fullDate.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
+      const formattedDate = fullDate.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
       });
       const sha = commit.sha.substring(0, 7);
       const author = commit.commit.author.name;
@@ -262,17 +266,17 @@ export default class AboutModal {
       `;
     });
 
-    html += '</div>';
+    html += "</div>";
     this.updateLogContainer.innerHTML = html;
   }
 
   #getBadgeStyle(message) {
     const lowerMessage = message.toLowerCase();
-    let badge = '';
-    let extraBadge = '';
-    let cleanMessage = message.split('\n')[0];
+    let badge = "";
+    let extraBadge = "";
+    let cleanMessage = message.split("\n")[0];
 
-    if (lowerMessage.startsWith('npm(')) {
+    if (lowerMessage.startsWith("npm(")) {
       const npmMatch = message.match(/npm\(([^)]+)\):\s*(.*)/);
       if (npmMatch) {
         badge = '<span class="badge bg-secondary me-1">npm</span>';
@@ -283,66 +287,93 @@ export default class AboutModal {
       }
     }
     // conventional commit formats
-    else if (lowerMessage.startsWith('feat:') || lowerMessage.startsWith('feat(')) {
+    else if (
+      lowerMessage.startsWith("feat:") ||
+      lowerMessage.startsWith("feat(")
+    ) {
       badge = '<span class="badge bg-success me-1">Feature</span>';
-      cleanMessage = cleanMessage.replace(/^feat(\([^)]*\))?:\s*/i, '');
-    }
-    else if (lowerMessage.startsWith('fix:') || lowerMessage.startsWith('fix(')) {
+      cleanMessage = cleanMessage.replace(/^feat(\([^)]*\))?:\s*/i, "");
+    } else if (
+      lowerMessage.startsWith("fix:") ||
+      lowerMessage.startsWith("fix(")
+    ) {
       badge = '<span class="badge bg-danger me-1">Fix</span>';
-      cleanMessage = cleanMessage.replace(/^fix(\([^)]*\))?:\s*/i, '');
-    }
-    else if (lowerMessage.startsWith('chore:') || lowerMessage.startsWith('chore(')) {
+      cleanMessage = cleanMessage.replace(/^fix(\([^)]*\))?:\s*/i, "");
+    } else if (
+      lowerMessage.startsWith("chore:") ||
+      lowerMessage.startsWith("chore(")
+    ) {
       badge = '<span class="badge bg-secondary me-1">Chore</span>';
-      cleanMessage = cleanMessage.replace(/^chore(\([^)]*\))?:\s*/i, '');
-    }
-    else if (lowerMessage.startsWith('docs:') || lowerMessage.startsWith('docs(')) {
+      cleanMessage = cleanMessage.replace(/^chore(\([^)]*\))?:\s*/i, "");
+    } else if (
+      lowerMessage.startsWith("docs:") ||
+      lowerMessage.startsWith("docs(")
+    ) {
       badge = '<span class="badge bg-info me-1">Docs</span>';
-      cleanMessage = cleanMessage.replace(/^docs(\([^)]*\))?:\s*/i, '');
-    }
-    else if (lowerMessage.startsWith('refactor:') || lowerMessage.startsWith('refactor(')) {
+      cleanMessage = cleanMessage.replace(/^docs(\([^)]*\))?:\s*/i, "");
+    } else if (
+      lowerMessage.startsWith("refactor:") ||
+      lowerMessage.startsWith("refactor(")
+    ) {
       badge = '<span class="badge bg-warning me-1">Refactor</span>';
-      cleanMessage = cleanMessage.replace(/^refactor(\([^)]*\))?:\s*/i, '');
-    }
-    else if (lowerMessage.startsWith('style:') || lowerMessage.startsWith('style(')) {
+      cleanMessage = cleanMessage.replace(/^refactor(\([^)]*\))?:\s*/i, "");
+    } else if (
+      lowerMessage.startsWith("style:") ||
+      lowerMessage.startsWith("style(")
+    ) {
       badge = '<span class="badge bg-info me-1">Style</span>';
-      cleanMessage = cleanMessage.replace(/^style(\([^)]*\))?:\s*/i, '');
-    }
-    else if (lowerMessage.startsWith('test:') || lowerMessage.startsWith('test(')) {
+      cleanMessage = cleanMessage.replace(/^style(\([^)]*\))?:\s*/i, "");
+    } else if (
+      lowerMessage.startsWith("test:") ||
+      lowerMessage.startsWith("test(")
+    ) {
       badge = '<span class="badge bg-warning me-1">Test</span>';
-      cleanMessage = cleanMessage.replace(/^test(\([^)]*\))?:\s*/i, '');
-    }
-    else if (lowerMessage.startsWith('perf:') || lowerMessage.startsWith('perf(')) {
+      cleanMessage = cleanMessage.replace(/^test(\([^)]*\))?:\s*/i, "");
+    } else if (
+      lowerMessage.startsWith("perf:") ||
+      lowerMessage.startsWith("perf(")
+    ) {
       badge = '<span class="badge bg-success me-1">Performance</span>';
-      cleanMessage = cleanMessage.replace(/^perf(\([^)]*\))?:\s*/i, '');
-    }
-    else if (lowerMessage.startsWith('ci:') || lowerMessage.startsWith('ci(')) {
+      cleanMessage = cleanMessage.replace(/^perf(\([^)]*\))?:\s*/i, "");
+    } else if (
+      lowerMessage.startsWith("ci:") ||
+      lowerMessage.startsWith("ci(")
+    ) {
       badge = '<span class="badge bg-info me-1">CI</span>';
-      cleanMessage = cleanMessage.replace(/^ci(\([^)]*\))?:\s*/i, '');
-    }
-    else if (lowerMessage.startsWith('build:') || lowerMessage.startsWith('build(')) {
+      cleanMessage = cleanMessage.replace(/^ci(\([^)]*\))?:\s*/i, "");
+    } else if (
+      lowerMessage.startsWith("build:") ||
+      lowerMessage.startsWith("build(")
+    ) {
       badge = '<span class="badge bg-secondary me-1">Build</span>';
-      cleanMessage = cleanMessage.replace(/^build(\([^)]*\))?:\s*/i, '');
+      cleanMessage = cleanMessage.replace(/^build(\([^)]*\))?:\s*/i, "");
     }
     // merge commits
-    else if (lowerMessage.startsWith('merge pull request') || lowerMessage.startsWith('merge branch')) {
+    else if (
+      lowerMessage.startsWith("merge pull request") ||
+      lowerMessage.startsWith("merge branch")
+    ) {
       badge = '<span class="badge bg-primary me-1">Merge</span>';
-    }
-    else if (lowerMessage.includes('fix') || lowerMessage.includes('bug')) {
+    } else if (lowerMessage.includes("fix") || lowerMessage.includes("bug")) {
       badge = '<span class="badge bg-danger me-1">Fix</span>';
-    }
-    else if (lowerMessage.includes('add') || lowerMessage.includes('feature')) {
+    } else if (
+      lowerMessage.includes("add") ||
+      lowerMessage.includes("feature")
+    ) {
       badge = '<span class="badge bg-success me-1">Feature</span>';
-    }
-    else if (lowerMessage.includes('update') || lowerMessage.includes('improve')) {
+    } else if (
+      lowerMessage.includes("update") ||
+      lowerMessage.includes("improve")
+    ) {
       badge = '<span class="badge bg-primary me-1">Update</span>';
-    }
-    else if (lowerMessage.includes('refactor') || lowerMessage.includes('cleanup')) {
+    } else if (
+      lowerMessage.includes("refactor") ||
+      lowerMessage.includes("cleanup")
+    ) {
       badge = '<span class="badge bg-warning me-1">Refactor</span>';
-    }
-    else if (lowerMessage.includes('doc')) {
+    } else if (lowerMessage.includes("doc")) {
       badge = '<span class="badge bg-info me-1">Docs</span>';
-    }
-    else {
+    } else {
       badge = '<span class="badge bg-secondary me-1">Chore</span>';
     }
 
@@ -416,60 +447,64 @@ export default class AboutModal {
 
   #generateTabs() {
     const baseTabs = [];
-    
+
     // Supporters tab
     baseTabs.push({
-      id: 'supporters',
-      title: 'Supporters',
-      icon: 'bi-heart',
-      active: true
+      id: "supporters",
+      title: "Supporters",
+      icon: "bi-heart",
+      active: true,
     });
 
     // About tab
     baseTabs.push({
-      id: 'about',
-      title: 'About',
-      icon: 'bi-info-circle',
-      active: false
+      id: "about",
+      title: "About",
+      icon: "bi-info-circle",
+      active: false,
     });
 
     // Update Log tab
     if (this.options.showUpdateLog) {
       baseTabs.push({
-        id: 'updates',
-        title: 'Update Log',
-        icon: 'bi-journal-code'
+        id: "updates",
+        title: "Update Log",
+        icon: "bi-journal-code",
       });
     }
 
     // Credits tab
     if (this.options.showCredits) {
       baseTabs.push({
-        id: 'credits',
-        title: 'Credits',
-        icon: 'bi-people-fill'
+        id: "credits",
+        title: "Credits",
+        icon: "bi-people-fill",
       });
     }
 
     // Custom tabs
     const allTabs = [...baseTabs, ...this.options.additionalTabs];
 
-    const tabsHTML = allTabs.map((tab, index) => `
+    const tabsHTML = allTabs
+      .map(
+        (tab, index) => `
       <li class="nav-item" role="presentation">
         <button
-          class="nav-link ${index === 0 ? 'active' : ''} text-white"
+          class="nav-link ${index === 0 ? "active" : ""} text-white"
           id="${this.options.modalId}-${tab.id}-tab"
           data-bs-toggle="tab"
           data-bs-target="#${this.options.modalId}-${tab.id}-content"
           type="button"
           role="tab"
           aria-controls="${this.options.modalId}-${tab.id}-content"
-          aria-selected="${index === 0 ? 'true' : 'false'}"
+          aria-selected="${index === 0 ? "true" : "false"}"
         >
           <i class="bi ${tab.icon} me-2"></i>${tab.title}
         </button>
       </li>
-    `).join('');
+    `,
+      )
+      .join("");
 
     return `
       <ul class="nav nav-tabs nav-fill bg-darker" id="${this.options.modalId}-tabs" role="tablist">
@@ -492,7 +527,9 @@ export default class AboutModal {
       baseContent.push(this.#generateCreditsContent());
     }
 
-    const customContent = this.options.additionalTabs.map(tab => `
+    const customContent = this.options.additionalTabs
+      .map(
+        (tab) => `
       <div
         class="tab-pane fade"
         id="${this.options.modalId}-${tab.id}-content"
@@ -501,11 +538,13 @@ export default class AboutModal {
       >
         ${tab.content}
       </div>
-    `).join('');
+    `,
+      )
+      .join("");
 
     return `
       <div class="tab-content p-3">
-        ${baseContent.join('')}
+        ${baseContent.join("")}
         ${customContent}
       </div>
     `;
@@ -537,7 +576,9 @@ export default class AboutModal {
           </div>
         </div>
 
-        ${this.options.showDonations ? `
+        ${
+          this.options.showDonations
+            ? `
           <div class="toru-section">
             <h6 class="toru-heading">
               <i class="bi bi-envelope-open-heart me-2"></i>Support Us
@@ -584,7 +625,9 @@ export default class AboutModal {
               </div>
             </div>
           </div>
-        ` : ''}
+        `
+            : ""
+        }
       </div>
     `;
   }
@@ -831,23 +874,25 @@ export default class AboutModal {
       }
     };
 
-    this.modal.addEventListener('shown.bs.modal', loadSupporters);
+    this.modal.addEventListener("shown.bs.modal", loadSupporters);
   }
 
   async #fetchSupporters() {
     try {
-      const response = await fetch('/supporters.json');
+      const response = await fetch("/supporters.json");
       if (response.ok) {
         this.supporters = await response.json();
       }
     } catch (error) {
-      console.error('Failed to load supporters:', error);
+      console.error("Failed to load supporters:", error);
       this.supporters = [];
     }
   }
 
   #updateSupportersDisplay() {
-    const supportersContainer = this.modal.querySelector('#supporters-container');
+    const supportersContainer = this.modal.querySelector(
+      "#supporters-container",
+    );
     if (supportersContainer) {
       supportersContainer.innerHTML = this.#generateSupporterCards();
     }
@@ -858,20 +903,27 @@ export default class AboutModal {
       return '<p class="text-center text-muted">Be the first to support us!</p>';
     }
 
-    return this.supporters.map(supporter => {
-      const linkStart = supporter.link ? `<a href="${supporter.link}" target="_blank" class="text-decoration-none">` : '';
-      const linkEnd = supporter.link ? '</a>' : '';
-      const tierBadge = supporter.tier ? `<span class="badge bg-warning text-dark mb-2">Tier ${supporter.tier}</span>` : '';
-      const message = supporter.message ? `<p class="card-text small text-muted fst-italic mt-2 mb-0">"${supporter.message}"</p>` : '';
+    return this.supporters
+      .map((supporter) => {
+        const linkStart = supporter.link
+          ? `<a href="${supporter.link}" target="_blank" class="text-decoration-none">`
+          : "";
+        const linkEnd = supporter.link ? "</a>" : "";
+        const tierBadge = supporter.tier
+          ? `<span class="badge bg-warning text-dark mb-2">Tier ${supporter.tier}</span>`
+          : "";
+        const message = supporter.message
+          ? `<p class="card-text small text-muted fst-italic mt-2 mb-0">"${supporter.message}"</p>`
+          : "";
 
-      return `
+        return `
         <div class="card bg-dark border-secondary mb-3">
           <div class="card-body">
             <div class="d-flex align-items-center">
               ${linkStart}
                 <img
                   src="${supporter.avatar}"
-                  alt="${supporter.name || 'Supporter'}"
+                  alt="${supporter.name || "Supporter"}"
                   class="rounded-circle me-3"
                   style="width: 3.5rem; height: 3.5rem; object-fit: cover;"
                   loading="lazy"
@@ -879,7 +931,7 @@ export default class AboutModal {
               ${linkEnd}
               <div class="flex-grow-1">
                 ${linkStart}
-                  <h6 class="card-title mb-1">${supporter.name || 'Anonymous Supporter'}</h6>
+                  <h6 class="card-title mb-1">${supporter.name || "Anonymous Supporter"}</h6>
                 ${linkEnd}
                 ${tierBadge}
               </div>
@@ -888,6 +940,7 @@ export default class AboutModal {
           </div>
         </div>
       `;
-    }).join('');
+      })
+      .join("");
   }
 }

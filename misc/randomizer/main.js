@@ -33,9 +33,9 @@ window.bootstrap = bootstrap;
 
 (async () => {
   new AboutModal({
-    modalId: 'about-modal',
-    title: 'About Randomizer',
-    subtitle: 'Information about the Randomizer',
+    modalId: "about-modal",
+    title: "About Randomizer",
+    subtitle: "Information about the Randomizer",
     overviewText: `
       <p>
         The TDS Randomizer is a tool for generating random suggestions
@@ -52,9 +52,9 @@ window.bootstrap = bootstrap;
     showDonations: true,
     additionalTabs: [
       {
-        id: 'howto',
-        title: 'How to Use',
-        icon: 'bi-question-circle',
+        id: "howto",
+        title: "How to Use",
+        icon: "bi-question-circle",
         content: `
           <div class="toru-section">
             <h6 class="toru-heading">
@@ -77,14 +77,14 @@ window.bootstrap = bootstrap;
               </ol>
             </div>
           </div>
-        `
-      }
+        `,
+      },
     ],
     customFooter: `
       <button type="button" class="w-100 btn btn-secondary" data-bs-dismiss="modal">
         Close
       </button>
-    `
+    `,
   });
 
   document.addEventListener("DOMContentLoaded", function () {

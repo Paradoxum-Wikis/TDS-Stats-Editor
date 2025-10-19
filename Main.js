@@ -64,9 +64,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const towerImportHandler = new TowerImportHandler();
 
   new AboutModal({
-    modalId: 'discord-modal', // backwards compatb
-    title: 'About Us',
-    subtitle: 'Information about the TDS Statistics Editor',
+    modalId: "discord-modal", // backwards compatb
+    title: "About Us",
+    subtitle: "Information about the TDS Statistics Editor",
     showDonations: true,
     showUpdateLog: true,
     showCredits: true,
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
       >
         Close
       </button>
-    `
+    `,
   });
 
   loadUpdateLog();

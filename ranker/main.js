@@ -23,9 +23,9 @@ import "../components/SettingsManager.js";
 import AboutModal from "../Shared/AboutModal.js";
 
 new AboutModal({
-  modalId: 'discord-modal',
-  title: 'About Us',
-  subtitle: 'Information about the Tier List Maker',
+  modalId: "discord-modal",
+  title: "About Us",
+  subtitle: "Information about the Tier List Maker",
   overviewText: `
     <p>
       Adachi's TDS Ranker is a part of the TDS Statistics
@@ -56,7 +56,7 @@ new AboutModal({
     <button type="button" class="w-100 btn btn-secondary" data-bs-dismiss="modal">
       Close
     </button>
-  `
+  `,
 });
 
 // if you have the time, please split this main.js file into smaller files, it's getting a bit too much tbh

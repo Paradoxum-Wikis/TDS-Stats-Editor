@@ -304,7 +304,10 @@ class UnitCalculations {
       Default: {
         Requires: ["Damage"],
         Value: (damage) => {
-          const { damageBuff, flatDamage } = window?.state?.boosts?.unit ?? { damageBuff: 0, flatDamage: 0 };
+          const { damageBuff, flatDamage } = window?.state?.boosts?.unit ?? {
+            damageBuff: 0,
+            flatDamage: 0,
+          };
           return (damage + (flatDamage || 0)) * (damageBuff + 1);
         },
       },
@@ -692,7 +695,17 @@ class UnitCalculations {
     TotalDPS: {
       Default: {
         Requires: ["DPS", "MissileDPS"],
-        Exclude: ["Elf 0", "Elf 1", "Snowball Elf", "Bomber Elf", "Cannoneer Elf", "Guardian Elf", "Gunner Elf", "Gift Bomber", "Ripped Elf"],
+        Exclude: [
+          "Elf 0",
+          "Elf 1",
+          "Snowball Elf",
+          "Bomber Elf",
+          "Cannoneer Elf",
+          "Guardian Elf",
+          "Gunner Elf",
+          "Gift Bomber",
+          "Ripped Elf",
+        ],
         Value: (level) => {
           const unitDPS = level.DPS;
           const missileDPS = isNaN(level.MissileDPS) ? 0 : level.MissileDPS;

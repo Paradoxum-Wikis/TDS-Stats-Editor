@@ -15,8 +15,8 @@ import { MobileNav } from "./MobileNav.js";
 window.bootstrap = bootstrap;
 document.addEventListener("DOMContentLoaded", () => {
   new AboutModal({
-    title: 'About Skills Planner',
-    subtitle: 'Information about the Skills Planner',
+    title: "About Skills Planner",
+    subtitle: "Information about the Skills Planner",
     overviewText: `
       <p>
         The TDS Skills Planner is a tool for planning your skill tree
@@ -34,9 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
     showDonations: true,
     additionalTabs: [
       {
-        id: 'howto',
-        title: 'How to Use',
-        icon: 'bi-question-circle',
+        id: "howto",
+        title: "How to Use",
+        icon: "bi-question-circle",
         content: `
           <div class="toru-section">
             <h6 class="toru-heading">
@@ -50,14 +50,14 @@ document.addEventListener("DOMContentLoaded", () => {
               </ol>
             </div>
           </div>
-        `
-      }
+        `,
+      },
     ],
     customFooter: `
       <button type="button" class="w-100 btn btn-secondary" data-bs-dismiss="modal">
         Close
       </button>
-    `
+    `,
   });
 
   new SkillTreePlanner();
