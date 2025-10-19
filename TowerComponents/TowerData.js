@@ -3937,7 +3937,7 @@ export default {
           DamageBuff: 0,
           MaxUnits: 3,
         },
-        Price: 2000,
+        Price: 2750,
         Cooldown: 0,
         Range: 6,
         Damage: 0,
@@ -3961,7 +3961,7 @@ export default {
           },
           Image: 17196819847,
           Title: "Explosive Experts",
-          Cost: 1000,
+          Cost: 1350,
         },
         {
           Stats: {
@@ -3980,7 +3980,7 @@ export default {
           },
           Image: 17196820389,
           Title: "Upgraded Barracks",
-          Cost: 2000,
+          Cost: 2750,
         },
         {
           Stats: {
@@ -4000,7 +4000,7 @@ export default {
           },
           Image: 17196819964,
           Title: "Improved Training",
-          Cost: 7000,
+          Cost: 6500,
         },
         {
           Stats: {
@@ -4030,7 +4030,7 @@ export default {
               Queue2: "Grenadier 1",
               Queue3: "Riot Guard 0",
               Queue4: "Field Medic 0",
-              DamageBuff: 10,
+              DamageBuff: 15,
               MaxUnits: 9,
             },
             Extras: [],
@@ -4040,7 +4040,7 @@ export default {
           },
           Image: 17196820108,
           Title: "Air Transport",
-          Cost: 15000,
+          Cost: 12650,
         },
         {
           Stats: {
@@ -4060,7 +4060,7 @@ export default {
           },
           Image: 17196820275,
           Title: "Enhanced Equipment",
-          Cost: 35000,
+          Cost: 36000,
         },
       ],
     },
