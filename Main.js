@@ -37,7 +37,7 @@ import AboutModal from "./Shared/AboutModal.js";
 import * as bootstrap from "bootstrap";
 import CryptoJS from "crypto-js";
 
-const TDSVersion = "1.76.0"; // change GAME version number here
+const TDSVersion = "1.77.0"; // change GAME version number here
 
 window.clearUrlAndShowLanding = clearUrlAndShowLanding;
 window.bootstrap = bootstrap;
