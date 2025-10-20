@@ -459,7 +459,7 @@ export default {
     MaxHits: 0,
     MaxSpeed: 2.5,
     MaxTargets: 0,
-    Spawnrate: 40,
+    Spawnrate: 37.5,
     Speed: 2.5,
   },
   "Grenadier 2": {
@@ -484,7 +484,7 @@ export default {
     MaxHits: 0,
     MaxSpeed: 2.5,
     MaxTargets: 0,
-    Spawnrate: 37.5,
+    Spawnrate: 40,
     Speed: 2.5,
   },
 
@@ -567,7 +567,7 @@ export default {
   "Field Medic 1": {
     Health: 750,
     Damage: 0,
-    Range: 30,
+    Range: 35,
     Detections: {
       Hidden: false,
       Flying: false,

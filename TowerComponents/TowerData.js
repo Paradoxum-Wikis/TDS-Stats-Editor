@@ -8369,7 +8369,7 @@ export default {
             Range: 25,
             Damage: 120,
           },
-          Title: "Vengeful Missles",
+          Title: "Queen of the Blood Ember",
           Cost: 8500,
         },
       ],
