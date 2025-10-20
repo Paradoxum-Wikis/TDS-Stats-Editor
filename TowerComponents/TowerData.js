@@ -8340,7 +8340,7 @@ export default {
               BurnTime: 3,
               TickRate: 0.5,
             },
-            Detections: { Flying: false, Lead: true },
+            Detections: { Flying: true, Lead: true },
             Range: 25,
             Damage: 30,
           },
