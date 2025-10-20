@@ -1294,7 +1294,7 @@ export default {
   },
   "Thorns 1": {
     Damage: 8,
-    Range: 12,
+    Range: 10,
     Lifetime: 4.5,
     Slowdown: 15,
     TickRate: 0.5,
