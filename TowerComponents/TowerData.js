@@ -8305,7 +8305,7 @@ export default {
           Stats: {
             Extras: [],
             Attributes: {
-              RocketSpeed: 20,
+              RocketSpeed: 25,
               ExplosionRadius: 3.5,
               Knockback: 12.5,
               BurnDamage: 1,
@@ -8321,7 +8321,7 @@ export default {
             Range: 23,
             Damage: 10,
           },
-          Title: "Bigger Boom",
+          Title: "Bewitching Blaze",
           Cost: 300,
         },
         {
@@ -8329,11 +8329,11 @@ export default {
           Stats: {
             Extras: [
               "Explosion Radius: 3.5 → 5",
-              "Rocket Speed: 20 → 25",
+              "Rocket Speed: 25 → 30",
               "Knockback: 10 → 12.5",
             ],
             Attributes: {
-              RocketSpeed: 25,
+              RocketSpeed: 30,
               ExplosionRadius: 5,
               Knockback: 17.5,
               BurnDamage: 2,
@@ -8344,7 +8344,7 @@ export default {
             Range: 25,
             Damage: 30,
           },
-          Title: "Rapid Reload",
+          Title: "Vengeful Missiles",
           Cost: 2000,
         },
         {
@@ -8377,7 +8377,7 @@ export default {
         Attributes: {
           Knockback: 12.5,
           ExplosionRadius: 3.5,
-          RocketSpeed: 20,
+          RocketSpeed: 25,
           BurnDamage: 0,
           BurnTime: 0,
           TickRate: 0,
