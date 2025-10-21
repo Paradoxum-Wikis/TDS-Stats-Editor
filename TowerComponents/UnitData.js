@@ -489,7 +489,7 @@ export default {
   },
 
   "Riot Guard 0": {
-    Health: 1200,
+    Health: 1000,
     Damage: 50,
     Range: 4,
     Detections: {
@@ -2408,7 +2408,7 @@ export default {
     BurnTime: 0,
     ExplosionDamage: 0,
     ExplosionRadius: 0,
-    MaxHits: 3,
+    MaxHits: 4,
     StunTime: 0.45,
     TickRate: 0,
   },
