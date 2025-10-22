@@ -78,6 +78,8 @@ const approvedTowers = [
   "Vessel Of Infinite Destruction/Toxic Gunner",
   "Hellscream2008/Lucky Shooter",
   "Vessel Of Infinite Destruction/Gatling Gunner",
+  "Vessel Of Infinite Destruction/Golden Engineer",
+  "Vessel Of Infinite Destruction/Golden Mortar",
 ];
 
 // List of featured towers
@@ -113,8 +115,8 @@ const grandfatheredTowers = [
 
 // its own section the page
 const highlights = [
-  "Hellscream2008/Acidinator (Rebalanced)",
-  "Vessel Of Infinite Destruction/Militant",
+  "Vessel Of Infinite Destruction/Golden Engineer",
+  "Vessel Of Infinite Destruction/Golden Mortar",
   "Vessel Of Infinite Destruction/Toxic Gunner",
   "Hellscream2008/Lucky Shooter",
 ];
