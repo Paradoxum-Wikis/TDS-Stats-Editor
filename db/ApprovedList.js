@@ -100,6 +100,8 @@ const featuredTowers = [
   "Vessel Of Infinite Destruction/Scout",
   "Vessel Of Infinite Destruction/Toxic Gunner",
   "Hellscream2008/Lucky Shooter",
+  "Vessel Of Infinite Destruction/Golden Engineer",
+  "Vessel Of Infinite Destruction/Golden Mortar",
 ];
 
 // List of grandfathered towers
