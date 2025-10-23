@@ -6621,7 +6621,7 @@ export default {
       Defaults: {
         Detections: { Flying: false, Hidden: false, Lead: false },
         Price: 250,
-        Range: 15,
+        Range: 14,
         Cooldown: 0.8,
         Damage: 2,
       },
