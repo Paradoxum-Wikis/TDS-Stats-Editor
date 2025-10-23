@@ -48,7 +48,7 @@ export default class StatsImageExporter {
 
     const subtitle = document.createElement("p");
     subtitle.textContent =
-      "Tower Defense Simulator Statistics Editor - tds-editor.com";
+      "tds-editor.com";
     subtitle.style.margin = "10px 0 0 0";
     subtitle.style.fontSize = "1rem";
     subtitle.style.color = "inherit";
