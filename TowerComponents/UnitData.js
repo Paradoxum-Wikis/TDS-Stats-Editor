@@ -364,7 +364,7 @@ export default {
   },
   "Rifleman 1": {
     Health: 75,
-    Damage: 12,
+    Damage: 11,
     Range: 24,
     Detections: {
       Hidden: true,
@@ -389,7 +389,7 @@ export default {
   },
   "Rifleman 2": {
     Health: 275,
-    Damage: 30,
+    Damage: 25,
     Range: 30,
     Detections: {
       Hidden: true,
@@ -409,7 +409,7 @@ export default {
     MaxHits: 0,
     MaxSpeed: 3.5,
     MaxTargets: 0,
-    Spawnrate: 35,
+    Spawnrate: 40,
     Speed: 3.5,
   },
   "Grenadier 0": {
@@ -438,8 +438,8 @@ export default {
     Speed: 2.5,
   },
   "Grenadier 1": {
-    Health: 125,
-    Damage: 45,
+    Health: 135,
+    Damage: 40,
     Range: 20,
     Detections: {
       Hidden: false,
@@ -459,13 +459,13 @@ export default {
     MaxHits: 0,
     MaxSpeed: 2.5,
     MaxTargets: 0,
-    Spawnrate: 37.5,
+    Spawnrate: 35,
     Speed: 2.5,
   },
   "Grenadier 2": {
-    Health: 300,
-    Damage: 80,
-    Range: 22,
+    Health: 325,
+    Damage: 75,
+    Range: 22.5,
     Detections: {
       Hidden: false,
       Flying: false,
@@ -484,7 +484,7 @@ export default {
     MaxHits: 0,
     MaxSpeed: 2.5,
     MaxTargets: 0,
-    Spawnrate: 40,
+    Spawnrate: 35,
     Speed: 2.5,
   },
 
@@ -560,12 +560,12 @@ export default {
     Limit: 3,
     MaxHits: 0,
     MaxSpeed: 2.5,
-    MaxTargets: 6,
+    MaxTargets: 8,
     Spawnrate: 30,
     Speed: 2.5,
   },
   "Field Medic 1": {
-    Health: 750,
+    Health: 700,
     Damage: 0,
     Range: 35,
     Detections: {
@@ -585,7 +585,7 @@ export default {
     Limit: 3,
     MaxHits: 0,
     MaxSpeed: 2.5,
-    MaxTargets: 8,
+    MaxTargets: 10,
     Spawnrate: 30,
     Speed: 2.5,
   },

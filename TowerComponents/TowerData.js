@@ -4000,7 +4000,7 @@ export default {
           },
           Image: 17196819964,
           Title: "Improved Training",
-          Cost: 6500,
+          Cost: 7500,
         },
         {
           Stats: {
@@ -4040,7 +4040,7 @@ export default {
           },
           Image: 17196820108,
           Title: "Air Transport",
-          Cost: 12650,
+          Cost: 13500,
         },
         {
           Stats: {
@@ -6624,6 +6624,7 @@ export default {
         Range: 14,
         Cooldown: 0.8,
         Damage: 2,
+        Limit: 16,
       },
     },
     PVP: {
