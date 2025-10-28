@@ -80,6 +80,8 @@ const approvedTowers = [
   "Vessel Of Infinite Destruction/Gatling Gunner",
   "Vessel Of Infinite Destruction/Golden Engineer",
   "Vessel Of Infinite Destruction/Golden Mortar",
+  "Hellscream2008/War Machine + (Top path)",
+  "Hellscream2008/War Machine + (Bottom path)",
 ];
 
 // List of featured towers
