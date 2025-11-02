@@ -9961,6 +9961,7 @@ export default {
               ExponentialValue: "NaN",
               MaxHits: 2,
             },
+            Detections: { Flying: false, Hidden: false, Lead: false },
             Extras: ["AOE Damage: 25 → 40"],
           },
         },
@@ -9981,6 +9982,7 @@ export default {
               MaxHits: 2,
             },
             Extras: ["AOE Damage: 40 → 60"],
+            Detections: { Flying: false, Hidden: true, Lead: false },
           },
         },
         {
