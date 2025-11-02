@@ -9850,6 +9850,7 @@ export default {
         Limit: 4,
         Attributes: {
           KnockbackForce: "NaN",
+          KnockbackDebounce: 3,
         },
       },
       Upgrades: [

@@ -302,6 +302,7 @@ export default class TableInput {
       case "ShieldRechargeSpeed":
       case "TowerSelectionCooldown":
       case "TimeBetweenMissiles":
+      case "KnockbackDebounce":
         return formatter.format(value) + (showSeconds ? "s" : "");
 
       case "Range":
