@@ -9850,7 +9850,7 @@ export default {
         Limit: 4,
         Attributes: {
           KnockbackForce: "NaN",
-          KnockbackDebounce: 3,
+          KnockbackDebounce: "NaN",
         },
       },
       Upgrades: [
@@ -9864,6 +9864,7 @@ export default {
             Cooldown: 1.108,
             Attributes: {
               KnockbackForce: "NaN",
+              KnockbackDebounce: "NaN",
             },
           },
         },
@@ -9878,8 +9879,9 @@ export default {
             Detections: { Flying: false, Hidden: true, Lead: true },
             Attributes: {
               KnockbackForce: 20,
+              KnockbackDebounce: 3,
             },
-            Extras: ["Knockback Force: NaN → 20"],
+            Extras: ["Knockback Force: NaN → 20", "Knockback Debounce: NaN → 3"],
             
           },
         },
