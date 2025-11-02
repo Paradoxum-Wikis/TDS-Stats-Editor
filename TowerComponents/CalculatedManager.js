@@ -302,6 +302,13 @@ class CalculatedManager {
           return Math.max(spikeDPS, landmineDPS, beartrapDPS);
         },
       },
+
+      WarlockMelee: {
+        For: ["Warlock"],
+        Value: (level) =>
+          (level.Damage + level["AOE Damage"] * level.MaxHits) / level.Cooldown,
+        Subtype: (skinData) => skinData.name.includes("Melee"),
+      },
     },
 
     "DPS Rate": {
@@ -393,6 +400,12 @@ class CalculatedManager {
           (level.Damage * level.Burst) /
           ((level.Burst - 1) * level.Cooldown + level.BurstCooldown),
         Subtype: (skinData) => skinData.name.includes("Frost"),
+      },
+      WarlockMelee: {
+        For: ["Warlock"],
+        Value: (level) =>
+          (level.Damage + level["AOE Damage"]) / level.Cooldown,
+        Subtype: (skinData) => skinData.name.includes("Melee"),
       },
       Ace: {
         For: ["Ace Pilot"],

@@ -9839,4 +9839,218 @@ export default {
       ],
     },
   },
+  Warlock: {
+    Ranged: {
+      Defaults: {
+        Detections: { Flying: false, Hidden: false, Lead: true },
+        Range: 19,
+        Price: 4200,
+        Cooldown: 1.108,
+        Damage: 25,
+        Limit: 4,
+        Attributes: {
+          KnockbackForce: "NaN",
+        },
+      },
+      Upgrades: [
+        {
+          Image: "File:WarlockLevel1.png",
+          Title: "Acolyte",
+          Cost: 2500,
+          Stats: {
+            Range: 20,
+            Damage: 40,
+            Cooldown: 1.108,
+            Attributes: {
+              KnockbackForce: "NaN",
+            },
+          },
+        },
+        {
+          Image: "File:WarlockLevel2.png",
+          Title: "Forbidden Arts",
+          Cost: 6800,
+          Stats: {
+            Range: 23,
+            Damage: 60,
+            Cooldown: 0.808,
+            Detections: { Flying: false, Hidden: true, Lead: true },
+            Attributes: {
+              KnockbackForce: 20,
+            },
+            Extras: ["Knockback Force: NaN → 20"],
+            
+          },
+        },
+        {
+          Image: "File:WarlockLevel3.png",
+          Title: "Pact of the Blade",
+          Cost: 12000,
+          Stats: {
+            Range: 23,
+            Damage: 115,
+            Cooldown: 0.808,
+            Attributes: {
+              KnockbackForce: 22.5,
+            },
+            Extras: ["Knockback Force: 20 → 22.5"],
+          },
+        },
+        {
+          Image: "File:WarlockLevel4.png",
+          Title: "Eldritch Knight",
+          Cost: 18500,
+          Stats: {
+            Range: 24,
+            Damage: 200,
+            Cooldown: 0.758,
+            Attributes: {
+              KnockbackForce: 30,
+            },
+            Extras: ["Knockback Force: 22.5 → 30"],
+          },
+        },
+        {
+          Image: "File:WarlockLevel5.png",
+          Title: "Abyss Walker",
+          Cost: 28000,
+          Stats: {
+            Range: 26,
+            Damage: 260,
+            Cooldown: 0.608,
+            Attributes: {
+              KnockbackForce: 37.5,
+            },
+            Extras: ["Knockback Force: 30 → 37.5"],
+          },
+        },
+      ],
+    },
+    Melee: {
+      Defaults: {
+        Detections: { Flying: false, Hidden: false, Lead: false },
+        Range: 7,
+        Price: 4200,
+        Cooldown: 2.008,
+        Damage: 50,
+        Limit: 4,
+        Attributes: {
+          "AOE Damage": 25,
+          BleedDamage: "NaN",
+          BleedStack: "NaN",
+          MaxStack: "NaN",
+          ExponentialValue: "NaN",
+          MaxHits: 2,
+        },
+        Note: "Hiddens can be attacked indirectly if a detectable enemy is nearby."
+      },
+      Upgrades: [
+        {
+          Image: "File:WarlockLevel1.png",
+          Title: "Acolyte",
+          Cost: 2500,
+          Stats: {
+            Range: 7,
+            Damage: 85,
+            Cooldown: 2.008,
+            Attributes: {
+              "AOE Damage": 40,
+              BleedDamage: "NaN",
+              BleedStack: "NaN",
+              MaxStack: "NaN",
+              ExponentialValue: "NaN",
+              MaxHits: 2,
+            },
+            Extras: ["AOE Damage: 25 → 40"],
+          },
+        },
+        {
+          Image: "File:WarlockLevel2.png",
+          Title: "Forbidden Arts",
+          Cost: 6800,
+          Stats: {
+            Range: 7.5,
+            Damage: 150,
+            Cooldown: 2.008,
+            Attributes: {
+              "AOE Damage": 60,
+              BleedDamage: "NaN",
+              BleedStack: "NaN",
+              MaxStack: "NaN",
+              ExponentialValue: "NaN",
+              MaxHits: 2,
+            },
+            Extras: ["AOE Damage: 40 → 60"],
+          },
+        },
+        {
+          Image: "File:WarlockLevel3.png",
+          Title: "Pact of the Blade",
+          Cost: 12000,
+          Stats: {
+            Range: 7.5,
+            Damage: 250,
+            Cooldown: 1.808,
+            Attributes: {
+              "AOE Damage": 115,
+              BleedDamage: "NaN",
+              BleedStack: "NaN",
+              MaxStack: "NaN",
+              ExponentialValue: "NaN",
+              MaxHits: 2,
+            },
+            Extras: ["AOE Damage: 60 → 115"],
+          },
+        },
+        {
+          Image: "File:WarlockLevel4.png",
+          Title: "Eldritch Knight",
+          Cost: 18500,
+          Stats: {
+            Range: 8,
+            Damage: 400,
+            Cooldown: 1.808,
+            Attributes: {
+              "AOE Damage": 200,
+              BleedDamage: 2,
+              BleedStack: 3,
+              MaxStack: 40,
+              ExponentialValue: 0.28,
+              MaxHits: 3,
+            },
+            Extras: [
+              "AOE Damage: 115 → 200",
+              "Bleed Damage: NaN → 2",
+              "Bleed Stack: NaN → 3",
+              "Max Stack: NaN → 40",
+              "Exponential Value: NaN → 0.28",
+              "Max Hits: 2 → 3",
+            ],
+          },
+        },
+        {
+          Image: "File:WarlockLevel5.png",
+          Title: "Abyss Walker",
+          Cost: 28000,
+          Stats: {
+            Range: 9,
+            Damage: 750,
+            Cooldown: 1.808,
+            Attributes: {
+              "AOE Damage": 260,
+              BleedDamage: 2,
+              BleedStack: 6,
+              MaxStack: 40,
+              ExponentialValue: 0.28,
+              MaxHits: 3,
+            },
+            Extras: [
+              "AOE Damage: 200 → 260",
+              "Bleed Stack: 3 → 6",
+            ],
+          },
+        },
+      ],
+    },
+  },
 };
