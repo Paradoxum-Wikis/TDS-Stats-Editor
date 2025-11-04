@@ -411,57 +411,14 @@
   color: #f64ca1 !important;
 }
 
-/* Fix for WikitextViewer in light mode */
-.light-mode .wikitable-code {
-  color: black !important;
+.light-mode .wikitext-viewer {
+  color: #212529;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
 }
 
-.light-mode .wikitable-code .table-delimiter,
-.light-mode .wikitable-code .table-header,
-.light-mode .wikitable-code .table-caption,
-.light-mode .wikitable-code .table-cell-delimiter {
-  color: #d6336c !important;
-  font-weight: bold;
-}
-
-.light-mode .wikitable-code .table-row {
-  color: #7048e8 !important;
-}
-
-.light-mode .wikitable-code .table-header-delimiter {
-  color: #e67700 !important;
-}
-
-.light-mode .wikitable-code .wiki-div {
-  color: #37b24d !important;
-}
-
-.light-mode .wikitable-code .table-caption-text {
-  color: #2b8a3e !important;
-  font-weight: bold;
-}
-
-.light-mode .wikitable-code .wiki-comment {
-  color: #6c757d !important;
-}
-
-.light-mode .wikitable-code .wiki-div {
-  color: #6610f2 !important;
-}
-
-.light-mode .wikitable-code .wiki-bold,
-.light-mode .wikitable-code .wiki-bold-text {
-  color: #212529 !important;
-  font-weight: bold;
-}
-
-.light-mode .wikitable-code .table-caption-text {
-  color: #0a58ca !important;
-  font-weight: bold;
-}
-
-.light-mode .lmwikitable {
-  background-color: white;
+.wikitext-viewer span {
+  filter: none;
 }
 
 /* mobile components */

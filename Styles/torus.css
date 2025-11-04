@@ -71,68 +71,6 @@ input {
   color: #ff77bb !important;
 }
 
-.wikitable-code {
-  display: block;
-  font-family: monospace;
-  white-space: pre;
-  color: #f8f9fa;
-  text-wrap: auto;
-}
-
-/* Syntax highlighting for wikitable elements */
-.table-delimiter {
-  color: #ff79c6;
-  font-weight: bold;
-}
-
-.table-row {
-  color: #bd93f9;
-}
-
-.table-caption {
-  color: #ff79c6;
-}
-
-.table-caption-text {
-  color: #50fa7b;
-  font-weight: bold;
-}
-
-.table-header {
-  color: #ff79c6;
-  font-weight: bold;
-}
-
-.header-content {
-  color: #8be9fd;
-}
-
-.table-cell-delimiter {
-  color: #ff79c6;
-}
-
-.wiki-bold {
-  color: #ff2c2c;
-}
-
-.wiki-bold-text {
-  color: white;
-  font-weight: bold;
-}
-
-.wiki-comment {
-  color: #6272a4;
-  font-style: italic;
-}
-
-.table-header-delimiter {
-  color: #ffcc00;
-}
-
-.wiki-div {
-  color: #90ee90;
-}
-
 .logo-slideshow {
   position: relative;
   max-width: 240px;
@@ -550,4 +488,17 @@ a:hover {
 
 .h2 {
   margin-bottom: 0;
+}
+
+.wikitext-viewer {
+  color: #afafaf;
+  font-family: monospace;
+  font-size: 0.875em;
+  overflow: auto;
+  max-height: 580px;
+  padding: .75rem 6px;
+}
+
+.wikitext-viewer span {
+  filter: brightness(1.65);
 }
