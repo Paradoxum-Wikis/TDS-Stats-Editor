@@ -497,6 +497,7 @@ a:hover {
   overflow: auto;
   max-height: 580px;
   padding: .75rem 6px;
+  white-space: pre-wrap;
 }
 
 .wikitext-viewer span {

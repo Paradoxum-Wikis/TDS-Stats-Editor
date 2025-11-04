@@ -417,7 +417,7 @@
   border: 1px solid #dee2e6;
 }
 
-.wikitext-viewer span {
+.light-mode .wikitext-viewer span {
   filter: none;
 }
 

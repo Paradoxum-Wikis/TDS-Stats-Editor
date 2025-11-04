@@ -2,8 +2,8 @@ import { WikitextHighlighter } from "wikistxr";
 
 class WikitextViewer {
   constructor() {
-    this.container = document.querySelector("#wikitable-panel");
-    this.container.classList.add("wikitext-viewer");
+    this.container = document.createElement("div");
+    this.container.className = "wikitext-viewer";
     this.highlighter = new WikitextHighlighter();
 
     if (!document.getElementById("wikistxr-styles")) {
