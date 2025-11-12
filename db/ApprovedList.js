@@ -82,6 +82,8 @@ const approvedTowers = [
   "Vessel Of Infinite Destruction/Golden Mortar",
   "Hellscream2008/War Machine + (Top path)",
   "Hellscream2008/War Machine + (Bottom path)",
+  "NoobGlitch/Recruit",
+  "Vessel Of Infinite Destruction/Paintballer",
 ];
 
 // List of featured towers
@@ -104,6 +106,7 @@ const featuredTowers = [
   "Hellscream2008/Lucky Shooter",
   "Vessel Of Infinite Destruction/Golden Engineer",
   "Vessel Of Infinite Destruction/Golden Mortar",
+  "Vessel Of Infinite Destruction/Paintballer",
 ];
 
 // List of grandfathered towers
@@ -122,7 +125,7 @@ const highlights = [
   "Vessel Of Infinite Destruction/Golden Engineer",
   "Vessel Of Infinite Destruction/Golden Mortar",
   "Vessel Of Infinite Destruction/Toxic Gunner",
-  "Hellscream2008/Lucky Shooter",
+  "Vessel Of Infinite Destruction/Paintballer",
 ];
 
 window.approvedTowers = approvedTowers;
